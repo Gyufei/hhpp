@@ -21,7 +21,6 @@ import { usePairApprove } from "../create-offer/use-pair-approve";
 import { useAccountVerifyDialog } from "@/lib/hooks/marketplace/use-account-verify-dialog";
 import AccountVerifyDialog from "@/components/share/account-verify-dialog";
 import { reportEvent } from "@/lib/utils/analytics";
-import AskDetailBtnTip from "./ask-detail-btn-tip";
 import { useCheckBnbBalance } from "@/lib/hooks/api/use-check-bnb-balance";
 import ArrowBetween from "../create-offer/arrow-between";
 
@@ -210,15 +209,13 @@ export default function AskDetail({
                   disabled={
                     isDepositLoading || !receivePointAmount || isApproving
                   }
-                  className="mt-4 flex h-12 w-full items-center justify-center rounded-2xl bg-green leading-6 text-white disabled:bg-gray"
+                  className="mt-4 flex h-12 w-full items-center justify-center rounded-2xl bg-green leading-6 text-white disabled:bg-[#f0f1f5]"
                 >
                   {isShouldApprove
                     ? approveBtnText
                     : T("btn-ConfirmTakerOrder")}
                 </button>
               </WithWalletConnectBtn>
-
-              <AskDetailBtnTip />
             </>
           )}
         </div>

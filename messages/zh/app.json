@@ -35,7 +35,9 @@
     "txt-YourFriendSentYouAnOnboardingInvitation": "您的朋友 <name></name> 向您发送了一个交易费返还 <num></num> 的引导邀请",
     "drawer-title-Info": "信息",
     "drawer-Wallets": "线包",
-    "drawer-SocialMedia": "社交媒体"
+    "drawer-SocialMedia": "社交媒体",
+    "btn-Deposit": "存款",
+    "btn-Withdraw": "提款"
   },
   "pop-Setting": {
     "cap-NetworkSetting": "网络设置",

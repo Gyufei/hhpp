@@ -35,7 +35,9 @@
     "txt-YourFriendSentYouAnOnboardingInvitation": "Your friend <name></name> sent you an onboarding invitation with <num></num> trading fee back! ",
     "drawer-title-Info": "Info",
     "drawer-Wallets": "Wallets",
-    "drawer-SocialMedia": "Social Media"
+    "drawer-SocialMedia": "Social Media",
+    "btn-Deposit": "Deposit",
+    "btn-Withdraw": "Withdraw"
   },
   "pop-Setting": {
     "cap-NetworkSetting": "Network Settings",

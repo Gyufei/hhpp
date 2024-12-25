@@ -6,9 +6,7 @@ import { createContext, useContext, useState } from "react";
 
 interface IWalletModalContext {
   isWalletModalOpen: boolean;
-  isWalletDisconnectModalOpen: boolean;
   openWalletModal: (isOpen: boolean, chain?: ChainType) => void;
-  openDisconnectModal: (isOpen: boolean) => void;
 }
 
 const WalletModalContext = createContext<IWalletModalContext | null>(null);
@@ -19,24 +17,16 @@ function WalletModalProviderPrimitive({
   children: React.ReactNode;
 }) {
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
-  const [isWalletDisconnectModalOpen, setIsWalletDisconnectModalOpen] =
-    useState(false);
 
   function openWalletModal(isOpen: boolean) {
     setIsWalletModalOpen(isOpen);
-  }
-
-  function openDisconnectModal(isOpen: boolean) {
-    setIsWalletDisconnectModalOpen(isOpen);
   }
 
   return (
     <WalletModalContext.Provider
       value={{
         isWalletModalOpen,
-        isWalletDisconnectModalOpen,
         openWalletModal,
-        openDisconnectModal,
       }}
     >
       {children}

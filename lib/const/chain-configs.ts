@@ -32,6 +32,8 @@ export const ChainConfigs: Record<string, IChainConfig> = {
           tokenManager: "0xa921e0BA08ceA8850D82D5e8240f626777FC1dB9",
           systemConfig: "0xa026b4E35AAE30f7CC5F0a205D49b8A38d1B65Aa",
           deliveryPlace: "0x384124A2588a8a446873a34c0FdFfE7f30FfE70F",
+
+          deposit: "",
         }
       : {
           // test
@@ -39,6 +41,8 @@ export const ChainConfigs: Record<string, IChainConfig> = {
           tokenManager: "0x87f25fe11280c82aEf7247157A06525Cff7A13e5",
           systemConfig: "0xf29140CEE701A202215CC59800Ddd9a4382eD20f",
           deliveryPlace: "0x30681E123b2eC25157f52f3d52baB1EBD8fb5450",
+
+          deposit: "0x68b1E0fD8A1045137934b5a8816d58315C747B99",
         },
     isEvm: true,
   },
