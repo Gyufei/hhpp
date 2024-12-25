@@ -1,0 +1,4 @@
+Sitemap: https://tadle.com/sitemap.xml
+
+User-agent: *
+Disallow: /api

@@ -1,0 +1,13 @@
+lb = label
+tb = table
+th = tableHeader
+cap = caption
+dp = dropdown
+sl = select
+txt = text
+ct = chart
+tg = toggle
+pn = panel
+pl = placeholder
+cd = card
+p = paragraph

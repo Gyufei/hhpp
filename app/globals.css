@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: var(--font-video);
+}
+
+:root {
+  --color-black: #2d2e33;
+  --color-yellow: #e0ff62;
+  --color-green: #4cbf87;
+  --color-red: #ff6262;
+  --color-gary: #99a0af;
+  --color-lightgray: #c0c4cc;
+  --color-focus: #3dd866;
+}
+
+@layer base {
+  input[type="text"]:not(:disabled) {
+    @apply !bg-transparent;
+  }
+
+  input,
+  .no-outline {
+    @apply outline-none focus:outline-none focus-visible:outline-none;
+  }
+}
+
+@layer components {
+}
+
+@layer utilities {
+  .no-scroll-bar::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
+  }
+}
+
+.highcharts-credits {
+  display: none !important;
+}
+
+.now-msg {
+  animation-name: now-msg;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+  top: 44px;
+}
+
+@keyframes now-msg {
+  0% {
+    transform: translateY(100px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.sc-gZMcBi.dUwNNA {
+  height: 40px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #d8d8d8;
+}
+
+img {
+  -webkit-user-drag: none; /* Safari 和 Chrome */
+  -moz-user-drag: none; /* Firefox */
+  -ms-user-drag: none; /* IE/Edge */
+  user-drag: none;
+}
