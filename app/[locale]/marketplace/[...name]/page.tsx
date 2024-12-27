@@ -7,12 +7,16 @@ import { useEffect } from "react";
 import { ChainType } from "@/lib/types/chain";
 import VConsole from "vconsole";
 import { isProduction } from "@/lib/PathMap";
-if (!isProduction) {
-  new VConsole();
-}
+import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
+
 export default function Marketplace({ params }: { params: { name: string } }) {
   const marketplaceName = decodeURIComponent(params.name[0]);
   const { data: markets, mutate } = useMarketplaces();
+  const { isMobileSize } = useDeviceSize();
+
+  if (!isProduction && isMobileSize) {
+    new VConsole();
+  }
 
   const marketplace = markets?.find(
     (marketplace) => marketplace.market_symbol === marketplaceName,
@@ -27,7 +31,7 @@ export default function Marketplace({ params }: { params: { name: string } }) {
         mutate();
       }
     }
-  }, [data, marketplace, mutate]);
+  }, [data]);
 
   if (!markets || !marketplaceName) return null;
 

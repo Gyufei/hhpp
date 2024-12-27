@@ -43,7 +43,7 @@ export default function Marketplace() {
       <MobileMarketBreadcrumb />
       <div className="flex flex-1 items-stretch">
         {checkIsActive("market") && (
-          <div className="flex flex-1 flex-col pl-4 sm:pl-6">
+          <div className="flex flex-1 flex-col overflow-auto pl-4 sm:pl-6">
             <PointMarket />
           </div>
         )}

@@ -162,6 +162,11 @@ export default function RpcManage() {
     );
   };
 
+  const handleRpcChange = (value: any) => {
+    setNewRpcUrl(value);
+    setInputRpcError(false);
+  };
+
   return (
     <div className="space-y-4">
       {networks.map((network) => (
@@ -194,8 +199,9 @@ export default function RpcManage() {
               <Input
                 data-error={inputRpcError}
                 placeholder={ct("pl-InputYourCustomRPC")}
+                style={{ fontSize: "12px" }}
                 value={newRpcUrl}
-                onChange={(e) => setNewRpcUrl(e.target.value)}
+                onChange={(e) => handleRpcChange(e.target.value)}
                 className="h-10 w-[256px] rounded-lg border-none bg-[#fafafa] pl-3 pr-[40px] data-[error]:border-red"
               />
               <Image

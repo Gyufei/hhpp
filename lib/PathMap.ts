@@ -55,7 +55,6 @@ export const DataApiPaths = {
   accountStats: "/account/stats",
   accountWithdraw: "/account/withdraw",
   transactionSubmit: "/transaction/submit",
-  accountVerify: "/account/verify",
 };
 
 export const ApiPaths = {
@@ -64,7 +63,6 @@ export const ApiPaths = {
   tradingVol: "/user/trade_vol",
   userName: "/user/user_name",
   tokenPrice: "/token/info",
-  addTransaction: "/transaction/add",
   marketTrades: "/market_place/maker_trades_history",
   salesVolumeHistory: "/market_place/sales_volume_history",
 

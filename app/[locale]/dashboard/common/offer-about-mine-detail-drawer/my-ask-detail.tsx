@@ -12,7 +12,6 @@ import { IOffer } from "@/lib/types/offer";
 import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
 import { useCloseOffer } from "@/lib/hooks/contract/use-close-offer";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
-import { useAbortAskOffer } from "@/lib/hooks/contract/use-abort-ask-offer";
 import { ChainConfigs } from "@/lib/const/chain-configs";
 import NP from "number-precision";
 import { reportEvent } from "@/lib/utils/analytics";
@@ -38,8 +37,6 @@ export default function MyAskDetail({
     offerChainInfo,
     isFilled,
     isCanceled,
-    isCanAbort,
-    isNativeToken,
     pointDecimalNum,
   } = useOfferFormat({
     offer,
@@ -49,36 +46,19 @@ export default function MyAskDetail({
     isLoading: isClosing,
     write: closeAction,
     isSuccess: isCloseSuccess,
-  } = useCloseOffer({
-    chain: offer.marketplace.chain,
-    marketplaceStr: offer.marketplace.market_place_account,
-    makerStr: offer.offer_maker,
-    offerStr: offer.offer_id,
-    holdingStr: holdingId,
-    isNativeToken,
-  });
+  } = useCloseOffer();
 
-  const {
-    isLoading: isAborting,
-    write: abortAction,
-    isSuccess: isAbortSuccess,
-  } = useAbortAskOffer({
-    chain: offer.marketplace.chain,
-    marketplaceStr: offer.marketplace.market_place_account,
-    makerStr: offer.offer_maker,
-    offerStr: offer.offer_id,
-    holdingStr: holdingId,
-    isNativeToken,
-  });
-
-  const { checkBalance } = useCheckBnbBalance(
+  const { checkBalanceInsufficient } = useCheckBnbBalance(
     offer.marketplace.chain,
     offerChainInfo,
   );
+
   function handleClose() {
     if (isClosing) return;
-    reportEvent("click", { value: "closeOffer" });
-    if (!checkBalance(0)) {
+
+    reportEvent("click", { value: `closeOffer-${holdingId}` });
+
+    if (checkBalanceInsufficient(0, true)) {
       return;
     }
     closeAction?.({
@@ -86,22 +66,11 @@ export default function MyAskDetail({
     });
   }
 
-  function handleAbort() {
-    if (isAborting) return;
-    reportEvent("click", { value: "abortOffer" });
-    if (!checkBalance(0)) {
-      return;
-    }
-    abortAction?.({
-      offerId: offer.offer_id,
-    });
-  }
-
   useEffect(() => {
-    if (isCloseSuccess || isAbortSuccess) {
+    if (isCloseSuccess) {
       onSuccess();
     }
-  }, [isCloseSuccess, isAbortSuccess, onSuccess]);
+  }, [isCloseSuccess, onSuccess]);
 
   return (
     <>
@@ -192,21 +161,6 @@ export default function MyAskDetail({
                 }
               </>
             }
-
-            {isCanAbort && (
-              <WithWalletConnectBtn
-                chain={offer?.marketplace.chain}
-                className="flex-1"
-                onClick={handleAbort}
-              >
-                <button
-                  disabled={isAborting}
-                  className="mt-4 flex h-12 w-full items-center justify-center rounded-2xl bg-yellow leading-6 text-black"
-                >
-                  {ot("btn-AbortThisOffer")}
-                </button>
-              </WithWalletConnectBtn>
-            )}
           </div>
         </div>
 

@@ -22,7 +22,7 @@ export function useCreateAction(
     logoURI: "/icons/empty.svg",
     decimals: 9,
   } as IToken);
-  const [tokenAmount, setTokenAmount] = useState("0");
+  const [tokenAmount, setTokenAmount] = useState("");
   const point = useMemo<IPoint | null>(
     () => ({
       logoURI: marketplace.pointLogo,
@@ -81,9 +81,6 @@ export function useCreateAction(
     isSuccess: isCreateSuccess,
   } = useCreateOffer({
     marketSymbol: currentMarket.market_symbol,
-    chain: currentMarket.chain,
-    marketplaceStr: currentMarket.market_place_account,
-    offerType: direction === "sell" ? "ask" : "bid",
   });
 
   async function handleCreate({

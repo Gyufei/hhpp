@@ -5,7 +5,6 @@ import { IPoint } from "../../types/token";
 import { formatTimeDuration } from "../../utils/time";
 import { useTokenPrice } from "@/lib/hooks/api/token/use-token-price";
 import { useTokens } from "../api/token/use-tokens";
-import { checkIsNativeToken } from "@/lib/utils/web3";
 import { ProjectDecimalsMap } from "@/lib/const/constant";
 
 export function useOfferFormat({ offer }: { offer: IOffer }) {
@@ -68,11 +67,6 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     Math.floor(NP.minus(Date.now() / 1000, offer.create_at)),
   );
 
-  const isNativeToken = checkIsNativeToken(
-    offer.marketplace.chain,
-    offerTokenInfo || null,
-  );
-
   const isFilled = offer.taken_item_amount === offer.item_amount;
 
   const isCanceled = offer.status === "canceled";
@@ -80,29 +74,6 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
   const isClosed = useMemo(() => {
     return ["filled", "canceled", "settled"].includes(offer.status);
   }, [offer.status]);
-
-  const isCanAbort = useMemo(() => {
-    if (["offchain_fungible_point"].includes(offer.marketplace.market_catagory))
-      return false;
-
-    if (offer.entry.direction === "buy") return false;
-
-    if (["unknown", "settled"].includes(offer.status)) return false;
-
-    const offerSettleType = offer.origin_settle_mode;
-    const isProtected = offerSettleType === "protected";
-    const isTurbo = offerSettleType === "turbo";
-
-    if (isProtected) {
-      return ["initialize_v2"].includes(offer.abort_offer_status);
-    }
-
-    if (isTurbo) {
-      return !offer.entry.is_root;
-    }
-
-    return false;
-  }, [offer]);
 
   return {
     orderDuration,
@@ -113,7 +84,6 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     forValue,
     offerLogo,
     forLogo,
-    isNativeToken,
 
     tokenPrice,
     tokenTotalPrice,
@@ -126,6 +96,5 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     isFilled,
     isCanceled,
     isClosed,
-    isCanAbort,
   };
 }

@@ -1,12 +1,10 @@
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useRollin } from "@/lib/hooks/contract/use-rollin";
-// import { differenceInMinutes } from "date-fns";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { GlobalMessageAtom } from "@/lib/states/global-message";
 import { useSetAtom } from "jotai";
-import { ChainType } from "@/lib/types/chain";
 
 export default function RollInBtn() {
   const setGlobalMessage = useSetAtom(GlobalMessageAtom);
@@ -14,12 +12,7 @@ export default function RollInBtn() {
   const T = useTranslations("cd-AccountOverview");
   const { connected } = useChainWallet();
 
-  const {
-    isLoading,
-    isSuccess,
-    write: rollinAction,
-    // getRollingData,
-  } = useRollin(ChainType.ARB);
+  const { isLoading, isSuccess, write: rollinAction } = useRollin();
 
   const [isSign, setIsSign] = useState(false);
 
@@ -32,7 +25,7 @@ export default function RollInBtn() {
     }
     if (isLoading || isSign) return;
 
-    rollinAction(undefined);
+    rollinAction();
   }
 
   async function getRollinState() {

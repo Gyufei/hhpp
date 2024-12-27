@@ -9,7 +9,6 @@ import {
 import { DateRange } from "react-day-picker";
 import { useEffect, useRef, useState } from "react";
 import { format, subDays } from "date-fns";
-import { TadleXp } from "./tadle-xp";
 import DateRangePickerDialog from "@/components/share/date-range-picker-dialog";
 import { useTranslations } from "next-intl";
 import ReferralLink from "./referral-link";
@@ -211,8 +210,6 @@ export default function OverviewInfo() {
           </div>
         </div>
       </div>
-
-      <TadleXp />
 
       <ReferralLink />
     </div>

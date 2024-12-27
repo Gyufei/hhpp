@@ -246,31 +246,33 @@ export default function MyBalances() {
             value={openPanel}
             onValueChange={(v) => handleOpenPanel(v)}
           >
-            {dataArray.map((item, index) => (
-              <AccordionItem key={index} value={item.panelName}>
-                <AccordionTrigger showIcon={false}>
-                  <AcHeader
-                    open={openPanel === item.panelName}
-                    name={item.title}
-                    walletCount={item.data?.length}
-                    totalAmount={item.total}
-                  />
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="flex flex-wrap gap-5">
-                    {item.data.map((i, index) => (
-                      <TokenGetCard
-                        key={index}
-                        tokenInfo={i.tokenInfo}
-                        amount={i.amount || 0}
-                        withdrawerName={item.withdrawerName}
-                        onSuccess={() => refetchTokenBlcData()}
-                      />
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
+            {dataArray
+              .filter((i) => i.total > 0)
+              ?.map((item, index) => (
+                <AccordionItem key={index} value={item.panelName}>
+                  <AccordionTrigger showIcon={false}>
+                    <AcHeader
+                      open={openPanel === item.panelName}
+                      name={item.title}
+                      walletCount={item.data?.length}
+                      totalAmount={item.total}
+                    />
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-wrap gap-5">
+                      {item.data.map((i, index) => (
+                        <TokenGetCard
+                          key={index}
+                          tokenInfo={i.tokenInfo}
+                          amount={i.amount || 0}
+                          withdrawerName={item.withdrawerName}
+                          onSuccess={() => refetchTokenBlcData()}
+                        />
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
           </Accordion>
         </div>
       ) : (

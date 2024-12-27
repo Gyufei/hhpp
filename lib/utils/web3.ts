@@ -1,5 +1,3 @@
-import { isProduction } from "../PathMap";
-import { IToken } from "@/lib/types/token";
 import { ChainType } from "@/lib/types/chain";
 
 export function truncateAddr(
@@ -20,26 +18,8 @@ export function truncateAddr(
 }
 
 export function isEvmChain(chain: ChainType) {
-  return [ChainType.ARB, ChainType.BNB].includes(chain);
+  return [ChainType.ARB].includes(chain);
 }
-
-export const checkIsNativeToken = (chain: ChainType, token: IToken | null) => {
-  if (!token) return false;
-
-  if (chain === ChainType.ARB) {
-    return token.symbol === "ETH";
-  }
-
-  if (chain === ChainType.BNB) {
-    return token.symbol === "BNB";
-  }
-
-  if (chain === ChainType.SOLANA) {
-    return token.symbol === "SOL";
-  }
-
-  return false;
-};
 
 export function handleGoScan(
   chain: ChainType,
@@ -55,18 +35,5 @@ export function handleGoScan(
 
   if (chain === ChainType.ARB) {
     window.open(`https://etherscan.io/${goType}/${addr}`, "_blank");
-  }
-
-  if (chain === ChainType.BNB) {
-    window.open(`https://bscscan.com/${goType}/${addr}`, "_blank");
-  }
-
-  if (chain === ChainType.SOLANA) {
-    window.open(
-      `https://solscan.io/${type}/${addr}${
-        isProduction ? "" : "?cluster=devnet"
-      }`,
-      "_blank",
-    );
   }
 }

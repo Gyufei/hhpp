@@ -1,4 +1,5 @@
 import { NumericalInput } from "@/components/share/numerical-input";
+import { cn } from "@/lib/utils/common";
 import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
 
@@ -9,6 +10,7 @@ export function InputPanel({
   bottomText,
   tokenSelect,
   isCanInput = true,
+  hasError = false,
 }: {
   value: string;
   onValueChange: (_v: string) => void;
@@ -16,11 +18,17 @@ export function InputPanel({
   bottomText: ReactElement;
   tokenSelect: ReactElement;
   isCanInput?: boolean;
+  hasError?: boolean;
 }) {
   const cot = useTranslations("Common");
 
   return (
-    <div className="flex w-full justify-between rounded-2xl border border-transparent bg-[#fafafa] p-4 focus-within:border focus-within:border-focus focus-within:bg-white">
+    <div
+      className={cn(
+        "flex w-full justify-between rounded-2xl border border-transparent bg-[#fafafa] p-4 focus-within:border focus-within:border-focus focus-within:bg-white",
+        hasError ? "error-blink" : "",
+      )}
+    >
       <div className="flex-1">
         <div className="text-xs leading-[18px] text-gray">{topText}</div>
         {isCanInput ? (

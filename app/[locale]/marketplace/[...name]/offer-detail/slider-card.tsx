@@ -1,7 +1,7 @@
 import Image from "next/image";
+import { formatNum } from "@/lib/utils/number";
 import { Slider } from "@/components/ui/slider";
 import { ReactElement } from "react";
-import { formatNum } from "@/lib/utils/number";
 
 export default function SliderCard({
   topText,
@@ -12,6 +12,7 @@ export default function SliderCard({
   tokenLogo,
   bottomText,
   setSliderValue,
+  hasError = false,
 }: {
   topText: ReactElement;
   value: string;
@@ -21,6 +22,7 @@ export default function SliderCard({
   tokenLogo: string;
   bottomText: ReactElement;
   setSliderValue: (_v: number) => void;
+  hasError?: boolean;
 }) {
   function handleSlider(val: number) {
     if (val > canGoMax) {
@@ -34,11 +36,18 @@ export default function SliderCard({
   const progress = ((sliderValue / sliderMax) * 100).toFixed();
 
   return (
-    <div className="mt-5 rounded-2xl bg-white p-4">
-      <div className="text-xs leading-[18px] text-gray">{topText}</div>
+    <div
+      data-error={hasError}
+      className={`mt-5 rounded-2xl border border-transparent bg-white p-4 ${
+        hasError ? "error-blink" : ""
+      }`}
+    >
+      <div className="flex items-center justify-between text-xs leading-[18px] text-gray">
+        {topText}
+      </div>
       <div className="mt-2 flex items-center justify-between">
         <div className="h-[36px] text-2xl leading-[36px]">
-          {formatNum(value, 4)}
+          {formatNum(value, 6)}
         </div>
         <Image
           src={tokenLogo}

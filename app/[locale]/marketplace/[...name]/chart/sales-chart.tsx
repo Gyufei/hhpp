@@ -190,8 +190,8 @@ export default function SalesChart({
       },
       series: [
         {
-          name: "Column",
-          type: "column",
+          name: "Line",
+          type: "line",
           color: "#D8F36B",
           column: {
             borderColor: "#D8F36B",

@@ -28,14 +28,14 @@ export function TradesTable({
 }) {
   const t = useTranslations("tb-MarketTrades");
   const { data: historyData, isLoading: isHistoryLoading } = useMarketTrades(
-    marketplace?.chain || ChainType.ETH,
+    marketplace?.chain || ChainType.ARB,
     marketplace?.market_place_account || "",
   );
 
-  const { data: tokens } = useTokens(marketplace?.chain || ChainType.ETH);
+  const { data: tokens } = useTokens(marketplace?.chain || ChainType.ARB);
   const isLoadingFlag = !marketplace || isLoading || isHistoryLoading;
 
-  const { data: msgEvents } = useWsMsgSub(marketplace?.chain || ChainType.ETH);
+  const { data: msgEvents } = useWsMsgSub(marketplace?.chain || ChainType.ARB);
 
   const tradeMsgs = useMemo<any[]>(() => {
     const sortHistory = sortBy(historyData || [], "trade_at").reverse();

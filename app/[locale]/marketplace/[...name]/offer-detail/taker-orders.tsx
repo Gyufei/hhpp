@@ -22,10 +22,15 @@ export function TakerOrders({
 }) {
   const T = useTranslations("drawer-OfferDetail");
 
-  const { offerValue, offerTokenInfo, offerPointInfo, forValue } =
-    useOfferFormat({
-      offer: offer,
-    });
+  const {
+    offerValue,
+    pointDecimalNum,
+    offerTokenInfo,
+    offerPointInfo,
+    forValue,
+  } = useOfferFormat({
+    offer: offer,
+  });
 
   const data = useMemo(() => {
     const orderData = orders.map((o, index) => {
@@ -43,7 +48,7 @@ export function TakerOrders({
   const theme = useTheme({
     Table: `
       grid-template-rows: 40px repeat(auto-fit, 48px);
-      grid-template-columns: 60px repeat(4, minmax(0, 1fr));
+      grid-template-columns: 120px repeat(4, minmax(0, 1fr));
       font-weight: 400;
       grid-auto-rows: 48px;
     `,
@@ -103,12 +108,8 @@ export function TakerOrders({
         return (
           <div className="flex items-center justify-end space-x-1">
             <div>
-              {formatNum(
-                NP.divide(points, 10 ** (offerTokenInfo?.decimals || 18)),
-                2,
-                true,
-              )}{" "}
-              ({percent}%)
+              {formatNum(NP.divide(points, 10 ** (pointDecimalNum || 0)))}(
+              {percent}%)
             </div>
             <Image
               src={offerPointInfo.logoURI}

@@ -78,9 +78,9 @@ export default function MarketplaceCard({
       )}
     >
       {isLoadingFlag ? (
-        <Skeleton className="absolute -top-4 h-[73px] w-[73px] rounded-full bg-[#fafafa]" />
+        <Skeleton className="absolute -top-5 h-[73px] w-[73px] rounded-full bg-[#fafafa]" />
       ) : (
-        <div className="absolute -top-4 h-fit">
+        <div className="absolute -top-5 h-fit">
           <Image
             src={marketplace?.projectLogo}
             width={72}
@@ -113,7 +113,7 @@ export default function MarketplaceCard({
             ) : (
               <>
                 <div className="w-[120px] overflow-hidden text-ellipsis whitespace-nowrap text-sm leading-[20px] text-black">
-                  {marketplace.market_name}
+                  {marketplace.item_name}
                 </div>
                 <OverviewIcons
                   isStar={isStar}

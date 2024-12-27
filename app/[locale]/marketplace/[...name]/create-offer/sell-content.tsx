@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { InputPanel } from "./input-panel";
 import { StableTokenSelectDisplay } from "./stable-token-display";
@@ -13,8 +13,6 @@ import { formatNum } from "@/lib/utils/number";
 import { useCreateAction } from "./use-create-action";
 import { useOptionOfCreate } from "./use-option-of-create";
 import { usePairApprove } from "./use-pair-approve";
-import { useAccountVerifyDialog } from "@/lib/hooks/marketplace/use-account-verify-dialog";
-import AccountVerifyDialog from "@/components/share/account-verify-dialog";
 import { PointTokenDisplay } from "./point-token-display";
 import { cn } from "@/lib/utils/common";
 import { reportEvent } from "@/lib/utils/analytics";
@@ -70,31 +68,26 @@ export function SellContent({
       sellPointAmount,
     );
 
-  const { verifyDialogOpen, setVerifyDialogOpen, isAccountVerify, targetUrl } =
-    useAccountVerifyDialog(currentMarket);
-
-  const { checkBalance } = useCheckBnbBalance(currentMarket.chain, {
+  const { checkBalanceInsufficient } = useCheckBnbBalance(currentMarket.chain, {
     address: currentMarket.project_token_addr,
     decimals: ProjectDecimalsMap[currentMarket.market_symbol],
     symbol: currentMarket.item_name,
   });
 
+  const [errorText, setErrorText] = useState("");
+
+  useEffect(() => {
+    if ((isOffChainFungiblePoint || isPointToken) && !isShouldApprove) {
+      const result = checkBalanceInsufficient(sellPointAmount);
+
+      setErrorText(result);
+    }
+  }, [sellPointAmount, isShouldApprove]);
+
   async function handleConfirmBtnClick() {
     if (isShouldApprove) {
       reportEvent("click", { value: "approve" });
       await approveAction();
-      return;
-    }
-
-    if (!isAccountVerify) {
-      setVerifyDialogOpen(true);
-      return;
-    }
-
-    if (
-      (isOffChainFungiblePoint || isPointToken) &&
-      !checkBalance(sellPointAmount)
-    ) {
       return;
     }
 
@@ -112,13 +105,14 @@ export function SellContent({
         <InputPanel
           value={sellPointAmount}
           onValueChange={setSellPointAmount}
+          hasError={!!errorText}
           topText={<>{T("txt-YouWillSell")}</>}
           bottomText={
             <>
               1 {currentMarket.item_name} = ${formatNum(pointPrice)}
             </>
           }
-          tokenSelect={<PointTokenDisplay point={sellPoint} />}
+          tokenSelect={<PointTokenDisplay point={sellPoint} showBalance />}
         />
 
         <ArrowBetween className="-my-4 self-center" />
@@ -166,18 +160,16 @@ export function SellContent({
 
       <button
         onClick={handleConfirmBtnClick}
-        disabled={isCreating || isApproving}
-        className="mt-2 flex h-12 w-full items-center justify-center rounded-2xl bg-red leading-6 text-white sm:mt-[140px]"
+        disabled={
+          isCreating ||
+          isApproving ||
+          !!errorText ||
+          (!receiveTokenAmount && !isShouldApprove)
+        }
+        className="mt-2 flex h-12 w-full items-center justify-center rounded-2xl bg-red leading-6 text-white disabled:cursor-not-allowed disabled:bg-gray"
       >
         {!isShouldApprove ? T("btn-ConfirmMakerOrder") : approveBtnText}
       </button>
-
-      <AccountVerifyDialog
-        open={verifyDialogOpen}
-        setOpen={setVerifyDialogOpen}
-        marketName={currentMarket.market_name}
-        targetUrl={targetUrl || ""}
-      />
     </div>
   );
 }

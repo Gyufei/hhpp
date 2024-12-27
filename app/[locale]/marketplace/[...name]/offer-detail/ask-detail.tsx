@@ -18,11 +18,11 @@ import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useTranslations } from "next-intl";
 import { ChainConfigs } from "@/lib/const/chain-configs";
 import { usePairApprove } from "../create-offer/use-pair-approve";
-import { useAccountVerifyDialog } from "@/lib/hooks/marketplace/use-account-verify-dialog";
-import AccountVerifyDialog from "@/components/share/account-verify-dialog";
 import { reportEvent } from "@/lib/utils/analytics";
 import { useCheckBnbBalance } from "@/lib/hooks/api/use-check-bnb-balance";
 import ArrowBetween from "../create-offer/arrow-between";
+import { IToken } from "@/lib/types/token";
+import { StableBalance } from "@/components/share/stable-balance";
 
 export default function AskDetail({
   offer,
@@ -44,7 +44,6 @@ export default function AskDetail({
     pointPerPrice,
     isFilled,
     offerTokenInfo,
-    isNativeToken,
     offerPointInfo,
     pointDecimalNum,
   } = useOfferFormat({
@@ -60,28 +59,11 @@ export default function AskDetail({
     isLoading: isDepositLoading,
     isSuccess,
     write: writeAction,
-  } = useCreateTakerOrder({
-    chain: offer.marketplace.chain,
-    marketplaceStr: offer.marketplace.market_place_account,
-    makerStr: offer.offer_maker,
-    offerStr: offer.offer_id,
-
-    // TODO: add field in new api
-    // preOfferAuthStr: order.authority,
-    // originOfferStr: makerDetail?.origin_offer || "",
-    // originOfferAuthStr: order.origin_offer_detail?.authority,
-    // referrerStr: referrer || "",
-    preOfferAuthStr: "",
-    originOfferStr: "",
-    originOfferAuthStr: "",
-    referrerStr: "",
-    isNativeToken,
-  });
-
-  const { verifyDialogOpen, setVerifyDialogOpen, isAccountVerify, targetUrl } =
-    useAccountVerifyDialog(offer.marketplace);
+  } = useCreateTakerOrder();
 
   const [receivePointAmount, setReceivePointAmount] = useState(0);
+
+  const [errorText, setErrorText] = useState("");
 
   const sliderCanMax = useMemo(() => {
     return +bigIntOrNpMinus(offer.item_amount, offer.taken_item_amount);
@@ -94,7 +76,7 @@ export default function AskDetail({
       forValue,
     );
     const payWithFee = NP.times(pay, 1 + platformFee + tradeFee);
-    return String(payWithFee);
+    return formatNum(payWithFee, 6);
   }, [receivePointAmount, forValue, offer.item_amount, tradeFee, platformFee]);
 
   const payTokenTotalPrice = useMemo(() => {
@@ -102,7 +84,7 @@ export default function AskDetail({
     return NP.times(payTokenAmount || 0, tokenPrice);
   }, [payTokenAmount, tokenPrice]);
 
-  const { checkBalance } = useCheckBnbBalance(
+  const { checkBalanceInsufficient } = useCheckBnbBalance(
     offer.marketplace.chain,
     offerTokenInfo,
   );
@@ -116,6 +98,13 @@ export default function AskDetail({
       payTokenAmount,
     );
 
+  useEffect(() => {
+    if (!isShouldApprove) {
+      const result = checkBalanceInsufficient(payTokenAmount);
+      setErrorText(result);
+    }
+  }, [payTokenAmount, isShouldApprove]);
+
   function handleSliderChange(v: number) {
     setReceivePointAmount(v);
   }
@@ -127,16 +116,7 @@ export default function AskDetail({
       return;
     }
 
-    if (!isAccountVerify) {
-      setVerifyDialogOpen(true);
-      return;
-    }
-
     if (isDepositLoading || !receivePointAmount) return;
-
-    if (!checkBalance(payTokenAmount)) {
-      return;
-    }
 
     reportEvent("click", { value: "confirmOffer-ask" });
     await writeAction({
@@ -170,7 +150,16 @@ export default function AskDetail({
           />
 
           <SliderCard
-            topText={<>{T("txt-YouPay")}</>}
+            topText={
+              <>
+                {T("txt-YouPay")}
+                <StableBalance
+                  className="mb-0"
+                  chain={offer.marketplace.chain}
+                  token={offerTokenInfo as IToken}
+                />
+              </>
+            }
             bottomText={<>~${formatNum(payTokenTotalPrice)} </>}
             value={payTokenAmount}
             tokenLogo={forLogo}
@@ -178,6 +167,7 @@ export default function AskDetail({
             sliderMax={Number(offer.item_amount)}
             sliderValue={receivePointAmount}
             setSliderValue={handleSliderChange}
+            hasError={!!errorText}
           />
 
           <ArrowBetween className="-my-4 self-center" />
@@ -201,15 +191,21 @@ export default function AskDetail({
             </>
           ) : (
             <>
+              <div className="mt-3 text-center text-[12px] text-[#FF6262]">
+                {errorText}
+              </div>
               <WithWalletConnectBtn
                 chain={offer.marketplace.chain}
                 onClick={handleConfirmTakerOrder}
               >
                 <button
                   disabled={
-                    isDepositLoading || !receivePointAmount || isApproving
+                    isDepositLoading ||
+                    (!receivePointAmount && !isShouldApprove) ||
+                    isApproving ||
+                    !!errorText
                   }
-                  className="mt-4 flex h-12 w-full items-center justify-center rounded-2xl bg-green leading-6 text-white disabled:bg-[#f0f1f5]"
+                  className="mt-4 flex h-12 w-full items-center justify-center rounded-2xl bg-green leading-6 text-white disabled:cursor-not-allowed disabled:bg-gray"
                 >
                   {isShouldApprove
                     ? approveBtnText
@@ -225,13 +221,6 @@ export default function AskDetail({
       </div>
 
       <OfferTabs offer={offer} />
-
-      <AccountVerifyDialog
-        open={verifyDialogOpen}
-        setOpen={setVerifyDialogOpen}
-        marketName={offer.marketplace.market_name}
-        targetUrl={targetUrl || ""}
-      />
     </>
   );
 }

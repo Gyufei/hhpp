@@ -1,30 +1,33 @@
-import { useCloseOfferEth } from "./eth/use-close-offer-eth";
-import { useChainTx } from "./help/use-chain-tx";
-import { ChainType } from "@/lib/types/chain";
+import { useEndPoint } from "@/lib/hooks/api/use-endpoint";
+import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
+import { dataApiFetcher } from "@/lib/fetcher";
+import { useSignData } from "./help/use-sign-data";
 
-export function useCloseOffer({
-  chain,
-  marketplaceStr,
-  makerStr,
-  offerStr,
-  holdingStr,
-  isNativeToken,
-}: {
-  chain: ChainType;
-  marketplaceStr: string;
-  makerStr: string;
-  offerStr: string;
-  holdingStr: string;
-  isNativeToken: boolean;
-}) {
-  const chainActionRes = useChainTx(useCloseOfferEth, {
-    chain,
-    marketplaceStr,
-    makerStr,
-    offerStr,
-    holdingStr,
-    isNativeToken,
-  });
+export function useCloseOffer() {
+  const { dataApiEndPoint } = useEndPoint();
+  const { signDataAction } = useSignData();
 
-  return chainActionRes;
+  const txAction = async (args: { offerId: string }) => {
+    const { offerId } = args;
+
+    const signedData = await signDataAction(args);
+    console.log("signedData", signedData);
+
+    const res = await dataApiFetcher(
+      `${dataApiEndPoint}/offer/${offerId}/cancel`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: null,
+      },
+    );
+
+    return res;
+  };
+
+  const wrapRes = useTxStatus(txAction);
+
+  return wrapRes;
 }

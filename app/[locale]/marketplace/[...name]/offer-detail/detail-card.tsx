@@ -134,7 +134,7 @@ function DetailLabel({
   return (
     <div className="flex items-center space-x-1 text-sm leading-5 text-gray">
       {children}
-      <WithTip>{tipText}</WithTip>
+      {tipText && <WithTip>{tipText}</WithTip>}
     </div>
   );
 }

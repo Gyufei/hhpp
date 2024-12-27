@@ -1,12 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
-import * as Sentry from "@sentry/nextjs";
-import { EIP6963AnnounceProviderEvent } from "@/lib/types/wallet";
 import { useWalletModalContext } from "@/components/provider/wallet-modal-provider";
 
 import {
@@ -15,91 +14,73 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import BalancePopContent from "./balance-pop-content";
+import { useAccountEffect, useSignMessage } from "wagmi";
+import { isProduction } from "@/lib/PathMap";
+
+const SignMessageKey = "tadle-sign-message";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function ConnectBtn() {
   const t = useTranslations("Header");
 
+  const { signMessage } = useSignMessage();
   const { isMobileSize } = useDeviceSize();
   const { openWalletModal } = useWalletModalContext();
-  const { address, shortAddr, connected, connecting, connector } =
-    useChainWallet();
-
-  const prevAddressRef = useRef<string | null>(null);
-  const userWallets = useRef<string[]>([]);
+  const { shortAddr, connected, connecting } = useChainWallet();
 
   const [popOpen, setPopOpen] = useState(false);
-
-  useEffect(() => {
-    const onAnnounceProvider = (event: EIP6963AnnounceProviderEvent) => {
-      const walletName = event?.detail?.info?.name;
-      if (walletName && !userWallets.current.includes(walletName)) {
-        userWallets.current = [...userWallets.current, walletName];
-      }
-      Sentry.setTag("wallets", userWallets.current.join(","));
-    };
-
-    window.addEventListener(
-      "eip6963:announceProvider",
-      onAnnounceProvider as EventListener,
-    );
-
-    // window.dispatchEvent(new Event("eip6963:requestProvider"));
-    return () => {
-      window.removeEventListener(
-        "eip6963:announceProvider",
-        onAnnounceProvider as EventListener,
-      );
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (address && address !== prevAddressRef.current) {
-      Sentry.setUser({
-        username: address,
-      });
-      Sentry.setTag("connectWallet", (connector as any)?.rkDetails?.name);
-      Sentry.setTag(
-        "client_px",
-        document?.documentElement?.clientWidth +
-          "*" +
-          document?.documentElement?.clientHeight,
-      );
-      prevAddressRef.current = address;
-    }
-  }, [address, connector]);
 
   function handleConnect() {
     openWalletModal(true);
   }
 
-  // if (!connected) {
-  //   if (isMobileSize) {
-  //     return (
-  //       <button
-  //         className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#d3d4d6] bg-white "
-  //         onClick={() => handleConnect()}
-  //       >
-  //         <Image src="/icons/wallet.svg" width={20} height={20} alt="wallet" />
-  //       </button>
-  //     );
-  //   }
+  useAccountEffect({
+    onConnect() {
+      if (!isProduction) return;
 
-  //   return (
-  //     <>
-  //       <button
-  //         className="shadow-25 h-10 rounded-full bg-[#f0f1f5] px-4 text-base leading-6 transition-all sm:h-12 sm:px-[22px]"
-  //         onClick={() => handleConnect()}
-  //       >
-  //         <span className="hidden sm:inline-block">
-  //           {t("btn-ConnectWallet")}
-  //         </span>
-  //         <span className="inline-block sm:hidden">{t("btn-Connect")}</span>
-  //       </button>
-  //     </>
-  //   );
-  // }
+      signMessage(
+        { message: "Hello, Welcome to Tadle!" },
+        {
+          onSuccess(data) {
+            localStorage.setItem(SignMessageKey, data);
+          },
+          onError(error) {
+            console.log("Error!", error);
+          },
+        },
+      );
+    },
+    onDisconnect() {
+      localStorage.removeItem(SignMessageKey);
+    },
+  });
+
+  if (!connected) {
+    if (isMobileSize) {
+      return (
+        <button
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#d3d4d6] bg-white "
+          onClick={() => handleConnect()}
+        >
+          <Image src="/icons/wallet.svg" width={20} height={20} alt="wallet" />
+        </button>
+      );
+    }
+
+    return (
+      <>
+        <button
+          className="shadow-25 h-10 rounded-full bg-[#f0f1f5] px-4 text-base leading-6 transition-all sm:h-12 sm:px-[22px]"
+          onClick={() => handleConnect()}
+        >
+          <span className="hidden sm:inline-block">
+            {t("btn-ConnectWallet")}
+          </span>
+          <span className="inline-block sm:hidden">{t("btn-Connect")}</span>
+        </button>
+      </>
+    );
+  }
 
   return (
     <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>

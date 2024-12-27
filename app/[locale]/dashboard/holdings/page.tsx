@@ -8,18 +8,11 @@ import { useSortHolding } from "@/lib/hooks/holding/use-sort-holding";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ChainType } from "@/lib/types/chain";
-import { NetworkSelect } from "@/components/share/network-select";
-import { useSearchParams } from "next/navigation";
 
 export default function MyHoldings() {
   const T = useTranslations("page-MyStocks");
-  const chain: any = useSearchParams().get("chain");
-  const [selectedChain, setSelectedChain] = useState<ChainType>(
-    chain || ChainType.BNB,
-  );
-
   const { data: holdings, mutate: refreshHoldings } = useMyHoldings({
-    chain: selectedChain,
+    chain: ChainType.ARB,
   });
 
   const [selectHId, setSelectHId] = useState("");
@@ -39,10 +32,6 @@ export default function MyHoldings() {
     setDrawerOpen(true);
   }
 
-  function handleChainChange(chain: ChainType) {
-    setSelectedChain(chain);
-  }
-
   const selectedHolding = holdings?.find((h) => h.holding_id === selectHId);
 
   const isOffChainFungiblePoint =
@@ -57,10 +46,6 @@ export default function MyHoldings() {
           {T("cap-MyStocks")}
         </div>
         <div className="flex items-center justify-end space-x-6">
-          <NetworkSelect
-            selectedChain={selectedChain}
-            handleChainChange={handleChainChange}
-          />
           <SortSelect
             sortField={sortField}
             sortDir={sortDir}

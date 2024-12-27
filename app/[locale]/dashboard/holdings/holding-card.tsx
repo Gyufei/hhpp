@@ -5,7 +5,6 @@ import { TokenPairImg } from "@/components/share/token-pair-img";
 import { IHolding } from "@/lib/types/holding";
 import DelistBtn from "./delist-btn";
 import { useTranslations } from "next-intl";
-import AbortHoldingBtn from "./abort-holding-btn";
 import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
 import { ChainConfigs } from "@/lib/const/chain-configs";
 
@@ -27,7 +26,6 @@ export default function HoldingCard({
     pointPerPrice,
     tokenTotalPrice,
     forLogo,
-    isCanAbort,
   } = useOfferFormat({
     offer: holding?.offer || ({} as any),
   });
@@ -63,7 +61,7 @@ export default function HoldingCard({
 
           <div>
             <div className="mb-[2px] leading-6 text-black">
-              {holding.marketplace?.market_name}
+              {holding.marketplace?.item_name}
             </div>
             <div className="w-fit rounded-[4px] bg-[#F0F1F5] px-[5px] py-[2px] text-[10px] leading-4 text-gray">
               #{holding.entries[0].id}
@@ -130,9 +128,6 @@ export default function HoldingCard({
           <ListAskHoldingBtn holding={holding} onSuccess={onSuccess} />
         )}
         {isListed && <DelistBtn />}
-        {isCanAbort && (
-          <AbortHoldingBtn holding={holding} onSuccess={onSuccess} />
-        )}
       </div>
     </div>
   );
