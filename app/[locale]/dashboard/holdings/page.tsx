@@ -12,7 +12,7 @@ import { ChainType } from "@/lib/types/chain";
 export default function MyHoldings() {
   const T = useTranslations("page-MyStocks");
   const { data: holdings, mutate: refreshHoldings } = useMyHoldings({
-    chain: ChainType.ARB,
+    chain: ChainType.HYPER,
   });
 
   const [selectHId, setSelectHId] = useState("");

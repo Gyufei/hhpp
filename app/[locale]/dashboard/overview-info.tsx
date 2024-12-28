@@ -31,7 +31,7 @@ export default function OverviewInfo() {
   );
 
   const { trigger: updateUserNameAction, data: updateRes } = useUserNameChange(
-    ChainType.ARB,
+    ChainType.HYPER,
   );
 
   const [nameInputValue, setNameInputValue] = useState("");

@@ -52,7 +52,7 @@ export default function MyOrders() {
         <div className="max-h-auto relative min-h-[296px] w-[820px] flex-1 flex-col overflow-y-hidden sm:w-full sm:min-w-0">
           <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-1 flex-col">
             <OrderTable
-              chain={ChainType.ARB}
+              chain={ChainType.HYPER}
               types={orderTypes}
               status={status}
               role={role}

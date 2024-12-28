@@ -38,7 +38,7 @@ export default function MarketplaceCard({
   const setGlobalMessage = useSetAtom(GlobalMessageAtom);
 
   const { data: marketInfos } = useMarketInfo(
-    marketplace?.chain || ChainType.ARB,
+    marketplace?.chain || ChainType.HYPER,
   );
 
   const projectInfo = useMemo(() => {

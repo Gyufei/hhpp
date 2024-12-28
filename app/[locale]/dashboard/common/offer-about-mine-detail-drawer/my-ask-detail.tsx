@@ -15,7 +15,6 @@ import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { ChainConfigs } from "@/lib/const/chain-configs";
 import NP from "number-precision";
 import { reportEvent } from "@/lib/utils/analytics";
-import { useCheckBnbBalance } from "@/lib/hooks/api/use-check-bnb-balance";
 
 export default function MyAskDetail({
   holdingId,
@@ -34,7 +33,6 @@ export default function MyAskDetail({
     amount,
     offerTokenInfo,
     offerPointInfo,
-    offerChainInfo,
     isFilled,
     isCanceled,
     pointDecimalNum,
@@ -48,19 +46,11 @@ export default function MyAskDetail({
     isSuccess: isCloseSuccess,
   } = useCloseOffer();
 
-  const { checkBalanceInsufficient } = useCheckBnbBalance(
-    offer.marketplace.chain,
-    offerChainInfo,
-  );
-
   function handleClose() {
     if (isClosing) return;
 
     reportEvent("click", { value: `closeOffer-${holdingId}` });
 
-    if (checkBalanceInsufficient(0, true)) {
-      return;
-    }
     closeAction?.({
       offerId: offer.offer_id,
     });

@@ -9,15 +9,17 @@ import { cn } from "@/lib/utils/common";
 import { DepositDialog } from "./deposit-dialog";
 import { WithdrawDialog } from "./withdraw-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useUsdcTokenBalance } from "@/lib/hooks/api/use-usdc-balance";
 
 export default function BalancePopContent() {
   const T = useTranslations("Header");
 
-  const balance = 3131.32414;
-  const isBalanceLoading = false;
-
   const { address, disconnect } = useChainWallet();
   const [balanceHover, setBalanceHover] = useState(false);
+
+  const { data: balanceData, isLoading: isBalanceLoading } =
+    useUsdcTokenBalance(address);
+  const balance = balanceData?.usdc_balance || "0";
 
   const [depositDialogOpen, setDepositDialogOpen] = useState(false);
   const [withdrawDialogOpen, setWithdrawDialogOpen] = useState(false);

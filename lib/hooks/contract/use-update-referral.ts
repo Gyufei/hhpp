@@ -5,7 +5,7 @@ import { ChainConfigs } from "@/lib/const/chain-configs";
 import { ChainType } from "@/lib/types/chain";
 
 export function useUpdateReferral({ referralCode }: { referralCode: string }) {
-  const evmConfig = ChainConfigs[ChainType.ARB];
+  const evmConfig = ChainConfigs[ChainType.HYPER];
 
   const { writeContractAsync } = useWriteContract();
 

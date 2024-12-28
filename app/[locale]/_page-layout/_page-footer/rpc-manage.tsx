@@ -40,13 +40,13 @@ export default function RpcManage() {
       ? JSON.parse(storedNetworks)
       : [
           {
-            id: ChainType.ARB,
+            id: ChainType.HYPER,
             name: "Arbitrum",
             rpcs: [
               {
                 id: "1",
                 name: "Arbitrum's RPC",
-                url: globalRpcs[ChainType.ARB],
+                url: globalRpcs[ChainType.HYPER],
                 isCustom: false,
                 isActive: true,
               },

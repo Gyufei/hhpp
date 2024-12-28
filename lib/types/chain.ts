@@ -1,3 +1,3 @@
 export enum ChainType {
-  ARB = "eth",
+  HYPER = "hyperliquid",
 }

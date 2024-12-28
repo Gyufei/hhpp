@@ -6,14 +6,14 @@ export const isProduction = process.env.NODE_ENV === "production" && !isPreview;
 
 export function WithApiHost(path: string) {
   const prodHost = `https://api.tadle.com`;
-  const devHost = `https://preview-api.tadle.com`;
+  const devHost = `https://preview-hypes-api.aggregation.top`;
   const host = isProduction ? prodHost : devHost;
   return `${host}${path}`;
 }
 
 export function WithDataApiHost(path: string) {
   const prodHost = `https://apis.tadle.com`;
-  const devHost = `https://preview-apis.tadle.com`;
+  const devHost = `https://preview-hypes-api.aggregation.top`;
   const host = isProduction ? prodHost : devHost;
   return `${host}${path}`;
 }
@@ -50,11 +50,15 @@ export const DataApiPaths = {
   orders: "/orders",
   holding: "/holdings",
   userXP: "/account/xp",
+  usdcBalance: "/account/usdc_balance",
+  accountInfo: "/account/info",
+  userWithdraw: "/account/bridge",
   userTokenBalance: "/account/token_balances",
   userItemBalance: "/account/item_balances",
   accountStats: "/account/stats",
   accountWithdraw: "/account/withdraw",
   transactionSubmit: "/transaction/submit",
+  marketPointAmount: "/point",
 };
 
 export const ApiPaths = {

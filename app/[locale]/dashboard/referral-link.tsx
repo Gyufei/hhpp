@@ -10,7 +10,7 @@ import { ChainType } from "@/lib/types/chain";
 export default function ReferralLink() {
   const T = useTranslations("page-Referral");
 
-  const { data: referralData } = useReferralData(ChainType.ARB);
+  const { data: referralData } = useReferralData(ChainType.HYPER);
 
   const setGlobalMessage = useSetAtom(GlobalMessageAtom);
 

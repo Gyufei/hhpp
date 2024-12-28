@@ -22,13 +22,13 @@ export default function MessageBtn() {
   const t = useTranslations("Header");
 
   const { data: historyData, isLoading: isLoadingFlag } = useMarketTrades(
-    ChainType.ARB,
+    ChainType.HYPER,
     // TODO: get all marketplaces
     "0xe30ce9af31a2f4cbd0b2fadef6b2c894f724741c",
   );
 
-  const { data: tokens } = useTokens(ChainType.ARB);
-  const { data: msgEvents } = useWsMsgSub(ChainType.ARB);
+  const { data: tokens } = useTokens(ChainType.HYPER);
+  const { data: msgEvents } = useWsMsgSub(ChainType.HYPER);
 
   const tradeMsgs = useMemo<any[]>(() => {
     const sortHistory = sortBy(historyData || [], "trade_at").reverse();
@@ -225,13 +225,13 @@ function MsgRow({ msgDetail }: { msgDetail: IMsg }) {
               className="flex cursor-pointer items-center justify-start"
               onClick={() => {
                 handleGoScan(
-                  marketplace?.chain || ChainType.ARB,
+                  marketplace?.chain || ChainType.HYPER,
                   "",
                   // msgDetail?.txHash,
                 );
               }}
             >
-              {marketplace?.chain === ChainType.ARB ? "Arbiscan" : ""}
+              {marketplace?.chain === ChainType.HYPER ? "Arbiscan" : ""}
               <Image
                 src="/icons/arrow-right-gray.svg"
                 width={16}

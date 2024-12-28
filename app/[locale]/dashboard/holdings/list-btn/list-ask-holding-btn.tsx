@@ -53,7 +53,7 @@ export default function ListAskHoldingBtn({
     isLoading: isDepositLoading,
     write: writeAction,
     isSuccess,
-  } = useList();
+  } = useList({ marketSymbol: holding.marketplace.market_symbol });
 
   function handleDeposit() {
     if (!sellPointAmount || !receiveTokenAmount) {
@@ -61,9 +61,8 @@ export default function ListAskHoldingBtn({
     }
 
     writeAction({
-      price: sellPrice,
       total_item_amount: sellPointAmount,
-      entryIds: holding.entries.map((e) => e.id),
+      usdc_amount: receiveTokenAmount,
     });
   }
 

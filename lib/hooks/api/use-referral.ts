@@ -5,28 +5,25 @@ import { useAtomValue } from "jotai";
 import { AccessTokenAtom } from "@/lib/states/user";
 import useSWRMutation from "swr/mutation";
 
-// export function useReferralCreate() {
-//   const { apiEndPoint } = useEndPoint();
-//   const token = useAtomValue(AccessTokenAtom);
+export function useReferralCreate() {
+  const { apiEndPoint } = useEndPoint();
+  const token = useAtomValue(AccessTokenAtom);
 
-//   const CreateApiPost = async () => {
-//     const res = await fetcher(
-//       `${apiEndPoint}${Paths.referral.create}`,
-//       {
-//         method: "POST",
-//         body: JSON.stringify({
-//           access_token: token,
-//         }),
-//       },
-//     );
+  const CreateApiPost = async () => {
+    const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.create}`, {
+      method: "POST",
+      body: JSON.stringify({
+        access_token: token,
+      }),
+    });
 
-//     return res;
-//   };
+    return res;
+  };
 
-//   const res = useSWRMutation("create referral", CreateApiPost);
+  const res = useSWRMutation("create referral", CreateApiPost);
 
-//   return res;
-// }
+  return res;
+}
 
 export function useReferralRateChange() {
   const { apiEndPoint } = useEndPoint();
@@ -67,7 +64,6 @@ export function useReferralRateChange() {
 
 export function useReferralNoteChange() {
   const { apiEndPoint } = useEndPoint();
-  const token = useAtomValue(AccessTokenAtom);
 
   const postApi = async (
     _: string,
@@ -80,14 +76,13 @@ export function useReferralNoteChange() {
       };
     },
   ) => {
-    if (!token || !arg.referral_code) return null;
+    if (!arg.referral_code) return null;
 
     const res = await apiFetcher(
       `${apiEndPoint}${ApiPaths.referral.updateNote}`,
       {
         method: "POST",
         body: JSON.stringify({
-          access_token: token,
           ...arg,
         }),
       },
@@ -103,7 +98,6 @@ export function useReferralNoteChange() {
 
 export function useReferralDefault() {
   const { apiEndPoint } = useEndPoint();
-  const token = useAtomValue(AccessTokenAtom);
 
   const postApi = async (
     _: string,
@@ -115,12 +109,11 @@ export function useReferralDefault() {
       };
     },
   ) => {
-    if (!token || !arg.referral_code) return null;
+    if (!arg.referral_code) return null;
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.default}`, {
       method: "POST",
       body: JSON.stringify({
-        access_token: token,
         ...arg,
       }),
     });
@@ -133,40 +126,35 @@ export function useReferralDefault() {
   return res;
 }
 
-// export function useReferralDelete() {
-//   const { apiEndPoint } = useEndPoint();
-//   const token = useAtomValue(AccessTokenAtom);
+export function useReferralDelete() {
+  const { apiEndPoint } = useEndPoint();
 
-//   const postApi = async (
-//     _: string,
-//     {
-//       arg,
-//     }: {
-//       arg: {
-//         "referral_code": string,
-//       };
-//     },
-//   ) => {
-//     if (!token || !arg.referral_code) return null;
+  const postApi = async (
+    _: string,
+    {
+      arg,
+    }: {
+      arg: {
+        referral_code: string;
+      };
+    },
+  ) => {
+    if (!arg.referral_code) return null;
 
-//     const res = await fetcher(
-//       `${apiEndPoint}${Paths.referral.delete}`,
-//       {
-//         method: "POST",
-//         body: JSON.stringify({
-//           access_token: token,
-//           ...arg
-//         }),
-//       },
-//     );
+    const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.delete}`, {
+      method: "POST",
+      body: JSON.stringify({
+        ...arg,
+      }),
+    });
 
-//     return res;
-//   };
+    return res;
+  };
 
-//   const res = useSWRMutation("delete referral", postApi);
+  const res = useSWRMutation("delete referral", postApi);
 
-//   return res;
-// }
+  return res;
+}
 
 export function useReferralView() {
   const { apiEndPoint } = useEndPoint();

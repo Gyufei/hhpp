@@ -31,7 +31,7 @@ export function StableTokenSelectDisplay({
 
   return (
     <div className="flex flex-col items-end">
-      {showBalance && <StableBalance chain={chain} token={token} />}
+      {showBalance && <StableBalance />}
       <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
         <PopoverTrigger>
           <div className="flex w-fit cursor-pointer items-center rounded-full bg-[#F0F1F5] p-2">

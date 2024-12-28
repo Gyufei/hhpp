@@ -18,7 +18,7 @@ export function truncateAddr(
 }
 
 export function isEvmChain(chain: ChainType) {
-  return [ChainType.ARB].includes(chain);
+  return [ChainType.HYPER].includes(chain);
 }
 
 export function handleGoScan(
@@ -33,7 +33,7 @@ export function handleGoScan(
     goType = "address";
   }
 
-  if (chain === ChainType.ARB) {
+  if (chain === ChainType.HYPER) {
     window.open(`https://etherscan.io/${goType}/${addr}`, "_blank");
   }
 }

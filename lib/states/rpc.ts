@@ -3,9 +3,9 @@ import { ChainConfigs } from "../const/chain-configs";
 import { ChainType } from "../types/chain";
 
 export const GlobalRpcsAtom = atomWithStorage<Record<any, any>>("globalRpcs", {
-  [ChainType.ARB]: ChainConfigs[ChainType.ARB].rpcs.TadleDefaultRPC,
+  [ChainType.HYPER]: ChainConfigs[ChainType.HYPER].rpcs.TadleDefaultRPC,
 });
 
 export const CustomRpcsAtom = atomWithStorage<Record<any, any>>("customRpcs", {
-  [ChainType.ARB]: null,
+  [ChainType.HYPER]: null,
 });

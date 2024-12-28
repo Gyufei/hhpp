@@ -29,7 +29,7 @@ export function ReferralDrawer({
   setDrawerOpen: (_v: boolean) => void;
 }) {
   const rt = useTranslations("page-Referral");
-  const { data: extraRateData } = useReferralExtraRate(ChainType.ARB);
+  const { data: extraRateData } = useReferralExtraRate(ChainType.HYPER);
   const extraRate = useMemo(
     () => (extraRateData?.data || 0) / 10 ** 4,
     [extraRateData],

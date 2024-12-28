@@ -17,11 +17,9 @@ import { useGlobalConfig } from "@/lib/hooks/use-global-config";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useTranslations } from "next-intl";
 import { ChainConfigs } from "@/lib/const/chain-configs";
-import { usePairApprove } from "../create-offer/use-pair-approve";
 import { reportEvent } from "@/lib/utils/analytics";
-import { useCheckBnbBalance } from "@/lib/hooks/api/use-check-bnb-balance";
+import { useCheckBalance } from "@/lib/hooks/api/use-check-balance";
 import ArrowBetween from "../create-offer/arrow-between";
-import { IToken } from "@/lib/types/token";
 import { StableBalance } from "@/components/share/stable-balance";
 
 export default function AskDetail({
@@ -44,7 +42,6 @@ export default function AskDetail({
     pointPerPrice,
     isFilled,
     offerTokenInfo,
-    offerPointInfo,
     pointDecimalNum,
   } = useOfferFormat({
     offer,
@@ -84,38 +81,18 @@ export default function AskDetail({
     return NP.times(payTokenAmount || 0, tokenPrice);
   }, [payTokenAmount, tokenPrice]);
 
-  const { checkBalanceInsufficient } = useCheckBnbBalance(
-    offer.marketplace.chain,
-    offerTokenInfo,
-  );
-
-  const { isShouldApprove, approveAction, isApproving, approveBtnText } =
-    usePairApprove(
-      offer.marketplace.chain,
-      offerTokenInfo,
-      offerPointInfo,
-      "buyFromAsk",
-      payTokenAmount,
-    );
+  const { checkUSDCInsufficient } = useCheckBalance(offer.marketplace);
 
   useEffect(() => {
-    if (!isShouldApprove) {
-      const result = checkBalanceInsufficient(payTokenAmount);
-      setErrorText(result);
-    }
-  }, [payTokenAmount, isShouldApprove]);
+    const result = checkUSDCInsufficient(payTokenAmount);
+    setErrorText(result);
+  }, [payTokenAmount]);
 
   function handleSliderChange(v: number) {
     setReceivePointAmount(v);
   }
 
   async function handleConfirmTakerOrder() {
-    if (isShouldApprove) {
-      reportEvent("click", { value: "approve" });
-      await approveAction();
-      return;
-    }
-
     if (isDepositLoading || !receivePointAmount) return;
 
     reportEvent("click", { value: "confirmOffer-ask" });
@@ -153,11 +130,7 @@ export default function AskDetail({
             topText={
               <>
                 {T("txt-YouPay")}
-                <StableBalance
-                  className="mb-0"
-                  chain={offer.marketplace.chain}
-                  token={offerTokenInfo as IToken}
-                />
+                <StableBalance className="mb-0" />
               </>
             }
             bottomText={<>~${formatNum(payTokenTotalPrice)} </>}
@@ -200,16 +173,11 @@ export default function AskDetail({
               >
                 <button
                   disabled={
-                    isDepositLoading ||
-                    (!receivePointAmount && !isShouldApprove) ||
-                    isApproving ||
-                    !!errorText
+                    isDepositLoading || !receivePointAmount || !!errorText
                   }
                   className="mt-4 flex h-12 w-full items-center justify-center rounded-2xl bg-green leading-6 text-white disabled:cursor-not-allowed disabled:bg-gray"
                 >
-                  {isShouldApprove
-                    ? approveBtnText
-                    : T("btn-ConfirmTakerOrder")}
+                  {T("btn-ConfirmTakerOrder")}
                 </button>
               </WithWalletConnectBtn>
             </>

@@ -22,7 +22,7 @@ export default function Marketplace({ params }: { params: { name: string } }) {
     (marketplace) => marketplace.market_symbol === marketplaceName,
   );
 
-  const { data } = useWsMsgSub(marketplace?.chain || ChainType.ARB);
+  const { data } = useWsMsgSub(marketplace?.chain || ChainType.HYPER);
 
   useEffect(() => {
     if (data && data?.length > 0) {

@@ -66,7 +66,7 @@ export function ReferralSignInBtn({ referralCode }: { referralCode: string }) {
   const pathname = usePathname();
 
   const { data: codeData } = useReferralCodeData({
-    chain: ChainType.ARB,
+    chain: ChainType.HYPER,
     code: referralCode,
   });
 
@@ -89,8 +89,6 @@ export function ReferralSignInBtn({ referralCode }: { referralCode: string }) {
     isSuccess,
     write: writeAction,
   } = useUpdateReferral({
-    chain: ChainType.ARB,
-    referrerStr,
     referralCode,
   });
 

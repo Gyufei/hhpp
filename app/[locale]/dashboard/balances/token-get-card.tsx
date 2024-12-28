@@ -5,7 +5,6 @@ import Image from "next/image";
 import { formatNum } from "@/lib/utils/number";
 import { useTranslations } from "next-intl";
 import { useWithdrawToken } from "@/lib/hooks/contract/use-withdraw-token";
-import { useWithdrawItem } from "@/lib/hooks/contract/use-withdraw-item";
 import { IToken } from "@/lib/types/token";
 import { useEffect, useRef } from "react";
 import { reportEvent } from "@/lib/utils/analytics";
@@ -13,7 +12,6 @@ import { reportEvent } from "@/lib/utils/analytics";
 export function TokenGetCard({
   tokenInfo,
   amount,
-  withdrawerName,
   onSuccess,
 }: {
   tokenInfo: IToken | null;
@@ -28,38 +26,17 @@ export function TokenGetCard({
     isLoading: isWdTokenLoading,
     write: wdTokenAction,
     isSuccess: isWdTokenSuccess,
-  } = useWithdrawToken({
-    chain: (tokenInfo as any)?.chain,
-  });
-
-  const {
-    isLoading: isWdItemLoading,
-    write: wdItemAction,
-    isSuccess: isWdItemSuccess,
-  } = useWithdrawItem({ chain: (tokenInfo as any)?.chain });
+  } = useWithdrawToken();
 
   function handleWithdrawToken() {
     if (isWdTokenLoading) return;
     hasReportedSuccessRef.current = false;
     reportEvent("click", { value: "withdrawToken" });
-    wdTokenAction({
-      token_symbol: tokenInfo?.symbol,
-      token_balance_type: withdrawerName,
-    });
-  }
-
-  function handleWithdrawItem() {
-    if (isWdItemLoading) return;
-    hasReportedSuccessRef.current = false;
-    reportEvent("click", { value: "withdrawItem" });
-    wdItemAction({
-      marketplaceStr: (tokenInfo as any).market.market_place_account,
-      tokenAddress: tokenInfo?.address,
-    });
+    wdTokenAction(undefined);
   }
 
   useEffect(() => {
-    if (isWdTokenSuccess || isWdItemSuccess) {
+    if (isWdTokenSuccess) {
       if (!hasReportedSuccessRef.current) {
         hasReportedSuccessRef.current = true;
         reportEvent("withdrawSuccess", {
@@ -68,7 +45,7 @@ export function TokenGetCard({
         onSuccess();
       }
     }
-  }, [isWdTokenSuccess, isWdItemSuccess, onSuccess]);
+  }, [isWdTokenSuccess, onSuccess]);
 
   return (
     <div className="flex w-full flex-col items-stretch justify-between rounded-xl bg-white px-4 py-3 sm:w-[220px]">
@@ -99,9 +76,7 @@ export function TokenGetCard({
             {formatNum(amount)}
           </div>
         </div>
-        <WithWalletConnectBtn
-          onClick={withdrawerName ? handleWithdrawToken : handleWithdrawItem}
-        >
+        <WithWalletConnectBtn onClick={handleWithdrawToken}>
           <div
             data-active={amount > 0}
             className="flex h-12 w-full cursor-pointer items-center justify-center rounded-lg border border-[#d3d4d6] hover:border-0 hover:bg-yellow data-[active=false]:pointer-events-none data-[active=false]:opacity-70 sm:h-7 sm:w-14 sm:rounded-full"

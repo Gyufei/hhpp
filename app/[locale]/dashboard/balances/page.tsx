@@ -44,7 +44,7 @@ export default function MyBalances() {
 
   const { address: wallet } = useChainWallet();
 
-  const { data: arbTokens } = useTokens(ChainType.ARB);
+  const { data: arbTokens } = useTokens(ChainType.HYPER);
   const { data: allMarketPoint } = useMarketPoints();
 
   const { isMobileSize } = useDeviceSize();
@@ -65,11 +65,11 @@ export default function MyBalances() {
             symbol: t.symbol,
             logoURI: t.logoURI,
             decimals: ProjectDecimalsMap[t.marketplace.market_symbol],
-            chain: ChainType.ARB,
+            chain: ChainType.HYPER,
           } as IToken),
       );
 
-    return [...addChainToToken(ChainType.ARB, arbTokens || []), ...marketToken];
+    return [...addChainToToken(ChainType.HYPER, arbTokens || []), ...marketToken];
   }, [arbTokens, allMarketPoint]);
 
   const { data: tokenBlcData, mutate: refetchTokenBlcData } =

@@ -1,15 +1,6 @@
 /* eslint-disable no-undef */
 "use client";
 
-import { withSecure } from "acclism-manifest-v2";
-import { WithDataApiHost } from "./PathMap";
-
-const access_key = "aK15X6c9";
-const seedApiUrl = WithDataApiHost("/seed/apply");
-const ga_code = "129203";
-
-const encryptFetch = withSecure(fetch, access_key, seedApiUrl, ga_code);
-
 export async function apiFetcher(
   input: URL | RequestInfo,
   init?: RequestInit | undefined,
@@ -30,7 +21,7 @@ export async function dataApiFetcher(
   init?: RequestInit | undefined,
 ) {
   try {
-    const result = await encryptFetch(input, init);
+    const result = await fetch(input, init);
     const res = await parsedRes(result);
 
     return res;

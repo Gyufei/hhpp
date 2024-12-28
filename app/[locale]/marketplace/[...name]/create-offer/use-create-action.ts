@@ -5,15 +5,11 @@ import { IMarketplace } from "@/lib/types/marketplace";
 import { IPoint, IToken } from "@/lib/types/token";
 import { useTokenPrice } from "@/lib/hooks/api/token/use-token-price";
 import { useCreateOffer } from "@/lib/hooks/contract/use-create-offer";
-import { ISettleMode } from "@/lib/types/offer";
 import { useCreateOfferMinPrice } from "@/lib/hooks/offer/use-create-offer-min-price";
 import { ProjectDecimalsMap } from "@/lib/const/constant";
 import { toNonExponential } from "@/lib/utils/number";
 
-export function useCreateAction(
-  marketplace: IMarketplace,
-  direction: "buy" | "sell",
-) {
+export function useCreateAction(marketplace: IMarketplace) {
   const { data: stableTokens } = useStableToken(marketplace.chain);
   const { checkMinPrice } = useCreateOfferMinPrice();
 
@@ -83,15 +79,7 @@ export function useCreateAction(
     marketSymbol: currentMarket.market_symbol,
   });
 
-  async function handleCreate({
-    collateralRate,
-    settleMode,
-    taxForSub,
-  }: {
-    collateralRate: string;
-    settleMode: ISettleMode;
-    taxForSub: string;
-  }) {
+  async function handleCreate() {
     try {
       const isPriceValid = checkMinPrice(
         pointPrice,
@@ -103,17 +91,10 @@ export function useCreateAction(
       }
 
       writeAction({
-        direction: direction,
-        price: toNonExponential(
-          NP.divide(NP.divide(tokenAmount, pointAmount), pointDecimalNum),
-        ),
         total_item_amount: toNonExponential(
           NP.times(pointAmount, pointDecimalNum),
         ),
-        payment_token: token.symbol,
-        collateral_ratio: collateralRate,
-        settle_mode: settleMode,
-        trade_tax_pct: taxForSub,
+        usdc_amount: tokenAmount,
       });
     } catch (error) {
       console.error(error);

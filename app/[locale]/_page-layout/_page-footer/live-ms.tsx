@@ -6,8 +6,8 @@ import { useMemo } from "react";
 export function LiveMs() {
   const { globalRpcs, customRpcs } = useRpc();
 
-  const rpc = globalRpcs[ChainType.ARB] || customRpcs[ChainType.ARB];
-  const { data: ms } = useRpcLatency(ChainType.ARB, rpc!);
+  const rpc = globalRpcs[ChainType.HYPER] || customRpcs[ChainType.HYPER];
+  const { data: ms } = useRpcLatency(ChainType.HYPER, rpc!);
 
   const msColor = useMemo(() => {
     if (!ms) return "#3DD866";

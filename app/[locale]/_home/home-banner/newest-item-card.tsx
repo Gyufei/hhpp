@@ -11,7 +11,7 @@ export default function NewestItemCard() {
   const t = useTranslations("Home");
   const [prevMsg, setPrevMsg] = useState<any>(null);
   const [nowMsg, setNowMsg] = useState<any>(null);
-  const { data } = useWsMsgSub(ChainType.ARB);
+  const { data } = useWsMsgSub(ChainType.HYPER);
 
   useEffect(() => {
     if (!data) return;

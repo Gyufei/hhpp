@@ -14,7 +14,7 @@ export default function ReferralPage({ params }: { params: any }) {
   const { address } = useChainWallet();
 
   const { data: codeData, isLoading } = useReferralCodeData({
-    chain: ChainType.ARB,
+    chain: ChainType.HYPER,
     code: referral,
   });
 

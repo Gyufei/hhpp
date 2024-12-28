@@ -1,43 +1,17 @@
-import { useAccount, useBalance } from "wagmi";
-import NP from "number-precision";
 import { formatNum } from "@/lib/utils/number";
-import { IToken } from "@/lib/types/token";
 import { cn } from "@/lib/utils/common";
-import { useEffect, useState } from "react";
+import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
+import { useUsdcTokenBalance } from "@/lib/hooks/api/use-usdc-balance";
 
-export function StableBalance({
-  token,
-  className,
-}: {
-  token: IToken;
-  className?: string;
-}) {
-  const [balance, setBalance] = useState(0);
-  const { address } = useAccount();
+export function StableBalance({ className }: { className?: string }) {
+  const { address } = useChainWallet();
 
-  const userBalance = useBalance({
-    address: address as `0x${string}`,
-    token: token?.address as `0x${string}`,
-    query: {
-      enabled: !!address,
-    },
-  });
-
-  const nativeBalance = userBalance?.data?.value || "0";
-  const evmBalance = NP.divide(String(nativeBalance), 10 ** 18);
-
-  useEffect(() => {
-    setBalance((prevBalance) => {
-      if (prevBalance !== evmBalance) {
-        return evmBalance;
-      }
-      return prevBalance;
-    });
-  }, [evmBalance]);
+  const { data: usdcBalanceData } = useUsdcTokenBalance(address);
+  const usdcBalance = usdcBalanceData?.usdc_balance || "0";
 
   return (
     <div className={cn("mb-6 text-[12px] text-[#99A0AF]", className)}>
-      Balance: {formatNum(balance)}
+      Balance: {formatNum(usdcBalance)}
     </div>
   );
 }

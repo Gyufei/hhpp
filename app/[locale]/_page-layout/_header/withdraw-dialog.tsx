@@ -6,6 +6,7 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { NumericalInput } from "@/components/share/numerical-input";
 import { useEffect, useState } from "react";
 import { formatNum } from "@/lib/utils/number";
+import { useUserWithdraw } from "@/lib/hooks/api/use-account-withdraw";
 
 export function WithdrawDialog({
   open,
@@ -14,24 +15,28 @@ export function WithdrawDialog({
 }: {
   open: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  balance: number;
+  balance: string;
 }) {
   const T = useTranslations("Header");
   const CT = useTranslations("Common");
 
-  const [withdrawAmount, setWithdrawAmount] = useState<string>("");
+  const { trigger: triggerWithdraw } = useUserWithdraw();
 
+  const [withdrawAmount, setWithdrawAmount] = useState<string>("");
   const [withdrawError, setWithdrawError] = useState<string | null>(null);
 
   function handleConfirmWithdraw() {
     if (withdrawError) return;
-    if (!withdrawAmount) return;
+    if (!Number(withdrawAmount)) {
+      setWithdrawError("Withdraw amount is not a number");
+      return;
+    }
 
-    console.log("handleConfirmWithdraw", withdrawAmount);
+    triggerWithdraw({ amount: withdrawAmount });
   }
 
   useEffect(() => {
-    if (Number(withdrawAmount) > balance) {
+    if (Number(withdrawAmount) > Number(balance)) {
       setWithdrawError("Withdraw amount is greater than balance");
       return;
     }

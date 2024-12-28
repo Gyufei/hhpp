@@ -7,7 +7,7 @@ import { ChainType } from "@/lib/types/chain";
 
 export function useUserXp() {
   const { dataApiEndPoint } = useEndPoint();
-  const { address: wallet } = useChainWallet(ChainType.ARB);
+  const { address: wallet } = useChainWallet(ChainType.HYPER);
 
   const res = useSWR<any>(
     wallet ? `${dataApiEndPoint}${DataApiPaths.userXP}/${wallet}` : null,

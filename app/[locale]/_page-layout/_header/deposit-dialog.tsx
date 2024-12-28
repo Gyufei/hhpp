@@ -14,7 +14,7 @@ export function DepositDialog({
   onOpenChange: (isOpen: boolean) => void;
 }) {
   const T = useTranslations("Header");
-  const chainConfig = ChainConfigs[ChainType.ARB];
+  const chainConfig = ChainConfigs[ChainType.HYPER];
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => onOpenChange(isOpen)}>

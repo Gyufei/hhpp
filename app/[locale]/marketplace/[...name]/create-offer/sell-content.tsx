@@ -12,12 +12,10 @@ import { useTranslations } from "next-intl";
 import { formatNum } from "@/lib/utils/number";
 import { useCreateAction } from "./use-create-action";
 import { useOptionOfCreate } from "./use-option-of-create";
-import { usePairApprove } from "./use-pair-approve";
 import { PointTokenDisplay } from "./point-token-display";
 import { cn } from "@/lib/utils/common";
 import { reportEvent } from "@/lib/utils/analytics";
-import { useCheckBnbBalance } from "@/lib/hooks/api/use-check-bnb-balance";
-import { ProjectDecimalsMap } from "@/lib/const/constant";
+import { useCheckBalance } from "@/lib/hooks/api/use-check-balance";
 
 export function SellContent({
   marketplace,
@@ -49,7 +47,7 @@ export function SellContent({
     isCreating,
     handleCreate,
     isCreateSuccess,
-  } = useCreateAction(marketplace, "sell");
+  } = useCreateAction(marketplace);
 
   useEffect(() => {
     if (isCreateSuccess) {
@@ -59,43 +57,17 @@ export function SellContent({
 
   const { note, setNote } = useOptionOfCreate();
 
-  const { isShouldApprove, approveAction, isApproving, approveBtnText } =
-    usePairApprove(
-      currentMarket?.chain || "",
-      receiveToken,
-      sellPoint || undefined,
-      "sell",
-      sellPointAmount,
-    );
-
-  const { checkBalanceInsufficient } = useCheckBnbBalance(currentMarket.chain, {
-    address: currentMarket.project_token_addr,
-    decimals: ProjectDecimalsMap[currentMarket.market_symbol],
-    symbol: currentMarket.item_name,
-  });
+  const { checkPointInsufficient } = useCheckBalance(marketplace);
 
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
-    if ((isOffChainFungiblePoint || isPointToken) && !isShouldApprove) {
-      const result = checkBalanceInsufficient(sellPointAmount);
-
-      setErrorText(result);
-    }
-  }, [sellPointAmount, isShouldApprove]);
+    const result = checkPointInsufficient(sellPointAmount);
+    setErrorText(result);
+  }, [sellPointAmount]);
 
   async function handleConfirmBtnClick() {
-    if (isShouldApprove) {
-      reportEvent("click", { value: "approve" });
-      await approveAction();
-      return;
-    }
-
-    handleCreate({
-      collateralRate: "100",
-      settleMode: "protected",
-      taxForSub: "0",
-    });
+    handleCreate();
     reportEvent("click", { value: "confirmOffer-sell" });
   }
 
@@ -160,15 +132,10 @@ export function SellContent({
 
       <button
         onClick={handleConfirmBtnClick}
-        disabled={
-          isCreating ||
-          isApproving ||
-          !!errorText ||
-          (!receiveTokenAmount && !isShouldApprove)
-        }
+        disabled={isCreating || !!errorText || !receiveTokenAmount}
         className="mt-2 flex h-12 w-full items-center justify-center rounded-2xl bg-red leading-6 text-white disabled:cursor-not-allowed disabled:bg-gray"
       >
-        {!isShouldApprove ? T("btn-ConfirmMakerOrder") : approveBtnText}
+        {T("btn-ConfirmMakerOrder")}
       </button>
     </div>
   );

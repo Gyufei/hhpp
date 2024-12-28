@@ -28,7 +28,7 @@ export default function EthWalletsProvider({
   const globalRpcs = useAtomValue(GlobalRpcsAtom);
   const customRpcs = useAtomValue(CustomRpcsAtom);
 
-  const arbRpc = customRpcs[ChainType.ARB] || globalRpcs[ChainType.ARB];
+  const arbRpc = customRpcs[ChainType.HYPER] || globalRpcs[ChainType.HYPER];
 
   const transports = isProduction
     ? {
