@@ -24,10 +24,12 @@ export function useChainWallet() {
 
   const evmWallet = useMemo(
     () => ({
+      // source wallet for data fetch, sign, arb
       realAddress: evmAddress || "",
       shortAddr: evmAddress
         ? truncateAddr(evmAddress, { nPrefix: 4, nSuffix: 4 })
         : "",
+      // dest wallet for HL
       address: destAddress || "",
       connected: evmConnected,
       connecting: evmConnecting,

@@ -3,11 +3,9 @@ import { dataApiFetcher } from "@/lib/fetcher";
 import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { useSignData } from "./help/use-sign-data";
-import { ChainConfigs } from "@/lib/const/chain-configs";
-import { ChainType } from "@/lib/types/chain";
 
 export function useCreateTakerOrder() {
-  const { address } = useChainWallet();
+  const { realAddress, address } = useChainWallet();
   const { dataApiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
 
@@ -16,8 +14,8 @@ export function useCreateTakerOrder() {
 
     const reqData = await signDataAction({
       item_amount: itemAmount,
-      source_account: address,
-      dest_account: ChainConfigs[ChainType.HYPER].contracts.bridge,
+      source_account: realAddress,
+      dest_account: address,
     });
 
     const res = await dataApiFetcher(

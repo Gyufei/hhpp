@@ -3,8 +3,6 @@ import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { dataApiFetcher } from "@/lib/fetcher";
 import { DataApiPaths } from "@/lib/PathMap";
 import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
-import { ChainConfigs } from "@/lib/const/chain-configs";
-import { ChainType } from "@/lib/types/chain";
 import { useSignData } from "./help/use-sign-data";
 
 export type IBalanceType =
@@ -17,14 +15,14 @@ export type IBalanceType =
 export function useWithdrawToken() {
   const { dataApiEndPoint } = useEndPoint();
 
-  const { address } = useChainWallet();
+  const { realAddress, address } = useChainWallet();
 
   const { signDataAction } = useSignData();
 
   const txAction = async () => {
     const reqData = await signDataAction({
-      source_account: address,
-      dest_account: ChainConfigs[ChainType.HYPER].contracts.bridge,
+      source_account: realAddress,
+      dest_account: address,
     });
 
     const res = await dataApiFetcher(

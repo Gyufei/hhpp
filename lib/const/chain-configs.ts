@@ -28,11 +28,9 @@ export const ChainConfigs: Record<string, IChainConfig> = {
     contracts: isProduction
       ? {
           deposit: "",
-          bridge: "",
         }
       : {
           deposit: "0x9EBeD0B93d2dc9C332640608Bcd551885ADd857D",
-          bridge: "0x3924cb7faaf689977d54e492077b22066f57f2dc",
         },
     isEvm: true,
   },
