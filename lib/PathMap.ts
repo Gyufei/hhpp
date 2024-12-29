@@ -1,5 +1,3 @@
-import { ChainType } from "./types/chain";
-
 export const isPreview = process.env.NEXT_PUBLIC_IS_PREVIEW === "1";
 export const isProduction = process.env.NODE_ENV === "production" && !isPreview;
 // export const isProduction = true;
@@ -20,19 +18,19 @@ export function WithDataApiHost(path: string) {
 
 export function WithCDN(path: string) {
   const prodCDN = `https://cdn.tadle.com`;
-  const devCDN = `https://preview-cdn.tadle.com`;
+  const devCDN = `https://preview-hypes-cdn.aggregation.top`;
   const cdn = isProduction ? prodCDN : devCDN;
   return `${cdn}${path}`;
 }
 
-export function WithProjectImgCDN(path: string, chain: ChainType) {
+export function WithProjectImgCDN(path: string) {
   const goPath = path.endsWith(".png") ? path : `${path}.png`;
-  return WithCDN(`/${chain}/images/project/${goPath}`);
+  return WithCDN(`/images/project/${goPath}`);
 }
 
-export function WithPointImgCDN(path: string, chain: ChainType) {
+export function WithPointImgCDN(path: string) {
   const goPath = path.endsWith(".png") ? path : `${path}.png`;
-  return WithCDN(`/${chain}/images/point/${goPath}`);
+  return WithCDN(`/images/point/${goPath}`);
 }
 
 export function WithWss(path: string) {

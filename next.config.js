@@ -9,11 +9,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "preview-cdn.tadle.com",
+        hostname: "preview-hypes-cdn.aggregation.top",
       },
       {
         protocol: "https",
-        hostname: "cdn.tadle.com",
+        hostname: "hypes-cdn.aggregation.top",
       },
       {
         protocol: "https",
@@ -22,11 +22,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "raw.githubusercontent.com",
-      },
-      {
-        protocol: "https",
-        hostname: '"cdn-tadle.aggregation.top',
-      },
+      }
     ],
   },
   webpack: (config) => {

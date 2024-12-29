@@ -12,7 +12,7 @@ import { IMarketplace } from "@/lib/types/marketplace";
 export function useMarketplaces(chain?: string) {
   const { dataApiEndPoint } = useEndPoint();
 
-  async function allChainFetch() {
+  async function marketFetch() {
     const res = await dataApiFetcher(
       `${dataApiEndPoint}${DataApiPaths.markets}`,
     );
@@ -21,8 +21,8 @@ export function useMarketplaces(chain?: string) {
       const chain = m.chain_name;
       return {
         ...m,
-        projectLogo: WithProjectImgCDN(m.market_symbol, chain),
-        pointLogo: WithPointImgCDN(m.market_symbol, chain),
+        projectLogo: WithProjectImgCDN(m.market_symbol),
+        pointLogo: WithPointImgCDN(m.market_symbol),
         chain,
       };
     });
@@ -30,7 +30,7 @@ export function useMarketplaces(chain?: string) {
     return allMarket as Array<IMarketplace>;
   }
 
-  const res = useSWR(`marketplaces-${chain || "all"}`, allChainFetch);
+  const res = useSWR(`marketplaces-${chain || "all"}`, marketFetch);
 
   return res;
 }
