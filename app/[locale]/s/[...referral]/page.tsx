@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useRouter } from "@/app/navigation";
 import { useReferralCodeData } from "@/lib/hooks/api/use-referral-data";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
-import { ChainType } from "@/lib/types/chain";
 
 export default function ReferralPage({ params }: { params: any }) {
   const referral = params.referral[0];
@@ -14,7 +13,6 @@ export default function ReferralPage({ params }: { params: any }) {
   const { address } = useChainWallet();
 
   const { data: codeData, isLoading } = useReferralCodeData({
-    chain: ChainType.HYPER,
     code: referral,
   });
 

@@ -5,15 +5,12 @@ import Image from "next/image";
 import { ReferralTable } from "./referral-table";
 import { useReferralData } from "@/lib/hooks/api/use-referral-data";
 import { useEffect } from "react";
-import { ChainType } from "@/lib/types/chain";
 import { useReferralCreate } from "@/lib/hooks/api/use-referral";
 
 export default function Referral() {
   const rt = useTranslations("page-Referral");
 
-  const { data: referralData, mutate: refetch } = useReferralData(
-    ChainType.HYPER,
-  );
+  const { data: referralData, mutate: refetch } = useReferralData();
 
   const {
     trigger: createAction,

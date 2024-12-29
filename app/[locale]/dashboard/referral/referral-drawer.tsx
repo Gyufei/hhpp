@@ -14,7 +14,6 @@ import { useEffect, useMemo, useState } from "react";
 import { NumericalInput } from "@/components/share/numerical-input";
 import { useReferralRateChange } from "@/lib/hooks/api/use-referral";
 import { useGlobalConfig } from "@/lib/hooks/use-global-config";
-import { ChainType } from "@/lib/types/chain";
 import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 
 export function ReferralDrawer({
@@ -29,11 +28,12 @@ export function ReferralDrawer({
   setDrawerOpen: (_v: boolean) => void;
 }) {
   const rt = useTranslations("page-Referral");
-  const { data: extraRateData } = useReferralExtraRate(ChainType.HYPER);
+  const { data: extraRateData } = useReferralExtraRate();
   const extraRate = useMemo(
     () => (extraRateData?.data || 0) / 10 ** 4,
     [extraRateData],
   );
+
   const { isMobileSize } = useDeviceSize();
 
   const { referralBaseRate } = useGlobalConfig();
@@ -206,7 +206,6 @@ export function ReferralDrawer({
 
         <WithWalletConnectBtn className="w-full" onClick={handleSaveRate}>
           <button
-            // disabled={isCreateLoading}
             className="mt-[140px] flex h-12 w-full items-center justify-center rounded-2xl bg-green leading-6 text-white"
           >
             {rt("btn-Save")}

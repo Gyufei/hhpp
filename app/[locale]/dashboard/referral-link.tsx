@@ -5,12 +5,11 @@ import { GlobalMessageAtom } from "@/lib/states/global-message";
 import { useSetAtom } from "jotai";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
-import { ChainType } from "@/lib/types/chain";
 
 export default function ReferralLink() {
   const T = useTranslations("page-Referral");
 
-  const { data: referralData } = useReferralData(ChainType.HYPER);
+  const { data: referralData } = useReferralData();
 
   const setGlobalMessage = useSetAtom(GlobalMessageAtom);
 

@@ -2,7 +2,6 @@ import { useEndPoint } from "./use-endpoint";
 import useSWR from "swr";
 import { ApiPaths } from "@/lib/PathMap";
 import { apiFetcher } from "@/lib/fetcher";
-import { ChainType } from "@/lib/types/chain";
 import { useChainWallet } from "../web3/use-chain-wallet";
 
 export interface IReferralItem {
@@ -21,7 +20,7 @@ export interface IReferralItem {
   unique_views: string;
 }
 
-export function useReferralData(chain: ChainType) {
+export function useReferralData() {
   const { apiEndPoint } = useEndPoint();
   const { address } = useChainWallet();
 
@@ -29,7 +28,7 @@ export function useReferralData(chain: ChainType) {
     if (!address) return null;
 
     const res = await apiFetcher(
-      `${apiEndPoint}/${chain}${ApiPaths.referral.data}?dest_account=${address}`,
+      `${apiEndPoint}${ApiPaths.referral.data}?dest_account=${address}`,
     );
 
     const parsedRes = res.map((item: any) => {
@@ -50,13 +49,13 @@ export function useReferralData(chain: ChainType) {
   return res;
 }
 
-export function useReferralReferer(chain: ChainType) {
+export function useReferralReferer() {
   const { apiEndPoint } = useEndPoint();
   const { address } = useChainWallet();
 
   const res = useSWR<string | any | null>(
     address
-      ? `${apiEndPoint}/${chain}${ApiPaths.referral.referer}?dest_account=${address}`
+      ? `${apiEndPoint}${ApiPaths.referral.referer}?dest_account=${address}`
       : null,
     apiFetcher,
   );
@@ -71,13 +70,7 @@ export function useReferralReferer(chain: ChainType) {
   return res;
 }
 
-export function useReferralCodeData({
-  chain,
-  code,
-}: {
-  chain: ChainType;
-  code: string;
-}) {
+export function useReferralCodeData({ code }: { code: string }) {
   const { apiEndPoint } = useEndPoint();
 
   const res = useSWR<{
@@ -86,7 +79,7 @@ export function useReferralCodeData({
     referral_rate: string;
   } | null>(
     code
-      ? `${apiEndPoint}/${chain}${ApiPaths.referral.codeData}?referral_code=${code}`
+      ? `${apiEndPoint}${ApiPaths.referral.codeData}?referral_code=${code}`
       : null,
     apiFetcher,
   );
@@ -94,13 +87,13 @@ export function useReferralCodeData({
   return res;
 }
 
-export function useReferralExtraRate(chain: ChainType) {
+export function useReferralExtraRate() {
   const { apiEndPoint } = useEndPoint();
   const { address } = useChainWallet();
 
   const res = useSWR(
     address
-      ? `${apiEndPoint}/${chain}${ApiPaths.referral.extraRate}?dest_account=${address}`
+      ? `${apiEndPoint}${ApiPaths.referral.extraRate}?dest_account=${address}`
       : null,
     apiFetcher,
   );
