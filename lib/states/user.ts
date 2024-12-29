@@ -4,7 +4,7 @@ import { atomWithStorage } from "jotai/utils";
 export const UserStore = createStore();
 
 export const AccessTokenAtom = atomWithStorage<string>(
-  "privy:token",
+  "userToken",
   "",
   undefined,
   {

@@ -7,7 +7,7 @@ export function useStableToken(chain: ChainType) {
   const { data: tokens, isLoading } = useTokens(chain);
 
   const stableTokens = useMemo(() => {
-    const stableTokenList = ["USDT", "USDC", "ETH"]
+    const stableTokenList = ["USDC"];
 
     if (!tokens) return [];
 
@@ -15,7 +15,7 @@ export function useStableToken(chain: ChainType) {
       tokens.filter((t) => stableTokenList.includes(t.symbol)),
       stableTokenList,
     );
-  }, [tokens, chain]);
+  }, [tokens]);
 
   return {
     data: stableTokens,

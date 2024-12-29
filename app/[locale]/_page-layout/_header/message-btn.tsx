@@ -23,11 +23,9 @@ export default function MessageBtn() {
 
   const { data: historyData, isLoading: isLoadingFlag } = useMarketTrades(
     ChainType.HYPER,
-    // TODO: get all marketplaces
-    "0xe30ce9af31a2f4cbd0b2fadef6b2c894f724741c",
+    "",
   );
 
-  const { data: tokens } = useTokens(ChainType.HYPER);
   const { data: msgEvents } = useWsMsgSub(ChainType.HYPER);
 
   const tradeMsgs = useMemo<any[]>(() => {
@@ -41,20 +39,10 @@ export default function MessageBtn() {
 
     const allMsg = sortBy(msgEvents || [], "trade_at")
       .reverse()
-      .concat(history || [])
-      .map((item: any) => {
-        const token = tokens?.find(
-          (token) => token.address === item.token_mint,
-        );
-
-        return {
-          ...item,
-          token: token || item.token,
-        };
-      });
+      .concat(history || []);
 
     return allMsg;
-  }, [msgEvents, historyData, tokens]);
+  }, [msgEvents, historyData]);
 
   const data = useMemo(() => {
     if (isLoadingFlag) {

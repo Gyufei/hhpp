@@ -1,10 +1,9 @@
-import { useAtomValue } from "jotai";
 import { useEndPoint } from "./use-endpoint";
-import { AccessTokenAtom } from "@/lib/states/user";
 import useSWR from "swr";
 import { ApiPaths } from "@/lib/PathMap";
 import { apiFetcher } from "@/lib/fetcher";
 import { ChainType } from "@/lib/types/chain";
+import { useChainWallet } from "../web3/use-chain-wallet";
 
 export interface IReferralItem {
   id: string;
@@ -24,13 +23,13 @@ export interface IReferralItem {
 
 export function useReferralData(chain: ChainType) {
   const { apiEndPoint } = useEndPoint();
-  const token = useAtomValue(AccessTokenAtom);
+  const { address } = useChainWallet();
 
   const referralDataFetcher = async () => {
-    if (!token) return null;
+    if (!address) return null;
 
     const res = await apiFetcher(
-      `${apiEndPoint}/${chain}${ApiPaths.referral.data}?access_token=${token}`,
+      `${apiEndPoint}/${chain}${ApiPaths.referral.data}?dest_account=${address}`,
     );
 
     const parsedRes = res.map((item: any) => {
@@ -44,7 +43,7 @@ export function useReferralData(chain: ChainType) {
   };
 
   const res = useSWR<IReferralItem[] | null>(
-    `${token}-referral-data`,
+    `${address}-referral-data`,
     referralDataFetcher,
   );
 
@@ -53,11 +52,11 @@ export function useReferralData(chain: ChainType) {
 
 export function useReferralReferer(chain: ChainType) {
   const { apiEndPoint } = useEndPoint();
-  const token = useAtomValue(AccessTokenAtom);
+  const { address } = useChainWallet();
 
   const res = useSWR<string | any | null>(
-    token
-      ? `${apiEndPoint}/${chain}${ApiPaths.referral.referer}?access_token=${token}`
+    address
+      ? `${apiEndPoint}/${chain}${ApiPaths.referral.referer}?dest_account=${address}`
       : null,
     apiFetcher,
   );
@@ -97,11 +96,11 @@ export function useReferralCodeData({
 
 export function useReferralExtraRate(chain: ChainType) {
   const { apiEndPoint } = useEndPoint();
-  const token = useAtomValue(AccessTokenAtom);
+  const { address } = useChainWallet();
 
   const res = useSWR(
-    token
-      ? `${apiEndPoint}/${chain}${ApiPaths.referral.extraRate}?access_token=${token}`
+    address
+      ? `${apiEndPoint}/${chain}${ApiPaths.referral.extraRate}?dest_account=${address}`
       : null,
     apiFetcher,
   );

@@ -6,7 +6,7 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { NumericalInput } from "@/components/share/numerical-input";
 import { useEffect, useState } from "react";
 import { formatNum } from "@/lib/utils/number";
-import { useUserWithdraw } from "@/lib/hooks/api/use-account-withdraw";
+import { useUserWithdraw } from "@/lib/hooks/contract/use-user-withdraw";
 
 export function WithdrawDialog({
   open,

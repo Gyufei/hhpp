@@ -1,19 +1,18 @@
 import { apiFetcher } from "@/lib/fetcher";
 import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
-import { useAtomValue } from "jotai";
-import { AccessTokenAtom } from "@/lib/states/user";
 import useSWRMutation from "swr/mutation";
+import { useChainWallet } from "../web3/use-chain-wallet";
 
 export function useReferralCreate() {
   const { apiEndPoint } = useEndPoint();
-  const token = useAtomValue(AccessTokenAtom);
+  const { address } = useChainWallet();
 
   const CreateApiPost = async () => {
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.create}`, {
       method: "POST",
       body: JSON.stringify({
-        access_token: token,
+        dest_account: address,
       }),
     });
 
@@ -27,7 +26,7 @@ export function useReferralCreate() {
 
 export function useReferralRateChange() {
   const { apiEndPoint } = useEndPoint();
-  const token = useAtomValue(AccessTokenAtom);
+  const { address } = useChainWallet();
 
   const postApi = async (
     _: string,
@@ -41,14 +40,14 @@ export function useReferralRateChange() {
       };
     },
   ) => {
-    if (!token || !arg.referral_code) return null;
+    if (!address || !arg.referral_code) return null;
 
     const res = await apiFetcher(
       `${apiEndPoint}${ApiPaths.referral.updateCommission}`,
       {
         method: "POST",
         body: JSON.stringify({
-          access_token: token,
+          dest_account: address,
           ...arg,
         }),
       },
@@ -64,6 +63,7 @@ export function useReferralRateChange() {
 
 export function useReferralNoteChange() {
   const { apiEndPoint } = useEndPoint();
+  const { address } = useChainWallet();
 
   const postApi = async (
     _: string,
@@ -76,13 +76,14 @@ export function useReferralNoteChange() {
       };
     },
   ) => {
-    if (!arg.referral_code) return null;
+    if (!address || !arg.referral_code) return null;
 
     const res = await apiFetcher(
       `${apiEndPoint}${ApiPaths.referral.updateNote}`,
       {
         method: "POST",
         body: JSON.stringify({
+          dest_account: address,
           ...arg,
         }),
       },
@@ -98,6 +99,7 @@ export function useReferralNoteChange() {
 
 export function useReferralDefault() {
   const { apiEndPoint } = useEndPoint();
+  const { address } = useChainWallet();
 
   const postApi = async (
     _: string,
@@ -109,11 +111,12 @@ export function useReferralDefault() {
       };
     },
   ) => {
-    if (!arg.referral_code) return null;
+    if (!address || !arg.referral_code) return null;
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.default}`, {
       method: "POST",
       body: JSON.stringify({
+        dest_account: address,
         ...arg,
       }),
     });
@@ -128,6 +131,7 @@ export function useReferralDefault() {
 
 export function useReferralDelete() {
   const { apiEndPoint } = useEndPoint();
+  const { address } = useChainWallet();
 
   const postApi = async (
     _: string,
@@ -139,11 +143,12 @@ export function useReferralDelete() {
       };
     },
   ) => {
-    if (!arg.referral_code) return null;
+    if (!address || !arg.referral_code) return null;
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.delete}`, {
       method: "POST",
       body: JSON.stringify({
+        dest_account: address,
         ...arg,
       }),
     });
@@ -183,6 +188,38 @@ export function useReferralView() {
   };
 
   const res = useSWRMutation("update referral default", postApi);
+
+  return res;
+}
+
+export function useReferralBind() {
+  const { apiEndPoint } = useEndPoint();
+  const { address } = useChainWallet();
+
+  const CreateApiPost = async (
+    _: string,
+    {
+      arg,
+    }: {
+      arg: {
+        referral_code: string;
+      };
+    },
+  ) => {
+    if (!address || !arg.referral_code) return null;
+
+    const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.bind}`, {
+      method: "POST",
+      body: JSON.stringify({
+        dest_account: address,
+        ...arg,
+      }),
+    });
+
+    return res;
+  };
+
+  const res = useSWRMutation("create referral", CreateApiPost);
 
   return res;
 }

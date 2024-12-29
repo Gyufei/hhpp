@@ -78,6 +78,7 @@ export const ApiPaths = {
     default: "/referral/default",
     data: "/referral/referral_system_data",
     views: "/referral/views",
+    bind: "/referral/bind",
     delete: "/referral/delete",
     codeData: "/referral/referal_rate",
     extraRate: "/referral/referal_extra_rate",

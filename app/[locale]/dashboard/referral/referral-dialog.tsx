@@ -5,10 +5,9 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { truncateAddr } from "@/lib/utils/web3";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { useUpdateReferral } from "@/lib/hooks/contract/use-update-referral";
 import { useReferralCodeData } from "@/lib/hooks/api/use-referral-data";
 import { usePathname, useRouter } from "@/app/navigation";
-import { useReferralView } from "@/lib/hooks/api/use-referral";
+import { useReferralBind, useReferralView } from "@/lib/hooks/api/use-referral";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { ChainType } from "@/lib/types/chain";
@@ -84,17 +83,14 @@ export function ReferralSignInBtn({ referralCode }: { referralCode: string }) {
   }, [referrerStr]);
 
   const {
-    data: txHash,
-    isLoading: isUpdating,
-    isSuccess,
-    write: writeAction,
-  } = useUpdateReferral({
-    referralCode,
-  });
+    isMutating: isUpdating,
+    data: isSuccess,
+    trigger: writeAction,
+  } = useReferralBind();
 
   function handleSignInReferral() {
     if (isUpdating || !codeData) return;
-    writeAction(undefined);
+    writeAction({ referral_code: referralCode });
   }
 
   useEffect(() => {
@@ -106,7 +102,7 @@ export function ReferralSignInBtn({ referralCode }: { referralCode: string }) {
         router.replace(pathname + `?${params.toString()}`);
       }
     }
-  }, [isSuccess, txHash]);
+  }, [isSuccess]);
 
   return (
     <>

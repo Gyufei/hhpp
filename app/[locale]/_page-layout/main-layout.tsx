@@ -1,4 +1,3 @@
-"use client";
 import Header from "@/app/[locale]/_page-layout/_header";
 import GlobalActionTip from "@/components/share/global-action-tip";
 import ReferralDialog from "../dashboard/referral/referral-dialog";
