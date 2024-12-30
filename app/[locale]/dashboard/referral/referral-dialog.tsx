@@ -51,13 +51,22 @@ export default function ReferralDialog() {
         }}
         aria-describedby={undefined}
       >
-        <ReferralSignInBtn referralCode={referralCode} />
+        <ReferralSignInBtn
+          referralCode={referralCode}
+          onSuccess={() => setShowReDialog(false)}
+        />
       </DialogContent>
     </Dialog>
   );
 }
 
-export function ReferralSignInBtn({ referralCode }: { referralCode: string }) {
+export function ReferralSignInBtn({
+  referralCode,
+  onSuccess,
+}: {
+  referralCode: string;
+  onSuccess: () => void;
+}) {
   const t = useTranslations("Header");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -93,6 +102,7 @@ export function ReferralSignInBtn({ referralCode }: { referralCode: string }) {
 
   useEffect(() => {
     if (isSuccess) {
+      onSuccess();
       if (searchParams.get("s")) {
         const params = new URLSearchParams(searchParams.toString());
         params.delete("s");
