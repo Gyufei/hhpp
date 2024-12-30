@@ -8,12 +8,12 @@ interface IUsdcBalance {
   locked_amount: number;
 }
 
-export function usePointAmount(wallet: string, market: string) {
+export function usePointAmount(wallet: string, marketAccount: string) {
   const { dataApiEndPoint } = useEndPoint();
 
   const res = useSWR<IUsdcBalance>(
-    wallet && market
-      ? `${dataApiEndPoint}${DataApiPaths.marketPointAmount}?wallet=${wallet}&market_place_account=${market}`
+    wallet && marketAccount
+      ? `${dataApiEndPoint}${DataApiPaths.marketPointAmount}?wallet=${wallet}&market_place_account=${marketAccount}`
       : null,
     dataApiFetcher,
   );

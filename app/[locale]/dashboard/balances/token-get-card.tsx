@@ -12,6 +12,7 @@ import { reportEvent } from "@/lib/utils/analytics";
 export function TokenGetCard({
   tokenInfo,
   amount,
+  withdrawerName,
   onSuccess,
 }: {
   tokenInfo: IToken | null;
@@ -32,7 +33,9 @@ export function TokenGetCard({
     if (isWdTokenLoading) return;
     hasReportedSuccessRef.current = false;
     reportEvent("click", { value: "withdrawToken" });
-    wdTokenAction(undefined);
+    wdTokenAction({
+      token_balance_type: withdrawerName,
+    });
   }
 
   useEffect(() => {
@@ -67,7 +70,7 @@ export function TokenGetCard({
         </div>
       </div>
 
-      <div className="mt-[10px] flex flex-col justify-between sm:items-end">
+      <div className="mt-[10px] flex flex-col justify-between sm:items-end md:flex-row">
         <div className="mb-8 mt-4 flex flex-row justify-between sm:mb-0 sm:mt-0 sm:flex-col">
           <div className="text-sm leading-5 text-lightgray">
             {mbt("lb-Amount")}
@@ -76,7 +79,7 @@ export function TokenGetCard({
             {formatNum(amount)}
           </div>
         </div>
-        <WithWalletConnectBtn onClick={handleWithdrawToken}>
+        <WithWalletConnectBtn onClick={() => handleWithdrawToken()}>
           <div
             data-active={amount > 0}
             className="flex h-12 w-full cursor-pointer items-center justify-center rounded-lg border border-[#d3d4d6] hover:border-0 hover:bg-yellow data-[active=false]:pointer-events-none data-[active=false]:opacity-70 sm:h-7 sm:w-14 sm:rounded-full"

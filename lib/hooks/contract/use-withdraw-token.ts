@@ -19,8 +19,13 @@ export function useWithdrawToken() {
 
   const { signDataAction } = useSignData();
 
-  const txAction = async () => {
+  const txAction = async ({
+    token_balance_type,
+  }: {
+    token_balance_type: IBalanceType;
+  }) => {
     const reqData = await signDataAction({
+      token_balance_type,
       source_account: realAddress,
       dest_account: address,
     });

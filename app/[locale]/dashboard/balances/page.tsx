@@ -69,7 +69,10 @@ export default function MyBalances() {
           } as IToken),
       );
 
-    return [...addChainToToken(ChainType.HYPER, arbTokens || []), ...marketToken];
+    return [
+      ...addChainToToken(ChainType.HYPER, arbTokens || []),
+      ...marketToken,
+    ];
   }, [arbTokens, allMarketPoint]);
 
   const { data: tokenBlcData, mutate: refetchTokenBlcData } =

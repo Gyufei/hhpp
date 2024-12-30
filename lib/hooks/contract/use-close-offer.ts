@@ -3,11 +3,9 @@ import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
 import { dataApiFetcher } from "@/lib/fetcher";
 import { useSignData } from "./help/use-sign-data";
 import { useChainWallet } from "../web3/use-chain-wallet";
-import { ChainConfigs } from "@/lib/const/chain-configs";
-import { ChainType } from "@/lib/types/chain";
 
 export function useCloseOffer() {
-  const { address } = useChainWallet();
+  const { realAddress, address } = useChainWallet();
   const { dataApiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
 
@@ -16,7 +14,7 @@ export function useCloseOffer() {
 
     const reqData = await signDataAction({
       source_account: address,
-      dest_account: ChainConfigs[ChainType.HYPER].contracts.bridge,
+      dest_account: realAddress,
     });
 
     const res = await dataApiFetcher(
