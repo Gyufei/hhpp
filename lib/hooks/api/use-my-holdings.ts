@@ -17,12 +17,7 @@ export function useMyHoldings() {
     if (!address || isMarketLoading) return [];
 
     const holdingRes = await dataApiFetcher(
-      // `${dataApiEndPoint}${DataApiPaths.holding}?wallet=${address}&chain=${chain}`,
-      `${dataApiEndPoint}${
-        DataApiPaths.holding
-      }?wallet=${"0x3924cb7faaf689977d54e492077b22066f57f2dc"}&chain=${
-        ChainType.HYPER
-      }`,
+      `${dataApiEndPoint}${DataApiPaths.holding}?wallet=${address}&chain=${ChainType.HYPER}`,
     );
 
     if (holdingRes?.length <= 0) return [];
