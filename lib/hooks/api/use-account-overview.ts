@@ -30,7 +30,7 @@ export function useAccountStats(chain: ChainType) {
   return res;
 }
 
-export function useUserNameChange(chain: ChainType) {
+export function useUserNameChange() {
   const { apiEndPoint } = useEndPoint();
 
   const postApi = async (
