@@ -29,7 +29,7 @@ export async function dataApiFetcher(
   init?: RequestInit | undefined,
 ) {
   try {
-    const result = await fetch(input, init);
+    const result = await encryptFetch(input, init);
     const res = await parsedRes(result);
 
     return res;
