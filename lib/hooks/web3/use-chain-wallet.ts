@@ -6,13 +6,13 @@ import { useAccountInfo } from "../api/use-account-info";
 
 export function useChainWallet() {
   const {
-    address: evmAddress,
-    isConnected: evmConnected,
-    isConnecting: evmConnecting,
-    connector: evmConnector,
+    address: realAddress,
+    isConnected,
+    isConnecting,
+    connector,
   } = useAccount();
 
-  const { data: destInfo } = useAccountInfo(evmAddress || "");
+  const { data: destInfo } = useAccountInfo(realAddress || "");
 
   const destAddress = destInfo?.dest_wallet;
 
@@ -22,31 +22,18 @@ export function useChainWallet() {
     return ChainType.HYPER;
   }, []);
 
-  const evmWallet = useMemo(
-    () => ({
-      // source wallet for data fetch, sign, arb
-      realAddress: evmAddress || "",
-      shortAddr: evmAddress
-        ? truncateAddr(evmAddress, { nPrefix: 4, nSuffix: 4 })
-        : "",
-      // dest wallet for HL
-      address: destAddress || "",
-      connected: evmConnected,
-      connecting: evmConnecting,
-      disconnect: evmDisconnect,
-      currentChain: currentWalletChain,
-      connector: evmConnector,
-    }),
-    [
-      destAddress,
-      evmAddress,
-      evmConnected,
-      evmConnecting,
-      evmDisconnect,
-      currentWalletChain,
-      evmConnector,
-    ],
-  );
-
-  return evmWallet;
+  return {
+    // source wallet for data fetch, sign, arb
+    realAddress: realAddress || "",
+    shortAddr: realAddress
+      ? truncateAddr(realAddress, { nPrefix: 4, nSuffix: 4 })
+      : "",
+    // dest wallet for HL
+    address: destAddress || "",
+    connected: isConnected,
+    connecting: isConnecting,
+    disconnect: evmDisconnect,
+    currentChain: currentWalletChain,
+    connector: connector,
+  };
 }

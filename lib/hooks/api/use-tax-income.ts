@@ -9,7 +9,7 @@ export function useTaxIncome(chain: ChainType, period: IRangeType) {
   const { apiEndPoint } = useEndPoint();
 
   const res = useSWR(
-    `${apiEndPoint}/${chain}${ApiPaths.taxIncome}?period=${period}`,
+    `${apiEndPoint}${ApiPaths.taxIncome}?period=${period}`,
     apiFetcher,
   );
 

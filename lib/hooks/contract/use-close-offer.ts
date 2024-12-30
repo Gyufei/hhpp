@@ -13,8 +13,8 @@ export function useCloseOffer() {
     const { offerId } = args;
 
     const reqData = await signDataAction({
-      source_account: address,
-      dest_account: realAddress,
+      source_account: realAddress,
+      dest_account: address,
     });
 
     const res = await dataApiFetcher(

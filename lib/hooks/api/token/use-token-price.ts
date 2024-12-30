@@ -8,10 +8,7 @@ import { ChainType } from "@/lib/types/chain";
 export function useTokenPrice(chain: ChainType, address: string) {
   const { apiEndPoint } = useEndPoint();
 
-  const res = useSWR<any>(
-    `${apiEndPoint}/${chain}${ApiPaths.tokenPrice}`,
-    apiFetcher,
-  );
+  const res = useSWR<any>(`${apiEndPoint}${ApiPaths.tokenPrice}`, apiFetcher);
 
   const tokenPrice = useMemo(() => {
     if (!res) return "1";

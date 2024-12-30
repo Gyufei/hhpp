@@ -9,7 +9,7 @@ export function useMarketTrades(chain: ChainType, marketplaceId: string) {
 
   const res = useSWR(
     marketplaceId && chain
-      ? `${apiEndPoint}/${chain}${ApiPaths.marketTrades}?market_place_account=${marketplaceId}`
+      ? `${apiEndPoint}${ApiPaths.marketTrades}?market_place_account=${marketplaceId}`
       : "",
     apiFetcher,
   );

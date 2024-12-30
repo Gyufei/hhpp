@@ -9,7 +9,7 @@ export function useMakerOrders(chain: ChainType, period: IRangeType) {
   const { apiEndPoint } = useEndPoint();
 
   const res = useSWR(
-    `${apiEndPoint}/${chain}${ApiPaths.makerOrders}?period=${period}`,
+    `${apiEndPoint}${ApiPaths.makerOrders}?period=${period}`,
     apiFetcher,
   );
 

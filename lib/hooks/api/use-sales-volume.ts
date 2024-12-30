@@ -16,7 +16,7 @@ export function useSalesVolume(chain: ChainType, marketplaceId: string) {
 
   const res = useSWR(
     marketplaceId
-      ? `${apiEndPoint}/${chain}${ApiPaths.salesVolumeHistory}?market_place_account=${marketplaceId}`
+      ? `${apiEndPoint}${ApiPaths.salesVolumeHistory}?market_place_account=${marketplaceId}`
       : null,
     apiFetcher,
   );

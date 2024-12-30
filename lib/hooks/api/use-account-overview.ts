@@ -46,15 +46,12 @@ export function useUserNameChange(chain: ChainType) {
   ) => {
     if (!arg.uuid || !arg.user_name) return null;
 
-    const res = await apiFetcher(
-      `${apiEndPoint}/${chain}${ApiPaths.userName}`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          ...arg,
-        }),
-      },
-    );
+    const res = await apiFetcher(`${apiEndPoint}${ApiPaths.userName}`, {
+      method: "POST",
+      body: JSON.stringify({
+        ...arg,
+      }),
+    });
 
     return res;
   };

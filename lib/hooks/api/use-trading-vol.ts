@@ -9,7 +9,7 @@ export function useTradingVol(chain: ChainType, period: IRangeType) {
   const { apiEndPoint } = useEndPoint();
 
   const res = useSWR(
-    `${apiEndPoint}/${chain}${ApiPaths.tradingVol}?period=${period}`,
+    `${apiEndPoint}${ApiPaths.tradingVol}?period=${period}`,
     apiFetcher,
   );
 
