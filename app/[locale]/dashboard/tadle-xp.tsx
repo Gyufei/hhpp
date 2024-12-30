@@ -46,7 +46,7 @@ export function TadleXp() {
     <div className="min-h-[210px]">
       <div className="flex items-center space-x-2">
         <div className="h-6 w-6 rounded-lg bg-yellow"></div>
-        <div className="leading-6 text-black">Tadle XP</div>
+        <div className="leading-6 text-black">HyperTrade XP</div>
       </div>
       <div className="relative mt-4">
         <GaugeComponent

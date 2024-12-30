@@ -26,7 +26,7 @@ export default function Faqs() {
         <div className="flex cursor-pointer items-center space-x-1">
           <Link
             className="flex items-center"
-            href="https://tadle.gitbook.io/tadle/faq"
+            href="https://hyper.gitbook.io/faq"
           >
             <div className="text-lg leading-6 text-black">{t("btn-More")}</div>
             <Image

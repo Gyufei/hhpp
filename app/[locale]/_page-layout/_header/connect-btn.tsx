@@ -17,7 +17,7 @@ import BalancePopContent from "./balance-pop-content";
 import { useAccountEffect, useSignMessage } from "wagmi";
 import { isProduction } from "@/lib/PathMap";
 
-const SignMessageKey = "tadle-sign-message";
+const SignMessageKey = "hyper-trade-sign-message";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function ConnectBtn() {
@@ -39,7 +39,7 @@ export default function ConnectBtn() {
       if (!isProduction) return;
 
       signMessage(
-        { message: "Hello, Welcome to Tadle!" },
+        { message: "Hello, Welcome to HyperTrade!" },
         {
           onSuccess(data) {
             localStorage.setItem(SignMessageKey, data);

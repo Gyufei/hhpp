@@ -1,4 +1,4 @@
-Sitemap: https://tadle.com/sitemap.xml
+Sitemap: https://hyper.trade/sitemap.xml
 
 User-agent: *
 Disallow: /api

@@ -3,21 +3,18 @@ export const isProduction = process.env.NODE_ENV === "production" && !isPreview;
 // export const isProduction = true;
 
 export function WithApiHost(path: string) {
-  const prodHost = `https://api.tadle.com`;
+  const prodHost = `https://api.hyper.trade`;
   const devHost = `https://preview-hypes-api.aggregation.top`;
   const host = isProduction ? prodHost : devHost;
   return `${host}${path}`;
 }
 
 export function WithDataApiHost(path: string) {
-  const prodHost = `https://apis.tadle.com`;
-  const devHost = `https://preview-hypes-api.aggregation.top`;
-  const host = isProduction ? prodHost : devHost;
-  return `${host}${path}`;
+  return WithApiHost(path);
 }
 
 export function WithCDN(path: string) {
-  const prodCDN = `https://cdn.tadle.com`;
+  const prodCDN = `https://cdn.hyper.trade`;
   const devCDN = `https://preview-hypes-cdn.aggregation.top`;
   const cdn = isProduction ? prodCDN : devCDN;
   return `${cdn}${path}`;
@@ -34,8 +31,8 @@ export function WithPointImgCDN(path: string) {
 }
 
 export function WithWss(path: string) {
-  const devWss = "wss://preview-wss.tadle.com" + path;
-  const prodWss = "wss://wss.tadle.com" + path;
+  const prodWss = "wss://wss.hyper.trade" + path;
+  const devWss = "wss://preview-wss.hyper.trade" + path;
   const wss = isProduction ? prodWss : devWss;
   return wss;
 }

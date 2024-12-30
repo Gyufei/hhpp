@@ -92,7 +92,7 @@ function Logo() {
   return (
     <Link href="/">
       <div className="mx-4 hidden flex-1 cursor-pointer items-center justify-center justify-self-center sm:flex">
-        <Image src="/icons/logo.svg" alt="logo" width={75} height={20} />
+        <Image src="/icons/logo.svg" alt="logo" width={150} height={30} />
       </div>
     </Link>
   );

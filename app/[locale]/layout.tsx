@@ -15,16 +15,16 @@ import { locales } from "../../i18n";
 
 export const metadata = {
   title: {
-    template: "%s | Tadle Market",
-    default: "Tadle Market",
+    template: "%s | HyperTrade",
+    default: "HyperTrade",
   },
   description: "Decentralized Pre-market Infrastructure",
   metadataBase: new URL(`https://${process.env.VERCEL_DOMAIN}`),
   openGraph: {
-    title: "Tadle Market",
+    title: "HyperTrade",
     description: "Decentralized Pre-market Infrastructure",
     url: `https://${process.env.VERCEL_DOMAIN}`,
-    siteName: "Tadle Market",
+    siteName: "HyperTrade",
     images: "/img/GGzCP6QaAAAm9YG.png",
     locale: "en_US",
     type: "website",
@@ -50,9 +50,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tadle Market",
+    title: "HyperTrade",
     description: "Decentralized Pre-market Infrastructure",
-    creator: "@tadle_com",
+    creator: "@hyper_trade",
     images: ["/img/GGzCP6QaAAAm9YG.png"],
   },
 };

@@ -49,8 +49,8 @@ module.exports = withNextIntl(
 
       // Suppresses source map uploading logs during build
       silent: true,
-      org: "tadle",
-      project: "tadle",
+      org: "HyperTrade",
+      project: "HyperTrade",
       // An auth token is required for uploading source maps.
       authToken:
         "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",

@@ -2,6 +2,7 @@ import Image from "next/image";
 import NewestItemCard from "./newest-item-card";
 import { useTranslations } from "next-intl";
 import { Link } from "@/app/navigation";
+import { DocLink } from "@/lib/utils/social";
 
 export default function HomeBanner() {
   const t = useTranslations("Home");
@@ -29,10 +30,10 @@ export default function HomeBanner() {
         {t("cap-TheFirstPreSuperMarket")}
       </div>
 
-      <div className="mt-10 hidden text-xl leading-[30px] text-lightgray text-center sm:flex">
+      <div className="mt-10 hidden text-center text-xl leading-[30px] text-lightgray sm:flex">
         {t("cap-BridgingLiquidityBetweenPrimaryAndSecondaryMarkets")}
       </div>
-      <div className="mt-[10px] block text-sm leading-[20px] text-lightgray text-center sm:hidden">
+      <div className="mt-[10px] block text-center text-sm leading-[20px] text-lightgray sm:hidden">
         {t("cap-BridgingLiquidityBetweenPrimaryAndSecondaryMarkets")}
       </div>
 
@@ -43,8 +44,8 @@ export default function HomeBanner() {
           </div>
         </Link>
         <Link
-          href="https://tadle.gitbook.io/tadle"
-          className="mt-[22px] ml-1 flex cursor-pointer items-center space-x-1 sm:ml-0 sm:mt-0"
+          href={DocLink}
+          className="ml-1 mt-[22px] flex cursor-pointer items-center space-x-1 sm:ml-0 sm:mt-0"
         >
           <div className="text-lg leading-6 text-black">
             {t("btn-ReadTheDocs")}
