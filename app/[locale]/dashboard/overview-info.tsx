@@ -14,7 +14,6 @@ import { useTranslations } from "next-intl";
 import ReferralLink from "./referral-link";
 import RollInBtn from "./roll-in-btn";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
-import { ChainType } from "@/lib/types/chain";
 
 export default function OverviewInfo() {
   const T = useTranslations("cd-AccountOverview");
@@ -30,9 +29,8 @@ export default function OverviewInfo() {
     currentChain!,
   );
 
-  const { trigger: updateUserNameAction, data: updateRes } = useUserNameChange(
-    ChainType.HYPER,
-  );
+  const { trigger: updateUserNameAction, data: updateRes } =
+    useUserNameChange();
 
   const [nameInputValue, setNameInputValue] = useState("");
   const [showNameInput, setShowNameInput] = useState(false);
