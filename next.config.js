@@ -49,11 +49,11 @@ module.exports = withNextIntl(
 
       // Suppresses source map uploading logs during build
       silent: true,
-      org: "HyperTrade",
-      project: "HyperTrade",
+      org: "fei-qy",
+      project: "hyper",
       // An auth token is required for uploading source maps.
       authToken:
-        "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",
+        "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",
     },
     {
       // For all available options, see:
