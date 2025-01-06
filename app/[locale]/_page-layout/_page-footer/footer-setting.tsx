@@ -28,7 +28,7 @@ export default function FooterSetting() {
         />
       </PopoverTrigger>
       <PopoverContent
-        className="flex w-[348px] flex-col items-stretch space-y-2 border-none bg-white p-6 text-[12px] text-[#2D2E33]"
+        className="flex w-[348px] flex-col items-stretch space-y-2 border border-[#303030] bg-bg-black p-6 text-[12px] text-[#2D2E33]"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}

@@ -12,7 +12,7 @@ export default function MainLayout({
   NP.enableBoundaryChecking(false);
 
   return (
-    <div className="h-screen w-screen overflow-y-auto overflow-x-hidden bg-white">
+    <div className="bg-bg-black h-screen w-screen overflow-y-auto overflow-x-hidden">
       <div className="flex w-full flex-col justify-between">
         <div className="relative mx-auto w-full">
           <Header />

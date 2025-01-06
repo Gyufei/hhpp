@@ -56,7 +56,7 @@ export default function RollInBtn() {
       onClick={handleSign}
       className="pointer-events-none cursor-not-allowed"
     >
-      <div className="flex h-7 w-[74px] cursor-pointer items-center justify-center rounded-[52px] border border-[#d3d4d6] text-sm leading-5 text-[#d3d4d6] hover:border-[#FFA95B] hover:text-[#FFA95B]">
+      <div className="flex h-7 w-[74px] cursor-pointer items-center justify-center rounded-[52px] border border-[#303030] text-sm leading-5 text-[#d3d4d6] hover:border-[#FFA95B] hover:text-[#FFA95B]">
         {T("btn-Rollin")}
       </div>
     </WithWalletConnectBtn>

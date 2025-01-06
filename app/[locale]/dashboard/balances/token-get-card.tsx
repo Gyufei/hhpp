@@ -51,7 +51,7 @@ export function TokenGetCard({
   }, [isWdTokenSuccess, onSuccess]);
 
   return (
-    <div className="flex w-full flex-col items-stretch justify-between rounded-xl bg-white px-4 py-3 sm:w-[220px]">
+    <div className="flex w-full flex-col items-stretch justify-between rounded-xl bg-bg-black px-4 py-3 sm:w-[220px]">
       <div className="flex flex-col">
         <div className="hidden text-sm leading-5 text-lightgray sm:flex">
           {mbt("lb-Token")}
@@ -64,7 +64,7 @@ export function TokenGetCard({
             className="rounded-full"
             alt="token logo"
           />
-          <div className="text-base leading-6 text-black">
+          <div className="text-base leading-6 text-txt-white">
             {tokenInfo?.symbol}
           </div>
         </div>
@@ -75,14 +75,14 @@ export function TokenGetCard({
           <div className="text-sm leading-5 text-lightgray">
             {mbt("lb-Amount")}
           </div>
-          <div className="text-base leading-6 text-black">
+          <div className="text-base leading-6 text-txt-white">
             {formatNum(amount)}
           </div>
         </div>
         <WithWalletConnectBtn onClick={() => handleWithdrawToken()}>
           <div
             data-active={amount > 0}
-            className="flex h-12 w-full cursor-pointer items-center justify-center rounded-lg border border-[#d3d4d6] hover:border-0 hover:bg-yellow data-[active=false]:pointer-events-none data-[active=false]:opacity-70 sm:h-7 sm:w-14 sm:rounded-full"
+            className="flex h-12 w-full cursor-pointer items-center justify-center rounded-lg border border-[#303030] hover:border-0 hover:bg-yellow data-[active=false]:pointer-events-none data-[active=false]:opacity-70 sm:h-7 sm:w-14 sm:rounded-full"
           >
             {mbt("btn-Get")}
           </div>

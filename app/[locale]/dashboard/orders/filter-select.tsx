@@ -58,7 +58,7 @@ export function FilterSelect({
       <DropdownMenuTrigger asChild>
         <div
           data-open={popOpen}
-          className="flex h-8 w-8 cursor-pointer items-center justify-center space-x-1 rounded-full border border-[#D3D4D6] outline-none"
+          className="flex h-8 w-8 cursor-pointer items-center justify-center space-x-1 rounded-full border border-[#303030] outline-none"
         >
           <Image
             src="/icons/filter.svg"
@@ -70,7 +70,7 @@ export function FilterSelect({
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-[158px] border-0 bg-white p-1"
+        className="w-[158px] border-0 bg-bg-black p-1"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}
@@ -78,7 +78,7 @@ export function FilterSelect({
         <DropdownMenuSub>
           <DropdownMenuSubTrigger
             data-checked={checkFilterType === "Type"}
-            className="flex h-9 cursor-pointer items-center rounded-xl px-4 text-xs leading-[18px] text-black data-[checked=true]:bg-[#FAFAFA]"
+            className="flex h-9 cursor-pointer items-center rounded-xl px-4 text-xs leading-[18px] text-txt-white data-[checked=true]:bg-bg-black"
             onClick={() => setCheckFilterType(FilterTypes[0])}
           >
             {T("sl-Type")}
@@ -86,7 +86,7 @@ export function FilterSelect({
           <DropdownMenuPortal>
             <DropdownMenuSubContent
               sideOffset={6}
-              className="w-[158px] border-0 bg-white p-1"
+              className="w-[158px] border-0 bg-bg-black p-1"
               style={{
                 boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
               }}
@@ -95,7 +95,7 @@ export function FilterSelect({
                 <DropdownMenuItem
                   key={r}
                   data-active={role === r}
-                  className="h-9 cursor-pointer py-[3px] data-[active=true]:bg-[#FAFAFA]"
+                  className="h-9 cursor-pointer py-[3px] data-[active=true]:bg-bg-black"
                   onClick={() => handleRoleClick(r)}
                 >
                   <div className="text-xs leading-[18px]">{r}</div>
@@ -107,7 +107,7 @@ export function FilterSelect({
         <DropdownMenuSub>
           <DropdownMenuSubTrigger
             data-checked={checkFilterType === "Status"}
-            className="flex h-9 cursor-pointer items-center rounded-xl px-4 text-xs leading-[18px] text-black data-[checked=true]:bg-[#FAFAFA]"
+            className="flex h-9 cursor-pointer items-center rounded-xl px-4 text-xs leading-[18px] text-txt-white data-[checked=true]:bg-bg-black"
             onClick={() => setCheckFilterType(FilterTypes[1])}
           >
             {T("sl-Status")}
@@ -115,7 +115,7 @@ export function FilterSelect({
           <DropdownMenuPortal>
             <DropdownMenuSubContent
               sideOffset={6}
-              className="w-[158px] border-0 bg-white p-1"
+              className="w-[158px] border-0 bg-bg-black p-1"
               style={{
                 boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
               }}
@@ -124,7 +124,7 @@ export function FilterSelect({
                 <DropdownMenuItem
                   key={s}
                   data-active={status === s}
-                  className="h-9 cursor-pointer py-[3px] data-[active=true]:bg-[#FAFAFA]"
+                  className="h-9 cursor-pointer py-[3px] data-[active=true]:bg-bg-black"
                   onClick={() => handleStatusClick(s)}
                 >
                   <div className="text-xs leading-[18px]">{s}</div>

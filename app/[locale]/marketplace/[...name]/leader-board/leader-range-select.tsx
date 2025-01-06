@@ -57,7 +57,7 @@ export function LeaderRangeSelect({
       </PopoverTrigger>
       <PopoverContent
         align="end"
-        className="flex w-20 flex-col items-stretch border-0 bg-white p-1"
+        className="flex w-20 flex-col items-stretch border-0 bg-bg-black p-1"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}
@@ -66,12 +66,12 @@ export function LeaderRangeSelect({
           <div
             key={t.value}
             data-checked={type === t.value}
-            className="flex cursor-pointer items-center rounded-xl px-3 py-2 data-[checked=true]:bg-[#FAFAFA]"
+            className="flex cursor-pointer items-center rounded-xl px-3 py-2 data-[checked=true]:bg-bg-black"
             onClick={() => handleClickOpt(t.value)}
           >
             <div
               data-checked={type === t.value}
-              className="ml-[5px] text-xs leading-[18px] data-[checked=true]:text-black data-[checked=false]:text-gray"
+              className="ml-[5px] text-xs leading-[18px] data-[checked=true]:text-txt-white data-[checked=false]:text-gray"
             >
               {t.label}
             </div>

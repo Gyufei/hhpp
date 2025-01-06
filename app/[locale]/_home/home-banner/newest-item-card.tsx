@@ -49,7 +49,7 @@ export default function NewestItemCard() {
       </div>
       {!nowMsg && (
         <div
-          className="mt-4 flex h-[88px] items-center justify-between space-x-[250px] rounded-[20px] bg-white px-8"
+          className="mt-4 flex h-[88px] items-center justify-between space-x-[250px] rounded-[20px] bg-bg-black px-8"
           style={{
             boxShadow: "4px 8px 40px 0px rgba(45, 46, 51, 0.1)",
           }}
@@ -70,7 +70,7 @@ export default function NewestItemCard() {
       )}
       {nowMsg && (
         <div
-          className="now-msg absolute flex h-[88px] w-full items-center justify-between space-x-[250px] rounded-[20px] bg-white px-8"
+          className="now-msg absolute flex h-[88px] w-full items-center justify-between space-x-[250px] rounded-[20px] bg-bg-black px-8"
           style={{
             boxShadow: "4px 8px 40px 0px rgba(45, 46, 51, 0.1)",
           }}

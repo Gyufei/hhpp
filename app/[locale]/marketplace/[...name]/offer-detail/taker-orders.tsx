@@ -68,11 +68,13 @@ export function TakerOrders({
       &:not(:first-of-type) {
         text-align: right;
       }
+
+      background: #111a1e;
     `,
     HeaderCell: `
       font-size: 12px;
       font-weight: 400;
-      color: #c0c4cc;
+      color: #949e9c;
       line-height: 18px;
     `,
     Cell: `

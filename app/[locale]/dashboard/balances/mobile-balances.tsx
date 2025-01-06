@@ -32,7 +32,7 @@ const MobileBalances: React.FC<MobileBalancesProps> = ({
   return (
     <div className="flex h-[calc(100vh-206px)] w-full flex-1 flex-col overflow-y-auto">
       {dataArray.length > 0 ? (
-        <div className="mx-auto max-w-sm space-y-2 bg-white p-4">
+        <div className="mx-auto max-w-sm space-y-2 bg-bg-black p-4">
           <Accordion
             type="single"
             collapsible
@@ -43,7 +43,7 @@ const MobileBalances: React.FC<MobileBalancesProps> = ({
               <AccordionItem
                 key={index}
                 value={item.panelName}
-                className="mb-3 overflow-hidden rounded-lg border bg-[#FAFAFA] p-4"
+                className="mb-3 overflow-hidden rounded-lg border bg-bg-black p-4"
               >
                 <AccordionTrigger className="mb-4 h-6" showIcon={false}>
                   <AcHeader
@@ -113,11 +113,11 @@ function AcFooter({
     <div className="flex flex-col items-center justify-between">
       <div className="mb-2 flex w-full items-center justify-between ">
         <div className="text-gray">{mbt("cap-WalletCount")}</div>
-        <div className="text-black">{walletCount}</div>
+        <div className="text-txt-white">{walletCount}</div>
       </div>
       <div className="mb-2 flex w-full items-center justify-between ">
         <div className="text-gray">{mbt("cap-TotalAmount")}</div>
-        <div className="text-black">{formatNum(totalAmount)}</div>
+        <div className="text-txt-white">{formatNum(totalAmount)}</div>
       </div>
     </div>
   );

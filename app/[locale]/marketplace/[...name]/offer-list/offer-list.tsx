@@ -1,10 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import {
-  IOfferType,
-  OfferTypeSelect,
-} from "@/components/share/offer-type-select";
 import { SortSelect } from "@/components/share/sort-select";
 import SearchInput from "./search-input";
 import { OfferCard, OrderCardSkeleton } from "./offer-card";
@@ -21,7 +17,6 @@ export default function OfferList({
   offers: Array<IOffer>;
   isLoading: boolean;
 }) {
-  const [orderTypes, setOrderTypes] = useState<Array<IOfferType>>(["sell"]);
   const [searchText, setSearchText] = useState("");
 
   const { isMobileSize } = useDeviceSize();
@@ -34,26 +29,16 @@ export default function OfferList({
   } = useSortOffer(offers || []);
 
   const filterOrders = useMemo(() => {
-    const typeOrders = (sortOffers || [])?.filter((o: IOffer) =>
-      orderTypes.includes(o.entry.direction as IOfferType),
-    );
-
     if (!searchText) {
-      return typeOrders;
+      return sortOffers;
     }
 
-    return typeOrders?.filter((o: IOffer) => {
+    return sortOffers?.filter((o: IOffer) => {
       const isIdMatch = String(o.entry.id) === String(searchText);
 
       return isIdMatch;
     });
-  }, [sortOffers, orderTypes, searchText]);
-
-  // const [layout, setLayout] = useState<"grid" | "list">("grid");
-
-  function handleTypeChange(t: Array<IOfferType>) {
-    setOrderTypes(t);
-  }
+  }, [sortOffers, searchText]);
 
   function handleSearch(text: string) {
     setSearchText(text);
@@ -66,13 +51,9 @@ export default function OfferList({
     filterOrders?.[0]?.marketplace?.market_catagory === "point_token";
 
   return (
-    <div className="flex h-full flex-col rounded-none bg-[#fafafa] p-5 sm:rounded-3xl">
-      <div className="flex w-full items-center justify-between border-b border-[#d8d8d8] pb-5">
+    <div className="flex h-full flex-col rounded-none bg-[#303030] p-5 sm:rounded-3xl">
+      <div className="flex w-full items-center justify-between border-b border-[#111A1E] pb-5">
         <div className="no-scroll-bar flex w-[calc(100vw-170px)] flex-1 items-center space-x-4 overflow-x-scroll sm:w-auto sm:overflow-hidden">
-          <OfferTypeSelect
-            types={orderTypes}
-            handleTypeChange={handleTypeChange}
-          />
           <SortSelect
             sortField={sortField}
             sortDir={sortDir}
@@ -92,7 +73,7 @@ export default function OfferList({
           <SearchInput handleSearch={handleSearch} />
           {/* <div
             data-active={layout === "list"}
-            className="ml-2 hidden h-8 w-8 min-w-8 cursor-pointer items-center justify-center rounded-full data-[active=true]:bg-white sm:flex"
+            className="ml-2 hidden h-8 w-8 min-w-8 cursor-pointer items-center justify-center rounded-full data-[active=true]:bg-bg-black sm:flex"
           >
             <HoverIcon
               src="/icons/menu-gray.svg"
@@ -106,7 +87,7 @@ export default function OfferList({
           </div>
           <div
             data-active={layout === "grid"}
-            className="ml-2 flex h-8 w-8 min-w-8 cursor-pointer items-center justify-center rounded-full data-[active=true]:bg-white"
+            className="ml-2 flex h-8 w-8 min-w-8 cursor-pointer items-center justify-center rounded-full data-[active=true]:bg-bg-black"
           >
             <HoverIcon
               src="/icons/grid-gray.svg"

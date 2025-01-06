@@ -51,14 +51,14 @@ export default function ReferralInfo({
     <>
       <div className="mt-5 flex flex-col items-center justify-start sm:flex-row sm:space-x-5">
         <div
-          className="flex w-full items-stretch justify-between rounded-[20px] bg-white px-5 py-3 sm:w-[300px]"
+          className="flex w-full items-stretch justify-between rounded-[20px] bg-bg-black px-5 py-3 sm:w-[300px]"
           style={{
             backgroundImage: "url(/img/new-users.png)",
             backgroundRepeat: "no-repeat",
           }}
         >
           <div className="flex flex-col items-start justify-between">
-            <div className="mt-1 text-[30px] leading-[30px] text-black">
+            <div className="mt-1 text-[30px] leading-[30px] text-txt-white">
               {signedUp}
             </div>
             <div className="text-sm leading-5 text-gray">
@@ -82,14 +82,14 @@ export default function ReferralInfo({
           </div>
         </div>
         <div
-          className="mt-3 flex w-full items-stretch justify-between rounded-[20px] bg-white px-5 py-3 sm:mt-0 sm:w-[300px]"
+          className="mt-3 flex w-full items-stretch justify-between rounded-[20px] bg-bg-black px-5 py-3 sm:mt-0 sm:w-[300px]"
           style={{
             backgroundImage: "url(/img/trading-fee.png)",
             backgroundRepeat: "no-repeat",
           }}
         >
           <div className="flex flex-col items-start justify-between">
-            <div className="mt-1 text-[30px] leading-[30px] text-black">
+            <div className="mt-1 text-[30px] leading-[30px] text-txt-white">
               ${commission}
             </div>
             <div className="text-sm leading-5 text-gray">

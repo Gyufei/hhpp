@@ -30,7 +30,7 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
 
   return (
     <div className="no-scroll-bar w-full overflow-x-scroll sm:w-auto sm:overflow-x-hidden">
-      <div className="mt-4 max-h-[415px] min-w-[820px] rounded-[20px] bg-[#fafafa] p-4 pb-6">
+      <div className="mt-4 max-h-[415px] min-w-[820px] rounded-[20px] bg-bg-black p-4 pb-6">
         <Tabs
           value={currentTab}
           className="flex flex-1 flex-col"
@@ -39,13 +39,13 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
           <TabsList className="flex items-end justify-between p-0">
             <div className="flex items-center justify-start space-x-10">
               <TabsTrigger
-                className="flex w-[105px] items-center pb-[10px] pl-0 pt-0 leading-6 data-[state=active]:border-b-2 data-[state=active]:border-lightgray data-[state=inactive]:border-transparent data-[state=active]:text-black data-[state=inactive]:text-lightgray"
+                className="flex w-[105px] items-center pb-[10px] pl-0 pt-0 leading-6 data-[state=active]:border-b-2 data-[state=active]:border-lightgray data-[state=inactive]:border-transparent data-[state=active]:text-txt-white data-[state=inactive]:text-lightgray"
                 value="orders"
               >
                 {T("cap-TakerOrders")}
               </TabsTrigger>
               {/* <TabsTrigger
-              className="w-[105px] leading-6 data-[state=active]:border-b-2 data-[state=inactive]:border-transparent data-[state=active]:border-lightgray data-[state=inactive]:text-lightgray data-[state=active]:text-black"
+              className="w-[105px] leading-6 data-[state=active]:border-b-2 data-[state=inactive]:border-transparent data-[state=active]:border-lightgray data-[state=inactive]:text-lightgray data-[state=active]:text-txt-white"
               value="history"
             >
               {T("cap-OrderHistory")}

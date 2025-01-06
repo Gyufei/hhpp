@@ -25,7 +25,7 @@ export function TokenPairImg({
         className="rounded-full"
       />
       {src2 && (
-        <div className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center rounded-full border border-white bg-white">
+        <div className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center rounded-full border border-white bg-bg-black">
           <Image
             src={src2}
             width={width2}

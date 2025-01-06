@@ -24,14 +24,14 @@ export default function DetailCard({ offer }: { offer: IOffer }) {
   return (
     <div className="flex-1 px-0 sm:px-6">
       <div className="flex items-center justify-between">
-        <div className="leading-6 text-black">{T("cap-OfferDetail")}</div>
+        <div className="leading-6 text-txt-white">{T("cap-OfferDetail")}</div>
       </div>
       <DetailRow>
         <DetailLabel tipText={T("tip-SellerAmount")}>
           {T("lb-SellerAmount")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="text-sm leading-5 text-black">
+          <div className="text-sm leading-5 text-txt-white">
             {formatNum(NP.divide(offer.item_amount, pointDecimalNum))}
           </div>
           <Image
@@ -47,7 +47,7 @@ export default function DetailCard({ offer }: { offer: IOffer }) {
       <DetailRow>
         <DetailLabel tipText={T("tip-Seller")}>{T("lb-Seller")}</DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="text-sm leading-5 text-black">
+          <div className="text-sm leading-5 text-txt-white">
             {truncateAddr(offer?.offer_maker || "", {
               nPrefix: 4,
               nSuffix: 4,
@@ -80,10 +80,10 @@ export default function DetailCard({ offer }: { offer: IOffer }) {
           {T("lb-InitialOfferMaker")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="w-fit rounded-[4px] bg-[#F0F1F5] px-[5px] py-[2px] text-[10px] leading-4 text-gray">
+          <div className="w-fit rounded-[4px] bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
             {originId ? `#${originId}` : ""}
           </div>
-          <div className="text-sm leading-5 text-black">
+          <div className="text-sm leading-5 text-txt-white">
             {truncateAddr(originMaker || "", {
               nPrefix: 4,
               nSuffix: 4,

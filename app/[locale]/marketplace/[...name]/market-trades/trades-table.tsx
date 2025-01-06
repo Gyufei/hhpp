@@ -135,10 +135,12 @@ export function TradesTable({
       &:nth-of-type(5) {
         text-align: center;
       }
+
+      background: #111a1e;
     `,
     HeaderCell: `
-      color: #c0c4cc;
-      border-bottom: 1px solid #eee;
+      color: #949e9c;
+      border-bottom: 1px solid #303030;
 
       &:nth-of-type(4),
       &:nth-of-type(5) {
@@ -146,7 +148,7 @@ export function TradesTable({
       }
     `,
     Cell: `
-      color: #2d2e33;
+      color: #D1D4DC;
       height: 40px;
 
       &:nth-of-type(3),

@@ -20,7 +20,7 @@ export default function Faqs() {
     <div className="mt-[60px] bg-[rgba(224,255,98,0.1)] px-4 py-20 sm:px-[120px]">
       <div className="flex items-center justify-between">
         <div />
-        <div className="text-center text-2xl leading-9 text-black sm:text-4xl sm:leading-[54px]">
+        <div className="text-center text-2xl leading-9 text-txt-white sm:text-4xl sm:leading-[54px]">
           {t("cap-FAQ")}
         </div>
         <div className="flex cursor-pointer items-center space-x-1">
@@ -28,7 +28,7 @@ export default function Faqs() {
             className="flex items-center"
             href="https://hyper.gitbook.io/faq"
           >
-            <div className="text-lg leading-6 text-black">{t("btn-More")}</div>
+            <div className="text-lg leading-6 text-txt-white">{t("btn-More")}</div>
             <Image
               src="/icons/right-arrow.svg"
               width={24}
@@ -147,7 +147,7 @@ CollTrigger.displayName = "CollTrigger";
 
 function CollDot() {
   return (
-    <div className="h-1 w-1 rounded-full bg-black sm:h-[6px] sm:w-[6px]"></div>
+    <div className="h-1 w-1 rounded-full bg-txt-white sm:h-[6px] sm:w-[6px]"></div>
   );
 }
 

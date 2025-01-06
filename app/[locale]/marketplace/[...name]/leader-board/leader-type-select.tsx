@@ -52,7 +52,7 @@ export function LeaderTypeSelect({
       </PopoverTrigger>
       <PopoverContent
         align="end"
-        className="flex w-[158px] flex-col items-stretch border-0 bg-white p-1"
+        className="flex w-[158px] flex-col items-stretch border-0 bg-bg-black p-1"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}
@@ -61,13 +61,13 @@ export function LeaderTypeSelect({
           <div
             key={t}
             data-checked={type === t}
-            className="flex cursor-pointer items-center rounded-xl px-3 py-2 data-[checked=true]:bg-[#FAFAFA]"
+            className="flex cursor-pointer items-center rounded-xl px-3 py-2 data-[checked=true]:bg-bg-black"
             onClick={() => handleClickOpt(t)}
           >
             <OptionIcon type={t} active={type === t} />
             <div
               data-checked={type === t}
-              className="ml-[5px] text-xs leading-[18px] data-[checked=false]:text-gray data-[checked=true]:text-black"
+              className="ml-[5px] text-xs leading-[18px] data-[checked=false]:text-gray data-[checked=true]:text-txt-white"
             >
               {mt(getI18nText(t))}
             </div>

@@ -34,7 +34,7 @@ export function StableTokenSelectDisplay({
       {showBalance && <StableBalance />}
       <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
         <PopoverTrigger>
-          <div className="flex w-fit cursor-pointer items-center rounded-full bg-[#F0F1F5] p-2">
+          <div className="flex w-fit cursor-pointer items-center rounded-full bg-bg-black p-2">
             {token && (
               <>
                 <Image
@@ -44,7 +44,7 @@ export function StableTokenSelectDisplay({
                   alt="selected token"
                   className="mr-2 rounded-full"
                 ></Image>
-                <div className="pr-[4px] text-sm leading-5 text-black">
+                <div className="pr-[4px] text-sm leading-5 text-txt-white">
                   {token?.symbol}
                 </div>
                 <div className="flex h-6 w-6 items-center justify-center">
@@ -61,13 +61,13 @@ export function StableTokenSelectDisplay({
         </PopoverTrigger>
         <PopoverContent
           align="end"
-          className="z-[103] flex w-[100px] flex-col items-stretch border-0 bg-white p-2 shadow-[0px_4px_8px_9px_rgba(14,4,62,0.08)]"
+          className="z-[103] flex w-[100px] flex-col items-stretch border-0 bg-bg-black p-2 shadow-[0px_4px_8px_9px_rgba(14,4,62,0.08)]"
         >
           {tokens.map((t) => (
             <div
               key={t.symbol}
               onClick={() => handleSelectToken(t)}
-              className="flex h-8 cursor-pointer items-center rounded-xl px-1 text-sm text-black hover:bg-[#f5f6f7]"
+              className="flex h-8 cursor-pointer items-center rounded-xl px-1 text-sm text-txt-white hover:bg-[#f5f6f7]"
             >
               <Image
                 width={24}

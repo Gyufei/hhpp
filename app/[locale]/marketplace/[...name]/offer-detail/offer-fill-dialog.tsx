@@ -23,7 +23,7 @@ export default function OfferFillDialog({
     >
       <DialogContent
         overlayClassName="z-[110]"
-        className="z-[110] flex w-[400px] flex-col gap-0 rounded-3xl border-none bg-white p-6"
+        className="z-[110] flex w-[400px] flex-col gap-0 rounded-3xl border-none bg-bg-black p-6"
       >
         <div className="flex flex-col items-center">
           <Image
@@ -32,7 +32,7 @@ export default function OfferFillDialog({
             height={120}
             alt="placeholder"
           />
-          <div className="mt-4 text-xl leading-[30px] text-black">
+          <div className="mt-4 text-xl leading-[30px] text-txt-white">
             Taker Order filled
           </div>
         </div>
@@ -40,11 +40,11 @@ export default function OfferFillDialog({
         <div className="mt-4 text-sm leading-5">
           <div className="flex justify-between">
             <div className="text-gray">Sub No.</div>
-            <div className="text-black">#{res.no}</div>
+            <div className="text-txt-white">#{res.no}</div>
           </div>
           <div className="mt-8 flex justify-between">
             <div className="text-gray">Deposited</div>
-            <div className="flex items-center space-x-1 text-black">
+            <div className="flex items-center space-x-1 text-txt-white">
               <span>${res.pay}</span>
               <Image
                 src={res?.token?.logoURI}
@@ -56,7 +56,7 @@ export default function OfferFillDialog({
           </div>
           <div className="mt-8 flex justify-between">
             <div className="text-gray">Tx</div>
-            <div className="text-black">
+            <div className="text-txt-white">
               {truncateAddr(res.tx, {
                 nPrefix: 4,
                 nSuffix: 4,
@@ -66,7 +66,7 @@ export default function OfferFillDialog({
         </div>
 
         <Link href={`/dashboard/holdings?chain=${chain}`}>
-          <button className="mt-7 flex h-12 w-full items-center justify-center rounded-2xl bg-yellow leading-6 text-black">
+          <button className="mt-7 flex h-12 w-full items-center justify-center rounded-2xl bg-yellow leading-6 text-txt-white">
             <span className="mr-1 inline-block">Go To My Holdings</span>
             <Image
               src="/icons/right-45.svg"

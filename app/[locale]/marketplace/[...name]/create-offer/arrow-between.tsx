@@ -5,7 +5,7 @@ export default function ArrowBetween({ className }: { className: string }) {
   return (
     <div
       className={cn(
-        "z-10 flex h-12 w-12 items-center justify-center rounded-lg border-2 border-white bg-[#fafafa]",
+        "z-10 flex h-12 w-12 items-center justify-center rounded-lg border-2 border-white bg-bg-black",
         className,
       )}
     >

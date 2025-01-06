@@ -26,7 +26,7 @@ export default function MarketCharts({
   }
 
   return (
-    <div className="flex h-[336px] flex-col rounded-3xl bg-[#FAFAFA] p-4">
+    <div className="flex h-[336px] flex-col rounded-3xl bg-bg-black p-4">
       <div className="flex items-center justify-between">
         <div className="flex w-full items-center justify-between space-x-[6px] sm:w-auto sm:justify-start">
           <ChartSwitch
@@ -68,10 +68,10 @@ function ChartSwitch({
   // const isDepth = chartType === "depth";
   const isSales = chartType === "sales";
   return (
-    <div className="flex space-x-1 rounded-full bg-[#F0F1F5] p-1">
+    <div className="flex space-x-1 rounded-full border border-[#303030] bg-bg-black p-1">
       {/* <div
         data-checked={isDepth}
-        className="flex cursor-pointer items-center rounded-full bg-transparent data-[checked=true]:bg-[#FAFAFA] data-[checked=true]:px-3 data-[checked=false]:px-[6px] data-[checked=true]:py-[6px]"
+        className="flex cursor-pointer items-center rounded-full bg-transparent data-[checked=true]:bg-bg-black data-[checked=true]:px-3 data-[checked=false]:px-[6px] data-[checked=true]:py-[6px]"
         onClick={() => handleChangeType("depth")}
       >
         <Image
@@ -81,12 +81,12 @@ function ChartSwitch({
           alt="depth"
         />
         {isDepth && (
-          <div className="ml-[6px] text-sm leading-5 text-black">{t('tg-Depth')}</div>
+          <div className="ml-[6px] text-sm leading-5 text-txt-white">{t('tg-Depth')}</div>
         )}
       </div> */}
       <div
         data-checked={isSales}
-        className="flex cursor-pointer items-center rounded-full bg-transparent data-[checked=true]:bg-[#FAFAFA] data-[checked=false]:px-[6px] data-[checked=true]:px-3 data-[checked=true]:py-[6px]"
+        className="flex cursor-pointer items-center rounded-full bg-transparent data-[checked=true]:bg-yellow data-[checked=false]:px-[6px] data-[checked=true]:px-3 data-[checked=true]:py-[6px]"
         onClick={() => handleChangeType("sales")}
       >
         <Image
@@ -96,7 +96,7 @@ function ChartSwitch({
           alt="sales"
         />
         {isSales && (
-          <div className="ml-[6px] text-sm leading-5 text-black">
+          <div className="ml-[6px] text-sm leading-5 text-bg-black">
             {t("tg-Sales")}
           </div>
         )}
@@ -118,7 +118,7 @@ function DurationSelect({
         <div
           key={d.value}
           data-checked={duration === d.value}
-          className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-sm leading-5 text-gray data-[checked=true]:bg-white data-[checked=true]:text-black"
+          className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-sm leading-5 text-gray data-[checked=true]:text-txt-white"
           onClick={() => handleChangeDuration(d.value)}
         >
           {d.name}

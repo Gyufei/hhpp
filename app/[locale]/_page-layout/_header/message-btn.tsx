@@ -88,7 +88,7 @@ export default function MessageBtn() {
     <>
       <div
         onClick={() => setDrawerOpen(true)}
-        className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-[#D3D4D6] hover:border-transparent hover:bg-yellow sm:h-12 sm:w-12 sm:rounded-full"
+        className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-[#303030] hover:border-transparent hover:bg-yellow sm:h-12 sm:w-12 sm:rounded-full"
       >
         <Image
           src="/icons/bell.svg"
@@ -111,7 +111,7 @@ export default function MessageBtn() {
         onClose={() => setDrawerOpen(false)}
         direction={isMobileSize ? "top" : "right"}
         size={isMobileSize ? "99%" : 500}
-        className="overflow-y-auto rounded-b-2xl p-6 sm:rounded-l-2xl"
+        className="overflow-y-auto rounded-b-2xl !bg-bg-black p-6 sm:rounded-l-2xl"
         customIdSuffix="msg-drawer"
       >
         {isMobileSize ? (
@@ -160,7 +160,7 @@ function MsgRow({ msgDetail }: { msgDetail: IMsg }) {
           alt="avatar"
           className="rounded-full"
         />
-        <div className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center rounded-full border border-white bg-white">
+        <div className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center rounded-full border border-white bg-bg-black">
           <Image
             src={token?.logoURI || "/icons/empty.svg"}
             width={8.8}
@@ -178,17 +178,17 @@ function MsgRow({ msgDetail }: { msgDetail: IMsg }) {
         }}
       >
         <div className="flex items-start space-x-1">
-          <div className="mr-1 leading-6 text-black">
+          <div className="mr-1 leading-6 text-txt-white">
             {marketplace?.market_symbol}
           </div>
-          <div className="w-fit rounded-[4px] bg-[#F0F1F5] px-[5px] py-[2px] text-[10px] leading-4 text-gray">
+          <div className="w-fit rounded-[4px] bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
             #{msgDetail.item_id}
           </div>
         </div>
 
         <div className="flex items-center text-sm leading-5 text-gray">
           User
-          <span className="mx-1 inline-block text-black">
+          <span className="mx-1 inline-block text-txt-white">
             {truncateAddr(msgDetail.buyer)}
           </span>
           <span
@@ -197,10 +197,10 @@ function MsgRow({ msgDetail }: { msgDetail: IMsg }) {
           >
             {direction === "sell" ? "listed" : "purchased"}
           </span>
-          <span className="mr-1 inline-block text-black">
+          <span className="mr-1 inline-block text-txt-white">
             {formatNum(msgDetail.amount)} {marketplace?.item_name}
           </span>
-          <span className="mx-1 inline-block text-black">
+          <span className="mx-1 inline-block text-txt-white">
             ({formatNum(msgDetail.token_amount)} {token?.symbol})
           </span>
         </div>

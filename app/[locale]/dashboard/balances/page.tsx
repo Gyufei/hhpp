@@ -237,7 +237,7 @@ export default function MyBalances() {
   return (
     <div className="flex h-full flex-1 flex-col sm:ml-5">
       <div className="hidden items-center space-x-5 sm:flex">
-        <div className="text-xl leading-[30px] text-black">
+        <div className="text-xl leading-[30px] text-txt-white">
           {mbt("cap-MyBalances")}
         </div>
       </div>
@@ -303,14 +303,14 @@ function AcHeader({
   return (
     <div className="flex flex-1 items-center justify-between">
       <div className="flex flex-1 items-center text-lg leading-[28px] ">
-        <div className="flex flex-1 justify-start text-black">{name}</div>
+        <div className="flex flex-1 justify-start text-txt-white">{name}</div>
         <div className="flex flex-1 items-center gap-x-[10px]">
           <div className="text-gray">{mbt("cap-WalletCount")}</div>
-          <div className="text-black">{walletCount}</div>
+          <div className="text-txt-white">{walletCount}</div>
         </div>
         <div className="flex flex-1 items-center gap-x-[10px]">
           <div className="text-gray">{mbt("cap-TotalAmount")}</div>
-          <div className="text-black">{formatNum(totalAmount)}</div>
+          <div className="text-txt-white">{formatNum(totalAmount)}</div>
         </div>
       </div>
       <div>

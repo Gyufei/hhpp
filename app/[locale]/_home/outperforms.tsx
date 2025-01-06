@@ -9,7 +9,7 @@ export default function OutPerforms() {
 
   return (
     <div className="flex flex-col items-center bg-[rgba(224,255,98,0.1)] px-4 pt-[80px] sm:px-[120px]">
-      <div className="text-[24px] leading-9 text-black sm:text-[40px] sm:leading-10">
+      <div className="text-[24px] leading-9 text-txt-white sm:text-[40px] sm:leading-10">
         {t("cap-WhyTadleOutperformsOthers")}
       </div>
       <div className="mt-[60px] flex flex-col items-stretch">
@@ -24,7 +24,7 @@ export default function OutPerforms() {
           </div>
           <div className="flex flex-1 flex-col items-center pt-10 sm:items-start sm:justify-between">
             <div>
-              <div className="text-center text-base leading-6 text-black sm:text-left sm:text-[30px] sm:leading-[42px]">
+              <div className="text-center text-base leading-6 text-txt-white sm:text-left sm:text-[30px] sm:leading-[42px]">
                 {t("cap-OptimalCapitalEfficiency")}
               </div>
               <div
@@ -43,7 +43,7 @@ export default function OutPerforms() {
         <div className="mt-10 flex flex-1 flex-col-reverse items-center justify-between sm:mt-0 sm:flex-row sm:items-stretch">
           <div className="flex flex-1 flex-col items-center pt-10 sm:items-start sm:justify-between">
             <div>
-              <div className="text-center text-base leading-6 text-black sm:text-left sm:text-[30px] sm:leading-[42px]">
+              <div className="text-center text-base leading-6 text-txt-white sm:text-left sm:text-[30px] sm:leading-[42px]">
                 {t("cap-SuperiorLiquidity")}
               </div>
               <div
@@ -78,7 +78,7 @@ export default function OutPerforms() {
           </div>
           <div className="flex flex-1 flex-col items-center pt-10 sm:items-start sm:justify-between">
             <div>
-              <div className="text-center text-base leading-6 text-black sm:text-left sm:text-[30px] sm:leading-[42px]">
+              <div className="text-center text-base leading-6 text-txt-white sm:text-left sm:text-[30px] sm:leading-[42px]">
                 {t("cap-LowTradingFee")}
               </div>
               <div
@@ -97,7 +97,7 @@ export default function OutPerforms() {
         <div className="mt-10 flex flex-1 flex-col-reverse items-center justify-between sm:mt-[87px] sm:flex-row sm:items-stretch">
           <div className="flex flex-1 flex-col items-center pt-10 sm:items-start sm:justify-between">
             <div>
-              <div className="text-center text-base leading-6 text-black sm:text-left sm:text-[30px] sm:leading-[42px]">
+              <div className="text-center text-base leading-6 text-txt-white sm:text-left sm:text-[30px] sm:leading-[42px]">
                 {t("cap-AdvancedTradingSystem")}
               </div>
               <div
@@ -132,7 +132,7 @@ export default function OutPerforms() {
           </div>
           <div className="flex flex-1 flex-col items-center pt-10 sm:items-start sm:justify-between">
             <div>
-              <div className="text-center text-base leading-6 text-black sm:text-left sm:text-[30px] sm:leading-[42px]">
+              <div className="text-center text-base leading-6 text-txt-white sm:text-left sm:text-[30px] sm:leading-[42px]">
                 {t("cap-RobustSecurity")}
               </div>
               <div
@@ -151,7 +151,7 @@ export default function OutPerforms() {
         <div className="mt-10 flex flex-1 flex-col-reverse items-center justify-between sm:mt-[87px] sm:flex-row sm:items-stretch">
           <div className="flex flex-1 flex-col items-center pt-10 sm:items-start sm:justify-between">
             <div>
-              <div className="text-center text-base leading-6 text-black sm:text-left sm:text-[30px] sm:leading-[42px]">
+              <div className="text-center text-base leading-6 text-txt-white sm:text-left sm:text-[30px] sm:leading-[42px]">
                 {t("cap-DecentralizedArbitrationForSettlements")}
               </div>
               <div
@@ -188,7 +188,7 @@ function ReadMore({ onClick }: { onClick: () => void }) {
       className="mt-6 flex h-12 w-[200px] cursor-pointer items-center justify-center space-x-1 rounded-xl bg-yellow text-lg leading-6 hover:w-[200px] hover:bg-yellow sm:mb-10 sm:mt-0 sm:w-fit sm:bg-transparent"
     >
       <div className="flex justify-between space-x-1">
-        <div className="text-lg leading-6 text-black">{t("btn-ReadMore")}</div>
+        <div className="text-lg leading-6 text-txt-white">{t("btn-ReadMore")}</div>
         <Image src="/icons/right-arrow.svg" width={24} height={24} alt="go" />
       </div>
     </div>

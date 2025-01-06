@@ -46,7 +46,7 @@ export function TadleXp() {
     <div className="min-h-[210px]">
       <div className="flex items-center space-x-2">
         <div className="h-6 w-6 rounded-lg bg-yellow"></div>
-        <div className="leading-6 text-black">HyperTrade XP</div>
+        <div className="leading-6 text-txt-white">HyperTrade XP</div>
       </div>
       <div className="relative mt-4">
         <GaugeComponent
@@ -91,7 +91,7 @@ export function TadleXp() {
           }}
         />
         <div className="absolute top-[75px] flex w-full flex-col items-center">
-          <div className="text-4xl leading-[54px] text-black">{xp}</div>
+          <div className="text-4xl leading-[54px] text-txt-white">{xp}</div>
           <div className="flex items-center text-sm leading-5">
             <div className="mr-1 text-gray">{T("txt-YourRank")}</div>
           </div>

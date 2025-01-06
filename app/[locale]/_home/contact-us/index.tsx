@@ -18,7 +18,7 @@ export default function ContactUs() {
     <div className="bg-[#F9FAF2] px-4 pt-[60px] sm:px-[120px]">
       <div className="flex flex-col items-end justify-between sm:flex-row">
         <div className="flex w-full flex-col items-center sm:w-fit sm:items-start">
-          <div className="text-center text-2xl leading-9 text-black sm:text-4xl sm:text-[40px] sm:leading-[54px]">
+          <div className="text-center text-2xl leading-9 text-txt-white sm:text-4xl sm:text-[40px] sm:leading-[54px]">
             {t("cap-StayInTheLoopWithUs")}
           </div>
           <SubscribeInput />
@@ -103,7 +103,7 @@ function LinkItem({
 }) {
   return (
     <a
-      className="text-sm leading-5 text-lightgray hover:text-black"
+      className="text-sm leading-5 text-lightgray hover:text-txt-white"
       href={href}
     >
       {children}

@@ -58,7 +58,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
   }
 
   return (
-    <div className="h-fit rounded-[20px] bg-white p-5 hover:shadow-[4px_4px_20px_0px_rgba(45,46,51,0.05)]">
+    <div className="bg-bg-black h-fit rounded-[20px] p-5 hover:shadow-[4px_4px_20px_0px_rgba(45,46,51,0.05)]">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <TokenPairImg
@@ -69,10 +69,10 @@ export function OfferCard({ offer }: { offer: IOffer }) {
           />
 
           <div>
-            <div className="mb-[2px] leading-6 text-black">
+            <div className="mb-[2px] leading-6 text-txt-white">
               {offer.marketplace.item_name}
             </div>
-            <div className="w-fit rounded-[4px] bg-[#F0F1F5] px-[5px] py-[2px] text-[10px] leading-4 text-gray">
+            <div className="bg-bg-black w-fit rounded-[4px] px-[5px] py-[2px] text-[10px] leading-4 text-gray">
               #{offer.entry.id}
             </div>
           </div>
@@ -85,19 +85,19 @@ export function OfferCard({ offer }: { offer: IOffer }) {
           />
           <div
             data-zero={Number(progress) === 0 ? true : false}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs leading-[18px] data-[zero=false]:text-black data-[zero=true]:text-gray"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs leading-[18px] data-[zero=false]:text-txt-white data-[zero=true]:text-gray"
           >
             {formatNum(NP.times(progress, 100))}%
           </div>
         </div>
       </div>
 
-      <div className="mt-4 flex items-center justify-between border-b border-[#F0F1F5] pb-5">
+      <div className="mt-4 flex items-center justify-between border-b border-[#303030] pb-5">
         <div className="flex flex-1 grow flex-col">
           <div className="mb-[2px] text-xs leading-[18px] text-gray">
             {t("lb-Offer")}
           </div>
-          <div className="flex items-center leading-6 text-black">
+          <div className="flex items-center leading-6 text-txt-white">
             {formatNum(offerValue, 2, true)}
             <Image
               src={offerLogo}
@@ -129,7 +129,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
           <div className="mb-[2px] text-xs leading-[18px] text-gray">
             {t("lb-For")}
           </div>
-          <div className="flex items-center leading-6 text-black">
+          <div className="flex items-center leading-6 text-txt-white">
             {formatNum(forValue, 2, true)}
             <Image
               src={forLogo}
@@ -190,7 +190,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
                 handleShowOffer(String(offer.entry.id));
               }}
             >
-              <button className="flex items-center justify-center rounded-full border border-[#eee] px-[18px] py-1 text-sm leading-5 text-black hover:border-transparent hover:bg-yellow">
+              <button className="flex items-center justify-center rounded-full border border-[#303030] px-[18px] py-1 text-sm leading-5 text-[#d1d4dc] hover:border-transparent hover:bg-yellow">
                 {orderType === "sell" ? t("btn-Buy") : t("btn-Sell")}
               </button>
             </WithWalletConnectBtn>
@@ -200,7 +200,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
               chain={offer.marketplace.chain}
               onClick={() => handleShowOffer(String(offer.entry.id))}
             >
-              <button className="flex items-center justify-center rounded-full border border-[#eee] px-[18px] py-1 text-sm leading-5 text-black hover:border-transparent hover:bg-yellow">
+              <button className="flex items-center justify-center rounded-full border border-[#eee] px-[18px] py-1 text-sm leading-5 text-txt-white hover:border-transparent hover:bg-yellow">
                 {t("btn-Detail")}
               </button>
             </WithWalletConnectBtn>
@@ -213,7 +213,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
 
 export function OrderCardSkeleton() {
   return (
-    <div className="h-fit rounded-[20px] bg-white p-5 hover:shadow-[4px_4px_20px_0px_rgba(45,46,51,0.05)]">
+    <div className="bg-bg-black h-fit rounded-[20px] p-5 hover:shadow-[4px_4px_20px_0px_rgba(45,46,51,0.05)]">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <Skeleton className="h-12 w-12 rounded-full" />
@@ -228,7 +228,7 @@ export function OrderCardSkeleton() {
           <CircleProgress percentage={0} className="scale-[1.1429]" />
           <div
             data-zero={true}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs leading-[18px] data-[zero=false]:text-black data-[zero=true]:text-gray"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs leading-[18px] data-[zero=false]:text-txt-white data-[zero=true]:text-gray"
           >
             0%
           </div>

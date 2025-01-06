@@ -8,7 +8,7 @@ export default function HoldingCard({ holding }: { holding: any }) {
   const ct = useTranslations("page-MyStocks");
 
   return (
-    <div className="rounded-[20px] bg-white p-5">
+    <div className="rounded-[20px] bg-bg-black p-5">
       <div className="flex items-start justify-between">
         <div className="flex cursor-pointer items-start space-x-3">
           <div className="mt-2">
@@ -22,7 +22,7 @@ export default function HoldingCard({ holding }: { holding: any }) {
             />
           </div>
           <div>
-            <div className="mb-[2px] leading-6 text-black">
+            <div className="mb-[2px] leading-6 text-txt-white">
               {holding.marketplace.item_name}
             </div>
             <div className="mt-4 flex items-start justify-between ">
@@ -30,7 +30,7 @@ export default function HoldingCard({ holding }: { holding: any }) {
                 <div className="mt-[2px] text-xs leading-[18px] text-gray">
                   {ct("txt-Free")}
                 </div>
-                <div className="flex items-center leading-6 text-black">
+                <div className="flex items-center leading-6 text-txt-white">
                   <BalanceValue
                     type="free"
                     marketAccount={holding.marketplace.market_place_account}
@@ -39,7 +39,7 @@ export default function HoldingCard({ holding }: { holding: any }) {
                 <div className="mt-[2px] text-xs leading-[18px] text-gray">
                   {ct("txt-Locked")}
                 </div>
-                <div className="flex items-center leading-6 text-black">
+                <div className="flex items-center leading-6 text-txt-white">
                   <BalanceValue
                     type="locked"
                     marketAccount={holding.marketplace.market_place_account}

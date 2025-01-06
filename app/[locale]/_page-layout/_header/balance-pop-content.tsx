@@ -43,7 +43,7 @@ export default function BalancePopContent() {
       <div
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="flex items-start justify-between rounded-xl border border-[#d8d8d8] p-3"
+        className="flex items-start justify-between rounded-xl border border-[#303030] p-3"
       >
         <div>
           <div className="text-xs leading-[18px] text-gray">Balance</div>
@@ -51,7 +51,7 @@ export default function BalancePopContent() {
             {isBalanceLoading ? (
               <Skeleton className="h-6 w-20" />
             ) : (
-              <div className="truncate text-2xl leading-9 text-black">
+              <div className="truncate text-2xl leading-9 text-txt-white">
                 {formatNum(balance)}
               </div>
             )}

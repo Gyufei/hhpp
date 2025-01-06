@@ -53,16 +53,18 @@ export default function PointMarket({ className }: { className?: string }) {
       &:first-of-type {
         text-align: left;
       }
+
+      background: #111a1e;
     `,
     HeaderCell: `
-      color: #c0c4cc;
+      color: #949e9c;
       &:first-of-type {
         padding-left: 8px;
       }
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #303030;
     `,
     Cell: `
-      color: #2d2e33;
+      color: #D1D4DC;
       height: 64px;
     `,
   });
@@ -130,7 +132,7 @@ export default function PointMarket({ className }: { className?: string }) {
               height2={14}
             />
             <div className="ml-3 flex flex-col">
-              <div className="text-sm leading-5 text-black">
+              <div className="text-sm leading-5 text-txt-white">
                 {item.market_name}
               </div>
             </div>
@@ -238,7 +240,7 @@ export default function PointMarket({ className }: { className?: string }) {
               <div>N/A</div>
             ) : (
               <>
-                <div className="text-sm leading-5 text-black">
+                <div className="text-sm leading-5 text-txt-white">
                   {format(Number(item.trading_ends_at) * 1000, "dd/MM/yyyy")}
                 </div>
                 <div className="text-[10px] leading-4 text-gray">
@@ -273,7 +275,7 @@ export default function PointMarket({ className }: { className?: string }) {
       <div className="hidden items-center justify-between sm:flex">
         <div className="flex items-center space-x-2">
           <div className="h-6 w-6 rounded-lg bg-yellow"></div>
-          <div className="leading-6 text-black">{t("cap-PointMarket")}</div>
+          <div className="leading-6 text-txt-white">{t("cap-PointMarket")}</div>
         </div>
       </div>
       <div className="max-h-auto relative min-h-[296px] w-[820px] flex-1 flex-col overflow-y-hidden sm:w-full sm:min-w-0">
@@ -292,7 +294,7 @@ export default function PointMarket({ className }: { className?: string }) {
 
 function PriceText({ num }: { num: number }) {
   return (
-    <div className="text-sm leading-5 text-black ">${formatNum(num, 3)}</div>
+    <div className="text-sm leading-5 text-txt-white ">${formatNum(num, 3)}</div>
   );
 }
 
@@ -302,7 +304,7 @@ function ChangeText({ vol, percent }: { vol: number; percent: number }) {
   return (
     <div
       data-greater={percent === 0 ? "zero" : isGreater}
-      className="text-sm leading-4 data-[greater=false]:text-red data-[greater=true]:text-green data-[greater=zero]:text-black"
+      className="text-sm leading-4 data-[greater=false]:text-red data-[greater=true]:text-green data-[greater=zero]:text-txt-white"
     >
       {Number(vol) === 0
         ? "$0"

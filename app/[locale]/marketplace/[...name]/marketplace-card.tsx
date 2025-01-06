@@ -74,11 +74,11 @@ export default function MarketplaceCard({
     <div
       className={cn(
         className,
-        "relative mt-4 rounded-3xl bg-[#F0F1F5] p-5 pt-3",
+        "relative mt-4 rounded-3xl border border-[#303030] bg-bg-black p-5 pt-3",
       )}
     >
       {isLoadingFlag ? (
-        <Skeleton className="absolute -top-5 h-[73px] w-[73px] rounded-full bg-[#fafafa]" />
+        <Skeleton className="absolute -top-5 h-[73px] w-[73px] rounded-full bg-bg-black" />
       ) : (
         <div className="absolute -top-5 h-fit">
           <Image
@@ -89,7 +89,7 @@ export default function MarketplaceCard({
             className="rounded-full"
           />
           {chainInfo?.logo && (
-            <div className="absolute bottom-0 right-0 flex h-6 w-6 items-center justify-center rounded-full border border-white bg-white">
+            <div className="absolute bottom-0 right-0 flex h-6 w-6 items-center justify-center rounded-full border border-white bg-bg-black">
               <Image
                 src={chainInfo?.logo}
                 width={24}
@@ -107,12 +107,12 @@ export default function MarketplaceCard({
           <div className="flex flex-col">
             {isLoadingFlag ? (
               <>
-                <Skeleton className="my-[2px] h-4 w-[100px] rounded-sm bg-[#fafafa]" />
-                <Skeleton className="my-[2px] h-4 w-[80px] rounded-sm bg-[#fafafa]" />
+                <Skeleton className="my-[2px] h-4 w-[100px] rounded-sm bg-bg-black" />
+                <Skeleton className="my-[2px] h-4 w-[80px] rounded-sm bg-bg-black" />
               </>
             ) : (
               <>
-                <div className="w-[120px] overflow-hidden text-ellipsis whitespace-nowrap text-sm leading-[20px] text-black">
+                <div className="w-[120px] overflow-hidden text-ellipsis whitespace-nowrap text-sm leading-[20px] text-txt-white">
                   {marketplace.item_name}
                 </div>
                 <OverviewIcons
@@ -127,7 +127,7 @@ export default function MarketplaceCard({
           </div>
         </div>
         {isLoadingFlag ? (
-          <Skeleton className="h-8 w-8 rounded-full bg-[#fafafa]" />
+          <Skeleton className="h-8 w-8 rounded-full bg-bg-black" />
         ) : (
           <FoldPop />
         )}
@@ -281,12 +281,12 @@ function FoldPop() {
             onChange={(e) => setSearchText(e.target.value)}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
-            className="h-10 rounded-lg border-none bg-[#fafafa] pl-8"
+            className="h-10 rounded-lg border-none bg-bg-black pl-8"
           />
         </div>
         {filteredCateList.map((cate, i) => (
           <div
-            className="flex cursor-pointer rounded-lg px-2 py-2 hover:bg-[#fafafa]"
+            className="flex cursor-pointer rounded-lg px-2 py-2 hover:bg-bg-black"
             onClick={() => handleGo(cate.id)}
             key={cate.name}
             style={{
@@ -302,7 +302,7 @@ function FoldPop() {
               className="rounded-full"
             />
             <div className="ml-[10px] flex flex-col">
-              <div className="text-sm leading-[20px] text-black">
+              <div className="text-sm leading-[20px] text-txt-white">
                 {cate.name}
               </div>
               <div
@@ -324,7 +324,7 @@ function FoldPop() {
     return (
       <div>
         <button
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-white"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-black"
           onClick={() => setPopOpen(!popOpen)}
         >
           <Image
@@ -339,7 +339,7 @@ function FoldPop() {
           onClose={() => setPopOpen(!popOpen)}
           direction={"bottom"}
           size={"calc(100vh - 100px)"}
-          className="flex flex-col overflow-y-auto rounded-3xl p-4"
+          className="flex flex-col overflow-y-auto rounded-3xl !bg-bg-black p-4"
         >
           <MobileDrawerTitle
             title={t("Switch")}
@@ -354,7 +354,7 @@ function FoldPop() {
   return (
     <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
       <PopoverTrigger asChild>
-        <button className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
+        <button className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-black">
           <Image
             src={popOpen ? "/icons/fold.svg" : "/icons/fold-gray.svg"}
             width={20}
@@ -365,7 +365,7 @@ function FoldPop() {
       </PopoverTrigger>
       <PopoverContent
         align="end"
-        className="flex w-[240px] flex-col items-stretch border-none bg-white p-2"
+        className="flex w-[240px] flex-col items-stretch border-none bg-bg-black p-2"
       >
         {renderContent()}
       </PopoverContent>

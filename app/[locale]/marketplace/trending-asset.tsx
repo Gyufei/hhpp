@@ -49,17 +49,19 @@ export default function TrendingAsset({ className }: { className?: string }) {
       }
 
       text-align: right;
+
+      background: #111a1e;
     `,
     HeaderCell: `
-      color: #c0c4cc;
+      color: #949e9c;
 
       &:first-of-type {
         padding-left: 8px;
       }
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #303030;
     `,
     Cell: `
-      color: #2d2e33;
+      color: #D1D4DC;
       height: 40px;
     `,
   });
@@ -135,7 +137,7 @@ export default function TrendingAsset({ className }: { className?: string }) {
         ),
     },
     {
-      label: t("th-FloorPrice"),
+      label: t("th-LastPrice"),
       renderCell: (item: any) =>
         isLoadingFlag ? (
           <div className="flex justify-end">
@@ -163,7 +165,9 @@ export default function TrendingAsset({ className }: { className?: string }) {
       <div className="hidden items-center justify-between sm:flex">
         <div className="flex items-center space-x-2">
           <div className="h-6 w-6 rounded-lg bg-yellow"></div>
-          <div className="leading-6 text-black">{t("cap-TrendingAssets")}</div>
+          <div className="leading-6 text-txt-white">
+            {t("cap-TrendingAssets")}
+          </div>
         </div>
       </div>
       {!tableData.nodes.length ? (
@@ -193,7 +197,7 @@ function PercentText({ num }: { num: number }) {
   return (
     <div
       data-greater={Number(num) === 0 ? "zero" : isGreater}
-      className="text-[10px] leading-4 data-[greater=false]:text-red data-[greater=true]:text-green data-[greater=zero]:text-black"
+      className="text-[10px] leading-4 data-[greater=false]:text-red data-[greater=true]:text-green data-[greater=zero]:text-txt-white"
     >
       {Number(num) === 0
         ? "0"

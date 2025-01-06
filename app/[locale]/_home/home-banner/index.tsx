@@ -16,7 +16,7 @@ export default function HomeBanner() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="relative hidden min-w-[1023px] text-center text-[50px] leading-[72px] text-black sm:flex sm:flex-col">
+      <div className="relative hidden min-w-[1023px] text-center text-[50px] leading-[72px] text-txt-white sm:flex sm:flex-col">
         {t("cap-DecentralizedPreMarketInfrastructure")}
         <Image
           src="/img/home/home-title-path.png"
@@ -26,7 +26,7 @@ export default function HomeBanner() {
           className="absolute left-[90px] top-[66px]"
         />
       </div>
-      <div className="flex justify-center text-center text-[40px] leading-[60px] text-black sm:hidden">
+      <div className="flex justify-center text-center text-[40px] leading-[60px] text-txt-white sm:hidden">
         {t("cap-TheFirstPreSuperMarket")}
       </div>
 
@@ -47,7 +47,7 @@ export default function HomeBanner() {
           href={DocLink}
           className="ml-1 mt-[22px] flex cursor-pointer items-center space-x-1 sm:ml-0 sm:mt-0"
         >
-          <div className="text-lg leading-6 text-black">
+          <div className="text-lg leading-6 text-txt-white">
             {t("btn-ReadTheDocs")}
           </div>
           <Image src="/icons/right-arrow.svg" width={24} height={24} alt="go" />

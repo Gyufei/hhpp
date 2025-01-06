@@ -1,9 +1,5 @@
 "use client";
 import { useState } from "react";
-import {
-  IOfferType,
-  OfferTypeSelect,
-} from "@/components/share/offer-type-select";
 import { OrderTable } from "./order-table";
 import { FilterSelect, IRole, IStatus, Roles, Status } from "./filter-select";
 import { useTranslations } from "next-intl";
@@ -11,13 +7,8 @@ import { ChainType } from "@/lib/types/chain";
 
 export default function MyOrders() {
   const T = useTranslations("page-MyOrders");
-  const [orderTypes, setOrderTypes] = useState<Array<IOfferType>>(["sell"]);
   const [status, setStatus] = useState<IStatus>(Status[0]);
   const [role, setRole] = useState<IRole>(Roles[0]);
-
-  function handleTypeChange(t: Array<IOfferType>) {
-    setOrderTypes(t);
-  }
 
   function handleRoleChange(r: IRole) {
     setRole(r);
@@ -31,15 +22,11 @@ export default function MyOrders() {
     <div className="box-content flex h-[calc(100vh-156px)] w-full flex-1 flex-col sm:ml-5 sm:h-[calc(100vh-96px)] sm:px-0">
       <div className="mb-[10px] mt-4 flex w-full items-center justify-between pl-2 sm:mb-0 sm:mt-0 sm:pl-0">
         <div className="hidden items-center space-x-5 sm:flex">
-          <div className="text-xl leading-[30px] text-black">
+          <div className="text-xl leading-[30px] text-txt-white">
             {T("cap-MyOrders")}
           </div>
         </div>
         <div className="flex items-center space-x-2 sm:space-x-6">
-          <OfferTypeSelect
-            types={orderTypes}
-            handleTypeChange={handleTypeChange}
-          />
           <FilterSelect
             role={role}
             status={status}
@@ -51,12 +38,7 @@ export default function MyOrders() {
       <div className="flex max-w-[100vw] flex-1 flex-col overflow-x-scroll px-4 sm:max-w-none sm:overflow-x-hidden sm:px-0">
         <div className="max-h-auto relative min-h-[296px] w-[820px] flex-1 flex-col overflow-y-hidden sm:w-full sm:min-w-0">
           <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-1 flex-col">
-            <OrderTable
-              chain={ChainType.HYPER}
-              types={orderTypes}
-              status={status}
-              role={role}
-            />
+            <OrderTable chain={ChainType.HYPER} status={status} />
           </div>
         </div>
       </div>

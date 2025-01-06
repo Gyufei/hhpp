@@ -15,7 +15,7 @@ export function PointTokenDisplay({
   return (
     <div className="flex flex-col items-end">
       {showBalance && <PointBalance point={point as IPoint} />}
-      <div className="flex w-fit cursor-pointer items-center rounded-full bg-[#F0F1F5] p-2">
+      <div className="flex w-fit cursor-pointer items-center rounded-full bg-bg-black p-2">
         {point ? (
           <>
             <Image
@@ -25,7 +25,7 @@ export function PointTokenDisplay({
               alt="select token"
               className="mr-2 rounded-full"
             ></Image>
-            <div className="overflow-x-hidden whitespace-nowrap pr-[4px] text-sm leading-5 text-black">
+            <div className="overflow-x-hidden whitespace-nowrap pr-[4px] text-sm leading-5 text-txt-white">
               {point?.symbol || ""}
             </div>
           </>

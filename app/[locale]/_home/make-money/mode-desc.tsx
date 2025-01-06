@@ -24,14 +24,14 @@ export default function ModeDesc() {
         <div
           data-active={mode === "turbo"}
           onClick={() => setMode("turbo")}
-          className="flex h-12 cursor-pointer items-center justify-center rounded-xl px-[20px] text-[#c0c4cc] data-[active=true]:bg-yellow data-[active=true]:text-black md:px-[30px]"
+          className="flex h-12 cursor-pointer items-center justify-center rounded-xl px-[20px] text-[#c0c4cc] data-[active=true]:bg-yellow data-[active=true]:text-txt-white md:px-[30px]"
         >
           {t("btn-TurboMode")}
         </div>
         <div
           data-active={mode === "protected"}
           onClick={() => setMode("protected")}
-          className="flex h-12 cursor-pointer items-center justify-center rounded-xl px-[30px] text-[#c0c4cc] data-[active=true]:bg-yellow data-[active=true]:text-black"
+          className="flex h-12 cursor-pointer items-center justify-center rounded-xl px-[30px] text-[#c0c4cc] data-[active=true]:bg-yellow data-[active=true]:text-txt-white"
         >
           {t("btn-ProtectedMode")}
         </div>
@@ -64,7 +64,7 @@ export default function ModeDesc() {
           href="/marketplace"
           className="mt-[50px] flex cursor-pointer items-center space-x-1 sm:mt-0"
         >
-          <div className="text-lg leading-6 text-black">
+          <div className="text-lg leading-6 text-txt-white">
             {t("btn-StartTrading")}
           </div>
           <Image src="/icons/right-arrow.svg" width={24} height={24} alt="go" />

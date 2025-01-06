@@ -21,7 +21,7 @@ export default function TrendingProject() {
 
   return (
     <div className="flex flex-col items-center pt-20">
-      <div className="text-[40px] leading-10 text-black">
+      <div className="text-[40px] leading-10 text-txt-white">
         {t("cap-TrendingProjects")}
       </div>
       <div className="mt-6 flex w-full flex-col items-start gap-x-5 gap-y-9 px-4 py-5 sm:grid sm:grid-cols-4 sm:flex-row sm:items-stretch sm:overflow-x-hidden">
@@ -80,7 +80,7 @@ function ItemCard({
       <div className="flex items-start justify-between pl-20">
         <div className="flex space-x-3">
           <div className="flex flex-col">
-            <div className="w-[140px] overflow-hidden text-ellipsis whitespace-nowrap text-sm leading-[20px] text-black">
+            <div className="w-[140px] overflow-hidden text-ellipsis whitespace-nowrap text-sm leading-[20px] text-txt-white">
               {marketplace.item_name}
             </div>
             <div className="h-[18px] text-xs leading-[18px] text-gray"></div>
@@ -97,7 +97,7 @@ function ItemCard({
             {isLoadingFlag ? (
               <ValueSkeleton />
             ) : (
-              <div className="flex items-center text-sm leading-5 text-black">
+              <div className="flex items-center text-sm leading-5 text-txt-white">
                 $
                 {formatNum(
                   NP.times(marketplace.initial_listing_price, pointDecimalNum),
@@ -114,7 +114,7 @@ function ItemCard({
             {isLoadingFlag ? (
               <ValueSkeleton />
             ) : (
-              <div className="flex items-center text-sm leading-5 text-black">
+              <div className="flex items-center text-sm leading-5 text-txt-white">
                 $
                 {formatNum(
                   NP.times(marketplace.all_time_high_price, pointDecimalNum),
@@ -137,7 +137,7 @@ function ItemCard({
                     ? "zero"
                     : +marketplace.change_rate_24h > 0
                 }
-                className="text-sm leading-5 data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-black"
+                className="text-sm leading-5 data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-txt-white"
               >
                 {+marketplace.change_rate_24h === 0
                   ? null
@@ -159,7 +159,7 @@ function ItemCard({
             {isLoadingFlag ? (
               <ValueSkeleton />
             ) : (
-              <div className="flex items-center text-sm leading-5 text-black">
+              <div className="flex items-center text-sm leading-5 text-txt-white">
                 {formatNum(marketplace!.filled_orders || 0)}
               </div>
             )}
@@ -174,7 +174,7 @@ function ItemCard({
             {isLoadingFlag ? (
               <ValueSkeleton />
             ) : (
-              <div className="leading-6 text-black">
+              <div className="leading-6 text-txt-white">
                 {formatNum(
                   NP.divide(marketplace!.listed_supply, pointDecimalNum),
                 )}
@@ -189,7 +189,7 @@ function ItemCard({
             {isLoadingFlag ? (
               <ValueSkeleton />
             ) : (
-              <div className="flex items-center leading-6 text-black">
+              <div className="flex items-center leading-6 text-txt-white">
                 {formatNum(marketplace!.active_wallets)}
               </div>
             )}
@@ -208,12 +208,12 @@ function LabelText({
   isLoading?: boolean;
 }) {
   return isLoading ? (
-    <Skeleton className="my-[3px] h-[12px] w-[80px] bg-[#fafafa]" />
+    <Skeleton className="my-[3px] h-[12px] w-[80px] bg-bg-black" />
   ) : (
     <div className="text-xs leading-[18px] text-gray">{children}</div>
   );
 }
 
 function ValueSkeleton() {
-  return <Skeleton className="h-[16px] w-[100px] rounded-sm bg-[#fafafa]" />;
+  return <Skeleton className="h-[16px] w-[100px] rounded-sm bg-bg-black" />;
 }

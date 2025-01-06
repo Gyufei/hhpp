@@ -74,11 +74,13 @@ export function ReferralTable({
       &:not(:first-of-type) > div {
         padding-left: 10px;
       }
+
+      background: #111a1e;
     `,
     HeaderCell: `
       font-size: 12px;
       font-weight: 400;
-      color: #c0c4cc;
+      color: #949e9c;
       line-height: 18px;
     `,
     Cell: ``,
@@ -148,22 +150,22 @@ export function ReferralTable({
                     <ReferralCode rD={rD} index={index} />
                   </Cell>
                   <Cell className="h-[64px] px-1 py-[11px] align-top">
-                    <div className="text-sm leading-5 text-black">
+                    <div className="text-sm leading-5 text-txt-white">
                       {rD.referral_users}
                     </div>
                   </Cell>
                   <Cell className="h-[64px] px-1 py-[11px] align-top">
-                    <div className="text-sm leading-5 text-black">
+                    <div className="text-sm leading-5 text-txt-white">
                       {rD.trading_users}
                     </div>
                   </Cell>
                   <Cell className="h-[64px] px-1 py-[11px] align-top">
-                    <div className="text-sm leading-5 text-black">
+                    <div className="text-sm leading-5 text-txt-white">
                       ${rD.trading_fee}
                     </div>
                   </Cell>
                   <Cell className="h-[64px] px-1 py-[11px] align-top">
-                    <div className="text-sm leading-5 text-black">
+                    <div className="text-sm leading-5 text-txt-white">
                       {rD.unique_views}
                     </div>
                   </Cell>
@@ -244,7 +246,7 @@ function ReferralRate({
       onMouseLeave={() => setIsHover(false)}
       className="relative flex h-fit w-fit cursor-pointer items-center space-x-[6px]"
     >
-      <span className="border-b border-dashed border-lightgray text-sm leading-5 text-black">
+      <span className="border-b border-dashed border-lightgray text-sm leading-5 text-txt-white">
         {rD.referrer_rate != "" && rD.referrer_rate != null && (
           <>{formatNum(Number(rD.referrer_rate || 0) / 10 ** 4)}%,&nbsp;</>
         )}
@@ -331,7 +333,7 @@ function ReferralNote({
             value={inputValue}
             onChange={(e: any) => setInputValue(e.target.value)}
             onKeyDown={handleKeyPress}
-            className="h-6 rounded-none border-x-0 border-b border-t-0 border-lightgray bg-[#fafafa] pr-[50px]"
+            className="h-6 rounded-none border-x-0 border-b border-t-0 border-lightgray bg-bg-black pr-[50px]"
           />
           <Image
             onClick={handleInputConfirm}

@@ -112,7 +112,7 @@ export function ReferralDrawer({
       onClose={handleDrawerClose}
       direction={isMobileSize ? "bottom" : "right"}
       size={isMobileSize ? "calc(100vh - 44px)" : 952}
-      className="overflow-y-auto rounded-none p-4 sm:flex sm:flex-col sm:rounded-l-2xl sm:p-6 "
+      className="overflow-y-auto rounded-none !bg-bg-black p-4 sm:flex sm:flex-col sm:rounded-l-2xl sm:p-6 "
       customIdSuffix="referral-drawer"
     >
       {isMobileSize ? (
@@ -129,7 +129,7 @@ export function ReferralDrawer({
 
       <div className="mt-6 flex flex-1 flex-col justify-between">
         <div className="flex flex-1 flex-col">
-          <div className="text-base leading-6 text-black">
+          <div className="text-base leading-6 text-txt-white">
             {rt("cap-SetReferralLink")}
           </div>
           <div className="mt-2 text-sm leading-5 text-gray">
@@ -139,10 +139,10 @@ export function ReferralDrawer({
             disabled={true}
             value={referral?.referral_code}
             placeholder="qwerty"
-            className="mt-2 h-12 border-[#d8d8d8] pl-4 text-sm disabled:bg-[#F0F1F5]"
+            className="mt-2 h-12 border-[#303030] pl-4 text-sm disabled:bg-bg-black"
           />
 
-          <div className="mt-6 text-base leading-6 text-black">
+          <div className="mt-6 text-base leading-6 text-txt-white">
             {rt("cap-SetCommissionRates")}
           </div>
 
@@ -152,7 +152,7 @@ export function ReferralDrawer({
 
               <NumericalInput
                 data-error={rateError}
-                className="h-[50px] w-full rounded-xl border border-[#d8d8d8] px-4 py-[14px] focus:border-focus disabled:cursor-not-allowed disabled:bg-[#F0F1F5] data-[error=true]:!border-red"
+                className="h-[50px] w-full rounded-xl border border-[#303030] px-4 py-[14px] focus:border-focus disabled:cursor-not-allowed disabled:bg-bg-black data-[error=true]:!border-red"
                 placeholder={`${referralBaseRate}%`}
                 value={rate || ""}
                 onUserInput={handleRateInput}
@@ -167,7 +167,7 @@ export function ReferralDrawer({
               <NumericalInput
                 disabled={extraRate === 0}
                 data-error={rateError}
-                className="h-[50px] w-full rounded-xl border border-[#d8d8d8] px-4 py-[14px] focus:border-focus disabled:cursor-not-allowed disabled:bg-[#F0F1F5] data-[error=true]:!border-red"
+                className="h-[50px] w-full rounded-xl border border-[#303030] px-4 py-[14px] focus:border-focus disabled:cursor-not-allowed disabled:bg-bg-black data-[error=true]:!border-red"
                 placeholder="0%"
                 value={friendRate || ""}
                 onUserInput={handleFRateInput}
@@ -205,9 +205,7 @@ export function ReferralDrawer({
         </div>
 
         <WithWalletConnectBtn className="w-full" onClick={handleSaveRate}>
-          <button
-            className="mt-[140px] flex h-12 w-full items-center justify-center rounded-2xl bg-green leading-6 text-white"
-          >
+          <button className="mt-[140px] flex h-12 w-full items-center justify-center rounded-2xl bg-green leading-6 text-white">
             {rt("btn-Save")}
           </button>
         </WithWalletConnectBtn>

@@ -25,7 +25,7 @@ export default function SubscribeInput() {
   return (
     <div className="relative mt-5 flex w-full justify-center sm:w-fit">
       <Input
-        className="h-10 w-full rounded-xl border border-[#d8d8d8] hover:border-green focus:border-green sm:h-12 sm:w-[480px]"
+        className="h-10 w-full rounded-xl border border-[#303030] hover:border-green focus:border-green sm:h-12 sm:w-[480px]"
         type="email"
         placeholder={t("pl-EnterEmailAddress")}
         value={email}
@@ -33,7 +33,7 @@ export default function SubscribeInput() {
       />
       <div
         data-active={isEmail}
-        className="absolute left-[70%] top-0 flex h-10 items-center rounded-lg px-5 leading-5 text-lightgray data-[active=true]:cursor-pointer data-[active=true]:bg-yellow data-[active=true]:text-black sm:top-1 sm:leading-[22px] md:left-[calc(50%+116px)]"
+        className="absolute left-[70%] top-0 flex h-10 items-center rounded-lg px-5 leading-5 text-lightgray data-[active=true]:cursor-pointer data-[active=true]:bg-yellow data-[active=true]:text-txt-white sm:top-1 sm:leading-[22px] md:left-[calc(50%+116px)]"
         onClick={handleSubscribe}
       >
         {t("btn-Subscribe")}

@@ -84,12 +84,12 @@ export default function OverviewInfo() {
                 placeholder={T("pl-Username")}
                 value={nameInputValue}
                 onChange={(e) => setNameInputValue(e.target.value)}
-                className="h-6 w-40 rounded-none border-x-0 border-b border-t-0 border-[#f0f1f5] bg-white pl-0  text-black"
+                className="h-6 w-40 rounded-none border-x-0 border-b border-t-0 border-[#f0f1f5] bg-bg-black pl-0  text-txt-white"
                 onBlur={handleNameInputBlur}
               />
             ) : (
               <div className="flex items-center gap-1">
-                <div className="leading-6 text-black">
+                <div className="leading-6 text-txt-white">
                   {accountInfo?.user_name || ""}
                 </div>
                 <Image
@@ -105,7 +105,7 @@ export default function OverviewInfo() {
           </div>
 
           <DateRangePickerDialog dateRange={date} setDateRange={setDate}>
-            <div className="flex h-12 items-center space-x-2 rounded-full bg-[#fafafa] px-5 text-sm leading-5 text-black">
+            <div className="flex h-12 items-center space-x-2 rounded-full bg-bg-black px-5 text-sm leading-5 text-txt-white">
               <Image
                 src="/icons/calendar.svg"
                 width={24}
@@ -129,9 +129,9 @@ export default function OverviewInfo() {
         </div>
 
         {/* overview */}
-        <div className="mt-6 rounded-3xl bg-[#fafafa] p-5">
+        <div className="mt-6 rounded-3xl bg-bg-black p-5">
           <div className="flex items-center justify-between">
-            <div className="leading-6 text-black">
+            <div className="leading-6 text-txt-white">
               {T("cap-AccountOverview")}
             </div>
             <RollInBtn />
@@ -139,7 +139,7 @@ export default function OverviewInfo() {
           <div className="mt-5 flex justify-between">
             <div>
               <LabelText>{T("lb-TradeVol")}</LabelText>
-              <div className="leading-6 text-black">
+              <div className="leading-6 text-txt-white">
                 <NoDataDisplay noData={!accountInfo}>
                   ${formatNum(Number(accountInfo?.trade_vol))}
                 </NoDataDisplay>
@@ -149,7 +149,7 @@ export default function OverviewInfo() {
               <LabelText>{T("lb-Profit")}</LabelText>
               <div
                 // data-loss={accountInfo ? accountInfo?.profit < 0 : "null"}
-                className="leading-6 data-[loss=false]:text-green data-[loss=null]:text-black data-[loss=true]:text-red"
+                className="leading-6 data-[loss=false]:text-green data-[loss=null]:text-txt-white data-[loss=true]:text-red"
               >
                 <NoDataDisplay noData={!accountInfo}>
                   <>
@@ -164,7 +164,7 @@ export default function OverviewInfo() {
           <div className="mt-4 flex justify-between">
             <div>
               <LabelText>{T("lb-MakerOrders")}</LabelText>
-              <div className="leading-6 text-black">
+              <div className="leading-6 text-txt-white">
                 <NoDataDisplay noData={!accountInfo}>
                   {formatNum(Number(accountInfo?.maker_orders))}
                 </NoDataDisplay>
@@ -172,7 +172,7 @@ export default function OverviewInfo() {
             </div>
             <div className="flex flex-col items-end">
               <LabelText>{T("lb-TakerOrders")}</LabelText>
-              <div className="leading-6 text-black">
+              <div className="leading-6 text-txt-white">
                 <NoDataDisplay noData={!accountInfo}>
                   {formatNum(Number(accountInfo?.taker_orders))}
                 </NoDataDisplay>
@@ -183,7 +183,7 @@ export default function OverviewInfo() {
           <div className="mt-5 flex justify-between">
             <div>
               <LabelText>{T("lb-SettledValue")}</LabelText>
-              <div className="leading-6 text-black">
+              <div className="leading-6 text-txt-white">
                 <NoDataDisplay noData={!accountInfo}>
                   ${formatNum(Number(accountInfo?.settled_value))}
                 </NoDataDisplay>
@@ -195,7 +195,7 @@ export default function OverviewInfo() {
                 data-loss={
                   accountInfo ? Number(accountInfo?.tax_income) < 0 : "null"
                 }
-                className="leading-6 data-[loss=false]:text-green data-[loss=null]:text-black data-[loss=true]:text-red"
+                className="leading-6 data-[loss=false]:text-green data-[loss=null]:text-txt-white data-[loss=true]:text-red"
               >
                 <NoDataDisplay noData={!accountInfo}>
                   <>

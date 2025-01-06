@@ -27,7 +27,7 @@ export default function MyHoldings() {
   return (
     <div className="flex flex-1 flex-col p-4 sm:ml-5 sm:p-0">
       <div className="flex items-center justify-between">
-        <div className="hidden text-xl leading-[30px] text-black sm:flex">
+        <div className="hidden text-xl leading-[30px] text-txt-white sm:flex">
           {T("cap-MyStocks")}
         </div>
         <div className="flex items-center justify-end space-x-6">

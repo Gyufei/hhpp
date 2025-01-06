@@ -41,7 +41,7 @@ export default function OfferAboutMineDetailDrawer({
       onClose={handleDrawerClose}
       direction={isMobileSize ? "bottom" : "right"}
       size={isMobileSize ? "calc(100vh - 44px)" : 952}
-      className="overflow-y-auto rounded-none p-4 sm:rounded-l-2xl sm:p-6"
+      className="overflow-y-auto rounded-none !bg-bg-black p-4 sm:rounded-l-2xl sm:p-6"
       customIdSuffix="detail-drawer"
     >
       {isMobileSize ? (

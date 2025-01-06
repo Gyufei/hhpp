@@ -66,7 +66,7 @@ export default function MyAskDetail({
     <>
       <div className="flex flex-col justify-between gap-y-4 sm:flex-row sm:gap-y-0">
         {/* left card */}
-        <div className="flex flex-1 flex-col rounded-[20px] bg-[#fafafa] p-4">
+        <div className="flex flex-1 flex-col rounded-[20px] bg-bg-black p-4">
           <OfferInfo
             img1={offer.marketplace.projectLogo}
             img2={ChainConfigs[offer.marketplace.chain].logo}
@@ -132,7 +132,7 @@ export default function MyAskDetail({
                             >
                               <button
                                 disabled={isClosing}
-                                className="mt-4 flex h-12 w-full items-center justify-center rounded-2xl bg-[#f0f1f5] leading-6 text-black"
+                                className="mt-4 flex h-12 w-full items-center justify-center rounded-2xl bg-[#f0f1f5] leading-6 text-txt-white"
                               >
                                 {ot("btn-CloseThisOffer")}
                               </button>

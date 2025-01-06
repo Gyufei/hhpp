@@ -29,7 +29,7 @@ const NumericalInput = forwardRef<HTMLInputElement, InputProps>(
       <input
         {...rest}
         className={cn(
-          "pointer-events-auto relative flex-1 overflow-hidden text-ellipsis whitespace-nowrap p-0  text-xl text-black transition-colors data-[state=disabled]:pointer-events-none data-[state=error]:text-red",
+          "pointer-events-auto relative flex-1 overflow-hidden text-ellipsis whitespace-nowrap p-0  text-xl text-txt-white transition-colors data-[state=disabled]:pointer-events-none data-[state=error]:text-red",
           rest?.className,
         )}
         style={{

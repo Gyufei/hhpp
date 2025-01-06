@@ -11,7 +11,7 @@ export default function FeeDisplay() {
         <div className="text-sm leading-5 text-gray">
           {cot("lb-MinimumOrderAmount")}
         </div>
-        <div className="text-sm leading-5 text-black">${minAmount}</div>
+        <div className="text-sm leading-5 text-txt-white">${minAmount}</div>
       </div>
     </div>
   );

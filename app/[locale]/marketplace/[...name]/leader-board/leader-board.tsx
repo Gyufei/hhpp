@@ -115,16 +115,18 @@ export default function LeaderBoard({
       &:nth-of-type(3) {
         text-align: right;
       }
+
+      background: #111a1e;
     `,
     HeaderCell: `
-      color: #c0c4cc;
+      color: #949e9c;
       &:first-of-type {
         padding-left: 8px;
       }
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #303030;
     `,
     Cell: `
-      color: #2d2e33;
+      color: #D1D4DC;
       height: 40px;
     `,
   });
@@ -228,7 +230,7 @@ export default function LeaderBoard({
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="h-6 w-6 rounded-lg bg-yellow"></div>
-          <div className="leading-6 text-black">{t("cap-Leaderboard")}</div>
+          <div className="leading-6 text-txt-white">{t("cap-Leaderboard")}</div>
         </div>
         <div className="flex items-center justify-end space-x-3">
           <LeaderTypeSelect

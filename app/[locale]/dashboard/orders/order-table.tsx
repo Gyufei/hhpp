@@ -19,9 +19,8 @@ import { useMyOffers } from "@/lib/hooks/api/use-my-offers";
 import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
 import { IOffer } from "@/lib/types/offer";
 import { formatTimestamp } from "@/lib/utils/time";
-import { IRole, IStatus } from "./filter-select";
+import { IStatus } from "./filter-select";
 import OfferAboutMineDetailDrawer from "../common/offer-about-mine-detail-drawer";
-import { IOfferType } from "@/components/share/offer-type-select";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useTranslations } from "next-intl";
 import { sortBy } from "lodash";
@@ -32,14 +31,10 @@ import { formatNum } from "@/lib/utils/number";
 
 export function OrderTable({
   chain,
-  role,
   status,
-  types,
 }: {
   chain: ChainType;
-  role: IRole;
   status: IStatus;
-  types: Array<IOfferType>;
 }) {
   const T = useTranslations("page-MyOrders");
 
@@ -61,10 +56,8 @@ export function OrderTable({
         };
       })
       .filter((o) => {
-        const oType = o?.entry?.direction;
         const isStatus = status === "All" || status.toLowerCase() === o.status;
-
-        return types.includes(oType as IOfferType) && isStatus;
+        return isStatus;
       });
 
     const sortData = sortBy(offerData, "create_at").reverse();
@@ -72,7 +65,7 @@ export function OrderTable({
     return {
       nodes: sortData,
     };
-  }, [offers, role, status, types]);
+  }, [offers, status]);
 
   useEffect(() => {
     refreshMyOffers();
@@ -103,11 +96,13 @@ export function OrderTable({
       &:not(:first-of-type) > div {
         padding-left: 10px;
       }
+      
+      background: #111a1e;
     `,
     HeaderCell: `
       font-size: 12px;
       font-weight: 400;
-      color: #c0c4cc;
+      color: #949e9c;
       line-height: 18px;
 
     `,
@@ -183,7 +178,7 @@ export function OrderTable({
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top">
                     <div>
-                      <div className="text-sm leading-5 text-black">
+                      <div className="text-sm leading-5 text-txt-white">
                         {off.marketplace?.market_name}
                       </div>
                       <div className="text-[10px] leading-4 text-gray">
@@ -201,7 +196,7 @@ export function OrderTable({
                     <OfferHash offer={off} />
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top">
-                    <span className="text-sm leading-5 text-black">
+                    <span className="text-sm leading-5 text-txt-white">
                       {formatTimestamp(off.create_at * 1000)}
                     </span>
                   </Cell>
@@ -270,7 +265,7 @@ function OfferItem({ offer }: { offer: IOffer }) {
         alt="avatar"
         className="rounded-full"
       />
-      <div className="boffer boffer-white absolute bottom-0 right-0 flex h-[14px] w-[14px] items-center justify-center rounded-full bg-white">
+      <div className="boffer boffer-white absolute bottom-0 right-0 flex h-[14px] w-[14px] items-center justify-center rounded-full bg-bg-black">
         <Image
           src={ChainConfigs[offer.marketplace.chain].logo}
           width={14}
@@ -298,7 +293,7 @@ function OfferFromTo({ offer }: { offer: IOffer }) {
           alt="token"
           className="rounded-full"
         />
-        <span className="text-sm leading-5 text-black">
+        <span className="text-sm leading-5 text-txt-white">
           {formatNum(offerValue, 2, true)}
         </span>
       </div>
@@ -310,7 +305,7 @@ function OfferFromTo({ offer }: { offer: IOffer }) {
           alt="token"
           className="rounded-full"
         />
-        <span className="text-sm leading-5 text-black">
+        <span className="text-sm leading-5 text-txt-white">
           {formatNum(forValue, 2, true)}
         </span>
       </div>
@@ -336,7 +331,7 @@ function OfferHash({ offer }: { offer: IOffer }) {
 
   return (
     <div className="flex items-center">
-      <span className="text-sm leading-5 text-black">
+      <span className="text-sm leading-5 text-txt-white">
         {truncateAddr(hash || "")}
       </span>
       <Image
@@ -365,7 +360,7 @@ function DetailBtn({
       className="flex w-fit"
       onClick={onClick}
     >
-      <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-[#eee] px-[14px] text-sm leading-5 text-black hover:border-black">
+      <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-[#eee] px-[14px] text-sm leading-5 text-txt-white hover:border-black">
         {ct("Detail")}
       </div>
     </WithWalletConnectBtn>

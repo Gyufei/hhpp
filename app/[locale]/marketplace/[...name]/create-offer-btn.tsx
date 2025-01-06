@@ -54,7 +54,7 @@ export default function CreateOfferBtn({
           reportEvent("click", { value: "createOffer" });
         }}
       >
-        <button className="hidden h-12 w-full items-center justify-center rounded-2xl bg-yellow leading-6 text-black sm:flex">
+        <button className="hidden h-12 w-full items-center justify-center rounded-2xl bg-yellow leading-6 text-txt-white sm:flex">
           {T("btn-CreateOffer")}
         </button>
         <button className="absolute -top-[49px] right-[10px] flex h-10 w-10 items-center justify-center rounded-lg bg-yellow sm:hidden">
@@ -72,7 +72,7 @@ export default function CreateOfferBtn({
           onClose={handleCloseDrawer}
           direction={isMobileSize ? "bottom" : "right"}
           size={isMobileSize ? "calc(100vh - 44px)" : 500}
-          className="flex flex-col overflow-y-auto rounded-none p-4 sm:rounded-l-2xl sm:p-6"
+          className="flex flex-col overflow-y-auto rounded-none !bg-bg-black p-4 sm:rounded-l-2xl sm:p-6"
         >
           {isMobileSize ? (
             <MobileDrawerTitle

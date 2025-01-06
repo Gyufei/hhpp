@@ -59,7 +59,7 @@ export default function LanguageSetting() {
       </PopoverTrigger>
       <PopoverContent
         align="end"
-        className="flex w-[124px] flex-col items-stretch border-0 bg-white p-1"
+        className="flex w-[124px] flex-col items-stretch border-0 bg-bg-black p-1"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}
@@ -69,7 +69,7 @@ export default function LanguageSetting() {
             key={t.value}
             onClick={() => handleSelectLang(t.value)}
             data-active={locale === t.value}
-            className="flex h-9 cursor-pointer items-center rounded-xl px-1 text-xs leading-[18px] text-gray data-[active=true]:bg-[#f5f6f7] data-[active=true]:text-black"
+            className="flex h-9 cursor-pointer items-center rounded-xl px-1 text-xs leading-[18px] text-gray data-[active=true]:bg-[#f5f6f7] data-[active=true]:text-txt-white"
           >
             <Image
               width={16}

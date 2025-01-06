@@ -23,7 +23,7 @@ export function SwapItemPanel({
   return (
     <div
       className={cn(
-        "flex w-full justify-between rounded-2xl bg-white p-4",
+        "flex w-full justify-between rounded-2xl bg-bg-black p-4",
         className,
       )}
     >

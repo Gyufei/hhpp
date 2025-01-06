@@ -179,7 +179,7 @@ export default function RpcManage() {
                 size="icon"
                 onClick={() => handleAddRpc(network.id)}
               >
-                <Plus className="h-4 w-4 hover:text-[#4CBF87]" />
+                <Plus className="h-4 w-4 hover:text-green" />
               </Button>
             )}
           </div>
@@ -202,7 +202,7 @@ export default function RpcManage() {
                 style={{ fontSize: "12px" }}
                 value={newRpcUrl}
                 onChange={(e) => handleRpcChange(e.target.value)}
-                className="h-10 w-[256px] rounded-lg border-none bg-[#fafafa] pl-3 pr-[40px] data-[error]:border-red"
+                className="h-10 w-[256px] rounded-lg border-none bg-bg-black pl-3 pr-[40px] data-[error]:border-red"
               />
               <Image
                 onClick={() => handleSaveRpc(network.id)}
@@ -249,7 +249,7 @@ function RpcItem({ chain, rpc, onEditRpc, onSetActiveRpc }: any) {
     <div
       key={rpc.id}
       data-active={rpc.isActive}
-      className="bg-gray-50 flex items-center justify-between rounded-lg p-3 data-[active=true]:bg-[#fafafa]"
+      className="bg-gray-50 flex items-center justify-between rounded-lg p-3 data-[active=true]:bg-bg-black"
     >
       <div className="space-y-1">
         <div className="flex items-center gap-2">
@@ -293,7 +293,7 @@ function MsDisplay({ ms }: { ms: number | undefined }) {
     if (!ms) return "#3DD866";
     if (ms < 100) return "#3DD866";
     if (ms > 99 && ms < 200) return "#FFA95B";
-    if (ms > 200) return "#FF6262";
+    if (ms > 200) return "#EF5350";
   }, [ms]);
 
   if (!ms) return null;

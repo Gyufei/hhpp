@@ -14,10 +14,10 @@ export default function ReceiveCard({
   tokenLogo: string;
 }) {
   return (
-    <div className="rounded-2xl bg-white p-4">
+    <div className="rounded-2xl border border-[#303030] bg-bg-black p-4">
       <div className="text-xs leading-[18px] text-gray">{topText}</div>
       <div className="mt-2 flex justify-between">
-        <div className="h-[36px] text-2xl leading-[36px]">
+        <div className="h-[36px] text-2xl leading-[36px] text-txt-white">
           {formatNum(value, 4)}
         </div>
         <Image

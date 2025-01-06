@@ -27,14 +27,14 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
 
   return (
     <div className="flex-1 px-6">
-      <div className="leading-6 text-black">{ot("cap-OfferDetail")}</div>
+      <div className="leading-6 text-txt-white">{ot("cap-OfferDetail")}</div>
 
       <DetailRow>
         <DetailLabel tipText={ot("tip-Filled")}>
           {ot("lb-Filled/SellingAmount")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="text-sm leading-5 text-black">
+          <div className="text-sm leading-5 text-txt-white">
             {formatNum(
               NP.divide(offer.taken_item_amount, pointDecimalNum),
               2,
@@ -57,10 +57,10 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
       <DetailRow>
         <DetailLabel tipText="">{ot("lb-Previous")} Maker / Taker</DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="w-fit rounded-[4px] bg-[#F0F1F5] px-[5px] py-[2px] text-[10px] leading-4 text-gray">
+          <div className="w-fit rounded-[4px] bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
             {offer.entry.id ? `#${offer.entry.id}` : ""}
           </div>
-          <div className="text-sm leading-5 text-black">
+          <div className="text-sm leading-5 text-txt-white">
             {truncateAddr(offer.offer_maker || "", {
               nPrefix: 4,
               nSuffix: 4,
@@ -84,7 +84,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
           {ot("lb-InitialOfferMaker")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="w-fit rounded-[4px] bg-[#F0F1F5] px-[5px] py-[2px] text-[10px] leading-4 text-gray">
+          <div className="w-fit rounded-[4px] bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
             {originId ? `#${originId}` : ""}
           </div>
           <div className="text-sm leading-5 text-red">

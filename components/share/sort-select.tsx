@@ -42,10 +42,10 @@ export function SortSelect({
       <DropdownMenuTrigger asChild>
         <div
           data-open={popOpen}
-          className="flex cursor-pointer items-center space-x-1 rounded-full border border-[#D3D4D6] px-[16px] py-[5px] outline-none data-[open=true]:border-yellow data-[open=true]:bg-yellow"
+          className="flex cursor-pointer items-center space-x-1 rounded-full border border-[#949E9C] px-[16px] py-[5px] outline-none data-[open=true]:border-yellow data-[open=true]:bg-yellow"
         >
           <Image src="/icons/sort.svg" width={20} height={20} alt="type icon" />
-          <div className="overflow-hidden text-clip whitespace-nowrap text-sm leading-5 text-black">{`${t(
+          <div className="overflow-hidden text-clip whitespace-nowrap text-sm leading-5 text-txt-white">{`${t(
             "sl-" + sortField,
           )}:${t("sl-" + sortDir)}`}</div>
           <Image
@@ -60,7 +60,7 @@ export function SortSelect({
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-[158px] border-0 bg-white p-1"
+        className="w-[158px] border border-[#303030] bg-bg-black p-1"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}
@@ -106,27 +106,27 @@ function SortOptions({
     <DropdownMenuSub>
       <DropdownMenuSubTrigger
         data-checked={sortField === field}
-        className="flex h-9 cursor-pointer items-center rounded-xl px-4 text-xs leading-[18px] text-black data-[checked=true]:bg-[#FAFAFA]"
+        className="flex h-9 cursor-pointer items-center rounded-xl px-4 text-xs leading-[18px] text-txt-white data-[checked=true]:bg-bg-black"
       >
         {t("sl-" + field)}
       </DropdownMenuSubTrigger>
       <DropdownMenuPortal>
         <DropdownMenuSubContent
           sideOffset={6}
-          className="w-[88px] border-0 bg-white p-1 sm:w-[158px]"
+          className="w-[88px] border-0 bg-bg-black p-1 sm:w-[158px]"
           style={{
             boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
           }}
         >
           <DropdownMenuItem
             data-active={sortField === field && sortDir === "Ascending"}
-            className="h-9 cursor-pointer py-[3px] data-[active=true]:bg-[#FAFAFA]"
+            className="h-9 cursor-pointer py-[3px] text-txt-white data-[active=true]:bg-bg-black"
           >
             <SortUp onClick={() => onSortDirChange(field, "Ascending")} />
           </DropdownMenuItem>
           <DropdownMenuItem
             data-active={sortField === field && sortDir === "Descending"}
-            className="h-9 cursor-pointer py-[3px] data-[active=true]:bg-[#FAFAFA]"
+            className="h-9 cursor-pointer py-[3px] text-txt-white data-[active=true]:bg-bg-black"
           >
             <SortDown onClick={() => onSortDirChange(field, "Descending")} />
           </DropdownMenuItem>

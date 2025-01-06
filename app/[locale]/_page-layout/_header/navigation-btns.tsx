@@ -11,8 +11,6 @@ export default function NavigationBtns() {
   const isHome = pathname === "/";
   const isDashboard = pathname.startsWith(`/dashboard`);
   const isMarketPlace = pathname.startsWith(`/marketplace`);
-  const pointPattern = /\/marketplace\/[a-zA-Z]+/;
-  const isMarketDetailPage = pointPattern.test(pathname);
 
   const router = useRouter();
 
@@ -27,7 +25,7 @@ export default function NavigationBtns() {
           <div>
             <div
               data-active={isDashboard}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-[#D3D4D6] data-[active=true]:w-fit data-[active=false]:cursor-pointer data-[active=true]:border-none data-[active=true]:bg-yellow data-[active=true]:px-6 data-[active=false]:hover:border-transparent data-[active=false]:hover:bg-yellow"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-[#303030] data-[active=true]:w-fit data-[active=false]:cursor-pointer data-[active=true]:border-none data-[active=true]:bg-yellow data-[active=true]:px-6 data-[active=false]:hover:border-transparent data-[active=false]:hover:bg-yellow"
             >
               <Image
                 src="/icons/dashboard.svg"
@@ -47,10 +45,7 @@ export default function NavigationBtns() {
         <div
           onClick={() => handleClick(`/marketplace`)}
           data-active={isMarketPlace}
-          className="z-20 flex h-12 w-12 items-center justify-center rounded-full border border-[#D3D4D6] data-[active=true]:w-fit data-[active=false]:cursor-pointer data-[active=true]:border-yellow data-[active=true]:bg-yellow data-[active=true]:px-6 data-[active=false]:hover:border-transparent data-[active=false]:hover:bg-yellow"
-          style={{
-            borderRight: isMarketDetailPage ? "2px solid #fff" : "",
-          }}
+          className="z-20 flex h-12 w-12 items-center justify-center rounded-full border border-[#303030] data-[active=true]:w-fit data-[active=false]:cursor-pointer data-[active=true]:border-yellow data-[active=true]:bg-yellow data-[active=true]:px-6 data-[active=false]:hover:border-transparent data-[active=false]:hover:bg-yellow"
         >
           <Image
             src="/icons/Marketplace.svg"

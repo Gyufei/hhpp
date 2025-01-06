@@ -23,14 +23,14 @@ export function DepositDialog({
       </VisuallyHidden>
       <DialogContent
         showClose={false}
-        className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded-3xl border-none bg-white p-6"
+        className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded-3xl border-none bg-bg-black p-6"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}
         aria-describedby={undefined}
       >
         <div className="relative flex w-full items-center justify-center">
-          <div className="text-xl leading-[30px] text-black">
+          <div className="text-xl leading-[30px] text-txt-white">
             {T("btn-Deposit")}
           </div>
           <Image

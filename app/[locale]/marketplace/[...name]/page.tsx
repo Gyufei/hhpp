@@ -5,18 +5,10 @@ import MarketplaceContent from "./marketplace-content";
 import { useWsMsgSub } from "@/lib/hooks/api/use-ws-msgs";
 import { useEffect } from "react";
 import { ChainType } from "@/lib/types/chain";
-import VConsole from "vconsole";
-import { isProduction } from "@/lib/PathMap";
-import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 
 export default function Marketplace({ params }: { params: { name: string } }) {
   const marketplaceName = decodeURIComponent(params.name[0]);
   const { data: markets, mutate } = useMarketplaces();
-  const { isMobileSize } = useDeviceSize();
-
-  if (!isProduction && isMobileSize) {
-    new VConsole();
-  }
 
   const marketplace = markets?.find(
     (marketplace) => marketplace.market_symbol === marketplaceName,

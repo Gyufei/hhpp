@@ -13,7 +13,7 @@ export default function MobileRouterMenu() {
     <div className="block sm:hidden">
       <button
         data-show={showMenu ? true : false}
-        className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-[#d3d4d6] bg-white transition-all data-[show=true]:border-black"
+        className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-[#303030] bg-bg-black transition-all data-[show=true]:border-black"
         onClick={() => setShowMenu(!showMenu)}
       >
         {showMenu ? (
@@ -54,7 +54,7 @@ function MenuList({ onEnd }: { onEnd: () => void }) {
   };
 
   return (
-    <div className="fixed left-0 top-[100px] z-10 h-[calc(100vh-100px)] w-screen bg-white p-4">
+    <div className="fixed left-0 top-[100px] z-10 h-[calc(100vh-100px)] w-screen bg-bg-black p-4">
       <div
         data-active={isDashboardActive}
         className="mb-2 flex items-center space-x-3 py-3 data-[active=true]:opacity-50"
@@ -71,7 +71,7 @@ function MenuList({ onEnd }: { onEnd: () => void }) {
           height={40}
           alt="pools"
         />
-        <div className="text-lg leading-5 text-black">{t("btn-Dashboard")}</div>
+        <div className="text-lg leading-5 text-txt-white">{t("btn-Dashboard")}</div>
       </div>
       <div
         data-active={isMarketplaceActive}
@@ -92,7 +92,7 @@ function MenuList({ onEnd }: { onEnd: () => void }) {
             height={40}
             alt="governance"
           />
-          <div className="text-lg leading-5 text-black">
+          <div className="text-lg leading-5 text-txt-white">
             {t("btn-Marketplace")}
           </div>
         </div>

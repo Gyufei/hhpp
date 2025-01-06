@@ -59,7 +59,7 @@ export default function ConnectBtn() {
     if (isMobileSize) {
       return (
         <button
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#d3d4d6] bg-white "
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#303030] bg-bg-black "
           onClick={() => handleConnect()}
         >
           <Image src="/icons/wallet.svg" width={20} height={20} alt="wallet" />
@@ -85,7 +85,7 @@ export default function ConnectBtn() {
   return (
     <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
       <PopoverTrigger asChild>
-        <button className="shadow-25 h-10 rounded-full border border-[#d3d4d6] px-6 text-base leading-6 text-black transition-all hover:border-transparent hover:bg-yellow sm:h-12">
+        <button className="shadow-25 h-10 rounded-full border border-[#303030] px-6 text-base leading-6 text-[#d1d4dc] transition-all hover:border-transparent hover:bg-yellow sm:h-12">
           <div className="flex items-center">
             {!shortAddr || connecting ? (
               <Skeleton className="h-5 w-24" />
@@ -96,7 +96,7 @@ export default function ConnectBtn() {
         </button>
       </PopoverTrigger>
       <PopoverContent
-        className="flex w-[288px] flex-col items-stretch space-y-2 border-none bg-white p-6 text-[12px] text-[#2D2E33]"
+        className="flex w-[288px] flex-col items-stretch space-y-2 border-none bg-bg-black p-6 text-[12px] text-[#2D2E33]"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}

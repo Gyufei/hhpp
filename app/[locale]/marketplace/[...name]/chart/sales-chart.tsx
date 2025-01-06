@@ -192,9 +192,9 @@ export default function SalesChart({
         {
           name: "Line",
           type: "line",
-          color: "#D8F36B",
+          color: "#50d2c1",
           column: {
-            borderColor: "#D8F36B",
+            borderColor: "#50d2c1",
             borderWidth: 3,
             borderRadius: 40,
             shadow: true,
@@ -213,7 +213,7 @@ export default function SalesChart({
           name: "Line",
           type: "line",
           data: chartData?.line,
-          color: "#D8F36B",
+          color: "#50d2c1",
           marker: {
             enabled: false,
             states: {

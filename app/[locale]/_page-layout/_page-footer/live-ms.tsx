@@ -13,7 +13,7 @@ export function LiveMs() {
     if (!ms) return "#3DD866";
     if (ms < 100) return "#3DD866";
     if (ms > 99 && ms < 200) return "#FFA95B";
-    if (ms > 200) return "#FF6262";
+    if (ms > 200) return "#EF5350";
   }, [ms]);
 
   return (

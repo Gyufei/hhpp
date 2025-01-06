@@ -7,12 +7,14 @@ body {
 }
 
 :root {
-  --color-black: #2d2e33;
-  --color-yellow: #e0ff62;
+  --color-txt-white: #f6fefd;
+  --color-bg-black: #111a1e;
+  /* --color-yellow: #e0ff62; */
+  --color-yellow: #50d2c1;
   --color-green: #4cbf87;
-  --color-red: #ff6262;
-  --color-gary: #99a0af;
-  --color-lightgray: #c0c4cc;
+  --color-red: #ef5350;
+  --color-gary: #949e9c;
+  --color-lightgray: #d1d4dc;
   --color-focus: #3dd866;
 }
 
@@ -60,7 +62,7 @@ body {
   height: 40px;
   width: 100%;
   border-radius: 12px;
-  border: 1px solid #d8d8d8;
+  border: 1px solid #303030;
 }
 
 img {

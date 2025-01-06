@@ -17,7 +17,7 @@ export default function MobilePageFooter({
 }) {
   return (
     <div
-      className="flex h-14 w-full justify-between bg-white py-2 sm:hidden"
+      className="flex h-14 w-full justify-between bg-bg-black py-2 sm:hidden"
       style={{
         boxShadow: "0px -10px 20px 0px rgba(14, 4, 62, 0.02)",
       }}

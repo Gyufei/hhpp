@@ -45,7 +45,7 @@ export default function ReferralDialog() {
       </VisuallyHidden>
       <DialogContent
         showClose={false}
-        className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded-3xl border-none bg-white p-6"
+        className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded-3xl border-none bg-bg-black p-6"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}
@@ -114,10 +114,10 @@ export function ReferralSignInBtn({
 
   return (
     <>
-      <div className="mb-3 text-xl leading-[30px] text-black">
+      <div className="mb-3 text-xl leading-[30px] text-txt-white">
         {t("cap-Welcome")}
       </div>
-      <div className="min-h-10 px-5 text-center text-sm leading-5 text-black">
+      <div className="min-h-10 px-5 text-center text-sm leading-5 text-txt-white">
         {t.rich("txt-YourFriendSentYouAnOnboardingInvitation", {
           name: (_chunks: any) => (
             <span className="text-green">{shortAddr}</span>
@@ -132,7 +132,7 @@ export function ReferralSignInBtn({
       <div className="mt-10 w-full">
         <button
           onClick={handleSignInReferral}
-          className="flex h-12 w-full items-center justify-center rounded-2xl bg-yellow text-black"
+          className="flex h-12 w-full items-center justify-center rounded-2xl bg-yellow text-txt-white"
         >
           {t("btn-SignIn")}
         </button>

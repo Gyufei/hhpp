@@ -105,7 +105,7 @@ export function SellContent({
                     height={30}
                     width={30}
                     alt="info"
-                    className="absolute -bottom-[14px] -right-[18px] !text-[#E0FF62]"
+                    className="absolute -bottom-[14px] -right-[18px] !text-yellow"
                   />
                 </div>
               </WithTip>

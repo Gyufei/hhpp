@@ -34,7 +34,7 @@ export default function OrderNoteAndFee({
   return (
     <div className="mt-4 flex flex-col">
       <div className="mb-2 flex items-center space-x-1">
-        <div className="mr-[6px]  text-sm leading-6 text-black">
+        <div className="mr-[6px]  text-sm leading-6 text-txt-white">
           {cot("cap-OrderNote")}
         </div>
         <Checkbox
@@ -54,7 +54,7 @@ export default function OrderNoteAndFee({
                   ? cot("pl-AnythingYouWantToInformTheSeller")
                   : cot("pl-AnythingYouWantToInformTheBuyer")
               }
-              className="h-[66px] rounded-xl border border-[#d8d8d8] focus:border-focus"
+              className="h-[66px] rounded-xl border border-[#303030] focus:border-focus"
             />
             <div className="absolute bottom-2 right-4 text-xs leading-[18px] text-gray">
               {value.length} / 50
