@@ -1,6 +1,6 @@
-import { IOfferType } from "@/components/share/offer-type-select";
 import { IMarketplace } from "./marketplace";
 
+export type IOfferType = "buy" | "sell";
 export type ISettleMode = "protected" | "turbo";
 
 export interface IOffer {

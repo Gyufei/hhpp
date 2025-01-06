@@ -1,5 +1,4 @@
-import { IOfferType } from "@/components/share/offer-type-select";
-import { IOffer } from "@/lib/types/offer";
+import { IOffer, IOfferType } from "@/lib/types/offer";
 
 export interface IOrder {
   order_id: string;
