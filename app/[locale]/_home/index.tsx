@@ -112,7 +112,7 @@ function TradeMore() {
             Trade more on
           </span>
           <Image
-            src="/icons/trade.svg"
+            src="/icons/Trade.svg"
             width={280}
             height={62}
             alt="trade"
