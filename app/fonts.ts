@@ -6,25 +6,30 @@ export const inter = Inter({
   display: "swap",
 });
 
-export const VideoFont = localFont({
+export const TeodorFont = localFont({
   src: [
     {
-      path: "../public/fonts/Video.ttf",
+      path: "../public/fonts/Teodor-Light.ttf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Teodor-Regular.otf",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../public/fonts/Video-Medium.ttf",
+      path: "../public/fonts/Teodor-Medium.otf",
       weight: "600",
       style: "normal",
     },
     {
-      path: "../public/fonts/Video-Bold.ttf",
+      path: "../public/fonts/Teodor-Bold.otf",
       weight: "700",
       style: "normal",
     },
   ],
-  variable: "--font-video",
+  variable: "--font-teodor",
   fallback: [
     "system-ui",
     "-apple-system",

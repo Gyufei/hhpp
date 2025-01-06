@@ -1,5 +1,5 @@
 import "@/app/globals.css";
-import { inter } from "@/app/fonts";
+import { inter, TeodorFont } from "@/app/fonts";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -72,7 +72,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={cn(inter.className)}>
+      <body className={cn(inter.className, TeodorFont.variable)}>
         <JotaiProvider>
           <WalletModalProvider>
             <SWRConfigProvider>

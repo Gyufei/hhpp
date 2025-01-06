@@ -17,6 +17,9 @@ module.exports = {
         lightgray: "var(--color-lightgray)",
         focus: "var(--color-focus)",
       },
+      fontFamily: {
+        teodor: ["var(--font-teodor)"],
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

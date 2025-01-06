@@ -13,37 +13,7 @@ export default function Header() {
   const isMarketItemPage = /\/marketplace\/[a-zA-Z]+/.test(pathname);
 
   if (isHome) {
-    return (
-      <>
-        <MobileLogo />
-        <div className="flex h-14 items-center justify-between px-4 py-2 sm:absolute sm:top-0 sm:h-24 sm:w-full sm:px-6 sm:py-6">
-          {/* pc */}
-          <NavigationBtns />
-          <Logo />
-          <div className="hidden flex-1 items-center justify-end space-x-4 sm:flex md:space-x-6"></div>
-
-          {/* Mobile */}
-          <div className="flex flex-1 items-center justify-between sm:hidden">
-            <div></div>
-            <Link href="/">
-              <div className="flex h-11 cursor-pointer items-center justify-center sm:hidden">
-                <div className="flex h-6 items-center justify-center rounded-full bg-yellow">
-                  <Image
-                    src="/icons/logo.svg"
-                    alt="logo"
-                    width={75}
-                    height={20}
-                  />
-                </div>
-              </div>
-            </Link>
-            <div className="flex items-center space-x-4">
-              <MobileRouterMenu />
-            </div>
-          </div>
-        </div>
-      </>
-    );
+    return <></>;
   }
 
   return (
