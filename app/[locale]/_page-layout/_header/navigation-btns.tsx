@@ -1,7 +1,7 @@
 "use client";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import Image from "next/image";
-import { usePathname, useRouter } from "@/app/navigation";
+import { usePathname, useRouter } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 
 export default function NavigationBtns() {

@@ -6,7 +6,7 @@ import { truncateAddr } from "@/lib/utils/web3";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useReferralCodeData } from "@/lib/hooks/api/use-referral-data";
-import { usePathname, useRouter } from "@/app/navigation";
+import { usePathname, useRouter } from "@/i18n/routing";
 import { useReferralBind, useReferralView } from "@/lib/hooks/api/use-referral";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";

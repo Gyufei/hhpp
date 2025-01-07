@@ -1,7 +1,7 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { usePathname } from "@/app/navigation";
+import { usePathname } from "@/i18n/routing";
 import Drawer from "react-modern-drawer";
 
 import { useEffect, useMemo, useState } from "react";

@@ -8,7 +8,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 import { useParams } from "next/navigation";
-import { usePathname, useRouter } from "@/app/navigation";
+import { usePathname, useRouter } from "@/i18n/routing";
 
 export default function LanguageSetting() {
   const locale = useLocale();

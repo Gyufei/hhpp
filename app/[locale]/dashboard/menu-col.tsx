@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { usePathname, Link } from "@/app/navigation";
+import { usePathname, Link } from "@/i18n/routing";
 
 export default function MenuCol() {
   const pathname = usePathname();

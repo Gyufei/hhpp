@@ -12,7 +12,7 @@ import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
 import { TokenPairImg } from "@/components/share/token-pair-img";
 import { formatNum } from "@/lib/utils/number";
 import { format } from "date-fns";
-import { useRouter } from "@/app/navigation";
+import { useRouter } from "@/i18n/routing";
 import { IMarketplace } from "@/lib/types/marketplace";
 import { ChainConfigs } from "@/lib/const/chain-configs";
 import { ProjectDecimalsMap } from "@/lib/const/constant";

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { truncateAddr } from "@/lib/utils/web3";
-import { Link } from "@/app/navigation";
+import { Link } from "@/i18n/routing";
 import { ChainType } from "@/lib/types/chain";
 
 export default function OfferFillDialog({

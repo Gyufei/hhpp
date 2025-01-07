@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { X } from "lucide-react";
-import { usePathname, useRouter } from "@/app/navigation";
+import { usePathname, useRouter } from "@/i18n/routing";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import PageFooter from "@/app/[locale]/_page-layout/_page-footer";

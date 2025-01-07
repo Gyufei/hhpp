@@ -14,7 +14,7 @@ import { useSetAtom } from "jotai";
 import { GlobalMessageAtom } from "@/lib/states/global-message";
 import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
 import MarketplaceOverview from "@/components/share/market-place-overview";
-import { useRouter } from "@/app/navigation";
+import { useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils/common";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";

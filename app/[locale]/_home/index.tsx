@@ -2,81 +2,19 @@ import { cn } from "@/lib/utils/common";
 import { TgLink, TwitterLink } from "@/lib/utils/social";
 import Image from "next/image";
 import Link from "next/link";
-
-const menuItemsClx =
-  "flex h-10 items-center rounded-3xl px-[10px] cursor-pointer";
+import HomeHeader from "./home-header";
+import HomeBanner from "./home-banner";
+import TradeMore from "./trade-more";
 
 export default function Home() {
   return (
     <div className="mx-0">
-      <Header />
-      <Banner />
+      <HomeHeader />
+      <HomeBanner />
       <TradeMore />
       <BlockChain />
       <Brand />
       <Footer />
-    </div>
-  );
-}
-
-function Header() {
-  return (
-    <div className="fixed left-0 right-0 top-0 z-10 flex h-14 w-full items-center justify-between bg-bg-black px-[120px]">
-      <div className="flex items-center justify-start space-x-[100px]">
-        <Image src="/icons/logo.svg" width={100} height={20} alt="logo" />
-        <div className="flex items-center space-x-[30px] text-[#F6FEFD]">
-          <div className={menuItemsClx}>Curve Trade</div>
-          <div className="flex h-10 items-center rounded-3xl px-[10px]">
-            Direct Trade
-          </div>
-          <div className={menuItemsClx}>Portfolio</div>
-          <div className={menuItemsClx}>Referrals</div>
-          <div className={cn(menuItemsClx, "space-x-[10px]")}>
-            <span>More</span>
-            <Image
-              src="/icons/arrow-down.svg"
-              width={10}
-              height={10}
-              alt="arrow-down"
-            />
-          </div>
-        </div>
-      </div>
-      <div className="flex items-center space-x-[30px]">
-        <div className="flex items-center space-x-[20px]">
-          <SocialIcon />
-        </div>
-        <StartTradingButton className="h-9 px-[30px] text-xs" />
-      </div>
-    </div>
-  );
-}
-
-function Banner() {
-  return (
-    <div
-      className="mt-14 flex flex-col items-center pb-[118px] pt-[132px]"
-      style={{
-        backgroundImage: "url('/img/home/banner-bg.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <Image src="/icons/simple-logo.svg" width={120} height={90} alt="logo" />
-      <div className="mt-5 text-center text-[80px] font-light leading-[120px] text-white">
-        First stop for high quality <br /> Hyperliquid assets.
-      </div>
-      <div className="mt-[30px] w-[420px] text-center text-sm font-light text-[#F6FEFD]">
-        Crypto is fragmented today, but it doesn&apos;t need to be.For the first
-        time, build projects, create value, andexchange assets on the same
-        hyper-performant chain.
-      </div>
-      <div className="mt-10 flex items-center justify-between space-x-[30px]">
-        <StartTradingButton />
-        <div className="flex h-10 cursor-pointer items-center rounded-3xl border border-yellow px-6 text-base font-light text-yellow">
-          Start Building
-        </div>
-      </div>
     </div>
   );
 }
@@ -96,46 +34,6 @@ function StartTradingButton({ className }: { className?: string }) {
   );
 }
 
-function TradeMore() {
-  return (
-    <div
-      className="flex h-[916px] items-center justify-center bg-[#E6FCF9]"
-      style={{
-        backgroundImage: "url('/img/home/trade-bg.svg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div className="flex flex-col items-start space-y-2">
-        <div className="flex items-center space-x-6">
-          <span className="text-[70px] font-thin text-[#072722]">
-            Trade more on
-          </span>
-          <Image
-            src="/icons/Trade.svg"
-            width={280}
-            height={62}
-            alt="trade"
-            className="translate-y-[8px]"
-          />
-        </div>
-        <div className="flex items-center space-x-6">
-          <span className="text-[70px] font-thin text-[#072722]">
-            Make more on
-          </span>
-          <Image
-            src="/icons/liquid.svg"
-            width={318}
-            height={64}
-            alt="liquidity"
-            className="translate-y-[8px]"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function BlockChain() {
   return (
     <div className="flex h-[916px] items-center justify-center bg-bg-black">
@@ -147,7 +45,7 @@ function BlockChain() {
           <div className="text-base font-semibold leading-6 text-[#F6FEFD]">
             Blockchain
           </div>
-          <div className="mt-5 flex h-10 items-center justify-center rounded-full bg-yellow px-[34px] text-bg-black">
+          <div className="mt-5 flex h-10 cursor-pointer items-center justify-center rounded-full bg-yellow px-[34px] text-bg-black">
             Axelarscan
           </div>
           <div className="absolute left-0 top-1/2 h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow"></div>

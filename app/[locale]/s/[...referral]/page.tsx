@@ -2,7 +2,7 @@
 import { useEffect, useMemo } from "react";
 import Image from "next/image";
 
-import { useRouter } from "@/app/navigation";
+import { useRouter } from "@/i18n/routing";
 import { useReferralCodeData } from "@/lib/hooks/api/use-referral-data";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 

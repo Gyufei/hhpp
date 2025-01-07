@@ -5,7 +5,7 @@ import NavigationBtns from "./navigation-btns";
 import MessageBtn from "./message-btn";
 import MobileRouterMenu from "./mobile-router-menu";
 import Link from "next/link";
-import { usePathname } from "@/app/navigation";
+import { usePathname } from "@/i18n/routing";
 
 export default function Header() {
   const pathname = usePathname();

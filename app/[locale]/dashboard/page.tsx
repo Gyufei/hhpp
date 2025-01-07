@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "@/app/navigation";
+import { usePathname, useRouter } from "@/i18n/routing";
 import { useEffect } from "react";
 
 export default function Dashboard() {

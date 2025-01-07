@@ -1,5 +1,5 @@
 import "@/app/globals.css";
-import { inter, TeodorFont } from "@/app/fonts";
+import { inter } from "@/app/fonts";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -10,8 +10,8 @@ import MainLayout from "@/app/[locale]/_page-layout/main-layout";
 import "react-modern-drawer/dist/index.css";
 import { isProduction } from "@/lib/PathMap";
 import WalletModalProvider from "@/components/provider/wallet-modal-provider";
-import { redirect } from "next/navigation";
-import { locales } from "../../i18n";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
 
 export const metadata = {
   title: {
@@ -64,15 +64,15 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  if (locale && !locales.includes(locale as any)) {
-    redirect("/en/not-found");
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
   }
 
   const messages = await getMessages();
 
   return (
     <html lang={locale}>
-      <body className={cn(inter.className, TeodorFont.variable)}>
+      <body className={cn(inter.className)}>
         <JotaiProvider>
           <WalletModalProvider>
             <SWRConfigProvider>

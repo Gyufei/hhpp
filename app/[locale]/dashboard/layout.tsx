@@ -1,5 +1,5 @@
 "use client";
-import { usePathname, useRouter } from "@/app/navigation";
+import { usePathname, useRouter } from "@/i18n/routing";
 import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
