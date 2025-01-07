@@ -275,7 +275,7 @@ export default function PointMarket({ className }: { className?: string }) {
       <div className="hidden items-center justify-between sm:flex">
         <div className="flex items-center space-x-2">
           <div className="h-6 w-6 rounded-lg bg-main"></div>
-          <div className="leading-6 text-txt-white">{t("cap-PointMarket")}</div>
+          <div className="leading-6 text-title-white">{t("cap-PointMarket")}</div>
         </div>
       </div>
       <div className="max-h-auto relative min-h-[296px] w-[820px] flex-1 flex-col overflow-y-hidden sm:w-full sm:min-w-0">

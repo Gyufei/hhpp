@@ -122,7 +122,7 @@ function DetailRow({
     <div
       className="mt-1 flex items-center justify-between py-[10px]"
       style={{
-        boxShadow: showBottomLine ? "inset 0px -1px 0px 0px #EEEEEE" : "none",
+        boxShadow: showBottomLine ? "inset 0px -1px 0px 0px #303030" : "none",
       }}
     >
       {children}

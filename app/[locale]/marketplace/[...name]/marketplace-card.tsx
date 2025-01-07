@@ -265,10 +265,10 @@ function FoldPop() {
   function renderContent() {
     return (
       <>
-        <div className="relative mb-3 border-b border-[#fafafa] pb-3">
+        <div className="relative mb-3 border-b border-[#303030] pb-3">
           <Image
             src={
-              isInputFocused ? "/icons/search.svg" : "/icons/search-gray.svg"
+              isInputFocused ? "/icons/search-gray.svg" : "/icons/search.svg"
             }
             width={20}
             height={20}
@@ -281,17 +281,17 @@ function FoldPop() {
             onChange={(e) => setSearchText(e.target.value)}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
-            className="h-10 rounded-lg border-none bg-bg-black pl-8"
+            className="h-10 rounded-lg border-[#303030] bg-bg-black pl-8 text-title-white"
           />
         </div>
         {filteredCateList.map((cate, i) => (
           <div
-            className="flex cursor-pointer rounded-lg px-2 py-2 hover:bg-bg-black"
+            className="flex cursor-pointer rounded-lg px-2 py-2 hover:bg-border-black"
             onClick={() => handleGo(cate.id)}
             key={cate.name}
             style={{
               marginTop: i === 0 ? 0 : 12,
-              boxShadow: isMobileSize ? "inset 0px -1px 0px 0px #EEEEEE" : "",
+              boxShadow: isMobileSize ? "inset 0px -1px 0px 0px #303030" : "",
             }}
           >
             <Image
