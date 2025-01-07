@@ -1,9 +1,9 @@
 
-export const TwitterLink = "https://twitter.com/hyper_trade";
+export const TwitterLink = "https://twitter.com/hypes_trade";
 export const DiscordLink = "https://discord.com/channels/1254632665685164092/1254724478038970409";
-export const TgLink = "https://t.me/hyper_trade";
-export const GithubLink = "https://github.com/hyper-trade";
-export const DocLink = "https://hyper-trade.gitbook.io/hyper-trade"
+export const TgLink = "https://t.me/hypes_trade";
+export const GithubLink = "https://github.com/hypes-trade";
+export const DocLink = "https://hypes-trade.gitbook.io/hypes-trade"
 
 export const handleGoTwitter = () => {
   window.open(TwitterLink);

@@ -9,15 +9,20 @@ export const supportedChains = isProduction
   ? ([arbitrum] as const)
   : ([arbitrum, arbitrumSepolia] as const);
 
-export function getWagmiConfig() {
-  const transports = isProduction
-    ? {
-        [arbitrum.id]: http(ChainConfigs[ChainType.HYPER].rpcs.TadleDefaultRPC),
-      }
-    : {
-        [arbitrum.id]: http(ChainConfigs[ChainType.HYPER].rpcs.TadleDefaultRPC),
-        [arbitrumSepolia.id]: http(),
-      };
+export function getWagmiConfig(transports?: Record<number, any>) {
+  const trans =
+    transports || isProduction
+      ? {
+          [arbitrum.id]: http(
+            ChainConfigs[ChainType.HYPER].rpcs.TadleDefaultRPC,
+          ),
+        }
+      : {
+          [arbitrum.id]: http(
+            ChainConfigs[ChainType.HYPER].rpcs.TadleDefaultRPC,
+          ),
+          [arbitrumSepolia.id]: http(),
+        };
 
   const wagmiConfig = createConfig({
     connectors: [
@@ -32,7 +37,7 @@ export function getWagmiConfig() {
     storage: createStorage({
       storage: cookieStorage,
     }),
-    transports: transports as any,
+    transports: trans as any,
   });
 
   return wagmiConfig;

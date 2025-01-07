@@ -3,7 +3,6 @@
 import EthWalletsProvider from "@/components/provider/eth-wallets";
 import { ChainType } from "@/lib/types/chain";
 import { createContext, useContext, useState } from "react";
-import { State } from "wagmi";
 
 interface IWalletModalContext {
   isWalletModalOpen: boolean;
@@ -37,13 +36,11 @@ function WalletModalProviderPrimitive({
 
 export default function WalletModalProvider({
   children,
-  initialState,
 }: {
   children: React.ReactNode;
-  initialState?: State;
 }) {
   return (
-    <EthWalletsProvider initialState={initialState}>
+    <EthWalletsProvider>
       <WalletModalProviderPrimitive>{children}</WalletModalProviderPrimitive>
     </EthWalletsProvider>
   );

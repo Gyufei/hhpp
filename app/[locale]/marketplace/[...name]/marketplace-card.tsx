@@ -112,7 +112,7 @@ export default function MarketplaceCard({
               </>
             ) : (
               <>
-                <div className="w-[120px] overflow-hidden text-ellipsis whitespace-nowrap text-sm leading-[20px] text-txt-white">
+                <div className="w-[120px] overflow-hidden text-ellipsis whitespace-nowrap text-sm leading-[20px] text-title-white">
                   {marketplace.item_name}
                 </div>
                 <OverviewIcons

@@ -1,4 +1,4 @@
-Sitemap: https://hyper.trade/sitemap.xml
+Sitemap: https://hypes.trade/sitemap.xml
 
 User-agent: *
 Disallow: /api
