@@ -360,7 +360,7 @@ function DetailBtn({
       className="flex w-fit"
       onClick={onClick}
     >
-      <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-[#eee] px-[14px] text-sm leading-5 text-txt-white hover:border-black">
+      <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-border-black px-[14px] text-sm leading-5 text-txt-white hover:border-black">
         {ct("Detail")}
       </div>
     </WithWalletConnectBtn>

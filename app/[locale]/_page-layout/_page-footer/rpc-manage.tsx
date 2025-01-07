@@ -195,19 +195,19 @@ export default function RpcManage() {
           ))}
 
           {addingRpcTo === network.id && (
-            <div className="relative mt-4 border-t border-dashed border-[#eee] pt-4">
+            <div className="relative mt-4 border-t border-dashed border-border-black pt-4">
               <Input
                 data-error={inputRpcError}
                 placeholder={ct("pl-InputYourCustomRPC")}
                 style={{ fontSize: "12px" }}
                 value={newRpcUrl}
                 onChange={(e) => handleRpcChange(e.target.value)}
-                className="h-10 w-[256px] rounded-lg border-none bg-bg-black pl-3 pr-[40px] data-[error]:border-red"
+                className="h-10 w-[256px] rounded-lg border border-border-black pl-3 pr-[40px] data-[error=true]:border-red"
               />
               <Image
                 onClick={() => handleSaveRpc(network.id)}
                 src={
-                  newRpcUrl ? "/icons/rpc-link.svg" : "/icons/rpc-link-gray.svg"
+                  newRpcUrl ? "/icons/rpc-link-gray.svg" : "/icons/rpc-link.svg"
                 }
                 width={24}
                 height={24}
@@ -249,7 +249,7 @@ function RpcItem({ chain, rpc, onEditRpc, onSetActiveRpc }: any) {
     <div
       key={rpc.id}
       data-active={rpc.isActive}
-      className="bg-gray-50 flex items-center justify-between rounded-lg p-3 data-[active=true]:bg-bg-black"
+      className="flex items-center justify-between rounded-lg p-3 data-[active=true]:bg-bg-black"
     >
       <div className="space-y-1">
         <div className="flex items-center gap-2">

@@ -44,21 +44,21 @@ export default function MenuCol() {
       {/* <div
         onClick={handleComingSoon}
         data-active={false}
-        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-[#d3d4d5] data-[active=true]:border-yellow data-[active=true]:bg-yellow"
+        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-[#d3d4d5] data-[active=true]:border-main data-[active=true]:bg-main"
       >
         <Image src="/icons/compass.svg" width={24} height={24} alt="holdings" />
       </div>
       <div
         onClick={handleComingSoon}
         data-active={false}
-        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-[#d3d4d5] data-[active=true]:border-yellow data-[active=true]:bg-yellow"
+        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-[#d3d4d5] data-[active=true]:border-main data-[active=true]:bg-main"
       >
         <Image src="/icons/stats.svg" width={24} height={24} alt="holdings" />
       </div>
       <div
         onClick={handleComingSoon}
         data-active={false}
-        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-[#d3d4d5] data-[active=true]:border-yellow data-[active=true]:bg-yellow"
+        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-[#d3d4d5] data-[active=true]:border-main data-[active=true]:bg-main"
       >
         <Image src="/icons/referral.svg" width={24} height={24} alt="holdings" />
       </div> */}
@@ -91,7 +91,7 @@ function MenuIcon({
     <Link href={href}>
       <div
         data-active={isActive}
-        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-[#d3d4d5] data-[active=true]:border-yellow data-[active=true]:bg-yellow"
+        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-[#d3d4d5] data-[active=true]:border-main data-[active=true]:bg-main"
       >
         {children}
       </div>

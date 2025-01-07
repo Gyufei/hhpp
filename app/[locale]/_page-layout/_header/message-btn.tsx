@@ -88,7 +88,7 @@ export default function MessageBtn() {
     <>
       <div
         onClick={() => setDrawerOpen(true)}
-        className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-[#303030] hover:border-transparent hover:bg-yellow sm:h-12 sm:w-12 sm:rounded-full"
+        className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-border-black hover:border-transparent hover:bg-main sm:h-12 sm:w-12 sm:rounded-full"
       >
         <Image
           src="/icons/bell.svg"

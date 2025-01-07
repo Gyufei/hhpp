@@ -39,7 +39,7 @@ export function DepositDialog({
             width={24}
             height={24}
             alt="close"
-            className="absolute right-0 top-1 cursor-pointer rounded-full hover:bg-yellow"
+            className="absolute right-0 top-1 cursor-pointer rounded-full hover:bg-main"
           />
         </div>
 

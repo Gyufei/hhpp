@@ -132,7 +132,7 @@ export function ReferralSignInBtn({
       <div className="mt-10 w-full">
         <button
           onClick={handleSignInReferral}
-          className="flex h-12 w-full items-center justify-center rounded-2xl bg-yellow text-txt-white"
+          className="flex h-12 w-full items-center justify-center rounded-2xl bg-main text-txt-white"
         >
           {t("btn-SignIn")}
         </button>

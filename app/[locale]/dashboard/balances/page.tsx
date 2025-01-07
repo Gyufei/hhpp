@@ -242,7 +242,7 @@ export default function MyBalances() {
         </div>
       </div>
       {dataArray.length > 0 ? (
-        <div className="relative mt-5 flex w-full flex-1 flex-col justify-between border-t border-[#eee]">
+        <div className="relative mt-5 flex w-full flex-1 flex-col justify-between border-t border-border-black">
           <Accordion
             type="single"
             collapsible

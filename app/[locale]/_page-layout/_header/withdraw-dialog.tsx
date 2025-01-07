@@ -67,7 +67,7 @@ export function WithdrawDialog({
             width={24}
             height={24}
             alt="close"
-            className="absolute right-0 top-1 cursor-pointer rounded-full hover:bg-yellow"
+            className="absolute right-0 top-1 cursor-pointer rounded-full hover:bg-main"
           />
         </div>
 
@@ -77,7 +77,7 @@ export function WithdrawDialog({
             value={withdrawAmount}
             onUserInput={(value) => setWithdrawAmount(value)}
             placeholder="0"
-            className="h-[50px] w-full rounded-xl border border-[#303030] py-[14px] pl-4 pr-[100px] focus:border-focus disabled:cursor-not-allowed disabled:bg-bg-black data-[error=true]:!border-red"
+            className="h-[50px] w-full rounded-xl border border-border-black py-[14px] pl-4 pr-[100px] focus:border-lightgray disabled:cursor-not-allowed disabled:bg-bg-black data-[error=true]:!border-red"
           />
           <div className="absolute right-4 top-1/2 -translate-y-1/2 text-xs leading-[18px] text-gray">
             Max: {formatNum(balance)}
@@ -87,7 +87,7 @@ export function WithdrawDialog({
         <button
           disabled={!!withdrawError}
           onClick={handleConfirmWithdraw}
-          className="mt-5 flex h-12 w-full items-center justify-center rounded-[16px] bg-yellow leading-6 text-txt-white disabled:bg-bg-black"
+          className="mt-5 flex h-12 w-full items-center justify-center rounded-[16px] bg-main leading-6 text-txt-white disabled:bg-gray"
         >
           {CT("btn-Confirm")}
         </button>

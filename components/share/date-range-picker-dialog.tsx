@@ -59,7 +59,7 @@ export default function DateRangePickerDialog({
           <div className="mt-5 flex justify-end border-t border-[#F0F1F5] pt-4">
             <Button
               onClick={handleConfirm}
-              className="h-7 rounded-full border border-[#eee] hover:border-black"
+              className="h-7 rounded-full border border-border-black hover:border-black"
             >
               {T("btn-Confirm")}
             </Button>

@@ -38,7 +38,7 @@ export default function MobilePageFooter({
           />
           <div
             data-active={activePanel === item.name}
-            className="w-fit text-xs leading-[18px] text-[#2D2E33] data-[active=false]:opacity-40"
+            className="w-fit text-xs leading-[18px] text-txt-white data-[active=false]:opacity-40"
           >
             {item.label}
           </div>

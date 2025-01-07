@@ -1,4 +1,5 @@
 import Image from "next/image";
+import StartTradingButton from "./start-trading-button";
 
 export default function HomeBanner() {
   return (
@@ -14,14 +15,14 @@ export default function HomeBanner() {
       <div className="mt-5 text-center text-[80px] font-light leading-[120px] text-white">
         First stop for high quality <br /> Hyperliquid assets.
       </div>
-      <div className="mt-[30px] w-[420px] text-center text-sm font-light text-[#F6FEFD]">
+      <div className="mt-[30px] w-[420px] text-center text-sm font-light text-title-white">
         Crypto is fragmented today, but it doesn&apos;t need to be.For the first
         time, build projects, create value, andexchange assets on the same
         hyper-performant chain.
       </div>
       <div className="mt-10 flex items-center justify-between space-x-[30px]">
         <StartTradingButton />
-        <div className="flex h-10 cursor-pointer items-center rounded-3xl border border-yellow px-6 text-base font-light text-yellow">
+        <div className="flex h-10 cursor-pointer items-center rounded-3xl border border-main px-6 text-base font-light text-main">
           Start Building
         </div>
       </div>

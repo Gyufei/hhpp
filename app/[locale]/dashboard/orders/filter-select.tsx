@@ -58,7 +58,7 @@ export function FilterSelect({
       <DropdownMenuTrigger asChild>
         <div
           data-open={popOpen}
-          className="flex h-8 w-8 cursor-pointer items-center justify-center space-x-1 rounded-full border border-[#303030] outline-none"
+          className="flex h-8 w-8 cursor-pointer items-center justify-center space-x-1 rounded-full border border-border-black outline-none"
         >
           <Image
             src="/icons/filter.svg"

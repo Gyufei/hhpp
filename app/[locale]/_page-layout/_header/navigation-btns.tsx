@@ -25,10 +25,14 @@ export default function NavigationBtns() {
           <div>
             <div
               data-active={isDashboard}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-[#303030] data-[active=true]:w-fit data-[active=false]:cursor-pointer data-[active=true]:border-none data-[active=true]:bg-yellow data-[active=true]:px-6 data-[active=false]:hover:border-transparent data-[active=false]:hover:bg-yellow"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-border-black data-[active=true]:w-fit data-[active=false]:cursor-pointer data-[active=true]:border-none data-[active=true]:bg-main data-[active=true]:px-6 data-[active=false]:hover:border-transparent data-[active=false]:hover:bg-main"
             >
               <Image
-                src="/icons/dashboard.svg"
+                src={
+                  isDashboard
+                    ? "/icons/dashboard-black.svg"
+                    : "/icons/dashboard.svg"
+                }
                 width={24}
                 height={24}
                 alt="dashboard"
@@ -45,17 +49,23 @@ export default function NavigationBtns() {
         <div
           onClick={() => handleClick(`/marketplace`)}
           data-active={isMarketPlace}
-          className="z-20 flex h-12 w-12 items-center justify-center rounded-full border border-[#303030] data-[active=true]:w-fit data-[active=false]:cursor-pointer data-[active=true]:border-yellow data-[active=true]:bg-yellow data-[active=true]:px-6 data-[active=false]:hover:border-transparent data-[active=false]:hover:bg-yellow"
+          className="z-20 flex h-12 w-12 items-center justify-center rounded-full border border-border-black data-[active=true]:w-fit data-[active=false]:cursor-pointer data-[active=true]:border-main data-[active=true]:bg-main data-[active=true]:px-6 data-[active=false]:hover:border-transparent data-[active=false]:hover:bg-main"
         >
           <Image
-            src="/icons/Marketplace.svg"
+            src={
+              isMarketPlace
+                ? "/icons/Marketplace-black.svg"
+                : "/icons/Marketplace.svg"
+            }
             width={24}
             height={24}
             alt="marketplace"
             data-active={isMarketPlace}
             className="cursor-pointer data-[active=true]:mr-1"
           />
-          {isMarketPlace && <div>{t("btn-Marketplace")}</div>}
+          {isMarketPlace && (
+            <div className="text-bg-black">{t("btn-Marketplace")}</div>
+          )}
         </div>
       </div>
     </div>

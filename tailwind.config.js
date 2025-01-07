@@ -8,14 +8,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        main: "var(--color-main)",
+        "title-white": "var(--color-title-white)",
         "txt-white": "var(--color-txt-white)",
         "bg-black": "var(--color-bg-black)",
-        yellow: "var(--color-yellow)",
+        "border-black": "var(--color-border-black)",
         green: "var(--color-green)",
         red: "var(--color-red)",
+
         gray: "var(--color-gary)",
         lightgray: "var(--color-lightgray)",
-        focus: "var(--color-focus)",
       },
       fontFamily: {
         teodor: ["var(--font-teodor)"],

@@ -23,7 +23,7 @@ export const PrevButton = ({ className, ...buttonProps }: ButtonProps) => {
     <button
       {...buttonProps}
       className={cn(
-        "flex h-8 w-8 items-center justify-center rounded-lg bg-bg-black text-sm leading-5 text-lightgray data-[active=true]:bg-yellow data-[active=true]:text-txt-white",
+        "flex h-8 w-8 items-center justify-center rounded-lg bg-bg-black text-sm leading-5 text-lightgray data-[active=true]:bg-main data-[active=true]:text-txt-white",
         className,
       )}
       onClick={() => previous()}
@@ -61,7 +61,7 @@ export const NextButton = ({ className, ...buttonProps }: ButtonProps) => {
     <button
       {...buttonProps}
       className={cn(
-        "flex h-8 w-8 items-center justify-center rounded-lg bg-bg-black text-sm leading-5 text-lightgray data-[active=true]:bg-yellow data-[active=true]:text-txt-white",
+        "flex h-8 w-8 items-center justify-center rounded-lg bg-bg-black text-sm leading-5 text-lightgray data-[active=true]:bg-main data-[active=true]:text-txt-white",
         className,
       )}
       onClick={() => next()}
@@ -98,7 +98,7 @@ const TruncableElement = ({ prev }: ITruncableElementProps) => {
     <li>
       <a
         className={cn(
-          "flex h-8 w-8 items-center justify-center rounded-lg bg-bg-black text-sm leading-5 text-lightgray data-[active=true]:bg-yellow data-[active=true]:text-txt-white",
+          "flex h-8 w-8 items-center justify-center rounded-lg bg-bg-black text-sm leading-5 text-lightgray data-[active=true]:bg-main data-[active=true]:text-txt-white",
         )}
       >
         ...
@@ -122,7 +122,7 @@ export const PageButton = ({ className }: PageButtonProps) => {
         onClick={() => pagination.setCurrentPage(page - 1)}
         data-active={pagination.currentPage + 1 === page}
         className={cn(
-          "flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-bg-black text-sm leading-5 text-lightgray data-[active=true]:bg-yellow data-[active=true]:text-txt-white",
+          "flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-bg-black text-sm leading-5 text-lightgray data-[active=true]:bg-main data-[active=true]:text-txt-white",
           className,
         )}
       >

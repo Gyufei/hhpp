@@ -61,7 +61,7 @@ export function StableTokenSelectDisplay({
         </PopoverTrigger>
         <PopoverContent
           align="end"
-          className="z-[103] flex w-[100px] flex-col items-stretch border-0 bg-bg-black p-2 shadow-[0px_4px_8px_9px_rgba(14,4,62,0.08)]"
+          className="z-[103] flex w-[100px] flex-col items-stretch border border-border-black bg-bg-black p-2 shadow-[0px_4px_8px_9px_rgba(14,4,62,0.08)]"
         >
           {tokens.map((t) => (
             <div

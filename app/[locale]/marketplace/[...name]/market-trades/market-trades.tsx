@@ -25,7 +25,7 @@ export default function MarketTrades({
     <div className="flex flex-1 flex-col">
       <div className="flex h-[30px] items-center justify-between">
         <div className="flex items-center space-x-2">
-          <div className="h-6 w-6 rounded-lg bg-yellow"></div>
+          <div className="h-6 w-6 rounded-lg bg-main"></div>
           <div className="leading-6 text-txt-white">{t("cap-MarketTrades")}</div>
         </div>
         {/* <TradeTypeSelect

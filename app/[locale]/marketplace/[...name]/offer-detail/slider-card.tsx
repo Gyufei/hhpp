@@ -38,7 +38,7 @@ export default function SliderCard({
   return (
     <div
       data-error={hasError}
-      className={`mt-5 rounded-2xl border border-[#303030] bg-bg-black p-4 ${
+      className={`mt-5 rounded-2xl border border-border-black bg-bg-black p-4 ${
         hasError ? "error-blink" : ""
       }`}
     >
@@ -64,12 +64,12 @@ export default function SliderCard({
           max={sliderMax}
           step={1}
         />
-        <div className="ml-4 mr-3 flex h-5 items-center rounded-full border border-[#eee] px-[10px] text-[10px] leading-4 text-txt-white">
+        <div className="ml-4 mr-3 flex h-5 items-center rounded-full border border-border-black px-[10px] text-[10px] leading-4 text-txt-white">
           {progress}%
         </div>
         <div
           onClick={() => setSliderValue(canGoMax)}
-          className="flex h-5 cursor-pointer items-center rounded-full bg-yellow px-[10px] text-[10px] leading-4 text-txt-white"
+          className="flex h-5 cursor-pointer items-center rounded-full bg-main px-[10px] text-[10px] leading-4 text-txt-white"
         >
           Max
         </div>

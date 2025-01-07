@@ -43,7 +43,7 @@ export default function BalancePopContent() {
       <div
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="flex items-start justify-between rounded-xl border border-[#303030] p-3"
+        className="flex items-start justify-between rounded-xl border border-border-black p-3"
       >
         <div>
           <div className="text-xs leading-[18px] text-gray">Balance</div>
@@ -79,7 +79,7 @@ export default function BalancePopContent() {
       </div>
 
       <button
-        className="mt-5 flex h-10 w-full items-center justify-center rounded-2xl bg-green text-sm leading-5 text-white disabled:bg-gray"
+        className="mt-5 flex h-10 w-full items-center justify-center rounded-2xl bg-green text-sm leading-5 text-white"
         onClick={() => setDepositDialogOpen(true)}
       >
         {T("btn-Deposit")}

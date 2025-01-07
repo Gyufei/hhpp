@@ -67,7 +67,7 @@ export function EvmWallets({ onSelected }: { onSelected: () => void }) {
           onClick={() => handleConnect(conn)}
           onMouseEnter={() => handleMouseEnter(conn)}
           onMouseLeave={handleMouseLeave}
-          className="flex cursor-pointer items-center justify-between rounded-2xl p-4 hover:bg-[#D1D4DC]"
+          className="flex cursor-pointer items-center justify-between rounded-2xl p-4 text-txt-white hover:text-main"
           key={conn.name}
         >
           <div className="flex items-center space-x-3">
@@ -78,7 +78,7 @@ export function EvmWallets({ onSelected }: { onSelected: () => void }) {
               height={24}
               className="c-image-shadow"
             />
-            <span className="text-sm font-semibold leading-[17px] text-txt-white">
+            <span className="text-sm font-semibold leading-[17px]">
               {conn.name}
             </span>
           </div>
@@ -86,7 +86,7 @@ export function EvmWallets({ onSelected }: { onSelected: () => void }) {
           {!conn?.installed() && (
             <div
               data-state={hoverWallet === conn.name}
-              className="flex cursor-pointer items-center justify-center rounded-full border border-black px-[12px] py-[2px] text-txt-white data-[state=true]:border-yellow data-[state=true]:bg-yellow"
+              className="flex cursor-pointer items-center justify-center rounded-full border border-border-black px-[12px] py-[2px] text-txt-white data-[state=true]:border-main data-[state=true]:bg-main"
               onClick={() => goToWallet(conn)}
             >
               <div className="text-sm leading-5 text-txt-white">Install</div>

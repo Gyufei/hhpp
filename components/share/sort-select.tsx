@@ -42,7 +42,7 @@ export function SortSelect({
       <DropdownMenuTrigger asChild>
         <div
           data-open={popOpen}
-          className="flex cursor-pointer items-center space-x-1 rounded-full border border-[#949E9C] px-[16px] py-[5px] outline-none data-[open=true]:border-yellow data-[open=true]:bg-yellow"
+          className="flex cursor-pointer items-center space-x-1 rounded-full border border-[#949E9C] px-[16px] py-[5px] outline-none data-[open=true]:border-main data-[open=true]:bg-main"
         >
           <Image src="/icons/sort.svg" width={20} height={20} alt="type icon" />
           <div className="overflow-hidden text-clip whitespace-nowrap text-sm leading-5 text-txt-white">{`${t(
@@ -60,7 +60,7 @@ export function SortSelect({
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-[158px] border border-[#303030] bg-bg-black p-1"
+        className="w-[158px] border border-border-black bg-bg-black p-1"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}

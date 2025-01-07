@@ -41,7 +41,7 @@ export function TradeTypeSelect({
       </PopoverTrigger>
       <PopoverContent
         align="end"
-        className="flex w-20 flex-col items-stretch border-0 bg-bg-black p-1"
+        className="flex w-20 flex-col items-stretch border border-border-black bg-bg-black p-1"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}

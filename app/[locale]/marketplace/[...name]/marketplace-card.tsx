@@ -74,7 +74,7 @@ export default function MarketplaceCard({
     <div
       className={cn(
         className,
-        "relative mt-4 rounded-3xl border border-[#303030] bg-bg-black p-5 pt-3",
+        "relative mt-4 rounded-3xl border border-border-black bg-bg-black p-5 pt-3",
       )}
     >
       {isLoadingFlag ? (
@@ -365,7 +365,7 @@ function FoldPop() {
       </PopoverTrigger>
       <PopoverContent
         align="end"
-        className="flex w-[240px] flex-col items-stretch border-none bg-bg-black p-2"
+        className="flex w-[240px] flex-col items-stretch border border-border-black bg-bg-black p-2"
       >
         {renderContent()}
       </PopoverContent>

@@ -13,7 +13,7 @@ export default function MobileRouterMenu() {
     <div className="block sm:hidden">
       <button
         data-show={showMenu ? true : false}
-        className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-[#303030] bg-bg-black transition-all data-[show=true]:border-black"
+        className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-border-black bg-bg-black transition-all data-[show=true]:border-black"
         onClick={() => setShowMenu(!showMenu)}
       >
         {showMenu ? (

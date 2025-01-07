@@ -42,7 +42,7 @@ export default function Referral() {
         </div>
       </div>
 
-      <div className="relative mt-5 flex flex-1 flex-col justify-start border-t border-[#eee]">
+      <div className="relative mt-5 flex flex-1 flex-col justify-start border-t border-border-black">
         <ReferralInfo referralData={referralData || []} />
         <div className="mt-4 rounded-xl bg-bg-black px-4 sm:mt-0 sm:bg-transparent">
           <div className="mb-2 mt-5 flex items-center space-x-2">

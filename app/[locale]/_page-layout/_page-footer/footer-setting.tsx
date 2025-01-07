@@ -28,13 +28,13 @@ export default function FooterSetting() {
         />
       </PopoverTrigger>
       <PopoverContent
-        className="flex w-[348px] flex-col items-stretch space-y-2 border border-[#303030] bg-bg-black p-6 text-[12px] text-[#2D2E33]"
+        className="flex w-[348px] flex-col items-stretch space-y-2 border border-border-black bg-bg-black p-6 text-[12px] text-txt-white"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}
       >
         <div className="ml-30 flex items-center">
-          <div className="flex flex-1 justify-center text-xl leading-[30px]">
+          <div className="flex flex-1 justify-center text-xl leading-[30px] text-title-white">
             {ct("cap-NetworkSetting")}
           </div>
           <Image

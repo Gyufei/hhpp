@@ -84,9 +84,6 @@ export default async function RootLayout({
         </JotaiProvider>
       </body>
       <GoogleAnalytics gaId={isProduction ? "G-FN03SV9KCF" : "G-1PQBDX806E"} />
-      {/* <GoogleTagManager
-        gtmId={isProduction ? "GTM-TPXPN9FF" : "GTM-MRM39HBK"}
-      /> */}
     </html>
   );
 }

@@ -68,7 +68,7 @@ function ChartSwitch({
   // const isDepth = chartType === "depth";
   const isSales = chartType === "sales";
   return (
-    <div className="flex space-x-1 rounded-full border border-[#303030] bg-bg-black p-1">
+    <div className="flex space-x-1 rounded-full border border-border-black bg-bg-black p-1">
       {/* <div
         data-checked={isDepth}
         className="flex cursor-pointer items-center rounded-full bg-transparent data-[checked=true]:bg-bg-black data-[checked=true]:px-3 data-[checked=false]:px-[6px] data-[checked=true]:py-[6px]"
@@ -86,7 +86,7 @@ function ChartSwitch({
       </div> */}
       <div
         data-checked={isSales}
-        className="flex cursor-pointer items-center rounded-full bg-transparent data-[checked=true]:bg-yellow data-[checked=false]:px-[6px] data-[checked=true]:px-3 data-[checked=true]:py-[6px]"
+        className="flex cursor-pointer items-center rounded-full bg-transparent data-[checked=true]:bg-main data-[checked=false]:px-[6px] data-[checked=true]:px-3 data-[checked=true]:py-[6px]"
         onClick={() => handleChangeType("sales")}
       >
         <Image

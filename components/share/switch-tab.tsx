@@ -17,7 +17,7 @@ function TabItem({
       data-check={isChecked ? "true" : "false"}
       onClick={onClick}
       className={cn(
-        "c-font-title-55 data-[check=true]:c-font-title-65 relative z-0 cursor-pointer select-none rounded-t-xl border-2 border-b-0 border-black py-[5px] px-[36px] text-sm leading-[18px] transition-all data-[check=true]:z-10 data-[check=true]:bg-yellow data-[check=true]:leading-[22px]",
+        "c-font-title-55 data-[check=true]:c-font-title-65 relative z-0 cursor-pointer select-none rounded-t-xl border-2 border-b-0 border-black py-[5px] px-[36px] text-sm leading-[18px] transition-all data-[check=true]:z-10 data-[check=true]:bg-main data-[check=true]:leading-[22px]",
         className,
       )}
     >

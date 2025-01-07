@@ -82,7 +82,7 @@ export function TokenGetCard({
         <WithWalletConnectBtn onClick={() => handleWithdrawToken()}>
           <div
             data-active={amount > 0}
-            className="flex h-12 w-full cursor-pointer items-center justify-center rounded-lg border border-[#303030] hover:border-0 hover:bg-yellow data-[active=false]:pointer-events-none data-[active=false]:opacity-70 sm:h-7 sm:w-14 sm:rounded-full"
+            className="flex h-12 w-full cursor-pointer items-center justify-center rounded-lg border border-border-black hover:border-0 hover:bg-main data-[active=false]:pointer-events-none data-[active=false]:opacity-70 sm:h-7 sm:w-14 sm:rounded-full"
           >
             {mbt("btn-Get")}
           </div>

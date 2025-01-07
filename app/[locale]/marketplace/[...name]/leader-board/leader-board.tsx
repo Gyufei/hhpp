@@ -229,7 +229,7 @@ export default function LeaderBoard({
     <div className={cn(className, "flex flex-col")}>
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <div className="h-6 w-6 rounded-lg bg-yellow"></div>
+          <div className="h-6 w-6 rounded-lg bg-main"></div>
           <div className="leading-6 text-txt-white">{t("cap-Leaderboard")}</div>
         </div>
         <div className="flex items-center justify-end space-x-3">
