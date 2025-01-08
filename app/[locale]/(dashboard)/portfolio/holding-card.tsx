@@ -8,7 +8,7 @@ export default function HoldingCard({ holding }: { holding: any }) {
   const ct = useTranslations("page-MyStocks");
 
   return (
-    <div className="rounded-[20px] bg-bg-black p-5">
+    <div className="rounded-[20px] border border-border-black bg-bg-black p-5">
       <div className="flex items-start justify-between">
         <div className="flex cursor-pointer items-start space-x-3">
           <div className="mt-2">

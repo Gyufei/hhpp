@@ -1,72 +1,37 @@
 "use client";
-import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import Image from "next/image";
-import { usePathname, useRouter } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
+import { cn } from "@/lib/utils/common";
+
+const menuItemsClx =
+  "flex h-10 items-center rounded-3xl px-[10px] cursor-pointer data-[active=true]:text-main";
 
 export default function NavigationBtns() {
-  const t = useTranslations("Header");
-  const pathname = usePathname();
-
-  const isHome = pathname === "/";
-  const isDashboard = pathname.startsWith(`/dashboard`);
-  const isMarketPlace = pathname.startsWith(`/marketplace`);
-
-  const router = useRouter();
-
-  function handleClick(href: string) {
-    router.push(href);
-  }
-
   return (
-    <div className="hidden flex-1 items-center space-x-5 sm:flex">
-      {!isHome && (
-        <WithWalletConnectBtn onClick={() => handleClick(`/dashboard`)}>
-          <div>
-            <div
-              data-active={isDashboard}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-border-black data-[active=true]:w-fit data-[active=false]:cursor-pointer data-[active=true]:border-none data-[active=true]:bg-main data-[active=true]:px-6 data-[active=false]:hover:border-transparent data-[active=false]:hover:bg-main"
-            >
-              <Image
-                src={
-                  isDashboard
-                    ? "/icons/dashboard-black.svg"
-                    : "/icons/dashboard.svg"
-                }
-                width={24}
-                height={24}
-                alt="dashboard"
-                data-active={isDashboard}
-                className="data-[active=true]:mr-1"
-              />
-              {isDashboard && <div>{t("btn-Dashboard")}</div>}
-            </div>
-          </div>
-        </WithWalletConnectBtn>
-      )}
-
-      <div className="relative flex items-center">
-        <div
-          onClick={() => handleClick(`/marketplace`)}
-          data-active={isMarketPlace}
-          className="z-20 flex h-12 w-12 items-center justify-center rounded-full border border-border-black data-[active=true]:w-fit data-[active=false]:cursor-pointer data-[active=true]:border-main data-[active=true]:bg-main data-[active=true]:px-6 data-[active=false]:hover:border-transparent data-[active=false]:hover:bg-main"
-        >
-          <Image
-            src={
-              isMarketPlace
-                ? "/icons/Marketplace-black.svg"
-                : "/icons/Marketplace.svg"
-            }
-            width={24}
-            height={24}
-            alt="marketplace"
-            data-active={isMarketPlace}
-            className="cursor-pointer data-[active=true]:mr-1"
-          />
-          {isMarketPlace && (
-            <div className="text-bg-black">{t("btn-Marketplace")}</div>
-          )}
-        </div>
+    <div className="flex items-center space-x-[30px] text-title-white">
+      <Link href="/curve" className={menuItemsClx}>
+        Curve Trade
+      </Link>
+      <Link
+        href="/marketplace"
+        className="flex h-10 items-center rounded-3xl px-[10px]"
+      >
+        Direct Trade
+      </Link>
+      <Link href="/portfolio" className={menuItemsClx}>
+        Portfolio
+      </Link>
+      <Link href="/referrals" className={menuItemsClx}>
+        Referrals
+      </Link>
+      <div className={cn(menuItemsClx, "space-x-[10px]")}>
+        <span>More</span>
+        <Image
+          src="/icons/arrow-down.svg"
+          width={10}
+          height={10}
+          alt="arrow-down"
+        />
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 import Header from "@/app/[locale]/_page-layout/_header";
 import GlobalActionTip from "@/components/share/global-action-tip";
-import ReferralDialog from "../dashboard/referral/referral-dialog";
 import NP from "number-precision";
 import WalletsModal from "@/components/share/wallets-modal";
+import ReferralDialog from "../(dashboard)/referrals/referral-dialog";
 
 export default function MainLayout({
   children,

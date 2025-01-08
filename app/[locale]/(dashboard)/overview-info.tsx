@@ -11,9 +11,9 @@ import { useEffect, useRef, useState } from "react";
 import { format, subDays } from "date-fns";
 import DateRangePickerDialog from "@/components/share/date-range-picker-dialog";
 import { useTranslations } from "next-intl";
+import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import ReferralLink from "./referral-link";
 import RollInBtn from "./roll-in-btn";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 
 export default function OverviewInfo() {
   const T = useTranslations("cd-AccountOverview");
