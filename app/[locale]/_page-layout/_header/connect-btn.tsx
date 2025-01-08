@@ -72,7 +72,7 @@ export default function ConnectBtn() {
     return (
       <>
         <button
-          className="shadow-25 h-10 rounded-[4px] bg-[#f0f1f5] bg-main px-4 text-xs leading-6 text-bg-black transition-all sm:h-9 sm:px-[10px]"
+          className="shadow-25 h-10 rounded bg-[#f0f1f5] bg-main px-4 text-xs leading-6 text-bg-black transition-all sm:h-9 sm:px-[10px]"
           onClick={() => handleConnect()}
         >
           <span>{t("btn-Connect")}</span>

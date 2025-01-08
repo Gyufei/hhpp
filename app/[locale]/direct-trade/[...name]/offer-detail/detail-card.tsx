@@ -80,7 +80,7 @@ export default function DetailCard({ offer }: { offer: IOffer }) {
           {T("lb-InitialOfferMaker")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="w-fit rounded-[4px] bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
+          <div className="w-fit rounded bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
             {originId ? `#${originId}` : ""}
           </div>
           <div className="text-sm leading-5 text-txt-white">

@@ -32,7 +32,7 @@ export default function OfferInfo({
 
           <div>
             <div className="mb-[2px] text-2xl leading-9 text-txt-white">{name}</div>
-            <div className="w-fit rounded-[4px] bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
+            <div className="w-fit rounded bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
               #{no}
             </div>
           </div>

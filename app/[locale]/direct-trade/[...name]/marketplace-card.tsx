@@ -259,7 +259,7 @@ function FoldPop() {
   );
 
   function handleGo(id: string) {
-    router.push(`/marketplace/${id}`);
+    router.push(`/direct-trade/${id}`);
   }
 
   function renderContent() {

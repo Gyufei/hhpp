@@ -29,7 +29,7 @@ export default function ReferralPage({ params }: { params: any }) {
 
   useEffect(() => {
     if (!isLoading && !noReferralData && !sameUser) {
-      router.replace(`/marketplace?s=${referral}`);
+      router.replace(`/direct-trade?s=${referral}`);
     }
   }, [isLoading, referral, router, noReferralData, sameUser]);
 

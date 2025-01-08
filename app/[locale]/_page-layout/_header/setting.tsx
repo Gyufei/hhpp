@@ -17,17 +17,15 @@ export default function Setting() {
 
   return (
     <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
-      <PopoverTrigger>
-        <div className="flex h-9 w-9 items-center justify-center">
-          <HoverIcon
-            src="/icons/setting.svg"
-            hoverSrc="/icons/setting.svg"
-            width={24}
-            height={24}
-            active={popOpen}
-            alt="setting"
-          />
-        </div>
+      <PopoverTrigger className="flex h-9 w-9 items-center justify-center">
+        <HoverIcon
+          src="/icons/setting.svg"
+          hoverSrc="/icons/setting.svg"
+          width={24}
+          height={24}
+          active={popOpen}
+          alt="setting"
+        />
       </PopoverTrigger>
       <PopoverContent
         className="flex w-[348px] flex-col items-stretch space-y-2 border border-border-black bg-bg-black p-6 text-[12px] text-txt-white"

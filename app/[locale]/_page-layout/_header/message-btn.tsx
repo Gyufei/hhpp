@@ -181,7 +181,7 @@ function MsgRow({ msgDetail }: { msgDetail: IMsg }) {
           <div className="mr-1 leading-6 text-txt-white">
             {marketplace?.market_symbol}
           </div>
-          <div className="w-fit rounded-[4px] bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
+          <div className="w-fit rounded bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
             #{msgDetail.item_id}
           </div>
         </div>
