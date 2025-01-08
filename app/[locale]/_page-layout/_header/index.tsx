@@ -15,15 +15,17 @@ export default function Header() {
   }
 
   return (
-    <div className="flex h-14 items-center justify-between px-4 py-2 sm:h-24 sm:px-[10px] sm:py-1">
+    <div className="flex h-14 items-center justify-between px-4 py-2 sm:px-[10px] sm:py-1">
       <div className="flex items-center justify-start space-x-[30px]">
         <Logo />
         <NavigationBtns />
       </div>
-      <div className="hidden flex-1 items-center justify-end space-x-4 sm:flex md:space-x-4">
+      <div className="hidden flex-1 items-center justify-end space-x-4 sm:flex md:space-x-5">
         <ConnectBtn />
-        <Setting />
-        <LanguageSetting />
+        <div className="flex items-center gap-[10px]">
+          <Setting />
+          <LanguageSetting />
+        </div>
       </div>
     </div>
   );

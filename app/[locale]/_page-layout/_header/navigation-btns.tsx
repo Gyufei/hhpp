@@ -28,8 +28,8 @@ export default function NavigationBtns() {
         <span>More</span>
         <Image
           src="/icons/arrow-down.svg"
-          width={10}
-          height={10}
+          width={20}
+          height={20}
           alt="arrow-down"
         />
       </div>

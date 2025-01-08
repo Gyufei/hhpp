@@ -16,6 +16,7 @@ import {
 import BalancePopContent from "./balance-pop-content";
 import { useAccountEffect, useSignMessage } from "wagmi";
 import { isProduction } from "@/lib/PathMap";
+import HoverIcon from "@/components/share/hover-icon";
 
 const SignMessageKey = "hypes-trade-sign-message";
 
@@ -83,15 +84,23 @@ export default function ConnectBtn() {
   return (
     <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
       <PopoverTrigger asChild>
-        <button className="shadow-25 h-10 rounded-full border border-border-black px-6 text-base leading-6 text-[#d1d4dc] transition-all hover:border-transparent hover:bg-main sm:h-12">
-          <div className="flex items-center">
+        <div className="flex cursor-pointer items-center gap-[5px]">
+          <div className="flex items-center text-xs leading-[18px] text-title-white">
             {!shortAddr || connecting ? (
               <Skeleton className="h-5 w-24" />
             ) : (
               <div>{shortAddr}</div>
             )}
           </div>
-        </button>
+          <HoverIcon
+            src="/icons/arrow-down.svg"
+            hoverSrc="/icons/arrow-down.svg"
+            width={20}
+            height={20}
+            alt="arrow-down"
+            className={`${popOpen ? "rotate-180" : ""}`}
+          />
+        </div>
       </PopoverTrigger>
       <PopoverContent
         className="flex w-[288px] flex-col items-stretch space-y-2 border-border-black bg-bg-black p-6 text-[12px]"

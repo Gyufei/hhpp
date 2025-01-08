@@ -26,7 +26,7 @@ export function useChainWallet() {
     // source wallet for data fetch, sign, arb
     realAddress: realAddress || "",
     shortAddr: realAddress
-      ? truncateAddr(realAddress, { nPrefix: 4, nSuffix: 4 })
+      ? truncateAddr(realAddress, { nPrefix: 6, nSuffix: 4 })
       : "",
     // dest wallet for HL
     address: destAddress || "",
