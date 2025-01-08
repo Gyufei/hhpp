@@ -51,7 +51,7 @@ export default function ConnectBtn() {
       );
     },
     onDisconnect() {
-      localStorage.removeItem("hyper-trade-sign-message")
+      localStorage.removeItem("hyper-trade-sign-message");
       localStorage.removeItem(SignMessageKey);
     },
   });
@@ -60,7 +60,7 @@ export default function ConnectBtn() {
     if (isMobileSize) {
       return (
         <button
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-border-black bg-bg-black "
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-border-black bg-bg-black "
           onClick={() => handleConnect()}
         >
           <Image src="/icons/wallet.svg" width={20} height={20} alt="wallet" />
@@ -71,13 +71,10 @@ export default function ConnectBtn() {
     return (
       <>
         <button
-          className="shadow-25 h-10 rounded-full bg-[#f0f1f5] px-4 text-base leading-6 transition-all sm:h-12 sm:px-[22px]"
+          className="shadow-25 h-10 rounded-[4px] bg-[#f0f1f5] bg-main px-4 text-xs leading-6 text-bg-black transition-all sm:h-9 sm:px-[10px]"
           onClick={() => handleConnect()}
         >
-          <span className="hidden sm:inline-block">
-            {t("btn-ConnectWallet")}
-          </span>
-          <span className="inline-block sm:hidden">{t("btn-Connect")}</span>
+          <span>{t("btn-Connect")}</span>
         </button>
       </>
     );

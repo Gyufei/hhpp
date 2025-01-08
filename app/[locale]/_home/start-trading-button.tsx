@@ -7,7 +7,7 @@ export default function StartTradingButton({
   className?: string;
 }) {
   return (
-    <Link href="/marketplace">
+    <Link href="/direct-trade">
       <div
         className={cn(
           "flex h-10 cursor-pointer items-center rounded-3xl bg-main px-6 text-base font-light text-black",

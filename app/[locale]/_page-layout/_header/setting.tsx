@@ -10,7 +10,7 @@ import {
 import { useTranslations } from "next-intl";
 import RpcManage from "./rpc-manage";
 
-export default function FooterSetting() {
+export default function Setting() {
   const ct = useTranslations("pop-Setting");
 
   const [popOpen, setPopOpen] = useState(false);

@@ -1,3 +1,3 @@
 export default function Page() {
-  return <div>CurveTradePage</div>;
+  return <div className="flex items-stretch justify-between"></div>;
 }
