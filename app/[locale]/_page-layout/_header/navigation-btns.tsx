@@ -9,11 +9,11 @@ const menuItemsClx =
 export default function NavigationBtns() {
   return (
     <div className="flex items-center space-x-[30px] text-title-white">
-      <Link href="/curve" className={menuItemsClx}>
+      <Link href="/curve-trade" className={menuItemsClx}>
         Curve Trade
       </Link>
       <Link
-        href="/marketplace"
+        href="/direct-trade"
         className="flex h-10 items-center rounded-3xl px-[10px]"
       >
         Direct Trade
