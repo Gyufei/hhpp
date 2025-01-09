@@ -42,35 +42,59 @@ export function TransactionsTable() {
 
   const theme = useTheme({
     Table: `
-      grid-template-rows: 40px repeat(auto-fit, 48px);
-      grid-template-columns: 120px repeat(4, minmax(0, 1fr));
+      margin-top: 10px;
+      grid-template-rows: 24px repeat(auto-fit, 40px);
+      grid-template-columns: repeat(6, minmax(0, 1fr)) 100px;
       font-weight: 400;
-      grid-auto-rows: 48px;
+      grid-auto-rows: 40px;
     `,
     Header: "",
     Body: "",
     BaseRow: `
-      background-color: #303030;
-    `,
-    HeaderRow: `
       background: transparent;
+      padding: 0 10px;
     `,
+    HeaderRow: ``,
     Row: `
-      box-shadow: inset 0px -1px 0px 0px #303030;
+      border-radius: 4px;
+      &:hover {
+        background-color: #222428;
+      }
     `,
     BaseCell: `
-      font-size: 14px;
+      font-size: 12px;
       text-align: left;
 
-      background: #111a1e;
+      &:first-child {
+        padding-left: 10px;
+      }
+
+      &:last-child {
+        padding-right: 10px;
+      }
     `,
     HeaderCell: `
       font-size: 12px;
       font-weight: 400;
       color: #949e9c;
       line-height: 18px;
+
+      &:last-child {
+        text-align: right;
+      }
     `,
     Cell: `
+      color: #f6fefd;
+      
+      &:first-child {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
     `,
   });
 
@@ -78,7 +102,9 @@ export function TransactionsTable() {
     {
       label: "Account",
       renderCell: (o: any) => {
-        return truncateAddr(o.account || "");
+        return (
+          <div className="w-fit truncate">{truncateAddr(o.account || "")}</div>
+        );
       },
     },
     {
@@ -89,7 +115,7 @@ export function TransactionsTable() {
         return (
           <div
             className={cn(
-              "flex h-5 items-center px-[5px]",
+              "flex h-5 w-8 items-center rounded px-[5px]",
               isSell ? "bg-[#EF535020] text-red" : "bg-[#50D2C120] text-green",
             )}
           >
@@ -116,7 +142,9 @@ export function TransactionsTable() {
     },
     {
       label: "Hash",
-      renderCell: (o: any) => <div>{truncateAddr(o.hash)}</div>,
+      renderCell: (o: any) => (
+        <div className="flex justify-end">{truncateAddr(o.hash)}</div>
+      ),
     },
   ];
 
@@ -124,7 +152,7 @@ export function TransactionsTable() {
 }
 
 function AgoDisplay({ timestamp }: { timestamp: number }) {
-  const duration = (Date.now() - timestamp) / 1000;
+  const duration = Date.now() - timestamp;
 
   const [durationStr, setDurationStr] = useState("");
 

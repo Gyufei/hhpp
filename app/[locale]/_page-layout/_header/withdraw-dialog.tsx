@@ -7,6 +7,8 @@ import { NumericalInput } from "@/components/share/numerical-input";
 import { useEffect, useState } from "react";
 import { formatNum } from "@/lib/utils/number";
 import { useUserWithdraw } from "@/lib/hooks/contract/use-user-withdraw";
+import { GlobalMessageAtom } from "@/lib/states/global-message";
+import { useSetAtom } from "jotai";
 
 export function WithdrawDialog({
   open,
@@ -20,7 +22,13 @@ export function WithdrawDialog({
   const T = useTranslations("Header");
   const CT = useTranslations("Common");
 
-  const { trigger: triggerWithdraw } = useUserWithdraw();
+  const setGlobalMessage = useSetAtom(GlobalMessageAtom);
+
+  const {
+    trigger: triggerWithdraw,
+    isMutating,
+    data: isSuccess,
+  } = useUserWithdraw();
 
   const [withdrawAmount, setWithdrawAmount] = useState<string>("");
   const [withdrawError, setWithdrawError] = useState<string | null>(null);
@@ -43,6 +51,16 @@ export function WithdrawDialog({
 
     setWithdrawError(null);
   }, [withdrawAmount, balance]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      onOpenChange(false);
+      setGlobalMessage({
+        type: "success",
+        message: "Withdrawal successful",
+      });
+    }
+  }, [isSuccess]);
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => onOpenChange(isOpen)}>
@@ -85,7 +103,7 @@ export function WithdrawDialog({
         </div>
 
         <button
-          disabled={!!withdrawError}
+          disabled={!!withdrawError || isMutating}
           onClick={handleConfirmWithdraw}
           className="mt-5 flex h-12 w-full items-center justify-center rounded-[16px] bg-main leading-6 text-txt-white disabled:bg-gray"
         >

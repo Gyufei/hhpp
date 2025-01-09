@@ -29,7 +29,7 @@ export function useUserWithdraw() {
       dest_account: address,
     };
 
-    const reqData = signDataAction(params);
+    const reqData = await signDataAction(params);
 
     const res = await dataApiFetcher(
       `${dataApiEndPoint}${DataApiPaths.userWithdraw}`,
