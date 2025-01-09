@@ -17,7 +17,7 @@ function TabItem({
       data-check={isChecked ? "true" : "false"}
       onClick={onClick}
       className={cn(
-        "c-font-title-55 data-[check=true]:c-font-title-65 relative z-0 cursor-pointer select-none rounded-t-xl border-2 border-b-0 border-black py-[5px] px-[36px] text-sm leading-[18px] transition-all data-[check=true]:z-10 data-[check=true]:bg-main data-[check=true]:leading-[22px]",
+        "relative flex h-8 flex-1 cursor-pointer select-none items-center justify-center rounded text-xs leading-[18px] transition-all data-[check=false]:bg-transparent data-[check=true]:bg-main data-[check=false]:text-gray data-[check=true]:text-title-white",
         className,
       )}
     >
@@ -36,10 +36,11 @@ export default function SwitchTab({
   setActiveTab: (tab: string) => void;
 }) {
   return (
-    <div className="flex h-9 items-end">
+    <div className="flex h-10 items-center justify-between rounded border border-border-black bg-[#222428] p-1">
       <TabItem
         isChecked={activeTab === tabs[0]}
         onClick={() => setActiveTab(tabs[0])}
+        className="data-[check=true]:bg-main"
       >
         {tabs[0]}
       </TabItem>
@@ -47,7 +48,7 @@ export default function SwitchTab({
       <TabItem
         isChecked={activeTab === tabs[1]}
         onClick={() => setActiveTab(tabs[1])}
-        className="right-[10px]"
+        className="data-[check=true]:bg-red"
       >
         {tabs[1]}
       </TabItem>

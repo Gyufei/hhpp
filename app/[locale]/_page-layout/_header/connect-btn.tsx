@@ -85,7 +85,7 @@ export default function ConnectBtn() {
     <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
       <PopoverTrigger asChild>
         <div className="flex cursor-pointer items-center gap-[5px]">
-          <div className="flex items-center text-xs leading-[18px] text-title-white">
+          <div className="flex items-center text-xs leading-[18px] text-title-white hover:text-main">
             {!shortAddr || connecting ? (
               <Skeleton className="h-5 w-24" />
             ) : (
