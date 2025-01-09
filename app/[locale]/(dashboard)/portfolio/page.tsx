@@ -1,57 +1,68 @@
 "use client";
-import { useMyHoldings } from "@/lib/hooks/api/use-my-holdings";
-import { SortSelect } from "@/components/share/sort-select";
-import HoldingCard from "./holding-card";
-import { useSortHolding } from "@/lib/hooks/holding/use-sort-holding";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
+import MyHolding from "./my-holding";
+import PortfolioInfo from "./portfolio-info";
 
-export default function MyHoldings() {
-  const T = useTranslations("page-MyStocks");
+const tabClx =
+  "flex w-[105px] items-center px-[10px] py-[10px] text-sm leading-5 border-b-2 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray rounded-none";
 
-  const { data: holdings } = useMyHoldings();
+export default function PortFolio() {
+  const TH = useTranslations("Header");
 
-  const {
-    sortField,
-    sortDir,
-    handleSortFieldChange,
-    handleSortDirChange,
-    sortOffers,
-  } = useSortHolding(holdings || []);
-
-  const isOffChainFungiblePoint =
-    sortOffers?.[0]?.marketplace?.market_catagory === "offchain_fungible_point";
-
-  const isPointToken =
-    sortOffers?.[0]?.marketplace?.market_catagory === "point_token";
+  const [currentTab, setCurrentTab] = useState("orders");
 
   return (
-    <div className="flex flex-1 flex-col p-4 sm:ml-5 sm:p-0">
-      <div className="flex items-center justify-between">
-        <div className="hidden text-xl leading-[30px] text-txt-white sm:flex">
-          {T("cap-MyStocks")}
-        </div>
-        <div className="flex items-center justify-end space-x-6">
-          <SortSelect
-            sortField={sortField}
-            sortDir={sortDir}
-            handleSortFieldChange={handleSortFieldChange}
-            handleSortDirChange={handleSortDirChange}
-            showCollateral={!(isOffChainFungiblePoint || isPointToken)}
-          />
+    <div className="flex flex-1 flex-col text-txt-white sm:p-0">
+      <div className="hidden items-center justify-between border-b-2 border-[#303030] p-5 sm:flex">
+        <div className="flex items-center space-x-5">
+          <div className="text-xl leading-[30px] text-txt-white">
+            {TH("btn-Dashboard")}
+          </div>
+          <PortfolioInfo />
         </div>
       </div>
-
-      {sortOffers.length ? (
-        <div className="no-scroll-bar mt-5 grid max-h-[calc(100vh-248px)] flex-1 auto-rows-min grid-cols-1 gap-5 overflow-y-auto border-t border-border-black pt-5 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-          {(sortOffers || []).map((holding) => {
-            return <HoldingCard key={holding.holding_id} holding={holding} />;
-          })}
-        </div>
-      ) : (
-        <div className="flex flex-1 items-center justify-center text-base text-gray">
-          {T("txt-YourStockAppearHere")}
-        </div>
-      )}
+      <Tabs
+        value={currentTab}
+        className="flex flex-1 flex-col  p-5 "
+        onValueChange={setCurrentTab}
+      >
+        <TabsList className="flex items-center justify-between p-0">
+          <div className="flex items-center justify-start space-x-[10px]">
+            <TabsTrigger className={tabClx} value="orders">
+              My Orders
+            </TabsTrigger>
+            <TabsTrigger className={tabClx} value="holdings">
+              My Holdings
+            </TabsTrigger>
+            <TabsTrigger className={tabClx} value="balances">
+              My Balances
+            </TabsTrigger>
+          </div>
+        </TabsList>
+        <TabsContent
+          value="orders"
+          className="flex flex-1 flex-col data-[state=inactive]:hidden"
+          forceMount={true}
+        >
+          Orders
+        </TabsContent>
+        <TabsContent
+          value="holdings"
+          className="flex flex-1 flex-col data-[state=inactive]:hidden"
+          forceMount={true}
+        >
+          <MyHolding />
+        </TabsContent>
+        <TabsContent
+          value="balances"
+          className="flex flex-1 flex-col data-[state=inactive]:hidden"
+          forceMount={true}
+        >
+          Balances
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
