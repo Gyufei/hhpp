@@ -48,9 +48,9 @@ export default function LanguageSetting() {
 
   return (
     <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
-      <PopoverTrigger>
+      <PopoverTrigger className="flex h-9 w-9 items-center justify-center">
         <HoverIcon
-          src="/icons/en-gray.svg"
+          src="/icons/en.svg"
           hoverSrc="/icons/en.svg"
           width={24}
           height={24}

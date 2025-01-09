@@ -20,7 +20,7 @@ export default function DrawerTitle({
         {tag && (
           <div
             className={cn(
-              "flex h-5 items-center rounded-[4px] px-[6px] text-xs leading-4 text-white",
+              "flex h-5 items-center rounded px-[6px] text-xs leading-4 text-white",
               tagClassName,
             )}
           >

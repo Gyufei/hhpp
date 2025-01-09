@@ -17,9 +17,9 @@ export default function Setting() {
 
   return (
     <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
-      <PopoverTrigger>
+      <PopoverTrigger className="flex h-9 w-9 items-center justify-center">
         <HoverIcon
-          src="/icons/setting-gray.svg"
+          src="/icons/setting.svg"
           hoverSrc="/icons/setting.svg"
           width={24}
           height={24}
