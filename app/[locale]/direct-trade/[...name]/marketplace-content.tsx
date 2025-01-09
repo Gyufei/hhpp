@@ -8,6 +8,7 @@ import MarketplaceCard from "./marketplace-card";
 import OfferDetailDrawer from "./offer-detail/offer-detail-drawer";
 import CreateOfferBtn from "./create-offer-btn";
 import MarketCharts from "./chart/market-charts";
+import MarketTrades from "./market-trades/market-trades";
 
 import { useAnchor } from "@/lib/hooks/common/use-anchor";
 import { useMarketOffers } from "@/lib/hooks/api/use-market-offers";
@@ -97,13 +98,8 @@ export default function MarketplaceContent({
           <OfferDetailDrawer offers={offers || []} onSuccess={refreshOffers} />
         </div>
         <div className="m-[2px] flex w-full flex-col rounded bg-bg-black px-[10px] sm:w-[320px]">
-          <div className="hidden h-[80px] py-4 sm:block">
-            {marketplace && (
-              <CreateOfferBtn
-                marketplace={marketplace}
-                onSuccess={refreshOffers}
-              />
-            )}
+          <div className="hidden h-[80px] py-4 text-txt-white sm:block">
+            <MarketTrades marketplace={marketplace} />
           </div>
         </div>
       </div>
