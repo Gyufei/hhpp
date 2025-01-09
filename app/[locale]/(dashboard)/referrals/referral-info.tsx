@@ -49,68 +49,68 @@ export default function ReferralInfo({
 
   return (
     <>
-      <div className="mt-5 flex flex-col items-center justify-start sm:flex-row sm:space-x-5">
+      <div className="flex flex-col items-center justify-start text-[12px] sm:flex-row sm:space-x-3">
         <div
-          className="flex w-full items-stretch justify-between rounded-[20px] bg-bg-black px-5 py-3 sm:w-[300px]"
+          className="flex w-full items-stretch justify-between rounded-[20px] bg-bg-black  object-contain  p-3"
           style={{
             backgroundImage: "url(/img/new-users.png)",
             backgroundRepeat: "no-repeat",
           }}
         >
-          <div className="flex flex-col items-start justify-between">
-            <div className="mt-1 text-[30px] leading-[30px] text-txt-white">
-              {signedUp}
-            </div>
-            <div className="text-sm leading-5 text-gray">
-              {rt("lb-SignedUp")}
-            </div>
-          </div>
-          <div className="flex flex-col items-end justify-between space-y-1">
-            <DisplayArrow
-              isUp={Number(signedUpRate === 0) ? "zero" : signedUpRate > 0}
-            />
-            <div className="flex items-center space-x-1">
-              <span
-                data-up={Number(signedUpRate === 0) ? "zero" : signedUpRate > 0}
-                className="data text-sm leading-5 data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-gray"
-              >
-                {signedUpRate > 0 ? "+" : ""}
-                {formatNum(signedUpRate * 100)}%
-              </span>
-              <span className="text-gray">/ 24h</span>
+          <div className="flex flex-col items-start justify-between object-contain">
+            <div className="text-gray">{rt("lb-SignedUp")}</div>
+            <div className="flex items-center justify-center text-txt-white">
+              <div>${signedUp}</div>
+              <div className="ml-[10px] flex items-center justify-center ">
+                <DisplayArrow
+                  isUp={Number(signedUpRate === 0) ? "zero" : signedUpRate > 0}
+                />
+                <div className="flex items-center">
+                  <span
+                    data-up={
+                      Number(signedUpRate === 0) ? "zero" : signedUpRate > 0
+                    }
+                    className="data leading-5 data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-gray"
+                  >
+                    {signedUpRate > 0 ? "+" : ""}
+                    {formatNum(signedUpRate * 100)}%
+                  </span>
+                  <span className="text-gray">/ 24h</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div
-          className="mt-3 flex w-full items-stretch justify-between rounded-[20px] bg-bg-black px-5 py-3 sm:mt-0 sm:w-[300px]"
+          className="mt-3 flex w-full items-stretch justify-between bg-bg-black object-contain p-3 sm:mt-0"
           style={{
             backgroundImage: "url(/img/trading-fee.png)",
             backgroundRepeat: "no-repeat",
           }}
         >
           <div className="flex flex-col items-start justify-between">
-            <div className="mt-1 text-[30px] leading-[30px] text-txt-white">
-              ${commission}
-            </div>
-            <div className="text-sm leading-5 text-gray">
-              {rt("lb-Commission")}
-            </div>
-          </div>
-          <div className="flex flex-col items-end justify-between space-y-1">
-            <DisplayArrow
-              isUp={Number(commissionRate === 0) ? "zero" : commissionRate > 0}
-            />
-            <div className="flex items-center space-x-1">
-              <span
-                data-up={
-                  Number(commissionRate === 0) ? "zero" : commissionRate > 0
-                }
-                className="text-sm leading-5 data-[up=false]:text-red  data-[up=true]:text-green data-[up=zero]:text-gray"
-              >
-                {commissionRate > 0 ? "+" : ""}
-                {formatNum(commissionRate * 100)}%
-              </span>
-              <span className="text-gray">/ 24h</span>
+            <div className="text-gray">{rt("lb-Commission")}</div>
+            <div className="flex items-center justify-center text-txt-white">
+              <div>${commission}</div>
+              <div className="ml-[10px] flex items-center justify-center">
+                <DisplayArrow
+                  isUp={
+                    Number(commissionRate === 0) ? "zero" : commissionRate > 0
+                  }
+                />
+                <div className="flex items-center">
+                  <span
+                    data-up={
+                      Number(commissionRate === 0) ? "zero" : commissionRate > 0
+                    }
+                    className="data-[up=false]:text-red  data-[up=true]:text-green data-[up=zero]:text-gray"
+                  >
+                    {commissionRate > 0 ? "+" : ""}
+                    {formatNum(commissionRate * 100)}%
+                  </span>
+                  <span className="text-gray">/ 24h</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -123,7 +123,7 @@ function DisplayArrow({ isUp }: { isUp: "zero" | boolean }) {
   return (
     <div
       data-up={isUp}
-      className="flex h-8 w-11 items-center justify-center rounded-[12px] data-[up=false]:bg-[rgba(255,98,98,0.2)] data-[up=true]:bg-[rgba(76,191,135,0.2)] data-[up=zero]:bg-[rgba(240,241,245,1)]"
+      className="flex h-8 w-5 items-center justify-center rounded-[12px] "
     >
       <Image
         src={
