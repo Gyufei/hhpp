@@ -1,4 +1,4 @@
-import TradingViewWidget from "./trading-view-widget";
+// import TradingViewWidget from "./trading-view-widget";
 
 // import {
 //   ChartingLibraryWidgetOptions,
@@ -20,8 +20,8 @@ import TradingViewWidget from "./trading-view-widget";
 
 export function TradingChart() {
   return (
-    <div className="flex-1 basis-[560px]">
-      <TradingViewWidget />;
+    <div className="mt-[2px] flex-1 basis-[560px] rounded bg-bg-black">
+      {/* <TradingViewWidget /> */}
     </div>
   );
 }

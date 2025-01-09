@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 // import { useEffect, useRef } from "react";
 // import {
 //   ChartingLibraryWidgetOptions,
@@ -5,9 +6,55 @@
 //   ResolutionString,
 //   widget,
 // } from "/public/charting_library/charting_library";
-export default function TradingViewWidget() {
-  return <></>;
+import { useEffect, useRef, memo } from "react";
+
+let hasInit = false;
+function TradingViewWidget() {
+  const container = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (hasInit) return;
+    const script = document.createElement("script");
+    script.src =
+      "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+    script.type = "text/javascript";
+    script.async = true;
+    script.innerHTML = `
+        {
+          "autosize": true,
+          "symbol": "NASDAQ:AAPL",
+          "interval": "1",
+          "timezone": "Asia/Shanghai",
+          "theme": "dark",
+          "style": "1",
+          "locale": "en",
+          "background": "#111a1e",
+          "allow_symbol_change": false,
+          "hide_side_toolbar": false,
+          "calendar": false,
+          "support_host": "https://www.tradingview.com"
+        }`;
+    if (container.current) {
+      (container.current as any).appendChild(script);
+    }
+    hasInit = true;
+  }, []);
+
+  return (
+    <div
+      className="tradingview-widget-container"
+      ref={container}
+      style={{ height: "100%", width: "100%" }}
+    >
+      <div
+        className="tradingview-widget-container__widget"
+        style={{ height: "100%", width: "100%" }}
+      ></div>
+    </div>
+  );
 }
+
+export default memo(TradingViewWidget);
 
 // export default function TradingViewWidget(
 //   props: Partial<ChartingLibraryWidgetOptions>,

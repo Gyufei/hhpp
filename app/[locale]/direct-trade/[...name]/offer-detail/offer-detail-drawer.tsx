@@ -92,7 +92,6 @@ export default function OfferDetailDrawer({
             }
           }}
           res={resultOrder}
-          chain={offer?.marketplace.chain}
         />
       )}
     </>
