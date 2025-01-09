@@ -26,7 +26,7 @@ export default function MarketplaceOverview({
   }, [marketplace]);
 
   return (
-    <div className="mt-3 flex-col space-y-2  text-[12px] ">
+    <div className="mt-12 flex-col space-y-2  text-[12px] ">
       <div className="flex justify-between">
         <LabelText isLoading={isLoadingFlag}>
           {t("lb-InitialListing")}

@@ -76,7 +76,7 @@ export default function MarketplaceCard({
         {isLoadingFlag ? (
           <Skeleton className="h-[73px] w-[73px] " />
         ) : (
-          <div className=" h-fit">
+          <div className="absolute top-0 h-fit">
             <Image
               src={marketplace?.projectLogo}
               width={72}
@@ -98,7 +98,7 @@ export default function MarketplaceCard({
           </div>
         )}
 
-        <div className="flex flex-1 items-center justify-between pl-3">
+        <div className="mt-3 flex flex-1 items-center justify-between pl-[84px]">
           <div className="relative flex items-center space-x-3 ">
             <div className="flex flex-col">
               {isLoadingFlag ? (
