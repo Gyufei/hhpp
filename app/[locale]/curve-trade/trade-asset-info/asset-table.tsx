@@ -183,11 +183,11 @@ export default function AssetTable() {
       font-size: 12px;
       text-align: left;
 
-      &:first-child {
+      &:first-of-type {
         padding-left: 10px;
       }
 
-      &:last-child() {
+      &:last-of-type {
         padding-right: 10px;
       }
     `,
@@ -197,7 +197,7 @@ export default function AssetTable() {
       color: #949e9c;
       line-height: 18px;
 
-      &:last-child {
+      &:last-of-type {
         text-align: right;
       }
     `,

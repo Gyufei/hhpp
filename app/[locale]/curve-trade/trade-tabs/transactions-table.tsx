@@ -65,11 +65,11 @@ export function TransactionsTable() {
       font-size: 12px;
       text-align: left;
 
-      &:first-child {
+      &:first-of-type {
         padding-left: 10px;
       }
 
-      &:last-child {
+      &:last-of-type {
         padding-right: 10px;
       }
     `,
@@ -86,7 +86,7 @@ export function TransactionsTable() {
     Cell: `
       color: #f6fefd;
       
-      &:first-child {
+      &:first-of-type {
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
       }
