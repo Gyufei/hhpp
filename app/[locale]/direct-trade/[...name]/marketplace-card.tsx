@@ -71,12 +71,12 @@ export default function MarketplaceCard({
   };
 
   return (
-    <div className={cn(className, "relative mt-3 bg-bg-black")}>
+    <div className={cn(className, "relative")}>
       <div className="flex items-center justify-between">
         {isLoadingFlag ? (
           <Skeleton className="h-[73px] w-[73px] " />
         ) : (
-          <div className="absolute top-0 h-fit">
+          <div className="absolute top-[10px] h-fit">
             <Image
               src={marketplace?.projectLogo}
               width={72}
@@ -262,7 +262,7 @@ function FoldPop() {
   function renderContent() {
     return (
       <>
-        <div className="relative mb-3 border-b border-[#303030] pb-3">
+        <div className="relative pb-6">
           <Image
             src={
               isInputFocused ? "/icons/search-gray.svg" : "/icons/search.svg"

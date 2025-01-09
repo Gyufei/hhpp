@@ -52,7 +52,7 @@ export default function OfferList({
 
   return (
     <div className="flex h-full flex-col ">
-      <div className="flex w-full items-center justify-between border-b border-[#303030] pb-[10px]">
+      <div className="mb-[2px] flex w-full items-center justify-between rounded bg-bg-black pb-[10px]">
         <div className="no-scroll-bar flex w-[calc(100vw-170px)] flex-1 items-center space-x-4 overflow-x-scroll sm:w-auto sm:overflow-hidden">
           <SortSelect
             sortField={sortField}

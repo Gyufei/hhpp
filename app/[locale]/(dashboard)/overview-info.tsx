@@ -3,7 +3,6 @@ import { formatNum } from "@/lib/utils/number";
 import { useAccountStats } from "@/lib/hooks/api/use-account-overview";
 import { useTranslations } from "next-intl";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
-import ReferralLink from "./referral-link";
 
 export default function OverviewInfo() {
   const T = useTranslations("cd-AccountOverview");
@@ -12,8 +11,8 @@ export default function OverviewInfo() {
   const { data: accountInfo } = useAccountStats(currentChain!);
 
   return (
-    <div className="flex h-full max-h-[800px] flex-col justify-between space-y-12 pb-5">
-      <div className="mt-2 border-b border-[#303030] bg-bg-black px-4 pb-8">
+    <div className="flex h-full flex-col justify-between space-y-12 pb-5 ">
+      <div className="m-[10px] mt-2 border-b border-[#303030] pb-8">
         <div className="flex items-center justify-between">
           <div className="leading-6 text-txt-white">
             {T("cap-AccountOverview")}
@@ -84,7 +83,6 @@ export default function OverviewInfo() {
           </div>
         </div>
       </div>
-      <ReferralLink />
     </div>
   );
 }
