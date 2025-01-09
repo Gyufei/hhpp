@@ -2,18 +2,15 @@ import Image from "next/image";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { truncateAddr } from "@/lib/utils/web3";
 import { Link } from "@/i18n/routing";
-import { ChainType } from "@/lib/types/chain";
 
 export default function OfferFillDialog({
   open,
   onOpenChange,
   res,
-  chain,
 }: {
   open: boolean;
   onOpenChange: (_open: boolean) => void;
   res: Record<string, any>;
-  chain: ChainType;
 }) {
   return (
     <Dialog
@@ -65,7 +62,7 @@ export default function OfferFillDialog({
           </div>
         </div>
 
-        <Link href={`/dashboard/holdings?chain=${chain}`}>
+        <Link href={`/portfolio`}>
           <button className="mt-7 flex h-12 w-full items-center justify-center rounded-2xl bg-main leading-6 text-txt-white">
             <span className="mr-1 inline-block">Go To My Holdings</span>
             <Image
