@@ -58,7 +58,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
   }
 
   return (
-    <div className="bg-bg-black h-fit rounded-[20px] p-5 hover:shadow-[4px_4px_20px_0px_rgba(45,46,51,0.05)]">
+    <div className="h-fit rounded-[4px] bg-[#222428] p-5 hover:shadow-[4px_4px_20px_0px_rgba(45,46,51,0.05)]">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <TokenPairImg
@@ -72,7 +72,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
             <div className="mb-[2px] leading-6 text-txt-white">
               {offer.marketplace.item_name}
             </div>
-            <div className="bg-bg-black w-fit rounded-[4px] px-[5px] py-[2px] text-[10px] leading-4 text-gray">
+            <div className="w-fit rounded-[4px] bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
               #{offer.entry.id}
             </div>
           </div>
@@ -213,7 +213,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
 
 export function OrderCardSkeleton() {
   return (
-    <div className="bg-bg-black h-fit rounded-[20px] p-5 hover:shadow-[4px_4px_20px_0px_rgba(45,46,51,0.05)]">
+    <div className="h-fit rounded-[20px] bg-bg-black p-5 hover:shadow-[4px_4px_20px_0px_rgba(45,46,51,0.05)]">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <Skeleton className="h-12 w-12 rounded-full" />

@@ -7,7 +7,6 @@ import OfferList from "@/app/[locale]/direct-trade/[...name]/offer-list/offer-li
 import MarketplaceCard from "./marketplace-card";
 import OfferDetailDrawer from "./offer-detail/offer-detail-drawer";
 import CreateOfferBtn from "./create-offer-btn";
-import MarketTrades from "@/app/[locale]/direct-trade/[...name]/market-trades/market-trades";
 import MarketCharts from "./chart/market-charts";
 
 import { useAnchor } from "@/lib/hooks/common/use-anchor";
@@ -63,14 +62,14 @@ export default function MarketplaceContent({
           <CreateOfferBtn marketplace={marketplace} onSuccess={refreshOffers} />
         )}
       </div>
-      <div className="flex flex-1 items-stretch pt-4 sm:pt-0">
-        <div className="flex w-full flex-col space-y-6 px-6 sm:w-[348px]">
+      <div className="flex flex-1  pt-4 sm:pt-0">
+        <div className="flex w-full flex-col border-2 border-[#303030] sm:w-[320px]">
           <MarketplaceCard
-            className="basic-[218px] h-[218px] shrink-0 grow-0"
+            className="shrink-0 grow-0 border-b-2 border-[#303030] px-[10px] "
             marketplace={marketplace}
           />
 
-          <div className="hidden sm:block">
+          <div className="hidden border-b-2 border-[#303030] px-[10px] py-[16px] sm:block">
             {marketplace && (
               <CreateOfferBtn
                 marketplace={marketplace}
@@ -84,22 +83,20 @@ export default function MarketplaceContent({
           </div>
         </div>
         <div
-          className="flex-1"
+          className="flex-1 border-2 border-l-0 border-r-0 border-[#303030] p-[10px]"
           style={{
             minHeight: isMobileSize
               ? "calc(100vh - 175px)"
               : "min(calc(100vh - 156px), 691px)",
             maxHeight: isMobileSize
               ? "calc(100vh - 175px)"
-              : "max(calc(100vh - 156px), 691px)",
+              : "max(calc(100vh - 96px), 691px)",
           }}
         >
           <OfferList offers={canBuyOffers || []} isLoading={isOffersLoading} />
           <OfferDetailDrawer offers={offers || []} onSuccess={refreshOffers} />
         </div>
-        <div className="flex w-full flex-col px-6 sm:hidden">
-          <MarketTrades marketplace={marketplace} />
-
+        <div className="flex w-full flex-col border-2 border-[#303030] px-6 sm:w-[320px]">
           <div className="hidden h-[80px] py-4 sm:block">
             {marketplace && (
               <CreateOfferBtn
@@ -108,8 +105,6 @@ export default function MarketplaceContent({
               />
             )}
           </div>
-
-          <MarketCharts marketplace={marketplace} />
         </div>
       </div>
     </div>

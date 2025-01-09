@@ -51,8 +51,8 @@ export default function OfferList({
     filterOrders?.[0]?.marketplace?.market_catagory === "point_token";
 
   return (
-    <div className="flex h-full flex-col rounded-none bg-border-black p-5 sm:rounded-3xl">
-      <div className="flex w-full items-center justify-between border-b border-[#111A1E] pb-5">
+    <div className="flex h-full flex-col ">
+      <div className="flex w-full items-center justify-between border-b border-[#303030] pb-[10px]">
         <div className="no-scroll-bar flex w-[calc(100vw-170px)] flex-1 items-center space-x-4 overflow-x-scroll sm:w-auto sm:overflow-hidden">
           <SortSelect
             sortField={sortField}
@@ -103,7 +103,7 @@ export default function OfferList({
       </div>
 
       <div
-        className="no-scroll-bar mt-5 grid flex-1 auto-rows-min grid-cols-1 gap-5 overflow-y-auto xl:grid-cols-2 2xl:grid-cols-3"
+        className="no-scroll-bar mt-[10px] grid flex-1 auto-rows-min grid-cols-1 gap-[10px] overflow-y-auto xl:grid-cols-2 2xl:grid-cols-3"
         style={{
           gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
         }}

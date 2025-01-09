@@ -26,112 +26,98 @@ export default function MarketplaceOverview({
   }, [marketplace]);
 
   return (
-    <div className="mt-3 flex-col space-y-2">
-      <div className="flex items-center justify-between">
-        <div>
-          <LabelText isLoading={isLoadingFlag}>
-            {t("lb-InitialListing")}
-          </LabelText>
-          {isLoadingFlag ? (
-            <ValueSkeleton />
-          ) : (
-            <div className="flex items-center text-sm leading-5 text-txt-white">
-              $
-              {formatNum(
-                NP.times(marketplace.initial_listing_price, pointDecimalNum),
-                3,
-              )}
-            </div>
-          )}
-        </div>
-
-        <div className="flex flex-col items-end">
-          <LabelText isLoading={isLoadingFlag}>{t("lb-AllTimeHigh")}</LabelText>
-          {isLoadingFlag ? (
-            <ValueSkeleton />
-          ) : (
-            <div className="flex items-center text-sm leading-5 text-txt-white">
-              $
-              {formatNum(
-                Number(
-                  NP.times(marketplace.all_time_high_price, pointDecimalNum),
-                ),
-                3,
-              )}
-            </div>
-          )}
-        </div>
+    <div className="mt-3 flex-col space-y-2  text-[12px] ">
+      <div className="flex justify-between">
+        <LabelText isLoading={isLoadingFlag}>
+          {t("lb-InitialListing")}
+        </LabelText>
+        {isLoadingFlag ? (
+          <ValueSkeleton />
+        ) : (
+          <div className="flex items-center text-sm leading-5 text-txt-white">
+            $
+            {formatNum(
+              NP.times(marketplace.initial_listing_price, pointDecimalNum),
+              3,
+            )}
+          </div>
+        )}
       </div>
 
-      <div className="flex items-center justify-between">
-        <div>
-          <LabelText isLoading={isLoadingFlag}>{t("lb-24hChange")}</LabelText>
-          {isLoadingFlag ? (
-            <ValueSkeleton />
-          ) : (
-            <div
-              data-up={
-                +marketplace.change_rate_24h === 0
-                  ? "zero"
-                  : +marketplace.change_rate_24h > 0
-              }
-              className="text-sm leading-5 data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-txt-white"
-            >
-              {+marketplace.change_rate_24h === 0
-                ? null
+      <div className="flex justify-between">
+        <LabelText isLoading={isLoadingFlag}>{t("lb-AllTimeHigh")}</LabelText>
+        {isLoadingFlag ? (
+          <ValueSkeleton />
+        ) : (
+          <div className="flex items-center text-sm leading-5 text-txt-white">
+            $
+            {formatNum(
+              Number(
+                NP.times(marketplace.all_time_high_price, pointDecimalNum),
+              ),
+              3,
+            )}
+          </div>
+        )}
+      </div>
+
+      <div className="flex justify-between">
+        <LabelText isLoading={isLoadingFlag}>{t("lb-24hChange")}</LabelText>
+        {isLoadingFlag ? (
+          <ValueSkeleton />
+        ) : (
+          <div
+            data-up={
+              +marketplace.change_rate_24h === 0
+                ? "zero"
                 : +marketplace.change_rate_24h > 0
-                ? "+ "
-                : "- "}
-              {+marketplace.change_rate_24h === 0
-                ? 0
-                : toPercent(+marketplace.change_rate_24h)}
-              %
-            </div>
-          )}
-        </div>
-
-        <div className="flex flex-col items-end">
-          <LabelText isLoading={isLoadingFlag}>
-            {t("lb-FilledOrders")}
-          </LabelText>
-          {isLoadingFlag ? (
-            <ValueSkeleton />
-          ) : (
-            <div className="flex items-center text-sm leading-5 text-txt-white">
-              {formatNum(marketplace!.filled_orders || 0)}
-            </div>
-          )}
-        </div>
+            }
+            className="text-sm leading-5 data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-txt-white"
+          >
+            {+marketplace.change_rate_24h === 0
+              ? null
+              : +marketplace.change_rate_24h > 0
+              ? "+ "
+              : "- "}
+            {+marketplace.change_rate_24h === 0
+              ? 0
+              : toPercent(+marketplace.change_rate_24h)}
+            %
+          </div>
+        )}
       </div>
 
-      <div className="flex items-center justify-between">
-        <div>
-          <LabelText isLoading={isLoadingFlag}>
-            {t("lb-ListedSupply")}
-          </LabelText>
-          {isLoadingFlag ? (
-            <ValueSkeleton />
-          ) : (
-            <div className="leading-6 text-txt-white">
-              {formatNum(
-                NP.divide(marketplace!.listed_supply, pointDecimalNum),
-              )}
-            </div>
-          )}
-        </div>
+      <div className="flex justify-between">
+        <LabelText isLoading={isLoadingFlag}>{t("lb-FilledOrders")}</LabelText>
+        {isLoadingFlag ? (
+          <ValueSkeleton />
+        ) : (
+          <div className="flex items-center text-sm leading-5 text-txt-white">
+            {formatNum(marketplace!.filled_orders || 0)}
+          </div>
+        )}
+      </div>
 
-        <div className="flex flex-col items-end">
-          <LabelText isLoading={isLoadingFlag}>
-            {t("lb-ActiveWallets")}
-          </LabelText>
-          {isLoadingFlag ? (
-            <ValueSkeleton />
-          ) : (
-            <div className="flex items-center leading-6 text-txt-white">
-              {formatNum(marketplace!.active_wallets)}
-            </div>
-          )}
-        </div>
+      <div className="flex justify-between">
+        <LabelText isLoading={isLoadingFlag}>{t("lb-ListedSupply")}</LabelText>
+        {isLoadingFlag ? (
+          <ValueSkeleton />
+        ) : (
+          <div className="leading-6 text-txt-white">
+            {formatNum(NP.divide(marketplace!.listed_supply, pointDecimalNum))}
+          </div>
+        )}
+      </div>
+
+      <div className="flex justify-between ">
+        <LabelText isLoading={isLoadingFlag}>{t("lb-ActiveWallets")}</LabelText>
+        {isLoadingFlag ? (
+          <ValueSkeleton />
+        ) : (
+          <div className="flex items-center leading-6 text-txt-white">
+            {formatNum(marketplace!.active_wallets)}
+          </div>
+        )}
       </div>
     </div>
   );

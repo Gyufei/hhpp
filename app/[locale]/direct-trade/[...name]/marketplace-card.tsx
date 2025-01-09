@@ -71,66 +71,63 @@ export default function MarketplaceCard({
   };
 
   return (
-    <div
-      className={cn(
-        className,
-        "relative mt-4 rounded-3xl border border-border-black bg-bg-black p-5 pt-3",
-      )}
-    >
-      {isLoadingFlag ? (
-        <Skeleton className="absolute -top-5 h-[73px] w-[73px] rounded-full bg-bg-black" />
-      ) : (
-        <div className="absolute -top-5 h-fit">
-          <Image
-            src={marketplace?.projectLogo}
-            width={72}
-            height={72}
-            alt="token1"
-            className="rounded-full"
-          />
-          {chainInfo?.logo && (
-            <div className="absolute bottom-0 right-0 flex h-6 w-6 items-center justify-center rounded-full border border-white bg-bg-black">
-              <Image
-                src={chainInfo?.logo}
-                width={24}
-                height={24}
-                alt="token2"
-                className="rounded-full"
-              />
-            </div>
-          )}
-        </div>
-      )}
-
-      <div className="flex items-start justify-between pl-[84px]">
-        <div className="relative flex items-center space-x-3 ">
-          <div className="flex flex-col">
-            {isLoadingFlag ? (
-              <>
-                <Skeleton className="my-[2px] h-4 w-[100px] rounded-sm bg-bg-black" />
-                <Skeleton className="my-[2px] h-4 w-[80px] rounded-sm bg-bg-black" />
-              </>
-            ) : (
-              <>
-                <div className="w-[120px] overflow-hidden text-ellipsis whitespace-nowrap text-sm leading-[20px] text-title-white">
-                  {marketplace.item_name}
-                </div>
-                <OverviewIcons
-                  isStar={isStar}
-                  handleStar={handleStar}
-                  handleCopy={handleCopy}
-                  twitter={projectInfo?.twitter}
-                  discord={projectInfo?.discord}
+    <div className={cn(className, "relative mt-3 bg-bg-black")}>
+      <div className="flex items-center justify-between">
+        {isLoadingFlag ? (
+          <Skeleton className="h-[73px] w-[73px] " />
+        ) : (
+          <div className=" h-fit">
+            <Image
+              src={marketplace?.projectLogo}
+              width={72}
+              height={72}
+              alt="token1"
+              className="rounded-md border-[1.5px] border-[#303030] p-1"
+            />
+            {chainInfo?.logo && (
+              <div className="absolute bottom-0 right-0 flex h-6 w-6 items-center justify-center rounded-full border border-white bg-bg-black">
+                <Image
+                  src={chainInfo?.logo}
+                  width={24}
+                  height={24}
+                  alt="token2"
+                  className="rounded-full"
                 />
-              </>
+              </div>
             )}
           </div>
-        </div>
-        {isLoadingFlag ? (
-          <Skeleton className="h-8 w-8 rounded-full bg-bg-black" />
-        ) : (
-          <FoldPop />
         )}
+
+        <div className="flex flex-1 items-center justify-between pl-3">
+          <div className="relative flex items-center space-x-3 ">
+            <div className="flex flex-col">
+              {isLoadingFlag ? (
+                <>
+                  <Skeleton className="my-[2px] h-4 w-[100px] rounded-sm bg-bg-black" />
+                  <Skeleton className="my-[2px] h-4 w-[80px] rounded-sm bg-bg-black" />
+                </>
+              ) : (
+                <>
+                  <div className="w-[120px] overflow-hidden text-ellipsis whitespace-nowrap text-sm leading-[20px] text-title-white">
+                    {marketplace.item_name}
+                  </div>
+                  <OverviewIcons
+                    isStar={isStar}
+                    handleStar={handleStar}
+                    handleCopy={handleCopy}
+                    twitter={projectInfo?.twitter}
+                    discord={projectInfo?.discord}
+                  />
+                </>
+              )}
+            </div>
+          </div>
+          {isLoadingFlag ? (
+            <Skeleton className="h-8 w-8 rounded-full bg-bg-black" />
+          ) : (
+            <FoldPop />
+          )}
+        </div>
       </div>
 
       <MarketplaceOverview
