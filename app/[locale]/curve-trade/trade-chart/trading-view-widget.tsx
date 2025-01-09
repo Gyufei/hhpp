@@ -5,7 +5,7 @@ import {
   ResolutionString,
   LanguageCode,
   widget,
-} from "public/charting_library/charting_library/charting_library.js";
+} from "public/charting_library/charting_library/charting_library.min.js";
 
 const config: Partial<ChartingLibraryWidgetOptions> = {
   symbol: "AAPL",
