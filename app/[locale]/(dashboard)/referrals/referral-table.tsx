@@ -212,7 +212,7 @@ function ReferralCode({ rD, index }: { rD: IReferralItem; index: number }) {
     <div
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      className="relative flex h-fit w-fit cursor-pointer items-center space-x-2"
+      className="relative flex h-fit w-fit cursor-pointer items-center space-x-2 text-txt-white"
     >
       <span className="mr-[2px] text-sm leading-5">#{index + 1}</span>
       <span>{rD.referral_code}</span>
