@@ -27,7 +27,7 @@ export function TabFilter() {
         </div>
       </PopoverTrigger>
       <PopoverContent
-        className="flex w-[288px] flex-col items-stretch space-y-2 border-border-black bg-bg-black p-6 text-[12px]"
+        className="flex w-[200px] flex-col items-stretch space-y-2 border-border-black bg-bg-black p-6 text-[12px]"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}

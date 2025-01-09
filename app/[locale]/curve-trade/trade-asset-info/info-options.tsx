@@ -1,63 +1,7 @@
-import Image from "next/image";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { useState } from "react";
 import { formatNum } from "@/lib/utils/number";
 import { truncateAddr } from "@/lib/utils/web3";
 
-export function TradeAssetInfo() {
-  return (
-    <div className="flex h-[80px] items-center justify-start rounded bg-bg-black px-[10px]">
-      <TradeAssetSelect />
-      <AssetTag />
-      <InfoOptions />
-    </div>
-  );
-}
-
-function TradeAssetSelect() {
-  const [popOpen, setPopOpen] = useState(false);
-
-  const tokenInfo = {
-    name: "USD Coin",
-    symbol: "USDC",
-    decimals: 0,
-    address: "0x2222222222222222222222222222222222222222",
-    logoURI:
-      "https://preview-hypes-cdn.aggregation.top/images/token/0x2222222222222222222222222222222222222222.png",
-  };
-
-  return (
-    <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
-      <PopoverTrigger className="flex items-center">
-        <Image
-          src={tokenInfo.logoURI}
-          width={20}
-          height={20}
-          alt={tokenInfo.symbol}
-        />
-        <div className="mx-[10px] flex items-center text-[20px] leading-[30px] text-title-white">
-          <span>{tokenInfo.symbol}</span>/<span>{tokenInfo.symbol}</span>
-        </div>
-        <Image src={"/icons/fold-gray.svg"} width={20} height={20} alt="fold" />
-      </PopoverTrigger>
-      <PopoverContent className="flex w-[956px] border border-border-black bg-bg-black p-6 text-[12px] text-txt-white"></PopoverContent>
-    </Popover>
-  );
-}
-
-function AssetTag() {
-  return (
-    <div className="ml-[10px] mr-[30px] rounded bg-[#50D2C120] px-[5px] py-[1px] text-xs text-green">
-      Spot
-    </div>
-  );
-}
-
-function InfoOptions() {
+export default function InfoOptions() {
   const info = {
     price: "3.2136",
     change: 0.00234,
