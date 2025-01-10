@@ -55,13 +55,13 @@ export function TakerOrders({
     Header: "",
     Body: "",
     BaseRow: `
-      background-color: #303030;
+      background-color: #474747;
     `,
     HeaderRow: `
       background: transparent;
     `,
     Row: `
-      box-shadow: inset 0px -1px 0px 0px #303030;
+      box-shadow: inset 0px -1px 0px 0px #474747;
     `,
     BaseCell: `
       font-size: 14px;

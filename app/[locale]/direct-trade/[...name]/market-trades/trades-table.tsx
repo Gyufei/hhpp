@@ -142,7 +142,7 @@ export function TradesTable({
     `,
     HeaderCell: `
       color: #f6fefd;
-      border-bottom: 1px solid #303030;
+      border-bottom: 1px solid #474747;
 
       &:nth-of-type(4),
       &:nth-of-type(5) {

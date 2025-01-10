@@ -1,16 +1,15 @@
 "use client";
-import Image from "next/image";
 import { Link, usePathname } from "@/i18n/routing";
-import { cn } from "@/lib/utils/common";
+import MoreMenu from "./more-menu";
 
 const menuItemsClx =
-  "flex h-10 items-center rounded-3xl px-[10px] cursor-pointer data-[active=true]:text-main hover:brightness-90";
+  "flex h-10 items-center rounded-3xl px-[10px] cursor-pointer data-[active=true]:text-main hover:text-main";
 
 export default function NavigationBtns() {
   const pathname = usePathname();
 
   return (
-    <div className="flex items-center space-x-[30px] text-title-white">
+    <div className="hidden items-center space-x-[30px] text-title-white sm:flex">
       <Link
         href="/curve-trade"
         data-active={pathname.startsWith("/curve-trade")}
@@ -39,15 +38,7 @@ export default function NavigationBtns() {
       >
         Referrals
       </Link>
-      <div className={cn(menuItemsClx, "space-x-[10px]")}>
-        <span>More</span>
-        <Image
-          src="/icons/arrow-down.svg"
-          width={20}
-          height={20}
-          alt="arrow-down"
-        />
-      </div>
+      <MoreMenu />
     </div>
   );
 }

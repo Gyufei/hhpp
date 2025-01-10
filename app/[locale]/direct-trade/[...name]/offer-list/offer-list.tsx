@@ -71,34 +71,6 @@ export default function OfferList({
           className="ml-6 flex min-w-[100px] items-center justify-end sm:ml-2"
         >
           <SearchInput handleSearch={handleSearch} />
-          {/* <div
-            data-active={layout === "list"}
-            className="ml-2 hidden h-8 w-8 min-w-8 cursor-pointer items-center justify-center rounded-full data-[active=true]:bg-bg-black sm:flex"
-          >
-            <HoverIcon
-              src="/icons/menu-gray.svg"
-              hoverSrc="/icons/menu.svg"
-              active={layout === "list"}
-              width={20}
-              height={20}
-              onClick={() => setLayout("list")}
-              alt="menu"
-            />
-          </div>
-          <div
-            data-active={layout === "grid"}
-            className="ml-2 flex h-8 w-8 min-w-8 cursor-pointer items-center justify-center rounded-full data-[active=true]:bg-bg-black"
-          >
-            <HoverIcon
-              src="/icons/grid-gray.svg"
-              hoverSrc="/icons/grid.svg"
-              active={layout === "grid"}
-              width={20}
-              height={20}
-              onClick={() => setLayout("grid")}
-              alt="menu"
-            />
-          </div> */}
         </div>
       </div>
 

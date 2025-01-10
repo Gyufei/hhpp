@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { cn } from "@/lib/utils/common";
 
 export type ISortField = "Created" | "Price" | "Collateral";
 export type ISortDir = "Ascending" | "Descending";
@@ -42,10 +43,10 @@ export function SortSelect({
       <DropdownMenuTrigger asChild>
         <div
           data-open={popOpen}
-          className="flex cursor-pointer items-center space-x-1 rounded-full border border-[#949E9C] px-[16px] py-[5px] outline-none data-[open=true]:border-main data-[open=true]:bg-main"
+          className="flex cursor-pointer items-center space-x-1 rounded-full bg-[#222428] px-[16px] py-[5px] outline-none"
         >
           <Image src="/icons/sort.svg" width={20} height={20} alt="type icon" />
-          <div className="overflow-hidden text-clip whitespace-nowrap text-sm leading-5 text-txt-white">{`${t(
+          <div className="overflow-hidden text-clip whitespace-nowrap text-sm leading-5 text-title-white">{`${t(
             "sl-" + sortField,
           )}:${t("sl-" + sortDir)}`}</div>
           <Image
@@ -106,29 +107,37 @@ function SortOptions({
     <DropdownMenuSub>
       <DropdownMenuSubTrigger
         data-checked={sortField === field}
-        className="flex h-9 cursor-pointer items-center rounded-xl px-4 text-xs leading-[18px] text-txt-white data-[checked=true]:bg-bg-black"
+        className="flex h-9 cursor-pointer items-center rounded-xl px-4 text-xs leading-[18px] text-gray hover:text-main data-[checked=true]:text-main"
       >
         {t("sl-" + field)}
       </DropdownMenuSubTrigger>
       <DropdownMenuPortal>
         <DropdownMenuSubContent
           sideOffset={6}
-          className="w-[88px] border-0 bg-bg-black p-1 sm:w-[158px]"
+          className="w-[88px] border-border-black bg-bg-black p-1 sm:w-[158px]"
           style={{
             boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
           }}
         >
           <DropdownMenuItem
             data-active={sortField === field && sortDir === "Ascending"}
-            className="h-9 cursor-pointer py-[3px] text-txt-white data-[active=true]:bg-bg-black"
+            className="h-9 cursor-pointer py-[3px] text-txt-white hover:text-main data-[active=true]:text-main"
           >
-            <SortUp onClick={() => onSortDirChange(field, "Ascending")} />
+            <SortUpDown
+              active={sortField === field && sortDir === "Ascending"}
+              onClick={() => onSortDirChange(field, "Ascending")}
+              isDown={false}
+            />
           </DropdownMenuItem>
           <DropdownMenuItem
             data-active={sortField === field && sortDir === "Descending"}
-            className="h-9 cursor-pointer py-[3px] text-txt-white data-[active=true]:bg-bg-black"
+            className="h-9 cursor-pointer py-[3px] text-txt-white hover:text-main data-[active=true]:text-main"
           >
-            <SortDown onClick={() => onSortDirChange(field, "Descending")} />
+            <SortUpDown
+              active={sortField === field && sortDir === "Descending"}
+              onClick={() => onSortDirChange(field, "Descending")}
+              isDown={true}
+            />
           </DropdownMenuItem>
         </DropdownMenuSubContent>
       </DropdownMenuPortal>
@@ -136,39 +145,39 @@ function SortOptions({
   );
 }
 
-function SortUp({ onClick }: { onClick: () => void }) {
+function SortUpDown({
+  onClick,
+  active,
+  isDown,
+}: {
+  onClick: () => void;
+  active: boolean;
+  isDown: boolean;
+}) {
   const t = useTranslations("sl-OrderSort");
   const local = useLocale();
   const isEn = local === "en";
 
-  return (
-    <div className="flex items-center space-x-1 " onClick={onClick}>
-      <Image src="/icons/sort-up.svg" width={16} height={16} alt="up" />
-      <span className="text-xs leading-[18px]">
-        {isEn ? "Sort " : ""}
-        {t("sl-Ascending")}
-      </span>
-    </div>
-  );
-}
-
-function SortDown({ onClick }: { onClick: () => void }) {
-  const t = useTranslations("sl-OrderSort");
-  const local = useLocale();
-  const isEn = local === "en";
+  const [isHover, setIsHover] = useState(false);
+  const isActive = active || isHover;
 
   return (
-    <div onClick={onClick} className="flex items-center space-x-1">
+    <div
+      className={cn("flex items-center space-x-1", isActive ? "text-main" : "")}
+      onClick={onClick}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
       <Image
-        src="/icons/sort-up.svg"
-        className="rotate-180"
+        src={isActive ? "/icons/sort-up-hover.svg" : "/icons/sort-up.svg"}
         width={16}
         height={16}
         alt="up"
+        className={cn(isDown ? "rotate-180" : "")}
       />
       <span className="text-xs leading-[18px]">
         {isEn ? "Sort " : ""}
-        {t("sl-Descending")}
+        {isDown ? t("sl-Descending") : t("sl-Ascending")}
       </span>
     </div>
   );

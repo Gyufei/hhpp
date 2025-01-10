@@ -11,7 +11,7 @@ body {
   --color-title-white: #f6fefd;
   --color-txt-white: #d1d4dc;
   --color-bg-black: #111a1e;
-  --color-border-black: #303030;
+  --color-border-black: #474747;
   --color-green: #4cbf87;
   --color-red: #ef5350;
   --color-lightgray: #d1d4dc;
@@ -62,7 +62,7 @@ body {
   height: 40px;
   width: 100%;
   border-radius: 12px;
-  border: 1px solid #303030;
+  border: 1px solid #474747;
 }
 
 img {

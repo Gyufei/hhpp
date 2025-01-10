@@ -82,7 +82,7 @@ export default function MarketplaceCard({
               width={72}
               height={72}
               alt="token1"
-              className="rounded-md border-[1.5px] border-[#303030] p-1"
+              className="rounded-md border-[1.5px] border-border-black p-1"
             />
             {chainInfo?.logo && (
               <div className="absolute bottom-0 right-0 flex h-6 w-6 items-center justify-center rounded-full border border-white bg-bg-black">
@@ -278,7 +278,7 @@ function FoldPop() {
             onChange={(e) => setSearchText(e.target.value)}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
-            className="h-10 rounded-lg border-[#303030] bg-bg-black pl-8 text-title-white"
+            className="h-10 rounded-lg border-border-black bg-bg-black pl-8 text-title-white"
           />
         </div>
         {filteredCateList.map((cate, i) => (
@@ -288,7 +288,7 @@ function FoldPop() {
             key={cate.name}
             style={{
               marginTop: i === 0 ? 0 : 12,
-              boxShadow: isMobileSize ? "inset 0px -1px 0px 0px #303030" : "",
+              boxShadow: isMobileSize ? "inset 0px -1px 0px 0px #474747" : "",
             }}
           >
             <Image

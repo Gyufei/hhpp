@@ -1,33 +1,16 @@
 "use client";
-import { useTranslations } from "next-intl";
-import PointMarket from "./point-market";
-import TrendingAsset from "./trending-asset";
+import { useRouter } from "@/i18n/routing";
+import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
 
 export default function Marketplace() {
-  return (
-    <div className="flex h-[calc(100vh-100px)] w-full flex-col sm:h-[calc(100vh-96px)]">
-      <MobileMarketBreadcrumb />
-      <div className="flex flex-1 items-stretch">
-        <div className="flex flex-1 flex-col overflow-auto pl-4 sm:pl-6">
-          <PointMarket />
-        </div>
-        <div className="flex w-full flex-col px-4 sm:w-[368px] sm:px-6">
-          <TrendingAsset />
-        </div>
-      </div>
-    </div>
-  );
-}
+  const router = useRouter();
+  const { data: markets } = useMarketplaces();
 
-function MobileMarketBreadcrumb() {
-  const ht = useTranslations("Header");
+  const firstMarket = markets?.[0];
 
-  return (
-    <div className="mb-[10px] mt-4 flex items-center pl-4 sm:hidden">
-      <div className="text-base leading-6 text-[#99a0af]">
-        {ht("btn-Marketplace")}
-        <span className="inline-block px-2">&gt;</span>
-      </div>
-    </div>
-  );
+  if (firstMarket) {
+    router.replace(`/direct-trade/${firstMarket.market_symbol}`);
+  }
+
+  return <></>;
 }

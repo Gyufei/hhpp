@@ -58,7 +58,7 @@ export default function TrendingAsset({ className }: { className?: string }) {
       &:first-of-type {
         padding-left: 8px;
       }
-      border-bottom: 1px solid #303030;
+      border-bottom: 1px solid #474747;
     `,
     Cell: `
       color: #D1D4DC;

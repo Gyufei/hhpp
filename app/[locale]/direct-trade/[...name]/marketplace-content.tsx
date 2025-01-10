@@ -63,7 +63,7 @@ export default function MarketplaceContent({
           <CreateOfferBtn marketplace={marketplace} onSuccess={refreshOffers} />
         )}
       </div>
-      <div className="flex flex-1  pt-4 sm:pt-0">
+      <div className="flex flex-1 pt-4 sm:pt-0">
         <div className="m-[2px] flex w-full flex-col sm:w-[320px]">
           <MarketplaceCard
             className="mb-[2px] rounded bg-bg-black p-[10px]"
