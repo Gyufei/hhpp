@@ -16,15 +16,15 @@ export type IDurationType = "hour" | "day" | "week";
 
 export const Durations: { name: string; value: IDurationType }[] = [
   {
-    name: "1H",
+    name: "1h",
     value: "hour",
   },
   {
-    name: "1D",
+    name: "1d",
     value: "day",
   },
   {
-    name: "1W",
+    name: "1w",
     value: "week",
   },
 ];
@@ -127,7 +127,7 @@ export default function SalesChart({
     () => ({
       chart: {
         backgroundColor: "transparent",
-        height: "249px",
+        height: "440px",
       },
       time: {
         useUTC: false,
@@ -143,34 +143,34 @@ export default function SalesChart({
         max: now,
         tickWidth: 0,
         title: undefined,
-        lineColor: "#F0F1F5",
+        lineColor: "#303030",
         lineWidth: 1,
         labels: {
           style: {
-            color: "#99A0AF",
+            color: "#949E9C",
             fontSize: "12px",
           },
         },
-        showFirstLabel: false,
+        showFirstLabel: true,
       },
       yAxis: [
         {
           lineWidth: 1,
-          lineColor: "#F0F1F5",
+          lineColor: "#303030",
           min: 0,
-          gridLineWidth: 0,
+          gridLineWidth: 1,
+          gridLineColor: "#303030",
           title: undefined,
           tickWidth: 0,
           showFirstLabel: false,
           labels: {
             align: "left",
-            x: 4,
+            x: 8,
             style: {
-              color: "#99A0AF",
+              color: "#949E9C",
               fontSize: "12px",
             },
           },
-          crosshairs: true,
         },
       ],
       legend: {
@@ -190,24 +190,16 @@ export default function SalesChart({
       },
       series: [
         {
-          name: "Line",
-          type: "line",
-          color: "#50d2c1",
+          name: "Column",
+          type: "column",
+          color: "#346A65",
           column: {
-            borderColor: "#50d2c1",
-            borderWidth: 3,
+            borderColor: "#346A65",
+            borderWidth: 0,
             borderRadius: 40,
             shadow: true,
           },
           data: chartData?.col,
-          // data: [
-          //   [Date.now(), 150],
-          //   [Date.now() - 10 * 60000, 150],
-          //   [Date.now() - 20 * 60000, 50],
-          //   [Date.now() - 30 * 60020, 250],
-          //   [Date.now() - 40 * 60000, 350],
-          //   [Date.now() - 50 * 60000, 350],
-          // ],
         },
         {
           name: "Line",

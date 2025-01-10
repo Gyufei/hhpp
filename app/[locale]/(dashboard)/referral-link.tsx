@@ -37,11 +37,6 @@ export default function ReferralLink() {
         {T("cap-YourReferralLink")}
       </div>
       <div className="relative mt-2">
-        {/* <Input
-          placeholder="https://"
-          className="h-12 border-[#d4d4d4] pl-4 pr-[52px] text-sm focus:border-[#3dd866]"
-        /> */}
-
         <div className="flex h-12 items-center justify-between space-x-2 rounded-lg border border-[#d4d4d4] px-4 text-sm">
           <div className="flex-1 truncate text-gray">{refLink}</div>
 

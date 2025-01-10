@@ -10,7 +10,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { IOffer } from "@/lib/types/offer";
-import { TokenPairImg } from "@/components/share/token-pair-img";
 import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
 import { useMemo } from "react";
 import { TooltipArrow } from "@radix-ui/react-tooltip";
@@ -19,7 +18,6 @@ import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useAnchor } from "@/lib/hooks/common/use-anchor";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
-import { ChainConfigs } from "@/lib/const/chain-configs";
 import { reportEvent } from "@/lib/utils/analytics";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 
@@ -34,6 +32,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
     forLogo,
     pointPerPrice,
     tokenTotalPrice,
+    orderDuration,
   } = useOfferFormat({
     offer: offer,
   });
@@ -58,21 +57,22 @@ export function OfferCard({ offer }: { offer: IOffer }) {
   }
 
   return (
-    <div className="h-fit rounded-[4px] bg-[#222428] p-5 hover:shadow-[4px_4px_20px_0px_rgba(45,46,51,0.05)]">
+    <div className="h-fit rounded bg-[#222428] px-[10px] pb-3 pt-[10px] hover:shadow-[4px_4px_20px_0px_rgba(45,46,51,0.05)]">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <TokenPairImg
-            src1={offer.marketplace.projectLogo}
-            src2={ChainConfigs[offer.marketplace.chain]?.logo}
-            width1={48}
-            height1={48}
+          <Image
+            src={offer.marketplace.projectLogo}
+            width={48}
+            height={48}
+            alt="project logo"
+            className="rounded-full"
           />
 
           <div>
             <div className="mb-[2px] leading-6 text-txt-white">
               {offer.marketplace.item_name}
             </div>
-            <div className="w-fit rounded bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
+            <div className="w-fit rounded border border-border-black bg-border-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
               #{offer.entry.id}
             </div>
           </div>
@@ -107,7 +107,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
               className="ml-1 rounded-full"
             />
           </div>
-          <div className="overflow-visible whitespace-nowrap text-xs leading-[18px] text-lightgray">
+          <div className="mt-[2px] overflow-visible whitespace-nowrap text-xs leading-[18px] text-gray">
             {orderType === "sell" ? (
               <>
                 ${formatNum(pointPerPrice, 6)} / {offer.marketplace.market_name}
@@ -139,7 +139,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
               className="ml-1 rounded-full"
             />
           </div>
-          <div className="overflow-visible whitespace-nowrap text-xs leading-[18px] text-lightgray">
+          <div className="mt-[2px] overflow-visible whitespace-nowrap text-xs leading-[18px] text-gray">
             {orderType === "sell" ? (
               <>${formatNum(tokenTotalPrice)}</>
             ) : (
@@ -152,9 +152,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
       </div>
 
       <div className="flex items-center justify-between pt-3">
-        <div className="text-xs leading-[18px] text-lightgray">
-          {/* {orderDuration} */}
-        </div>
+        <div className="text-xs leading-[18px] text-gray">{orderDuration}</div>
         <div className="flex items-center">
           {offer.note && (
             <div
@@ -190,7 +188,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
                 handleShowOffer(String(offer.entry.id));
               }}
             >
-              <button className="flex items-center justify-center rounded-full border border-border-black px-[18px] py-1 text-sm leading-5 text-[#d1d4dc] hover:border-transparent hover:bg-main">
+              <button className="flex items-center justify-center rounded-full border border-main px-[18px] py-1 text-sm leading-5 text-main hover:border-main-hover hover:text-main-hover">
                 {orderType === "sell" ? t("btn-Buy") : t("btn-Sell")}
               </button>
             </WithWalletConnectBtn>
@@ -200,7 +198,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
               chain={offer.marketplace.chain}
               onClick={() => handleShowOffer(String(offer.entry.id))}
             >
-              <button className="flex items-center justify-center rounded-full border border-border-black px-[18px] py-1 text-sm leading-5 text-txt-white hover:border-transparent hover:bg-main">
+              <button className="flex items-center justify-center rounded-full border border-main px-[18px] py-1 text-sm leading-5 text-main hover:border-main-hover hover:text-main-hover">
                 {t("btn-Detail")}
               </button>
             </WithWalletConnectBtn>

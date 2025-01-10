@@ -63,7 +63,7 @@ export default function OfferFillDialog({
         </div>
 
         <Link href={`/portfolio`}>
-          <button className="mt-7 flex h-12 w-full items-center justify-center rounded bg-main leading-6 text-txt-white">
+          <button className="mt-7 flex h-12 w-full items-center justify-center rounded bg-main hover:bg-main-hover leading-6 text-txt-white">
             <span className="mr-1 inline-block">Go To My Holdings</span>
             <Image
               src="/icons/right-45.svg"

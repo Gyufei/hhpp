@@ -9,7 +9,7 @@ export default function BlockChain() {
           <div className="text-base font-semibold leading-6 text-title-white">
             Deposit
           </div>
-          <div className="mt-5 flex h-10 cursor-pointer items-center justify-center rounded-full bg-main px-[34px] text-bg-black">
+          <div className="hover:bg-main-hover mt-5 flex h-10 cursor-pointer items-center justify-center rounded-full bg-main px-[34px] text-bg-black">
             HypesTrade
           </div>
           <div className="absolute left-0 top-1/2 h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-main"></div>
