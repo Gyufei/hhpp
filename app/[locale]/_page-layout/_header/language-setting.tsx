@@ -69,7 +69,7 @@ export default function LanguageSetting() {
             key={t.value}
             onClick={() => handleSelectLang(t.value)}
             data-active={locale === t.value}
-            className="flex h-9 cursor-pointer items-center rounded-xl px-1 text-xs leading-[18px] text-txt-white data-[active=true]:text-main"
+            className="flex h-9 cursor-pointer items-center rounded px-1 text-xs leading-[18px] text-txt-white hover:text-main data-[active=true]:text-main"
           >
             <Image
               width={16}

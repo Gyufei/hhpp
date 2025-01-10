@@ -66,7 +66,7 @@ export function LeaderRangeSelect({
           <div
             key={t.value}
             data-checked={type === t.value}
-            className="flex cursor-pointer items-center rounded-xl px-3 py-2 data-[checked=true]:bg-bg-black"
+            className="flex cursor-pointer items-center rounded px-3 py-2 data-[checked=true]:bg-bg-black"
             onClick={() => handleClickOpt(t.value)}
           >
             <div

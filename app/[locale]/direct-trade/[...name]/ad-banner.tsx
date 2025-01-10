@@ -22,7 +22,7 @@ export default function AdBanner({ className }: { className?: string }) {
         width={280}
         height={160}
         alt="ad1"
-        className="w-full rounded-2xl sm:h-auto sm:w-[300px]"
+        className="w-full rounded sm:h-auto sm:w-[300px]"
       />
       <div className="absolute bottom-0 right-3 top-0 my-3 flex flex-col items-center justify-center gap-2 sm:justify-between">
         {images.map((src, index) => (

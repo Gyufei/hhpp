@@ -54,7 +54,7 @@ export default function CreateOfferBtn({
           reportEvent("click", { value: "createOffer" });
         }}
       >
-        <button className="hidden h-8 w-full items-center justify-center rounded-xl bg-[#97FCE4] bg-main text-[12px] leading-4 text-bg-black sm:flex">
+        <button className="hidden h-8 w-full items-center justify-center rounded bg-[#97FCE4] bg-main text-[12px] leading-4 text-bg-black sm:flex">
           {T("btn-CreateOffer")}
         </button>
         <button className="absolute -top-[49px] right-[10px] flex h-10 w-10 items-center justify-center rounded-lg bg-main sm:hidden">

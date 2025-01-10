@@ -23,14 +23,11 @@ export function DepositDialog({
       </VisuallyHidden>
       <DialogContent
         showClose={false}
-        className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded-3xl border-none bg-bg-black p-6"
-        style={{
-          boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
-        }}
+        className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded border-border-black bg-bg-black p-0"
         aria-describedby={undefined}
       >
-        <div className="relative flex w-full items-center justify-center">
-          <div className="text-xl leading-[30px] text-txt-white">
+        <div className="relative flex w-full items-center justify-between border-b border-border-black px-5 py-[10px]">
+          <div className="text-[18px] leading-[28px] text-title-white">
             {T("btn-Deposit")}
           </div>
           <Image
@@ -39,15 +36,17 @@ export function DepositDialog({
             width={24}
             height={24}
             alt="close"
-            className="absolute right-0 top-1 cursor-pointer rounded-full hover:bg-main"
+            className="cursor-pointer rounded-full"
           />
         </div>
 
-        <div className="mt-4 break-all text-center text-sm leading-5 text-gray">
-          {chainConfig.contracts.deposit}
-        </div>
+        <div className="flex flex-col items-center p-5">
+          <div className="break-all text-center text-xs leading-[18px] text-gray">
+            {chainConfig.contracts.deposit}
+          </div>
 
-        <QrCode src={`/img/qrcode/${chainConfig.contracts.deposit}.png`} />
+          <QrCode src={`/img/qrcode/${chainConfig.contracts.deposit}.png`} />
+        </div>
       </DialogContent>
     </Dialog>
   );
@@ -55,37 +54,38 @@ export function DepositDialog({
 
 function QrCode({ src }: { src: string }) {
   return (
-    <div className="h-[280px] w-[280px] p-5">
-      <div className="relative h-full w-full overflow-hidden">
+    <div className="mt-[15px] h-[280px] w-[280px] bg-bg-black">
+      <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
         <Image
           src={src}
           alt="qrcode"
-          fill
-          className="scale-[1.05] object-cover"
+          width={250}
+          height={250}
+          className="rounded"
         />
         <Image
-          src="/img/qrcode/corner-border.png"
+          src="/img/qrcode/corner-border-1.png"
           alt="copy"
           width={60}
           height={60}
           className="absolute left-0 top-0 -rotate-90"
         />
         <Image
-          src="/img/qrcode/corner-border.png"
+          src="/img/qrcode/corner-border-1.png"
           alt="copy"
           width={60}
           height={60}
           className="absolute right-0 top-0"
         />
         <Image
-          src="/img/qrcode/corner-border.png"
+          src="/img/qrcode/corner-border-1.png"
           alt="copy"
           width={60}
           height={60}
           className="absolute bottom-0 left-0 rotate-180"
         />
         <Image
-          src="/img/qrcode/corner-border.png"
+          src="/img/qrcode/corner-border-1.png"
           alt="copy"
           width={60}
           height={60}

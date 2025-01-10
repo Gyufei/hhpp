@@ -20,7 +20,7 @@ export default function OfferFillDialog({
     >
       <DialogContent
         overlayClassName="z-[110]"
-        className="z-[110] flex w-[400px] flex-col gap-0 rounded-3xl border-none bg-bg-black p-6"
+        className="z-[110] flex w-[400px] flex-col gap-0 rounded border-border-black bg-bg-black p-6"
       >
         <div className="flex flex-col items-center">
           <Image
@@ -63,7 +63,7 @@ export default function OfferFillDialog({
         </div>
 
         <Link href={`/portfolio`}>
-          <button className="mt-7 flex h-12 w-full items-center justify-center rounded-2xl bg-main leading-6 text-txt-white">
+          <button className="mt-7 flex h-12 w-full items-center justify-center rounded bg-main leading-6 text-txt-white">
             <span className="mr-1 inline-block">Go To My Holdings</span>
             <Image
               src="/icons/right-45.svg"

@@ -25,7 +25,7 @@ export function InputPanel({
   return (
     <div
       className={cn(
-        "flex w-full justify-between rounded-2xl border border-border-black bg-bg-black p-4 focus-within:border focus-within:border-lightgray focus-within:bg-bg-black",
+        "flex w-full justify-between rounded border border-border-black bg-bg-black p-4 focus-within:border focus-within:border-lightgray focus-within:bg-bg-black",
         hasError ? "error-blink" : "",
       )}
     >

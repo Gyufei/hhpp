@@ -67,7 +67,7 @@ export function StableTokenSelectDisplay({
             <div
               key={t.symbol}
               onClick={() => handleSelectToken(t)}
-              className="flex h-8 cursor-pointer items-center rounded-xl px-1 text-sm text-txt-white hover:bg-[#f5f6f7]"
+              className="flex h-8 cursor-pointer items-center rounded px-1 text-sm text-txt-white hover:bg-[#f5f6f7]"
             >
               <Image
                 width={24}

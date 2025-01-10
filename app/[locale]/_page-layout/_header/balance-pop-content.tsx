@@ -43,23 +43,23 @@ export default function BalancePopContent() {
       <div
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="flex items-start justify-between rounded-xl border border-border-black p-3"
+        className="flex items-start justify-between rounded border border-dashed border-border-black p-[10px]"
       >
         <div>
           <div className="text-xs leading-[18px] text-gray">Balance</div>
-          <div className="mt-1 flex max-w-[190px] items-center gap-x-2 ">
+          <div className="mt-1 flex max-w-[160px] items-center gap-x-[5px] ">
             {isBalanceLoading ? (
-              <Skeleton className="h-6 w-20" />
+              <Skeleton className="h-5 w-20" />
             ) : (
-              <div className="truncate text-2xl leading-9 text-txt-white">
+              <div className="truncate text-[20px] leading-[30px] text-title-white">
                 {formatNum(balance)}
               </div>
             )}
             <Image
               src="/icons/withdraw.svg"
               alt="arrow-down"
-              width={24}
-              height={24}
+              width={20}
+              height={20}
               className={cn(
                 "cursor-pointer",
                 balanceHover ? "block" : "hidden",
@@ -72,14 +72,14 @@ export default function BalancePopContent() {
           src="/icons/logout.svg"
           className="cursor-pointer"
           alt="close"
-          width={24}
-          height={24}
+          width={20}
+          height={20}
           onClick={handleDisconnect}
         />
       </div>
 
       <button
-        className="mt-5 flex h-10 w-full items-center justify-center rounded-2xl bg-green text-sm leading-5 text-white"
+        className="mt-5 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black outline-none"
         onClick={() => setDepositDialogOpen(true)}
       >
         {T("btn-Deposit")}

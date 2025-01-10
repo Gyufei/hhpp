@@ -26,7 +26,7 @@ export default function MarketplaceOverview({
   }, [marketplace]);
 
   return (
-    <div className="mt-12 flex-col space-y-2  text-[12px] ">
+    <div className="mt-4 flex-col space-y-[10px] text-[12px] ">
       <div className="flex justify-between">
         <LabelText isLoading={isLoadingFlag}>
           {t("lb-InitialListing")}
@@ -34,7 +34,7 @@ export default function MarketplaceOverview({
         {isLoadingFlag ? (
           <ValueSkeleton />
         ) : (
-          <div className="flex items-center text-sm leading-5 text-txt-white">
+          <div className="flex items-center text-sm leading-5 text-title-white">
             $
             {formatNum(
               NP.times(marketplace.initial_listing_price, pointDecimalNum),
@@ -49,7 +49,7 @@ export default function MarketplaceOverview({
         {isLoadingFlag ? (
           <ValueSkeleton />
         ) : (
-          <div className="flex items-center text-sm leading-5 text-txt-white">
+          <div className="flex items-center text-sm leading-5 text-title-white">
             $
             {formatNum(
               Number(
@@ -72,7 +72,7 @@ export default function MarketplaceOverview({
                 ? "zero"
                 : +marketplace.change_rate_24h > 0
             }
-            className="text-sm leading-5 data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-txt-white"
+            className="text-sm leading-5 data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-title-white"
           >
             {+marketplace.change_rate_24h === 0
               ? null
@@ -92,7 +92,7 @@ export default function MarketplaceOverview({
         {isLoadingFlag ? (
           <ValueSkeleton />
         ) : (
-          <div className="flex items-center text-sm leading-5 text-txt-white">
+          <div className="flex items-center text-sm leading-5 text-title-white">
             {formatNum(marketplace!.filled_orders || 0)}
           </div>
         )}
@@ -103,7 +103,7 @@ export default function MarketplaceOverview({
         {isLoadingFlag ? (
           <ValueSkeleton />
         ) : (
-          <div className="leading-6 text-txt-white">
+          <div className="leading-6 text-title-white">
             {formatNum(NP.divide(marketplace!.listed_supply, pointDecimalNum))}
           </div>
         )}
@@ -114,7 +114,7 @@ export default function MarketplaceOverview({
         {isLoadingFlag ? (
           <ValueSkeleton />
         ) : (
-          <div className="flex items-center leading-6 text-txt-white">
+          <div className="flex items-center leading-6 text-title-white">
             {formatNum(marketplace!.active_wallets)}
           </div>
         )}

@@ -107,7 +107,7 @@ function SortOptions({
     <DropdownMenuSub>
       <DropdownMenuSubTrigger
         data-checked={sortField === field}
-        className="flex h-9 cursor-pointer items-center rounded-xl px-4 text-xs leading-[18px] text-gray hover:text-main data-[checked=true]:text-main"
+        className="flex h-9 cursor-pointer items-center rounded px-4 text-xs leading-[18px] text-gray hover:text-main data-[checked=true]:text-main"
       >
         {t("sl-" + field)}
       </DropdownMenuSubTrigger>

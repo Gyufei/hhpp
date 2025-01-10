@@ -32,6 +32,7 @@ export default function Setting() {
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}
+        align="end"
       >
         <div className="ml-30 flex items-center">
           <div className="flex flex-1 justify-center text-xl leading-[30px] text-title-white">

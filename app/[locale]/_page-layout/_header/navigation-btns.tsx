@@ -3,7 +3,7 @@ import { Link, usePathname } from "@/i18n/routing";
 import MoreMenu from "./more-menu";
 
 const menuItemsClx =
-  "flex h-10 items-center rounded-3xl px-[10px] cursor-pointer data-[active=true]:text-main hover:text-main";
+  "flex h-10 items-center px-[10px] cursor-pointer data-[active=true]:text-main hover:text-main";
 
 export default function NavigationBtns() {
   const pathname = usePathname();

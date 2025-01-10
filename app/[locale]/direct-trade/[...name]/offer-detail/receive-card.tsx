@@ -14,7 +14,7 @@ export default function ReceiveCard({
   tokenLogo: string;
 }) {
   return (
-    <div className="rounded-2xl border border-border-black bg-bg-black p-4">
+    <div className="rounded border border-border-black bg-bg-black p-4">
       <div className="text-xs leading-[18px] text-gray">{topText}</div>
       <div className="mt-2 flex justify-between">
         <div className="h-[36px] text-2xl leading-[36px] text-txt-white">

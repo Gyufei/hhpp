@@ -44,7 +44,7 @@ export default function Referral() {
       </div>
 
       <div className="relative m-[2px] mr-0 flex flex-1 flex-col justify-start rounded bg-bg-black">
-        <div className="mt-4 rounded-xl bg-bg-black p-4 sm:mt-0 sm:bg-transparent">
+        <div className="mt-4 rounded bg-bg-black p-4 sm:mt-0 sm:bg-transparent">
           <div className="mb-2 mt-5 flex items-center space-x-2">
             <div className="text-base leading-6 text-txt-white">
               {rt("cap-ReferralLink")}

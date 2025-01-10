@@ -45,7 +45,7 @@ export default function ReferralDialog() {
       </VisuallyHidden>
       <DialogContent
         showClose={false}
-        className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded-3xl border-none bg-bg-black p-6"
+        className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded border-border-black bg-bg-black p-6"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}
@@ -132,7 +132,7 @@ export function ReferralSignInBtn({
       <div className="mt-10 w-full">
         <button
           onClick={handleSignInReferral}
-          className="flex h-12 w-full items-center justify-center rounded-2xl bg-main text-txt-white"
+          className="flex h-12 w-full items-center justify-center rounded bg-main text-txt-white"
         >
           {t("btn-SignIn")}
         </button>

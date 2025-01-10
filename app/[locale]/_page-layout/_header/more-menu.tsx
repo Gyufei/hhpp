@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 const menuItemsClx =
-  "flex h-10 items-center rounded-3xl px-[10px] cursor-pointer hover:text-main";
+  "flex h-10 items-center rounded px-[10px] cursor-pointer hover:text-main";
 
 const urlOptions = [
   {

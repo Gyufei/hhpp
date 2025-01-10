@@ -23,7 +23,6 @@ import { ChainType } from "@/lib/types/chain";
 import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 import MobileDrawerTitle from "@/components/share/drawer-title-mobile";
 import Drawer from "react-modern-drawer";
-import { ChainConfigs } from "@/lib/const/chain-configs";
 
 export default function MarketplaceCard({
   marketplace,
@@ -48,8 +47,6 @@ export default function MarketplaceCard({
     return projectInfo;
   }, [marketplace, marketInfos]);
 
-  const chainInfo = marketplace ? ChainConfigs[marketplace?.chain] : null;
-
   function handleStar() {
     if (isStar) {
       setIsStar(false);
@@ -72,34 +69,23 @@ export default function MarketplaceCard({
 
   return (
     <div className={cn(className, "relative")}>
-      <div className="flex items-center justify-between">
-        {isLoadingFlag ? (
-          <Skeleton className="h-[73px] w-[73px] " />
-        ) : (
-          <div className="absolute top-[10px] h-fit">
-            <Image
-              src={marketplace?.projectLogo}
-              width={72}
-              height={72}
-              alt="token1"
-              className="rounded-md border-[1.5px] border-border-black p-1"
-            />
-            {chainInfo?.logo && (
-              <div className="absolute bottom-0 right-0 flex h-6 w-6 items-center justify-center rounded-full border border-white bg-bg-black">
-                <Image
-                  src={chainInfo?.logo}
-                  width={24}
-                  height={24}
-                  alt="token2"
-                  className="rounded-full"
-                />
-              </div>
-            )}
-          </div>
-        )}
+      <div className="flex items-center justify-between border-b border-[#303030] pb-4">
+        <div className="flex items-center justify-start space-x-[10px]">
+          {isLoadingFlag ? (
+            <Skeleton className="h-14 w-14 rounded-full" />
+          ) : (
+            <div className="flex h-14 w-14 items-center justify-center rounded-full border-[1.5px] border-border-black">
+              <Image
+                src={marketplace?.projectLogo}
+                width={48}
+                height={48}
+                alt="token1"
+                className="rounded-full"
+              />
+            </div>
+          )}
 
-        <div className="mt-3 flex flex-1 items-center justify-between pl-[84px]">
-          <div className="relative flex items-center space-x-3 ">
+          <div className="mt-[3px] relative flex items-center space-x-3">
             <div className="flex flex-col">
               {isLoadingFlag ? (
                 <>
@@ -108,7 +94,7 @@ export default function MarketplaceCard({
                 </>
               ) : (
                 <>
-                  <div className="w-[120px] overflow-hidden text-ellipsis whitespace-nowrap text-sm leading-[20px] text-title-white">
+                  <div className="w-[120px] overflow-hidden text-ellipsis whitespace-nowrap text-xl leading-[30px] text-title-white">
                     {marketplace.item_name}
                   </div>
                   <OverviewIcons
@@ -122,12 +108,12 @@ export default function MarketplaceCard({
               )}
             </div>
           </div>
-          {isLoadingFlag ? (
-            <Skeleton className="h-8 w-8 rounded-full bg-bg-black" />
-          ) : (
-            <FoldPop />
-          )}
         </div>
+        {isLoadingFlag ? (
+          <Skeleton className="h-8 w-8 rounded-full bg-bg-black" />
+        ) : (
+          <FoldPop />
+        )}
       </div>
 
       <MarketplaceOverview
@@ -336,7 +322,7 @@ function FoldPop() {
           onClose={() => setPopOpen(!popOpen)}
           direction={"bottom"}
           size={"calc(100vh - 100px)"}
-          className="flex flex-col overflow-y-auto rounded-3xl !bg-bg-black p-4"
+          className="flex flex-col overflow-y-auto rounded !bg-bg-black p-4"
         >
           <MobileDrawerTitle
             title={t("Switch")}

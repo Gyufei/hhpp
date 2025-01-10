@@ -69,14 +69,14 @@ export function WithdrawDialog({
       </VisuallyHidden>
       <DialogContent
         showClose={false}
-        className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded-3xl border-none bg-bg-black p-6"
+        className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded border-border-black bg-bg-black p-0"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}
         aria-describedby={undefined}
       >
-        <div className="relative flex w-full items-center justify-center">
-          <div className="text-xl leading-[30px] text-txt-white">
+        <div className="relative flex w-full items-center justify-between border-b border-border-black px-5 py-[10px]">
+          <div className="text-[18px] leading-[28px] text-title-white">
             {T("btn-Withdraw")}
           </div>
           <Image
@@ -85,30 +85,32 @@ export function WithdrawDialog({
             width={24}
             height={24}
             alt="close"
-            className="absolute right-0 top-1 cursor-pointer rounded-full hover:bg-main"
+            className="cursor-pointer rounded-full"
           />
         </div>
 
-        <div className="relative mt-5 w-full">
+        <div className="relative w-full border-b border-border-black p-5">
           <NumericalInput
             data-error={!!withdrawError}
             value={withdrawAmount}
             onUserInput={(value) => setWithdrawAmount(value)}
-            placeholder="0"
-            className="h-[50px] w-full rounded-xl border border-border-black py-[14px] pl-4 pr-[100px] focus:border-lightgray disabled:cursor-not-allowed disabled:bg-bg-black data-[error=true]:!border-red"
+            placeholder="Enter amount"
+            className="h-12 w-full rounded border border-border-black py-3 pl-[10px] pr-[75px] text-base leading-6 text-title-white focus:border-[#D1D4DC] data-[error=true]:!border-red"
           />
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-xs leading-[18px] text-gray">
+          <div className="absolute right-[30px] top-1/2 -translate-y-1/2 text-xs leading-[18px] text-gray">
             Max: {formatNum(balance)}
           </div>
         </div>
 
-        <button
-          disabled={!!withdrawError || isMutating}
-          onClick={handleConfirmWithdraw}
-          className="mt-5 flex h-12 w-full items-center justify-center rounded-[16px] bg-main leading-6 text-txt-white disabled:bg-gray"
-        >
-          {CT("btn-Confirm")}
-        </button>
+        <div className="w-full px-5 py-[15px]">
+          <button
+            disabled={!!withdrawError || isMutating}
+            onClick={handleConfirmWithdraw}
+            className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black disabled:bg-[#346A65]"
+          >
+            {CT("btn-Confirm")}
+          </button>
+        </div>
       </DialogContent>
     </Dialog>
   );
