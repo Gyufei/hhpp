@@ -97,10 +97,18 @@ export default function MarketplaceContent({
           <OfferList offers={canBuyOffers || []} isLoading={isOffersLoading} />
           <OfferDetailDrawer offers={offers || []} onSuccess={refreshOffers} />
         </div>
-        <div className="m-[2px] flex w-full flex-col rounded bg-bg-black px-[10px] sm:w-[320px]">
-          <div className="hidden h-[80px] py-4 text-txt-white sm:block">
-            <MarketTrades marketplace={marketplace} />
-          </div>
+        <div
+          className="m-[2px] flex w-full flex-col rounded bg-bg-black px-[10px] sm:w-[320px]"
+          style={{
+            minHeight: isMobileSize
+              ? "calc(100vh - 175px)"
+              : "min(calc(100vh - 60px), 691px)",
+            maxHeight: isMobileSize
+              ? "calc(100vh - 175px)"
+              : "max(calc(100vh - 60px), 691px)",
+          }}
+        >
+          <MarketTrades marketplace={marketplace} />
         </div>
       </div>
     </div>

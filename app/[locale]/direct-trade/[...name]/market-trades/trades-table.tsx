@@ -234,7 +234,7 @@ export function TradesTable({
   ];
 
   return (
-    <div className="relative flex w-full flex-1 shrink grow flex-col">
+    <div className="relative flex h-full w-full shrink grow flex-col">
       <Image
         src="/icons/time.svg"
         width={16}
