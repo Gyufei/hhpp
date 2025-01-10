@@ -17,7 +17,7 @@ export default function OfferInfo({
   progress: number;
 }) {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between ">
       {/* avatar and name number */}
       <div className="flex items-center">
         <div className="flex items-center space-x-4">
@@ -31,7 +31,9 @@ export default function OfferInfo({
           />
 
           <div>
-            <div className="mb-[2px] text-2xl leading-9 text-txt-white">{name}</div>
+            <div className="mb-[2px] text-2xl leading-9 text-txt-white">
+              {name}
+            </div>
             <div className="w-fit rounded bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
               #{no}
             </div>
@@ -44,7 +46,7 @@ export default function OfferInfo({
           className="scale-[1.4285]"
           percentage={progress * 100}
         />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm leading-[20px] text-txt-white">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-sm leading-[20px] text-txt-white">
           {formatNum(NP.times(progress, 100))}%
         </div>
       </div>

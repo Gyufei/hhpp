@@ -15,7 +15,8 @@ import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { sortBy } from "lodash";
 import { useMyHoldings } from "@/lib/hooks/api/use-my-holdings";
-
+import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
+import { usePointAmount } from "@/lib/hooks/api/use-point-amount";
 export function BalanceTable() {
   const T = useTranslations("page-MyOrders");
 
@@ -117,24 +118,30 @@ export function BalanceTable() {
               </HeaderRow>
             </Header>
             <Body>
-              {tableList.map((off) => (
+              {tableList.map((holding) => (
                 <Row
-                  key={off.offer_id}
-                  item={off}
+                  key={holding.offer_id}
+                  item={holding}
                   className="h-12 border-none !bg-transparent"
                 >
                   <Cell className="h-12 px-1 py-[11px] align-top ">
-                    {off.marketplace.item_name}
+                    {holding.marketplace.item_name}
                   </Cell>
 
                   <Cell className="h-12 px-1 py-[11px] align-top">
-                    {off.marketplace.total_vol}
+                    <BalanceValue
+                      type="total"
+                      marketAccount={holding.marketplace.market_place_account}
+                    />
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top">
-                    {off.entries[0]?.item_amount}
+                    <BalanceValue
+                      type="free"
+                      marketAccount={holding.marketplace.market_place_account}
+                    />
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top">
-                    ${off.marketplace.last_price * off.entries[0].item_amount}
+                    ${holding.marketplace.last_price * 100}
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top text-red">
                     -$233.556/-12.34%
@@ -172,3 +179,23 @@ export function BalanceTable() {
     </>
   );
 }
+
+const BalanceValue = ({
+  type,
+  marketAccount,
+}: {
+  type: string;
+  marketAccount: string;
+}) => {
+  const { address: wallet } = useChainWallet();
+  const { data: pointAmount } = usePointAmount(wallet, marketAccount);
+
+  if (pointAmount) {
+    if (type === "free") {
+      return <>{pointAmount?.free_amount || 0}</>;
+    } else {
+      return <>{pointAmount?.locked_amount + pointAmount?.free_amount || 0}</>;
+    }
+  }
+  return <>0</>;
+};

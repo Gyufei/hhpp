@@ -111,7 +111,7 @@ export function ReferralDrawer({
       open={drawerOpen}
       onClose={handleDrawerClose}
       direction={isMobileSize ? "bottom" : "right"}
-      size={isMobileSize ? "calc(100vh - 44px)" : 952}
+      size={isMobileSize ? "calc(100vh - 44px)" : 480}
       className="overflow-y-auto rounded-none !bg-bg-black p-4 sm:flex sm:flex-col sm:rounded-l-2xl sm:p-6 "
       customIdSuffix="referral-drawer"
     >
@@ -187,7 +187,7 @@ export function ReferralDrawer({
             </div>
           )}
 
-          <div className="mt-6 bg-[rgba(255,169,91,0.1)] p-4 text-sm leading-5 text-[#ffa95b]">
+          <div className="mt-6 bg-[rgba(255,169,91,0.1)] p-4 text-sm leading-5 text-[#50D2C1]">
             <Image
               width={20}
               height={20}
@@ -205,7 +205,7 @@ export function ReferralDrawer({
         </div>
 
         <WithWalletConnectBtn className="w-full" onClick={handleSaveRate}>
-          <button className="mt-[140px] flex h-12 w-full items-center justify-center rounded bg-green leading-6 text-white">
+          <button className="mt-[140px] flex h-12 w-full items-center justify-center rounded bg-[#50D2C1] bg-green leading-6 text-white">
             {rt("btn-Save")}
           </button>
         </WithWalletConnectBtn>
