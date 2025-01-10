@@ -15,7 +15,7 @@ export default function PortFolio() {
 
   return (
     <div className="flex flex-1 flex-col text-txt-white sm:p-0">
-      <div className="hidden items-center justify-between border-b-2 border-[#303030] p-5 sm:flex">
+      <div className="m-[2px] mr-0 hidden items-center justify-between rounded bg-bg-black p-5 sm:flex">
         <div className="flex items-center space-x-5">
           <div className="text-xl leading-[30px] text-txt-white">
             {TH("btn-Dashboard")}
@@ -25,7 +25,7 @@ export default function PortFolio() {
       </div>
       <Tabs
         value={currentTab}
-        className="flex flex-1 flex-col  p-5 "
+        className="m-[2px] mr-0 mt-0 flex flex-1 flex-col rounded bg-bg-black p-5"
         onValueChange={setCurrentTab}
       >
         <TabsList className="flex items-center justify-between p-0">

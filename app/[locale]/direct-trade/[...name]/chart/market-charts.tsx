@@ -26,7 +26,7 @@ export default function MarketCharts({
   }
 
   return (
-    <div className="flex h-[336px] flex-col rounded-3xl bg-bg-black p-4">
+    <div className="flex flex-col p-4">
       <div className="flex items-center justify-between">
         <div className="flex w-full items-center justify-between space-x-[6px] sm:w-auto sm:justify-start">
           <ChartSwitch
@@ -46,7 +46,7 @@ export default function MarketCharts({
         </div> */}
       </div>
 
-      <div className="mt-5 h-[280px]">
+      <div className="mt-5 ">
         {chartType === "sales" ? (
           <SalesChart duration={duration} marketplace={marketplace} />
         ) : (

@@ -32,7 +32,7 @@ export default function ReferralLink() {
   }
 
   return (
-    <div className="border-t-2 border-[#303030] px-4 pt-10">
+    <div className="px-4 py-10">
       <div className="leading-[18px] text-gray">
         {T("cap-YourReferralLink")}
       </div>

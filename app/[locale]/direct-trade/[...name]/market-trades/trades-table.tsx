@@ -35,7 +35,9 @@ export function TradesTable({
   const { data: tokens } = useTokens(marketplace?.chain || ChainType.HYPER);
   const isLoadingFlag = !marketplace || isLoading || isHistoryLoading;
 
-  const { data: msgEvents } = useWsMsgSub(marketplace?.chain || ChainType.HYPER);
+  const { data: msgEvents } = useWsMsgSub(
+    marketplace?.chain || ChainType.HYPER,
+  );
 
   const tradeMsgs = useMemo<any[]>(() => {
     const sortHistory = sortBy(historyData || [], "trade_at").reverse();
@@ -139,7 +141,7 @@ export function TradesTable({
       background: #111a1e;
     `,
     HeaderCell: `
-      color: #949e9c;
+      color: #f6fefd;
       border-bottom: 1px solid #303030;
 
       &:nth-of-type(4),
@@ -148,7 +150,7 @@ export function TradesTable({
       }
     `,
     Cell: `
-      color: #D1D4DC;
+      color: #f6fefd;
       height: 40px;
 
       &:nth-of-type(3),
@@ -232,7 +234,7 @@ export function TradesTable({
   ];
 
   return (
-    <div className="relative flex w-full flex-1 shrink grow flex-col border-b border-border-black">
+    <div className="relative flex w-full flex-1 shrink grow flex-col">
       <Image
         src="/icons/time.svg"
         width={16}
@@ -241,7 +243,7 @@ export function TradesTable({
         className="absolute left-0 top-[10px] z-10"
       />
       <div className="max-h-auto relative w-full flex-1 flex-col overflow-y-hidden pb-0">
-        <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-1 flex-col">
+        <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-1 flex-col text-txt-white">
           <CompactTable
             columns={COLUMNS}
             data={data}
