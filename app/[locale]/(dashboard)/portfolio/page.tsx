@@ -2,7 +2,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import MyHolding from "./my-holding";
+import MyOrders from "./orders/page";
+import MyBalances from "./my-balance";
 import PortfolioInfo from "./portfolio-info";
 
 const tabClx =
@@ -11,7 +12,7 @@ const tabClx =
 export default function PortFolio() {
   const TH = useTranslations("Header");
 
-  const [currentTab, setCurrentTab] = useState("orders");
+  const [currentTab, setCurrentTab] = useState("balances");
 
   return (
     <div className="flex flex-1 flex-col text-txt-white sm:p-0">
@@ -33,9 +34,6 @@ export default function PortFolio() {
             <TabsTrigger className={tabClx} value="orders">
               My Orders
             </TabsTrigger>
-            <TabsTrigger className={tabClx} value="holdings">
-              My Holdings
-            </TabsTrigger>
             <TabsTrigger className={tabClx} value="balances">
               My Balances
             </TabsTrigger>
@@ -46,21 +44,14 @@ export default function PortFolio() {
           className="flex flex-1 flex-col data-[state=inactive]:hidden"
           forceMount={true}
         >
-          Orders
-        </TabsContent>
-        <TabsContent
-          value="holdings"
-          className="flex flex-1 flex-col data-[state=inactive]:hidden"
-          forceMount={true}
-        >
-          <MyHolding />
+          <MyOrders />
         </TabsContent>
         <TabsContent
           value="balances"
           className="flex flex-1 flex-col data-[state=inactive]:hidden"
           forceMount={true}
         >
-          Balances
+          <MyBalances />
         </TabsContent>
       </Tabs>
     </div>
