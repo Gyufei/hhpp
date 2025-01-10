@@ -52,7 +52,7 @@ export function OrderTable({
           id: o.offer_id,
         };
       })
-      .filter((o) => {
+      .filter(() => {
         // console.log("🚀 ~ .filter ~ o:", o, types, status);
         // const oType = o?.entry?.direction;
         // const isStatus = status === "All" || status.toLowerCase() === o.status;

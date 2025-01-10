@@ -1,11 +1,8 @@
 "use client";
 
 import { BalanceTable } from "./balance-table";
-import { useTranslations } from "next-intl";
 
 export default function MyOrders() {
-  const T = useTranslations("page-MyOrders");
-
   return (
     <div className="box-content flex h-[calc(100vh-156px)] w-full flex-1 flex-col  text-txt-white sm:h-[calc(100vh-96px)] sm:px-0">
       <div className="flex max-w-[100vw] flex-1 flex-col overflow-x-scroll px-4 sm:max-w-none sm:overflow-x-hidden sm:px-0">

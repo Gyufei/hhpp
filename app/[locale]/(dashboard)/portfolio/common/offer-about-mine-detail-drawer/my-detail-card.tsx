@@ -3,7 +3,6 @@ import Image from "next/image";
 import { formatNum } from "@/lib/utils/number";
 import { handleGoScan, truncateAddr } from "@/lib/utils/web3";
 import { WithTip } from "@/components/share/with-tip";
-import { formatTimeObj } from "@/lib/utils/time";
 import { IOffer } from "@/lib/types/offer";
 import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
 import { useTranslations } from "next-intl";
@@ -135,31 +134,6 @@ function DetailLabel({
     <div className="flex items-center space-x-1 text-sm leading-5 text-gray">
       {children}
       {tipText && <WithTip>{tipText}</WithTip>}
-    </div>
-  );
-}
-
-function TimeDisplay({ seconds }: { seconds: number }) {
-  const dateObj = formatTimeObj(seconds);
-  const ct = useTranslations("Common");
-
-  return (
-    <div className="mt-4 flex justify-center space-x-4">
-      <TimeItem num={dateObj.days || 0} text={ct("Days")} />
-      <TimeItem num={dateObj.hours || 0} text={ct("Hours")} />
-      <TimeItem num={dateObj.minutes || 0} text={ct("Minutes")} />
-      <TimeItem num={dateObj.seconds || 0} text={ct("Seconds")} />
-    </div>
-  );
-}
-
-function TimeItem({ num, text }: { num: number; text: string }) {
-  return (
-    <div className="flex flex-col items-center">
-      <div className="text-yellow flex h-12 w-12 items-center justify-center rounded-lg bg-black text-xl leading-[30px]">
-        {num}
-      </div>
-      <div className="text-xs leading-[18px] text-lightgray">{text}</div>
     </div>
   );
 }
