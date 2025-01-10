@@ -22,7 +22,7 @@ export default function DetailCard({ offer }: { offer: IOffer }) {
   const originMaker = entryInfo?.original_creator || offer.offer_maker;
 
   return (
-    <div className="flex-1 px-0 sm:px-6">
+    <div className="flex-1 px-0 mt-6 sm:px-6">
       <div className="flex items-center justify-between">
         <div className="leading-6 text-txt-white">{T("cap-OfferDetail")}</div>
       </div>
