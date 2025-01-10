@@ -5,9 +5,8 @@ import { DataApiPaths } from "@/lib/PathMap";
 import { dataApiFetcher } from "@/lib/fetcher";
 import { useMarketplaces } from "./use-marketplaces";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
-import { ChainType } from "@/lib/types/chain";
 
-export function useMyOffers({ chain }: { chain: ChainType }) {
+export function useMyOffers(params: any) {
   const { dataApiEndPoint } = useEndPoint();
   const { address } = useChainWallet();
 
@@ -18,7 +17,7 @@ export function useMyOffers({ chain }: { chain: ChainType }) {
     if (isMarketLoading) return [];
 
     const fetchParams = Object.entries({
-      chain: chain,
+      ...params,
       wallet: address,
     })
       .filter(([_, v]) => v !== null)

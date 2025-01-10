@@ -127,7 +127,7 @@ export default function SalesChart({
     () => ({
       chart: {
         backgroundColor: "transparent",
-        height: "440px",
+        height: "400px",
       },
       time: {
         useUTC: false,
