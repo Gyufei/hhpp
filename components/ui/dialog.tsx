@@ -54,7 +54,7 @@ const DialogContent = React.forwardRef<
       >
         {children}
         {showClose && (
-          <DialogPrimitive.Close className="shadow-1 absolute right-6 top-4 flex h-8 w-8 items-center justify-center rounded-full text-txt-white outline-0 transition-opacity hover:bg-main disabled:pointer-events-none">
+          <DialogPrimitive.Close className="shadow-1 absolute right-6 top-4 flex h-8 w-8 items-center justify-center rounded-full text-txt-white outline-0 transition-opacity disabled:pointer-events-none">
             <Image src="/icons/close.svg" width={24} height={24} alt="close" />
           </DialogPrimitive.Close>
         )}

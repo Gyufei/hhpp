@@ -8,6 +8,9 @@ body {
 
 :root {
   --color-main: #50d2c1;
+  --color-main-hover: #97fce4;
+  --color-main-inactive: #346a65;
+
   --color-title-white: #f6fefd;
   --color-txt-white: #d1d4dc;
   --color-bg-black: #111a1e;

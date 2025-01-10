@@ -85,7 +85,7 @@ export default function MarketplaceCard({
             </div>
           )}
 
-          <div className="mt-[3px] relative flex items-center space-x-3">
+          <div className="relative mt-[3px] flex items-center space-x-3">
             <div className="flex flex-col">
               {isLoadingFlag ? (
                 <>
@@ -251,7 +251,7 @@ function FoldPop() {
         <div className="relative pb-6">
           <Image
             src={
-              isInputFocused ? "/icons/search-gray.svg" : "/icons/search.svg"
+              isInputFocused ? "/icons/search.svg" : "/icons/search-gray.svg"
             }
             width={20}
             height={20}
@@ -264,7 +264,7 @@ function FoldPop() {
             onChange={(e) => setSearchText(e.target.value)}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
-            className="h-10 rounded-lg border-border-black bg-bg-black pl-8 text-title-white"
+            className="focus:border-text-white h-10 rounded-lg border-border-black bg-bg-black pl-8 text-title-white"
           />
         </div>
         {filteredCateList.map((cate, i) => (

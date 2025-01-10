@@ -51,8 +51,8 @@ export default function OfferList({
     filterOrders?.[0]?.marketplace?.market_catagory === "point_token";
 
   return (
-    <div className="flex h-full flex-col ">
-      <div className="mb-[2px] flex w-full items-center justify-between rounded bg-bg-black pb-[10px]">
+    <div className="flex h-full flex-col">
+      <div className="mb-[2px] flex w-full items-center justify-between border-b border-border-black bg-bg-black pb-[10px]">
         <div className="no-scroll-bar flex w-[calc(100vw-170px)] flex-1 items-center space-x-4 overflow-x-scroll sm:w-auto sm:overflow-hidden">
           <SortSelect
             sortField={sortField}

@@ -95,7 +95,7 @@ export function WithdrawDialog({
             value={withdrawAmount}
             onUserInput={(value) => setWithdrawAmount(value)}
             placeholder="Enter amount"
-            className="h-12 w-full rounded border border-border-black py-3 pl-[10px] pr-[75px] text-base leading-6 text-title-white focus:border-[#D1D4DC] data-[error=true]:!border-red"
+            className="h-12 w-full rounded border border-border-black py-3 pl-[10px] pr-[75px] text-base leading-6 text-title-white focus:border-text-white data-[error=true]:!border-red"
           />
           <div className="absolute right-[30px] top-1/2 -translate-y-1/2 text-xs leading-[18px] text-gray">
             Max: {formatNum(balance)}
@@ -106,7 +106,7 @@ export function WithdrawDialog({
           <button
             disabled={!!withdrawError || isMutating}
             onClick={handleConfirmWithdraw}
-            className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black disabled:bg-[#346A65]"
+            className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:bg-main-inactive"
           >
             {CT("btn-Confirm")}
           </button>

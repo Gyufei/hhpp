@@ -79,7 +79,7 @@ export default function BalancePopContent() {
       </div>
 
       <button
-        className="mt-5 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black outline-none"
+        className="hover:bg-main-hover mt-5 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black outline-none"
         onClick={() => setDepositDialogOpen(true)}
       >
         {T("btn-Deposit")}

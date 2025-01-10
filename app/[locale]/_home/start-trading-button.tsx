@@ -10,7 +10,7 @@ export default function StartTradingButton({
     <Link href="/direct-trade">
       <div
         className={cn(
-          "flex h-10 cursor-pointer items-center rounded-3xl bg-main px-6 text-base font-light text-black",
+          "hover:bg-main-hover flex h-10 cursor-pointer items-center rounded-3xl bg-main px-6 text-base font-light text-black",
           className,
         )}
       >

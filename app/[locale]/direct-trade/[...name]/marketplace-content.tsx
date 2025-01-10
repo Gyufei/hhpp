@@ -70,7 +70,7 @@ export default function MarketplaceContent({
             marketplace={marketplace}
           />
 
-          <div className="mb-[2px] hidden rounded bg-bg-black px-[10px] py-[16px]  sm:block">
+          <div className="mb-[2px] hidden rounded bg-bg-black px-[10px] py-4 sm:block">
             {marketplace && (
               <CreateOfferBtn
                 marketplace={marketplace}

@@ -54,7 +54,7 @@ const DrawerContent = React.forwardRef<
       <div className="bg-muted mx-auto mt-4 hidden h-2 w-[100px] rounded-full" />
       {children}
       {showClose && (
-        <DrawerPrimitive.Close className="shadow-1 absolute right-4 top-1 flex h-8 w-8 items-center justify-center rounded-full border-none text-txt-white outline-0 transition-opacity hover:bg-main disabled:pointer-events-none">
+        <DrawerPrimitive.Close className="shadow-1 absolute right-4 top-1 flex h-8 w-8 items-center justify-center rounded-full border-none text-txt-white outline-0 transition-opacity disabled:pointer-events-none">
           <X className="h-4 w-4" />
         </DrawerPrimitive.Close>
       )}

@@ -9,6 +9,9 @@ module.exports = {
     extend: {
       colors: {
         main: "var(--color-main)",
+        "main-hover": "var(--color-main-hover)",
+        "main-inactive": "var(--color-main-inactive)",
+
         "title-white": "var(--color-title-white)",
         "txt-white": "var(--color-txt-white)",
         "bg-black": "var(--color-bg-black)",
