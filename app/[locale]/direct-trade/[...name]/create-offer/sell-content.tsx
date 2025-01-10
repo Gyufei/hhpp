@@ -28,10 +28,6 @@ export function SellContent({
 }) {
   const T = useTranslations("drawer-CreateOffer");
 
-  const isOffChainFungiblePoint =
-    marketplace?.market_catagory === "offchain_fungible_point";
-  const isPointToken = marketplace?.market_catagory === "point_token";
-
   const {
     token: receiveToken,
     setToken: setReceiveToken,
@@ -40,7 +36,6 @@ export function SellContent({
     setTokenAmount: setReceiveAmount,
     pointAmount: sellPointAmount,
     setPointAmount: setSellPointAmount,
-    tokenAmountValue: sellPrice,
     currentMarket,
     pointPrice,
 
@@ -72,7 +67,7 @@ export function SellContent({
   }
 
   return (
-    <div className={cn("mt-6 flex flex-1 flex-col justify-between", className)}>
+    <div className={cn("flex flex-1 flex-col justify-between p-5", className)}>
       <div className="flex flex-1 flex-col">
         <InputPanel
           value={sellPointAmount}
@@ -90,6 +85,7 @@ export function SellContent({
         <ArrowBetween className="-my-4 self-center" />
 
         <InputPanel
+          className="pb-4"
           value={receiveTokenAmount}
           onValueChange={setReceiveAmount}
           topText={
@@ -111,13 +107,7 @@ export function SellContent({
               </WithTip>
             </div>
           }
-          bottomText={
-            <>
-              {!(isOffChainFungiblePoint || isPointToken)
-                ? `${T("txt-RequiredCollateral")} ${sellPrice}`
-                : null}
-            </>
-          }
+          bottomText={<></>}
           tokenSelect={
             <StableTokenSelectDisplay
               chain={currentMarket.chain}
@@ -127,13 +117,15 @@ export function SellContent({
           }
         />
 
+        <div className="my-5  h-[1px] bg-border-black"></div>
+
         <OrderNoteAndFee value={note} onValueChange={setNote} type={"sell"} />
       </div>
 
       <button
         onClick={handleConfirmBtnClick}
         disabled={isCreating || !!errorText || !receiveTokenAmount}
-        className="mt-2 flex h-12 w-full items-center justify-center rounded bg-red leading-6 text-white disabled:cursor-not-allowed disabled:bg-gray"
+        className="mt-2 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive"
       >
         {T("btn-ConfirmMakerOrder")}
       </button>

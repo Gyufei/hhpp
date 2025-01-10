@@ -46,7 +46,7 @@ export default function SearchInput({
           value={searchText}
           onKeyDown={handleKeyPress}
           onChange={(e) => setSearchText(e.target.value)}
-          className="z-0 h-8 w-[200px] rounded border border-[#d1d4dc] bg-transparent px-[10px] text-title-white"
+          className="z-0 h-8 w-[200px] rounded border border-[#d1d4dc] bg-transparent px-[10px] text-txt-white placeholder:text-gray"
         />
       ) : (
         <Image

@@ -13,14 +13,15 @@ export default function DrawerTitle({
   tagClassName?: string;
 }) {
   return (
-    <div className="mb-6 flex items-center justify-between">
+    <div className="flex items-center justify-between border-b border-border-black p-5">
       <div className="flex items-center space-x-[10px]">
-        <div className="h-6 w-6 rounded-lg bg-main"></div>
-        <div className="text-xl leading-[30px] text-title-white">{title}</div>
+        <div className="text-[18px] leading-[28px] text-title-white">
+          {title}
+        </div>
         {tag && (
           <div
             className={cn(
-              "flex h-5 items-center rounded px-[6px] text-xs leading-4 text-white",
+              "txt-white flex h-5 items-center rounded px-[6px] text-xs leading-4",
               tagClassName,
             )}
           >

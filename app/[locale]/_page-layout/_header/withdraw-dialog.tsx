@@ -95,7 +95,7 @@ export function WithdrawDialog({
             value={withdrawAmount}
             onUserInput={(value) => setWithdrawAmount(value)}
             placeholder="Enter amount"
-            className="h-12 w-full rounded border border-border-black py-3 pl-[10px] pr-[75px] text-base leading-6 text-title-white focus:border-text-white data-[error=true]:!border-red"
+            className="h-12 w-full rounded border border-border-black py-3 pl-[10px] pr-[75px] text-base leading-6 text-title-white focus:border-txt-white data-[error=true]:!border-red"
           />
           <div className="absolute right-[30px] top-1/2 -translate-y-1/2 text-xs leading-[18px] text-gray">
             Max: {formatNum(balance)}

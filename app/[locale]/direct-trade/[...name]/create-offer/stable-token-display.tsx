@@ -30,11 +30,11 @@ export function StableTokenSelectDisplay({
   };
 
   return (
-    <div className="flex flex-col items-end">
-      {showBalance && <StableBalance />}
+    <>
+      {showBalance ? <StableBalance /> : <div></div>}
       <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
         <PopoverTrigger>
-          <div className="flex w-fit cursor-pointer items-center rounded-full bg-bg-black p-2">
+          <div className="flex h-8 w-fit cursor-pointer items-center rounded border border-[#474747] bg-[#222428] px-[10px] py-[6px]">
             {token && (
               <>
                 <Image
@@ -44,7 +44,7 @@ export function StableTokenSelectDisplay({
                   alt="selected token"
                   className="mr-2 rounded-full"
                 ></Image>
-                <div className="pr-[4px] text-sm leading-5 text-txt-white">
+                <div className="pr-[4px] text-sm leading-5 text-title-white">
                   {token?.symbol}
                 </div>
                 <div className="flex h-6 w-6 items-center justify-center">
@@ -81,6 +81,6 @@ export function StableTokenSelectDisplay({
           ))}
         </PopoverContent>
       </Popover>
-    </div>
+    </>
   );
 }

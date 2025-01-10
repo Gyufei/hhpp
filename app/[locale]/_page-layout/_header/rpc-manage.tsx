@@ -202,7 +202,7 @@ export default function RpcManage() {
                 style={{ fontSize: "12px" }}
                 value={newRpcUrl}
                 onChange={(e) => handleRpcChange(e.target.value)}
-                className="h-10 w-[256px] rounded-lg border border-border-black pl-3 pr-[40px] data-[error=true]:border-red"
+                className="h-10 w-[256px] rounded-lg border border-border-black pl-3 pr-[40px] data-[error=true]:border-red text-txt-white placeholder:text-gray"
               />
               <Image
                 onClick={() => handleSaveRpc(network.id)}

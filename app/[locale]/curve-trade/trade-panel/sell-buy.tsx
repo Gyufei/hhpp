@@ -33,7 +33,7 @@ export default function SellBuy() {
           value={amount}
           onUserInput={(value) => setAmount(value)}
           placeholder="0.00"
-          className="h-8 w-full rounded border border-[#474747] py-[7px] pl-[10px] pr-[100px] text-xs leading-[18px] focus:border-text-white disabled:cursor-not-allowed data-[error=true]:!border-red"
+          className="h-8 w-full rounded border border-[#474747] py-[7px] pl-[10px] pr-[100px] text-xs leading-[18px] focus:border-txt-white disabled:cursor-not-allowed data-[error=true]:!border-red"
         />
         <div className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-1 text-xs leading-[18px] text-title-white">
           <div>{stableToken}</div>

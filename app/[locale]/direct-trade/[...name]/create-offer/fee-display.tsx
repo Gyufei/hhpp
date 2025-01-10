@@ -8,10 +8,12 @@ export default function FeeDisplay() {
   return (
     <div className="mt-3">
       <div className="mb-3 flex items-center justify-between">
-        <div className="text-sm leading-5 text-gray">
+        <div className="text-xs leading-[18px] text-gray">
           {cot("lb-MinimumOrderAmount")}
         </div>
-        <div className="text-sm leading-5 text-txt-white">${minAmount}</div>
+        <div className="text-xs leading-[18px] text-title-white">
+          ${minAmount}
+        </div>
       </div>
     </div>
   );

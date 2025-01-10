@@ -333,7 +333,7 @@ function ReferralNote({
             value={inputValue}
             onChange={(e: any) => setInputValue(e.target.value)}
             onKeyDown={handleKeyPress}
-            className="h-6 rounded-none border-x-0 border-b border-t-0 border-lightgray bg-bg-black pr-[50px]"
+            className="h-6 rounded-none border-x-0 border-b border-t-0 border-lightgray bg-bg-black pr-[50px] text-txt-white placeholder:text-gray"
           />
           <Image
             onClick={handleInputConfirm}

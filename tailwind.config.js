@@ -16,11 +16,10 @@ module.exports = {
         "txt-white": "var(--color-txt-white)",
         "bg-black": "var(--color-bg-black)",
         "border-black": "var(--color-border-black)",
+        gray: "var(--color-gary)",
+
         green: "var(--color-green)",
         red: "var(--color-red)",
-
-        gray: "var(--color-gary)",
-        lightgray: "var(--color-lightgray)",
       },
       fontFamily: {
         teodor: ["var(--font-teodor)"],

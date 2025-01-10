@@ -139,7 +139,7 @@ export function ReferralDrawer({
             disabled={true}
             value={referral?.referral_code}
             placeholder="qwerty"
-            className="mt-2 h-12 border-border-black pl-4 text-sm disabled:bg-bg-black"
+            className="mt-2 h-12 border-border-black pl-4 text-sm text-txt-white placeholder:text-gray disabled:bg-bg-black"
           />
 
           <div className="mt-6 text-base leading-6 text-txt-white">
@@ -152,7 +152,7 @@ export function ReferralDrawer({
 
               <NumericalInput
                 data-error={rateError}
-                className="h-[50px] w-full rounded border border-border-black px-4 py-[14px] focus:border-text-white disabled:cursor-not-allowed disabled:bg-bg-black data-[error=true]:!border-red"
+                className="focus:border-txt-white h-[50px] w-full rounded border border-border-black px-4 py-[14px] disabled:cursor-not-allowed disabled:bg-bg-black data-[error=true]:!border-red"
                 placeholder={`${referralBaseRate}%`}
                 value={rate || ""}
                 onUserInput={handleRateInput}
@@ -167,7 +167,7 @@ export function ReferralDrawer({
               <NumericalInput
                 disabled={extraRate === 0}
                 data-error={rateError}
-                className="h-[50px] w-full rounded border border-border-black px-4 py-[14px] focus:border-text-white disabled:cursor-not-allowed disabled:bg-bg-black data-[error=true]:!border-red"
+                className="focus:border-txt-white h-[50px] w-full rounded border border-border-black px-4 py-[14px] disabled:cursor-not-allowed disabled:bg-bg-black data-[error=true]:!border-red"
                 placeholder="0%"
                 value={friendRate || ""}
                 onUserInput={handleFRateInput}
@@ -205,7 +205,7 @@ export function ReferralDrawer({
         </div>
 
         <WithWalletConnectBtn className="w-full" onClick={handleSaveRate}>
-          <button className="mt-[140px] flex h-12 w-full items-center justify-center rounded bg-green leading-6 text-white">
+          <button className="mt-[140px] flex h-12 w-full items-center justify-center rounded bg-green leading-6 txt-white">
             {rt("btn-Save")}
           </button>
         </WithWalletConnectBtn>

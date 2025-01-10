@@ -40,8 +40,6 @@ export default function CreateOfferBtn({
     }
   }
 
-  const isJustSell = marketplace?.market_catagory === "offchain_fungible_point";
-
   return (
     <>
       <WithWalletConnectBtn
@@ -54,7 +52,7 @@ export default function CreateOfferBtn({
           reportEvent("click", { value: "createOffer" });
         }}
       >
-        <button className="hover:bg-main-hover hidden h-8 w-full items-center justify-center rounded bg-[#97FCE4] bg-main text-[12px] leading-4 text-bg-black sm:flex">
+        <button className="hidden h-8 w-full items-center justify-center rounded bg-[#97FCE4] bg-main text-[12px] leading-4 text-bg-black hover:bg-main-hover sm:flex">
           {T("btn-CreateOffer")}
         </button>
         <button className="absolute -top-[49px] right-[10px] flex h-10 w-10 items-center justify-center rounded-lg bg-main sm:hidden">
@@ -72,7 +70,7 @@ export default function CreateOfferBtn({
           onClose={handleCloseDrawer}
           direction={isMobileSize ? "bottom" : "right"}
           size={isMobileSize ? "calc(100vh - 44px)" : 500}
-          className="flex flex-col overflow-y-auto rounded-none !bg-bg-black p-4 sm:rounded-l-2xl sm:p-6"
+          className="flex flex-col overflow-y-auto rounded-none !bg-bg-black p-4 sm:p-0"
         >
           {isMobileSize ? (
             <MobileDrawerTitle
@@ -93,11 +91,10 @@ export default function CreateOfferBtn({
           >
             <TabsContent
               value="sell"
-              className="flex flex-1 flex-col data-[state=inactive]:hidden"
+              className="mt-0 flex flex-1 flex-col data-[state=inactive]:hidden"
               forceMount={true}
             >
               <SellContent
-                className={isJustSell ? "mt-0" : ""}
                 onSuccess={handleSuccess}
                 marketplace={marketplace}
               />

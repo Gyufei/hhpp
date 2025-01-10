@@ -175,7 +175,7 @@ export default function AskDetail({
                   disabled={
                     isDepositLoading || !receivePointAmount || !!errorText
                   }
-                  className="mt-4 flex h-12 w-full items-center justify-center rounded bg-green leading-6 text-white disabled:cursor-not-allowed disabled:bg-gray"
+                  className="mt-4 flex h-12 w-full items-center justify-center rounded bg-green leading-6 txt-white disabled:cursor-not-allowed disabled:bg-gray"
                 >
                   {T("btn-ConfirmTakerOrder")}
                 </button>

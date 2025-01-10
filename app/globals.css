@@ -11,14 +11,14 @@ body {
   --color-main-hover: #97fce4;
   --color-main-inactive: #346a65;
 
-  --color-title-white: #f6fefd;
-  --color-txt-white: #d1d4dc;
   --color-bg-black: #111a1e;
   --color-border-black: #474747;
+  --color-title-white: #f6fefd;
+  --color-txt-white: #d1d4dc;
+  --color-gary: #949e9c;
+
   --color-green: #4cbf87;
   --color-red: #ef5350;
-  --color-lightgray: #d1d4dc;
-  --color-gary: #949e9c;
 }
 
 @layer base {

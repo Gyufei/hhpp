@@ -21,7 +21,7 @@ export default function PointBalance({
   const balance = pointAmountData?.free_amount || 0;
 
   return (
-    <div className={cn("mb-6 text-[12px] text-[#99A0AF]", className)}>
+    <div className={cn("text-[12px] text-gray", className)}>
       Balance: {formatNum(balance)}
     </div>
   );

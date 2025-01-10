@@ -32,15 +32,14 @@ export default function OrderNoteAndFee({
   }
 
   return (
-    <div className="mt-4 flex flex-col">
+    <div className="flex flex-col">
       <div className="mb-2 flex items-center space-x-1">
-        <div className="mr-[6px]  text-sm leading-6 text-txt-white">
+        <div className="mr-[6px]  text-xs leading-[18px] text-txt-white">
           {cot("cap-OrderNote")}
         </div>
         <Checkbox
           checked={showInput}
           onCheckedChange={(v) => handleShowInput(!!v)}
-          className="rounded-full"
         />
       </div>
       {showInput && (
@@ -54,7 +53,7 @@ export default function OrderNoteAndFee({
                   ? cot("pl-AnythingYouWantToInformTheSeller")
                   : cot("pl-AnythingYouWantToInformTheBuyer")
               }
-              className="h-[66px] rounded border border-border-black focus:border-text-white"
+              className="h-[66px] rounded border border-border-black text-xs leading-[18px] text-txt-white placeholder:text-gray"
             />
             <div className="absolute bottom-2 right-4 text-xs leading-[18px] text-gray">
               {value.length} / 50

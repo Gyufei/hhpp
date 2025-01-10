@@ -39,17 +39,11 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
           <TabsList className="flex items-end justify-between p-0">
             <div className="flex items-center justify-start space-x-10">
               <TabsTrigger
-                className="flex w-[105px] items-center pb-[10px] pl-0 pt-0 leading-6 data-[state=active]:border-b-2 data-[state=active]:border-lightgray data-[state=inactive]:border-transparent data-[state=active]:text-txt-white data-[state=inactive]:text-lightgray"
+                className="flex w-[105px] items-center pb-[10px] pl-0 pt-0 leading-6 data-[state=active]:border-b-2 data-[state=active]:border-lightgray data-[state=inactive]:border-transparent data-[state=active]:text-txt-white data-[state=inactive]:text-gray"
                 value="orders"
               >
                 {T("cap-TakerOrders")}
               </TabsTrigger>
-              {/* <TabsTrigger
-              className="w-[105px] leading-6 data-[state=active]:border-b-2 data-[state=inactive]:border-transparent data-[state=active]:border-lightgray data-[state=inactive]:text-lightgray data-[state=active]:text-txt-white"
-              value="history"
-            >
-              {T("cap-OrderHistory")}
-            </TabsTrigger> */}
             </div>
             <div className="flex items-center space-x-2">
               <label

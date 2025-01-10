@@ -256,7 +256,7 @@ function FoldPop() {
             width={20}
             height={20}
             alt="search"
-            className="absolute left-[7px] top-[10px]"
+            className="absolute left-[7px] top-[10px] "
           />
           <Input
             placeholder={t("Search")}
@@ -264,7 +264,7 @@ function FoldPop() {
             onChange={(e) => setSearchText(e.target.value)}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
-            className="focus:border-text-white h-10 rounded-lg border-border-black bg-bg-black pl-8 text-title-white"
+            className="focus:border-txt-white h-10 rounded-lg border-border-black bg-bg-black pl-8 text-txt-white placeholder:text-gray"
           />
         </div>
         {filteredCateList.map((cate, i) => (
