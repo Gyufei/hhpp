@@ -220,7 +220,7 @@ function ReferralCode({ rD, index }: { rD: IReferralItem; index: number }) {
         <HoverIcon
           onClick={handleCopy}
           src="/icons/copy-gray.svg"
-          hoverSrc="/icons/copy.svg"
+          hoverSrc="/icons/white-copy.svg"
           width={20}
           height={20}
           alt="copy"
@@ -246,7 +246,7 @@ function ReferralRate({
       onMouseLeave={() => setIsHover(false)}
       className="relative flex h-fit w-fit cursor-pointer items-center space-x-[6px]"
     >
-      <span className="border-b border-dashed border-lightgray text-sm leading-5 text-txt-white">
+      <span className="border-lightgray border-b border-dashed text-sm leading-5 text-txt-white">
         {rD.referrer_rate != "" && rD.referrer_rate != null && (
           <>{formatNum(Number(rD.referrer_rate || 0) / 10 ** 4)}%,&nbsp;</>
         )}
@@ -258,7 +258,7 @@ function ReferralRate({
         <HoverIcon
           onClick={onClick}
           src="/icons/set-up-gray.svg"
-          hoverSrc="/icons/set-up.svg"
+          hoverSrc="/icons/white-set.svg"
           width={20}
           height={20}
           alt="copy"
@@ -333,7 +333,7 @@ function ReferralNote({
             value={inputValue}
             onChange={(e: any) => setInputValue(e.target.value)}
             onKeyDown={handleKeyPress}
-            className="h-6 rounded-none border-x-0 border-b border-t-0 border-lightgray bg-bg-black pr-[50px] text-txt-white placeholder:text-gray"
+            className="border-lightgray h-6 rounded-none border-x-0 border-b border-t-0 bg-bg-black pr-[50px] text-txt-white placeholder:text-gray"
           />
           <Image
             onClick={handleInputConfirm}
@@ -349,7 +349,7 @@ function ReferralNote({
           <Tooltip>
             <TooltipTrigger>
               <div className="flex items-center justify-end">
-                <div className="mr-[6px] w-[100px] truncate text-right">
+                <div className="mr-[6px] w-[100px] truncate text-right text-txt-white">
                   {inputValue}
                 </div>
                 <HoverIcon
@@ -426,7 +426,7 @@ function OpBtn({
         <HoverIcon
           onClick={handleFlag}
           src="/icons/flag-gray.svg"
-          hoverSrc="/icons/flag.svg"
+          hoverSrc="/icons/green-flag.svg"
           width={20}
           height={20}
           alt="copy"
@@ -436,7 +436,7 @@ function OpBtn({
         <HoverIcon
           onClick={handleDelete}
           src="/icons/delete-gray.svg"
-          hoverSrc="/icons/delete.svg"
+          hoverSrc="/icons/red-delete.svg"
           width={20}
           height={20}
           alt="copy"

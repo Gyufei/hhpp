@@ -12,17 +12,17 @@ import { useTheme } from "@table-library/react-table-library/theme";
 
 import { truncateAddr } from "@/lib/utils/web3";
 import { Pagination } from "@/components/ui/pagination/pagination";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useMyOffers } from "@/lib/hooks/api/use-my-offers";
 import { IOffer } from "@/lib/types/offer";
 import { formatTimestamp } from "@/lib/utils/time";
 import { IRole, IStatus } from "./filter-select";
-// import OfferAboutMineDetailDrawer from "../common/offer-about-mine-detail-drawer";
+import OfferAboutMineDetailDrawer from "../common/offer-about-mine-detail-drawer";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useTranslations } from "next-intl";
 import { sortBy } from "lodash";
 import { ChainType } from "@/lib/types/chain";
-
+import { reportEvent } from "@/lib/utils/analytics";
 export function OrderTable({
   role,
   status,
@@ -34,14 +34,15 @@ export function OrderTable({
 }) {
   const T = useTranslations("page-MyOrders");
 
-  const { data: offers } = useMyOffers({
+  const { data: offers, mutate: refreshMyOffers } = useMyOffers({
     market_symbol: "abc",
     chain: ChainType.HYPER,
   });
 
-  // const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  // const [selectOfferId, setSelectOfferId] = useState("");
+  const [selectOfferId, setSelectOfferId] = useState("");
+  const selectedOffer = offers?.find((o) => o.offer_id === selectOfferId);
 
   const data = useMemo(() => {
     const offerData = (offers || [])
@@ -123,8 +124,8 @@ export function OrderTable({
     );
   }
   function handleOpenOfferDrawer(OId: string) {
-    // setSelectOfferId(OId);
-    // setDrawerOpen(true);
+    setSelectOfferId(OId);
+    setDrawerOpen(true);
   }
 
   return (
@@ -236,7 +237,7 @@ export function OrderTable({
         </Pagination>
       )}
 
-      {/* <OfferAboutMineDetailDrawer
+      <OfferAboutMineDetailDrawer
         holdingId={selectOfferId}
         drawerOpen={drawerOpen}
         setDrawerOpen={setDrawerOpen}
@@ -249,7 +250,7 @@ export function OrderTable({
           }
           refreshMyOffers();
         }}
-      /> */}
+      />
     </>
   );
 }

@@ -33,7 +33,7 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
       <div className="mt-4 max-h-[415px] min-w-[820px] rounded-[20px] bg-bg-black p-4 pb-6">
         <Tabs
           value={currentTab}
-          className="flex flex-1 flex-col"
+          className="flex flex-1 flex-col text-txt-white"
           onValueChange={setCurrentTab}
         >
           <TabsList className="flex items-end justify-between p-0">

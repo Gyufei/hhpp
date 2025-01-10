@@ -11,7 +11,7 @@ export default function OverviewInfo() {
   const { data: accountInfo } = useAccountStats(currentChain!);
 
   return (
-    <div className="flex h-full flex-col justify-between space-y-12 pb-5 ">
+    <div className="flex h-full flex-col space-y-2 pb-5 ">
       <div className="m-[10px] mt-2 border-b border-border-black pb-8">
         <div className="flex items-center justify-between">
           <div className="leading-6 text-txt-white">
@@ -80,6 +80,23 @@ export default function OverviewInfo() {
                 {formatNum(Math.abs(Number(accountInfo?.tax_income) || 0))}
               </>
             </NoDataDisplay>
+          </div>
+        </div>
+      </div>
+      <div className="m-[10px]">
+        <div className="flex items-center justify-between">
+          <div className="leading-6 text-txt-white">HT Points</div>
+        </div>
+        <div className="mt-3 flex justify-between">
+          <LabelText>Total Points</LabelText>
+          <div className="leading-6 text-txt-white">
+            <NoDataDisplay noData={!accountInfo}>10,000</NoDataDisplay>
+          </div>
+        </div>
+        <div className="mt-3 flex justify-between">
+          <LabelText>Rank</LabelText>
+          <div className="leading-6 text-txt-white">
+            <NoDataDisplay noData={!accountInfo}>N/A</NoDataDisplay>
           </div>
         </div>
       </div>
