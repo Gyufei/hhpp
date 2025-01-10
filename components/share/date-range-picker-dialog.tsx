@@ -38,7 +38,7 @@ export default function DateRangePickerDialog({
     <Dialog aria-describedby={undefined} open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
-        className="h-[80%] w-min overflow-auto border-none bg-bg-black p-4 sm:h-auto sm:w-[838px] sm:overflow-hidden"
+        className="h-[80%] w-min overflow-auto border-border-black bg-bg-black p-4 sm:h-auto sm:w-[838px] sm:overflow-hidden"
         showClose={false}
       >
         <div>

@@ -38,7 +38,7 @@ export default function SliderCard({
   return (
     <div
       data-error={hasError}
-      className={`mt-5 rounded-2xl border border-border-black bg-bg-black p-4 ${
+      className={`mt-5 rounded border border-border-black bg-bg-black p-4 ${
         hasError ? "error-blink" : ""
       }`}
     >

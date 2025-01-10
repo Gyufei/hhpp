@@ -67,7 +67,7 @@ export function EvmWallets({ onSelected }: { onSelected: () => void }) {
           onClick={() => handleConnect(conn)}
           onMouseEnter={() => handleMouseEnter(conn)}
           onMouseLeave={handleMouseLeave}
-          className="flex cursor-pointer items-center justify-between rounded-2xl p-4 text-txt-white hover:text-main"
+          className="flex cursor-pointer items-center justify-between rounded p-4 text-txt-white hover:text-main"
           key={conn.name}
         >
           <div className="flex items-center space-x-3">

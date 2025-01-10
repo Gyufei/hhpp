@@ -1,14 +1,12 @@
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { useRef, useState } from "react";
-import { useTranslations } from "next-intl";
 
 export default function SearchInput({
   handleSearch,
 }: {
   handleSearch: (searchText: string) => void;
 }) {
-  const t = useTranslations("pn-Marketplace");
   const [searchText, setSearchText] = useState("");
   const [isActive, setIsActive] = useState(false);
 
@@ -18,14 +16,16 @@ export default function SearchInput({
     if (!isActive) {
       setSearchText("");
       setIsActive(true);
+      setHover(false);
       setTimeout(() => {
         inputRef.current?.focus();
-      }, 1000);
+      }, 500);
     }
   }
 
   function handleBlur() {
     setIsActive(false);
+    setHover(false);
   }
 
   function handleKeyPress(e: any) {
@@ -34,25 +34,30 @@ export default function SearchInput({
     }
   }
 
+  const [hover, setHover] = useState(false);
+
   return (
-    <div className="min-w-8 flex h-8">
-      <Image
-        onClick={handleClickSearchIcon}
-        src={isActive ? "/icons/search.svg" : "/icons/search-gray.svg"}
-        width={20}
-        height={20}
-        alt="search"
-        className="z-10 cursor-pointer"
-      />
-      {isActive && (
+    <div className="flex h-8 min-w-8">
+      {isActive ? (
         <Input
           ref={inputRef}
-          placeholder={t("pl-ItemId")}
+          placeholder="Search"
           onBlur={handleBlur}
           value={searchText}
           onKeyDown={handleKeyPress}
           onChange={(e) => setSearchText(e.target.value)}
-          className="z-0 -ml-4 h-8 w-[100px] rounded-none border-x-0 border-t-0 border-b border-black bg-transparent pl-5"
+          className="z-0 h-8 w-[200px] rounded border border-[#d1d4dc] bg-transparent px-[10px] text-title-white"
+        />
+      ) : (
+        <Image
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+          onClick={handleClickSearchIcon}
+          src={hover ? "/icons/search.svg" : "/icons/search-gray.svg"}
+          width={20}
+          height={20}
+          alt="search"
+          className="z-10 cursor-pointer"
         />
       )}
     </div>

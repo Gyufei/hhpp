@@ -133,7 +133,7 @@ export function SellContent({
       <button
         onClick={handleConfirmBtnClick}
         disabled={isCreating || !!errorText || !receiveTokenAmount}
-        className="mt-2 flex h-12 w-full items-center justify-center rounded-2xl bg-red leading-6 text-white disabled:cursor-not-allowed disabled:bg-gray"
+        className="mt-2 flex h-12 w-full items-center justify-center rounded bg-red leading-6 text-white disabled:cursor-not-allowed disabled:bg-gray"
       >
         {T("btn-ConfirmMakerOrder")}
       </button>

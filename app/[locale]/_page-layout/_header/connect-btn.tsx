@@ -103,10 +103,7 @@ export default function ConnectBtn() {
         </div>
       </PopoverTrigger>
       <PopoverContent
-        className="flex w-[288px] flex-col items-stretch space-y-2 border-border-black bg-bg-black p-6 text-[12px]"
-        style={{
-          boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
-        }}
+        className="flex w-[276px] flex-col items-stretch space-y-[10px] border-border-black bg-bg-black p-[10px] text-[12px]"
         align="end"
       >
         <BalancePopContent />

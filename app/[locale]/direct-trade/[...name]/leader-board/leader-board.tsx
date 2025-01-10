@@ -123,7 +123,7 @@ export default function LeaderBoard({
       &:first-of-type {
         padding-left: 8px;
       }
-      border-bottom: 1px solid #303030;
+      border-bottom: 1px solid #474747;
     `,
     Cell: `
       color: #D1D4DC;

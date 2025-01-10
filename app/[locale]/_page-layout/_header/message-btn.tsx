@@ -174,7 +174,7 @@ function MsgRow({ msgDetail }: { msgDetail: IMsg }) {
       <div
         className="flex flex-1 flex-col space-y-1 py-3"
         style={{
-          boxShadow: "inset 0px -1px 0px 0px #303030",
+          boxShadow: "inset 0px -1px 0px 0px #474747",
         }}
       >
         <div className="flex items-start space-x-1">
