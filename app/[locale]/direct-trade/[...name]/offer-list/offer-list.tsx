@@ -9,7 +9,7 @@ import { IOffer } from "@/lib/types/offer";
 import { useSortOffer } from "@/lib/hooks/offer/use-sort-offer";
 import { range } from "lodash";
 import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
-import OfferDetailDrawer from "../offer-detail/offer-detail-drawer";
+import OfferDetailDialog from "../offer-detail/offer-detail-dialog";
 
 export default function OfferList({
   offers,
@@ -98,7 +98,8 @@ export default function OfferList({
               />
             ))}
       </div>
-      <OfferDetailDrawer
+
+      <OfferDetailDialog
         offer={showOffer}
         onSuccess={refreshOffers}
         onClose={() => setShowOffer(null)}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import AskDetail from "../offer-detail/ask-detail";
+import AskDetail from "./ask-detail";
 import OfferFillDialog from "./offer-fill-dialog";
 import { IOffer } from "@/lib/types/offer";
 import { useTranslations } from "next-intl";
@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { reportEvent } from "@/lib/utils/analytics";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
-export default function OfferDetailDrawer({
+export default function OfferDetailDialog({
   offer,
   onSuccess,
   onClose,
@@ -29,6 +29,10 @@ export default function OfferDetailDrawer({
   useEffect(() => {
     if (offer && connected) {
       setDrawerOpen(true);
+    }
+
+    if (!offer) {
+      setDrawerOpen(false);
     }
   }, [offer, connected]);
 
