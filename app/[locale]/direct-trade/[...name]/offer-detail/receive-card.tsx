@@ -14,7 +14,7 @@ export default function ReceiveCard({
   tokenLogo: string;
 }) {
   return (
-    <div className="rounded border border-border-black bg-bg-black p-4">
+    <div className="rounded bg-[#222428] p-[10px] focus-within:border-txt-white">
       <div className="text-xs leading-[18px] text-gray">{topText}</div>
       <div className="mt-2 flex justify-between">
         <div className="h-[36px] text-2xl leading-[36px] text-txt-white">
@@ -22,8 +22,8 @@ export default function ReceiveCard({
         </div>
         <Image
           src={tokenLogo}
-          width={28}
-          height={28}
+          width={24}
+          height={24}
           alt="stable token"
           className="h-7 w-7 rounded-full"
         />

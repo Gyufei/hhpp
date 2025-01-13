@@ -16,7 +16,6 @@ import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
 import { useGlobalConfig } from "@/lib/hooks/use-global-config";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useTranslations } from "next-intl";
-import { ChainConfigs } from "@/lib/const/chain-configs";
 import { reportEvent } from "@/lib/utils/analytics";
 import { useCheckBalance } from "@/lib/hooks/api/use-check-balance";
 import ArrowBetween from "../create-offer/arrow-between";
@@ -115,12 +114,11 @@ export default function AskDetail({
 
   return (
     <>
-      <div className="flex flex-col justify-between gap-y-4 sm:flex-row sm:gap-y-0">
+      <div className="flex flex-col justify-between gap-y-4 border-b border-border-black sm:flex-row sm:gap-y-0">
         {/* left card */}
-        <div className="flex flex-1 flex-col rounded-[20px] bg-bg-black p-4">
+        <div className="flex flex-1 flex-col border-r border-border-black bg-bg-black p-5">
           <OfferInfo
             img1={offer.marketplace.projectLogo}
-            img2={ChainConfigs[offer.marketplace.chain].logo}
             name={offer.marketplace.market_name}
             no={String(offer.entry.id)}
             progress={progress}
@@ -158,13 +156,13 @@ export default function AskDetail({
 
           {isFilled ? (
             <>
-              <button className="mt-4 flex h-12 w-full items-center justify-center rounded bg-[#f0f1f5] leading-6 text-txt-white">
+              <button className="mt-4 flex h-8 w-full items-center justify-center rounded bg-[#D1D4DC] text-xs leading-[18px] text-bg-black">
                 {T("btn-Offer100%Filled")}
               </button>
             </>
           ) : (
-            <>
-              <div className="mt-3 text-center text-[12px] text-red">
+            <div className="mt-4">
+              <div className="text-center text-[10px] leading-[16px] text-red">
                 {errorText}
               </div>
               <WithWalletConnectBtn
@@ -175,12 +173,12 @@ export default function AskDetail({
                   disabled={
                     isDepositLoading || !receivePointAmount || !!errorText
                   }
-                  className="mt-4 flex h-12 w-full items-center justify-center rounded bg-green leading-6 txt-white disabled:cursor-not-allowed disabled:bg-gray"
+                  className="mt-1 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive"
                 >
                   {T("btn-ConfirmTakerOrder")}
                 </button>
               </WithWalletConnectBtn>
-            </>
+            </div>
           )}
         </div>
 

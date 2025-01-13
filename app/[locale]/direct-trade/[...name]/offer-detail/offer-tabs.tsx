@@ -1,4 +1,3 @@
-import { SmallSwitch } from "@/components/share/small-switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useMemo, useState } from "react";
 import { TakerOrders } from "./taker-orders";
@@ -6,6 +5,7 @@ import { IOffer } from "@/lib/types/offer";
 import { useTranslations } from "next-intl";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { useTakerOrderOfOffers } from "@/lib/hooks/api/use-taker-orders-of-offer";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function OfferTabs({ offer }: { offer: IOffer }) {
   const T = useTranslations("drawer-OfferDetail");
@@ -30,16 +30,16 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
 
   return (
     <div className="no-scroll-bar w-full overflow-x-scroll sm:w-auto sm:overflow-x-hidden">
-      <div className="mt-4 max-h-[415px] min-w-[820px] rounded-[20px] bg-bg-black p-4 pb-6">
+      <div className="mt-[10px] max-h-[415px] min-w-[820px] rounded-[20px] bg-bg-black px-5 pb-5 pt-0">
         <Tabs
           value={currentTab}
           className="flex flex-1 flex-col text-txt-white"
           onValueChange={setCurrentTab}
         >
-          <TabsList className="flex items-end justify-between p-0">
-            <div className="flex items-center justify-start space-x-10">
+          <TabsList className="relative flex items-center justify-between rounded-none p-0">
+            <div className="z-10 flex items-center justify-start space-x-10">
               <TabsTrigger
-                className="flex w-[105px] items-center pb-[10px] pl-0 pt-0 leading-6 data-[state=active]:border-b-2 data-[state=active]:border-lightgray data-[state=inactive]:border-transparent data-[state=active]:text-txt-white data-[state=inactive]:text-gray"
+                className="flex w-[105px] items-center rounded-none border-b-2 pb-[10px] pl-0 pt-0 text-sm leading-5 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-txt-white data-[state=inactive]:text-gray"
                 value="orders"
               >
                 {T("cap-TakerOrders")}
@@ -48,16 +48,17 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
             <div className="flex items-center space-x-2">
               <label
                 htmlFor="onlyMe"
-                className="text-xs leading-[18px] text-gray"
+                className="text-xs leading-[18px] text-title-white"
               >
                 {T("tg-OnlyMe")}
               </label>
-              <SmallSwitch
+              <Checkbox
                 checked={onlyMe}
-                onCheckedChange={(v) => setOnlyMe(v)}
+                onCheckedChange={(v) => setOnlyMe(!!v)}
                 id="onlyMe"
               />
             </div>
+            <div className="absolute bottom-[4.5px] h-1 w-full border-b border-border-black"></div>
           </TabsList>
           <TabsContent value="orders" className="h-fit">
             {<TakerOrders orders={showOrders || []} offer={offer} />}

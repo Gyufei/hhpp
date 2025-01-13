@@ -67,7 +67,7 @@ export default function OfferDetailDrawer({
         onClose={handleDrawerClose}
         direction={isMobileSize ? "bottom" : "right"}
         size={isMobileSize ? "calc(100vh - 44px)" : 952}
-        className="overflow-y-auto rounded-none !bg-bg-black p-4 sm:p-0"
+        className="overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
       >
         {isMobileSize ? (
           <MobileDrawerTitle

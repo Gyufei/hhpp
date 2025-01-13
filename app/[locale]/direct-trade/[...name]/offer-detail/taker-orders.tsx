@@ -32,6 +32,8 @@ export function TakerOrders({
     offer: offer,
   });
 
+  console.log(orders, offer);
+
   const data = useMemo(() => {
     const orderData = orders.map((o, index) => {
       return {
@@ -55,29 +57,25 @@ export function TakerOrders({
     Header: "",
     Body: "",
     BaseRow: `
-      background-color: #474747;
+      background-color: transparent;
     `,
-    HeaderRow: `
-      background: transparent;
-    `,
-    Row: `
-      box-shadow: inset 0px -1px 0px 0px #474747;
-    `,
+    HeaderRow: ``,
+    Row: ``,
     BaseCell: `
-      font-size: 14px;
-      &:not(:first-of-type) {
-        text-align: right;
-      }
-
-      background: #111a1e;
+      font-size: 12px;
     `,
     HeaderCell: `
       font-size: 12px;
-      font-weight: 400;
       color: #949e9c;
+      font-weight: 400;
       line-height: 18px;
+      
+      &:last-of-type {
+        text-align: right;
+      }
     `,
     Cell: `
+      color: #F6FEFD;
     `,
   });
 
@@ -107,11 +105,16 @@ export function TakerOrders({
         const totalPoints = offer.item_amount;
         const percent = formatNum(NP.divide(points, totalPoints) * 100);
 
+        console.log(
+          points,
+          pointDecimalNum,
+          NP.divide(points, 10 ** (pointDecimalNum || 0)),
+        );
+
         return (
-          <div className="flex items-center justify-end space-x-1">
+          <div className="flex items-center justify-start space-x-1">
             <div>
-              {formatNum(NP.divide(points, 10 ** (pointDecimalNum || 0)))}(
-              {percent}%)
+              {formatNum(NP.divide(points, pointDecimalNum))}({percent}%)
             </div>
             <Image
               src={offerPointInfo.logoURI}
@@ -135,7 +138,7 @@ export function TakerOrders({
           percent,
         );
         return (
-          <div className="flex items-center justify-end space-x-1">
+          <div className="flex items-center justify-start space-x-1">
             <span>{formatNum(amount)}</span>
             <Image
               src={offerTokenInfo?.logoURI || ""}
@@ -150,18 +153,20 @@ export function TakerOrders({
     {
       label: T("th-TxHash"),
       renderCell: (o: ITakerOrder) => (
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-start">
           {truncateAddr(o.tx_hash || "")}
-          <Image
-            onClick={() =>
-              handleGoScan(offer.marketplace.chain, o.tx_hash || "", "tx")
-            }
-            src="/icons/right-45.svg"
-            width={16}
-            height={16}
-            alt="goScan"
-            className="cursor-pointer"
-          />
+          {o.tx_hash && (
+            <Image
+              onClick={() =>
+                handleGoScan(offer.marketplace.chain, o.tx_hash || "", "tx")
+              }
+              src="/icons/right-45.svg"
+              width={16}
+              height={16}
+              alt="goScan"
+              className="cursor-pointer"
+            />
+          )}
         </div>
       ),
     },

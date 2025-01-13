@@ -38,7 +38,7 @@ export default function SliderCard({
   return (
     <div
       data-error={hasError}
-      className={`mt-5 rounded border border-border-black bg-bg-black p-4 ${
+      className={`mt-5 rounded bg-[#222428] p-[10px] focus-within:border-txt-white ${
         hasError ? "error-blink" : ""
       }`}
     >
@@ -51,8 +51,8 @@ export default function SliderCard({
         </div>
         <Image
           src={tokenLogo}
-          width={28}
-          height={28}
+          width={24}
+          height={24}
           alt="stable token"
           className="rounded-full"
         />
@@ -64,17 +64,19 @@ export default function SliderCard({
           max={sliderMax}
           step={1}
         />
-        <div className="ml-4 mr-3 flex h-5 items-center rounded-full border border-border-black px-[10px] text-[10px] leading-4 text-txt-white">
+        <div className="ml-4 mr-3 flex h-5 items-center rounded-full border border-border-black px-[10px] text-[10px] leading-4 text-title-white">
           {progress}%
         </div>
         <div
           onClick={() => setSliderValue(canGoMax)}
-          className="flex h-5 cursor-pointer items-center rounded-full bg-main hover:bg-main-hover px-[10px] text-[10px] leading-4 text-txt-white"
+          className="flex h-5 cursor-pointer items-center rounded-full border border-main px-[10px] text-[10px] leading-4 text-main hover:border-main-hover hover:text-main-hover"
         >
           Max
         </div>
       </div>
-      <div className="text-xs leading-[18px] text-gray">{bottomText}</div>
+      <div className="mt-[10px] text-xs leading-[18px] text-gray">
+        {bottomText}
+      </div>
     </div>
   );
 }

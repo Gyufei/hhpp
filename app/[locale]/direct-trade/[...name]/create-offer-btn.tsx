@@ -70,7 +70,7 @@ export default function CreateOfferBtn({
           onClose={handleCloseDrawer}
           direction={isMobileSize ? "bottom" : "right"}
           size={isMobileSize ? "calc(100vh - 44px)" : 500}
-          className="flex flex-col overflow-y-auto rounded-none !bg-bg-black p-4 sm:p-0"
+          className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
         >
           {isMobileSize ? (
             <MobileDrawerTitle
