@@ -12,7 +12,7 @@ export default function HomeBanner() {
       }}
     >
       <Image src="/icons/simple-logo.svg" width={120} height={90} alt="logo" />
-      <div className="mt-5 text-center text-[80px] font-light leading-[120px] txt-white">
+      <div className="mt-5 text-center text-[80px] font-light leading-[120px] text-txt-white">
         First stop for high quality <br /> Hyperliquid assets.
       </div>
       <div className="mt-[30px] w-[420px] text-center text-sm font-light text-title-white">
