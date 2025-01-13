@@ -30,7 +30,7 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
 
   return (
     <div className="no-scroll-bar w-full overflow-x-scroll sm:w-auto sm:overflow-x-hidden">
-      <div className="mt-[10px] max-h-[415px] min-w-[820px] rounded-[20px] bg-bg-black px-5 pb-5 pt-0">
+      <div className="mt-[10px] max-h-[415px] w-[700px] rounded-[20px] bg-bg-black mx-5 pb-5 pt-0">
         <Tabs
           value={currentTab}
           className="flex flex-1 flex-col text-txt-white"

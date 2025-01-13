@@ -9,16 +9,17 @@ import { IOffer } from "@/lib/types/offer";
 import { useSortOffer } from "@/lib/hooks/offer/use-sort-offer";
 import { range } from "lodash";
 import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
+import OfferDetailDrawer from "../offer-detail/offer-detail-drawer";
 
 export default function OfferList({
   offers,
   isLoading,
+  refreshOffers,
 }: {
   offers: Array<IOffer>;
   isLoading: boolean;
+  refreshOffers: () => void;
 }) {
-  const [searchText, setSearchText] = useState("");
-
   const { isMobileSize } = useDeviceSize();
   const {
     sortField,
@@ -27,6 +28,9 @@ export default function OfferList({
     handleSortDirChange,
     sortOffers,
   } = useSortOffer(offers || []);
+
+  const [searchText, setSearchText] = useState("");
+  const [showOffer, setShowOffer] = useState<IOffer | null>(null);
 
   const filterOrders = useMemo(() => {
     if (!searchText) {
@@ -42,6 +46,10 @@ export default function OfferList({
 
   function handleSearch(text: string) {
     setSearchText(text);
+  }
+
+  function handleShowOffer(offer: IOffer) {
+    setShowOffer(offer);
   }
 
   const isOffChainFungiblePoint =
@@ -83,9 +91,18 @@ export default function OfferList({
         {isLoading
           ? range(6).map((i) => <OrderCardSkeleton key={i} />)
           : (filterOrders || []).map((offer) => (
-              <OfferCard offer={offer} key={offer.offer_id} />
+              <OfferCard
+                offer={offer}
+                key={offer.offer_id}
+                handleShowOffer={handleShowOffer}
+              />
             ))}
       </div>
+      <OfferDetailDrawer
+        offer={showOffer}
+        onSuccess={refreshOffers}
+        onClose={() => setShowOffer(null)}
+      />
     </div>
   );
 }

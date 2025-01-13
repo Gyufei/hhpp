@@ -34,20 +34,20 @@ export function StableTokenSelectDisplay({
       {showBalance ? <StableBalance /> : <div></div>}
       <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
         <PopoverTrigger>
-          <div className="flex h-8 w-fit cursor-pointer items-center rounded border border-[#474747] bg-[#222428] px-[10px] py-[6px]">
+          <div className="flex w-fit cursor-pointer items-center rounded border border-[#474747] bg-[#222428] px-[10px] py-[6px]">
             {token && (
               <>
                 <Image
-                  width={24}
-                  height={24}
+                  width={20}
+                  height={20}
                   src={token?.logoURI}
                   alt="selected token"
                   className="mr-2 rounded-full"
                 ></Image>
-                <div className="pr-[4px] text-sm leading-5 text-title-white">
+                <div className="pr-[4px] text-xs leading-[18px] text-title-white">
                   {token?.symbol}
                 </div>
-                <div className="flex h-6 w-6 items-center justify-center">
+                <div className="flex h-5 w-5 items-center justify-center">
                   <Image
                     src="/icons/down.svg"
                     width={16}
@@ -61,17 +61,17 @@ export function StableTokenSelectDisplay({
         </PopoverTrigger>
         <PopoverContent
           align="end"
-          className="z-[103] flex w-[100px] flex-col items-stretch border border-border-black bg-bg-black p-2 shadow-[0px_4px_8px_9px_rgba(14,4,62,0.08)]"
+          className="z-[103] flex w-[100px] flex-col items-stretch border border-border-black bg-bg-black px-2 py-1 shadow-[0px_4px_8px_9px_rgba(14,4,62,0.08)]"
         >
           {tokens.map((t) => (
             <div
               key={t.symbol}
               onClick={() => handleSelectToken(t)}
-              className="flex h-8 cursor-pointer items-center rounded px-1 text-sm text-txt-white hover:bg-[#f5f6f7]"
+              className="flex cursor-pointer items-center rounded px-1 text-xs leading-[18px] text-title-white hover:text-main"
             >
               <Image
-                width={24}
-                height={24}
+                width={20}
+                height={20}
                 src={t.logoURI}
                 alt="token option"
                 className="mr-2 rounded-full"

@@ -1,30 +1,24 @@
-import { useEffect, useMemo, useState } from "react";
-import Drawer from "react-modern-drawer";
-import DrawerTitle from "@/components/share/drawer-title";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import AskDetail from "../offer-detail/ask-detail";
 import OfferFillDialog from "./offer-fill-dialog";
-import { useAnchor } from "@/lib/hooks/common/use-anchor";
 import { IOffer } from "@/lib/types/offer";
 import { useTranslations } from "next-intl";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
-import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
-import MobileDrawerTitle from "@/components/share/drawer-title-mobile";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { reportEvent } from "@/lib/utils/analytics";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 export default function OfferDetailDrawer({
-  offers,
+  offer,
   onSuccess,
+  onClose,
 }: {
-  offers: Array<IOffer>;
+  offer: IOffer | null;
   onSuccess: () => void;
+  onClose: () => void;
 }) {
   const ot = useTranslations("drawer-OfferDetail");
-  const { isMobileSize } = useDeviceSize();
-  const { anchor: offerId, setAnchorValue } = useAnchor();
-
-  const offer = useMemo(() => {
-    return offers?.find((o) => String(o.entry.id) === offerId);
-  }, [offers, offerId]);
 
   const { connected } = useChainWallet();
 
@@ -36,11 +30,7 @@ export default function OfferDetailDrawer({
     if (offer && connected) {
       setDrawerOpen(true);
     }
-
-    if (!offerId) {
-      setDrawerOpen(false);
-    }
-  }, [offer, offerId, connected]);
+  }, [offer, connected]);
 
   function handleSuccess(ord: Record<string, any>) {
     reportEvent("askOffer" + "Success", {
@@ -51,9 +41,11 @@ export default function OfferDetailDrawer({
     onSuccess();
   }
 
-  function handleDrawerClose() {
-    setDrawerOpen(false);
-    setAnchorValue("");
+  function handleDrawerToggle(v: boolean) {
+    setDrawerOpen(v);
+    if (!v) {
+      onClose();
+    }
   }
 
   if (!offer) {
@@ -62,33 +54,41 @@ export default function OfferDetailDrawer({
 
   return (
     <>
-      <Drawer
-        open={drawerOpen}
-        onClose={handleDrawerClose}
-        direction={isMobileSize ? "bottom" : "right"}
-        size={isMobileSize ? "calc(100vh - 44px)" : 952}
-        className="overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
-      >
-        {isMobileSize ? (
-          <MobileDrawerTitle
-            title={ot("cap-AskOfferDetail")}
-            onClose={handleDrawerClose}
-          />
-        ) : (
-          <DrawerTitle
-            title={ot("cap-AskOfferDetail")}
-            onClose={handleDrawerClose}
-          />
-        )}
-        <AskDetail onSuccess={(ord) => handleSuccess(ord)} offer={offer} />
-      </Drawer>
+      <Dialog open={drawerOpen} onOpenChange={(v) => handleDrawerToggle(v)}>
+        <VisuallyHidden asChild>
+          <DialogTitle>Offer Detail</DialogTitle>
+        </VisuallyHidden>
+        <DialogContent
+          showClose={false}
+          className="w-[740px] gap-0 overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
+        >
+          <div className="flex w-full items-center justify-between border-b border-border-black px-5 py-4">
+            <div className="flex items-center space-x-[10px]">
+              <div className="text-[18px] leading-[28px] text-title-white">
+                {ot("cap-OfferDetail")}
+              </div>
+            </div>
+            <Image
+              src="/icons/close.svg"
+              width={24}
+              height={24}
+              alt="close"
+              className="cursor-pointer"
+              onClick={() => handleDrawerToggle(false)}
+            />
+          </div>
+
+          <AskDetail onSuccess={(ord) => handleSuccess(ord)} offer={offer} />
+        </DialogContent>
+      </Dialog>
+
       {resultOrder && (
         <OfferFillDialog
           open={orderFillDialog}
           onOpenChange={(val) => {
             setOrderFillDialog(val);
             if (!val) {
-              handleDrawerClose();
+              handleDrawerToggle(false);
             }
           }}
           res={resultOrder}

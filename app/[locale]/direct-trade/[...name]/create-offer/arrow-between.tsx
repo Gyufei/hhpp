@@ -9,13 +9,7 @@ export default function ArrowBetween({ className }: { className: string }) {
         className,
       )}
     >
-      <Image
-        src="/icons/sort-up.svg"
-        width={24}
-        height={24}
-        alt="down"
-        className="rotate-180"
-      />
+      <Image src="/icons/sort-down.svg" width={24} height={24} alt="down" />
     </div>
   );
 }

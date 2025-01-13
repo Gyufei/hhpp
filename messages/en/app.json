@@ -105,7 +105,6 @@
   "drawer-CreateOffer": {
     "btn-CreateOffer": "Create Offer",
     "cap-CreateOffer": "Create Offer",
-    "cap-CreateMakerOffer": "Create Maker Offer",
     "cap-Sell": "Sell",
     "cap-Buy": "Buy",
     "cap-Ask": "Ask",
@@ -125,14 +124,12 @@
     "pl-AnythingYouWantToInformTheSeller": "Anything you want to inform the seller...",
     "lb-MinimumOrderAmount": "Minimum Order Amount",
     "lb-PlatformTradingFee": "Platform Trading Fee",
-    "btn-ConfirmMakerOrder": "Confirm Maker Order",
     "cap-RegisterAccount": "Register Account",
     "text-RegisterAccount": "It is detected that the wallet you are currently connected to has not been registered in <symbol>marketSymbol</symbol> . Please go to  <symbol>marketSymbol</symbol> to register for transactions. After the transaction, you will be able to check the points information at any time",
     "text-Go": "Go"
   },
   "drawer-OfferDetail": {
     "cap-OfferDetail": "Offer Detail",
-    "cap-AskOfferDetail": "Ask Offer Detail",
     "cap-BidOfferDetail": "Bid Offer Detail",
     "cap-MyAskOfferDetail": "My Ask Offer Detail",
     "cap-MyBidOfferDetail": "My Bid Offer Detail",
@@ -144,7 +141,7 @@
     "txt-YouHaveTheOptionToClose": "You have the option to close the offer before it is 100% filled.",
 
     "btn-Offer100%Filled": "Offer 100% Filled",
-    "btn-ConfirmTakerOrder": "Confirm Taker Order",
+    "btn-ConfirmOrder": "Confirm Order",
     "btn-SettleThisOffer": "Settle this offer",
     "btn-SettlementCompleted": "Settlement Completed",
     "btn-RelistThisOffer": "Relist this offer",

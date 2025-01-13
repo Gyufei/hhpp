@@ -106,7 +106,6 @@
   "drawer-CreateOffer": {
     "btn-CreateOffer": "创建订单",
     "cap-CreateOffer": "创建订单",
-    "cap-CreateMakerOffer": "创建订单",
     "cap-Sell": "售卖",
     "cap-Ask": "询价",
     "cap-Buy": "购买",
@@ -125,14 +124,12 @@
     "pl-AnythingYouWantToInformTheSeller": "任何你想告诉卖家的内容",
     "lb-MinimumOrderAmount": "最低订单数量",
     "lb-PlatformTradingFee": "平台交易手续费",
-    "btn-ConfirmMakerOrder": "确认订单",
     "cap-RegisterAccount": "注册账户",
     "text-RegisterAccount": "检测到您目前连接的钱包尚未在<symbol>market symbol</symbol>注册，请前往<symbol>market symbol</symbol>注册以进行交易，交易后您将可以随时查询积分信息",
     "text-Go": "前往"
   },
   "drawer-OfferDetail": {
     "cap-OfferDetail": "订单详情",
-    "cap-AskOfferDetail": "询价订单详情",
     "cap-BidOfferDetail": "报价订单详情",
     "cap-MyAskOfferDetail": "我的询价订单详情",
     "cap-MyBidOfferDetail": "我的报价订单详情",
@@ -144,7 +141,7 @@
     "txt-YouHaveTheOptionToClose": "在 100% 完成前可关闭订单",
 
     "btn-Offer100%Filled": "订单完成",
-    "btn-ConfirmTakerOrder": "确认订单",
+    "btn-ConfirmOrder": "确认订单",
     "btn-SettleThisOffer": "清算订单",
     "btn-SettlementCompleted": "清算完成",
     "btn-RelistThisOffer": "重新上架",

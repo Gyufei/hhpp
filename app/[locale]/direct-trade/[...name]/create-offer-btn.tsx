@@ -1,17 +1,14 @@
 import Image from "next/image";
-import Drawer from "react-modern-drawer";
-import DrawerTitle from "@/components/share/drawer-title";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 
-import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { SellContent } from "./create-offer/sell-content";
 import { IMarketplace } from "@/lib/types/marketplace";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useTranslations } from "next-intl";
-import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
-import MobileDrawerTitle from "@/components/share/drawer-title-mobile";
 import { reportEvent } from "@/lib/utils/analytics";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 export default function CreateOfferBtn({
   marketplace,
@@ -21,23 +18,12 @@ export default function CreateOfferBtn({
   onSuccess: () => void;
 }) {
   const T = useTranslations("drawer-CreateOffer");
-  const { isMobileSize } = useDeviceSize();
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [currentTab, setCurrentTab] = useState("sell");
-  const hasReportedSuccessRef = useRef(false);
   const { checkAndSwitchChain } = useCheckSwitchChain();
 
-  function handleCloseDrawer() {
-    setDrawerOpen(false);
-  }
-
   function handleSuccess() {
-    if (!hasReportedSuccessRef.current) {
-      hasReportedSuccessRef.current = true;
-      reportEvent("createOfferSuccess", { value: currentTab });
-      handleCloseDrawer();
-      onSuccess();
-    }
+    setDrawerOpen(false);
+    onSuccess();
   }
 
   return (
@@ -48,7 +34,6 @@ export default function CreateOfferBtn({
         onClick={() => {
           checkAndSwitchChain();
           setDrawerOpen(true);
-          hasReportedSuccessRef.current = false;
           reportEvent("click", { value: "createOffer" });
         }}
       >
@@ -65,42 +50,37 @@ export default function CreateOfferBtn({
         </button>
       </WithWalletConnectBtn>
       {drawerOpen && (
-        <Drawer
+        <Dialog
           open={drawerOpen}
-          onClose={handleCloseDrawer}
-          direction={isMobileSize ? "bottom" : "right"}
-          size={isMobileSize ? "calc(100vh - 44px)" : 500}
-          className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
+          onOpenChange={(isOpen) => setDrawerOpen(isOpen)}
         >
-          {isMobileSize ? (
-            <MobileDrawerTitle
-              title={T("cap-CreateMakerOffer")}
-              onClose={handleCloseDrawer}
-            />
-          ) : (
-            <DrawerTitle
-              title={T("cap-CreateMakerOffer")}
-              onClose={handleCloseDrawer}
-            />
-          )}
-
-          <Tabs
-            value={currentTab}
-            className="flex flex-1 flex-col"
-            onValueChange={setCurrentTab}
+          <VisuallyHidden asChild>
+            <DialogTitle>Create Offer</DialogTitle>
+          </VisuallyHidden>
+          <DialogContent
+            showClose={false}
+            className="flex w-[480px] flex-col items-center justify-stretch gap-0 rounded border border-border-black bg-bg-black p-0"
+            aria-describedby={undefined}
           >
-            <TabsContent
-              value="sell"
-              className="mt-0 flex flex-1 flex-col data-[state=inactive]:hidden"
-              forceMount={true}
-            >
-              <SellContent
-                onSuccess={handleSuccess}
-                marketplace={marketplace}
+            <div className="flex w-full items-center justify-between border-b border-border-black px-5 py-4">
+              <div className="flex items-center space-x-[10px]">
+                <div className="text-[18px] leading-[28px] text-title-white">
+                  {T("cap-CreateOffer")}
+                </div>
+              </div>
+              <Image
+                src="/icons/close.svg"
+                width={24}
+                height={24}
+                alt="close"
+                className="cursor-pointer"
+                onClick={() => setDrawerOpen(false)}
               />
-            </TabsContent>
-          </Tabs>
-        </Drawer>
+            </div>
+
+            <SellContent onSuccess={handleSuccess} marketplace={marketplace} />
+          </DialogContent>
+        </Dialog>
       )}
     </>
   );

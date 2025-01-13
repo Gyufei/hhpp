@@ -1,16 +1,13 @@
 "use client";
-import Image from "next/image";
 import { useMemo } from "react";
 import { sortBy } from "lodash";
 
 import OfferList from "@/app/[locale]/direct-trade/[...name]/offer-list/offer-list";
 import MarketplaceCard from "./marketplace-card";
-import OfferDetailDrawer from "./offer-detail/offer-detail-drawer";
 import CreateOfferBtn from "./create-offer-btn";
 import MarketCharts from "./chart/market-charts";
 import MarketTrades from "./market-trades/market-trades";
 
-import { useAnchor } from "@/lib/hooks/common/use-anchor";
 import { useMarketOffers } from "@/lib/hooks/api/use-market-offers";
 import { IOffer } from "@/lib/types/offer";
 
@@ -41,20 +38,6 @@ export default function MarketplaceContent({
 
     return sortO;
   }, [offers]);
-
-  const { anchor: offerId } = useAnchor();
-
-  const anchorOffer = useMemo(() => {
-    return offers?.find((o) => String(o.entry.id) === offerId);
-  }, [offers, offerId]);
-
-  if (marketplace && offers && offerId && !anchorOffer) {
-    return (
-      <div className="flex h-[calc(100vh-100px)] w-full items-center justify-center sm:h-[calc(100vh-56px)]">
-        <Image src="/img/404.png" width={480} height={360} alt="404" />
-      </div>
-    );
-  }
 
   return (
     <div className="flex w-full flex-col bg-border-black p-[2px]">
@@ -94,8 +77,11 @@ export default function MarketplaceContent({
               : "max(calc(100vh - 60px), 708px)",
           }}
         >
-          <OfferList offers={canBuyOffers || []} isLoading={isOffersLoading} />
-          <OfferDetailDrawer offers={offers || []} onSuccess={refreshOffers} />
+          <OfferList
+            offers={canBuyOffers || []}
+            isLoading={isOffersLoading}
+            refreshOffers={refreshOffers}
+          />
         </div>
         <div
           className="flex w-full flex-col rounded bg-bg-black px-[10px] sm:w-[320px]"

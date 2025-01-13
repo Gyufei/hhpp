@@ -67,8 +67,10 @@ export function SellContent({
   }
 
   return (
-    <div className={cn("flex flex-1 flex-col justify-between p-5", className)}>
-      <div className="flex flex-1 flex-col">
+    <div
+      className={cn("flex w-full flex-1 flex-col justify-between", className)}
+    >
+      <div className="flex flex-1 flex-col p-5">
         <InputPanel
           value={sellPointAmount}
           onValueChange={setSellPointAmount}
@@ -79,7 +81,7 @@ export function SellContent({
               1 {currentMarket.item_name} = ${formatNum(pointPrice)}
             </>
           }
-          tokenSelect={<PointTokenDisplay point={sellPoint} showBalance />}
+          tokenSelect={<PointTokenDisplay point={sellPoint} />}
         />
 
         <ArrowBetween className="-my-4 self-center" />
@@ -122,13 +124,15 @@ export function SellContent({
         <OrderNoteAndFee value={note} onValueChange={setNote} type={"sell"} />
       </div>
 
-      <button
-        onClick={handleConfirmBtnClick}
-        disabled={isCreating || !!errorText || !receiveTokenAmount}
-        className="mt-2 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive"
-      >
-        {T("btn-ConfirmMakerOrder")}
-      </button>
+      <div className="border-t border-border-black px-5 py-4">
+        <button
+          onClick={handleConfirmBtnClick}
+          disabled={isCreating || !!errorText || !receiveTokenAmount}
+          className="mt-2 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive"
+        >
+          Confirm
+        </button>
+      </div>
     </div>
   );
 }

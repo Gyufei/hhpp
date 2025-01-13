@@ -104,7 +104,6 @@
   "drawer-CreateOffer": {
     "btn-CreateOffer": "제안 생성",
     "cap-CreateOffer": "제안 생성",
-    "cap-CreateMakerOffer": "메이커 제안 생성",
     "cap-Sell": "판매",
     "cap-Buy": "구매",
     "cap-Ask": "매도",
@@ -124,14 +123,12 @@
     "pl-AnythingYouWantToInformTheSeller": "판매자에게 알리고 싶은 내용...",
     "lb-MinimumOrderAmount": "최소 주문 금액",
     "lb-PlatformTradingFee": "플랫폼 거래 수수료",
-    "btn-ConfirmMakerOrder": "메이커 주문 확인",
     "cap-RegisterAccount": "계정 등록",
     "text-RegisterAccount": "현재 연결된 지갑이 <symbol>marketSymbol</symbol>에 등록되지 않았습니다. <symbol>marketSymbol</symbol>에 등록하여 거래를 진행하세요. 거래 후 언제든지 포인트 정보를 확인할 수 있습니다.",
     "text-Go": "이동"
   },
   "drawer-OfferDetail": {
     "cap-OfferDetail": "제안 세부사항",
-    "cap-AskOfferDetail": "매도 제안 세부사항",
     "cap-BidOfferDetail": "입찰 제안 세부사항",
     "cap-MyAskOfferDetail": "내 매도 제안 세부사항",
     "cap-MyBidOfferDetail": "내 입찰 제안 세부사항",
@@ -142,7 +139,7 @@
     "txt-YouHaveToSell": "판매해야 합니다",
     "txt-YouHaveTheOptionToClose": "100% 체결되기 전에 제안을 닫을 수 있는 옵션이 있습니다.",
     "btn-Offer100%Filled": "제안 100% 체결",
-    "btn-ConfirmTakerOrder": "테이커 주문 확인",
+    "btn-ConfirmOrder": "테이커 확인",
     "btn-SettleThisOffer": "이 제안 정산",
     "btn-SettlementCompleted": "정산 완료",
     "btn-RelistThisOffer": "이 제안 재상장",

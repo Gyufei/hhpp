@@ -15,15 +15,20 @@ import { useMemo } from "react";
 import { TooltipArrow } from "@radix-ui/react-tooltip";
 import { CTooltipArrow } from "@/components/share/c-tooltip-arrow";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
-import { useAnchor } from "@/lib/hooks/common/use-anchor";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
 import { reportEvent } from "@/lib/utils/analytics";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 
-export function OfferCard({ offer }: { offer: IOffer }) {
+export function OfferCard({
+  offer,
+  handleShowOffer,
+}: {
+  offer: IOffer;
+  handleShowOffer: (offer: IOffer) => void;
+}) {
   const t = useTranslations("cd-Order");
-  const { setAnchorValue } = useAnchor();
+
   const {
     progress,
     offerValue,
@@ -49,8 +54,8 @@ export function OfferCard({ offer }: { offer: IOffer }) {
     return ["filled", "settled"].includes(offer.status);
   }, [offer]);
 
-  function handleShowOffer(oId: string) {
-    setAnchorValue(oId);
+  function handleShow() {
+    handleShowOffer(offer);
     reportEvent("click_" + orderType === "sell" ? "buy-offer" : "sell-offer", {
       value: offer.entry.id,
     });
@@ -185,7 +190,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
               chain={offer.marketplace.chain}
               onClick={() => {
                 checkAndSwitchChain();
-                handleShowOffer(String(offer.entry.id));
+                handleShow();
               }}
             >
               <button className="flex items-center justify-center rounded-full border border-main px-[18px] py-1 text-sm leading-5 text-main hover:border-main-hover hover:text-main-hover">
@@ -196,7 +201,7 @@ export function OfferCard({ offer }: { offer: IOffer }) {
           {done && (
             <WithWalletConnectBtn
               chain={offer.marketplace.chain}
-              onClick={() => handleShowOffer(String(offer.entry.id))}
+              onClick={() => handleShow()}
             >
               <button className="flex items-center justify-center rounded-full border border-main px-[18px] py-1 text-sm leading-5 text-main hover:border-main-hover hover:text-main-hover">
                 {t("btn-Detail")}

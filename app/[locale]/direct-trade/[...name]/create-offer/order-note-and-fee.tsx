@@ -33,8 +33,8 @@ export default function OrderNoteAndFee({
 
   return (
     <div className="flex flex-col">
-      <div className="mb-2 flex items-center space-x-1">
-        <div className="mr-[6px]  text-xs leading-[18px] text-txt-white">
+      <div className="flex items-center space-x-1">
+        <div className="mr-[6px] text-xs leading-[18px] text-txt-white">
           {cot("cap-OrderNote")}
         </div>
         <Checkbox
@@ -44,7 +44,7 @@ export default function OrderNoteAndFee({
       </div>
       {showInput && (
         <>
-          <div className="relative">
+          <div className="relative mt-2">
             <Textarea
               value={value}
               onChange={(e) => handleInputNote(e.target.value)}

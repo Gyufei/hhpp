@@ -161,8 +161,8 @@ export default function AskDetail({
               </button>
             </>
           ) : (
-            <div className="mt-4">
-              <div className="text-center text-[10px] leading-[16px] text-red">
+            <div className="relative mt-4">
+              <div className="absolute -top-1 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-[10px] leading-[16px] text-red">
                 {errorText}
               </div>
               <WithWalletConnectBtn
@@ -175,7 +175,7 @@ export default function AskDetail({
                   }
                   className="mt-1 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive"
                 >
-                  {T("btn-ConfirmTakerOrder")}
+                  {T("btn-ConfirmOrder")}
                 </button>
               </WithWalletConnectBtn>
             </div>
