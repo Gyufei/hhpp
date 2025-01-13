@@ -182,7 +182,8 @@
     "lb-YourBonus": "당신의 보너스",
     "tip-YourBonus": "",
     "lb-You": "당신",
-    "cap-TakerOrders": "테이커 주문",
+
+    "cap-Transactions": "거래",
     "cap-OrderHistory": "주문 내역",
     "tg-OnlyMe": "나만",
     "th-SubNo": "하위 번호",

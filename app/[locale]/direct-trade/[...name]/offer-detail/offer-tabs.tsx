@@ -30,7 +30,7 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
 
   return (
     <div className="no-scroll-bar w-full overflow-x-scroll sm:w-auto sm:overflow-x-hidden">
-      <div className="mt-[10px] max-h-[415px] w-[700px] rounded-[20px] bg-bg-black mx-5 pb-5 pt-0">
+      <div className="mx-5 mt-[10px] max-h-[415px] w-[700px] rounded-[20px] bg-bg-black pb-5 pt-0">
         <Tabs
           value={currentTab}
           className="flex flex-1 flex-col text-txt-white"
@@ -39,10 +39,10 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
           <TabsList className="relative flex items-center justify-between rounded-none p-0">
             <div className="z-10 flex items-center justify-start space-x-10">
               <TabsTrigger
-                className="flex w-[105px] items-center rounded-none border-b-2 pb-[10px] pl-0 pt-0 text-sm leading-5 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-txt-white data-[state=inactive]:text-gray"
+                className="flex w-[135px] items-center rounded-none border-b-2 pb-[10px] pl-0 pt-0 text-sm leading-5 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray"
                 value="orders"
               >
-                {T("cap-TakerOrders")}
+                {T("cap-Transactions")}({takerOrders?.length || 0})
               </TabsTrigger>
             </div>
             <div className="flex items-center space-x-2">
