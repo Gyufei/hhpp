@@ -12,7 +12,6 @@ import { IOffer } from "@/lib/types/offer";
 import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
 import { useCloseOffer } from "@/lib/hooks/contract/use-close-offer";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
-import { ChainConfigs } from "@/lib/const/chain-configs";
 import NP from "number-precision";
 import { reportEvent } from "@/lib/utils/analytics";
 
@@ -69,7 +68,6 @@ export default function MyAskDetail({
         <div className="flex flex-1 flex-col rounded-[20px] bg-bg-black p-4">
           <OfferInfo
             img1={offer.marketplace.projectLogo}
-            img2={ChainConfigs[offer.marketplace.chain].logo}
             name={offer.marketplace.market_name}
             no={String(offer.entry.id)}
             progress={progress}

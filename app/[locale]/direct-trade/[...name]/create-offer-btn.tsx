@@ -37,16 +37,8 @@ export default function CreateOfferBtn({
           reportEvent("click", { value: "createOffer" });
         }}
       >
-        <button className="hidden h-8 w-full items-center justify-center rounded bg-[#97FCE4] bg-main text-[12px] leading-4 text-bg-black hover:bg-main-hover sm:flex">
+        <button className="h-8 w-full items-center justify-center rounded bg-[#97FCE4] bg-main text-[12px] leading-4 text-bg-black hover:bg-main-hover sm:flex">
           {T("btn-CreateOffer")}
-        </button>
-        <button className="absolute -top-[49px] right-[10px] flex h-10 w-10 items-center justify-center rounded-lg bg-main sm:hidden">
-          <Image
-            src="/icons/plus-black.svg"
-            width={30}
-            height={30}
-            alt="create"
-          />
         </button>
       </WithWalletConnectBtn>
       {drawerOpen && (

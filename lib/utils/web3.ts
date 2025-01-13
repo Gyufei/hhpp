@@ -1,4 +1,5 @@
 import { ChainType } from "@/lib/types/chain";
+import { isProduction } from "../PathMap";
 
 export function truncateAddr(
   address: string,
@@ -34,6 +35,16 @@ export function handleGoScan(
   }
 
   if (chain === ChainType.HYPER) {
-    window.open(`https://etherscan.io/${goType}/${addr}`, "_blank");
+    if (isProduction) {
+      window.open(
+        `https://app.hyperliquid.xyz/explorer/${goType}/${addr}`,
+        "_blank",
+      );
+    } else {
+      window.open(
+        `https://app.hyperliquid-testnet.xyz/explorer/${goType}/${addr}`,
+        "_blank",
+      );
+    }
   }
 }
