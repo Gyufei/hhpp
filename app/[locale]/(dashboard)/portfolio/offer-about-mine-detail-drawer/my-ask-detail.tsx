@@ -63,9 +63,9 @@ export default function MyAskDetail({
 
   return (
     <>
-      <div className="flex flex-col justify-between gap-y-4 sm:flex-row sm:gap-y-0">
+      <div className="flex flex-col justify-between gap-y-4 border-b border-border-black sm:flex-row sm:gap-y-0">
         {/* left card */}
-        <div className="flex flex-1 flex-col rounded-[20px] bg-bg-black p-4">
+        <div className="flex flex-1 flex-col border-r border-border-black bg-bg-black p-5">
           <OfferInfo
             img1={offer.marketplace.projectLogo}
             name={offer.marketplace.market_name}
@@ -108,47 +108,37 @@ export default function MyAskDetail({
           />
 
           <div className="flex items-center justify-between gap-2">
-            {
-              <>
-                {
-                  <>
-                    {isCanceled ? (
-                      <button
-                        disabled={true}
-                        className="mt-4 flex h-12 w-full flex-1 items-center justify-center rounded-2xl bg-[#99A0AF] leading-6 text-white"
-                      >
-                        {ot("btn-OfferClosed")}
-                      </button>
-                    ) : (
-                      <>
-                        {
-                          <>
-                            <WithWalletConnectBtn
-                              className="flex-1"
-                              chain={offer?.marketplace.chain}
-                              onClick={handleClose}
-                            >
-                              <button
-                                disabled={isClosing}
-                                className="mt-4 flex h-12 w-full items-center justify-center rounded-2xl  bg-green leading-6 text-txt-white"
-                              >
-                                {ot("btn-CloseThisOffer")}
-                              </button>
-                            </WithWalletConnectBtn>
+            <>
+              {isCanceled ? (
+                <button
+                  disabled={true}
+                  className="mt-4 flex h-8 w-full flex-1 items-center justify-center rounded text-xs leading-[18px] text-bg-black"
+                >
+                  {ot("btn-OfferClosed")}
+                </button>
+              ) : (
+                <>
+                  <WithWalletConnectBtn
+                    className="flex-1"
+                    chain={offer?.marketplace.chain}
+                    onClick={handleClose}
+                  >
+                    <button
+                      disabled={isClosing}
+                      className="mt-4 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive"
+                    >
+                      {ot("btn-CloseThisOffer")}
+                    </button>
+                  </WithWalletConnectBtn>
 
-                            {isFilled && (
-                              <div className="mt-3 rounded-2xl bg-[#FBF2EA] px-4 py-3 leading-5 text-[#FFA95B]">
-                                {ot("txt-YouHaveTheOptionToClose")}
-                              </div>
-                            )}
-                          </>
-                        }
-                      </>
-                    )}
-                  </>
-                }
-              </>
-            }
+                  {isFilled && (
+                    <div className="mt-3 rounded-2xl bg-[#FBF2EA] px-4 py-3 leading-5 text-[#FFA95B]">
+                      {ot("txt-YouHaveTheOptionToClose")}
+                    </div>
+                  )}
+                </>
+              )}
+            </>
           </div>
         </div>
 

@@ -23,7 +23,7 @@ export function SwapItemPanel({
   return (
     <div
       className={cn(
-        "flex w-full justify-between border border-border-black bg-bg-black p-4",
+        "flex w-full justify-between rounded bg-[#222428] p-[10px]",
         className,
       )}
     >
@@ -31,21 +31,23 @@ export function SwapItemPanel({
         <div className="text-xs leading-[18px] text-gray">{topText}</div>
         {isCanInput ? (
           <NumericalInput
-            className="mr-1 mt-2 h-9 text-2xl"
+            className="mr-1 mt-2 h-9 text-2xl text-title-white placeholder:text-gray"
             placeholder="Enter Amount"
             value={value}
             onUserInput={onValueChange}
           />
         ) : (
-          <div className="mt-2 h-9 text-2xl leading-9">{value}</div>
+          <div className="mt-2 h-9 text-2xl leading-9 text-title-white">
+            {value}
+          </div>
         )}
         <div className="text-xs leading-[18px] text-gray">{bottomText}</div>
       </div>
       <div className="flex items-center">
         <Image
           src={tokenLogo}
-          width={28}
-          height={28}
+          width={24}
+          height={24}
           alt="token"
           className="rounded-full"
         />

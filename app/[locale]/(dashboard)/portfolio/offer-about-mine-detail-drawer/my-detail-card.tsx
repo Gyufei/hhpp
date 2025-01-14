@@ -14,16 +14,17 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
   const { offerPointInfo, pointDecimalNum } = useOfferFormat({
     offer: offer,
   });
-  const offerType = offer.entry.direction;
   const { data: entryInfo } = useEntryById(offer.entry.id);
 
   const originId = entryInfo?.root_entry_id || offer.entry.id;
   const originMaker = entryInfo?.original_creator || offer.offer_maker;
 
   return (
-    <div className="flex-1 px-0 sm:px-6">
+    <div className="flex-1 p-5">
       <div className="flex items-center justify-between">
-        <div className="leading-6 text-txt-white">{T("cap-OfferDetail")}</div>
+        <div className="text-xs leading-6 text-txt-white">
+          {T("cap-OfferDetail")}
+        </div>
       </div>
       <DetailRow>
         <DetailLabel tipText={T("tip-SellerAmount")}>
@@ -65,21 +66,21 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
         </div>
       </DetailRow>
 
-      <DetailRow showBottomLine={offerType === "sell"}>
+      <DetailRow>
         <DetailLabel tipText={T("tip-TrendingEndsAt")}>
           {T("lb-TrendingEndsAt")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="text-sm leading-5">--</div>
+          <div className="text-sm leading-5 text-title-white">--</div>
         </div>
       </DetailRow>
 
-      <DetailRow showBottomLine={false}>
+      <DetailRow>
         <DetailLabel tipText={T("tip-InitialOfferMaker")}>
           {T("lb-InitialOfferMaker")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="w-fit rounded bg-bg-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
+          <div className="w-fit rounded bg-border-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
             {originId ? `#${originId}` : ""}
           </div>
           <div className="text-sm leading-5 text-txt-white">
@@ -104,20 +105,9 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
   );
 }
 
-function DetailRow({
-  showBottomLine = true,
-  children,
-}: {
-  showBottomLine?: boolean;
-  children: React.ReactNode;
-}) {
+function DetailRow({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      className="mt-1 flex items-center justify-between py-[10px]"
-      style={{
-        boxShadow: showBottomLine ? "inset 0px -1px 0px 0px #474747" : "none",
-      }}
-    >
+    <div className="mt-[10px] flex items-center justify-between">
       {children}
     </div>
   );
@@ -131,7 +121,7 @@ function DetailLabel({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center space-x-1 text-sm leading-5 text-gray">
+    <div className="underline-[#474747] flex items-center space-x-1 text-xs leading-[18px] text-gray underline">
       {children}
       {tipText && <WithTip>{tipText}</WithTip>}
     </div>
