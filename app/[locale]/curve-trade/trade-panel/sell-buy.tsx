@@ -47,13 +47,21 @@ export default function SellBuy() {
         </div>
       </div>
       <div className="mt-[10px] flex items-center space-x-[5px]">
-        <div className={btnClx}>Reset</div>
-        <div className={btnClx}>0.1 {stableToken}</div>
-        <div className={btnClx}>0.5 {stableToken}</div>
-        <div className={btnClx}>1 {stableToken}</div>
+        <div className={btnClx} onClick={() => setAmount("")}>
+          Reset
+        </div>
+        <div className={btnClx} onClick={() => setAmount("0.1")}>
+          0.1 {stableToken}
+        </div>
+        <div className={btnClx} onClick={() => setAmount("0.5")}>
+          0.5 {stableToken}
+        </div>
+        <div className={btnClx} onClick={() => setAmount("1")}>
+          1 {stableToken}
+        </div>
       </div>
 
-      <div className="mt-5 flex h-8 cursor-pointer items-center justify-center rounded bg-main hover:bg-main-hover text-xs leading-[18px] text-bg-black hover:brightness-90">
+      <div className="mt-5 flex h-8 cursor-pointer items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover hover:brightness-90">
         Place trade
       </div>
     </div>

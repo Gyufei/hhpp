@@ -180,7 +180,7 @@ export function TradesTable({
         ),
     },
     {
-      label: t("th-Price"),
+      label: t("th-Value"),
       renderCell: (trade: any) =>
         isLoadingFlag ? (
           <Skeleton className="h-[16px] w-[100px]" />

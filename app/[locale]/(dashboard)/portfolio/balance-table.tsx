@@ -38,11 +38,15 @@ export function BalanceTable() {
 
   const theme = useTheme({
     Table: `
+      grid-template-columns: 100px repeat(5,minmax(0,1fr));
+      grid-template-rows: 40px repeat(auto-fit, 56px);
+      grid-auto-rows: 56px;
+      gap: 2px;
     `,
     Header: "",
     Body: "",
     BaseRow: `
-      font-size: 14px;
+      font-size: 12px;
       line-height: 18px;
     `,
     HeaderRow: `
@@ -51,6 +55,10 @@ export function BalanceTable() {
     Row: `
     `,
     BaseCell: `
+      &:first-of-type {
+        padding-left: 10px;
+      }
+
       &:nth-last-of-type(2) > div,
       &:last-of-type > div {
         display: flex;
@@ -65,11 +73,13 @@ export function BalanceTable() {
     HeaderCell: `
       font-size: 12px;
       font-weight: 400;
-      color: #c0c4cc;
+      color: #949e9c;
       line-height: 18px;
 
     `,
-    Cell: ``,
+    Cell: `
+      color: #F6FEFD;
+    `,
   });
 
   const pagination = usePagination(data as any, {
@@ -98,7 +108,7 @@ export function BalanceTable() {
         data={data}
         theme={theme}
         pagination={pagination}
-        className="no-scroll-bar flex-1 !grid-cols-[100px_repeat(5,minmax(0,1fr))] grid-rows-[40px_repeat(7,64px)] gap-2 text-txt-white"
+        className="no-scroll-bar flex-1 text-txt-white"
       >
         {(tableList: Array<any>) => (
           <>

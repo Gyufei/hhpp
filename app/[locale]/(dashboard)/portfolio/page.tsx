@@ -28,7 +28,7 @@ export default function PortFolio() {
       </div>
       <Tabs
         value={currentTab}
-        className="m-[2px] mr-0 mt-0 flex flex-1 flex-col rounded bg-bg-black p-5"
+        className="m-[2px] mr-0 mt-0 flex flex-1 flex-col rounded bg-bg-black px-[10px] py-[12px]"
         onValueChange={setCurrentTab}
       >
         <TabsList className="flex items-center justify-between p-0">
