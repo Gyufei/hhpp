@@ -106,6 +106,7 @@
   "drawer-CreateOffer": {
     "btn-CreateOffer": "创建订单",
     "cap-CreateOffer": "创建订单",
+    "cap-List": "上架",
     "cap-Sell": "售卖",
     "cap-Ask": "询价",
     "cap-Buy": "购买",

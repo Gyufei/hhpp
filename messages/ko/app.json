@@ -104,6 +104,7 @@
   "drawer-CreateOffer": {
     "btn-CreateOffer": "제안 생성",
     "cap-CreateOffer": "제안 생성",
+    "cap-List": "목록",
     "cap-Sell": "판매",
     "cap-Buy": "구매",
     "cap-Ask": "매도",

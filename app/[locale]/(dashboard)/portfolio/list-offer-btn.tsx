@@ -48,7 +48,7 @@ export default function ListOfferBtn({
           onOpenChange={(isOpen) => setDrawerOpen(isOpen)}
         >
           <VisuallyHidden asChild>
-            <DialogTitle>Create Offer</DialogTitle>
+            <DialogTitle>List</DialogTitle>
           </VisuallyHidden>
           <DialogContent
             showClose={false}
@@ -58,7 +58,7 @@ export default function ListOfferBtn({
             <div className="flex w-full items-center justify-between border-b border-border-black px-5 py-4">
               <div className="flex items-center space-x-[10px]">
                 <div className="text-[18px] leading-[28px] text-title-white">
-                  {T("cap-CreateOffer")}
+                  {T("cap-List")}
                 </div>
               </div>
               <Image
