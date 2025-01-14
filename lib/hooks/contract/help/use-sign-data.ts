@@ -1,15 +1,15 @@
-// import { useSignMessage } from "wagmi";
+import { useSignMessage } from "wagmi";
 
 export function useSignData() {
-  // const { signMessageAsync } = useSignMessage();
+  const { signMessageAsync } = useSignMessage();
 
   async function signDataAction(data: any) {
-    // const signature = await signMessageAsync({
-    //   message: JSON.stringify(data),
-    // });
+    const signature = await signMessageAsync({
+      message: JSON.stringify(data),
+    });
     return {
       ...data,
-      // signature,
+      signature,
     };
   }
 
