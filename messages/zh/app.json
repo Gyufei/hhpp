@@ -200,11 +200,9 @@
     "th-Time": "时间"
   },
   "menu-Dashboard": {
-    "cap-Orders": "订单",
-    "cap-Holdings": "库存",
-    "cap-Balances": "余额",
-    "cap-Referral": "推荐",
-    "cap-Overview": "概览"
+    "cap-Equity": "总净值",
+    "cap-14DayVolume": "14天交易量",
+    "cap-Fees(Taker/Maker)": "费用 (购买 / 出售)"
   },
   "cd-AccountOverview": {
     "pl-Username": "用户名",
@@ -219,19 +217,20 @@
     "lb-BonusIncome": "奖励收入"
   },
   "ct-Rank": {
-    "txt-YourRank": "你的分数",
-    "txt-UpdatedOn": "更新于"
+    "th-HTPoints": "HT积分",
+    "txt-TotalPoints": "总积分",
+    "txt-Rank": "排名"
   },
   "page-MyOrders": {
     "cap-MyOrders": "我的订单",
     "sl-Type": "类型",
     "sl-Status": "状态",
     "th-Offer": "订单",
-    "th-Items": "项目",
+    "th-Coin": "代币",
     "th-Type": "类型",
     "th-Tx": "交易",
-    "th-From/To": "从/至",
-    "th-EqToken": "等价代币",
+    "th-USDValue(Snapshot)": "美元价值",
+    "th-Price": "价格",
     "th-CreatedTime": "创建时间",
     "txt-YourOrderAppearHere": "你的订单在此显示..."
   },
@@ -263,21 +262,14 @@
     "lb-YouAreGoingToSettle": "你将清算",
     "btn-ConfirmThisSettlement": "确认清算"
   },
-  "page-MyBalance": {
+  "page-MyBalances": {
     "cap-MyBalances": "我的余额",
-    "txt-YourBalanceAppearHere": "你的余额在此显示...",
-    "cap-TaxIncome": "奖励收入",
-    "cap-RealizedAssets": "回报资产",
-    "cap-ReferralBonus": "推荐奖励",
-    "cap-SalesRevenue": "销售收入",
-    "cap-RemainingCash": "剩余现金",
-    "cap-MakerRefund": "Maker 退款",
-    "cap-PointToken": "积分代币",
-    "cap-WalletCount": "钱包数",
-    "cap-TotalAmount": "总计",
-    "lb-Token": "代币",
-    "lb-Amount": "总计",
-    "btn-Get": "提取"
+    "th-Coin": "代币",
+    "th-TotalBalance": "总余额",
+    "th-AvailableBalance": "可用余额",
+    "th-USDValue": "美元价值",
+    "th-PnL(%)": "收益率",
+    "th-List": "上架"
   },
   "page-Referral": {
     "cap-YourReferralLink": "你的推荐链接",

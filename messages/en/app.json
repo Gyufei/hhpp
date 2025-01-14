@@ -197,11 +197,9 @@
     "th-Time": "Time"
   },
   "menu-Dashboard": {
-    "cap-Orders": "Orders",
-    "cap-Holdings": "Holdings",
-    "cap-Balances": "Balance",
-    "cap-Referral": "Referral",
-    "cap-Overview": "Overview"
+    "cap-Equity": "Equity",
+    "cap-14DayVolume": "14 Day Volume",
+    "cap-Fees(Taker/Maker)": "Fees (Taker / Maker)"
   },
   "cd-AccountOverview": {
     "pl-Username": "username",
@@ -213,22 +211,23 @@
     "lb-TakerOrders": "Taker Orders",
     "lb-Profit": "Profit",
     "lb-SettledValue": "Settled Value",
-    "lb-BonusIncome": "Bonus Income"
+    "lb-BonusIncome": "Tax Income"
   },
   "ct-Rank": {
-    "txt-YourRank": "Your Rank",
-    "txt-UpdatedOn": "Updated On"
+    "th-HTPoints": "HT Points",
+    "txt-TotalPoints": "Total Points",
+    "txt-Rank": "Rank"
   },
   "page-MyOrders": {
     "cap-MyOrders": "My Orders",
     "sl-Type": "Type",
     "sl-Status": "Status",
-    "th-Items": "Items",
+    "th-Coin": "Coin",
     "th-Offer": "Offer",
     "th-Type": "Type",
     "th-Tx": "Tx",
-    "th-From/To": "From/To",
-    "th-EqToken": "Eq. Token",
+    "th-USDValue(Snapshot)": "USD Value(Snapshot)",
+    "th-Price": "Price",
     "th-CreatedTime": "Created Time",
     "txt-YourOrderAppearHere": "Your orders appear here.."
   },
@@ -260,21 +259,14 @@
     "lb-YouAreGoingToSettle": "You're going to settle",
     "btn-ConfirmThisSettlement": "Confirm this settlement"
   },
-  "page-MyBalance": {
-    "cap-MyBalances": "My Balance",
-    "txt-YourBalanceAppearHere": "Your balance appear here...",
-    "cap-TaxIncome": "Bonus Income",
-    "cap-RealizedAssets": "Realized Assets",
-    "cap-ReferralBonus": "Referral Bonus",
-    "cap-SalesRevenue": "Sales Revenue",
-    "cap-RemainingCash": "Remaining Cash",
-    "cap-MakerRefund": "Maker Refund",
-    "cap-PointToken": "Point Token",
-    "cap-WalletCount": "Wallet Count",
-    "cap-TotalAmount": "Total Amount",
-    "lb-Token": "Token",
-    "lb-Amount": "Amount",
-    "btn-Get": "Get"
+  "page-MyBalances": {
+    "cap-MyBalances": "My Balances",
+    "th-Coin": "Coin",
+    "th-TotalBalance": "Total Balance",
+    "th-AvailableBalance": "Available Balance",
+    "th-USDValue": "USD Value",
+    "th-PnL(%)": "PnL(%)",
+    "th-List": "List"
   },
   "page-Referral": {
     "cap-YourReferralLink": "Your referral link",

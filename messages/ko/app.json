@@ -194,11 +194,9 @@
     "th-Time": "시간"
   },
   "menu-Dashboard": {
-    "cap-Orders": "주문",
-    "cap-Holdings": "보유 자산",
-    "cap-Balances": "잔액",
-    "cap-Referral": "추천",
-    "cap-Overview": "개요"
+    "cap-Equity": "Equity",
+    "cap-14DayVolume": "14 Day Volume",
+    "cap-Fees(Taker/Maker)": "Fees (Taker / Maker)"
   },
   "cd-AccountOverview": {
     "pl-Username": "사용자 이름",
@@ -213,19 +211,20 @@
     "lb-BonusIncome": "보너스 수입"
   },
   "ct-Rank": {
-    "txt-YourRank": "당신의 순위",
-    "txt-UpdatedOn": "업데이트 날짜"
+    "th-HTPoints": "HT Points",
+    "txt-TotalPoints": "Total Points",
+    "txt-Rank": "Rank"
   },
   "page-MyOrders": {
     "cap-MyOrders": "내 주문",
     "sl-Type": "유형",
     "sl-Status": "상태",
-    "th-Items": "항목",
+    "th-Coin": "항목",
     "th-Offer": "제안",
     "th-Type": "유형",
     "th-Tx": "트랜잭션",
-    "th-From/To": "발신/수신",
-    "th-EqToken": "동등 토큰",
+    "th-USDValue(Snapshot)": "USD Value(Snapshot)",
+    "th-Price": "Price",
     "th-CreatedTime": "생성 시간",
     "txt-YourOrderAppearHere": "여기에 주문이 표시됩니다."
   },
@@ -257,21 +256,14 @@
     "lb-YouAreGoingToSettle": "정산할 예정입니다",
     "btn-ConfirmThisSettlement": "이 정산 확인"
   },
-  "page-MyBalance": {
-    "cap-MyBalances": "내 잔액",
-    "txt-YourBalanceAppearHere": "여기에 잔액이 표시됩니다.",
-    "cap-TaxIncome": "보너스 수입",
-    "cap-RealizedAssets": "실현된 자산",
-    "cap-ReferralBonus": "추천 보너스",
-    "cap-SalesRevenue": "판매 수익",
-    "cap-RemainingCash": "남은 현금",
-    "cap-MakerRefund": "메이커 환불",
-    "cap-PointToken": "포인트 토큰",
-    "cap-WalletCount": "지갑 수",
-    "cap-TotalAmount": "총 금액",
-    "lb-Token": "토큰",
-    "lb-Amount": "금액",
-    "btn-Get": "받기"
+  "page-MyBalances": {
+    "cap-MyBalances": "My Balances",
+    "th-Coin": "Coin",
+    "th-TotalBalance": "Total Balance",
+    "th-AvailableBalance": "Available Balance",
+    "th-USDValue": "USD Value",
+    "th-PnL(%)": "PnL(%)",
+    "th-List": "List"
   },
   "page-Referral": {
     "cap-YourReferralLink": "당신의 추천 링크",

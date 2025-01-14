@@ -11,6 +11,8 @@ const tabClx =
 
 export default function PortFolio() {
   const TH = useTranslations("Header");
+  const TO = useTranslations("page-MyOrders");
+  const TB = useTranslations("page-MyBalances");
 
   const [currentTab, setCurrentTab] = useState("orders");
 
@@ -32,10 +34,10 @@ export default function PortFolio() {
         <TabsList className="flex items-center justify-between p-0">
           <div className="flex items-center justify-start space-x-[10px]">
             <TabsTrigger className={tabClx} value="orders">
-              My Orders
+              {TO("cap-MyOrders")}
             </TabsTrigger>
             <TabsTrigger className={tabClx} value="balances">
-              My Balances
+              {TB("cap-MyBalances")}
             </TabsTrigger>
           </div>
         </TabsList>

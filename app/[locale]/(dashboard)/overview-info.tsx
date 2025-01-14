@@ -3,15 +3,19 @@ import { formatNum } from "@/lib/utils/number";
 import { useAccountStats } from "@/lib/hooks/api/use-account-overview";
 import { useTranslations } from "next-intl";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
+import { useUserXp } from "@/lib/hooks/api/use-user-xp";
 
 export default function OverviewInfo() {
   const T = useTranslations("cd-AccountOverview");
+  const TR = useTranslations("ct-Rank");
   const { currentChain } = useChainWallet();
+  const { data: userPoints } = useUserXp();
+  console.log("🚀 ~ OverviewInfo ~ userPoints:", userPoints);
 
   const { data: accountInfo } = useAccountStats(currentChain!);
 
   return (
-    <div className="flex h-full flex-col space-y-2 pb-5 ">
+    <div className="flex h-full flex-col space-y-2 pb-5 text-[12px]">
       <div className="m-[10px] mt-2 border-b border-border-black pb-8">
         <div className="flex items-center justify-between">
           <div className="leading-6 text-txt-white">
@@ -30,7 +34,7 @@ export default function OverviewInfo() {
           <LabelText>{T("lb-Profit")}</LabelText>
           <div
             // data-loss={accountInfo ? accountInfo?.profit < 0 : "null"}
-            className="leading-6 data-[loss=false]:text-green data-[loss=null]:text-txt-white data-[loss=true]:text-red"
+            className="leading-6 data-[loss=false]:text-[#50D2C1] data-[loss=null]:text-txt-white data-[loss=true]:text-red"
           >
             <NoDataDisplay noData={!accountInfo}>
               <>
@@ -72,7 +76,7 @@ export default function OverviewInfo() {
             data-loss={
               accountInfo ? Number(accountInfo?.tax_income) < 0 : "null"
             }
-            className="leading-6 data-[loss=false]:text-green data-[loss=null]:text-txt-white data-[loss=true]:text-red"
+            className="leading-6 data-[loss=false]:text-[#50D2C1] data-[loss=null]:text-txt-white data-[loss=true]:text-red"
           >
             <NoDataDisplay noData={!accountInfo}>
               <>
@@ -85,16 +89,16 @@ export default function OverviewInfo() {
       </div>
       <div className="m-[10px]">
         <div className="flex items-center justify-between">
-          <div className="leading-6 text-txt-white">HT Points</div>
+          <div className="leading-6 text-txt-white">{TR("th-HTPoints")}</div>
         </div>
         <div className="mt-3 flex justify-between">
-          <LabelText>Total Points</LabelText>
+          <LabelText>{TR("txt-TotalPoints")}</LabelText>
           <div className="leading-6 text-txt-white">
             <NoDataDisplay noData={!accountInfo}>10,000</NoDataDisplay>
           </div>
         </div>
         <div className="mt-3 flex justify-between">
-          <LabelText>Rank</LabelText>
+          <LabelText>{TR("txt-Rank")}</LabelText>
           <div className="leading-6 text-txt-white">
             <NoDataDisplay noData={!accountInfo}>N/A</NoDataDisplay>
           </div>

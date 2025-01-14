@@ -18,7 +18,7 @@ import { useMyHoldings } from "@/lib/hooks/api/use-my-holdings";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { usePointAmount } from "@/lib/hooks/api/use-point-amount";
 export function BalanceTable() {
-  const T = useTranslations("page-MyOrders");
+  const T = useTranslations("page-MyBalances");
 
   const { data: balanceData } = useMyHoldings();
 
@@ -104,17 +104,21 @@ export function BalanceTable() {
           <>
             <Header className="text-xs leading-[18px] text-gray">
               <HeaderRow className="">
-                <HeaderCell className="h-10 px-1 py-[11px]">Coin</HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  Total Balance
+                  {T("th-Coin")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  Available Balance
+                  {T("th-TotalBalance")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  USD Value
+                  {T("th-AvailableBalance")}
                 </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">PnL(%)</HeaderCell>
+                <HeaderCell className="h-10 px-1 py-[11px]">
+                  {T("th-USDValue")}
+                </HeaderCell>
+                <HeaderCell className="h-10 px-1 py-[11px]">
+                  {T("th-PnL(%)")}
+                </HeaderCell>
               </HeaderRow>
             </Header>
             <Body>
