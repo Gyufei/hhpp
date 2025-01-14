@@ -74,3 +74,18 @@ img {
   -ms-user-drag: none; /* IE/Edge */
   user-drag: none;
 }
+
+.error-blink {
+  animation: blink 0.3s ease-in-out 2 forwards;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    border-color: #ef5350;
+  }
+  25%,
+  75% {
+    border-color: transparent;
+  }
+}

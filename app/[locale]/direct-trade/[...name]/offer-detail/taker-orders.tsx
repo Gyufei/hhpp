@@ -32,8 +32,6 @@ export function TakerOrders({
     offer: offer,
   });
 
-  console.log(orders, offer);
-
   const data = useMemo(() => {
     const orderData = orders.map((o, index) => {
       return {

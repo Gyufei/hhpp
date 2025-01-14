@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { InputPanel } from "./input-panel";
 import { StableTokenSelectDisplay } from "./stable-token-display";
+import NP from "number-precision";
 
 import ArrowBetween from "./arrow-between";
 import { WithTip } from "../../../../../components/share/with-tip";
@@ -16,6 +17,7 @@ import { PointTokenDisplay } from "./point-token-display";
 import { cn } from "@/lib/utils/common";
 import { reportEvent } from "@/lib/utils/analytics";
 import { useCheckBalance } from "@/lib/hooks/api/use-check-balance";
+import { useCreateOfferMinPrice } from "@/lib/hooks/offer/use-create-offer-min-price";
 
 export function SellContent({
   marketplace,
@@ -27,6 +29,7 @@ export function SellContent({
   className?: string;
 }) {
   const T = useTranslations("drawer-CreateOffer");
+  const { checkMinPrice, checkMaxPrice } = useCreateOfferMinPrice();
 
   const {
     token: receiveToken,
@@ -42,6 +45,7 @@ export function SellContent({
     isCreating,
     handleCreate,
     isCreateSuccess,
+    pointDecimalNum,
   } = useCreateAction(marketplace);
 
   useEffect(() => {
@@ -57,9 +61,32 @@ export function SellContent({
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
-    const result = checkPointInsufficient(sellPointAmount);
-    setErrorText(result);
-  }, [sellPointAmount]);
+    let curErrorText = "";
+    curErrorText = checkPointInsufficient(sellPointAmount);
+
+    if (!curErrorText && +pointPrice) {
+      curErrorText = checkMinPrice(
+        pointPrice,
+        NP.times(currentMarket.last_price, pointDecimalNum),
+      );
+
+      curErrorText = checkMaxPrice(
+        pointPrice,
+        NP.times(currentMarket.last_price, pointDecimalNum),
+      );
+    }
+
+    setErrorText(curErrorText);
+  }, [
+    sellPointAmount,
+    pointPrice,
+    currentMarket.item_name,
+    currentMarket.last_price,
+    pointDecimalNum,
+    checkMinPrice,
+    checkMaxPrice,
+    checkPointInsufficient,
+  ]);
 
   async function handleConfirmBtnClick() {
     handleCreate();
@@ -124,7 +151,10 @@ export function SellContent({
         <OrderNoteAndFee value={note} onValueChange={setNote} type={"sell"} />
       </div>
 
-      <div className="border-t border-border-black px-5 py-4">
+      <div className="relative border-t border-border-black px-5 py-4">
+        <div className="absolute left-1/2 top-1 -translate-x-1/2 text-center text-[10px] leading-[16px] text-red">
+          {errorText}
+        </div>
         <button
           onClick={handleConfirmBtnClick}
           disabled={isCreating || !!errorText || !receiveTokenAmount}

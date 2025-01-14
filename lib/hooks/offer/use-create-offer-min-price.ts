@@ -1,26 +1,20 @@
-import { GlobalMessageAtom } from "@/lib/states/global-message";
-import { toNonExponential } from "@/lib/utils/number";
-import { useSetAtom } from "jotai";
-
 export function useCreateOfferMinPrice() {
-  const setGlobalMessage = useSetAtom(GlobalMessageAtom);
-
   function checkMinPrice(price: number | string, minPrice: number) {
-    const minPrice80 = Number(minPrice * 0.8);
-    if (!price || Number(price) <= minPrice80) {
-      setGlobalMessage({
-        type: "error",
-        message: `Point price must be greater than ${toNonExponential(
-          minPrice80,
-        )}`,
-      });
-      return false;
+    if (Number(price) < Number(minPrice * 0.8)) {
+      return "Too small price shift";
     }
+    return "";
+  }
 
-    return true;
+  function checkMaxPrice(price: number | string, minPrice: number) {
+    if (Number(price) > Number(minPrice * 1.2)) {
+      return "Too big price shift";
+    }
+    return "";
   }
 
   return {
     checkMinPrice,
+    checkMaxPrice,
   };
 }
