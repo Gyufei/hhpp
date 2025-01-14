@@ -45,7 +45,7 @@ export default function Referral() {
       <div className="relative mr-0 mt-[2px] flex flex-1 flex-col justify-start rounded bg-bg-black">
         <div className="mt-4 flex h-full flex-col rounded bg-bg-black p-[10px] sm:mt-0 sm:bg-transparent">
           <div className="flex h-[24px] items-center space-x-[5px]">
-            <div className="px-[10px] text-sm leading-5 text-title-white">
+            <div className="pl-[10px] text-sm leading-5 text-title-white">
               {rt("cap-ReferralLink")}
             </div>
             <HoverIcon

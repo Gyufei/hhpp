@@ -150,24 +150,16 @@ export function ReferralTable({
                     <ReferralCode rD={rD} index={index} />
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
-                    <div className="text-sm leading-5 text-txt-white">
-                      {rD.referral_users}
-                    </div>
+                    <div className="text-txt-white">{rD.referral_users}</div>
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
-                    <div className="text-sm leading-5 text-txt-white">
-                      {rD.trading_users}
-                    </div>
+                    <div className="text-txt-white">{rD.trading_users}</div>
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
-                    <div className="text-sm leading-5 text-txt-white">
-                      ${rD.trading_fee}
-                    </div>
+                    <div className="text-txt-white">${rD.trading_fee}</div>
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
-                    <div className="text-sm leading-5 text-txt-white">
-                      {rD.unique_views}
-                    </div>
+                    <div className="text-txt-white">{rD.unique_views}</div>
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
                     <ReferralRate rD={rD} onClick={() => openEditDrawer(rD)} />
@@ -214,7 +206,7 @@ function ReferralCode({ rD, index }: { rD: IReferralItem; index: number }) {
       onMouseLeave={() => setIsHover(false)}
       className="relative flex h-fit w-fit cursor-pointer items-center space-x-2 text-txt-white"
     >
-      <span className="mr-[2px] text-sm leading-5">#{index + 1}</span>
+      <span className="mr-[2px] ">#{index + 1}</span>
       <span>{rD.referral_code}</span>
       {isHover && (
         <HoverIcon
@@ -246,7 +238,7 @@ function ReferralRate({
       onMouseLeave={() => setIsHover(false)}
       className="relative flex h-fit w-fit cursor-pointer items-center space-x-[6px]"
     >
-      <span className="border-lightgray border-b border-dashed text-sm leading-5 text-txt-white">
+      <span className="border-lightgray border-b border-dashed  text-txt-white">
         {rD.referrer_rate != "" && rD.referrer_rate != null && (
           <>{formatNum(Number(rD.referrer_rate || 0) / 10 ** 4)}%,&nbsp;</>
         )}
