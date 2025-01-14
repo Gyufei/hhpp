@@ -41,11 +41,6 @@ export default function MarketplaceContent({
 
   return (
     <div className="flex w-full flex-col bg-border-black p-[2px]">
-      <div className="relative block sm:hidden">
-        {marketplace && (
-          <CreateOfferBtn marketplace={marketplace} onSuccess={refreshOffers} />
-        )}
-      </div>
       <div className="flex flex-1 pt-4 sm:pt-0">
         <div className="mr-[2px] flex w-full flex-col sm:w-[320px]">
           <MarketplaceCard

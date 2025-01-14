@@ -64,7 +64,7 @@ export default function OfferDetailDialog({
         </VisuallyHidden>
         <DialogContent
           showClose={false}
-          className="w-[740px] gap-0 overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
+          className="w-[740px] gap-0 overflow-y-auto rounded border border-border-black !bg-bg-black p-4 sm:p-0"
         >
           <div className="flex w-full items-center justify-between border-b border-border-black px-5 py-4">
             <div className="flex items-center space-x-[10px]">

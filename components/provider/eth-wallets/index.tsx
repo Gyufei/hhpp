@@ -3,12 +3,11 @@ import React, { ReactNode } from "react";
 import { State } from "wagmi";
 
 import { WagmiProvider } from "wagmi";
-import { useAtomValue } from "jotai";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { CustomRpcsAtom, GlobalRpcsAtom } from "@/lib/states/rpc";
 import { ChainType } from "@/lib/types/chain";
 import { getWagmiConfig } from "./wagmi-config";
 import { memoize } from "lodash";
+import { ChainConfigs } from "@/lib/const/chain-configs";
 
 // Setup queryClient
 const queryClient = new QueryClient();
@@ -21,9 +20,7 @@ export default function EthWalletsProvider({
   children: ReactNode;
   initialState?: State;
 }) {
-  const globalRpcs = useAtomValue(GlobalRpcsAtom);
-  const customRpcs = useAtomValue(CustomRpcsAtom);
-  const arbRpc = customRpcs[ChainType.HYPER] || globalRpcs[ChainType.HYPER];
+  const arbRpc = ChainConfigs[ChainType.HYPER].rpcs.TadleDefaultRP;
   const wagmiConfig = getConfig(arbRpc);
 
   return (

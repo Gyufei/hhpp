@@ -49,10 +49,10 @@ export function TakerOrders({
 
   const theme = useTheme({
     Table: `
-      grid-template-rows: 40px repeat(auto-fit, 48px);
+      grid-template-rows: repeat(auto-fit, 40px);
       grid-template-columns: 120px repeat(4, minmax(0, 1fr));
       font-weight: 400;
-      grid-auto-rows: 48px;
+      grid-auto-rows: 40px;
     `,
     Header: "",
     Body: "",
@@ -82,7 +82,7 @@ export function TakerOrders({
   const pagination = usePagination(data, {
     state: {
       page: 0,
-      size: 10,
+      size: 5,
     },
     onChange: () => {},
   });

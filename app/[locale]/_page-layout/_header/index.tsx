@@ -16,13 +16,13 @@ export default function Header() {
 
   return (
     <div className="flex h-14 items-center justify-between px-[10px] py-2">
-      <div className="flex flex-row-reverse items-center justify-start space-x-[30px] sm:flex-row">
+      <div className="flex flex-row-reverse items-center justify-start sm:flex-row sm:space-x-[30px]">
         <Logo />
         <NavigationBtns />
       </div>
       <div className="flex flex-1 items-center justify-end space-x-4 sm:space-x-5">
         <ConnectBtn />
-        <div className="flex items-center gap-[10px]">
+        <div className="hidden items-center gap-[10px] sm:flex">
           <Setting />
           <LanguageSetting />
         </div>
