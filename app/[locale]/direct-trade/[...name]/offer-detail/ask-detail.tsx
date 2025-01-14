@@ -86,7 +86,7 @@ export default function AskDetail({
     let errorText = "";
     errorText = checkUSDCInsufficient(payTokenAmount);
 
-    if (receivePointAmount > sliderCanMax) {
+    if (!errorText && receivePointAmount > sliderCanMax) {
       errorText = `Insufficient ${offer.marketplace.item_name} to Buy`;
     }
 
