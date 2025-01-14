@@ -30,14 +30,14 @@ export default function CreateOfferBtn({
     <>
       <WithWalletConnectBtn
         chain={marketplace.chain}
-        className="w-full "
+        className="w-full text-right sm:text-center"
         onClick={() => {
           checkAndSwitchChain();
           setDrawerOpen(true);
           reportEvent("click", { value: "createOffer" });
         }}
       >
-        <button className="h-8 w-full items-center justify-center rounded bg-[#97FCE4] bg-main text-[12px] leading-4 text-bg-black hover:bg-main-hover sm:flex">
+        <button className="h-10 w-[160px] items-center justify-center rounded bg-[#97FCE4] bg-main text-[14px] leading-5 text-bg-black hover:bg-main-hover sm:flex sm:h-8 sm:w-full sm:text-[12px] sm:leading-4">
           {T("btn-CreateOffer")}
         </button>
       </WithWalletConnectBtn>

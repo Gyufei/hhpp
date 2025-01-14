@@ -69,12 +69,12 @@ export default function MarketplaceCard({
 
   return (
     <div className={cn(className, "relative")}>
-      <div className="flex items-center justify-between border-b border-[#303030] pb-4">
+      <div className="mx-[10px] flex items-center justify-start pb-4 pt-[10px] sm:justify-between sm:border-b sm:border-[#303030]">
         <div className="flex items-center justify-start space-x-[10px]">
           {isLoadingFlag ? (
             <Skeleton className="h-14 w-14 rounded-full" />
           ) : (
-            <div className="flex h-14 w-14 items-center justify-center rounded-full border-[1.5px] border-border-black">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full sm:border-[1.5px] sm:border-border-black">
               <Image
                 src={marketplace?.projectLogo}
                 width={48}
@@ -125,15 +125,9 @@ export default function MarketplaceCard({
 }
 
 function OverviewIcons({
-  // isStar,
-  // handleStar,
-  // handleCopy,
   twitter,
   discord,
 }: {
-  // isStar: boolean;
-  // handleStar: () => void;
-  // handleCopy: () => void;
   twitter: string | undefined;
   discord: string | undefined;
   [key: string]: any;
@@ -150,15 +144,6 @@ function OverviewIcons({
 
   return (
     <div className="flex h-5 items-center space-x-1">
-      {/* <HoverIcon
-        onClick={handleCopy}
-        src="/icons/copy-gray.svg"
-        hoverSrc="/icons/copy.svg"
-        width={20}
-        height={20}
-        alt="copy"
-      /> */}
-
       {twitter && (
         <HoverIcon
           onClick={handleGoTwitter}
@@ -180,26 +165,6 @@ function OverviewIcons({
           alt="discord"
         />
       )}
-
-      {/* {isStar ? (
-        <Image
-          onClick={handleStar}
-          src="/icons/stared.svg"
-          width={20}
-          height={20}
-          alt="stared"
-          className="cursor-pointer"
-        />
-      ) : (
-        <HoverIcon
-          onClick={handleStar}
-          src="/icons/star-gray.svg"
-          hoverSrc="/icons/star.svg"
-          width={20}
-          height={20}
-          alt="star"
-        />
-      )} */}
     </div>
   );
 }
@@ -264,7 +229,7 @@ function FoldPop() {
             onChange={(e) => setSearchText(e.target.value)}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
-            className="focus:border-txt-white h-10 rounded-lg border-border-black bg-bg-black pl-8 text-txt-white placeholder:text-gray"
+            className="h-10 rounded-lg border-border-black bg-bg-black pl-8 text-txt-white placeholder:text-gray focus:border-txt-white"
           />
         </div>
         {filteredCateList.map((cate, i) => (
