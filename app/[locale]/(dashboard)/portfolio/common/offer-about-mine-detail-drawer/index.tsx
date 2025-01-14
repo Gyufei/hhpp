@@ -1,13 +1,10 @@
-import Drawer from "react-modern-drawer";
-import DrawerTitle from "@/components/share/drawer-title";
-import MobileDrawerTitle from "@/components/share/drawer-title-mobile";
+import Image from "next/image";
 
 import { IOffer } from "@/lib/types/offer";
 import MyAskDetail from "./my-ask-detail";
-import { useMemo } from "react";
-import { upperFirst } from "lodash";
 import { useTranslations } from "next-intl";
-import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 export default function OfferAboutMineDetailDrawer({
   holdingId,
@@ -22,59 +19,50 @@ export default function OfferAboutMineDetailDrawer({
   drawerOpen: boolean;
   setDrawerOpen: (open: boolean) => void;
 }) {
-  const ct = useTranslations("Common");
   const ot = useTranslations("drawer-OfferDetail");
-
-  const settleMode = upperFirst(offer?.origin_settle_mode);
-  const { isMobileSize } = useDeviceSize();
-
-  const isAsk = useMemo(() => {
-    return offer?.entry.direction === "sell";
-  }, [offer]);
-  function handleDrawerClose() {
-    setDrawerOpen(false);
-  }
 
   function handleSuccess() {
     if (!drawerOpen) return;
     setDrawerOpen(false);
     onSuccess();
   }
+  function handleDrawerToggle(v: boolean) {
+    setDrawerOpen(v);
+  }
 
   if (!offer) return null;
 
   return (
-    <Drawer
-      open={drawerOpen}
-      onClose={handleDrawerClose}
-      direction={isMobileSize ? "bottom" : "right"}
-      size={isMobileSize ? "calc(100vh - 44px)" : 952}
-      className="overflow-y-auto rounded-none !bg-bg-black p-4 sm:rounded-l-2xl sm:p-6"
-      customIdSuffix="detail-drawer"
-    >
-      {isMobileSize ? (
-        <MobileDrawerTitle
-          title={
-            isAsk ? ot("cap-MyAskOfferDetail") : ot("cap-MyBidOfferDetail")
-          }
-          onClose={handleDrawerClose}
-        />
-      ) : (
-        <DrawerTitle
-          title={
-            isAsk ? ot("cap-MyAskOfferDetail") : ot("cap-MyBidOfferDetail")
-          }
-          onClose={handleDrawerClose}
-          tag={ct(settleMode)}
-          tagClassName={settleMode === "Protected" ? "bg-green" : "bg-red"}
-        />
-      )}
+    <Dialog open={drawerOpen} onOpenChange={(v) => handleDrawerToggle(v)}>
+      <VisuallyHidden asChild>
+        <DialogTitle>Offer Detail</DialogTitle>
+      </VisuallyHidden>
+      <DialogContent
+        showClose={false}
+        className="w-[740px] gap-0 overflow-y-auto rounded border border-border-black !bg-bg-black p-4 sm:p-0"
+      >
+        <div className="flex w-full items-center justify-between border-b border-border-black px-5 py-4">
+          <div className="flex items-center space-x-[10px]">
+            <div className="text-[18px] leading-[28px] text-title-white">
+              {ot("cap-OfferDetail")}
+            </div>
+          </div>
+          <Image
+            src="/icons/close.svg"
+            width={24}
+            height={24}
+            alt="close"
+            className="cursor-pointer"
+            onClick={() => handleDrawerToggle(false)}
+          />
+        </div>
 
-      <MyAskDetail
-        holdingId={holdingId}
-        offer={offer}
-        onSuccess={handleSuccess}
-      />
-    </Drawer>
+        <MyAskDetail
+          holdingId={holdingId}
+          offer={offer}
+          onSuccess={handleSuccess}
+        />
+      </DialogContent>
+    </Dialog>
   );
 }

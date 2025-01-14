@@ -9,7 +9,7 @@ import {
 } from "@table-library/react-table-library/table";
 import { usePagination } from "@table-library/react-table-library/pagination";
 import { useTheme } from "@table-library/react-table-library/theme";
-
+import ListOfferBtn from "./list-offer-btn";
 import { Pagination } from "@/components/ui/pagination/pagination";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
@@ -98,7 +98,7 @@ export function BalanceTable() {
         data={data}
         theme={theme}
         pagination={pagination}
-        className="flex-1 !grid-cols-[200px_repeat(4,minmax(0,1fr))] grid-rows-[40px_repeat(7,64px)] gap-2 text-txt-white"
+        className="no-scroll-bar flex-1 !grid-cols-[100px_repeat(5,minmax(0,1fr))] grid-rows-[40px_repeat(7,64px)] gap-2 text-txt-white"
       >
         {(tableList: Array<any>) => (
           <>
@@ -119,6 +119,7 @@ export function BalanceTable() {
                 <HeaderCell className="h-10 px-1 py-[11px]">
                   {T("th-PnL(%)")}
                 </HeaderCell>
+                <HeaderCell className="h-10 px-1 py-[11px]"></HeaderCell>
               </HeaderRow>
             </Header>
             <Body>
@@ -149,6 +150,12 @@ export function BalanceTable() {
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top text-red">
                     -$233.556/-12.34%
+                  </Cell>
+                  <Cell className="h-12 px-1 py-[11px] align-top">
+                    <ListOfferBtn
+                      marketplace={holding.marketplace}
+                      onSuccess={() => {}}
+                    ></ListOfferBtn>
                   </Cell>
                 </Row>
               ))}
