@@ -1,11 +1,12 @@
 import Image from "next/image";
-import { formatNum } from "@/lib/utils/number";
 import { Slider } from "@/components/ui/slider";
-import { ReactElement } from "react";
+import { ReactElement, useMemo } from "react";
+import { NumericalInput } from "@/components/share/numerical-input";
 
 export default function SliderCard({
   topText,
   value,
+  onValueChange,
   sliderValue,
   sliderMax,
   canGoMax,
@@ -16,6 +17,7 @@ export default function SliderCard({
 }: {
   topText: ReactElement;
   value: string;
+  onValueChange: (_v: string) => void;
   sliderValue: number;
   canGoMax: number;
   sliderMax: number;
@@ -33,12 +35,14 @@ export default function SliderCard({
     setSliderValue(val);
   }
 
-  const progress = ((sliderValue / sliderMax) * 100).toFixed();
+  const progress = useMemo(() => {
+    return ((sliderValue / sliderMax) * 100).toFixed();
+  }, [sliderValue, sliderMax]);
 
   return (
     <div
       data-error={hasError}
-      className={`mt-5 rounded bg-[#222428] p-[10px] focus-within:border-txt-white ${
+      className={`mt-5 rounded border border-transparent bg-[#222428] p-[10px] focus-within:border-txt-white ${
         hasError ? "error-blink" : ""
       }`}
     >
@@ -46,9 +50,15 @@ export default function SliderCard({
         {topText}
       </div>
       <div className="mt-2 flex items-center justify-between">
-        <div className="h-[36px] text-2xl leading-[36px] text-txt-white">
+        {/* <div className="h-[36px] text-2xl leading-[36px] text-txt-white">
           {formatNum(value, 6)}
-        </div>
+        </div> */}
+        <NumericalInput
+          className="mr-1 mt-2 h-9 max-w-[240px] text-left text-2xl leading-9 text-title-white placeholder:text-gray sm:max-w-full"
+          placeholder="Enter Amount"
+          value={value}
+          onUserInput={(v) => onValueChange(v)}
+        />
         <Image
           src={tokenLogo}
           width={24}
@@ -65,7 +75,7 @@ export default function SliderCard({
           step={1}
         />
         <div className="ml-4 mr-3 flex h-5 items-center rounded-full border border-border-black px-[10px] text-[10px] leading-4 text-title-white">
-          {progress}%
+          {Number(progress) > 100 ? ">100" : progress}%
         </div>
         <div
           onClick={() => setSliderValue(canGoMax)}

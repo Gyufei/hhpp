@@ -32,6 +32,8 @@ export default function AskDetail({
 
   const { platformFee } = useGlobalConfig();
 
+  const { checkUSDCInsufficient } = useCheckBalance(offer.marketplace);
+
   const {
     tokenPrice,
     progress,
@@ -80,15 +82,32 @@ export default function AskDetail({
     return NP.times(payTokenAmount || 0, tokenPrice);
   }, [payTokenAmount, tokenPrice]);
 
-  const { checkUSDCInsufficient } = useCheckBalance(offer.marketplace);
-
   useEffect(() => {
-    const result = checkUSDCInsufficient(payTokenAmount);
-    setErrorText(result);
-  }, [payTokenAmount]);
+    let errorText = "";
+    errorText = checkUSDCInsufficient(payTokenAmount);
+
+    if (receivePointAmount > sliderCanMax) {
+      errorText = `Insufficient ${offer.marketplace.item_name} to Buy`;
+    }
+
+    setErrorText(errorText);
+  }, [payTokenAmount, receivePointAmount]);
 
   function handleSliderChange(v: number) {
     setReceivePointAmount(v);
+  }
+
+  function handleWantPayTokenAmount(v: string) {
+    if (!v) {
+      setReceivePointAmount(0);
+      return;
+    }
+
+    const wantPay = Number(v);
+    const realPay = NP.divide(wantPay, 1 + platformFee + tradeFee);
+    const payPercent = NP.times(realPay, forValue);
+    const receive = NP.times(payPercent, offer.item_amount);
+    setReceivePointAmount(receive);
   }
 
   async function handleConfirmTakerOrder() {
@@ -132,8 +151,9 @@ export default function AskDetail({
               </>
             }
             bottomText={<>~${formatNum(payTokenTotalPrice)} </>}
-            value={payTokenAmount}
             tokenLogo={forLogo}
+            value={payTokenAmount}
+            onValueChange={handleWantPayTokenAmount}
             canGoMax={sliderCanMax}
             sliderMax={Number(offer.item_amount)}
             sliderValue={receivePointAmount}

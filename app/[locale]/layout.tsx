@@ -12,6 +12,7 @@ import { isProduction } from "@/lib/PathMap";
 import WalletModalProvider from "@/components/provider/wallet-modal-provider";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import GlobalProvider from "@/components/provider/global-provider";
 
 export const metadata = {
   title: {
@@ -73,15 +74,17 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={cn(inter.className)}>
-        <JotaiProvider>
-          <WalletModalProvider>
-            <SWRConfigProvider>
-              <NextIntlClientProvider messages={messages}>
-                <MainLayout>{children}</MainLayout>
-              </NextIntlClientProvider>
-            </SWRConfigProvider>
-          </WalletModalProvider>
-        </JotaiProvider>
+        <GlobalProvider>
+          <JotaiProvider>
+            <WalletModalProvider>
+              <SWRConfigProvider>
+                <NextIntlClientProvider messages={messages}>
+                  <MainLayout>{children}</MainLayout>
+                </NextIntlClientProvider>
+              </SWRConfigProvider>
+            </WalletModalProvider>
+          </JotaiProvider>
+        </GlobalProvider>
       </body>
       <GoogleAnalytics gaId={isProduction ? "G-FN03SV9KCF" : "G-1PQBDX806E"} />
     </html>
