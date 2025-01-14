@@ -105,6 +105,7 @@
   "drawer-CreateOffer": {
     "btn-CreateOffer": "Create Offer",
     "cap-CreateOffer": "Create Offer",
+    "cap-List": "List",
     "cap-Sell": "Sell",
     "cap-Buy": "Buy",
     "cap-Ask": "Ask",

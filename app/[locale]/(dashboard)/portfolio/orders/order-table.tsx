@@ -17,7 +17,7 @@ import { useMyOrders } from "@/lib/hooks/api/use-my-orders";
 import { IOffer } from "@/lib/types/offer";
 import { formatTimestamp } from "@/lib/utils/time";
 import { IRole, IStatus } from "./filter-select";
-import OfferAboutMineDetailDrawer from "../common/offer-about-mine-detail-drawer";
+import OfferAboutMineDetailDrawer from "../offer-about-mine-detail-drawer";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useTranslations } from "next-intl";
 import { sortBy } from "lodash";
@@ -138,6 +138,7 @@ export function OrderTable({
       </div>
     );
   }
+
   function handleOpenOfferDrawer(OId: string) {
     setSelectOfferId(OId);
     setDrawerOpen(true);

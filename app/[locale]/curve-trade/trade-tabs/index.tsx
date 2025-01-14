@@ -5,7 +5,7 @@ import { TabFilter } from "./tab-filter";
 import { TransactionsTable } from "./transactions-table";
 
 const tabClx =
-  "flex w-[105px] items-center px-[10px] py-[10px] text-sm leading-5 border-b-2 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray rounded-none";
+  "flex w-[105px] items-center px-[10px] py-[10px] text-sm leading-5 border-b data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray rounded-none";
 
 export function TradeTabs() {
   const [currentTab, setCurrentTab] = useState("transactions");
