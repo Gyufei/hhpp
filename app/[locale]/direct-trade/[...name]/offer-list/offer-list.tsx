@@ -8,7 +8,6 @@ import { OfferCard, OrderCardSkeleton } from "./offer-card";
 import { IOffer } from "@/lib/types/offer";
 import { useSortOffer } from "@/lib/hooks/offer/use-sort-offer";
 import { range } from "lodash";
-import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 import OfferDetailDialog from "../offer-detail/offer-detail-dialog";
 
 export default function OfferList({
@@ -20,7 +19,6 @@ export default function OfferList({
   isLoading: boolean;
   refreshOffers: () => void;
 }) {
-  const { isMobileSize } = useDeviceSize();
   const {
     sortField,
     sortDir,
@@ -60,7 +58,7 @@ export default function OfferList({
 
   return (
     <div className="flex h-full flex-col">
-      <div className="mb-[2px] flex w-full items-center justify-between border-b border-border-black bg-bg-black pb-[10px]">
+      <div className="mb-[2px] flex w-full items-center justify-between bg-bg-black pb-[10px] sm:border-b sm:border-border-black">
         <div className="no-scroll-bar flex w-[calc(100vw-170px)] flex-1 items-center space-x-4 overflow-x-scroll sm:w-auto sm:overflow-hidden">
           <SortSelect
             sortField={sortField}
@@ -70,20 +68,13 @@ export default function OfferList({
             showCollateral={!(isOffChainFungiblePoint || isPointToken)}
           />
         </div>
-        <div
-          style={{
-            background: isMobileSize
-              ? "linear-gradient(270deg, #FAFAFA 0%, #FAFAFA 71%, rgba(250, 250, 250, 0) 107%)"
-              : "none",
-          }}
-          className="ml-6 flex min-w-[100px] items-center justify-end sm:ml-2"
-        >
+        <div className="ml-6 flex min-w-[100px] items-center justify-end sm:ml-2">
           <SearchInput handleSearch={handleSearch} />
         </div>
       </div>
 
       <div
-        className="no-scroll-bar mt-[10px] grid flex-1 auto-rows-min grid-cols-1 gap-[10px] overflow-y-auto xl:grid-cols-2 2xl:grid-cols-3"
+        className="no-scroll-bar mt-[10px] grid flex-1 auto-rows-min grid-cols-1 gap-[10px] overflow-y-auto pb-16 sm:pb-0 xl:grid-cols-2 2xl:grid-cols-3"
         style={{
           gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
         }}

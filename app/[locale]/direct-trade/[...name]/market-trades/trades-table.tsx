@@ -257,5 +257,5 @@ export function TradesTable({
 }
 
 function TimeDisplay({ time }: { time: number }) {
-  return <div>{formatTimeDuration(time)}</div>;
+  return <div className="text-gray">{formatTimeDuration(time)}</div>;
 }
