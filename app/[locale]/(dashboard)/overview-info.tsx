@@ -7,6 +7,7 @@ import { useUserXp } from "@/lib/hooks/api/use-user-xp";
 
 export default function OverviewInfo() {
   const T = useTranslations("cd-AccountOverview");
+  const TR = useTranslations("ct-Rank");
   const { currentChain } = useChainWallet();
   const { data: userPoints } = useUserXp();
   console.log("🚀 ~ OverviewInfo ~ userPoints:", userPoints);
@@ -88,16 +89,16 @@ export default function OverviewInfo() {
       </div>
       <div className="m-[10px]">
         <div className="flex items-center justify-between">
-          <div className="leading-6 text-txt-white">HT Points</div>
+          <div className="leading-6 text-txt-white">{TR("th-HTPoints")}</div>
         </div>
         <div className="mt-3 flex justify-between">
-          <LabelText>Total Points</LabelText>
+          <LabelText>{TR("txt-TotalPoints")}</LabelText>
           <div className="leading-6 text-txt-white">
             <NoDataDisplay noData={!accountInfo}>10,000</NoDataDisplay>
           </div>
         </div>
         <div className="mt-3 flex justify-between">
-          <LabelText>Rank</LabelText>
+          <LabelText>{TR("txt-Rank")}</LabelText>
           <div className="leading-6 text-txt-white">
             <NoDataDisplay noData={!accountInfo}>N/A</NoDataDisplay>
           </div>

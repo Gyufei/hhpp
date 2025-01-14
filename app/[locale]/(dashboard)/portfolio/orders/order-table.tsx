@@ -9,8 +9,7 @@ import {
 } from "@table-library/react-table-library/table";
 import { usePagination } from "@table-library/react-table-library/pagination";
 import { useTheme } from "@table-library/react-table-library/theme";
-
-import { truncateAddr } from "@/lib/utils/web3";
+import { handleGoScan, truncateAddr } from "@/lib/utils/web3";
 import { Pagination } from "@/components/ui/pagination/pagination";
 import { useMemo, useState } from "react";
 import { useMyOffers } from "@/lib/hooks/api/use-my-offers";
@@ -24,6 +23,7 @@ import { useTranslations } from "next-intl";
 import { sortBy } from "lodash";
 import { ChainType } from "@/lib/types/chain";
 import { reportEvent } from "@/lib/utils/analytics";
+import Image from "next/image";
 export function OrderTable({
   role,
   status,
@@ -43,7 +43,6 @@ export function OrderTable({
     market_symbol: "abc",
     chain: ChainType.HYPER,
   });
-  console.log("🚀 ~ orders:", orders);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -67,7 +66,17 @@ export function OrderTable({
         return true;
       });
 
-    const sortData = sortBy([...offerData, ...orders], "create_at").reverse();
+    const orderData = (orders || []).map((o) => {
+      return {
+        ...o,
+        id: o.order_id,
+      };
+    });
+
+    const sortData = sortBy(
+      [...offerData, ...orderData],
+      "create_at",
+    ).reverse();
 
     return {
       nodes: sortData,
@@ -146,16 +155,20 @@ export function OrderTable({
           <>
             <Header className="text-xs leading-[18px] text-gray">
               <HeaderRow className="boffer-none">
-                <HeaderCell className="h-10 px-1 py-[11px]">Coin</HeaderCell>
+                <HeaderCell className="h-10 px-1 py-[11px]">
+                  {T("th-Coin")}
+                </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
                   {T("th-Offer")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
                   {T("th-Type")}
                 </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">Price</HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  USD Value(Snapshot)
+                  {T("th-Price")}
+                </HeaderCell>
+                <HeaderCell className="h-10 px-1 py-[11px]">
+                  {T("th-USDValue(Snapshot)")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
                   {T("th-Tx")}
@@ -174,19 +187,12 @@ export function OrderTable({
                   className="h-12 border-none !bg-transparent !text-xs"
                 >
                   <Cell className="h-12 px-1 py-[11px] align-top ">
-                    {/* <OfferItem offer={off} /> */}
                     {off.marketplace.item_name}
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top text-gray">
-                    <div>
-                      {/* <div className="text-sm leading-5 ">
-                        {off.marketplace?.market_name}
-                      </div> */}
-                      <div className="leading-4 text-gray">#{off.entry.id}</div>
-                    </div>
+                    <div className="leading-4 text-gray">#{off.entry.id}</div>
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top">
-                    {/* <OfferRole offer={off} /> */}
                     <div
                       data-type={off.role}
                       className="h-[20px] w-[46px] rounded bg-[rgba(78,196,250,0.2)] text-center leading-5 text-[#4EC4FA] data-[type=taker]:bg-[rgba(255,169,91,0.2)] data-[type=taker]:text-[#FFA95B]"
@@ -198,8 +204,7 @@ export function OrderTable({
                     ${off.price}
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top">
-                    {/* <OfferFromTo offer={off} /> */}$
-                    {off.price * off.item_amount}
+                    ${off.price * off.item_amount}
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top">
                     <OfferHash offer={off} />
@@ -268,20 +273,22 @@ export function OrderTable({
 
 function OfferHash({ offer }: { offer: IOffer }) {
   const hash = offer.tx_hash;
-
+  if (!hash) {
+    return <span className="leading-5">N/A</span>;
+  }
   return (
     <div className="flex items-center">
       <span className="leading-5 ">
-        {hash ? truncateAddr(hash || "", { nPrefix: 4, nSuffix: 4 }) : "N/A"}
+        {truncateAddr(hash || "", { nPrefix: 4, nSuffix: 4 })}
       </span>
-      {/* <Image
+      <Image
         onClick={() => handleGoScan(offer.marketplace.chain, hash || "", "tx")}
         src="/icons/right-45.svg"
         width={16}
         height={16}
         alt="goScan"
         className="cursor-pointer"
-      /> */}
+      />
     </div>
   );
 }
