@@ -14,6 +14,7 @@ import { truncateAddr } from "@/lib/utils/web3";
 import { Pagination } from "@/components/ui/pagination/pagination";
 import { useMemo, useState } from "react";
 import { useMyOffers } from "@/lib/hooks/api/use-my-offers";
+import { useMyOrders } from "@/lib/hooks/api/use-my-orders";
 import { IOffer } from "@/lib/types/offer";
 import { formatTimestamp } from "@/lib/utils/time";
 import { IRole, IStatus } from "./filter-select";
@@ -38,6 +39,11 @@ export function OrderTable({
     market_symbol: "abc",
     chain: ChainType.HYPER,
   });
+  const { data: orders = [] } = useMyOrders({
+    market_symbol: "abc",
+    chain: ChainType.HYPER,
+  });
+  console.log("🚀 ~ orders:", orders);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -61,12 +67,12 @@ export function OrderTable({
         return true;
       });
 
-    const sortData = sortBy(offerData, "create_at").reverse();
+    const sortData = sortBy([...offerData, ...orders], "create_at").reverse();
 
     return {
       nodes: sortData,
     };
-  }, [offers, role, status, types]);
+  }, [offers, orders, role, status, types]);
 
   const theme = useTheme({
     Table: `
@@ -165,7 +171,7 @@ export function OrderTable({
                 <Row
                   key={off.offer_id}
                   item={off}
-                  className="h-12 border-none !bg-transparent"
+                  className="h-12 border-none !bg-transparent !text-xs"
                 >
                   <Cell className="h-12 px-1 py-[11px] align-top ">
                     {/* <OfferItem offer={off} /> */}
@@ -181,8 +187,11 @@ export function OrderTable({
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top">
                     {/* <OfferRole offer={off} /> */}
-                    <div className="h-[20px] w-[46px] rounded bg-[rgba(78,196,250,0.2)] text-center text-[##4EC4FA]">
-                      Maker
+                    <div
+                      data-type={off.role}
+                      className="h-[20px] w-[46px] rounded bg-[rgba(78,196,250,0.2)] text-center leading-5 text-[#4EC4FA] data-[type=taker]:bg-[rgba(255,169,91,0.2)] data-[type=taker]:text-[#FFA95B]"
+                    >
+                      {off.role === "taker" ? "Taker" : "Maker"}
                     </div>
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top">
@@ -196,15 +205,17 @@ export function OrderTable({
                     <OfferHash offer={off} />
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top">
-                    <span className="text-sm leading-5">
+                    <span className="leading-5">
                       {formatTimestamp(off.create_at * 1000)}
                     </span>
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top">
-                    <DetailBtn
-                      chain={off.marketplace.chain}
-                      onClick={() => handleOpenOfferDrawer(off.offer_id)}
-                    ></DetailBtn>
+                    {off.role !== "taker" && (
+                      <DetailBtn
+                        chain={off.marketplace.chain}
+                        onClick={() => handleOpenOfferDrawer(off.offer_id)}
+                      ></DetailBtn>
+                    )}
                   </Cell>
                 </Row>
               ))}
@@ -256,12 +267,12 @@ export function OrderTable({
 }
 
 function OfferHash({ offer }: { offer: IOffer }) {
-  const hash = offer.tx_hash || "0x1224352435234u243ui23456";
+  const hash = offer.tx_hash;
 
   return (
     <div className="flex items-center">
-      <span className="text-sm leading-5 ">
-        {truncateAddr(hash || "", { nPrefix: 4, nSuffix: 4 })}
+      <span className="leading-5 ">
+        {hash ? truncateAddr(hash || "", { nPrefix: 4, nSuffix: 4 }) : "N/A"}
       </span>
       {/* <Image
         onClick={() => handleGoScan(offer.marketplace.chain, hash || "", "tx")}
@@ -289,7 +300,7 @@ function DetailBtn({
       className="flex w-fit"
       onClick={onClick}
     >
-      <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-[#eee] px-[14px] text-sm leading-5  hover:border-[#50D2C1] hover:text-[#50D2C1]">
+      <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]">
         {ct("Detail")}
       </div>
     </WithWalletConnectBtn>

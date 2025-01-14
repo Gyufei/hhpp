@@ -1,5 +1,3 @@
-import HoverIcon from "@/components/share/hover-icon";
-// import { Input } from "@/components/ui/input";
 import { useReferralData } from "@/lib/hooks/api/use-referral-data";
 import { GlobalMessageAtom } from "@/lib/states/global-message";
 import { useSetAtom } from "jotai";
@@ -33,30 +31,20 @@ export default function ReferralLink() {
 
   return (
     <div className="px-4 py-10">
-      <div className="leading-[18px] text-gray">
+      <div className="leading-[18px] text-txt-white">
         {T("cap-YourReferralLink")}
       </div>
       <div className="relative mt-2">
         <div className="flex h-12 items-center justify-between space-x-2 rounded-lg border border-[#d4d4d4] px-4 text-sm">
-          <div className="flex-1 truncate text-gray">{refLink}</div>
+          <div className="flex-1 truncate text-txt-white">{refLink}</div>
 
           <div className="flex items-center ">
-            <HoverIcon
-              src="/icons/info-gray.svg"
-              hoverSrc="/icons/info.svg"
-              width={20}
-              height={20}
-              alt="copy"
-              className="mr-3"
-            />
-            <HoverIcon
+            <button
+              className="flex items-center space-x-1 rounded-lg px-2 py-1 text-sm text-gray hover:text-[#50D2C1]"
               onClick={handleCopy}
-              src="/icons/link-copy-gray.svg"
-              hoverSrc="/icons/link-copy.svg"
-              width={20}
-              height={20}
-              alt="copy"
-            />
+            >
+              Copy
+            </button>
           </div>
         </div>
       </div>

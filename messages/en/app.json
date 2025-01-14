@@ -213,7 +213,7 @@
     "lb-TakerOrders": "Taker Orders",
     "lb-Profit": "Profit",
     "lb-SettledValue": "Settled Value",
-    "lb-BonusIncome": "Bonus Income"
+    "lb-BonusIncome": "Tax Income"
   },
   "ct-Rank": {
     "txt-YourRank": "Your Rank",
@@ -263,7 +263,7 @@
   "page-MyBalance": {
     "cap-MyBalances": "My Balance",
     "txt-YourBalanceAppearHere": "Your balance appear here...",
-    "cap-TaxIncome": "Bonus Income",
+    "cap-TaxIncome": "Tax Income",
     "cap-RealizedAssets": "Realized Assets",
     "cap-ReferralBonus": "Referral Bonus",
     "cap-SalesRevenue": "Sales Revenue",
