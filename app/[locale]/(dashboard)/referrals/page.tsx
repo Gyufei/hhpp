@@ -33,19 +33,19 @@ export default function Referral() {
 
   return (
     <div className="flex h-full w-screen flex-1 flex-col sm:w-full ">
-      <div className="ml-[2px] mt-[2px] hidden items-center justify-between rounded bg-bg-black p-4 pt-[19px] sm:flex ">
-        <div className="flex w-full items-center justify-between space-x-5">
-          <div className="text-xl leading-[30px] text-txt-white">
+      <div className="hidden items-center justify-between rounded bg-bg-black p-5 sm:flex ">
+        <div className="flex w-full items-center justify-between">
+          <div className="text-xl leading-[30px] text-title-white">
             {rt("cap-Referrals")}
           </div>
           <ReferralInfo referralData={referralData || []} />
         </div>
       </div>
 
-      <div className="relative m-[2px] mr-0 flex flex-1 flex-col justify-start rounded bg-bg-black">
-        <div className="mt-4 flex h-full flex-col rounded bg-bg-black p-4 sm:mt-0 sm:bg-transparent">
-          <div className="mb-2 mt-5 flex h-[24px] items-center space-x-2">
-            <div className="text-base leading-6 text-txt-white">
+      <div className="relative mr-0 mt-[2px] flex flex-1 flex-col justify-start rounded bg-bg-black">
+        <div className="mt-4 flex h-full flex-col rounded bg-bg-black p-[10px] sm:mt-0 sm:bg-transparent">
+          <div className="flex h-[24px] items-center space-x-[5px]">
+            <div className="pl-[10px] text-sm leading-5 text-title-white">
               {rt("cap-ReferralLink")}
             </div>
             <HoverIcon

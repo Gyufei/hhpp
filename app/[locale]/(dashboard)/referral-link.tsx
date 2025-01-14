@@ -30,12 +30,12 @@ export default function ReferralLink() {
   }
 
   return (
-    <div className="px-4 py-10 text-xs">
+    <div className="px-[10px] py-[20px]  text-xs">
       <div className="leading-[18px] text-txt-white">
         {T("cap-YourReferralLink")}
       </div>
-      <div className="relative mt-2">
-        <div className="flex h-12 items-center justify-between space-x-2 rounded-lg border border-[#d4d4d4] px-4">
+      <div className="relative mt-[10px]">
+        <div className="flex h-8 items-center justify-between space-x-2 rounded border border-txt-white pl-4">
           <div className="flex-1 truncate text-txt-white">{refLink}</div>
 
           <div className="flex items-center ">
