@@ -158,7 +158,7 @@ export function BalanceTable() {
                   <Cell className="h-12 px-1 py-[11px] align-top">
                     ${holding.marketplace.last_price * 100}
                   </Cell>
-                  <Cell className="h-12 px-1 py-[11px] align-top text-red">
+                  <Cell className="h-12 px-1 py-[11px] align-top !text-red">
                     -$233.556/-12.34%
                   </Cell>
                   <Cell className="h-12 px-1 py-[11px] align-top">
