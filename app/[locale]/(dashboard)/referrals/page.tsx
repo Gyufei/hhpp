@@ -33,7 +33,7 @@ export default function Referral() {
 
   return (
     <div className="flex h-full w-screen flex-1 flex-col sm:w-full ">
-      <div className="ml-[2px] mt-[2px] hidden items-center justify-between rounded bg-bg-black p-4 sm:flex ">
+      <div className="ml-[2px] mt-[2px] hidden items-center justify-between rounded bg-bg-black p-4 pt-[19px] sm:flex ">
         <div className="flex w-full items-center justify-between space-x-5">
           <div className="text-xl leading-[30px] text-txt-white">
             {rt("cap-Referrals")}
