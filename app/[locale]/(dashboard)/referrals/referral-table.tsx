@@ -52,30 +52,32 @@ export function ReferralTable({
 
   const theme = useTheme({
     Table: `
+      grid-template-columns: 150px repeat(7,minmax(0,1fr));
+      grid-template-rows: repeat(auto-fit, 40px);
+      grid-auto-rows: 40px;
+      gap: 2px;
     `,
     Header: "",
     Body: "",
     BaseRow: `
-      font-size: 14px;
+      font-size: 12px;
       line-height: 18px;
     `,
     HeaderRow: `
-      background: transparent;
+      background: #111a1e;
     `,
     Row: `
     `,
     BaseCell: `
+      &:first-of-type {
+        padding-left: 10px;
+      }
+
       &:not(:first-of-type) > div {
         display: flex;
         justify-content: flex-end;
         align-items: center;
       }
-
-      &:not(:first-of-type) > div {
-        padding-left: 10px;
-      }
-
-      background: #111a1e;
     `,
     HeaderCell: `
       font-size: 12px;
@@ -83,7 +85,9 @@ export function ReferralTable({
       color: #949e9c;
       line-height: 18px;
     `,
-    Cell: ``,
+    Cell: `
+      color: #F6FEFD;
+    `,
   });
 
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -96,7 +100,7 @@ export function ReferralTable({
 
   if (!data.nodes.length) {
     return (
-      <div className="flex w-screen flex-1 items-center justify-center text-base text-gray sm:w-full">
+      <div className="flex w-screen flex-1 items-center justify-center pt-20 text-base text-gray sm:w-full">
         {rt("txt-YourReferralLinkAppearHere")}
       </div>
     );
@@ -104,37 +108,33 @@ export function ReferralTable({
 
   return (
     <>
-      <Table
-        data={data}
-        theme={theme}
-        className="flex-1 !grid-cols-[150px_repeat(7,minmax(0,1fr))] grid-rows-[40px_repeat(7,64px)] gap-2"
-      >
+      <Table data={data} theme={theme} className="no-scroll-bar flex-1">
         {(tableList: Array<any>) => (
           <>
             <Header className="text-xs leading-[18px] text-gray">
               <HeaderRow className="border-none">
-                <HeaderCell className="h-10 px-1 py-[11px]">
+                <HeaderCell className="px-1 py-[11px]">
                   {rt("th-ReferralCode")}
                 </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
+                <HeaderCell className="px-1 py-[11px]">
                   {rt("lb-SignedUp")}
                 </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
+                <HeaderCell className="px-1 py-[11px]">
                   {rt("th-TradingUsers")}
                 </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
+                <HeaderCell className="px-1 py-[11px]">
                   {rt("th-TradingVol")}
                 </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
+                <HeaderCell className="px-1 py-[11px]">
                   {rt("th-Views")}
                 </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
+                <HeaderCell className="px-1 py-[11px]">
                   {rt("th-CommissionRates")}
                 </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
+                <HeaderCell className="px-1 py-[11px]">
                   {rt("th-Note")}
                 </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
+                <HeaderCell className="px-1 py-[11px]">
                   {rt("th-Op")}
                 </HeaderCell>
               </HeaderRow>
@@ -144,38 +144,38 @@ export function ReferralTable({
                 <Row
                   key={rD.id}
                   item={rD}
-                  className="h-[64px] border-none !bg-transparent"
+                  className="border-none !bg-transparent"
                 >
-                  <Cell className="h-[64px] px-1 py-[11px] align-top">
+                  <Cell className="px-1 py-[11px] align-top">
                     <ReferralCode rD={rD} index={index} />
                   </Cell>
-                  <Cell className="h-[64px] px-1 py-[11px] align-top">
+                  <Cell className="px-1 py-[11px] align-top">
                     <div className="text-sm leading-5 text-txt-white">
                       {rD.referral_users}
                     </div>
                   </Cell>
-                  <Cell className="h-[64px] px-1 py-[11px] align-top">
+                  <Cell className="px-1 py-[11px] align-top">
                     <div className="text-sm leading-5 text-txt-white">
                       {rD.trading_users}
                     </div>
                   </Cell>
-                  <Cell className="h-[64px] px-1 py-[11px] align-top">
+                  <Cell className="px-1 py-[11px] align-top">
                     <div className="text-sm leading-5 text-txt-white">
                       ${rD.trading_fee}
                     </div>
                   </Cell>
-                  <Cell className="h-[64px] px-1 py-[11px] align-top">
+                  <Cell className="px-1 py-[11px] align-top">
                     <div className="text-sm leading-5 text-txt-white">
                       {rD.unique_views}
                     </div>
                   </Cell>
-                  <Cell className="h-[64px] px-1 py-[11px] align-top">
+                  <Cell className="px-1 py-[11px] align-top">
                     <ReferralRate rD={rD} onClick={() => openEditDrawer(rD)} />
                   </Cell>
-                  <Cell className="h-[64px] px-1 py-[11px] align-top">
+                  <Cell className="px-1 py-[11px] align-top">
                     <ReferralNote rD={rD} onSuccess={refresh} />
                   </Cell>
-                  <Cell className="h-[64px] px-1 py-[11px] align-top">
+                  <Cell className="px-1 py-[11px] align-top">
                     <OpBtn rD={rD} onSuccess={refresh} />
                   </Cell>
                 </Row>

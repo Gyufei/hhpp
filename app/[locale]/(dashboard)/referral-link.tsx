@@ -30,17 +30,17 @@ export default function ReferralLink() {
   }
 
   return (
-    <div className="px-4 py-10">
-      <div className="leading-[18px] text-txt-white">
+    <div className="p-[10px]">
+      <div className="text-xs leading-[18px] text-txt-white">
         {T("cap-YourReferralLink")}
       </div>
-      <div className="relative mt-2">
-        <div className="flex h-12 items-center justify-between space-x-2 rounded-lg border border-[#d4d4d4] px-4 text-sm">
+      <div className="relative mt-[10px]">
+        <div className="flex h-8 items-center justify-between space-x-2 rounded border border-txt-white px-4 text-sm">
           <div className="flex-1 truncate text-txt-white">{refLink}</div>
 
           <div className="flex items-center ">
             <button
-              className="flex items-center space-x-1 rounded-lg px-2 py-1 text-sm text-gray hover:text-[#50D2C1]"
+              className="flex items-center space-x-1 rounded-lg px-2 py-1 text-xs text-gray text-title-white hover:text-[#50D2C1]"
               onClick={handleCopy}
             >
               Copy

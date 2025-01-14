@@ -38,6 +38,7 @@ export default function ReferralInfo({
 
   const signedUpRate = useMemo(() => {
     if (lastSignedUp === 0) return 0;
+
     return lastSignedUp / (signedUp - lastSignedUp);
   }, [lastSignedUp, signedUp]);
 
@@ -49,28 +50,22 @@ export default function ReferralInfo({
 
   return (
     <>
-      <div className="flex flex-col items-center justify-start text-[12px] sm:flex-row sm:space-x-3">
-        <div
-          className="flex w-full items-stretch justify-between rounded-[20px] bg-bg-black  object-contain  p-3"
-          style={{
-            backgroundImage: "url(/img/new-users.png)",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
+      <div className="flex flex-col items-center justify-start text-[12px] sm:flex-row sm:space-x-10">
+        <div className="flex w-full items-stretch justify-between">
           <div className="flex flex-col items-start justify-between object-contain">
             <div className="text-gray">{rt("lb-SignedUp")}</div>
-            <div className="flex items-center justify-center text-txt-white">
+            <div className="mt-1 flex items-center justify-center text-title-white">
               <div>${signedUp}</div>
-              <div className="ml-[10px] flex items-center justify-center ">
+              <div className="ml-[10px] flex items-center justify-center">
                 <DisplayArrow
                   isUp={Number(signedUpRate === 0) ? "zero" : signedUpRate > 0}
                 />
-                <div className="flex items-center">
+                <div className="flex w-max items-center">
                   <span
                     data-up={
                       Number(signedUpRate === 0) ? "zero" : signedUpRate > 0
                     }
-                    className="data leading-5 data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-gray"
+                    className="leading-[18px] data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-gray"
                   >
                     {signedUpRate > 0 ? "+" : ""}
                     {formatNum(signedUpRate * 100)}%
@@ -81,16 +76,11 @@ export default function ReferralInfo({
             </div>
           </div>
         </div>
-        <div
-          className="mt-3 flex w-full items-stretch justify-between bg-bg-black object-contain p-3 sm:mt-0"
-          style={{
-            backgroundImage: "url(/img/trading-fee.png)",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
+
+        <div className="mt-0 flex w-full items-stretch justify-between">
           <div className="flex flex-col items-start justify-between">
             <div className="text-gray">{rt("lb-Commission")}</div>
-            <div className="flex items-center justify-center text-txt-white">
+            <div className="mt-1 flex items-center justify-center text-txt-white">
               <div>${commission}</div>
               <div className="ml-[10px] flex items-center justify-center">
                 <DisplayArrow
@@ -98,12 +88,12 @@ export default function ReferralInfo({
                     Number(commissionRate === 0) ? "zero" : commissionRate > 0
                   }
                 />
-                <div className="flex items-center">
+                <div className="flex w-max items-center">
                   <span
                     data-up={
                       Number(commissionRate === 0) ? "zero" : commissionRate > 0
                     }
-                    className="data-[up=false]:text-red  data-[up=true]:text-green data-[up=zero]:text-gray"
+                    className="data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-gray"
                   >
                     {commissionRate > 0 ? "+" : ""}
                     {formatNum(commissionRate * 100)}%
@@ -123,7 +113,7 @@ function DisplayArrow({ isUp }: { isUp: "zero" | boolean }) {
   return (
     <div
       data-up={isUp}
-      className="flex h-8 w-5 items-center justify-center rounded-[12px] "
+      className="flex h-[18px] w-[18px] items-center justify-center rounded-[12px] "
     >
       <Image
         src={
