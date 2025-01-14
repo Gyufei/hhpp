@@ -50,21 +50,12 @@ export function OrderTable({
   const selectedOffer = offers?.find((o) => o.offer_id === selectOfferId);
 
   const data = useMemo(() => {
-    const offerData = (offers || [])
-      .map((o) => {
-        return {
-          ...o,
-          id: o.offer_id,
-        };
-      })
-      .filter(() => {
-        // console.log("🚀 ~ .filter ~ o:", o, types, status);
-        // const oType = o?.entry?.direction;
-        // const isStatus = status === "All" || status.toLowerCase() === o.status;
-
-        // return types.includes(oType as any) && isStatus;
-        return true;
-      });
+    const offerData = (offers || []).map((o) => {
+      return {
+        ...o,
+        id: o.offer_id,
+      };
+    });
 
     const orderData = (orders || []).map((o) => {
       return {
@@ -85,19 +76,27 @@ export function OrderTable({
 
   const theme = useTheme({
     Table: `
+      grid-template-columns: 100px repeat(7,minmax(0,1fr));
+      grid-template-rows: 40px repeat(auto-fit, 56px);
+      grid-auto-rows: 56px;
+      gap: 2px;
     `,
     Header: "",
     Body: "",
     BaseRow: `
-      font-size: 14px;
+      font-size: 12px;
       line-height: 18px;
     `,
     HeaderRow: `
-      background: transparent;
+      background: #111a1e;
     `,
     Row: `
     `,
     BaseCell: `
+      &:first-of-type {
+        padding-left: 10px;
+      }
+
       &:nth-last-of-type(2) > div,
       &:last-of-type > div {
         display: flex;
@@ -112,11 +111,12 @@ export function OrderTable({
     HeaderCell: `
       font-size: 12px;
       font-weight: 400;
-      color: #c0c4cc;
+      color: #949e9c;
       line-height: 18px;
-
     `,
-    Cell: ``,
+    Cell: `
+      color: #F6FEFD;
+    `,
   });
 
   const pagination = usePagination(data, {
@@ -149,7 +149,7 @@ export function OrderTable({
         data={data}
         theme={theme}
         pagination={pagination}
-        className="flex-1 !grid-cols-[100px_repeat(7,minmax(0,1fr))] grid-rows-[40px_repeat(7,64px)] gap-2 text-txt-white"
+        className="no-scroll-bar flex-1"
       >
         {(tableList: Array<any>) => (
           <>
