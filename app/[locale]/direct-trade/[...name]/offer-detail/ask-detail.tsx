@@ -155,7 +155,7 @@ export default function AskDetail({
             value={payTokenAmount}
             onValueChange={handleWantPayTokenAmount}
             canGoMax={sliderCanMax}
-            sliderMax={Number(offer.item_amount)}
+            sliderMax={sliderCanMax}
             sliderValue={receivePointAmount}
             setSliderValue={handleSliderChange}
             hasError={!!errorText}

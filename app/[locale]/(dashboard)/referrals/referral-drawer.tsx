@@ -96,6 +96,8 @@ export function ReferralDrawer({
       args.authority_rate === referral?.authority_rate &&
       args.referrer_rate === referral?.referrer_rate
     ) {
+      onSuccess();
+      setDrawerOpen(false);
       return;
     }
 

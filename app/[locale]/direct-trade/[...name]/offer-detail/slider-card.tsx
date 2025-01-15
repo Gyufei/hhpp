@@ -36,6 +36,7 @@ export default function SliderCard({
   }
 
   const progress = useMemo(() => {
+    if (!sliderMax) return 0;
     return ((sliderValue / sliderMax) * 100).toFixed();
   }, [sliderValue, sliderMax]);
 

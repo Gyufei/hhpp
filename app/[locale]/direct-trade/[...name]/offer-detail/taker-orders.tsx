@@ -103,12 +103,6 @@ export function TakerOrders({
         const totalPoints = offer.item_amount;
         const percent = formatNum(NP.divide(points, totalPoints) * 100);
 
-        console.log(
-          points,
-          pointDecimalNum,
-          NP.divide(points, 10 ** (pointDecimalNum || 0)),
-        );
-
         return (
           <div className="flex items-center justify-start space-x-1">
             <div>
