@@ -3,6 +3,7 @@ import { dataApiFetcher } from "@/lib/fetcher";
 import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
 import { useSignData } from "./help/use-sign-data";
 import { useChainWallet } from "../web3/use-chain-wallet";
+import { toast } from "react-hot-toast";
 
 export function useCreateOffer({ marketSymbol }: { marketSymbol: string }) {
   const { dataApiEndPoint } = useEndPoint();
@@ -27,23 +28,23 @@ export function useCreateOffer({ marketSymbol }: { marketSymbol: string }) {
 
     const reqData = await signDataAction(params);
 
-    const res = await dataApiFetcher(
-      `${dataApiEndPoint}/market/${marketSymbol}/create_offer`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    try {
+      const res = await dataApiFetcher(
+        `${dataApiEndPoint}/market/${marketSymbol}/create_offer`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reqData),
         },
-        body: JSON.stringify(reqData),
-      },
-    );
+      );
 
-    if (!res) {
-      throw new Error("Invalid transaction data");
+      return res;
+    } catch (error) {
+      toast.error("Invalid transaction data");
       return null;
     }
-
-    return res;
   };
 
   const wrapRes = useTxStatus(txAction);

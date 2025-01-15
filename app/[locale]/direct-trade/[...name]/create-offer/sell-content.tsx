@@ -61,6 +61,22 @@ export function SellContent({
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
+    const marketPointPrice = NP.times(
+      currentMarket.last_price,
+      pointDecimalNum,
+    );
+
+    if (true || !receiveTokenAmount) {
+      setReceiveAmount(
+        NP.times(sellPointAmount, marketPointPrice * 1.02).toString(),
+      );
+    }
+    if (!sellPointAmount) {
+      setReceiveAmount("");
+    }
+  }, [sellPointAmount]);
+
+  useEffect(() => {
     let curErrorText = "";
     curErrorText = checkPointInsufficient(sellPointAmount);
     const marketPointPrice = NP.times(
@@ -71,15 +87,6 @@ export function SellContent({
       curErrorText = checkMinPrice(pointPrice, marketPointPrice);
 
       curErrorText = checkMaxPrice(pointPrice, marketPointPrice);
-    }
-
-    if (!receiveTokenAmount) {
-      setReceiveAmount(
-        NP.times(sellPointAmount, marketPointPrice * 1.02).toString(),
-      );
-    }
-    if (!sellPointAmount) {
-      setReceiveAmount("");
     }
 
     setErrorText(curErrorText);
