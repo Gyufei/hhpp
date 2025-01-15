@@ -63,8 +63,6 @@ export default function ConnectBtn() {
   function handleOpenBalancePop(e: React.MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
     if (!connected) return;
-
-    balancePopRef.current?.refetchBalance();
     setPopOpen(true);
   }
 

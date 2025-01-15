@@ -6,7 +6,6 @@ import { withSecure } from "acclism-manifest-v2";
 const access_key = "aK15X6c9";
 const seedApiUrl = "https://preview-apis.tadle.com/seed/apply";
 const ga_code = "129203";
-
 const encryptFetch = withSecure(fetch, access_key, seedApiUrl, ga_code);
 
 export async function apiFetcher(
@@ -69,7 +68,7 @@ async function parsedRes(res: any) {
     const json = await res.json();
 
     if (json.code === 500) {
-      return null;
+      throw new Error(json.msg);
     }
 
     return json?.data || json;
