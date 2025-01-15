@@ -3,6 +3,7 @@ import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
 import useSWRMutation from "swr/mutation";
 import { useChainWallet } from "../web3/use-chain-wallet";
+import toast from "react-hot-toast";
 
 export function useReferralCreate() {
   const { apiEndPoint } = useEndPoint();
@@ -42,18 +43,22 @@ export function useReferralRateChange() {
   ) => {
     if (!address || !arg.referral_code) return null;
 
-    const res = await apiFetcher(
-      `${apiEndPoint}${ApiPaths.referral.updateCommission}`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          dest_account: address,
-          ...arg,
-        }),
-      },
-    );
-
-    return res;
+    try {
+      const res = await apiFetcher(
+        `${apiEndPoint}${ApiPaths.referral.updateCommission}`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            dest_account: address,
+            ...arg,
+          }),
+        },
+      );
+      return res;
+    } catch (error: Error | any) {
+      toast.error(error.message || "The service is abnormal. Please try again");
+      return null;
+    }
   };
 
   const res = useSWRMutation("update referral rate", postApi);

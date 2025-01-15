@@ -5,8 +5,9 @@
 import * as Sentry from "@sentry/nextjs";
 
 Sentry.init({
-  dsn: "https://30b9d2b5f84ea0272d02a2b482cc2ca9@o4505362337824768.ingest.us.sentry.io/4508493963264000",
-  enabled: process.env.NODE_ENV === "production",
+  dsn: "https://ba3489ebc4bef2c73b29c55eb1416691@o4508368229498880.ingest.de.sentry.io/4508646554140752",
+  // enabled: process.env.NODE_ENV === "production",
+  // enabled: process.env.NODE_ENV !== "development",
   // Adjust this value in production, or use tracesSampler for greater control
   tracesSampleRate: 1,
 
@@ -18,13 +19,4 @@ Sentry.init({
   // This sets the sample rate to be 10%. You may want this to be 100% while
   // in development and sample at a lower rate in production
   replaysSessionSampleRate: 0.1,
-
-  // You can remove this option if you're not planning to use the Sentry Session Replay feature:
-  integrations: [
-    Sentry.replayIntegration({
-      // Additional Replay configuration goes in here, for example:
-      maskAllText: true,
-      blockAllMedia: true,
-    }),
-  ],
 });

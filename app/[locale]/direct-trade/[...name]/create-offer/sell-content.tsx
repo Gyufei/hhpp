@@ -63,17 +63,23 @@ export function SellContent({
   useEffect(() => {
     let curErrorText = "";
     curErrorText = checkPointInsufficient(sellPointAmount);
-
+    const marketPointPrice = NP.times(
+      currentMarket.last_price,
+      pointDecimalNum,
+    );
     if (!curErrorText && +pointPrice) {
-      curErrorText = checkMinPrice(
-        pointPrice,
-        NP.times(currentMarket.last_price, pointDecimalNum),
-      );
+      curErrorText = checkMinPrice(pointPrice, marketPointPrice);
 
-      curErrorText = checkMaxPrice(
-        pointPrice,
-        NP.times(currentMarket.last_price, pointDecimalNum),
+      curErrorText = checkMaxPrice(pointPrice, marketPointPrice);
+    }
+
+    if (!receiveTokenAmount) {
+      setReceiveAmount(
+        NP.times(sellPointAmount, marketPointPrice * 1.02).toString(),
       );
+    }
+    if (!sellPointAmount) {
+      setReceiveAmount("");
     }
 
     setErrorText(curErrorText);
