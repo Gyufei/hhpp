@@ -71,7 +71,7 @@ async function parsedRes(res: any) {
 
     if (json.code === 500) {
       reportEvent("fetch_500", { value: "" });
-      return null;
+      throw new Error(json.msg);
     }
 
     return json?.data || json;
