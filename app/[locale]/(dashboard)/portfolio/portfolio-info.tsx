@@ -22,7 +22,7 @@ export default function PortfolioInfo() {
             {T("cap-Fees(Taker/Maker)")}
           </div>
           <div className="mt-1 flex items-center justify-center  text-txt-white">
-            <div>0.0350%0.0100%</div>
+            <div>0.0350%/0.0100%</div>
           </div>
         </div>
       </div>
