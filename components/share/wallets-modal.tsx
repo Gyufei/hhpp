@@ -17,7 +17,6 @@ export default function WalletsModal() {
         <DialogTitle>Connect Wallet</DialogTitle>
       </VisuallyHidden>
       <DialogContent
-        showClose={false}
         className="z-[199] flex w-[400px] flex-col items-center gap-0 border-border-black bg-bg-black p-6"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",

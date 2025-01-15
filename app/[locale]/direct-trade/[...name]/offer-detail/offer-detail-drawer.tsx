@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import AskDetail from "./ask-detail";
 import OfferFillDialog from "./offer-fill-dialog";
 import { IOffer } from "@/lib/types/offer";
 import { useTranslations } from "next-intl";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { reportEvent } from "@/lib/utils/analytics";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import DrawerTitle from "@/components/share/drawer-title";
+import Drawer from "react-modern-drawer";
 
-export default function OfferDetailDialog({
+export default function OfferDetailDrawer({
   offer,
   onSuccess,
   onClose,
@@ -58,33 +57,20 @@ export default function OfferDetailDialog({
 
   return (
     <>
-      <Dialog open={drawerOpen} onOpenChange={(v) => handleDrawerToggle(v)}>
-        <VisuallyHidden asChild>
-          <DialogTitle>Offer Detail</DialogTitle>
-        </VisuallyHidden>
-        <DialogContent
-          showClose={false}
-          className="w-[740px] gap-0 overflow-y-auto rounded border border-border-black !bg-bg-black p-4 sm:p-0"
-        >
-          <div className="flex w-full items-center justify-between border-b border-border-black px-5 py-4">
-            <div className="flex items-center space-x-[10px]">
-              <div className="text-[18px] leading-[28px] text-title-white">
-                {ot("cap-OfferDetail")}
-              </div>
-            </div>
-            <Image
-              src="/icons/close.svg"
-              width={24}
-              height={24}
-              alt="close"
-              className="cursor-pointer"
-              onClick={() => handleDrawerToggle(false)}
-            />
-          </div>
+      <Drawer
+        open={drawerOpen}
+        onClose={() => handleDrawerToggle(false)}
+        direction="right"
+        size={740}
+        className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
+      >
+        <DrawerTitle
+          title={ot("cap-OfferDetail")}
+          onClose={() => setDrawerOpen(false)}
+        />
 
-          <AskDetail onSuccess={(ord) => handleSuccess(ord)} offer={offer} />
-        </DialogContent>
-      </Dialog>
+        <AskDetail onSuccess={(ord) => handleSuccess(ord)} offer={offer} />
+      </Drawer>
 
       {resultOrder && (
         <OfferFillDialog
@@ -95,7 +81,7 @@ export default function OfferDetailDialog({
               handleDrawerToggle(false);
             }
           }}
-          res={resultOrder}
+          res={{}}
         />
       )}
     </>

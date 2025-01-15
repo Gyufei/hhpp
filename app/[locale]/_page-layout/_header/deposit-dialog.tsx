@@ -2,7 +2,6 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { ChainConfigs } from "@/lib/const/chain-configs";
 import { ChainType } from "@/lib/types/chain";
 
@@ -18,27 +17,11 @@ export function DepositDialog({
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => onOpenChange(isOpen)}>
-      <VisuallyHidden asChild>
-        <DialogTitle>Deposit Dialog</DialogTitle>
-      </VisuallyHidden>
       <DialogContent
-        showClose={false}
         className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded border-border-black bg-bg-black p-0"
         aria-describedby={undefined}
       >
-        <div className="relative flex w-full items-center justify-between border-b border-border-black px-5 py-[10px]">
-          <div className="text-[18px] leading-[28px] text-title-white">
-            {T("btn-Deposit")}
-          </div>
-          <Image
-            onClick={() => onOpenChange(false)}
-            src="/icons/close.svg"
-            width={24}
-            height={24}
-            alt="close"
-            className="cursor-pointer rounded-full"
-          />
-        </div>
+        <DialogTitle>{T("btn-Deposit")}</DialogTitle>
 
         <div className="flex flex-col items-center p-5">
           <div className="break-all text-center text-xs leading-[18px] text-gray">
