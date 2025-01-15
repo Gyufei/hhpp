@@ -8,7 +8,7 @@ import { OfferCard, OrderCardSkeleton } from "./offer-card";
 import { IOffer } from "@/lib/types/offer";
 import { useSortOffer } from "@/lib/hooks/offer/use-sort-offer";
 import { range } from "lodash";
-import OfferDetailDialog from "../offer-detail/offer-detail-dialog";
+import OfferDetailDrawer from "../offer-detail/offer-detail-drawer";
 
 export default function OfferList({
   offers,
@@ -90,7 +90,7 @@ export default function OfferList({
             ))}
       </div>
 
-      <OfferDetailDialog
+      <OfferDetailDrawer
         offer={showOffer}
         onSuccess={refreshOffers}
         onClose={() => setShowOffer(null)}

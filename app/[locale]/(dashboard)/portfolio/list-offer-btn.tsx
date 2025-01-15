@@ -5,8 +5,9 @@ import { SellContent } from "@/app/[locale]/direct-trade/[...name]/create-offer/
 import { IMarketplace } from "@/lib/types/marketplace";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useTranslations } from "next-intl";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { reportEvent } from "@/lib/utils/analytics";
+import DrawerTitle from "@/components/share/drawer-title";
+import Drawer from "react-modern-drawer";
 
 export default function ListOfferBtn({
   marketplace,
@@ -41,19 +42,20 @@ export default function ListOfferBtn({
         </div>
       </WithWalletConnectBtn>
       {drawerOpen && (
-        <Dialog
+        <Drawer
           open={drawerOpen}
-          onOpenChange={(isOpen: boolean) => setDrawerOpen(isOpen)}
+          onClose={() => setDrawerOpen(false)}
+          direction="right"
+          size={500}
+          className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
         >
-          <DialogContent
-            className="flex w-[480px] flex-col items-center justify-stretch gap-0 rounded border border-border-black bg-bg-black p-0"
-            aria-describedby={undefined}
-          >
-            <DialogTitle>{T("cap-List")}</DialogTitle>
+          <DrawerTitle
+            title={T("cap-List")}
+            onClose={() => setDrawerOpen(false)}
+          />
 
-            <SellContent onSuccess={handleSuccess} marketplace={marketplace} />
-          </DialogContent>
-        </Dialog>
+          <SellContent onSuccess={handleSuccess} marketplace={marketplace} />
+        </Drawer>
       )}
     </>
   );

@@ -6,7 +6,8 @@ import { IMarketplace } from "@/lib/types/marketplace";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useTranslations } from "next-intl";
 import { reportEvent } from "@/lib/utils/analytics";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import DrawerTitle from "@/components/share/drawer-title";
+import Drawer from "react-modern-drawer";
 
 export default function CreateOfferBtn({
   marketplace,
@@ -40,19 +41,20 @@ export default function CreateOfferBtn({
         </button>
       </WithWalletConnectBtn>
       {drawerOpen && (
-        <Dialog
+        <Drawer
           open={drawerOpen}
-          onOpenChange={(isOpen) => setDrawerOpen(isOpen)}
+          onClose={() => setDrawerOpen(false)}
+          direction="right"
+          size={500}
+          className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
         >
-          <DialogContent
-            className="flex w-[480px] flex-col items-center justify-stretch gap-0 rounded border border-border-black bg-bg-black p-0"
-            aria-describedby={undefined}
-          >
-            <DialogTitle>Create Offer</DialogTitle>
+          <DrawerTitle
+            title="Create Offer"
+            onClose={() => setDrawerOpen(false)}
+          />
 
-            <SellContent onSuccess={handleSuccess} marketplace={marketplace} />
-          </DialogContent>
-        </Dialog>
+          <SellContent onSuccess={handleSuccess} marketplace={marketplace} />
+        </Drawer>
       )}
     </>
   );

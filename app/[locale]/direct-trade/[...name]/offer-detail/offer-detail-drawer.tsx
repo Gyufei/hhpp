@@ -4,10 +4,11 @@ import OfferFillDialog from "./offer-fill-dialog";
 import { IOffer } from "@/lib/types/offer";
 import { useTranslations } from "next-intl";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { reportEvent } from "@/lib/utils/analytics";
+import DrawerTitle from "@/components/share/drawer-title";
+import Drawer from "react-modern-drawer";
 
-export default function OfferDetailDialog({
+export default function OfferDetailDrawer({
   offer,
   onSuccess,
   onClose,
@@ -56,13 +57,20 @@ export default function OfferDetailDialog({
 
   return (
     <>
-      <Dialog open={drawerOpen} onOpenChange={(v) => handleDrawerToggle(v)}>
-        <DialogContent className="w-[740px] gap-0 overflow-y-auto rounded border border-border-black !bg-bg-black p-4 sm:p-0">
-          <DialogTitle>{ot("cap-OfferDetail")}</DialogTitle>
+      <Drawer
+        open={drawerOpen}
+        onClose={() => handleDrawerToggle(false)}
+        direction="right"
+        size={740}
+        className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
+      >
+        <DrawerTitle
+          title={ot("cap-OfferDetail")}
+          onClose={() => setDrawerOpen(false)}
+        />
 
-          <AskDetail onSuccess={(ord) => handleSuccess(ord)} offer={offer} />
-        </DialogContent>
-      </Dialog>
+        <AskDetail onSuccess={(ord) => handleSuccess(ord)} offer={offer} />
+      </Drawer>
 
       {resultOrder && (
         <OfferFillDialog
