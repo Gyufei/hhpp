@@ -45,7 +45,7 @@ export default function ListOfferBtn({
       {drawerOpen && (
         <Dialog
           open={drawerOpen}
-          onOpenChange={(isOpen) => setDrawerOpen(isOpen)}
+          onOpenChange={(isOpen: boolean) => setDrawerOpen(isOpen)}
         >
           <VisuallyHidden asChild>
             <DialogTitle>List</DialogTitle>

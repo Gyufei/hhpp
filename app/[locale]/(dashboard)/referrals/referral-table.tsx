@@ -52,7 +52,7 @@ export function ReferralTable({
 
   const theme = useTheme({
     Table: `
-      grid-template-columns: 150px repeat(7,minmax(0,1fr));
+      grid-template-columns: 170px repeat(7,minmax(0,1fr));
       grid-template-rows: repeat(auto-fit, 40px);
       grid-auto-rows: 40px;
       gap: 2px;
@@ -69,14 +69,14 @@ export function ReferralTable({
     Row: `
     `,
     BaseCell: `
+      text-align: left;
+
       &:first-of-type {
         padding-left: 10px;
       }
-
-      &:not(:first-of-type) > div {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+      
+      &:last-of-type {
+        text-align: right;
       }
     `,
     HeaderCell: `
@@ -314,7 +314,7 @@ function ReferralNote({
 
   return (
     <div
-      className="relative flex h-fit w-fit items-center"
+      className="relative flex h-fit w-fit items-center justify-start"
       onClick={handleEditNote}
     >
       {isEdit ? (
@@ -339,9 +339,9 @@ function ReferralNote({
       ) : (
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger>
-              <div className="flex items-center justify-end">
-                <div className="mr-[6px] w-[100px] truncate text-right text-txt-white">
+            <TooltipTrigger asChild>
+              <div className="flex items-center justify-start">
+                <div className="mr-[6px] w-fit truncate text-right text-txt-white">
                   {inputValue}
                 </div>
                 <HoverIcon
@@ -404,7 +404,7 @@ function OpBtn({
   }
 
   return (
-    <div className="flex items-center space-x-3">
+    <div className="flex items-center justify-end space-x-3">
       {rD.flag === "1" ? (
         <HoverIcon
           onClick={handleFlag}

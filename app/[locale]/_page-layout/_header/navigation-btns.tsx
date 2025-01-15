@@ -16,10 +16,10 @@ export default function NavigationBtns() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const LinkList = [
-    {
-      title: "Curve Trade",
-      href: "/curve-trade",
-    },
+    // {
+    //   title: "Curve Trade",
+    //   href: "/curve-trade",
+    // },
     {
       title: "Direct Trade",
       href: "/direct-trade",
