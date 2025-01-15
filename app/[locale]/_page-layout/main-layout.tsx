@@ -1,5 +1,5 @@
 import Header from "@/app/[locale]/_page-layout/_header";
-import GlobalActionTip from "@/components/share/global-action-tip";
+import GlobalToast from "@/components/share/global-toast";
 import WalletsModal from "@/components/share/wallets-modal";
 import ReferralDialog from "../(dashboard)/referrals/referral-dialog";
 
@@ -17,7 +17,7 @@ export default function MainLayout({
         </div>
       </div>
 
-      <GlobalActionTip />
+      <GlobalToast />
       <ReferralDialog />
       <WalletsModal />
     </div>

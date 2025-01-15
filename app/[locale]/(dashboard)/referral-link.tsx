@@ -1,15 +1,12 @@
 import { useReferralData } from "@/lib/hooks/api/use-referral-data";
-import { GlobalMessageAtom } from "@/lib/states/global-message";
-import { useSetAtom } from "jotai";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
+import { toast } from "react-hot-toast";
 
 export default function ReferralLink() {
   const T = useTranslations("page-Referral");
 
   const { data: referralData } = useReferralData();
-
-  const setGlobalMessage = useSetAtom(GlobalMessageAtom);
 
   const refLink = useMemo(() => {
     if (!referralData) return "";
@@ -23,10 +20,7 @@ export default function ReferralLink() {
     if (!refLink) return;
     navigator.clipboard.writeText(refLink);
 
-    setGlobalMessage({
-      type: "success",
-      message: "Copied to clipboard",
-    });
+    toast.success("Copied to clipboard");
   }
 
   return (

@@ -6,6 +6,7 @@ import { useReferralData } from "@/lib/hooks/api/use-referral-data";
 import { useEffect } from "react";
 import { useReferralCreate } from "@/lib/hooks/api/use-referral";
 import HoverIcon from "@/components/share/hover-icon";
+
 export default function Referral() {
   const rt = useTranslations("page-Referral");
 

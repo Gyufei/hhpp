@@ -10,8 +10,6 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { IMarketplace } from "@/lib/types/marketplace";
-import { useSetAtom } from "jotai";
-import { GlobalMessageAtom } from "@/lib/states/global-message";
 import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
 import MarketplaceOverview from "@/components/share/market-place-overview";
 import { useRouter } from "@/i18n/routing";
@@ -23,6 +21,7 @@ import { ChainType } from "@/lib/types/chain";
 import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 import MobileDrawerTitle from "@/components/share/drawer-title-mobile";
 import Drawer from "react-modern-drawer";
+import { toast } from "react-hot-toast";
 
 export default function MarketplaceCard({
   marketplace,
@@ -34,8 +33,6 @@ export default function MarketplaceCard({
   const isLoadingFlag = !marketplace;
 
   const [isStar, setIsStar] = useState(false);
-  const setGlobalMessage = useSetAtom(GlobalMessageAtom);
-
   const { data: marketInfos } = useMarketInfo(
     marketplace?.chain || ChainType.HYPER,
   );
@@ -61,10 +58,7 @@ export default function MarketplaceCard({
 
     navigator.clipboard.writeText(marketplace.market_name);
 
-    setGlobalMessage({
-      type: "success",
-      message: "Copied to clipboard",
-    });
+    toast.success("Copied to clipboard");
   };
 
   return (

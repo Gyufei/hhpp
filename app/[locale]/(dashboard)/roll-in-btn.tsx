@@ -3,12 +3,9 @@ import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useRollin } from "@/lib/hooks/contract/use-rollin";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { GlobalMessageAtom } from "@/lib/states/global-message";
-import { useSetAtom } from "jotai";
+import { toast } from "react-hot-toast";
 
 export default function RollInBtn() {
-  const setGlobalMessage = useSetAtom(GlobalMessageAtom);
-
   const T = useTranslations("cd-AccountOverview");
   const { connected } = useChainWallet();
 
@@ -18,11 +15,10 @@ export default function RollInBtn() {
 
   function handleSign() {
     if (isSign) {
-      setGlobalMessage({
-        type: "warning",
-        message: "Already rollin",
-      });
+      toast.error("Already rollin");
+      return;
     }
+
     if (isLoading || isSign) return;
 
     rollinAction();

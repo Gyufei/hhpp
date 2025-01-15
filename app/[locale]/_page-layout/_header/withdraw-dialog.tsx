@@ -7,8 +7,7 @@ import { NumericalInput } from "@/components/share/numerical-input";
 import { useEffect, useState } from "react";
 import { formatNum } from "@/lib/utils/number";
 import { useUserWithdraw } from "@/lib/hooks/contract/use-user-withdraw";
-import { GlobalMessageAtom } from "@/lib/states/global-message";
-import { useSetAtom } from "jotai";
+import { toast } from "react-hot-toast";
 
 export function WithdrawDialog({
   open,
@@ -21,8 +20,6 @@ export function WithdrawDialog({
 }) {
   const T = useTranslations("Header");
   const CT = useTranslations("Common");
-
-  const setGlobalMessage = useSetAtom(GlobalMessageAtom);
 
   const {
     trigger: triggerWithdraw,
@@ -55,10 +52,7 @@ export function WithdrawDialog({
   useEffect(() => {
     if (isSuccess) {
       onOpenChange(false);
-      setGlobalMessage({
-        type: "success",
-        message: "Withdrawal successful",
-      });
+      toast.success("Withdrawal successful");
     }
   }, [isSuccess]);
 
