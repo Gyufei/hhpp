@@ -73,15 +73,6 @@ export function SellContent({
       curErrorText = checkMaxPrice(pointPrice, marketPointPrice);
     }
 
-    if (!receiveTokenAmount) {
-      setReceiveAmount(
-        NP.times(sellPointAmount, marketPointPrice * 1.02).toString(),
-      );
-    }
-    if (!sellPointAmount) {
-      setReceiveAmount("");
-    }
-
     setErrorText(curErrorText);
   }, [
     sellPointAmount,
@@ -99,6 +90,19 @@ export function SellContent({
     reportEvent("click", { value: "confirmOffer-sell" });
   }
 
+  const sellPointAmountChange = (v: string) => {
+    setSellPointAmount(v);
+
+    const marketPointPrice = NP.times(
+      currentMarket.last_price,
+      pointDecimalNum,
+    );
+    setReceiveAmount(NP.times(v, marketPointPrice * 1.02).toString());
+    if (!v) {
+      setReceiveAmount("");
+    }
+  };
+
   return (
     <div
       className={cn("flex w-full flex-1 flex-col justify-between", className)}
@@ -106,7 +110,7 @@ export function SellContent({
       <div className="flex flex-1 flex-col p-5">
         <InputPanel
           value={sellPointAmount}
-          onValueChange={setSellPointAmount}
+          onValueChange={sellPointAmountChange}
           hasError={!!errorText}
           topText={<>{T("txt-YouWillSell")}</>}
           bottomText={

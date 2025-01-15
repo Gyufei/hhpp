@@ -283,7 +283,9 @@ function ReferralNote({
   }, [updateRes, onSuccess]);
 
   const outSideRef = useOnclickOutside(() => {
-    handleInputConfirm();
+    if (isEdit) {
+      handleInputConfirm();
+    }
   });
 
   function handleEditNote() {
@@ -349,12 +351,14 @@ function ReferralNote({
                 />
               </div>
             </TooltipTrigger>
-            <TooltipContent className="w-[200px]">
-              <p className="text-xs leading-[18px]">{rD.notes}</p>
-              <TooltipArrow asChild>
-                <CTooltipArrow />
-              </TooltipArrow>
-            </TooltipContent>
+            {rD.notes && (
+              <TooltipContent className="w-[200px]">
+                <p className="text-xs leading-[18px]">{rD.notes}</p>
+                <TooltipArrow asChild>
+                  <CTooltipArrow />
+                </TooltipArrow>
+              </TooltipContent>
+            )}
           </Tooltip>
         </TooltipProvider>
       )}
