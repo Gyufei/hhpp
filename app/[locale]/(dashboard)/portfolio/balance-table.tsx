@@ -127,7 +127,7 @@ export function BalanceTable() {
                   {T("th-USDValue")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("th-PnL(%)")}
+                  <div className="underline">{T("th-PnL(%)")}</div>
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]"></HeaderCell>
               </HeaderRow>
