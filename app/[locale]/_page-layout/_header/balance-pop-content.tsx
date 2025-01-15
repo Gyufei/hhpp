@@ -66,7 +66,7 @@ const BalancePopContent = forwardRef(
             <div className="text-xs leading-[18px] text-gray">Balance</div>
             <div className="mt-1 flex max-w-[160px] items-center gap-x-[5px] ">
               {isBalanceLoading ? (
-                <Skeleton className="h-5 w-20" />
+                <Skeleton className="my-2 h-[22px] w-14" />
               ) : (
                 <div className="truncate text-[20px] leading-[30px] text-title-white">
                   {formatNum(balance)}

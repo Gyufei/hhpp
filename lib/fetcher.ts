@@ -7,7 +7,6 @@ import { reportEvent } from "@/lib/utils/analytics";
 const access_key = "aK15X6c9";
 const seedApiUrl = "https://preview-apis.tadle.com/seed/apply";
 const ga_code = "129203";
-
 const encryptFetch = withSecure(fetch, access_key, seedApiUrl, ga_code);
 
 export async function apiFetcher(

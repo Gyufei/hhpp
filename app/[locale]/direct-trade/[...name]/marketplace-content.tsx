@@ -22,6 +22,7 @@ export default function MarketplaceContent({
 }) {
   const { isMobileSize } = useDeviceSize();
   const [currentTab, setCurrentTab] = useState<ITab>("Items");
+  const [showKChart, setShowKChart] = useState(false);
 
   const {
     data: offers,
@@ -47,13 +48,26 @@ export default function MarketplaceContent({
 
   return (
     <div className="flex min-h-[calc(100vh-56px)] w-full flex-col bg-border-black p-[2px] sm:flex-row">
-      <div className="mr-[2px] flex w-full flex-col sm:w-[320px]">
+      <div
+        className={cn(
+          "mr-[2px] flex w-full flex-col",
+          showKChart ? "sm:w-[100vw-320px]" : "sm:w-[320px]",
+        )}
+      >
         <MarketplaceCard
-          className="mb-[2px] rounded bg-bg-black"
+          className={cn(
+            "mb-[2px] rounded bg-bg-black",
+            showKChart ? "invisible h-0 w-0" : "visible",
+          )}
           marketplace={marketplace}
         />
 
-        <div className="fixed bottom-0 z-50 mb-0 w-full rounded border-t border-border-black bg-bg-black px-[10px] py-2 sm:static sm:mb-[2px] sm:block sm:border-none sm:py-4">
+        <div
+          className={cn(
+            "fixed bottom-0 z-50 mb-0 w-full rounded border-t border-border-black bg-bg-black px-[10px] py-2 sm:static sm:mb-[2px] sm:block sm:border-none sm:py-4",
+            showKChart ? "invisible h-0 w-0 sm:mb-0 sm:py-0" : "visible",
+          )}
+        >
           {marketplace && (
             <CreateOfferBtn
               marketplace={marketplace}
@@ -63,7 +77,11 @@ export default function MarketplaceContent({
         </div>
 
         <div className="box-border hidden flex-1 rounded bg-bg-black sm:block">
-          <MarketCharts marketplace={marketplace} />
+          <MarketCharts
+            marketplace={marketplace}
+            showKChart={showKChart}
+            setShowKChart={setShowKChart}
+          />
         </div>
       </div>
 
@@ -71,13 +89,20 @@ export default function MarketplaceContent({
 
       {showChart && (
         <div className="flex w-full flex-1 flex-col rounded bg-bg-black px-[10px]">
-          <MarketCharts marketplace={marketplace} />
+          <MarketCharts
+            showKChart={showKChart}
+            setShowKChart={setShowKChart}
+            marketplace={marketplace}
+          />
         </div>
       )}
 
       {showItems && (
         <div
-          className="mr-[2px] flex-1 rounded bg-bg-black p-[10px] pt-4 sm:pt-[10px]"
+          className={cn(
+            "mr-[2px] flex-1 rounded bg-bg-black p-[10px] pt-4 sm:pt-[10px]",
+            showKChart ? "invisible h-0 w-0 sm:p-0" : "visible",
+          )}
           style={{
             minHeight: isMobileSize
               ? "calc(100vh - 175px)"

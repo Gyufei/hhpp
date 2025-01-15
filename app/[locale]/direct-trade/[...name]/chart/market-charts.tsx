@@ -6,13 +6,19 @@ import DepthChart from "./depth-chart";
 import SalesChart, { Durations, IDurationType } from "./sales-chart";
 import { IMarketplace } from "@/lib/types/marketplace";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils/common";
+import { TradingChart } from "@/app/[locale]/curve-trade/trade-chart";
 
 type IChartType = "depth" | "sales";
 
 export default function MarketCharts({
   marketplace,
+  showKChart,
+  setShowKChart,
 }: {
   marketplace: IMarketplace;
+  showKChart: boolean;
+  setShowKChart: (show: boolean) => void;
 }) {
   const [chartType, setChartType] = useState<IChartType>("sales");
   const [duration, setDuration] = useState<IDurationType>(Durations[0].value);
@@ -25,34 +31,68 @@ export default function MarketCharts({
     setDuration(duration);
   }
 
+  function handleShowKChart() {
+    setShowKChart(true);
+  }
+
   return (
-    <div className="flex flex-col p-4">
-      <div className="flex items-center justify-between">
-        <div className="flex w-full items-center justify-between space-x-[6px] sm:w-auto sm:justify-start">
-          <ChartSwitch
-            chartType={chartType}
-            handleChangeType={handleChangType}
-          />
-          {chartType === "sales" && (
-            <DurationSelect
-              duration={duration}
-              handleChangeDuration={handleChangeDuration}
+    <div
+      className={cn(
+        "flex flex-col p-4 transition-all duration-300",
+        showKChart ? "relative h-full" : "",
+      )}
+    >
+      {showKChart ? (
+        <>
+          <div className="absolute bottom-[135px] left-[84px] flex h-[33px] w-[33px] items-center justify-center rounded-full border border-border-black">
+            <Image
+              src="/icons/line-chart.svg"
+              width={20}
+              height={20}
+              alt="line-chart"
+              className=" cursor-pointer"
+              onClick={() => setShowKChart(false)}
             />
-          )}
-        </div>
+          </div>
+          <TradingChart />
+        </>
+      ) : (
+        <>
+          <div className="flex items-center justify-between">
+            <div className="flex w-full items-center justify-between space-x-[6px] sm:w-auto sm:justify-start">
+              <ChartSwitch
+                chartType={chartType}
+                handleChangeType={handleChangType}
+              />
+            </div>
+            <div className="flex items-center justify-end space-x-[10px]">
+              {chartType === "sales" && (
+                <DurationSelect
+                  duration={duration}
+                  handleChangeDuration={handleChangeDuration}
+                />
+              )}
+              <div className="h-5 w-[1px] bg-border-black"></div>
+              <Image
+                onClick={handleShowKChart}
+                src="/icons/k-chart.svg"
+                width={20}
+                height={20}
+                alt="k-chart"
+                className="cursor-pointer"
+              />
+            </div>
+          </div>
 
-        {/* <div className="hidden cursor-pointer items-center justify-center rounded-full p-[6px] sm:flex">
-          <Image src="/icons/extend.svg" width={20} height={20} alt="extend" />
-        </div> */}
-      </div>
-
-      <div className="mt-5 ">
-        {chartType === "sales" ? (
-          <SalesChart duration={duration} marketplace={marketplace} />
-        ) : (
-          <DepthChart />
-        )}
-      </div>
+          <div className="mt-5 ">
+            {chartType === "sales" ? (
+              <SalesChart duration={duration} marketplace={marketplace} />
+            ) : (
+              <DepthChart />
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -5,7 +5,10 @@ import {
   ResolutionString,
 } from "public/charting_library/charting_library.standalone";
 
-const config: Partial<ChartingLibraryWidgetOptions> = {
+const config:
+  | Partial<ChartingLibraryWidgetOptions> & {
+      [key: string]: any;
+    } = {
   symbol: "intel.tkn.near",
   interval: "1" as ResolutionString,
   library_path: "https://dynamic-moxie-09a484.netlify.app/",
@@ -16,6 +19,9 @@ const config: Partial<ChartingLibraryWidgetOptions> = {
   user_id: "0",
   fullscreen: false,
   autosize: true,
+  disabled_features: ["use_localstorage_for_settings"],
+  enabled_features: ["study_templates"],
+  theme: "dark"
 };
 
 export function TradingViewWidget() {
@@ -262,18 +268,9 @@ export function TradingViewWidget() {
     };
 
     const widget = new (window as any).TradingView.widget({
-      library_path: config.library_path,
-      // debug: true, // uncomment this line to see Library errors and warnings in the console
-      interval: config.interval,
-      fullscreen: config.fullscreen,
-      symbol: config.symbol,
       container: "tv_chart_container",
       datafeed,
-      locale: config.locale,
-      disabled_features: ["use_localstorage_for_settings"],
-      enabled_features: ["study_templates"],
-      theme: "dark",
-      autosize: config.autosize,
+      ...config,
     });
 
     return widget;
