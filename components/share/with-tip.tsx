@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   Tooltip,
   TooltipContent,
@@ -13,10 +12,14 @@ import { useState } from "react";
 export function WithTip({
   className,
   children,
+  content,
   align = "center",
+  contentClassName,
 }: {
   className?: string;
   children?: React.ReactNode;
+  content?: React.ReactNode;
+  contentClassName?: string;
   align?: "center" | "end" | "start" | undefined;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,23 +28,30 @@ export function WithTip({
     setIsOpen((prev) => !prev);
   };
 
+  if (!content) {
+    return <div className={cn(className)}>{children}</div>;
+  }
+
   return (
     <TooltipProvider>
       <Tooltip open={isOpen} onOpenChange={setIsOpen}>
         <TooltipTrigger onClick={handleToggle}>
-          <Image
-            src="/icons/help.svg"
-            width={16}
-            height={16}
-            alt="msg"
-            className="ml-1"
-          />
+          <div
+            className={cn(
+              className,
+              content
+                ? "underline-[#474747] cursor-pointer underline hover:text-main"
+                : "",
+            )}
+          >
+            {children}
+          </div>
         </TooltipTrigger>
         <TooltipContent
           align={align}
-          className={cn("z-[103] w-[300px]", className)}
+          className={cn("z-[103] w-fit", contentClassName)}
         >
-          <p className="text-xs leading-[18px]">{children}</p>
+          <p>{content}</p>
           <TooltipArrow asChild>
             <CTooltipArrow />
           </TooltipArrow>

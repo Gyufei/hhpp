@@ -1,3 +1,4 @@
+import { WithTip } from "@/components/share/with-tip";
 import { formatNum } from "@/lib/utils/number";
 import { truncateAddr } from "@/lib/utils/web3";
 
@@ -13,18 +14,18 @@ export default function InfoOptions() {
   };
 
   const labelValueLayoutClx = "flex flex-col gap-y-1";
-  const labelClx = "text-xs leading-[18px] text-gray underline";
+  const labelClx = "text-xs leading-[18px] text-gray";
   const valueClx = "text-xs leading-[18px] text-title-white";
 
   return (
     <div className="flex items-center gap-x-[30px]">
       <div className={labelValueLayoutClx}>
-        <div className={labelClx}>Price</div>
+        <WithTip className={labelClx}>Price</WithTip>
         <div className={valueClx}>{formatNum(info.price)}</div>
       </div>
 
       <div className={labelValueLayoutClx}>
-        <div className={labelClx}>24h Change</div>
+        <WithTip className={labelClx}>24h Change</WithTip>
         <div className={valueClx}>
           <GreenRedText
             value={info.change}
@@ -38,24 +39,24 @@ export default function InfoOptions() {
       </div>
 
       <div className={labelValueLayoutClx}>
-        <div className={labelClx}>24h Volume</div>
+        <WithTip className={labelClx}>24h Volume</WithTip>
         <div className={valueClx}>{`$${formatNum(info.vol)}`}</div>
       </div>
 
       <div className={labelValueLayoutClx}>
-        <div className={labelClx}>Market Cap</div>
+        <WithTip className={labelClx}>Market Cap</WithTip>
         <div className={valueClx}>{`$${formatNum(info.cap)}`}</div>
       </div>
 
       <div className={labelValueLayoutClx}>
-        <div className={labelClx}>Contract</div>
+        <WithTip className={labelClx}>Contract</WithTip>
         <div className={valueClx}>
           {truncateAddr(info.contract, { nPrefix: 6, nSuffix: 4 })}
         </div>
       </div>
 
       <div className={labelValueLayoutClx}>
-        <div className={labelClx}>Holders</div>
+        <WithTip className={labelClx}>Holders</WithTip>
         <div className={valueClx}>{info.holders.toString()}</div>
       </div>
     </div>
