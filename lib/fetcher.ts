@@ -2,6 +2,7 @@
 "use client";
 
 import { withSecure } from "acclism-manifest-v2";
+import { reportEvent } from "@/lib/utils/analytics";
 
 const access_key = "aK15X6c9";
 const seedApiUrl = "https://preview-apis.tadle.com/seed/apply";
@@ -69,6 +70,7 @@ async function parsedRes(res: any) {
     const json = await res.json();
 
     if (json.code === 500) {
+      reportEvent("fetch_500", { value: "" });
       return null;
     }
 

@@ -7,6 +7,7 @@ import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { useState } from "react";
 import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 import { useWalletModalContext } from "@/components/provider/wallet-modal-provider";
+import * as Sentry from "@sentry/nextjs";
 
 import {
   Popover,
@@ -36,9 +37,22 @@ export default function ConnectBtn() {
   }
 
   useAccountEffect({
-    onConnect() {
+    onConnect({ address, connector }) {
       if (!isProduction) return;
-
+      try {
+        Sentry.setUser({
+          username: address,
+        });
+        Sentry.setTag("connectWallet", (connector as any)?.rkDetails?.name);
+        Sentry.setTag(
+          "client_px",
+          document?.documentElement?.clientWidth +
+            "*" +
+            document?.documentElement?.clientHeight,
+        );
+      } catch (error) {
+        console.error("Error!", error);
+      }
       signMessage(
         { message: "Hello, Welcome to HypesTrade!" },
         {
