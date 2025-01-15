@@ -1,10 +1,6 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 import {
   Table,
@@ -18,16 +14,20 @@ import {
 import { useTheme } from "@table-library/react-table-library/theme";
 import useOnclickOutside from "react-cool-onclickoutside";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import HoverIcon from "@/components/share/hover-icon";
-import { useSetAtom } from "jotai";
-import { GlobalMessageAtom } from "@/lib/states/global-message";
 import { TooltipArrow } from "@radix-ui/react-tooltip";
 import { CTooltipArrow } from "@/components/share/c-tooltip-arrow";
 import { Input } from "@/components/ui/input";
 import { formatNum } from "@/lib/utils/number";
 import { IReferralItem } from "@/lib/hooks/api/use-referral-data";
+import toast from "react-hot-toast";
+
 import { ReferralDrawer } from "./referral-drawer";
 import {
   useReferralDelete,
@@ -189,15 +189,11 @@ export function ReferralTable({
 
 function ReferralCode({ rD, index }: { rD: IReferralItem; index: number }) {
   const [isHover, setIsHover] = useState(false);
-  const setGlobalMessage = useSetAtom(GlobalMessageAtom);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(rD.referral_code);
 
-    setGlobalMessage({
-      type: "success",
-      message: "Copied to clipboard",
-    });
+    toast.success("Copied to clipboard");
   };
 
   return (

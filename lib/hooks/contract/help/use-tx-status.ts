@@ -1,15 +1,12 @@
-import { GlobalMessageAtom } from "@/lib/states/global-message";
-import { useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { reportError, reportEvent } from "@/lib/utils/analytics";
+import { toast } from "react-hot-toast";
 
 export default function useTxStatus(
   txFn: (_args: any) => Promise<any>,
   successTip?: string,
   errorTip?: string,
 ) {
-  const setGlobalMessage = useSetAtom(GlobalMessageAtom);
-
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,10 +32,7 @@ export default function useTxStatus(
       const data = await txFn(...args);
       setData(data);
       setIsSuccess(true);
-      setGlobalMessage({
-        type: "success",
-        message: successTip || "Successfully",
-      });
+      toast.success(successTip || "Successfully");
     } catch (e: any) {
       setIsError(true);
       setError(e);
@@ -60,10 +54,7 @@ export default function useTxStatus(
         eMsg = "Insufficient Balance.";
       }
       if (eMsg) {
-        setGlobalMessage({
-          type: "error",
-          message: errorTip || eMsg || "Fail: Some error occur",
-        });
+        toast.error(errorTip || eMsg || "Fail: Some error occur");
       }
     } finally {
       setIsLoading(false);
