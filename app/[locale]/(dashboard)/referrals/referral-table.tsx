@@ -246,7 +246,7 @@ function ReferralRate({
         <HoverIcon
           onClick={onClick}
           src="/icons/set-up-gray.svg"
-          hoverSrc="/icons/white-set.svg"
+          hoverSrc="/icons/set-up.svg"
           width={20}
           height={20}
           alt="copy"
@@ -321,11 +321,11 @@ function ReferralNote({
             value={inputValue}
             onChange={(e: any) => setInputValue(e.target.value)}
             onKeyDown={handleKeyPress}
-            className="border-lightgray h-6 rounded-none border-x-0 border-b border-t-0 bg-bg-black pr-[50px] text-txt-white placeholder:text-gray"
+            className="border-lightgray h-6 rounded-none border-x-0 border-b border-t-0 bg-bg-black px-[10px] py-0 text-xs text-title-white text-txt-white placeholder:text-gray"
           />
           <Image
             onClick={handleInputConfirm}
-            src={"/icons/enter-gray.svg"}
+            src={"/icons/enter.svg"}
             width={24}
             height={24}
             alt="link"
@@ -402,10 +402,9 @@ function OpBtn({
   return (
     <div className="flex items-center justify-end space-x-3">
       {rD.flag === "1" ? (
-        <HoverIcon
+        <Image
           onClick={handleFlag}
-          src="/icons/flag-fill-gray.svg"
-          hoverSrc="/icons/flag-fill.svg"
+          src="/icons/flag-main.svg"
           width={20}
           height={20}
           alt="copy"
@@ -414,7 +413,7 @@ function OpBtn({
         <HoverIcon
           onClick={handleFlag}
           src="/icons/flag-gray.svg"
-          hoverSrc="/icons/green-flag.svg"
+          hoverSrc="/icons/flag.svg"
           width={20}
           height={20}
           alt="copy"

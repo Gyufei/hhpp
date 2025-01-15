@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { truncateAddr } from "@/lib/utils/web3";
 import { Link } from "@/i18n/routing";
 
@@ -20,28 +20,27 @@ export default function OfferFillDialog({
     >
       <DialogContent
         overlayClassName="z-[110]"
-        className="z-[110] flex w-[400px] flex-col gap-0 rounded border-border-black bg-bg-black p-6"
+        className="z-[110] w-[360px] gap-0 overflow-y-auto rounded border border-border-black !bg-bg-black p-4 sm:p-0"
       >
+        <DialogTitle>Taker Order filled</DialogTitle>
+
         <div className="flex flex-col items-center">
           <Image
-            src="/img/taker_order_filled.png"
-            width={120}
-            height={120}
+            src="/icons/taker-order-filled.svg"
+            width={200}
+            height={200}
             alt="placeholder"
           />
-          <div className="mt-4 text-xl leading-[30px] text-txt-white">
-            Taker Order filled
-          </div>
         </div>
 
-        <div className="mt-4 text-sm leading-5">
+        <div className="flex flex-col space-y-[10px] px-5 pb-5 pt-[10px] text-xs leading-[18px]">
           <div className="flex justify-between">
             <div className="text-gray">Sub No.</div>
-            <div className="text-txt-white">#{res.no}</div>
+            <div className="text-title-white">#{res.no}</div>
           </div>
           <div className="mt-8 flex justify-between">
             <div className="text-gray">Deposited</div>
-            <div className="flex items-center space-x-1 text-txt-white">
+            <div className="flex items-center space-x-1 text-title-white">
               <span>${res.pay}</span>
               <Image
                 src={res?.token?.logoURI}
@@ -53,7 +52,7 @@ export default function OfferFillDialog({
           </div>
           <div className="mt-8 flex justify-between">
             <div className="text-gray">Tx</div>
-            <div className="text-txt-white">
+            <div className="text-title-white">
               {truncateAddr(res.tx, {
                 nPrefix: 4,
                 nSuffix: 4,
@@ -62,18 +61,13 @@ export default function OfferFillDialog({
           </div>
         </div>
 
-        <Link href={`/portfolio`}>
-          <button className="mt-7 flex h-12 w-full items-center justify-center rounded bg-main hover:bg-main-hover leading-6 text-txt-white">
-            <span className="mr-1 inline-block">Go To My Holdings</span>
-            <Image
-              src="/icons/right-45.svg"
-              className="rotate-45"
-              width={20}
-              height={20}
-              alt="token"
-            />
-          </button>
-        </Link>
+        <div className="relative border-t border-border-black px-5 py-4">
+          <Link href={`/portfolio`}>
+            <button className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive">
+              Go To My Holdings
+            </button>
+          </Link>
+        </div>
       </DialogContent>
     </Dialog>
   );

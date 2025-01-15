@@ -1,8 +1,6 @@
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { NumericalInput } from "@/components/share/numerical-input";
 import { useEffect, useState } from "react";
 import { formatNum } from "@/lib/utils/number";
@@ -58,30 +56,14 @@ export function WithdrawDialog({
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => onOpenChange(isOpen)}>
-      <VisuallyHidden asChild>
-        <DialogTitle>Withdraw Dialog</DialogTitle>
-      </VisuallyHidden>
       <DialogContent
-        showClose={false}
         className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded border-border-black bg-bg-black p-0"
         style={{
           boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
         }}
         aria-describedby={undefined}
       >
-        <div className="relative flex w-full items-center justify-between border-b border-border-black px-5 py-[10px]">
-          <div className="text-[18px] leading-[28px] text-title-white">
-            {T("btn-Withdraw")}
-          </div>
-          <Image
-            onClick={() => onOpenChange(false)}
-            src="/icons/close.svg"
-            width={24}
-            height={24}
-            alt="close"
-            className="cursor-pointer rounded-full"
-          />
-        </div>
+        <DialogTitle>{T("btn-Withdraw")}</DialogTitle>
 
         <div className="relative w-full border-b border-border-black p-5">
           <NumericalInput
