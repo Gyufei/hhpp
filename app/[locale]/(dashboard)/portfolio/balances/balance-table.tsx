@@ -38,7 +38,7 @@ export function BalanceTable() {
 
   const theme = useTheme({
     Table: `
-      grid-template-columns: 100px repeat(5,minmax(0,1fr));
+      grid-template-columns: 100px repeat(4,minmax(0,1fr));
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
       gap: 2px;
@@ -126,9 +126,9 @@ export function BalanceTable() {
                 <HeaderCell className="h-10 px-1 py-[11px]">
                   {T("th-USDValue")}
                 </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
+                {/* <HeaderCell className="h-10 px-1 py-[11px]">
                   <div className="underline">{T("th-PnL(%)")}</div>
-                </HeaderCell>
+                </HeaderCell> */}
                 <HeaderCell className="h-10 px-1 py-[11px]"></HeaderCell>
               </HeaderRow>
             </Header>
@@ -158,9 +158,9 @@ export function BalanceTable() {
                   <Cell className="h-12 px-1 py-[11px] align-top">
                     ${holding.marketplace.last_price * 100}
                   </Cell>
-                  <Cell className="h-12 px-1 py-[11px] align-top !text-red">
+                  {/* <Cell className="h-12 px-1 py-[11px] align-top !text-red">
                     -$233.556/-12.34%
-                  </Cell>
+                  </Cell> */}
                   <Cell className="h-12 px-1 py-[11px] align-top">
                     <ListOfferBtn
                       marketplace={holding.marketplace}
