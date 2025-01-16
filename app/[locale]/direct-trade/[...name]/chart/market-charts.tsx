@@ -40,7 +40,7 @@ export default function MarketCharts({
   return (
     <div
       className={cn(
-        "flex flex-col p-4 transition-all duration-300",
+        "flex flex-col p-[10px] transition-all duration-300",
         showKChart ? "relative h-full" : "",
       )}
     >

@@ -7,7 +7,7 @@ import MyBalances from "./balances/page";
 import PortfolioInfo from "./portfolio-info";
 
 const tabClx =
-  "flex w-[105px] items-center px-[10px] py-[10px] text-sm leading-5 border-b-2 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray rounded-none";
+  "flex w-[105px] items-center px-[10px] font-[400] py-[10px] text-sm leading-5 border-b-2 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray rounded-none";
 
 export default function PortFolio() {
   const TH = useTranslations("Header");
@@ -18,7 +18,7 @@ export default function PortFolio() {
 
   return (
     <div className="flex flex-1 flex-col sm:p-0">
-      <div className="mb-[2px] mr-0 hidden items-center justify-between rounded bg-bg-black p-5 sm:flex">
+      <div className="mb-[2px] mr-0 hidden items-center justify-between rounded bg-bg-black px-5 py-[22px] sm:flex">
         <div className="flex w-full items-center justify-between space-x-5">
           <div className="text-xl leading-[30px] text-title-white">
             {TH("btn-Dashboard")}

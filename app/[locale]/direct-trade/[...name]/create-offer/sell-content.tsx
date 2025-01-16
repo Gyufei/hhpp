@@ -164,7 +164,7 @@ export function SellContent({
         <OrderNoteAndFee value={note} onValueChange={setNote} type={"sell"} />
       </div>
 
-      <div className="relative border-t border-border-black px-5 py-4">
+      <div className="relative px-5 py-4">
         <div className="absolute left-1/2 top-1 -translate-x-1/2 text-center text-[10px] leading-[16px] text-red">
           {errorText}
         </div>

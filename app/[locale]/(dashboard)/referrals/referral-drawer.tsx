@@ -122,7 +122,7 @@ export function ReferralDrawer({
               className="mt-[10px] h-8 rounded border-border-black pl-[10px] text-xs text-title-white placeholder:text-gray focus:border-txt-white disabled:bg-[#222428]"
             />
 
-            <div className="mt-[30px] h-1 border-b border-border-black"></div>
+            <div className="mt-[30px] h-1 border-b border-[#303030]"></div>
 
             <div className="mt-5 text-sm leading-5 text-title-white">
               {rt("cap-SetCommissionRates")}
@@ -151,7 +151,7 @@ export function ReferralDrawer({
                 <NumericalInput
                   disabled={extraRate === 0}
                   data-error={rateError}
-                  className="h-8 w-full rounded border border-border-black px-[10px] py-2 text-xs leading-[18px] text-title-white placeholder:text-gray focus:border-txt-white disabled:cursor-not-allowed disabled:bg-[#222428] data-[error=true]:!border-red"
+                  className="h-8 w-full rounded border border-border-black px-[10px] py-2 text-xs leading-[18px] text-title-white placeholder:text-gray focus:border-txt-white disabled:cursor-not-allowed disabled:bg-[#222428] disabled:text-gray data-[error=true]:!border-red"
                   placeholder="0%"
                   value={friendRate || ""}
                   onUserInput={handleFRateInput}
@@ -189,7 +189,7 @@ export function ReferralDrawer({
             </div>
           </div>
 
-          <div className="relative border-t border-border-black px-5 py-4">
+          <div className="relative border-t border-[#303030] px-5 py-4">
             <WithWalletConnectBtn onClick={handleSaveRate}>
               <button className="mt-2 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive">
                 {rt("btn-Save")}
