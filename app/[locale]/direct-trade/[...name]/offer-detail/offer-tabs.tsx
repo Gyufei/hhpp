@@ -29,11 +29,11 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
   }, [takerOrders, onlyMe, address]);
 
   return (
-    <div className="no-scroll-bar w-full overflow-x-scroll sm:w-auto sm:overflow-x-hidden">
-      <div className="mx-5 mt-[10px] max-h-[415px] w-[700px] rounded-[20px] bg-bg-black pb-5 pt-0">
+    <div className="no-scroll-bar flex w-full flex-1 flex-col overflow-x-scroll sm:w-auto sm:overflow-x-hidden">
+      <div className="max-h-auto mx-5 mt-[10px] w-[700px] flex-1 flex-col rounded-[20px] bg-bg-black pb-5 pt-0">
         <Tabs
           value={currentTab}
-          className="flex flex-1 flex-col"
+          className="flex h-full flex-1 flex-col"
           onValueChange={setCurrentTab}
         >
           <TabsList className="relative flex items-center justify-between rounded-none p-0">
@@ -60,7 +60,10 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
             </div>
             <div className="absolute bottom-[4.5px] h-1 w-full border-b border-border-black"></div>
           </TabsList>
-          <TabsContent value="orders" className="h-full">
+          <TabsContent
+            value="orders"
+            className="flex h-full flex-1 flex-col justify-between"
+          >
             {<TakerOrders orders={showOrders || []} offer={offer} />}
           </TabsContent>
           <TabsContent value="history" className="flex-1"></TabsContent>

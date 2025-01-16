@@ -10,7 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useMarketInfo } from "@/lib/hooks/api/use-market-info";
 import { ChainType } from "@/lib/types/chain";
 import { toast } from "react-hot-toast";
-import MarketFoldPop from "./market-fold-pop";
+import MarketSelect from "@/components/share/market-select";
 
 export default function MarketplaceCard({
   marketplace,
@@ -95,7 +95,7 @@ export default function MarketplaceCard({
         {isLoadingFlag ? (
           <Skeleton className="h-8 w-8 rounded-full bg-bg-black" />
         ) : (
-          <MarketFoldPop />
+          <MarketSelect />
         )}
       </div>
 

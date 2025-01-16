@@ -11,7 +11,6 @@ import * as Sentry from "@sentry/nextjs";
 
 import BalancePopContent from "./balance-pop-content";
 import { useAccountEffect, useSignMessage } from "wagmi";
-import { isProduction } from "@/lib/PathMap";
 import HoverIcon from "@/components/share/hover-icon";
 import {
   Popover,
@@ -41,7 +40,6 @@ export default function ConnectBtn() {
 
   useAccountEffect({
     onConnect({ address, connector }) {
-      if (!isProduction) return;
       try {
         Sentry.setUser({
           username: address,
@@ -56,6 +54,7 @@ export default function ConnectBtn() {
       } catch (error) {
         console.error("Error!", error);
       }
+
       signMessage(
         { message: "Hello, Welcome to HypesTrade!" },
         {
