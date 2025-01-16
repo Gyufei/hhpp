@@ -130,19 +130,22 @@ export function SellContent({
           topText={
             <div className="flex items-center">
               {T("txt-YouDLikeToReceive")}
-              <WithTip align="start">
-                <div className="relative">
-                  {T("tip-YouDLikeToReceive", {
-                    pointName: currentMarket.item_name,
-                  })}
-                  <Image
-                    src="/icons/info-tip.svg"
-                    height={30}
-                    width={30}
-                    alt="info"
-                    className="absolute -bottom-[14px] -right-[18px] !text-main"
-                  />
-                </div>
+              <WithTip
+                content={
+                  <>
+                    {T("tip-YouDLikeToReceive", {
+                      pointName: currentMarket.item_name,
+                    })}
+                  </>
+                }
+              >
+                <Image
+                  src="/icons/info-tip.svg"
+                  height={16}
+                  width={16}
+                  alt="info"
+                  className="ml-2"
+                />
               </WithTip>
             </div>
           }
