@@ -13,12 +13,11 @@ export default function HomeBanner() {
     >
       <Image src="/icons/simple-logo.svg" width={120} height={90} alt="logo" />
       <div className="mt-5 text-center text-[80px] font-light leading-[120px] text-title-white">
-        First stop for high quality <br /> Hyperliquid assets.
+        Seed market for high-quality <br /> Hyperliquid assets.
       </div>
       <div className="mt-[30px] w-[420px] text-center text-sm font-light text-title-white">
-        Crypto is fragmented today, but it doesn&apos;t need to be.For the first
-        time, build projects, create value, andexchange assets on the same
-        hyper-performant chain.
+        Rebuild dreams with see chances for every dream-making trader. Ample
+        liquidity, lightning-fast trades.
       </div>
       <div className="mt-10 flex items-center justify-between space-x-[30px]">
         <StartTradingButton />

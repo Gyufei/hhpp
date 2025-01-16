@@ -1,14 +1,13 @@
 {
   "Home": {
-    "cap-DecentralizedPreMarketInfrastructure": "Decentralized Pre-market Infrastructure",
-    "cap-TheFirstPreSuperMarket": "The First Pre SuperMarket",
+    "cap-DecentralizedPreMarketInfrastructure": "Seed Market for Hyperliquid",
+    "cap-TheFirstPreSuperMarket": "Seed Market for Hyperliquid",
     "cap-BridgingLiquidityBetweenPrimaryAndSecondaryMarkets": "Bridging liquidity between primary and secondary markets",
     "btn-GetStarted": "Getting Started",
     "btn-ReadTheDocs": "Read the Docs",
     "th-ItemId": "Item ID",
     "th-Asset": "Asset",
     "th-Value": "Value",
-
     "cap-TradePointsToMakeMoney": "Trade Points to Make Money",
     "cap-SpecialPointMarket": "Special Point Market",
     "p-SpecialPointMarket1": "Points from selected projects can be traded for an unlimited number of times. After purchasing points, traders have the opportunity to relist and sell them for profits.",
@@ -21,7 +20,6 @@
     "p-ProtectedMode1": "For Protected Mode, all sellers, whether they are the original or subsequent sellers, are required to deposit crypto as collateral. Upon settlement, each seller is obligated to transfer the token to the buyer according to the trading sequence.",
     "p-ProtectedMode2": "This mechanism provides additional assurance to point buyers and potentially reduces the default rate.",
     "btn-StartTrading": "Start Trading",
-
     "btn-ReadMore": "Read More",
     "cap-WhyTadleOutperformsOthers": "Why HypesTrade outperforms others?",
     "cap-OptimalCapitalEfficiency": "Optimal Capital Efficiency",
@@ -36,7 +34,6 @@
     "p-RobustSecurity": "HypesTrade implements advanced security measures to safeguard user assets.",
     "cap-DecentralizedArbitrationForSettlements": "Decentralized Arbitration for Settlements",
     "p-DecentralizedArbitrationForSettlements": "HypesTrade employs decentralized arbitration to ensure fair and transparent resolution for every case.",
-
     "cap-HowToGetStartedWithTadle": "How to get started with HypesTrade",
     "cap-ProductAdvantages": "Product Advantages",
     "txt-Step": "Step",
@@ -45,7 +42,6 @@
     "txt-PlaceABuyOrSellOrder": "Place a buy or sell order",
     "txt-CheckMetricsInDashboard": "Check metrics in dashboard",
     "cap-TrendingProjects": "Trending Projects",
-
     "cap-FAQ": "FAQ",
     "btn-More": "more",
     "cap-WhatIsPoint": "What Are Points?",
