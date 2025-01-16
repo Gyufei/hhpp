@@ -7,7 +7,6 @@ import { useUserXp } from "@/lib/hooks/api/use-user-xp";
 
 export default function OverviewInfo() {
   const T = useTranslations("cd-AccountOverview");
-  const TR = useTranslations("ct-Rank");
   const { currentChain } = useChainWallet();
   const { data: userPoints } = useUserXp();
   console.log("🚀 ~ OverviewInfo ~ userPoints:", userPoints);
