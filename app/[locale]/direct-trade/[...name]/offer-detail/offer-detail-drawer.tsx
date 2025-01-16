@@ -81,7 +81,7 @@ export default function OfferDetailDrawer({
               handleDrawerToggle(false);
             }
           }}
-          res={{}}
+          res={resultOrder}
         />
       )}
     </>
