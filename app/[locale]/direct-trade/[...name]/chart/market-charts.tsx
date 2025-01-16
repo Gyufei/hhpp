@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils/common";
 import { TradingChart } from "@/app/[locale]/curve-trade/trade-chart";
 
 type IChartType = "depth" | "sales";
+const OpenKline = false as const;
 
 export default function MarketCharts({
   marketplace,
@@ -32,6 +33,7 @@ export default function MarketCharts({
   }
 
   function handleShowKChart() {
+    if (!OpenKline) return;
     setShowKChart(true);
   }
 

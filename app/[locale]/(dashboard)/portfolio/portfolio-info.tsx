@@ -9,7 +9,7 @@ export default function PortfolioInfo() {
           <WithTip className="text-gray" content={"View Equity"}>
             {T("cap-Equity")}
           </WithTip>
-          <div className="mt-2 flex items-center justify-center text-txt-white">
+          <div className="mt-1 flex items-center justify-center text-title-white">
             <div>$1,000,000</div>
           </div>
         </div>
@@ -17,7 +17,7 @@ export default function PortfolioInfo() {
           <WithTip className="text-gray" content={"View Volume"}>
             {T("cap-14DayVolume")}
           </WithTip>
-          <div className="mt-2 flex items-center justify-center text-txt-white">
+          <div className="mt-1 flex items-center justify-center text-title-white">
             <div>$1,000,000</div>
           </div>
         </div>
@@ -25,7 +25,7 @@ export default function PortfolioInfo() {
           <WithTip className="text-gray" content={"View Fee Schedule"}>
             {T("cap-Fees(Taker/Maker)")}
           </WithTip>
-          <div className="mt-2 flex items-center justify-center  text-txt-white">
+          <div className="mt-1 flex items-center justify-center  text-title-white">
             <div>0.0350%0.0100%</div>
           </div>
         </div>
