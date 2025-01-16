@@ -173,6 +173,7 @@ export default function AskDetail({
             value={String(payTokenAmount)}
             onUserInput={handleInputPayTokenAmount}
             canGoMax={sliderCanMax}
+            canInput={!isFilled}
             sliderMax={sliderCanMax}
             sliderValue={receivePointAmount}
             setSliderValue={handleSliderChange}

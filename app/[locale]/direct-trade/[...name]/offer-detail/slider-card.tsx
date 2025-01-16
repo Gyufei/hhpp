@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Slider } from "@/components/ui/slider";
 import { ReactElement, useMemo } from "react";
 import { NumericalInput } from "@/components/share/numerical-input";
+import { formatNum } from "@/lib/utils/number";
 
 export default function SliderCard({
   topText,
@@ -14,6 +15,7 @@ export default function SliderCard({
   bottomText,
   setSliderValue,
   hasError = false,
+  canInput = true,
 }: {
   topText: ReactElement;
   value: string;
@@ -25,6 +27,7 @@ export default function SliderCard({
   bottomText: ReactElement;
   setSliderValue: (_v: number) => void;
   hasError?: boolean;
+  canInput?: boolean;
 }) {
   function handleSlider(val: number) {
     if (val > canGoMax) {
@@ -51,12 +54,18 @@ export default function SliderCard({
         {topText}
       </div>
       <div className="mt-2 flex items-center justify-between">
-        <NumericalInput
-          className="mr-1 mt-2 h-9 max-w-[240px] text-left text-2xl leading-9 text-title-white placeholder:text-gray sm:max-w-full"
-          placeholder="Enter Amount"
-          value={value}
-          onUserInput={(v) => onUserInput(v)}
-        />
+        {canInput ? (
+          <NumericalInput
+            className="mr-1 mt-2 h-9 max-w-[240px] text-left text-2xl leading-9 text-title-white placeholder:text-gray sm:max-w-full"
+            placeholder="Enter Amount"
+            value={value}
+            onUserInput={(v) => onUserInput(v)}
+          />
+        ) : (
+          <div className="h-[36px] text-2xl leading-[36px] text-title-white">
+            {formatNum(Number(value), 6)}
+          </div>
+        )}
         <Image
           src={tokenLogo}
           width={24}
