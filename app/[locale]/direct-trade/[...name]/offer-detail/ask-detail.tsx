@@ -170,7 +170,7 @@ export default function AskDetail({
             }
             bottomText={<>~${formatNum(payTokenTotalPrice)} </>}
             tokenLogo={forLogo}
-            value={payTokenAmount}
+            value={String(payTokenAmount)}
             onUserInput={handleInputPayTokenAmount}
             canGoMax={sliderCanMax}
             sliderMax={sliderCanMax}
