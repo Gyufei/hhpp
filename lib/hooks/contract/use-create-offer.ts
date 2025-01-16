@@ -43,7 +43,7 @@ export function useCreateOffer({ marketSymbol }: { marketSymbol: string }) {
       return res;
     } catch (error) {
       toast.error("Invalid transaction data");
-      return null;
+      throw new Error("Invalid transaction data");
     }
   };
 
