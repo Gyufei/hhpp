@@ -30,7 +30,9 @@ export function useCreateTakerOrder() {
       return res;
     } catch (e: any) {
       toast.error(e?.message || "The service is abnormal. Please try again");
-      return null;
+      throw new Error(
+        e?.message || "The service is abnormal. Please try again",
+      );
     }
   };
 
