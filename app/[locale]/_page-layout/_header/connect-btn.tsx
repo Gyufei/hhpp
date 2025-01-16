@@ -140,7 +140,7 @@ export default function ConnectBtn() {
         className="flex w-[276px] flex-col items-stretch space-y-[10px] border-border-black bg-bg-black p-[10px] text-[12px]"
         align="end"
       >
-        <button onClick={() => checkAndSwitchChain()}>111</button>
+        {/* <button onClick={() => checkAndSwitchChain()}>111</button> */}
         <BalancePopContent ref={balancePopRef} />
       </PopoverContent>
     </Popover>

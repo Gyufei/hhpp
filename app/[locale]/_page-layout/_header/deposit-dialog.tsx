@@ -28,7 +28,7 @@ export function DepositDialog({
             {chainConfig.contracts.deposit}
           </div>
 
-          <QrCode src={`/img/qrcode/${chainConfig.contracts.deposit}.png}`} />
+          <QrCode src={`/img/qrcode/${chainConfig.contracts.deposit}.png`} />
         </div>
       </DialogContent>
     </Dialog>
