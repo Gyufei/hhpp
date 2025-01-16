@@ -5,7 +5,7 @@ import Image from "next/image";
 import Logo from "./logo";
 import { useState } from "react";
 import { cn } from "@/lib/utils/common";
-import Setting from "./setting";
+// import Setting from "./setting";
 import LanguageSetting from "./language-setting";
 
 const menuItemsClx =

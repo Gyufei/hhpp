@@ -3,7 +3,7 @@ import ConnectBtn from "./connect-btn";
 import NavigationBtns from "./navigation-btns";
 import { usePathname } from "@/i18n/routing";
 import Logo from "./logo";
-import Setting from "./setting";
+// import Setting from "./setting";
 import LanguageSetting from "./language-setting";
 
 export default function Header() {

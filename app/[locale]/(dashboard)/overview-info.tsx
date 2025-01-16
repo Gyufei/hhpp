@@ -44,7 +44,7 @@ export default function OverviewInfo() {
           </div>
         </div> */}
 
-        <div className="mt-3 flex justify-between">
+        {/* <div className="mt-3 flex justify-between">
           <LabelText>{T("lb-MakerOrders")}</LabelText>
           <div className="leading-[18px] text-title-white">
             <NoDataDisplay noData={!accountInfo}>
@@ -59,7 +59,7 @@ export default function OverviewInfo() {
               {formatNum(Number(accountInfo?.taker_orders))}
             </NoDataDisplay>
           </div>
-        </div>
+        </div> */}
 
         <div className="mt-3 flex justify-between">
           <LabelText>{T("lb-SettledValue")}</LabelText>

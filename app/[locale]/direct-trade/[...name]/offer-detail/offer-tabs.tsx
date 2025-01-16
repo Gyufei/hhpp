@@ -45,7 +45,7 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
                 {T("cap-Transactions")}({takerOrders?.length || 0})
               </TabsTrigger>
             </div>
-            <div className="flex items-center space-x-2 mb-2">
+            <div className="mb-2 flex items-center space-x-2">
               <label
                 htmlFor="onlyMe"
                 className="text-xs leading-[18px] text-title-white"

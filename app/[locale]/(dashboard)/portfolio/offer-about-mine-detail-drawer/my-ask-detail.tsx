@@ -32,7 +32,7 @@ export default function MyAskDetail({
     amount,
     offerTokenInfo,
     offerPointInfo,
-    isFilled,
+    isClosed,
     isCanceled,
     pointDecimalNum,
   } = useOfferFormat({
@@ -107,14 +107,18 @@ export default function MyAskDetail({
             tokenLogo={offerTokenInfo?.logoURI || "/icons/empty.png"}
           />
 
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-wrap gap-2">
             <>
               {isCanceled ? (
                 <button
                   disabled={true}
-                  className="mt-4 flex h-8 w-full flex-1 items-center justify-center rounded text-xs leading-[18px] text-bg-black"
+                  className="mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-[18px] text-title-white"
                 >
                   {ot("btn-OfferClosed")}
+                </button>
+              ) : isClosed ? (
+                <button className="pointer-events-none mt-4  flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-6 text-title-white">
+                  {ot("btn-TradingEnded")}
                 </button>
               ) : (
                 <>
@@ -130,12 +134,9 @@ export default function MyAskDetail({
                       {ot("btn-CloseThisOffer")}
                     </button>
                   </WithWalletConnectBtn>
-
-                  {isFilled && (
-                    <div className="mt-3 rounded-2xl bg-[#FBF2EA] px-4 py-3 leading-5 text-[#FFA95B]">
-                      {ot("txt-YouHaveTheOptionToClose")}
-                    </div>
-                  )}
+                  <div className="mt-2 rounded bg-[#FBF2EA] px-3 py-2 text-xs leading-5 text-[#FFA95B]">
+                    {ot("txt-YouHaveTheOptionToClose")}
+                  </div>
                 </>
               )}
             </>

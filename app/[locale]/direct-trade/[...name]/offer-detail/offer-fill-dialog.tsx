@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { truncateAddr } from "@/lib/utils/web3";
+// import { truncateAddr } from "@/lib/utils/web3";
 import { Link } from "@/i18n/routing";
 
 export default function OfferFillDialog({
@@ -50,7 +50,7 @@ export default function OfferFillDialog({
               />
             </div>
           </div>
-          <div className="mt-8 flex justify-between">
+          {/* <div className="mt-8 flex justify-between">
             <div className="text-gray">Tx</div>
             <div className="text-title-white">
               {truncateAddr(res.tx, {
@@ -58,7 +58,7 @@ export default function OfferFillDialog({
                 nSuffix: 4,
               })}
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="relative border-t border-border-black px-5 py-4">
