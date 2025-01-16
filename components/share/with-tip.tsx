@@ -49,7 +49,7 @@ export function WithTip({
         </TooltipTrigger>
         <TooltipContent
           align={align}
-          className={cn("z-[103] w-fit", contentClassName)}
+          className={cn("z-[103] w-fit max-w-[300px]", contentClassName)}
         >
           <p>{content}</p>
           <TooltipArrow asChild>
