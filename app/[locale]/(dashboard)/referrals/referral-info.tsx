@@ -44,7 +44,7 @@ export default function ReferralInfo({
 
   const commissionRate = useMemo(() => {
     if (lastCommission === 0) return 0;
-    if (lastCommission === lastCommission) return 1;
+    if (commission === lastCommission) return 1;
 
     return lastCommission / (commission - lastCommission);
   }, [lastCommission, commission]);
