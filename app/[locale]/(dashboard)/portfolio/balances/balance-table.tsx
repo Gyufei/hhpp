@@ -9,16 +9,28 @@ import {
 } from "@table-library/react-table-library/table";
 import { usePagination } from "@table-library/react-table-library/pagination";
 import { useTheme } from "@table-library/react-table-library/theme";
-import ListOfferBtn from "./list-offer-btn";
 import { Pagination } from "@/components/ui/pagination/pagination";
 import { useTranslations } from "next-intl";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+
 import { sortBy } from "lodash";
 import { useMyHoldings } from "@/lib/hooks/api/use-my-holdings";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { usePointAmount } from "@/lib/hooks/api/use-point-amount";
+import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
+
+import { SellContent } from "@/app/[locale]/direct-trade/[...name]/create-offer/sell-content";
+import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
+import { reportEvent } from "@/lib/utils/analytics";
+import DrawerTitle from "@/components/share/drawer-title";
+import Drawer from "react-modern-drawer";
 export function BalanceTable() {
   const T = useTranslations("page-MyBalances");
+  const TC = useTranslations("drawer-CreateOffer");
+  const TB = useTranslations("page-MyBalances");
+  const { checkAndSwitchChain } = useCheckSwitchChain();
+
+  const [marketCreateOffer, setOpenMarketCreateOffer] = useState(null);
 
   const { data: balanceData } = useMyHoldings();
 
@@ -94,6 +106,10 @@ export function BalanceTable() {
     pagination.fns.onSetPage(page);
   };
 
+  function handleCloseDrawer() {
+    setOpenMarketCreateOffer(null);
+  }
+
   if (!data.nodes.length) {
     return (
       <div className="flex w-screen flex-1 items-center justify-center text-base text-gray sm:w-full">
@@ -162,10 +178,19 @@ export function BalanceTable() {
                     -$233.556/-12.34%
                   </Cell> */}
                   <Cell className="h-12 px-1 py-[11px] align-top">
-                    <ListOfferBtn
-                      marketplace={holding.marketplace}
-                      onSuccess={() => {}}
-                    ></ListOfferBtn>
+                    <WithWalletConnectBtn
+                      chain={holding.marketplace.chain}
+                      className="flex w-fit"
+                      onClick={() => {
+                        checkAndSwitchChain();
+                        setOpenMarketCreateOffer(holding.marketplace);
+                        reportEvent("click", { value: "createOffer" });
+                      }}
+                    >
+                      <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]">
+                        {TB("th-List")}
+                      </div>
+                    </WithWalletConnectBtn>
                   </Cell>
                 </Row>
               ))}
@@ -196,6 +221,22 @@ export function BalanceTable() {
 
           <Pagination.NextButton />
         </Pagination>
+      )}
+      {marketCreateOffer && (
+        <Drawer
+          open={true}
+          onClose={handleCloseDrawer}
+          direction="right"
+          size={500}
+          className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
+        >
+          <DrawerTitle title={TC("cap-List")} onClose={handleCloseDrawer} />
+
+          <SellContent
+            onSuccess={handleCloseDrawer}
+            marketplace={marketCreateOffer}
+          />
+        </Drawer>
       )}
     </>
   );
