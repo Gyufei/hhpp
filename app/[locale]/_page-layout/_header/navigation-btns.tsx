@@ -1,6 +1,6 @@
 "use client";
 import { Link, usePathname } from "@/i18n/routing";
-import MoreMenu from "./more-menu";
+// import MoreMenu from "./more-menu";
 import Image from "next/image";
 import Logo from "./logo";
 import { useState } from "react";
@@ -48,7 +48,7 @@ export default function NavigationBtns() {
             {item.title}
           </Link>
         ))}
-        <MoreMenu />
+        {/* <MoreMenu /> */}
       </div>
 
       {/* mobile */}
@@ -86,8 +86,8 @@ export default function NavigationBtns() {
               </Link>
             ))}
           </div>
-          <div className="mx-5 my-[10px] h-1 border-b border-border-black"></div>
-          <MoreMenu />
+          {/* <div className="mx-5 my-[10px] h-1 border-b border-border-black"></div>
+          <MoreMenu /> */}
           <div className="mx-5 my-[10px] h-1 border-b border-border-black"></div>
           <Setting />
           <LanguageSetting />

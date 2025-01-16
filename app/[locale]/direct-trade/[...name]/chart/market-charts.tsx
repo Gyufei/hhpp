@@ -74,15 +74,19 @@ export default function MarketCharts({
                   handleChangeDuration={handleChangeDuration}
                 />
               )}
-              <div className="h-5 w-[1px] bg-border-black"></div>
-              <Image
-                onClick={handleShowKChart}
-                src="/icons/k-chart.svg"
-                width={20}
-                height={20}
-                alt="k-chart"
-                className="cursor-pointer"
-              />
+              {OpenKline && (
+                <>
+                  <div className="h-5 w-[1px] bg-border-black"></div>
+                  <Image
+                    onClick={handleShowKChart}
+                    src="/icons/k-chart.svg"
+                    width={20}
+                    height={20}
+                    alt="k-chart"
+                    className="cursor-pointer"
+                  />
+                </>
+              )}
             </div>
           </div>
 
@@ -107,25 +111,9 @@ function ChartSwitch({
   handleChangeType: (_type: IChartType) => void;
 }) {
   const t = useTranslations("ct-Marketplace");
-  // const isDepth = chartType === "depth";
   const isSales = chartType === "sales";
   return (
     <div className="flex space-x-1 rounded border border-border-black bg-bg-black p-1">
-      {/* <div
-        data-checked={isDepth}
-        className="flex cursor-pointer items-center rounded-full bg-transparent data-[checked=true]:bg-bg-black data-[checked=true]:px-3 data-[checked=false]:px-[6px] data-[checked=true]:py-[6px]"
-        onClick={() => handleChangeType("depth")}
-      >
-        <Image
-          src={isDepth ? "/icons/depth.svg" : "/icons/depth-gray.svg"}
-          width={20}
-          height={20}
-          alt="depth"
-        />
-        {isDepth && (
-          <div className="ml-[6px] text-sm leading-5 text-txt-white">{t('tg-Depth')}</div>
-        )}
-      </div> */}
       <div
         data-checked={isSales}
         className="flex cursor-pointer items-center rounded bg-transparent data-[checked=true]:bg-main data-[checked=false]:px-[6px] data-[checked=true]:px-3 data-[checked=true]:py-[6px]"
