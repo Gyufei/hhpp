@@ -130,7 +130,7 @@ export default function SalesChart({
     () => ({
       chart: {
         backgroundColor: "transparent",
-        height: window.innerHeight > 900 ? "400px" : "249px",
+        height: window.innerHeight - 56 - 297 - 66 - 86 + "px",
       },
       time: {
         useUTC: false,
