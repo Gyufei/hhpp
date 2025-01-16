@@ -113,10 +113,10 @@ export function ReferralSignInBtn({
 
   return (
     <>
-      <div className="mb-3 text-xl leading-[30px] text-txt-white">
+      <div className="mb-3 text-xl leading-[30px] text-title-white">
         {t("cap-Welcome")}
       </div>
-      <div className="min-h-10 px-5 text-center text-sm leading-5 text-txt-white">
+      <div className="min-h-10 px-5 text-center text-sm leading-5 text-title-white">
         {t.rich("txt-YourFriendSentYouAnOnboardingInvitation", {
           name: (_chunks: any) => (
             <span className="text-green">{shortAddr}</span>

@@ -141,7 +141,7 @@ export function TradesTable({
       background: #111a1e;
     `,
     HeaderCell: `
-      color: #f6fefd;
+      color: #949E9C;
       border-bottom: 1px solid #474747;
 
       &:nth-of-type(4),
@@ -243,7 +243,7 @@ export function TradesTable({
         className="absolute left-0 top-[10px] z-10"
       />
       <div className="max-h-auto relative w-full flex-1 flex-col overflow-y-hidden pb-0">
-        <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-1 flex-col text-txt-white">
+        <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-1 flex-col">
           <CompactTable
             columns={COLUMNS}
             data={data}

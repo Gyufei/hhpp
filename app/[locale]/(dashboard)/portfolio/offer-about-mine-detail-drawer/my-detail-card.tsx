@@ -25,7 +25,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
   return (
     <div className="flex-1 p-5">
       <div className="flex items-center justify-between">
-        <div className="text-xs leading-6 text-txt-white">
+        <div className="text-xs leading-6 text-title-white">
           {T("cap-OfferDetail")}
         </div>
       </div>

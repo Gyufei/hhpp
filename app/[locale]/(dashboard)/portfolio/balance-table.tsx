@@ -108,7 +108,7 @@ export function BalanceTable() {
         data={data}
         theme={theme}
         pagination={pagination}
-        className="no-scroll-bar flex-1 text-txt-white"
+        className="no-scroll-bar flex-1 "
       >
         {(tableList: Array<any>) => (
           <>
