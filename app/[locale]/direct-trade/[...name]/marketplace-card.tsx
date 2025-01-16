@@ -3,25 +3,14 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import HoverIcon from "@/components/share/hover-icon";
 
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Input } from "@/components/ui/input";
 import { IMarketplace } from "@/lib/types/marketplace";
-import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
 import MarketplaceOverview from "@/components/share/market-place-overview";
-import { useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils/common";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useTranslations } from "next-intl";
 import { useMarketInfo } from "@/lib/hooks/api/use-market-info";
 import { ChainType } from "@/lib/types/chain";
-import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
-import MobileDrawerTitle from "@/components/share/drawer-title-mobile";
-import Drawer from "react-modern-drawer";
 import { toast } from "react-hot-toast";
+import MarketFoldPop from "./market-fold-pop";
 
 export default function MarketplaceCard({
   marketplace,
@@ -68,7 +57,7 @@ export default function MarketplaceCard({
           {isLoadingFlag ? (
             <Skeleton className="h-14 w-14 rounded-full" />
           ) : (
-            <div className="flex h-14 w-14 items-center justify-center rounded-full sm:border-[1.5px] sm:border-border-black">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full sm:border-[1.5px] sm:border-[#303030]">
               <Image
                 src={marketplace?.projectLogo}
                 width={48}
@@ -80,7 +69,7 @@ export default function MarketplaceCard({
           )}
 
           <div className="relative mt-[3px] flex items-center space-x-3">
-            <div className="flex flex-col">
+            <div className="flex flex-col justify-center">
               {isLoadingFlag ? (
                 <>
                   <Skeleton className="my-[2px] h-4 w-[100px] rounded-sm bg-bg-black" />
@@ -106,7 +95,7 @@ export default function MarketplaceCard({
         {isLoadingFlag ? (
           <Skeleton className="h-8 w-8 rounded-full bg-bg-black" />
         ) : (
-          <FoldPop />
+          <MarketFoldPop />
         )}
       </div>
 
@@ -136,6 +125,8 @@ function OverviewIcons({
     window.open(discord, "_blank");
   };
 
+  if (!twitter && !discord) return null;
+
   return (
     <div className="flex h-5 items-center space-x-1">
       {twitter && (
@@ -160,157 +151,5 @@ function OverviewIcons({
         />
       )}
     </div>
-  );
-}
-
-function FoldPop() {
-  const t = useTranslations("Common");
-  const { data: marketplaceData } = useMarketplaces();
-
-  const router = useRouter();
-
-  const { isMobileSize } = useDeviceSize();
-
-  const [popOpen, setPopOpen] = useState(false);
-  const [isInputFocused, setIsInputFocused] = useState(false);
-  const [searchText, setSearchText] = useState("");
-
-  const cateList = useMemo(() => {
-    return (marketplaceData || [])
-      .filter((m) => m.status !== "offline")
-      .map((marketplace) => {
-        return {
-          name: marketplace.market_name,
-          id: marketplace.market_symbol,
-          tokenLogo: marketplace.projectLogo,
-          link: marketplace.market_symbol,
-        };
-      });
-  }, [marketplaceData]);
-
-  const filteredCateList = useMemo(
-    () =>
-      searchText
-        ? cateList.filter((cate) =>
-            cate.name
-              .toLocaleUpperCase()
-              .includes(searchText.toLocaleUpperCase()),
-          )
-        : cateList,
-    [cateList, searchText],
-  );
-
-  function handleGo(id: string) {
-    router.push(`/direct-trade/${id}`);
-  }
-
-  function renderContent() {
-    return (
-      <>
-        <div className="relative pb-6">
-          <Image
-            src={
-              isInputFocused ? "/icons/search.svg" : "/icons/search-gray.svg"
-            }
-            width={20}
-            height={20}
-            alt="search"
-            className="absolute left-[7px] top-[10px] "
-          />
-          <Input
-            placeholder={t("Search")}
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            onFocus={() => setIsInputFocused(true)}
-            onBlur={() => setIsInputFocused(false)}
-            className="h-10 rounded-lg border-border-black bg-bg-black pl-8 text-title-white placeholder:text-gray focus:border-txt-white"
-          />
-        </div>
-        {filteredCateList.map((cate, i) => (
-          <div
-            className="flex cursor-pointer rounded-lg px-2 py-2 hover:bg-border-black"
-            onClick={() => handleGo(cate.id)}
-            key={cate.name}
-            style={{
-              marginTop: i === 0 ? 0 : 12,
-              boxShadow: isMobileSize ? "inset 0px -1px 0px 0px #474747" : "",
-            }}
-          >
-            <Image
-              src={cate.tokenLogo}
-              width={40}
-              height={40}
-              alt="avatar"
-              className="rounded-full"
-            />
-            <div className="ml-[10px] flex flex-col">
-              <div className="text-sm leading-[20px] text-txt-white">
-                {cate.name}
-              </div>
-              <div
-                style={{
-                  width: "150px",
-                }}
-                className="mt-[2px] w-[150px] overflow-hidden text-ellipsis whitespace-nowrap text-[12px] leading-[18px] text-gray"
-              >
-                {cate.link}
-              </div>
-            </div>
-          </div>
-        ))}
-      </>
-    );
-  }
-
-  if (isMobileSize) {
-    return (
-      <div>
-        <button
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-black"
-          onClick={() => setPopOpen(!popOpen)}
-        >
-          <Image
-            src={popOpen ? "/icons/fold.svg" : "/icons/fold-gray.svg"}
-            width={20}
-            height={20}
-            alt="fold"
-          />
-        </button>
-        <Drawer
-          open={popOpen}
-          onClose={() => setPopOpen(!popOpen)}
-          direction={"bottom"}
-          size={"calc(100vh - 100px)"}
-          className="flex flex-col overflow-y-auto rounded !bg-bg-black p-4"
-        >
-          <MobileDrawerTitle
-            title={t("Switch")}
-            onClose={() => setPopOpen(!popOpen)}
-          />
-          {renderContent()}
-        </Drawer>
-      </div>
-    );
-  }
-
-  return (
-    <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
-      <PopoverTrigger asChild>
-        <button className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-black">
-          <Image
-            src={popOpen ? "/icons/fold.svg" : "/icons/fold-gray.svg"}
-            width={20}
-            height={20}
-            alt="fold"
-          />
-        </button>
-      </PopoverTrigger>
-      <PopoverContent
-        align="end"
-        className="flex w-[240px] flex-col items-stretch border border-border-black bg-bg-black p-2"
-      >
-        {renderContent()}
-      </PopoverContent>
-    </Popover>
   );
 }

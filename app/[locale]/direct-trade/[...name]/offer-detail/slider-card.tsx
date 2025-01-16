@@ -3,6 +3,7 @@ import { Slider } from "@/components/ui/slider";
 import { ReactElement, useMemo } from "react";
 import { NumericalInput } from "@/components/share/numerical-input";
 import { formatNum } from "@/lib/utils/number";
+import { cn } from "@/lib/utils/common";
 
 export default function SliderCard({
   topText,
@@ -56,7 +57,14 @@ export default function SliderCard({
       <div className="mt-2 flex items-center justify-between">
         {canInput ? (
           <NumericalInput
-            className="mr-1 mt-2 h-9 max-w-[240px] text-left text-2xl leading-9 text-title-white placeholder:text-gray sm:max-w-full"
+            className={cn(
+              "mr-1 mt-2 h-9 max-w-[240px] text-left leading-9 text-title-white placeholder:text-gray sm:max-w-full",
+              value.length > 18
+                ? "text-lg"
+                : value.length > 24
+                ? "text-base"
+                : "text-2xl",
+            )}
             placeholder="Enter Amount"
             value={value}
             onUserInput={(v) => onUserInput(v)}

@@ -64,7 +64,7 @@ export function OfferCard({
   return (
     <div className="h-fit rounded border border-transparent bg-[#222428] px-[10px] pb-3 pt-[10px] hover:border-main">
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-[10px]">
           <Image
             src={offer.marketplace.projectLogo}
             width={48}

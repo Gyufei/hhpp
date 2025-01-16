@@ -39,13 +39,13 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
           <TabsList className="relative flex items-center justify-between rounded-none p-0">
             <div className="z-10 flex items-center justify-start space-x-10">
               <TabsTrigger
-                className="flex w-[135px] items-center rounded-none border-b-2 pb-[10px] pl-0 pt-0 text-sm leading-5 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray"
+                className="flex items-center rounded-none border-b-2 px-[10px] pb-[10px] pt-0 text-sm leading-5 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray"
                 value="orders"
               >
                 {T("cap-Transactions")}({takerOrders?.length || 0})
               </TabsTrigger>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="mb-2 flex items-center space-x-2">
               <label
                 htmlFor="onlyMe"
                 className="text-xs leading-[18px] text-title-white"
@@ -60,7 +60,7 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
             </div>
             <div className="absolute bottom-[4.5px] h-1 w-full border-b border-border-black"></div>
           </TabsList>
-          <TabsContent value="orders" className="h-fit">
+          <TabsContent value="orders" className="h-full">
             {<TakerOrders orders={showOrders || []} offer={offer} />}
           </TabsContent>
           <TabsContent value="history" className="flex-1"></TabsContent>
