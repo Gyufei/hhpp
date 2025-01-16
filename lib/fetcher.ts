@@ -70,7 +70,7 @@ async function parsedRes(res: any) {
 
     if (json.code === 500) {
       reportEvent("fetch_500", { value: "" });
-      throw new Error(json.msg);
+      return Promise.reject(new Error(json.msg));
     }
 
     return json?.data || json;
