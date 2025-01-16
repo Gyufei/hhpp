@@ -34,7 +34,7 @@ export default function OrderNoteAndFee({
   return (
     <div className="flex flex-col">
       <div className="flex items-center space-x-1">
-        <div className="mr-[6px] text-xs leading-[18px] text-txt-white">
+        <div className="mr-[6px] text-xs leading-[18px] text-title-white">
           {cot("cap-OrderNote")}
         </div>
         <Checkbox

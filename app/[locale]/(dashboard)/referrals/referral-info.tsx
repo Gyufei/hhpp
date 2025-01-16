@@ -81,7 +81,7 @@ export default function ReferralInfo({
         <div className="mt-0 flex w-full items-stretch justify-between">
           <div className="flex flex-col items-start justify-between">
             <div className="text-gray">{rt("lb-Commission")}</div>
-            <div className="mt-1 flex items-center justify-center text-txt-white">
+            <div className="mt-1 flex items-center justify-center text-title-white">
               <div>${commission}</div>
               <div className="ml-[10px] flex items-center justify-center">
                 <DisplayArrow

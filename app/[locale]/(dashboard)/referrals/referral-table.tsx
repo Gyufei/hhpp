@@ -150,16 +150,16 @@ export function ReferralTable({
                     <ReferralCode rD={rD} index={index} />
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
-                    <div className="text-txt-white">{rD.referral_users}</div>
+                    <div className="">{rD.referral_users}</div>
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
-                    <div className="text-txt-white">{rD.trading_users}</div>
+                    <div className="">{rD.trading_users}</div>
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
-                    <div className="text-txt-white">${rD.trading_fee}</div>
+                    <div className="">${rD.trading_fee}</div>
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
-                    <div className="text-txt-white">{rD.unique_views}</div>
+                    <div className="">{rD.unique_views}</div>
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
                     <ReferralRate rD={rD} onClick={() => openEditDrawer(rD)} />
@@ -200,7 +200,7 @@ function ReferralCode({ rD, index }: { rD: IReferralItem; index: number }) {
     <div
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      className="relative flex h-fit w-fit cursor-pointer items-center space-x-2 text-txt-white"
+      className="relative flex h-fit w-fit cursor-pointer items-center space-x-2"
     >
       <span className="mr-[2px] ">#{index + 1}</span>
       <span>{rD.referral_code}</span>
@@ -234,7 +234,7 @@ function ReferralRate({
       onMouseLeave={() => setIsHover(false)}
       className="relative flex h-fit w-fit cursor-pointer items-center space-x-[6px]"
     >
-      <span className="border-lightgray border-b border-dashed  text-txt-white">
+      <span className="border-lightgray border-b border-dashed  ">
         {rD.referrer_rate != "" && rD.referrer_rate != null && (
           <>{formatNum(Number(rD.referrer_rate || 0) / 10 ** 4)}%,&nbsp;</>
         )}
@@ -323,7 +323,7 @@ function ReferralNote({
             value={inputValue}
             onChange={(e: any) => setInputValue(e.target.value)}
             onKeyDown={handleKeyPress}
-            className="border-lightgray h-6 rounded-none border-x-0 border-b border-t-0 bg-bg-black px-[10px] py-0 text-xs text-title-white text-txt-white placeholder:text-gray"
+            className="border-lightgray h-6 rounded-none border-x-0 border-b border-t-0 bg-bg-black px-[10px] py-0 text-xs text-title-white  placeholder:text-gray"
           />
           <Image
             onClick={handleInputConfirm}
@@ -339,7 +339,7 @@ function ReferralNote({
           <Tooltip>
             <TooltipTrigger asChild>
               <div className="flex items-center justify-start">
-                <div className="mr-[6px] w-fit truncate text-right text-txt-white">
+                <div className="mr-[6px] w-fit truncate text-right ">
                   {inputValue}
                 </div>
                 <HoverIcon
