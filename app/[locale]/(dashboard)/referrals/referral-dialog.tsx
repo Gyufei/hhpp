@@ -69,9 +69,13 @@ export function ReferralSignInBtn({
   onSuccess: () => void;
 }) {
   const t = useTranslations("Header");
+  const rt = useTranslations("page-Referral");
+
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+
+  const { address } = useChainWallet();
 
   const { data: codeData } = useReferralCodeData({
     code: referralCode,
@@ -91,14 +95,14 @@ export function ReferralSignInBtn({
   }, [referrerStr]);
 
   const {
-    isMutating: isUpdating,
+    isMutating,
     data: isSuccess,
     trigger: writeAction,
     error,
   } = useReferralBind();
 
   function handleSignInReferral() {
-    if (isUpdating || !codeData) return;
+    if (isMutating || !codeData) return;
     writeAction({ referral_code: referralCode });
   }
 
@@ -139,7 +143,7 @@ export function ReferralSignInBtn({
       <div className="mt-6 w-full">
         <WithWalletConnectBtn onClick={handleSignInReferral}>
           <button className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover">
-            {t("btn-SignIn")}
+            {address ? rt("btn-Bind") : t("btn-SignIn")}
           </button>
         </WithWalletConnectBtn>
       </div>
