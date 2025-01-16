@@ -76,7 +76,7 @@ export function OrderTable({
 
   const theme = useTheme({
     Table: `
-      grid-template-columns: 100px repeat(7,minmax(0,1fr));
+      grid-template-columns: 100px repeat(6,minmax(0,1fr));
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
       gap: 2px;
@@ -171,9 +171,9 @@ export function OrderTable({
                 <HeaderCell className="h-10 px-1 py-[11px]">
                   {T("th-USDValue(Snapshot)")}
                 </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
+                {/* <HeaderCell className="h-10 px-1 py-[11px]">
                   {T("th-Tx")}
-                </HeaderCell>
+                </HeaderCell> */}
                 <HeaderCell className="h-10 px-1 py-[11px]">
                   {T("th-CreatedTime")}
                 </HeaderCell>
@@ -207,9 +207,9 @@ export function OrderTable({
                   <Cell className="h-12 px-1 py-[11px] align-top">
                     ${off.price * off.item_amount}
                   </Cell>
-                  <Cell className="h-12 px-1 py-[11px] align-top">
+                  {/* <Cell className="h-12 px-1 py-[11px] align-top">
                     <OfferHash offer={off} />
-                  </Cell>
+                  </Cell> */}
                   <Cell className="h-12 px-1 py-[11px] align-top">
                     <span className="leading-5">
                       {formatTimestamp(off.create_at * 1000)}
