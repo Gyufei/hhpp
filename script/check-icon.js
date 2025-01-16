@@ -2,11 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 // 忽略的文件夹
-const ignoreDirs = ['node_modules', 'public'];
+const ignoreDirs = ['node_modules', 'public', 'script'];
 
 // 获取所有SVG图标的名字和它们的完整路径
 function getIcons() {
-  const iconsDir = path.join(__dirname, 'public', 'icons');
+  const iconsDir = path.join(__dirname, '../public', 'icons');
   return fs.readdirSync(iconsDir)
     .filter(file => path.extname(file).toLowerCase() === '.svg')
     .map(file => ({
@@ -46,7 +46,7 @@ function collectReferences(dir) {
 // 查找未使用的图标并提供删除选项
 async function findAndDeleteUnusedIcons() {
   const icons = getIcons();
-  const allContent = collectReferences(__dirname);
+  const allContent = collectReferences(path.join(__dirname, '../'));
   const usedIcons = new Set();
 
   // 创建正则表达式来匹配图标名

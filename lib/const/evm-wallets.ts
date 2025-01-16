@@ -1,4 +1,4 @@
-import { isAndroid, isChrome, isIOS, isMobile } from "../utils/isMobile";
+import { isAndroid, isChrome, isIOS, isMobile } from "../utils/is-mobile";
 
 function getExplicitInjectedProvider(flag: string) {
   const _window =
