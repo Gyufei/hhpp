@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { apiFetcher, dataApiFetcher } from "@/lib/fetcher";
 import useSWRMutation from "swr/mutation";
 import { useEndPoint } from "./use-endpoint";
-import { ApiPaths, ApiPaths } from "@/lib/PathMap";
+import { ApiPaths } from "@/lib/PathMap";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { ChainType } from "@/lib/types/chain";
 

@@ -42,6 +42,7 @@ export const ApiPaths = {
   userName: "/user/user_name",
   tokenPrice: "/token/info",
   marketTrades: "/market_place/maker_trades_history",
+  salesVolumeHistory: "/market_place/sales_volume_history",
 
   referral: {
     referer: "/referral/referer",
