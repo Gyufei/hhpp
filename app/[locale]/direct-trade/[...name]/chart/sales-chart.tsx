@@ -7,6 +7,7 @@ import { IMarketplace } from "@/lib/types/marketplace";
 import { useSalesVolume } from "@/lib/hooks/api/use-sales-volume";
 import { useWsMsgSub } from "@/lib/hooks/api/use-ws-msgs";
 import { useEffect } from "react";
+import { sortBy } from "lodash";
 
 if (typeof Highcharts === "object") {
   HighchartsExporting(Highcharts);
@@ -71,18 +72,20 @@ export default function SalesChart({
       }
     });
 
-    const col = durationData.map((item) => {
+    const dData = sortBy(durationData, "create_at");
+
+    const col = dData.map((item) => {
       return [
         item.create_at,
         Number(NP.divide(NP.times(item.sales_volume, item.sales_price), 500)),
       ];
     });
 
-    const line = durationData.map((item) => {
+    const line = dData.map((item) => {
       return [item.create_at, Number(item.sales_price)];
     });
 
-    const scatter = durationData.map((item) => {
+    const scatter = dData.map((item) => {
       return [item.create_at, Number(item.sales_price)];
     });
 
