@@ -122,7 +122,7 @@ export default function MarketplaceContent({
 
       {showTrades && (
         <div
-          className="flex w-full flex-col rounded bg-bg-black px-[10px] pb-16 pt-4 sm:w-[320px] sm:pb-0 sm:pt-0"
+          className="flex w-full flex-col rounded bg-bg-black px-[10px] pb-16 pt-4 sm:w-[320px] sm:pb-0 sm:pt-[10px]"
           style={{
             minHeight: isMobileSize
               ? "calc(100vh - 175px)"

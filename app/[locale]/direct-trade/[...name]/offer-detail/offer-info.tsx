@@ -18,7 +18,7 @@ export default function OfferInfo({
     <div className="flex items-center justify-between ">
       {/* avatar and name number */}
       <div className="flex items-center">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-[10px]">
           <Image
             src={img1}
             width={48}

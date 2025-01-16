@@ -10,7 +10,7 @@ export function StableBalance({ className }: { className?: string }) {
   const usdcBalance = usdcBalanceData?.usdc_balance || "0";
 
   return (
-    <div className={cn("mb-6 text-[12px] text-[#99A0AF]", className)}>
+    <div className={cn("mb-6 text-[12px] leading-[18px] text-gray", className)}>
       Balance: {formatNum(usdcBalance)}
     </div>
   );

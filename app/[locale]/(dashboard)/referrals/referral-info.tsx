@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { formatNum } from "@/lib/utils/number";
 import { IReferralItem } from "@/lib/hooks/api/use-referral-data";
 import { useMemo } from "react";
+import NP from "number-precision";
 
 export default function ReferralInfo({
   referralData,
@@ -37,16 +38,21 @@ export default function ReferralInfo({
   }, [referralData]);
 
   const signedUpRate = useMemo(() => {
-    if (lastSignedUp === 0) return 0;
+    if (Number(lastSignedUp) === 0 || Number(signedUp) === 0) return 0;
 
-    return lastSignedUp / (signedUp - lastSignedUp);
+    const yesterdaySignedUp = NP.minus(signedUp, lastSignedUp);
+    if (yesterdaySignedUp === 0) return 1;
+
+    return NP.divide(lastSignedUp, yesterdaySignedUp);
   }, [lastSignedUp, signedUp]);
 
   const commissionRate = useMemo(() => {
-    if (lastCommission === 0) return 0;
-    if (lastCommission === lastCommission) return 1;
+    if (Number(lastCommission) === 0 || Number(commission) === 0) return 0;
 
-    return lastCommission / (commission - lastCommission);
+    const yesterdayCommission = NP.minus(commission, lastCommission);
+    if (yesterdayCommission === 0) return 1;
+
+    return NP.divide(lastCommission, yesterdayCommission);
   }, [lastCommission, commission]);
 
   return (

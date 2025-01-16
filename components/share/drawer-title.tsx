@@ -13,7 +13,7 @@ export default function DrawerTitle({
   tagClassName?: string;
 }) {
   return (
-    <div className="flex items-center justify-between border-b border-border-black p-5">
+    <div className="flex items-center justify-between border-b border-border-black px-5 py-[15px]">
       <div className="flex items-center space-x-[10px]">
         <div className="text-[18px] leading-[28px] text-title-white">
           {title}

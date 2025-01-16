@@ -21,13 +21,11 @@ export function SortSelect({
   sortDir,
   handleSortFieldChange,
   handleSortDirChange,
-  showCollateral = false,
 }: {
   sortField: ISortField;
   sortDir: ISortDir;
   handleSortFieldChange: (_s: ISortField) => void;
   handleSortDirChange: (_s: ISortDir) => void;
-  showCollateral?: boolean;
 }) {
   const t = useTranslations("sl-OrderSort");
   const [popOpen, setPopOpen] = useState(false);
@@ -43,17 +41,17 @@ export function SortSelect({
       <DropdownMenuTrigger asChild>
         <div
           data-open={popOpen}
-          className="flex cursor-pointer items-center space-x-1 rounded bg-[#222428] px-[16px] py-[5px] outline-none"
+          className="flex cursor-pointer items-center space-x-1 rounded bg-[#222428] px-[10px] py-[5px] outline-none"
         >
           <Image src="/icons/sort.svg" width={20} height={20} alt="type icon" />
-          <div className="overflow-hidden text-clip whitespace-nowrap text-sm leading-5 text-title-white">{`${t(
+          <div className="overflow-hidden text-clip whitespace-nowrap text-xs leading-[18px] text-title-white">{`${t(
             "sl-" + sortField,
           )}:${t("sl-" + sortDir)}`}</div>
           <Image
             data-open={popOpen}
             src="/icons/arrow-down.svg"
-            width={16}
-            height={16}
+            width={20}
+            height={20}
             alt="arrow"
             className="data-[open=true]:rotate-180"
           />
@@ -71,21 +69,15 @@ export function SortSelect({
           sortField={sortField}
           sortDir={sortDir}
           onSortDirChange={handleSortDirClick}
+          alignOffset={-5}
         />
         <SortOptions
           field="Price"
           sortField={sortField}
           sortDir={sortDir}
           onSortDirChange={handleSortDirClick}
+          alignOffset={-40}
         />
-        {showCollateral && (
-          <SortOptions
-            field="Collateral"
-            sortField={sortField}
-            sortDir={sortDir}
-            onSortDirChange={handleSortDirClick}
-          />
-        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -96,11 +88,13 @@ function SortOptions({
   sortField,
   sortDir,
   onSortDirChange,
+  alignOffset = -5,
 }: {
   field: ISortField;
   sortField: ISortField;
   sortDir: ISortDir;
   onSortDirChange: (_field: ISortField, _dir: ISortDir) => void;
+  alignOffset?: number;
 }) {
   const t = useTranslations("sl-OrderSort");
   return (
@@ -114,6 +108,7 @@ function SortOptions({
       <DropdownMenuPortal>
         <DropdownMenuSubContent
           sideOffset={6}
+          alignOffset={alignOffset}
           className="w-[88px] border-border-black bg-bg-black p-1 sm:w-[158px]"
           style={{
             boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
@@ -170,8 +165,8 @@ function SortUpDown({
     >
       <Image
         src={isActive ? "/icons/sort-up-hover.svg" : "/icons/sort-up.svg"}
-        width={16}
-        height={16}
+        width={20}
+        height={20}
         alt="up"
         className={cn(isDown ? "rotate-180" : "")}
       />
