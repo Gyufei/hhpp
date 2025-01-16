@@ -61,7 +61,7 @@ export default function OfferFillDialog({
           </div> */}
         </div>
 
-        <div className="relative border-t border-border-black px-5 py-4">
+        <div className="relative border-t border-[#303030] px-5 py-4">
           <Link href={`/portfolio`}>
             <button className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive">
               Go To My Holdings
