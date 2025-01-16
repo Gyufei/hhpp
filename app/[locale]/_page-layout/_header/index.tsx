@@ -23,7 +23,7 @@ export default function Header() {
       <div className="flex flex-1 items-center justify-end space-x-4 sm:space-x-5">
         <ConnectBtn />
         <div className="hidden items-center gap-[10px] sm:flex">
-          <Setting />
+          {/* <Setting /> */}
           <LanguageSetting />
         </div>
       </div>

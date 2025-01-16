@@ -89,7 +89,7 @@ export default function NavigationBtns() {
           {/* <div className="mx-5 my-[10px] h-1 border-b border-border-black"></div>
           <MoreMenu /> */}
           <div className="mx-5 my-[10px] h-1 border-b border-border-black"></div>
-          <Setting />
+          {/* <Setting /> */}
           <LanguageSetting />
         </div>
       )}
