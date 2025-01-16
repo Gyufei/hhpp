@@ -2,11 +2,14 @@ import NP from "number-precision";
 import Image from "next/image";
 import { formatNum } from "@/lib/utils/number";
 import { handleGoScan, truncateAddr } from "@/lib/utils/web3";
-import { WithTip } from "@/components/share/with-tip";
 import { IOffer } from "@/lib/types/offer";
 import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
 import { useTranslations } from "next-intl";
 import { useEntryById } from "@/lib/hooks/api/use-entry-by-id";
+import {
+  DetailLabel,
+  DetailRow,
+} from "@/app/[locale]/direct-trade/[...name]/offer-detail/detail-card";
 
 export default function MyDetailCard({ offer }: { offer: IOffer }) {
   const T = useTranslations("drawer-OfferDetail");
@@ -31,7 +34,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
           {T("lb-SellerAmount")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="text-sm leading-5 text-title-white">
+          <div className="text-xs leading-5 text-txt-white">
             {formatNum(NP.divide(offer.item_amount, pointDecimalNum))}
           </div>
           <Image
@@ -47,7 +50,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
       <DetailRow>
         <DetailLabel tipText={T("tip-Seller")}>{T("lb-Seller")}</DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="text-sm leading-5 text-title-white">
+          <div className="text-xs leading-5 text-txt-white">
             {truncateAddr(offer?.offer_maker || "", {
               nPrefix: 4,
               nSuffix: 4,
@@ -71,7 +74,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
           {T("lb-TrendingEndsAt")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="text-sm leading-5 text-title-white">--</div>
+          <div className="text-xs leading-5 text-title-white">--</div>
         </div>
       </DetailRow>
 
@@ -83,7 +86,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
           <div className="w-fit rounded bg-border-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
             {originId ? `#${originId}` : ""}
           </div>
-          <div className="text-sm leading-5 text-title-white">
+          <div className="text-xs leading-5 text-txt-white">
             {truncateAddr(originMaker || "", {
               nPrefix: 4,
               nSuffix: 4,
@@ -101,29 +104,6 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
           />
         </div>
       </DetailRow>
-    </div>
-  );
-}
-
-function DetailRow({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="mt-[10px] flex items-center justify-between">
-      {children}
-    </div>
-  );
-}
-
-function DetailLabel({
-  tipText,
-  children,
-}: {
-  tipText: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="underline-[#474747] flex items-center space-x-1 text-xs leading-[18px] text-gray underline">
-      {children}
-      {tipText && <WithTip>{tipText}</WithTip>}
     </div>
   );
 }

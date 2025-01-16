@@ -106,7 +106,7 @@ export default function DetailCard({ offer }: { offer: IOffer }) {
   );
 }
 
-function DetailRow({ children }: { children: React.ReactNode }) {
+export function DetailRow({ children }: { children: React.ReactNode }) {
   return (
     <div className="mt-[10px] flex items-center justify-between">
       {children}
@@ -114,7 +114,7 @@ function DetailRow({ children }: { children: React.ReactNode }) {
   );
 }
 
-function DetailLabel({
+export function DetailLabel({
   tipText,
   children,
 }: {
@@ -122,9 +122,11 @@ function DetailLabel({
   children: React.ReactNode;
 }) {
   return (
-    <div className="underline-[#474747] flex items-center space-x-1 text-xs leading-[18px] text-gray underline">
+    <WithTip
+      className="flex items-center space-x-1 text-xs leading-[18px] text-gray"
+      content={tipText}
+    >
       {children}
-      {tipText && <WithTip>{tipText}</WithTip>}
-    </div>
+    </WithTip>
   );
 }
