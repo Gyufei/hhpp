@@ -8,6 +8,7 @@ export function useCheckSwitchChain() {
 
   function checkAndSwitchChain() {
     const shouldChainId = Number(ChainConfigs[ChainType.HYPER].network);
+
     if (chainId !== shouldChainId) {
       return switchChainAsync({ chainId: shouldChainId });
     }

@@ -17,6 +17,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 
 const SignMessageKey = "hypes-trade-sign-message";
 
@@ -28,6 +29,7 @@ export default function ConnectBtn() {
   const { isMobileSize } = useDeviceSize();
   const { openWalletModal } = useWalletModalContext();
   const { shortAddr, connected, connecting } = useChainWallet();
+  const { checkAndSwitchChain } = useCheckSwitchChain();
 
   const [popOpen, setPopOpen] = useState(false);
   const balancePopRef = useRef<{
@@ -40,6 +42,25 @@ export default function ConnectBtn() {
 
   useAccountEffect({
     onConnect({ address, connector }) {
+      const userToken = localStorage.getItem(SignMessageKey);
+      if (userToken) {
+        checkAndSwitchChain();
+        return;
+      }
+
+      signMessage(
+        { message: "Hello, Welcome to HypesTrade!" },
+        {
+          onSuccess(data) {
+            localStorage.setItem(SignMessageKey, data);
+            checkAndSwitchChain();
+          },
+          onError(error) {
+            console.log("Error!", error);
+          },
+        },
+      );
+
       try {
         Sentry.setUser({
           username: address,
@@ -54,18 +75,6 @@ export default function ConnectBtn() {
       } catch (error) {
         console.error("Error!", error);
       }
-
-      signMessage(
-        { message: "Hello, Welcome to HypesTrade!" },
-        {
-          onSuccess(data) {
-            localStorage.setItem(SignMessageKey, data);
-          },
-          onError(error) {
-            console.log("Error!", error);
-          },
-        },
-      );
     },
     onDisconnect() {
       localStorage.removeItem("hyper-trade-sign-message");
@@ -131,6 +140,7 @@ export default function ConnectBtn() {
         className="flex w-[276px] flex-col items-stretch space-y-[10px] border-border-black bg-bg-black p-[10px] text-[12px]"
         align="end"
       >
+        <button onClick={() => checkAndSwitchChain()}>111</button>
         <BalancePopContent ref={balancePopRef} />
       </PopoverContent>
     </Popover>
