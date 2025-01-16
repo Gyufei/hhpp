@@ -47,7 +47,7 @@ export default function MarketSelect() {
         <PopoverContent className="ml-2 mt-4 flex w-[956px] flex-col border border-border-black bg-bg-black p-[10px]">
           <div className="relative mb-[10px]">
             <Input
-              placeholder={"Search"}
+              placeholder={"Search coins"}
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               className="h-8 rounded border-border-black bg-bg-black px-[10px] text-xs leading-[18px] text-title-white placeholder:text-gray focus:border-txt-white"
