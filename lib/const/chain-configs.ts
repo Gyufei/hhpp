@@ -27,7 +27,7 @@ export const ChainConfigs: Record<string, IChainConfig> = {
     },
     contracts: isProduction
       ? {
-          deposit: "",
+          deposit: "0x4bBb7cE5074cf2546e332353c0968Aaa0e82Ce23",
         }
       : {
           deposit: "0x9EBeD0B93d2dc9C332640608Bcd551885ADd857D",

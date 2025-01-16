@@ -56,7 +56,7 @@ export default function ReferralInfo({
           <div className="flex flex-col items-start justify-between object-contain">
             <div className="text-gray">{rt("lb-SignedUp")}</div>
             <div className="mt-1 flex items-center justify-center text-title-white">
-              <div>${signedUp}</div>
+              <div>{signedUp}</div>
               <div className="ml-[10px] flex items-center justify-center">
                 <DisplayArrow
                   isUp={Number(signedUpRate === 0) ? "zero" : signedUpRate > 0}
