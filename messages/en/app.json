@@ -212,7 +212,7 @@
     "lb-TakerOrders": "Taker Orders",
     "lb-Profit": "Profit",
     "lb-SettledValue": "Settled Value",
-    "lb-BonusIncome": "Tax Income"
+    "lb-TaxIncome": "Tax Income"
   },
   "ct-Rank": {
     "th-HTPoints": "HT Points",

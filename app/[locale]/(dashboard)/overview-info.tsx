@@ -16,7 +16,7 @@ export default function OverviewInfo() {
 
   return (
     <div className="flex h-full flex-col space-y-2 pb-5 text-[12px]">
-      <div className="m-[10px] mt-2 border-b border-border-black pb-8 text-xs">
+      <div className="m-[10px] mt-2 pb-8 text-xs">
         <div className="flex items-center justify-between">
           <div className="leading-[18px] text-title-white">
             {T("cap-AccountOverview")}
@@ -71,7 +71,7 @@ export default function OverviewInfo() {
           </div>
         </div>
         <div className="mt-3 flex justify-between">
-          <LabelText>{T("lb-BonusIncome")}</LabelText>
+          <LabelText>{T("lb-TaxIncome")}</LabelText>
           <div
             data-loss={
               accountInfo ? Number(accountInfo?.tax_income) < 0 : "null"
@@ -87,7 +87,7 @@ export default function OverviewInfo() {
           </div>
         </div>
       </div>
-      {/* <div className="m-[10px]">
+      {/* <div className="m-[10px] border-t border-border-black">
         <div className="flex items-center justify-between">
           <div className="leading-[18px] text-title-white">
             {TR("th-HTPoints")}

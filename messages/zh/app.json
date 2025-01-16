@@ -215,7 +215,7 @@
     "lb-TakerOrders": "Taker订单",
     "lb-Profit": "利润",
     "lb-SettledValue": "已清算",
-    "lb-BonusIncome": "奖励收入"
+    "lb-TaxIncome": "税收收入"
   },
   "ct-Rank": {
     "th-HTPoints": "HT积分",
