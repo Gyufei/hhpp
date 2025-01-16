@@ -1,6 +1,6 @@
 {
   "Home": {
-    "cap-DecentralizedPreMarketInfrastructure": "Decentralized Pre-market Infrastructure",
+    "cap-DecentralizedPreMarketInfrastructure": "Seed Market for Hyperliquid",
     "cap-TheFirstPreSuperMarket": "The First Pre SuperMarket",
     "cap-BridgingLiquidityBetweenPrimaryAndSecondaryMarkets": "Bridging liquidity between primary and secondary markets",
     "btn-GetStarted": "Getting Started",
@@ -8,7 +8,6 @@
     "th-ItemId": "Item ID",
     "th-Asset": "Asset",
     "th-Value": "Value",
-
     "cap-TradePointsToMakeMoney": "Trade Points to Make Money",
     "cap-SpecialPointMarket": "Special Point Market",
     "p-SpecialPointMarket1": "Points from selected projects can be traded for an unlimited number of times. After purchasing points, traders have the opportunity to relist and sell them for profits.",
@@ -35,7 +34,6 @@
     "p-RobustSecurity": "HypesTrade implements advanced security measures to safeguard user assets.",
     "cap-DecentralizedArbitrationForSettlements": "Decentralized Arbitration for Settlements",
     "p-DecentralizedArbitrationForSettlements": "HypesTrade employs decentralized arbitration to ensure fair and transparent resolution for every case.",
-
     "cap-HowToGetStartedWithTadle": "How to get started with HypesTrade",
     "cap-ProductAdvantages": "Product Advantages",
     "txt-Step": "Step",
@@ -44,7 +42,6 @@
     "txt-PlaceABuyOrSellOrder": "Place a buy or sell order",
     "txt-CheckMetricsInDashboard": "Check metrics in dashboard",
     "cap-TrendingProjects": "Trending Projects",
-
     "cap-FAQ": "FAQ",
     "btn-More": "more",
     "cap-WhatIsPoint": "What are Points?",
