@@ -131,7 +131,7 @@ export default function SalesChart({
       chart: {
         backgroundColor: "transparent",
         height:
-          (window.innerHeight - 56 - 297 - 66 - 86 > 297
+          (window.innerHeight - 56 - 297 - 66 - 86 > 260
             ? window.innerHeight - 56 - 297 - 66 - 86
             : 260) + "px",
       },
