@@ -59,9 +59,9 @@ export default function Referral() {
               className="cursor-pointer"
             />
           </div>
-          <div className="flex-1 overflow-x-scroll sm:max-w-none sm:overflow-x-hidden sm:px-0">
+          <div className="flex flex-1 overflow-x-scroll sm:max-w-none sm:overflow-x-hidden sm:px-0">
             <div className="max-h-auto relative min-h-[296px] w-[820px] sm:w-full sm:min-w-0">
-              <div className="absolute bottom-0 left-0 right-0 top-0">
+              <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-1 flex-col">
                 <ReferralTable referralData={referralData} refresh={refetch} />
               </div>
             </div>

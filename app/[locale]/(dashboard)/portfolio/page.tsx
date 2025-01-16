@@ -7,7 +7,7 @@ import MyBalances from "./balances/page";
 import PortfolioInfo from "./portfolio-info";
 
 const tabClx =
-  "flex w-[105px] items-center px-[10px] py-[10px] text-sm leading-5 border-b-2 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray rounded-none";
+  "flex w-[105px] items-center px-[10px] font-[400] py-[10px] text-sm leading-5 border-b-2 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray rounded-none";
 
 export default function PortFolio() {
   const TH = useTranslations("Header");
