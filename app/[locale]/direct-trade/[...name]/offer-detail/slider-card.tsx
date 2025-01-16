@@ -6,7 +6,7 @@ import { NumericalInput } from "@/components/share/numerical-input";
 export default function SliderCard({
   topText,
   value,
-  onValueChange,
+  onUserInput,
   sliderValue,
   sliderMax,
   canGoMax,
@@ -17,7 +17,7 @@ export default function SliderCard({
 }: {
   topText: ReactElement;
   value: string;
-  onValueChange: (_v: string) => void;
+  onUserInput: (_v: string) => void;
   sliderValue: number;
   canGoMax: number;
   sliderMax: number;
@@ -51,14 +51,11 @@ export default function SliderCard({
         {topText}
       </div>
       <div className="mt-2 flex items-center justify-between">
-        {/* <div className="h-[36px] text-2xl leading-[36px] text-txt-white">
-          {formatNum(value, 6)}
-        </div> */}
         <NumericalInput
           className="mr-1 mt-2 h-9 max-w-[240px] text-left text-2xl leading-9 text-title-white placeholder:text-gray sm:max-w-full"
           placeholder="Enter Amount"
           value={value}
-          onUserInput={(v) => onValueChange(v)}
+          onUserInput={(v) => onUserInput(v)}
         />
         <Image
           src={tokenLogo}

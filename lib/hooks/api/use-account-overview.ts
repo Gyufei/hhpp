@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { apiFetcher, dataApiFetcher } from "@/lib/fetcher";
 import useSWRMutation from "swr/mutation";
 import { useEndPoint } from "./use-endpoint";
-import { ApiPaths, DataApiPaths } from "@/lib/PathMap";
+import { ApiPaths } from "@/lib/PathMap";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { ChainType } from "@/lib/types/chain";
 
@@ -17,12 +17,12 @@ interface IAccountInfo {
 }
 
 export function useAccountStats(chain: ChainType) {
-  const { dataApiEndPoint } = useEndPoint();
+  const { apiEndPoint } = useEndPoint();
   const { address: wallet } = useChainWallet();
 
   const res = useSWR<IAccountInfo>(
     wallet
-      ? `${dataApiEndPoint}${DataApiPaths.accountStats}/${wallet}?chain=${chain}`
+      ? `${apiEndPoint}${ApiPaths.accountStats}/${wallet}?chain=${chain}`
       : null,
     dataApiFetcher,
   );

@@ -9,12 +9,10 @@ import {
 } from "@table-library/react-table-library/table";
 import { usePagination } from "@table-library/react-table-library/pagination";
 import { useTheme } from "@table-library/react-table-library/theme";
-import { handleGoScan, truncateAddr } from "@/lib/utils/web3";
 import { Pagination } from "@/components/ui/pagination/pagination";
 import { useMemo, useState } from "react";
 import { useMyOffers } from "@/lib/hooks/api/use-my-offers";
 import { useMyOrders } from "@/lib/hooks/api/use-my-orders";
-import { IOffer } from "@/lib/types/offer";
 import { formatTimestamp } from "@/lib/utils/time";
 import { IRole, IStatus } from "./filter-select";
 import OfferAboutMineDetailDrawer from "../offer-about-mine-detail-drawer";
@@ -23,7 +21,10 @@ import { useTranslations } from "next-intl";
 import { sortBy } from "lodash";
 import { ChainType } from "@/lib/types/chain";
 import { reportEvent } from "@/lib/utils/analytics";
-import Image from "next/image";
+// import Image from "next/image";
+// import { handleGoScan, truncateAddr } from "@/lib/utils/web3";
+// import { IOffer } from "@/lib/types/offer";
+
 export function OrderTable({
   role,
   status,
@@ -272,27 +273,27 @@ export function OrderTable({
   );
 }
 
-function OfferHash({ offer }: { offer: IOffer }) {
-  const hash = offer.tx_hash;
-  if (!hash) {
-    return <span className="leading-5">N/A</span>;
-  }
-  return (
-    <div className="flex items-center">
-      <span className="leading-5 ">
-        {truncateAddr(hash || "", { nPrefix: 4, nSuffix: 4 })}
-      </span>
-      <Image
-        onClick={() => handleGoScan(offer.marketplace.chain, hash || "", "tx")}
-        src="/icons/right-45.svg"
-        width={16}
-        height={16}
-        alt="goScan"
-        className="cursor-pointer"
-      />
-    </div>
-  );
-}
+// function OfferHash({ offer }: { offer: IOffer }) {
+//   const hash = offer.tx_hash;
+//   if (!hash) {
+//     return <span className="leading-5">N/A</span>;
+//   }
+//   return (
+//     <div className="flex items-center">
+//       <span className="leading-5 ">
+//         {truncateAddr(hash || "", { nPrefix: 4, nSuffix: 4 })}
+//       </span>
+//       <Image
+//         onClick={() => handleGoScan(offer.marketplace.chain, hash || "", "tx")}
+//         src="/icons/right-45.svg"
+//         width={16}
+//         height={16}
+//         alt="goScan"
+//         className="cursor-pointer"
+//       />
+//     </div>
+//   );
+// }
 
 function DetailBtn({
   onClick,

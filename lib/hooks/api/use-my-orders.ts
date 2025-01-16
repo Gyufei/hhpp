@@ -1,13 +1,13 @@
 import useSWR from "swr";
 import { useEndPoint } from "./use-endpoint";
 import { IOrder } from "@/lib/types/order";
-import { DataApiPaths } from "@/lib/PathMap";
+import { ApiPaths } from "@/lib/PathMap";
 import { dataApiFetcher } from "@/lib/fetcher";
 import { useMarketplaces } from "./use-marketplaces";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 
 export function useMyOrders(params: any) {
-  const { dataApiEndPoint } = useEndPoint();
+  const { apiEndPoint } = useEndPoint();
   const { address } = useChainWallet();
 
   const { data: marketplaceData, isLoading: isMarketLoading } =
@@ -25,7 +25,7 @@ export function useMyOrders(params: any) {
       .join("&");
 
     const orderRes = await dataApiFetcher(
-      `${dataApiEndPoint}${DataApiPaths.orders}?${fetchParams}`,
+      `${apiEndPoint}${ApiPaths.orders}?${fetchParams}`,
     );
 
     const parsedRes = orderRes.map((o: Record<string, any>) => {

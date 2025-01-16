@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { useEndPoint } from "./use-endpoint";
-import { DataApiPaths } from "@/lib/PathMap";
+import { ApiPaths } from "@/lib/PathMap";
 import { dataApiFetcher } from "@/lib/fetcher";
 
 interface IAccountInfo {
@@ -9,11 +9,11 @@ interface IAccountInfo {
 }
 
 export function useAccountInfo(wallet: string) {
-  const { dataApiEndPoint } = useEndPoint();
+  const { apiEndPoint } = useEndPoint();
 
   const res = useSWR<IAccountInfo>(
     wallet
-      ? `${dataApiEndPoint}${DataApiPaths.accountInfo}?wallet=${wallet}`
+      ? `${apiEndPoint}${ApiPaths.accountInfo}?wallet=${wallet}`
       : null,
     dataApiFetcher,
   );

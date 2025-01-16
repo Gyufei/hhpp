@@ -10,6 +10,8 @@ import { usePathname, useRouter } from "@/i18n/routing";
 import { useReferralBind, useReferralView } from "@/lib/hooks/api/use-referral";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { toast } from "react-hot-toast";
+import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function ReferralDialog() {
@@ -29,11 +31,11 @@ export default function ReferralDialog() {
   }, [referralCode, viewReferral, address]);
 
   useEffect(() => {
-    if (address && referralCode) {
+    if (referralCode) {
       setShowReDialog(true);
       return;
     }
-  }, [address, setShowReDialog, referralCode]);
+  }, [setShowReDialog, referralCode]);
 
   return (
     <Dialog
@@ -67,9 +69,13 @@ export function ReferralSignInBtn({
   onSuccess: () => void;
 }) {
   const t = useTranslations("Header");
+  const rt = useTranslations("page-Referral");
+
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+
+  const { address } = useChainWallet();
 
   const { data: codeData } = useReferralCodeData({
     code: referralCode,
@@ -89,19 +95,21 @@ export function ReferralSignInBtn({
   }, [referrerStr]);
 
   const {
-    isMutating: isUpdating,
+    isMutating,
     data: isSuccess,
     trigger: writeAction,
+    error,
   } = useReferralBind();
 
   function handleSignInReferral() {
-    if (isUpdating || !codeData) return;
+    if (isMutating || !codeData) return;
     writeAction({ referral_code: referralCode });
   }
 
   useEffect(() => {
     if (isSuccess) {
       onSuccess();
+      toast.success("Sign in with referral_code success");
       if (searchParams.get("s")) {
         const params = new URLSearchParams(searchParams.toString());
         params.delete("s");
@@ -109,7 +117,11 @@ export function ReferralSignInBtn({
         router.replace(pathname + `?${params.toString()}`);
       }
     }
-  }, [isSuccess]);
+
+    if (error) {
+      toast.error(error.message || "Sign in with referral_code failed");
+    }
+  }, [isSuccess, error]);
 
   return (
     <>
@@ -128,13 +140,12 @@ export function ReferralSignInBtn({
           ),
         })}
       </div>
-      <div className="mt-10 w-full">
-        <button
-          onClick={handleSignInReferral}
-          className="flex h-12 w-full items-center justify-center rounded bg-main text-bg-black hover:bg-main-hover"
-        >
-          {t("btn-SignIn")}
-        </button>
+      <div className="mt-6 w-full">
+        <WithWalletConnectBtn onClick={handleSignInReferral}>
+          <button className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover">
+            {address ? rt("btn-Bind") : t("btn-SignIn")}
+          </button>
+        </WithWalletConnectBtn>
       </div>
     </>
   );

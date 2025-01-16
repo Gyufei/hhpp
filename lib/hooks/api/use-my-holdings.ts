@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { dataApiFetcher } from "@/lib/fetcher";
-import { DataApiPaths } from "@/lib/PathMap";
+import { ApiPaths } from "@/lib/PathMap";
 import { useEndPoint } from "./use-endpoint";
 import { IHolding } from "@/lib/types/holding";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
@@ -9,7 +9,7 @@ import { ChainType } from "@/lib/types/chain";
 
 export function useMyHoldings() {
   const { address } = useChainWallet();
-  const { dataApiEndPoint } = useEndPoint();
+  const { apiEndPoint } = useEndPoint();
   const { data: marketplaceData, isLoading: isMarketLoading } =
     useMarketplaces();
 
@@ -17,7 +17,7 @@ export function useMyHoldings() {
     if (!address || isMarketLoading) return [];
 
     const holdingRes = await dataApiFetcher(
-      `${dataApiEndPoint}${DataApiPaths.holding}?wallet=${address}&chain=${ChainType.HYPER}`,
+      `${apiEndPoint}${ApiPaths.holding}?wallet=${address}&chain=${ChainType.HYPER}`,
     );
 
     if (holdingRes?.length <= 0) return [];

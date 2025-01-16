@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { useEndPoint } from "./use-endpoint";
-import { DataApiPaths } from "@/lib/PathMap";
+import { ApiPaths } from "@/lib/PathMap";
 import { dataApiFetcher } from "@/lib/fetcher";
 
 interface IUsdcBalance {
@@ -8,11 +8,11 @@ interface IUsdcBalance {
 }
 
 export function useUsdcTokenBalance(wallet: string) {
-  const { dataApiEndPoint } = useEndPoint();
+  const { apiEndPoint } = useEndPoint();
 
   const res = useSWR<IUsdcBalance>(
     wallet
-      ? `${dataApiEndPoint}${DataApiPaths.usdcBalance}?wallet=${wallet}`
+      ? `${apiEndPoint}${ApiPaths.usdcBalance}?wallet=${wallet}`
       : null,
     dataApiFetcher,
   );

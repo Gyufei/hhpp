@@ -223,7 +223,7 @@ function FoldPop() {
             onChange={(e) => setSearchText(e.target.value)}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
-            className="h-10 rounded-lg border-border-black bg-bg-black pl-8 text-txt-white placeholder:text-gray focus:border-txt-white"
+            className="h-10 rounded-lg border-border-black bg-bg-black pl-8 text-title-white placeholder:text-gray focus:border-txt-white"
           />
         </div>
         {filteredCateList.map((cate, i) => (

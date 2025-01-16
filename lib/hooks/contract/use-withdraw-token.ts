@@ -1,7 +1,7 @@
 import { useEndPoint } from "@/lib/hooks/api/use-endpoint";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { dataApiFetcher } from "@/lib/fetcher";
-import { DataApiPaths } from "@/lib/PathMap";
+import { ApiPaths } from "@/lib/PathMap";
 import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
 import { useSignData } from "./help/use-sign-data";
 
@@ -13,7 +13,7 @@ export type IBalanceType =
   | "makerRefund";
 
 export function useWithdrawToken() {
-  const { dataApiEndPoint } = useEndPoint();
+  const { apiEndPoint } = useEndPoint();
 
   const { realAddress, address } = useChainWallet();
 
@@ -31,7 +31,7 @@ export function useWithdrawToken() {
     });
 
     const res = await dataApiFetcher(
-      `${dataApiEndPoint}${DataApiPaths.accountWithdraw}`,
+      `${apiEndPoint}${ApiPaths.accountWithdraw}`,
       {
         method: "POST",
         headers: {

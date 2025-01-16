@@ -293,6 +293,7 @@
     "lb-YourFriend": "你的朋友",
     "tip-ReferralDrawer": "当有人使用你的推荐链接注册时，第一个人将收到第二个人支付的交易费用的{ num1 }的退款。此外，作为原始推荐人，您将获得相当于佣金{ num2 }的奖励。",
     "btn-Save": "保存",
+    "btn-Bind": "绑定",
     "txt-RateError": "总和不得超过 { rate }%"
   },
   "page-MarketList": {

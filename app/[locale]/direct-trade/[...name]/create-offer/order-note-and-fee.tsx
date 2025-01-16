@@ -53,7 +53,7 @@ export default function OrderNoteAndFee({
                   ? cot("pl-AnythingYouWantToInformTheSeller")
                   : cot("pl-AnythingYouWantToInformTheBuyer")
               }
-              className="h-[66px] rounded border border-border-black text-xs leading-[18px] text-txt-white placeholder:text-gray"
+              className="h-[66px] rounded border border-border-black text-xs leading-[18px] text-title-white placeholder:text-gray"
             />
             <div className="absolute bottom-2 right-4 text-xs leading-[18px] text-gray">
               {value.length} / 50

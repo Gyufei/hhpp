@@ -1,12 +1,12 @@
 import { useEndPoint } from "../api/use-endpoint";
-import { DataApiPaths } from "@/lib/PathMap";
+import { ApiPaths } from "@/lib/PathMap";
 import { dataApiFetcher } from "@/lib/fetcher";
 import { useChainWallet } from "../web3/use-chain-wallet";
 import { useSignData } from "./help/use-sign-data";
 import useSWRMutation from "swr/mutation";
 
 export function useUserWithdraw() {
-  const { dataApiEndPoint } = useEndPoint();
+  const { apiEndPoint } = useEndPoint();
 
   const { realAddress, address } = useChainWallet();
   const { signDataAction } = useSignData();
@@ -32,7 +32,7 @@ export function useUserWithdraw() {
     const reqData = await signDataAction(params);
 
     const res = await dataApiFetcher(
-      `${dataApiEndPoint}${DataApiPaths.userWithdraw}`,
+      `${apiEndPoint}${ApiPaths.userWithdraw}`,
       {
         method: "POST",
         body: JSON.stringify(reqData),

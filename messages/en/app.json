@@ -290,6 +290,7 @@
     "lb-YourFriend": "Your friend",
     "tip-ReferralDrawer": "When someone signs up using your referral link, the first person will receive a refund equal to {num1} of the trading fee paid by the second person. Additionally, you, as the original referrer, will receive a reward equal to {num2} of the commission fee.",
     "btn-Save": "Save",
+    "btn-Bind": "Bind",
     "txt-RateError": "Your And Your friend's commission rate can't be greater than {rate}%"
   },
   "page-MarketList": {

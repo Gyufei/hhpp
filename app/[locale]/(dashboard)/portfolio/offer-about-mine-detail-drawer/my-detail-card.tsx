@@ -34,7 +34,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
           {T("lb-SellerAmount")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="text-xs leading-5 text-txt-white">
+          <div className="text-xs leading-5 text-title-white">
             {formatNum(NP.divide(offer.item_amount, pointDecimalNum))}
           </div>
           <Image
@@ -50,7 +50,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
       <DetailRow>
         <DetailLabel tipText={T("tip-Seller")}>{T("lb-Seller")}</DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="text-xs leading-5 text-txt-white">
+          <div className="text-xs leading-5 text-title-white">
             {truncateAddr(offer?.offer_maker || "", {
               nPrefix: 4,
               nSuffix: 4,
@@ -86,7 +86,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
           <div className="w-fit rounded bg-border-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
             {originId ? `#${originId}` : ""}
           </div>
-          <div className="text-xs leading-5 text-txt-white">
+          <div className="text-xs leading-5 text-title-white">
             {truncateAddr(originMaker || "", {
               nPrefix: 4,
               nSuffix: 4,
