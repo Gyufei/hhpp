@@ -5,7 +5,7 @@ import {
   bigIntOrNpMinus,
 } from "@/lib/utils/number";
 import OfferInfo from "./offer-info";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import SliderCard from "./slider-card";
 import ReceiveCard from "./receive-card";
 import DetailCard from "./detail-card";
@@ -59,6 +59,7 @@ export default function AskDetail({
     write: writeAction,
   } = useCreateTakerOrder();
 
+  const [payTokenAmount, setPayTokenAmount] = useState(0);
   const [receivePointAmount, setReceivePointAmount] = useState(0);
 
   const [errorText, setErrorText] = useState("");
@@ -67,15 +68,30 @@ export default function AskDetail({
     return +bigIntOrNpMinus(offer.item_amount, offer.taken_item_amount);
   }, [offer]);
 
-  const payTokenAmount = useMemo(() => {
-    if (!receivePointAmount) return "0";
-    const pay = NP.times(
-      NP.divide(receivePointAmount, offer.item_amount),
-      forValue,
-    );
-    const payWithFee = NP.times(pay, 1 + platformFee + tradeFee);
-    return formatNum(payWithFee, 6);
-  }, [receivePointAmount, forValue, offer.item_amount, tradeFee, platformFee]);
+  const calcPayAmountByReceive = useCallback(
+    (receiveNum: number) => {
+      if (!receiveNum) return 0;
+
+      const pay = NP.times(NP.divide(receiveNum, offer.item_amount), forValue);
+      const payWithFee = NP.times(pay, 1 + platformFee + tradeFee);
+      return payWithFee;
+    },
+
+    [forValue, offer.item_amount, tradeFee, platformFee],
+  );
+
+  const calcReceiveByPayAmount = useCallback(
+    (payAmountNum: number) => {
+      if (!payAmountNum) return "0";
+
+      const wantPay = Number(payAmountNum);
+      const realPay = NP.divide(wantPay, 1 + platformFee + tradeFee);
+      const payPercent = NP.divide(realPay, forValue);
+      const receive = NP.times(payPercent, offer.item_amount);
+      return receive;
+    },
+    [forValue, offer.item_amount, tradeFee, platformFee],
+  );
 
   const payTokenTotalPrice = useMemo(() => {
     if (!payTokenAmount) return "0";
@@ -91,23 +107,25 @@ export default function AskDetail({
     }
 
     setErrorText(errorText);
-  }, [payTokenAmount, receivePointAmount]);
+  }, [
+    payTokenAmount,
+    receivePointAmount,
+    sliderCanMax,
+    checkUSDCInsufficient,
+    offer.marketplace.item_name,
+  ]);
 
   function handleSliderChange(v: number) {
     setReceivePointAmount(v);
+
+    const pay = calcPayAmountByReceive(v);
+    setPayTokenAmount(Number(pay));
   }
 
-  function handleWantPayTokenAmount(v: string) {
-    if (!v) {
-      setReceivePointAmount(0);
-      return;
-    }
-
-    const wantPay = Number(v);
-    const realPay = NP.divide(wantPay, 1 + platformFee + tradeFee);
-    const payPercent = NP.times(realPay, forValue);
-    const receive = NP.times(payPercent, offer.item_amount);
-    setReceivePointAmount(receive);
+  function handleInputPayTokenAmount(v: string) {
+    setPayTokenAmount(Number(v));
+    const receive = calcReceiveByPayAmount(Number(v));
+    setReceivePointAmount(Number(receive));
   }
 
   async function handleConfirmTakerOrder() {
@@ -153,7 +171,7 @@ export default function AskDetail({
             bottomText={<>~${formatNum(payTokenTotalPrice)} </>}
             tokenLogo={forLogo}
             value={payTokenAmount}
-            onValueChange={handleWantPayTokenAmount}
+            onUserInput={handleInputPayTokenAmount}
             canGoMax={sliderCanMax}
             sliderMax={sliderCanMax}
             sliderValue={receivePointAmount}
