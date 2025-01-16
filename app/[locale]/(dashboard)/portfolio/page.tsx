@@ -18,7 +18,7 @@ export default function PortFolio() {
 
   return (
     <div className="flex flex-1 flex-col sm:p-0">
-      <div className="mb-[2px] mr-0 hidden items-center justify-between rounded bg-bg-black p-5 sm:flex">
+      <div className="mb-[2px] mr-0 hidden items-center justify-between rounded bg-bg-black px-5 py-[22px] sm:flex">
         <div className="flex w-full items-center justify-between space-x-5">
           <div className="text-xl leading-[30px] text-title-white">
             {TH("btn-Dashboard")}

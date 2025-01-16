@@ -68,6 +68,9 @@ export function ReferralTable({
       background: #111a1e;
     `,
     Row: `
+      &:hover {
+        background: #222428 !important;
+      }
     `,
     BaseCell: `
       text-align: left;
@@ -93,6 +96,7 @@ export function ReferralTable({
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerData, setDrawerData] = useState<IReferralItem | null>(null);
+  const [hoverRowId, setHoverRowId] = useState<string | null>(null);
 
   function openEditDrawer(item: IReferralItem) {
     setDrawerData(item);
@@ -146,6 +150,8 @@ export function ReferralTable({
                   key={rD.id}
                   item={rD}
                   className="border-none !bg-transparent"
+                  onMouseEnter={() => setHoverRowId(rD.id)}
+                  onMouseLeave={() => setHoverRowId(null)}
                 >
                   <Cell className="px-1 py-[11px] align-top">
                     <ReferralCode rD={rD} index={index} />
@@ -165,7 +171,11 @@ export function ReferralTable({
                     <div className="">{rD.unique_views}</div>
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
-                    <ReferralRate rD={rD} onClick={() => openEditDrawer(rD)} />
+                    <ReferralRate
+                      rD={rD}
+                      onClick={() => openEditDrawer(rD)}
+                      isHover={hoverRowId === rD.id}
+                    />
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
                     <ReferralNote rD={rD} onSuccess={refresh} />
@@ -225,19 +235,15 @@ function ReferralCode({ rD, index }: { rD: IReferralItem; index: number }) {
 function ReferralRate({
   rD,
   onClick,
+  isHover,
 }: {
   rD: IReferralItem;
   onClick: () => void;
+  isHover: boolean;
 }) {
-  const [isHover, setIsHover] = useState(false);
-
   return (
-    <div
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-      className="relative flex h-fit w-fit cursor-pointer items-center space-x-[6px]"
-    >
-      <span className="border-lightgray border-b border-dashed  ">
+    <div className="relative flex h-fit w-fit cursor-pointer items-center space-x-[6px]">
+      <span className="border-lightgray border-b border-dashed">
         {rD.referrer_rate != "" && rD.referrer_rate != null && (
           <>{formatNum(Number(rD.referrer_rate || 0) / 10 ** 4)}%,&nbsp;</>
         )}

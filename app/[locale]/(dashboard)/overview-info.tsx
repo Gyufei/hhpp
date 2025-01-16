@@ -15,7 +15,7 @@ export default function OverviewInfo() {
 
   return (
     <div className="flex h-full flex-col space-y-2 pb-5 text-[12px]">
-      <div className="m-[10px] mt-2 pb-8 text-xs">
+      <div className="m-[10px] pb-8 text-xs">
         <div className="flex items-center justify-between">
           <div className="leading-[18px] text-title-white">
             {T("cap-AccountOverview")}
