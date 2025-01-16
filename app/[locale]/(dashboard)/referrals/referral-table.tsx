@@ -352,7 +352,7 @@ function ReferralNote({
               </div>
             </TooltipTrigger>
             {rD.notes && (
-              <TooltipContent className="w-[200px]">
+              <TooltipContent className="w-auto object-contain">
                 <p className="text-xs leading-[18px]">{rD.notes}</p>
                 <TooltipArrow asChild>
                   <CTooltipArrow />
