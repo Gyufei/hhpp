@@ -24,7 +24,7 @@ export default function Setting() {
           />
         </PopoverTrigger>
         <PopoverContent
-          className="hidden w-[348px] flex-col items-stretch space-y-2 border border-border-black bg-bg-black p-6 text-[12px] text-txt-white sm:flex"
+          className="hidden w-[348px] flex-col items-stretch space-y-2 border border-border-black bg-bg-black p-6 text-[12px] sm:flex"
           style={{
             boxShadow: "0px 0px 10px 0px rgba(45, 46, 51, 0.1)",
           }}

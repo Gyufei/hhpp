@@ -6,7 +6,7 @@ import { useChainWallet } from "../web3/use-chain-wallet";
 import { toast } from "react-hot-toast";
 
 export function useCreateOffer({ marketSymbol }: { marketSymbol: string }) {
-  const { dataApiEndPoint } = useEndPoint();
+  const { apiEndPoint } = useEndPoint();
   const { realAddress, address } = useChainWallet();
   const { signDataAction } = useSignData();
 
@@ -30,7 +30,7 @@ export function useCreateOffer({ marketSymbol }: { marketSymbol: string }) {
 
     try {
       const res = await dataApiFetcher(
-        `${dataApiEndPoint}/market/${marketSymbol}/create_offer`,
+        `${apiEndPoint}/market/${marketSymbol}/create_offer`,
         {
           method: "POST",
           headers: {

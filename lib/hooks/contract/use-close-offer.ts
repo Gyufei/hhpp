@@ -6,7 +6,7 @@ import { useChainWallet } from "../web3/use-chain-wallet";
 
 export function useCloseOffer() {
   const { realAddress, address } = useChainWallet();
-  const { dataApiEndPoint } = useEndPoint();
+  const { apiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
 
   const txAction = async (args: { offerId: string }) => {
@@ -18,7 +18,7 @@ export function useCloseOffer() {
     });
 
     const res = await dataApiFetcher(
-      `${dataApiEndPoint}/offer/${offerId}/cancel`,
+      `${apiEndPoint}/offer/${offerId}/cancel`,
       {
         method: "POST",
         headers: {

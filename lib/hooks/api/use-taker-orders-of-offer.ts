@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { useEndPoint } from "./use-endpoint";
-import { DataApiPaths } from "@/lib/PathMap";
+import { ApiPaths } from "@/lib/PathMap";
 import { dataApiFetcher } from "@/lib/fetcher";
 import { ChainType } from "@/lib/types/chain";
 
@@ -21,10 +21,10 @@ export function useTakerOrderOfOffers({
   offerId: string;
   chain: ChainType;
 }) {
-  const { dataApiEndPoint } = useEndPoint();
+  const { apiEndPoint } = useEndPoint();
 
   const res = useSWR<Array<ITakerOrder>>(
-    `${dataApiEndPoint}${DataApiPaths.offer}/${offerId}/taker_orders?chain=${chain}`,
+    `${apiEndPoint}${ApiPaths.offer}/${offerId}/taker_orders?chain=${chain}`,
     dataApiFetcher,
   );
 

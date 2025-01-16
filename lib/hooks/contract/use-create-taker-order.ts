@@ -6,7 +6,7 @@ import { useSignData } from "./help/use-sign-data";
 
 export function useCreateTakerOrder() {
   const { realAddress, address } = useChainWallet();
-  const { dataApiEndPoint } = useEndPoint();
+  const { apiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
 
   const txAction = async (args: { offerId: string; itemAmount: string }) => {
@@ -19,7 +19,7 @@ export function useCreateTakerOrder() {
     });
 
     const res = await dataApiFetcher(
-      `${dataApiEndPoint}/offer/${offerId}/take`,
+      `${apiEndPoint}/offer/${offerId}/take`,
       {
         method: "POST",
         headers: {

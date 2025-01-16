@@ -1,28 +1,22 @@
 import useSWR from "swr";
 import { dataApiFetcher } from "@/lib/fetcher";
-import {
-  DataApiPaths,
-  WithPointImgCDN,
-  WithProjectImgCDN,
-} from "@/lib/PathMap";
+import { ApiPaths } from "@/lib/PathMap";
 
 import { useEndPoint } from "./use-endpoint";
 import { IMarketplace } from "@/lib/types/marketplace";
 
 export function useMarketplaces(chain?: string) {
-  const { dataApiEndPoint } = useEndPoint();
+  const { apiEndPoint, cdnEndPoint } = useEndPoint();
 
   async function marketFetch() {
-    const res = await dataApiFetcher(
-      `${dataApiEndPoint}${DataApiPaths.markets}`,
-    );
+    const res = await dataApiFetcher(`${apiEndPoint}${ApiPaths.markets}`);
 
     const allMarket = res.flat().map((m: any) => {
       const chain = m.chain_name;
       return {
         ...m,
-        projectLogo: WithProjectImgCDN(m.market_symbol),
-        pointLogo: WithPointImgCDN(m.market_symbol),
+        projectLogo: `${cdnEndPoint}/images/project/${m.market_symbol}.png`,
+        pointLogo: `${cdnEndPoint}/images/point/${m.market_symbol}.png`,
         chain,
       };
     });

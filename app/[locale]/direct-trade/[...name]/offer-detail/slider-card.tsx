@@ -51,7 +51,7 @@ export default function SliderCard({
         {topText}
       </div>
       <div className="mt-2 flex items-center justify-between">
-        {/* <div className="h-[36px] text-2xl leading-[36px] text-txt-white">
+        {/* <div className="h-[36px] text-2xl leading-[36px] text-title-white">
           {formatNum(value, 6)}
         </div> */}
         <NumericalInput
