@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils/common";
 
-export type ISortField = "Created" | "Price";
+export type ISortField = "Created" | "Price" | "Collateral";
 export type ISortDir = "Ascending" | "Descending";
 
 export function SortSelect({
