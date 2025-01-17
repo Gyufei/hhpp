@@ -18,7 +18,6 @@ import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
 import { reportEvent } from "@/lib/utils/analytics";
-import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 
 export function OfferCard({
   offer,
@@ -41,8 +40,6 @@ export function OfferCard({
   } = useOfferFormat({
     offer: offer,
   });
-
-  const { checkAndSwitchChain } = useCheckSwitchChain();
 
   const orderType = offer.entry.direction;
 
@@ -189,7 +186,6 @@ export function OfferCard({
             <WithWalletConnectBtn
               chain={offer.marketplace.chain}
               onClick={() => {
-                checkAndSwitchChain();
                 handleShow();
               }}
             >

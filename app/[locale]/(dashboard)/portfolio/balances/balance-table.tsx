@@ -17,8 +17,6 @@ import { sortBy } from "lodash";
 import { useMyHoldings } from "@/lib/hooks/api/use-my-holdings";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { usePointAmount } from "@/lib/hooks/api/use-point-amount";
-import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
-
 import { SellContent } from "@/app/[locale]/direct-trade/[...name]/create-offer/sell-content";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { reportEvent } from "@/lib/utils/analytics";
@@ -28,7 +26,6 @@ export function BalanceTable() {
   const T = useTranslations("page-MyBalances");
   const TC = useTranslations("drawer-CreateOffer");
   const TB = useTranslations("page-MyBalances");
-  const { checkAndSwitchChain } = useCheckSwitchChain();
 
   const [marketCreateOffer, setOpenMarketCreateOffer] = useState(null);
 
@@ -182,9 +179,8 @@ export function BalanceTable() {
                       chain={holding.marketplace.chain}
                       className="flex w-fit"
                       onClick={() => {
-                        checkAndSwitchChain();
                         setOpenMarketCreateOffer(holding.marketplace);
-                        reportEvent("click", { value: "createOffer" });
+                        reportEvent("click", { value: "listOffer" });
                       }}
                     >
                       <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]">

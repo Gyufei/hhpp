@@ -37,11 +37,11 @@ export function OrderTable({
   const T = useTranslations("page-MyOrders");
 
   const { data: offers, mutate: refreshMyOffers } = useMyOffers({
-    market_symbol: "abc",
+    market_symbol: null,
     chain: ChainType.HYPER,
   });
   const { data: orders = [] } = useMyOrders({
-    market_symbol: "abc",
+    market_symbol: null,
     chain: ChainType.HYPER,
   });
 

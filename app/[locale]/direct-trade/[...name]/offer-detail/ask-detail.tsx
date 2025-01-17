@@ -20,6 +20,7 @@ import { reportEvent } from "@/lib/utils/analytics";
 import { useCheckBalance } from "@/lib/hooks/api/use-check-balance";
 import ArrowBetween from "../create-offer/arrow-between";
 import { StableBalance } from "@/components/share/stable-balance";
+import { cn } from "@/lib/utils/common";
 
 export default function AskDetail({
   offer,
@@ -212,7 +213,10 @@ export default function AskDetail({
                   disabled={
                     isDepositLoading || !receivePointAmount || !!errorText
                   }
-                  className="mt-1 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive"
+                  className={cn(
+                    "mt-1 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive",
+                    isDepositLoading ? "dot-loading" : "",
+                  )}
                 >
                   {T("ConfirmOrder")}
                 </button>

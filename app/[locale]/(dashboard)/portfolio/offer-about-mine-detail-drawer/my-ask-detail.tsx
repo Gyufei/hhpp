@@ -14,6 +14,7 @@ import { useCloseOffer } from "@/lib/hooks/contract/use-close-offer";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import NP from "number-precision";
 import { reportEvent } from "@/lib/utils/analytics";
+import { cn } from "@/lib/utils/common";
 
 export default function MyAskDetail({
   holdingId,
@@ -129,7 +130,10 @@ export default function MyAskDetail({
                   >
                     <button
                       disabled={isClosing}
-                      className="mt-4 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive"
+                      className={cn(
+                        "mt-4 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive",
+                        isClosing ? "dot-loading" : "",
+                      )}
                     >
                       {ot("CloseThisOffer")}
                     </button>

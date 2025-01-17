@@ -3,6 +3,7 @@ import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
 import { dataApiFetcher } from "@/lib/fetcher";
 import { useSignData } from "./help/use-sign-data";
 import { useChainWallet } from "../web3/use-chain-wallet";
+import { toast } from "react-hot-toast";
 
 export function useCloseOffer() {
   const { realAddress, address } = useChainWallet();
@@ -17,18 +18,27 @@ export function useCloseOffer() {
       dest_account: address,
     });
 
-    const res = await dataApiFetcher(
-      `${apiEndPoint}/offer/${offerId}/cancel`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    try {
+      const res = await dataApiFetcher(
+        `${apiEndPoint}/offer/${offerId}/cancel`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reqData),
         },
-        body: JSON.stringify(reqData),
-      },
-    );
+      );
 
-    return res;
+      return res;
+    } catch (error: any) {
+      toast.error(
+        error?.message || "The service is abnormal. Please try again",
+      );
+      throw new Error(
+        error?.message || "The service is abnormal. Please try again",
+      );
+    }
   };
 
   const wrapRes = useTxStatus(txAction);
