@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
-
 import { SellContent } from "./create-offer/sell-content";
 import { IMarketplace } from "@/lib/types/marketplace";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
@@ -18,7 +16,6 @@ export default function CreateOfferBtn({
 }) {
   const T = useTranslations("drawer-CreateOffer");
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const { checkAndSwitchChain } = useCheckSwitchChain();
 
   function handleSuccess() {
     setDrawerOpen(false);
@@ -31,7 +28,6 @@ export default function CreateOfferBtn({
         chain={marketplace.chain}
         className="w-full text-right sm:text-center"
         onClick={() => {
-          checkAndSwitchChain();
           setDrawerOpen(true);
           reportEvent("click", { value: "createOffer" });
         }}
