@@ -2,8 +2,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import MyOrders from "./orders/page";
-import MyBalances from "./balances/page";
+import MyOrders from "./my-orders";
+import MyBalances from "./my-balances";
 import PortfolioInfo from "./portfolio-info";
 
 const tabClx =

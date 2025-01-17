@@ -20,7 +20,7 @@ export default function MarketCountDown({
   const [seconds, setSeconds] = useState<number>(0);
 
   const calculateTime = useCallback(() => {
-    const startsAt = Number(marketplace.trading_starts_at);
+    const startsAt = Number(marketplace.trading_starts_at) * 1000;
     const difference = startsAt - Date.now();
     setDays(Math.floor(difference / (millisecondsInHour * 24)));
     setHours(Math.floor((difference / millisecondsInHour) % 24));

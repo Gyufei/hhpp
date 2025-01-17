@@ -46,7 +46,7 @@ export default function MarketplaceContent({
   }, [offers]);
 
   const calcIsCountdown = useCallback(() => {
-    const tradingStartsAt = Number(marketplace.trading_starts_at);
+    const tradingStartsAt = Number(marketplace.trading_starts_at) * 1000;
     if (!tradingStartsAt) return false;
 
     const isCount = isAfter(toDate(tradingStartsAt), Date.now());
