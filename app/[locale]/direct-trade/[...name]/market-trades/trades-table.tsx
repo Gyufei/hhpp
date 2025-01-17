@@ -26,7 +26,7 @@ export function TradesTable({
   marketplace: IMarketplace | undefined;
   isLoading: boolean;
 }) {
-  const T = useTranslations("tb-MarketTrades");
+  const T = useTranslations("Marketplace");
   const { data: historyData, isLoading: isHistoryLoading } = useMarketTrades(
     marketplace?.chain || ChainType.HYPER,
     marketplace?.market_place_account || "",

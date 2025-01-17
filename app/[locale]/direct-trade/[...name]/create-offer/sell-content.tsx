@@ -28,7 +28,7 @@ export function SellContent({
   onSuccess: () => void;
   className?: string;
 }) {
-  const T = useTranslations("drawer-CreateOffer");
+  const T = useTranslations("Offer");
   const { checkMinPrice, checkMaxPrice } = useCreateOfferMinPrice();
 
   const {

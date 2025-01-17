@@ -6,8 +6,8 @@ import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { useUserXp } from "@/lib/hooks/api/use-user-xp";
 
 export default function OverviewInfo() {
-  const T = useTranslations("cd-AccountOverview");
-  const RT = useTranslations("ct-Rank");
+  const T = useTranslations("Dashboard");
+  const RT = useTranslations("Dashboard");
   const { currentChain } = useChainWallet();
   const { data: userPoints } = useUserXp();
 

@@ -43,7 +43,7 @@ export function ReferralTable({
   referralData?: IReferralItem[] | null;
   refresh: () => void;
 }) {
-  const T = useTranslations("page-Referral");
+  const T = useTranslations("Referral");
 
   const data = useMemo(() => {
     return {
@@ -103,7 +103,7 @@ export function ReferralTable({
   if (!data.nodes.length) {
     return (
       <div className="flex w-screen flex-1 items-center justify-center pt-20 text-base text-gray sm:w-full">
-        {T("txt-YourReferralLinkAppearHere")}
+        {T("YourReferralLinkAppearHere")}
       </div>
     );
   }
@@ -264,7 +264,7 @@ function ReferralNote({
   rD: IReferralItem;
   onSuccess: () => void;
 }) {
-  const T = useTranslations("page-Referral");
+  const T = useTranslations("Referral");
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState(rD.notes);
   const [isEdit, setIsEdit] = useState(false);

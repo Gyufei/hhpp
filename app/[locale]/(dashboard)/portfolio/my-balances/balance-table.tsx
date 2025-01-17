@@ -24,9 +24,9 @@ import DrawerTitle from "@/components/share/drawer-title";
 import Drawer from "react-modern-drawer";
 
 export function BalanceTable() {
-  const T = useTranslations("page-MyBalances");
-  const CT = useTranslations("drawer-CreateOffer");
-  const BT = useTranslations("page-MyBalances");
+  const T = useTranslations("MyBalances");
+  const CT = useTranslations("Offer");
+  const BT = useTranslations("MyBalances");
 
   const [marketCreateOffer, setOpenMarketCreateOffer] = useState(null);
 
@@ -111,7 +111,7 @@ export function BalanceTable() {
   if (!data.nodes.length) {
     return (
       <div className="flex w-screen flex-1 items-center justify-center text-base text-gray sm:w-full">
-        {T("txt-YourBalanceAppearHere")}
+        {T("YourBalanceAppearHere")}
       </div>
     );
   }

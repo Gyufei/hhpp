@@ -19,23 +19,15 @@
     "Connect": "연결",
     "SignIn": "로그인",
     "SignOut": "로그아웃",
-    "YouAreSignedOut": "로그인",
-    "YouAreSignedIn": "로그인되었습니다",
-    "txt-ClaimTestTokens": "테스트 토큰 받기",
-    "txt-Help": "도움말",
     "Welcome": "환영합니다",
     "Continue": "계속",
-    "txt-YourFriendSentYouAnOnboardingInvitation": "친구 <name></name>님이 <num></num> 거래 수수료 환급과 함께 초대장을 보냈습니다!",
-    "drawer-title-Info": "정보",
-    "drawer-Wallets": "지갑",
-    "drawer-SocialMedia": "소셜 미디어",
     "Deposit": "입금",
     "Withdraw": "출금",
     "ChargeFeeTip": "Hyperliquid는 미국 달러 토큰을 입금할 때 일부 수수료를 부과합니다.",
     "DepositTip": "다른 네트워크 또는 다른 유형의 USDC를 보내지 마세요. 최소 입금액은 5 USDC입니다. Hyperliquid는 입금액까지 브리지 수수료를 부과합니다.",
     "ContractEndWith": "Contract ends with"
   },
-  "card-Marketplace": {
+  "Marketplace": {
     "InitialListing": "초기 상장",
     "AllTimeHigh": "역대 최고",
     "24hChange": "24시간 변화",
@@ -44,46 +36,30 @@
     "ActiveWallets": "활성 지갑",
     "TotalVol": "총 거래량",
     "24hVol": "24시간 거래량",
-    "AvgBid": "평균 입찰"
-  },
-  "OrderSort": {
-    "Created": "생성됨",
-    "Price": "가격",
-    "Collateral": "담보",
-    "Ascending": "오름차순",
-    "Descending": "내림차순"
-  },
-  "cd-Order": {
-    "Offer": "제안",
-    "For": "대상",
-    "Buy": "구매",
-    "Detail": "세부사항"
-  },
-  "tb-MarketTrades": {
+    "AvgBid": "평균 입찰",
+    "menu-Transaction": "거래",
+    "menu-Items": "항목",
+    "menu-MarketTrades": "시장 거래",
+    "menu-Charts": "차트",
+    "Asset": "자산",
+    "Vol24h": "24시간 거래량",
+    "Snapshot": "스냅샷",
+    "Sales": "판매",
     "MarketTrades": "시장 거래",
     "ItemId": "아이템 ID",
     "Value": "가격",
     "Amount": "금액",
     "Buyer": "구매자"
   },
-  "ct-Marketplace": {
-    "tg-Sales": "판매"
-  },
-  "drawer-CreateOffer": {
+  "Offer": {
     "CreateOffer": "제안 생성",
     "List": "목록",
-    "YouWillSell": "판매할 것입니다",
     "YouDLikeToReceive": "받고 싶습니다",
     "YouDLikeToReceiveTip": "{pointName}을 구매할 때, 프로토콜의 토큰으로 변환될 때까지 기다려야 토큰을 받을 수 있습니다.",
-    "YouPay": "지불할 금액",
-    "CollateralRate": "담보 비율",
-    "BonusForMaker": "메이커 보너스",
     "OrderNote": "주문 메모",
     "AnythingYouWantToInformTheBuyer": "구매자에게 알리고 싶은 내용...",
     "MinimumOrderAmount": "최소 주문 금액",
-    "PlatformTradingFee": "플랫폼 거래 수수료"
-  },
-  "drawer-OfferDetail": {
+    "PlatformTradingFee": "플랫폼 거래 수수료",
     "OfferDetail": "제안 세부사항",
     "BidOfferDetail": "입찰 제안 세부사항",
     "MyAskOfferDetail": "내 매도 제안 세부사항",
@@ -115,7 +91,6 @@
     "TotalCollateral": "총 담보",
     "TotalDeposit": "총 예치금",
     "EstSettlingOn": "예상 정산일",
-    "txt-NotStarted": "시작되지 않음",
     "InitialOfferMaker": "메이커",
     "InitialOfferMakerBonus": "메이커 보너스",
     "TaxForSubTrade": "하위 거래 세금",
@@ -133,12 +108,10 @@
     "TxHash": "트랜잭션 해시",
     "Time": "시간"
   },
-  "menu-Dashboard": {
+  "Dashboard": {
     "Equity": "Equity",
     "14DayVolume": "14 Day Volume",
-    "Fees(Taker/Maker)": "Fees (Taker / Maker)"
-  },
-  "cd-AccountOverview": {
+    "Fees(Taker/Maker)": "Fees (Taker / Maker)",
     "pl-Username": "사용자 이름",
     "txt-PickADate": "날짜 선택",
     "AccountOverview": "계정 개요",
@@ -148,14 +121,12 @@
     "TakerOrders": "테이커 주문",
     "Profit": "이익",
     "SettledValue": "정산된 가치",
-    "BonusIncome": "보너스 수입"
-  },
-  "ct-Rank": {
+    "BonusIncome": "보너스 수입",
     "HTPoints": "HT Points",
     "txt-TotalPoints": "Total Points",
     "txt-Rank": "Rank"
   },
-  "page-MyOrders": {
+  "MyOrders": {
     "MyOrders": "내 주문",
     "Type": "유형",
     "Status": "상태",
@@ -165,53 +136,32 @@
     "USDValue(Snapshot)": "USD Value(Snapshot)",
     "Price": "Price",
     "CreatedTime": "생성 시간",
-    "txt-YourOrderAppearHere": "여기에 주문이 표시됩니다."
-  },
-  "page-MyStocks": {
-    "MyStocks": "내 보유 자산",
-    "Offer": "제안",
+    "txt-YourOrderAppearHere": "여기에 주문이 표시됩니다.",
+    "Created": "생성됨",
+    "Collateral": "담보",
+    "Ascending": "오름차순",
+    "Descending": "내림차순",
     "For": "대상",
-    "tag-Ask": "매도",
-    "tag-Bid": "입찰",
-    "List": "목록",
-    "Abort": "중단",
-    "ListStockAsAskOffer": "보유 자산을 매도 제안으로 목록화",
-    "txt-Listed": "목록화됨",
-    "Settle": "정산",
-    "txt-YourStockAppearHere": "여기에 보유 자산이 표시됩니다.",
-    "txt-Free": "자유",
-    "txt-Locked": "잠김"
+    "Buy": "구매",
+    "Detail": "세부사항"
   },
-  "drawer-ListOrder": {
-    "StockId": "보유 자산 ID",
-    "Prev": "이전",
-    "OriginatedFrom": "출처"
-  },
-  "dialog-Settle": {
-    "SettleAskOffer": "매도 제안 정산",
-    "AskOfferNo": "매도 제안 번호",
-    "YourRole": "당신의 역할",
-    "TotalSettlementRequired": "필요한 총 정산",
-    "YouAreGoingToSettle": "정산할 예정입니다",
-    "ConfirmThisSettlement": "이 정산 확인"
-  },
-  "page-MyBalances": {
+  "MyBalances": {
     "MyBalances": "My Balances",
     "Coin": "Coin",
     "TotalBalance": "Total Balance",
     "AvailableBalance": "Available Balance",
     "USDValue": "USD Value",
     "PnL(%)": "PnL(%)",
-    "txt-YourBalanceAppearHere": "Your balances appear here...",
+    "YourBalanceAppearHere": "Your balances appear here...",
     "List": "List"
   },
-  "page-Referral": {
+  "Referral": {
     "YourReferralLink": "당신의 추천 링크",
     "Referrals": "추천 시스템",
     "SignedUp": "가입됨",
     "Commission": "수수료",
     "ReferralLink": "추천 링크",
-    "txt-YourReferralLinkAppearHere": "여기에 추천 링크가 표시됩니다.",
+    "YourReferralLinkAppearHere": "여기에 추천 링크가 표시됩니다.",
     "ReferralCode": "추천 코드",
     "TradingUsers": "거래 사용자",
     "TradingVol": "거래량",
@@ -226,25 +176,7 @@
     "ReferralDrawer": "누군가가 당신의 추천 링크를 사용하여 가입하면, 첫 번째 사람은 두 번째 사람이 지불한 거래 수수료의 {num1}에 해당하는 환불을 받습니다. 또한, 원래 추천자인 당신은 수수료의 {num2}에 해당하는 보상을 받습니다.",
     "Save": "저장",
     "Bind": "바인드",
-    "txt-RateError": "당신과 당신의 친구의 수수료율은 {rate}%를 초과할 수 없습니다."
-  },
-  "page-MarketList": {
-    "menu-Transaction": "거래",
-    "menu-Items": "항목",
-    "menu-MarketTrades": "시장 거래",
-    "menu-Charts": "차트",
-    "Asset": "자산",
-    "InitialListing": "초기 상장",
-    "AllTimeHigh": "최고 가격",
-    "Vol24h": "24시간 거래량",
-    "TotalVol": "총 거래량",
-    "SetterStarts": "설정 시작",
-    "TradingEnds": "거래 종료",
-    "Snapshot": "스냅샷",
-    "TrendingAssets": "트렌드 자산",
-    "LastPrice": "마지막 가격",
-    "24hChange": "24시간 변화",
-    "txt-NotStarted": "시작되지 않음",
-    "txt-NoMarketData": "시장 데이터 없음"
+    "RateError": "당신과 당신의 친구의 수수료율은 {rate}%를 초과할 수 없습니다.",
+    "YourFriendSentYouAnOnboardingInvitation": "친구 <name></name>님이 <num></num> 거래 수수료 환급과 함께 초대장을 보냈습니다!"
   }
 }

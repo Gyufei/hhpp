@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { WithTip } from "@/components/share/with-tip";
 export default function PortfolioInfo() {
-  const T = useTranslations("menu-Dashboard");
+  const T = useTranslations("Dashboard");
   return (
     <>
       <div className="flex flex-col items-center justify-start text-xs sm:flex-row sm:space-x-4">

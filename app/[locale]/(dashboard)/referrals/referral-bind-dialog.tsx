@@ -69,7 +69,7 @@ export function ReferralSignInBtn({
   onSuccess: () => void;
 }) {
   const T = useTranslations("Header");
-  const RT = useTranslations("page-Referral");
+  const RT = useTranslations("Referral");
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -129,7 +129,7 @@ export function ReferralSignInBtn({
         {T("Welcome")}
       </div>
       <div className="min-h-10 px-5 text-center text-sm leading-5 text-title-white">
-        {T.rich("txt-YourFriendSentYouAnOnboardingInvitation", {
+        {RT.rich("YourFriendSentYouAnOnboardingInvitation", {
           name: (_chunks: any) => (
             <span className="text-green">{shortAddr}</span>
           ),

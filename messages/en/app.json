@@ -19,78 +19,53 @@
     "Connect": "Connect",
     "SignIn": "Sign in",
     "SignOut": "Sign out",
-    "YouAreSignedOut": "Sign in",
-    "YouAreSignedIn": "You're signed in",
-    "txt-ClaimTestTokens": "Claim test tokens",
-    "txt-Help": "Help",
     "Welcome": "Welcome",
     "Continue": "Continue",
-    "txt-YourFriendSentYouAnOnboardingInvitation": "Your friend <name></name> sent you an onboarding invitation with <num></num> trading fee back! ",
-    "drawer-title-Info": "Info",
-    "drawer-Wallets": "Wallets",
-    "drawer-SocialMedia": "Social Media",
     "Deposit": "Deposit",
     "Withdraw": "Withdraw",
     "ChargeFeeTip": "Hyperliquid Will Charge You Some Fee When Bridging Usdc Over Arbitrum Ups To Your Deposit Amount.",
     "DepositTip": "Do not send USDC from other networks or other types of USDC. There is a minimum deposit of 5 USDC. Hyperliquid will charge you the bridging fee ups to your deposit amount.",
     "ContractEndWith": "Contract ends with"
   },
-  "card-Marketplace": {
+  "Marketplace": {
     "InitialListing": "Initial Listing",
     "AllTimeHigh": "All-time High",
     "24hChange": "24h Change",
     "FilledOrders": "Filled Orders",
     "ListedSupply": "Listed Supply",
     "ActiveWallets": "Active Wallets",
-
     "TotalVol": "Total Vol.",
     "24hVol": "24h Vol.",
-    "AvgBid": "Avg. Bid"
-  },
-  "OrderSort": {
-    "Created": "Created",
-    "Price": "Price",
-    "Collateral": "Collateral",
-    "Ascending": "Ascending",
-    "Descending": "Descending"
-  },
-  "cd-Order": {
-    "Offer": "Offer",
-    "For": "For",
-    "Buy": "Buy",
-    "Detail": "Detail"
-  },
-  "tb-MarketTrades": {
+    "AvgBid": "Avg. Bid",
+    "menu-Transaction": "Transaction",
+    "menu-Items": "Items",
+    "menu-MarketTrades": "Market Trades",
+    "menu-Charts": "Charts",
+    "Asset": "Asset",
+    "Vol24h": "24h Vol.",
+    "Snapshot": "Snapshot",
+    "Sales": "Sales",
     "MarketTrades": "Market Trades",
     "ItemId": "Item Id",
     "Value": "Value",
     "Amount": "Amount",
     "Buyer": "Buyer"
   },
-  "ct-Marketplace": {
-    "tg-Sales": "Sales"
-  },
-  "drawer-CreateOffer": {
+  "Offer": {
     "CreateOffer": "Create Offer",
     "List": "List",
-    "YouWillSell": "You will sell",
     "YouDLikeToReceive": "You'd like to receive",
     "YouDLikeToReceiveTip": "When buying {pointName}, you need to wait until the {pointName} convert into the protocol's tokens before you can receive tokens.",
-    "YouPay": "You pay",
-    "CollateralRate": "Collateral Rate",
-    "BonusForMaker": "Bonus for Maker",
     "OrderNote": "Order Note",
     "AnythingYouWantToInformTheBuyer": "Anything you want to inform the buyer...",
     "MinimumOrderAmount": "Minimum Order Amount",
-    "PlatformTradingFee": "Platform Trading Fee"
-  },
-  "drawer-OfferDetail": {
-    "OfferDetail": "Offer Detail",
+    "PlatformTradingFee": "Platform Trading Fee",
     "BidOfferDetail": "Bid Offer Detail",
     "MyAskOfferDetail": "My Ask Offer Detail",
     "MyBidOfferDetail": "My Bid Offer Detail",
     "YouWillSell": "You will sell",
     "YouPay": "You pay",
+
     "txt-YouGet": "You get",
     "YouGet": "",
     "txt-YouHaveToSell": "You have to sell",
@@ -118,7 +93,6 @@
     "TotalCollateral": "Total collateral",
     "TotalDeposit": "Total deposit",
     "EstSettlingOn": "Est. Settling On",
-    "txt-NotStarted": "Not Start",
     "InitialOfferMaker": "Maker",
     "InitialOfferMakerBonus": "Maker bonus",
     "TaxForSubTrade": "Tax for sub trade",
@@ -136,12 +110,10 @@
     "TxHash": "Tx Hash",
     "Time": "Time"
   },
-  "menu-Dashboard": {
+  "Dashboard": {
     "Equity": "Equity",
     "14DayVolume": "14 Day Volume",
-    "Fees(Taker/Maker)": "Fees (Taker / Maker)"
-  },
-  "cd-AccountOverview": {
+    "Fees(Taker/Maker)": "Fees (Taker / Maker)",
     "pl-Username": "username",
     "txt-PickADate": "Pick a Date",
     "AccountOverview": "Account Overview",
@@ -151,14 +123,12 @@
     "TakerOrders": "Taker Orders",
     "Profit": "Profit",
     "SettledValue": "Settled Value",
-    "TaxIncome": "Tax Income"
-  },
-  "ct-Rank": {
+    "TaxIncome": "Tax Income",
     "HTPoints": "HT Points",
     "txt-TotalPoints": "Total Points",
     "txt-Rank": "Rank"
   },
-  "page-MyOrders": {
+  "MyOrders": {
     "MyOrders": "My Orders",
     "Status": "Status",
     "Coin": "Coin",
@@ -166,55 +136,34 @@
     "Type": "Type",
     "Tx": "Tx",
     "USDValue(Snapshot)": "USD Value(Snapshot)",
-    "Price": "Price",
     "CreatedTime": "Created Time",
-    "txt-YourOrderAppearHere": "Your orders appear here.."
-  },
-  "page-MyStocks": {
-    "MyStocks": "My Holdings",
-    "Offer": "Offer",
+    "txt-YourOrderAppearHere": "Your orders appear here..",
     "For": "For",
-    "tag-Ask": "Ask",
-    "tag-Bid": "Bid",
-    "List": "List",
-    "Abort": "Abort",
-    "ListStockAsAskOffer": "List Holding As Ask Offer",
-    "txt-Listed": "Listed",
-    "Settle": "Settle",
-    "txt-YourStockAppearHere": "Your holding appear here..",
-    "txt-Free": "Free",
-    "txt-Locked": "Locked"
+    "Buy": "Buy",
+    "Detail": "Detail",
+    "Created": "Created",
+    "Price": "Price",
+    "Collateral": "Collateral",
+    "Ascending": "Ascending",
+    "Descending": "Descending"
   },
-  "drawer-ListOrder": {
-    "StockId": "Holding Id",
-    "Prev": "Prev",
-    "OriginatedFrom": "Originated from"
-  },
-  "dialog-Settle": {
-    "SettleAskOffer": "Settle Ask Offer",
-    "AskOfferNo": "Ask Offer No.",
-    "YourRole": "Your Role",
-    "TotalSettlementRequired": "Total Settlement Required",
-    "YouAreGoingToSettle": "You're going to settle",
-    "ConfirmThisSettlement": "Confirm this settlement"
-  },
-  "page-MyBalances": {
+  "MyBalances": {
     "MyBalances": "My Balances",
     "Coin": "Coin",
     "TotalBalance": "Total Balance",
     "AvailableBalance": "Available Balance",
     "USDValue": "USD Value",
     "PnL(%)": "PnL(%)",
-    "txt-YourBalanceAppearHere": "Your balances appear here...",
+    "YourBalanceAppearHere": "Your balances appear here...",
     "List": "List"
   },
-  "page-Referral": {
+  "Referral": {
     "YourReferralLink": "Your referral link",
     "Referrals": "Referrals",
     "SignedUp": "Signed Up",
     "Commission": "Commission",
     "ReferralLink": "Referral link",
-    "txt-YourReferralLinkAppearHere": "Your referral links appear here..",
+    "YourReferralLinkAppearHere": "Your referral links appear here..",
     "ReferralCode": "Referral Code",
     "TradingUsers": "Trading Users",
     "TradingVol": "Trading Vol.",
@@ -229,25 +178,7 @@
     "ReferralDrawer": "When someone signs up using your referral link, the first person will receive a refund equal to {num1} of the trading fee paid by the second person. Additionally, you, as the original referrer, will receive a reward equal to {num2} of the commission fee.",
     "Save": "Save",
     "Bind": "Bind",
-    "txt-RateError": "Your And Your friend's commission rate can't be greater than {rate}%"
-  },
-  "page-MarketList": {
-    "menu-Transaction": "Transaction",
-    "menu-Items": "Items",
-    "menu-MarketTrades": "Market Trades",
-    "menu-Charts": "Charts",
-    "Asset": "Asset",
-    "InitialListing": "Initial Listing",
-    "AllTimeHigh": "All-Time High",
-    "Vol24h": "24h Vol.",
-    "TotalVol": "Total Vol.",
-    "SetterStarts": "Setter Starts",
-    "TradingEnds": "Trading Ends",
-    "Snapshot": "Snapshot",
-    "TrendingAssets": "Trending Assets",
-    "LastPrice": "Last Price",
-    "24hChange": "24h Change",
-    "txt-NotStarted": "Not Started",
-    "txt-NoMarketData": "No Market Data Available"
+    "RateError": "Your And Your friend's commission rate can't be greater than {rate}%",
+    "YourFriendSentYouAnOnboardingInvitation": "Your friend <name></name> sent you an onboarding invitation with <num></num> trading fee back! "
   }
 }

@@ -17,7 +17,7 @@ export function TradeTypeSelect({
   type: ITradeType;
   handleTypeChange: (_t: ITradeType) => void;
 }) {
-  const T = useTranslations("tb-MarketTrades");
+  const T = useTranslations("Marketplace");
   const [popOpen, setPopOpen] = useState(false);
 
   function handleClickOpt(t: ITradeType) {

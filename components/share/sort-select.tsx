@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils/common";
 
-export type ISortField = "Created" | "Price" | "Collateral";
+export type ISortField = "Created" | "Price";
 export type ISortDir = "Ascending" | "Descending";
 
 export function SortSelect({
@@ -27,7 +27,7 @@ export function SortSelect({
   handleSortFieldChange: (_s: ISortField) => void;
   handleSortDirChange: (_s: ISortDir) => void;
 }) {
-  const T = useTranslations("OrderSort");
+  const T = useTranslations("MyOrder");
   const [popOpen, setPopOpen] = useState(false);
 
   function handleSortDirClick(field: ISortField, dir: ISortDir) {
@@ -96,14 +96,14 @@ function SortOptions({
   onSortDirChange: (_field: ISortField, _dir: ISortDir) => void;
   alignOffset?: number;
 }) {
-  const T = useTranslations("OrderSort");
+  const T = useTranslations("MyOrder");
   return (
     <DropdownMenuSub>
       <DropdownMenuSubTrigger
         data-checked={sortField === field}
         className="flex h-9 cursor-pointer items-center rounded px-4 text-xs leading-[18px] text-gray hover:text-main data-[checked=true]:text-main"
       >
-        {T("" + field)}
+        {T(field)}
       </DropdownMenuSubTrigger>
       <DropdownMenuPortal>
         <DropdownMenuSubContent
@@ -149,7 +149,7 @@ function SortUpDown({
   active: boolean;
   isDown: boolean;
 }) {
-  const T = useTranslations("OrderSort");
+  const T = useTranslations("MyOrder");
   const local = useLocale();
   const isEn = local === "en";
 

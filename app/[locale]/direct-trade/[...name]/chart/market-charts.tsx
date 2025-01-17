@@ -110,7 +110,7 @@ function ChartSwitch({
   chartType: IChartType;
   handleChangeType: (_type: IChartType) => void;
 }) {
-  const T = useTranslations("ct-Marketplace");
+  const T = useTranslations("Marketplace");
   const isSales = chartType === "sales";
   return (
     <div className="flex space-x-1 rounded border border-border-black bg-bg-black p-1">
@@ -127,7 +127,7 @@ function ChartSwitch({
         />
         {isSales && (
           <div className="ml-[6px] text-sm leading-5 text-bg-black">
-            {T("tg-Sales")}
+            {T("Sales")}
           </div>
         )}
       </div>

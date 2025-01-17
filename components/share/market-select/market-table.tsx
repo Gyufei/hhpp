@@ -17,7 +17,7 @@ export default function MarketTable({
   marketList: IMarketplace[];
   isLoading: boolean;
 }) {
-  const T = useTranslations("page-MarketList");
+  const T = useTranslations("Marketplace");
   const router = useRouter();
 
   const data = useMemo(() => {

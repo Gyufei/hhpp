@@ -24,7 +24,7 @@ export function ReferralRateDialog({
   drawerOpen: boolean;
   setDrawerOpen: (_v: boolean) => void;
 }) {
-  const T = useTranslations("page-Referral");
+  const T = useTranslations("Referral");
   const { data: extraRateData } = useReferralExtraRate();
   const extraRate = useMemo(
     () => (extraRateData?.data || 0) / 10 ** 4,
@@ -164,7 +164,7 @@ export function ReferralRateDialog({
 
               {rateError && (
                 <div className="absolute -bottom-6 left-0 text-xs leading-[18px] text-red">
-                  {T("txt-RateError", {
+                  {T("RateError", {
                     rate:
                       Number(referralBaseRate || 0) + Number(extraRate || 0),
                   })}

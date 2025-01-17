@@ -11,7 +11,7 @@ export default function OrderNoteAndFee({
   value: string;
   onValueChange: (_v: string) => void;
 }) {
-  const T = useTranslations("drawer-CreateOffer");
+  const T = useTranslations("Offer");
   const [showInput, setShowInput] = useState(false);
 
   function handleInputNote(v: string) {

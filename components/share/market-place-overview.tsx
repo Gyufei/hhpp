@@ -16,7 +16,7 @@ export default function MarketplaceOverview({
   marketplace: IMarketplace | undefined;
   isLoading?: boolean;
 }) {
-  const T = useTranslations("card-Marketplace");
+  const T = useTranslations("Marketplace");
   const isLoadingFlag = !marketplace || isLoading;
   const { isMobileSize } = useDeviceSize();
   const [isCollapsed, setIsCollapsed] = useState(false);

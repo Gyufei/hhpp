@@ -19,23 +19,15 @@
     "Connect": "连接",
     "SignIn": "登录",
     "SignOut": "退出",
-    "YouAreSignedOut": "登录",
-    "YouAreSignedIn": "您已登录",
-    "txt-ClaimTestTokens": "获取测试币",
-    "txt-Help": "帮助",
     "Welcome": "欢迎",
     "Continue": "继续",
-    "txt-YourFriendSentYouAnOnboardingInvitation": "您的朋友 <name></name> 向您发送了一个交易费返还 <num></num> 的引导邀请",
-    "drawer-title-Info": "信息",
-    "drawer-Wallets": "线包",
-    "drawer-SocialMedia": "社交媒体",
     "Deposit": "存款",
     "Withdraw": "提款",
     "ChargeFeeTip": "Hyperliquid 在将 USDC 桥接到 Arbitrum 时会收取一部分费用。",
     "DepositTip": "不要从其他网络或不同类型的 USDC 发送。最低存款额为 5 USDC。Hyperliquid 将收取桥接费用，直到您的存款金额。",
     "ContractEndWith": "合约结束于"
   },
-  "card-Marketplace": {
+  "Marketplace": {
     "InitialListing": "发行价",
     "AllTimeHigh": "最高成交价",
     "FilledOrders": "已成交",
@@ -44,22 +36,15 @@
     "ActiveWallets": "活跃钱包",
     "TotalVol": "总量",
     "24hVol": "总量/24h",
-    "AvgBid": "平均价"
-  },
-  "OrderSort": {
-    "Created": "创建时间",
-    "Price": "价格",
-    "Collateral": "抵押数量",
-    "Ascending": "升序",
-    "Descending": "降序"
-  },
-  "cd-Order": {
-    "Offer": "提供",
-    "For": "需求",
-    "Buy": "买",
-    "Detail": "详情"
-  },
-  "tb-MarketTrades": {
+    "AvgBid": "平均价",
+    "menu-Transaction": "事务",
+    "menu-Items": "项目",
+    "menu-MarketTrades": "交易",
+    "menu-Charts": "图表",
+    "Asset": "资产",
+    "Vol24h": "24小时总量",
+    "Snapshot": "快照",
+    "Sales": "销售",
     "MarketTrades": "市场交易",
     "ItemId": "项目ID",
     "Value": "价值",
@@ -67,30 +52,22 @@
     "Buyer": "买家",
     "Depth": "深度"
   },
-  "ct-Marketplace": {
-    "tg-Sales": "销售"
-  },
-  "drawer-CreateOffer": {
+  "MyOrder": {},
+  "Offer": {
     "CreateOffer": "创建订单",
     "List": "上架",
-    "YouWillSell": "你将出售",
     "YouDLikeToReceive": "你将收到",
     "YouDLikeToReceiveTip": "当购买 {pointName} 时, 您需要等到 {pointName} 转换成协议的代币之后才能接收代币",
     "YouPay": "你支付",
-    "CollateralRate": "抵押率",
-    "BonusForMaker": "提供者奖励",
     "OrderNote": "订单备注",
     "AnythingYouWantToInformTheBuyer": "任何你想告诉买家的内容",
     "MinimumOrderAmount": "最低订单数量",
-    "PlatformTradingFee": "平台交易手续费"
-  },
-  "drawer-OfferDetail": {
+    "PlatformTradingFee": "平台交易手续费",
     "OfferDetail": "订单详情",
     "BidOfferDetail": "报价订单详情",
     "MyAskOfferDetail": "我的询价订单详情",
     "MyBidOfferDetail": "我的报价订单详情",
     "YouWillSell": "你将出售",
-    "YouPay": "你支付",
     "txt-YouGet": "你将得到",
     "YouGet": "",
     "txt-YouHaveToSell": " 你要卖",
@@ -119,7 +96,6 @@
     "TotalCollateral": "总计抵押",
     "TotalDeposit": "总计存入",
     "EstSettlingOn": "清算",
-    "txt-NotStarted": "未开始",
     "InitialOfferMaker": "初始Maker",
     "InitialOfferMakerBonus": "初始Maker奖励",
     "BaseTaxForEachTrade": "每单基础交易税",
@@ -138,12 +114,10 @@
     "TxHash": "交易哈希",
     "Time": "时间"
   },
-  "menu-Dashboard": {
+  "Dashboard": {
     "Equity": "总净值",
     "14DayVolume": "14天交易量",
-    "Fees(Taker/Maker)": "费用 (购买 / 出售)"
-  },
-  "cd-AccountOverview": {
+    "Fees(Taker/Maker)": "费用 (购买 / 出售)",
     "pl-Username": "用户名",
     "txt-PickADate": "选择日期",
     "AccountOverview": "账户概览",
@@ -153,14 +127,12 @@
     "TakerOrders": "Taker订单",
     "Profit": "利润",
     "SettledValue": "已清算",
-    "TaxIncome": "税收收入"
-  },
-  "ct-Rank": {
+    "TaxIncome": "税收收入",
     "HTPoints": "HT积分",
     "txt-TotalPoints": "总积分",
     "txt-Rank": "排名"
   },
-  "page-MyOrders": {
+  "MyOrders": {
     "MyOrders": "我的订单",
     "Type": "类型",
     "Status": "状态",
@@ -170,53 +142,32 @@
     "USDValue(Snapshot)": "美元价值",
     "Price": "价格",
     "CreatedTime": "创建时间",
-    "txt-YourOrderAppearHere": "你的订单在此显示..."
-  },
-  "page-MyStocks": {
-    "MyStocks": "我的库存",
-    "Offer": "提供",
+    "txt-YourOrderAppearHere": "你的订单在此显示...",
+    "Created": "创建时间",
+    "Collateral": "抵押数量",
+    "Ascending": "升序",
+    "Descending": "降序",
     "For": "需求",
-    "tag-Ask": "询价",
-    "tag-Bid": "报价",
-    "List": "上架",
-    "Abort": "中止",
-    "ListStockAsAskOffer": "上架库存为询价订单",
-    "txt-Listed": "已上架",
-    "Settle": "清算",
-    "txt-YourStockAppearHere": "你的库存在此显示...",
-    "txt-Free": "自由的",
-    "txt-Locked": "锁定的"
+    "Buy": "买",
+    "Detail": "详情"
   },
-  "drawer-ListOrder": {
-    "StockId": "库存Id",
-    "Prev": "上一",
-    "OriginatedFrom": "继承自"
-  },
-  "dialog-Settle": {
-    "SettleAskOffer": "清算询价订单",
-    "AskOfferNo": "询价订单编号",
-    "YourRole": "你的角色",
-    "TotalSettlementRequired": "需清算总额",
-    "YouAreGoingToSettle": "你将清算",
-    "ConfirmThisSettlement": "确认清算"
-  },
-  "page-MyBalances": {
+  "MyBalances": {
     "MyBalances": "我的余额",
     "Coin": "代币",
     "TotalBalance": "总余额",
     "AvailableBalance": "可用余额",
     "USDValue": "美元价值",
     "PnL(%)": "收益率",
-    "txt-YourBalanceAppearHere": "你的余额出现在这里...",
+    "YourBalanceAppearHere": "你的余额出现在这里...",
     "List": "上架"
   },
-  "page-Referral": {
+  "Referral": {
     "YourReferralLink": "你的推荐链接",
     "Referrals": "推荐系统",
     "SignedUp": "签约",
     "Commission": "佣金",
     "ReferralLink": "推荐链接",
-    "txt-YourReferralLinkAppearHere": "你的推荐链接在此显示...",
+    "YourReferralLinkAppearHere": "你的推荐链接在此显示...",
     "ReferralCode": "推荐码",
     "TradingUsers": "交易用户数",
     "TradingVol": "交易量",
@@ -231,25 +182,7 @@
     "ReferralDrawer": "当有人使用你的推荐链接注册时，第一个人将收到第二个人支付的交易费用的{ num1 }的退款。此外，作为原始推荐人，您将获得相当于佣金{ num2 }的奖励。",
     "Save": "保存",
     "Bind": "绑定",
-    "txt-RateError": "总和不得超过 { rate }%"
-  },
-  "page-MarketList": {
-    "menu-Transaction": "事务",
-    "menu-Items": "项目",
-    "menu-MarketTrades": "交易",
-    "menu-Charts": "图表",
-    "Asset": "资产",
-    "InitialListing": "上市价格",
-    "AllTimeHigh": "历史最高价格",
-    "Vol24h": "24小时总量",
-    "TotalVol": "总量",
-    "SetterStarts": "清算开始",
-    "TradingEnds": "交易结束",
-    "Snapshot": "快照",
-    "TrendingAssets": "趋势资产",
-    "LastPrice": "最后价格",
-    "24hChange": "24h变化",
-    "txt-NotStarted": "未开始",
-    "txt-NoMarketData": "无市场数据"
+    "RateError": "总和不得超过 { rate }%",
+    "YourFriendSentYouAnOnboardingInvitation": "您的朋友 <name></name> 向您发送了一个交易费返还 <num></num> 的引导邀请"
   }
 }

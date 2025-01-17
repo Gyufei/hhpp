@@ -11,8 +11,8 @@ const tabClx =
 
 export default function PortFolio() {
   const HT = useTranslations("Header");
-  const MOT = useTranslations("page-MyOrders");
-  const MBT = useTranslations("page-MyBalances");
+  const MOT = useTranslations("MyOrders");
+  const MBT = useTranslations("MyBalances");
 
   const [currentTab, setCurrentTab] = useState("orders");
 

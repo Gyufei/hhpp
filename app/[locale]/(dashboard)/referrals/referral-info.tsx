@@ -11,7 +11,7 @@ export default function ReferralInfo({
 }: {
   referralData: Array<IReferralItem>;
 }) {
-  const RT = useTranslations("page-Referral");
+  const RT = useTranslations("Referral");
 
   const signedUp = useMemo(() => {
     return referralData.reduce((acc, cur) => {

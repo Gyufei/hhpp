@@ -26,7 +26,7 @@ import { formatNum } from "@/lib/utils/number";
 // import { IOffer } from "@/lib/types/offer";
 
 export function OrderTable() {
-  const T = useTranslations("page-MyOrders");
+  const T = useTranslations("MyOrders");
 
   const { data: offers, mutate: refreshMyOffers } = useMyOffers({
     market_symbol: null,
