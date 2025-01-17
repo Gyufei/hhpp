@@ -119,9 +119,14 @@
     "Profit": "이익",
     "SettledValue": "정산된 가치",
     "BonusIncome": "보너스 수입",
-    "HTPoints": "HT Points",
-    "txt-TotalPoints": "Total Points",
-    "txt-Rank": "Rank"
+    "HTPoints": "HT 포인트",
+    "txt-TotalPoints": "총 포인트",
+    "txt-Rank": "순위",
+    "AccountRevenue": "계정 수익",
+    "Total": "총계",
+    "AvailableToClaim": "청구 가능",
+    "ReferralCommision": "추천 수수료",
+    "Change(24h)": "24시간 변동"
   },
   "MyOrders": {
     "MyOrders": "내 주문",

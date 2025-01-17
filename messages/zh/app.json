@@ -126,7 +126,12 @@
     "TaxIncome": "税收收入",
     "HTPoints": "HT积分",
     "txt-TotalPoints": "总积分",
-    "txt-Rank": "排名"
+    "txt-Rank": "排名",
+    "AccountRevenue": "账户收益",
+    "Total": "总计",
+    "AvailableToClaim": "可领取",
+    "ReferralCommision": "推荐佣金",
+    "Change(24h)": "24小时变化"
   },
   "MyOrders": {
     "MyOrders": "我的订单",

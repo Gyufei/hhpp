@@ -13,7 +13,6 @@ import { usePathname } from "next/navigation";
 
 export default function OverviewInfo() {
   const T = useTranslations("Dashboard");
-  const RT = useTranslations("Dashboard");
   const { currentChain } = useChainWallet();
   const {
     isLoading: isClaiming,
@@ -122,7 +121,7 @@ export default function OverviewInfo() {
           <div className="mx-[10px] border-t border-border-black pb-[20px] pt-[20px]">
             <div className="flex items-center justify-between">
               <div className="leading-[18px] text-title-white">
-                Account Revenue
+                {T("AccountRevenue")}
               </div>
               {userClaim && (
                 <HoverIcon
@@ -146,7 +145,7 @@ export default function OverviewInfo() {
               )}
             </div>
             <div className="mt-3 flex justify-between">
-              <LabelText>Total</LabelText>
+              <LabelText>{T("Total")}</LabelText>
               <div className="leading-[18px] text-title-white">
                 <NoDataDisplay noData={!userClaim}>
                   ${formatNum(Number(userClaim?.total_sales_revenue))}
@@ -154,7 +153,7 @@ export default function OverviewInfo() {
               </div>
             </div>
             <div className="mt-3 flex justify-between">
-              <LabelText>Available to Claim</LabelText>
+              <LabelText> {T("AvailableToClaim")}</LabelText>
               <div className="leading-[18px] text-title-white">
                 <NoDataDisplay noData={!userClaim}>
                   ${formatNum(Number(userClaim?.sales_revenue))}
@@ -166,11 +165,11 @@ export default function OverviewInfo() {
           <div className="mx-[10px] border-t border-border-black pb-[20px] pt-[20px]">
             <div className="flex items-center justify-between">
               <div className="leading-[18px] text-title-white">
-                {RT("HTPoints")}
+                {T("HTPoints")}
               </div>
             </div>
             <div className="mt-3 flex justify-between">
-              <LabelText>{RT("txt-TotalPoints")}</LabelText>
+              <LabelText>{T("txt-TotalPoints")}</LabelText>
               <div className="leading-[18px] text-title-white">
                 <NoDataDisplay noData={!userPoints}>
                   {formatNum(Number(userPoints?.xp))}
@@ -189,7 +188,7 @@ export default function OverviewInfo() {
         <div className="mx-[10px] border-t border-border-black pb-[20px] pt-[20px]">
           <div className="flex items-center justify-between">
             <div className="leading-[18px] text-title-white">
-              Referral Commision
+              {T("ReferralCommision")}
             </div>
             {userClaim && (
               <HoverIcon
@@ -213,7 +212,7 @@ export default function OverviewInfo() {
             )}
           </div>
           <div className="mt-3 flex justify-between">
-            <LabelText>Total</LabelText>
+            <LabelText>{T("Total")}</LabelText>
             <div className="leading-[18px] text-title-white">
               <NoDataDisplay noData={!userClaim}>
                 ${formatNum(Number(userClaim?.total_referral_bonus))}
@@ -221,13 +220,13 @@ export default function OverviewInfo() {
             </div>
           </div>
           <div className="mt-3 flex justify-between">
-            <LabelText>Change (24h)</LabelText>
+            <LabelText>{T("Change(24h)")}</LabelText>
             <div className="leading-[18px] text-title-white">
               {userClaim ? <ReferralInfo /> : "-"}
             </div>
           </div>
           <div className="mt-3 flex justify-between">
-            <LabelText>Available to Claim</LabelText>
+            <LabelText>{T("AvailableToClaim")}</LabelText>
             <div className="leading-[18px] text-title-white">
               <NoDataDisplay noData={!userClaim}>
                 ${formatNum(Number(userClaim?.referral_bonus))}
