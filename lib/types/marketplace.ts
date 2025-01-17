@@ -2,6 +2,7 @@ import { ChainType } from "./chain";
 
 export interface IMarketplace {
   id: number;
+  chain_name: string;
   last_price: string;
   last_price_24h_ago: string;
   minimum_price: string;
@@ -16,6 +17,7 @@ export interface IMarketplace {
   tge: string;
   settlement_period: string;
   trading_ends_at: string;
+  trading_starts_at: string;
   all_time_high_price: string;
   initial_listing_price: string;
   active_wallets: string;

@@ -9,7 +9,9 @@
     "Days": "Days",
     "Hours": "Hours",
     "Minutes": "Minutes",
-    "Seconds": "Seconds"
+    "Seconds": "Seconds",
+    "Copy": "Copy",
+    "Network": "Network"
   },
   "Header": {
     "Dashboard": "Dashboard",
@@ -29,7 +31,9 @@
     "drawer-SocialMedia": "Social Media",
     "Deposit": "Deposit",
     "Withdraw": "Withdraw",
-    "ChargeFeeTip": "Hyperliquid Will Charge You Some Fee When Bridging Usdc Over Arbitrum Ups To Your Deposit Amount."
+    "ChargeFeeTip": "Hyperliquid Will Charge You Some Fee When Bridging Usdc Over Arbitrum Ups To Your Deposit Amount.",
+    "DepositTip": "Do not send USDC from other networks or other types of USDC. There is a minimum deposit of 5 USDC. Hyperliquid will charge you the bridging fee ups to your deposit amount.",
+    "ContractEndWith": "Contract ends with"
   },
   "card-Marketplace": {
     "InitialListing": "Initial Listing",

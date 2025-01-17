@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import HoverIcon from "@/components/share/hover-icon";
 
 import { IMarketplace } from "@/lib/types/marketplace";
@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils/common";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMarketInfo } from "@/lib/hooks/api/use-market-info";
 import { ChainType } from "@/lib/types/chain";
-import { toast } from "react-hot-toast";
 import MarketSelect from "@/components/share/market-select";
 
 export default function MarketplaceCard({
@@ -21,7 +20,6 @@ export default function MarketplaceCard({
 }) {
   const isLoadingFlag = !marketplace;
 
-  const [isStar, setIsStar] = useState(false);
   const { data: marketInfos } = useMarketInfo(
     marketplace?.chain || ChainType.HYPER,
   );
@@ -32,23 +30,6 @@ export default function MarketplaceCard({
 
     return projectInfo;
   }, [marketplace, marketInfos]);
-
-  function handleStar() {
-    if (isStar) {
-      setIsStar(false);
-    } else {
-      setIsStar(true);
-    }
-  }
-
-  const handleCopy = () => {
-    if (isLoadingFlag) return;
-    if (!marketplace.market_name) return;
-
-    navigator.clipboard.writeText(marketplace.market_name);
-
-    toast.success("Copied to clipboard");
-  };
 
   return (
     <div className={cn(className, "relative")}>
@@ -81,9 +62,6 @@ export default function MarketplaceCard({
                     {marketplace.item_name}
                   </div>
                   <OverviewIcons
-                    isStar={isStar}
-                    handleStar={handleStar}
-                    handleCopy={handleCopy}
                     twitter={projectInfo?.twitter}
                     discord={projectInfo?.discord}
                   />

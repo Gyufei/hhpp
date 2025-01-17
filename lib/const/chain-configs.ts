@@ -14,7 +14,7 @@ export interface IChainConfig {
 
 export const ChainConfigs: Record<string, IChainConfig> = {
   [ChainType.HYPER]: {
-    name: "Arbitrum",
+    name: "Arbitrum One",
     chainType: ChainType.HYPER,
     logo: "/icons/arb.svg",
     zeroAddr: "0x0000000000000000000000000000000000000000",
@@ -28,9 +28,11 @@ export const ChainConfigs: Record<string, IChainConfig> = {
     contracts: isProduction
       ? {
           deposit: "0x4bBb7cE5074cf2546e332353c0968Aaa0e82Ce23",
+          USDC: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
         }
       : {
           deposit: "0x9EBeD0B93d2dc9C332640608Bcd551885ADd857D",
+          USDC: "0x1870Dc7A474e045026F9ef053d5bB20a250Cc084",
         },
     isEvm: true,
   },

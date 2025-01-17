@@ -9,7 +9,9 @@
     "Days": "일",
     "Hours": "시간",
     "Minutes": "분",
-    "Seconds": "초"
+    "Seconds": "초",
+    "Copy": "복사",
+    "Network": "네트워크"
   },
   "Header": {
     "Dashboard": "대시보드",
@@ -29,7 +31,9 @@
     "drawer-SocialMedia": "소셜 미디어",
     "Deposit": "입금",
     "Withdraw": "출금",
-    "ChargeFeeTip": "Hyperliquid는 미국 달러 토큰을 입금할 때 일부 수수료를 부과합니다."
+    "ChargeFeeTip": "Hyperliquid는 미국 달러 토큰을 입금할 때 일부 수수료를 부과합니다.",
+    "DepositTip": "다른 네트워크 또는 다른 유형의 USDC를 보내지 마세요. 최소 입금액은 5 USDC입니다. Hyperliquid는 입금액까지 브리지 수수료를 부과합니다.",
+    "ContractEndWith": "Contract ends with"
   },
   "card-Marketplace": {
     "InitialListing": "초기 상장",

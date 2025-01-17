@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { sortBy } from "lodash";
 
 import OfferList from "@/app/[locale]/direct-trade/[...name]/offer-list/offer-list";
@@ -14,6 +14,8 @@ import { IOffer } from "@/lib/types/offer";
 import { IMarketplace } from "@/lib/types/marketplace";
 import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 import { cn } from "@/lib/utils/common";
+import MarketCountDown from "./market-count-down";
+import { isAfter, toDate } from "date-fns";
 
 export default function MarketplaceContent({
   marketplace,
@@ -23,6 +25,7 @@ export default function MarketplaceContent({
   const { isMobileSize } = useDeviceSize();
   const [currentTab, setCurrentTab] = useState<ITab>("Items");
   const [showKChart, setShowKChart] = useState(false);
+  const [isMarketCountdown, setIsMarketCountdown] = useState(false);
 
   const {
     data: offers,
@@ -41,6 +44,18 @@ export default function MarketplaceContent({
 
     return sortO;
   }, [offers]);
+
+  const calcIsCountdown = useCallback(() => {
+    const tradingStartsAt = Number(marketplace.trading_starts_at);
+    if (!tradingStartsAt) return false;
+
+    const isCount = isAfter(toDate(tradingStartsAt), Date.now());
+    setIsMarketCountdown(isCount);
+  }, [marketplace]);
+
+  useEffect(() => {
+    calcIsCountdown();
+  }, [calcIsCountdown]);
 
   const showItems = !isMobileSize || (isMobileSize && currentTab === "Items");
   const showTrades = !isMobileSize || (isMobileSize && currentTab === "Trades");
@@ -112,11 +127,18 @@ export default function MarketplaceContent({
               : "max(calc(100vh - 60px), 708px)",
           }}
         >
-          <OfferList
-            offers={canBuyOffers || []}
-            isLoading={isOffersLoading}
-            refreshOffers={refreshOffers}
-          />
+          {isMarketCountdown ? (
+            <MarketCountDown
+              marketplace={marketplace}
+              onCountEnd={calcIsCountdown}
+            />
+          ) : (
+            <OfferList
+              offers={canBuyOffers || []}
+              isLoading={isOffersLoading}
+              refreshOffers={refreshOffers}
+            />
+          )}
         </div>
       )}
 

@@ -9,7 +9,9 @@
     "Days": "天",
     "Hours": "小时",
     "Minutes": "分钟",
-    "Seconds": "秒"
+    "Seconds": "秒",
+    "Copy": "复制",
+    "Network": "网络"
   },
   "Header": {
     "Dashboard": "仪表盘",
@@ -29,7 +31,9 @@
     "drawer-SocialMedia": "社交媒体",
     "Deposit": "存款",
     "Withdraw": "提款",
-    "ChargeFeeTip": "Hyperliquid 在将 USDC 桥接到 Arbitrum 时会收取一部分费用。"
+    "ChargeFeeTip": "Hyperliquid 在将 USDC 桥接到 Arbitrum 时会收取一部分费用。",
+    "DepositTip": "不要从其他网络或不同类型的 USDC 发送。最低存款额为 5 USDC。Hyperliquid 将收取桥接费用，直到您的存款金额。",
+    "ContractEndWith": "合约结束于"
   },
   "card-Marketplace": {
     "InitialListing": "发行价",
