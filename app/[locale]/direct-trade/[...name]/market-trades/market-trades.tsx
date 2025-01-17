@@ -26,7 +26,7 @@ export default function MarketTrades({
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="text-xs leading-[18px] text-title-white">
-            {t("cap-MarketTrades")}
+            {t("MarketTrades")}
           </div>
         </div>
         {/* <TradeTypeSelect

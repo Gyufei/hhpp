@@ -119,28 +119,28 @@ export function ReferralTable({
             <Header className="text-xs leading-[18px] text-gray">
               <HeaderRow className="border-none">
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("th-ReferralCode")}
+                  {rt("ReferralCode")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("lb-SignedUp")}
+                  {rt("SignedUp")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("th-TradingUsers")}
+                  {rt("TradingUsers")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("th-TradingVol")}
+                  {rt("TradingVol")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("th-Views")}
+                  {rt("Views")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("th-CommissionRates")}
+                  {rt("CommissionRates")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("th-Note")}
+                  {rt("Note")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("th-Op")}
+                  {rt("Op")}
                 </HeaderCell>
               </HeaderRow>
             </Header>
@@ -328,7 +328,7 @@ function ReferralNote({
         <div ref={outSideRef}>
           <Input
             ref={inputRef}
-            placeholder={rt("th-Note")}
+            placeholder={rt("Note")}
             value={inputValue}
             onChange={(e: any) => setInputValue(e.target.value)}
             onKeyDown={handleKeyPress}

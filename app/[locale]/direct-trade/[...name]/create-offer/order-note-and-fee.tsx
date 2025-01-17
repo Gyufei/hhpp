@@ -7,11 +7,9 @@ import { useTranslations } from "next-intl";
 export default function OrderNoteAndFee({
   value,
   onValueChange,
-  type,
 }: {
   value: string;
   onValueChange: (_v: string) => void;
-  type: "buy" | "sell";
 }) {
   const cot = useTranslations("drawer-CreateOffer");
   const [showInput, setShowInput] = useState(false);
@@ -35,7 +33,7 @@ export default function OrderNoteAndFee({
     <div className="flex flex-col">
       <div className="flex items-center space-x-1">
         <div className="mr-[6px] text-xs leading-[18px] text-title-white">
-          {cot("cap-OrderNote")}
+          {cot("OrderNote")}
         </div>
         <Checkbox
           checked={showInput}
@@ -48,11 +46,7 @@ export default function OrderNoteAndFee({
             <Textarea
               value={value}
               onChange={(e) => handleInputNote(e.target.value)}
-              placeholder={
-                type === "buy"
-                  ? cot("pl-AnythingYouWantToInformTheSeller")
-                  : cot("pl-AnythingYouWantToInformTheBuyer")
-              }
+              placeholder={cot("AnythingYouWantToInformTheBuyer")}
               className="h-[66px] rounded border border-border-black text-xs leading-[18px] text-title-white placeholder:text-gray"
             />
             <div className="absolute bottom-2 right-4 text-xs leading-[18px] text-gray">

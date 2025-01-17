@@ -37,7 +37,7 @@ export function InputPanel({
         {isCanInput ? (
           <NumericalInput
             className="mr-1 mt-2 h-9 max-w-[240px] text-left text-2xl leading-9 text-title-white placeholder:text-gray sm:max-w-full"
-            placeholder={cot("pl-EnterAmount")}
+            placeholder={cot("EnterAmount")}
             value={value}
             onUserInput={onValueChange}
           />

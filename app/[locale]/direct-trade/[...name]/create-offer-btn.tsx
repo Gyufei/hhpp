@@ -37,7 +37,7 @@ export default function CreateOfferBtn({
         }}
       >
         <button className="h-10 w-[160px] items-center justify-center rounded bg-[#97FCE4] bg-main text-[14px] leading-5 text-bg-black hover:bg-main-hover sm:flex sm:h-8 sm:w-full sm:text-[12px] sm:leading-4">
-          {T("btn-CreateOffer")}
+          {T("CreateOffer")}
         </button>
       </WithWalletConnectBtn>
       {drawerOpen && (
@@ -49,7 +49,7 @@ export default function CreateOfferBtn({
           className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
         >
           <DrawerTitle
-            title="Create Offer"
+            title={T("CreateOffer")}
             onClose={() => setDrawerOpen(false)}
           />
 

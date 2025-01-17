@@ -92,7 +92,7 @@ export default function MarketTable({
 
   const COLUMNS = [
     {
-      label: t("th-Asset"),
+      label: t("Asset"),
       renderCell: (o: any) => {
         return isLoading ? (
           <Skeleton className="h-[16px] w-[60px]" />
@@ -102,7 +102,7 @@ export default function MarketTable({
       },
     },
     {
-      label: t("th-InitialListing"),
+      label: t("InitialListing"),
       renderCell: (item: IMarketplace) => {
         const pointDecimalNum = ProjectDecimalsMap[item.market_symbol]
           ? 10 ** ProjectDecimalsMap[item.market_symbol]
@@ -118,7 +118,7 @@ export default function MarketTable({
       },
     },
     {
-      label: t("th-AllTimeHigh"),
+      label: t("AllTimeHigh"),
       renderCell: (item: IMarketplace) => {
         const pointDecimalNum = ProjectDecimalsMap[item.market_symbol]
           ? 10 ** ProjectDecimalsMap[item.market_symbol]
@@ -136,7 +136,7 @@ export default function MarketTable({
       },
     },
     {
-      label: t("th-Vol24h"),
+      label: t("Vol24h"),
       renderCell: (item: IMarketplace) => {
         return isLoading ? (
           <div className="flex">
@@ -148,7 +148,7 @@ export default function MarketTable({
       },
     },
     {
-      label: t("th-24hChange"),
+      label: t("24hChange"),
       renderCell: (item: IMarketplace) => {
         const pointDecimalNum = ProjectDecimalsMap[item.market_symbol]
           ? 10 ** ProjectDecimalsMap[item.market_symbol]
@@ -166,7 +166,7 @@ export default function MarketTable({
       },
     },
     {
-      label: t("th-TotalVol"),
+      label: t("TotalVol"),
       renderCell: (item: IMarketplace) => {
         return isLoading ? (
           <div className="flex">

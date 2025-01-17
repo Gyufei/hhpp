@@ -94,13 +94,13 @@ export function TakerOrders({
 
   const COLUMNS = [
     {
-      label: T("th-SubNo"),
+      label: T("SubNo"),
       renderCell: (o: any) => {
         return truncateAddr(o.order_id || "");
       },
     },
     {
-      label: T("th-FillAmount"),
+      label: T("FillAmount"),
       renderCell: (o: any) => {
         const points = o.item_amount;
         const totalPoints = offer.item_amount;
@@ -123,7 +123,7 @@ export function TakerOrders({
       },
     },
     {
-      label: T("th-Deposits"),
+      label: T("Deposits"),
       renderCell: (o: ITakerOrder) => {
         const points = o.item_amount;
         const totalPoints = offer.item_amount;
@@ -146,7 +146,7 @@ export function TakerOrders({
       },
     },
     // {
-    //   label: T("th-TxHash"),
+    //   label: T("TxHash"),
     //   renderCell: (o: ITakerOrder) => (
     //     <div className="flex items-center justify-start">
     //       {truncateAddr(o.tx_hash || "")}
@@ -166,7 +166,7 @@ export function TakerOrders({
     //   ),
     // },
     {
-      label: T("th-Time"),
+      label: T("Time"),
       renderCell: (o: ITakerOrder) => (
         <div className="flex items-center justify-end">{`${formatTimestamp(
           Number(o.create_at) * 1000,

@@ -29,7 +29,7 @@ export function TradeTypeSelect({
     <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
       <PopoverTrigger asChild>
         <div className="flex cursor-pointer items-center justify-end space-x-1 rounded-full py-[5px] outline-none">
-          <div className="text-xs leading-5 text-gray">{tt("sl-" + type)}</div>
+          <div className="text-xs leading-5 text-gray">{tt("" + type)}</div>
           <Image
             data-open={popOpen}
             src="/icons/arrow-down-gray.svg"
@@ -57,7 +57,7 @@ export function TradeTypeSelect({
               data-checked={type === t}
               className="ml-[5px] text-xs leading-[18px] data-[checked=true]:text-txt-white data-[checked=false]:text-gray"
             >
-              {tt("sl-" + t)}
+              {tt("" + t)}
             </div>
           </div>
         ))}

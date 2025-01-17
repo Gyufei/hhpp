@@ -42,7 +42,7 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
                 className="flex items-center rounded-none border-b-2 px-[10px] pb-[10px] pt-0 text-sm leading-5 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray"
                 value="orders"
               >
-                {T("cap-Transactions")}({takerOrders?.length || 0})
+                {T("Transactions")}({takerOrders?.length || 0})
               </TabsTrigger>
             </div>
             <div className="mb-2 flex items-center space-x-2">

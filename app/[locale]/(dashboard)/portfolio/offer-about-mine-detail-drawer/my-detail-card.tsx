@@ -26,12 +26,12 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
     <div className="flex-1 p-5">
       <div className="flex items-center justify-between">
         <div className="text-xs leading-6 text-title-white">
-          {T("cap-OfferDetail")}
+          {T("OfferDetail")}
         </div>
       </div>
       <DetailRow>
-        <DetailLabel tipText={T("tip-SellerAmount")}>
-          {T("lb-SellerAmount")}
+        <DetailLabel tipText={T("SellerAmount")}>
+          {T("SellerAmount")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
           <div className="text-xs leading-5 text-title-white">
@@ -48,7 +48,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
       </DetailRow>
 
       <DetailRow>
-        <DetailLabel tipText={T("tip-Seller")}>{T("lb-Seller")}</DetailLabel>
+        <DetailLabel tipText={T("Seller")}>{T("Seller")}</DetailLabel>
         <div className="flex items-center space-x-1">
           <div className="text-xs leading-5 text-title-white">
             {truncateAddr(offer?.offer_maker || "", {
@@ -70,8 +70,8 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
       </DetailRow>
 
       <DetailRow>
-        <DetailLabel tipText={T("tip-TrendingEndsAt")}>
-          {T("lb-TrendingEndsAt")}
+        <DetailLabel tipText={T("TrendingEndsAt")}>
+          {T("TrendingEndsAt")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
           <div className="text-xs leading-5 text-title-white">--</div>
@@ -79,8 +79,8 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
       </DetailRow>
 
       <DetailRow>
-        <DetailLabel tipText={T("tip-InitialOfferMaker")}>
-          {T("lb-InitialOfferMaker")}
+        <DetailLabel tipText={T("InitialOfferMaker")}>
+          {T("InitialOfferMaker")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
           <div className="w-fit rounded bg-border-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">

@@ -9,7 +9,7 @@ export default function FeeDisplay() {
     <div className="mt-3">
       <div className="flex items-center justify-between">
         <div className="text-xs leading-[18px] text-gray">
-          {cot("lb-MinimumOrderAmount")}
+          {cot("MinimumOrderAmount")}
         </div>
         <div className="text-xs leading-[18px] text-title-white">
           ${minAmount}

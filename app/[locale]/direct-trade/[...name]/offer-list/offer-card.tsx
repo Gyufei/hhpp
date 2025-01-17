@@ -100,7 +100,7 @@ export function OfferCard({
       <div className="mt-4 flex items-center justify-between border-b border-border-black pb-5">
         <div className="flex flex-1 grow flex-col">
           <div className="mb-[2px] text-xs leading-[18px] text-gray">
-            {t("lb-Offer")}
+            {t("Offer")}
           </div>
           <div className="flex items-center leading-6 text-txt-white">
             {formatNum(offerValue, 2, true)}
@@ -132,7 +132,7 @@ export function OfferCard({
         </div>
         <div className="flex flex-1 grow flex-col items-end">
           <div className="mb-[2px] text-xs leading-[18px] text-gray">
-            {t("lb-For")}
+            {t("For")}
           </div>
           <div className="flex items-center leading-6 text-txt-white">
             {formatNum(forValue, 2, true)}
@@ -194,7 +194,7 @@ export function OfferCard({
               }}
             >
               <button className="flex items-center justify-center rounded-full border border-main px-[18px] py-1 text-sm leading-5 text-main hover:border-main-hover hover:text-main-hover">
-                {orderType === "sell" ? t("btn-Buy") : t("btn-Sell")}
+                {orderType === "sell" ? t("Buy") : t("Sell")}
               </button>
             </WithWalletConnectBtn>
           )}
@@ -204,7 +204,7 @@ export function OfferCard({
               onClick={() => handleShow()}
             >
               <button className="flex items-center justify-center rounded-full border border-main px-[18px] py-1 text-sm leading-5 text-main hover:border-main-hover hover:text-main-hover">
-                {t("btn-Detail")}
+                {t("Detail")}
               </button>
             </WithWalletConnectBtn>
           )}

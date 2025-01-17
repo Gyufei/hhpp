@@ -40,7 +40,7 @@ export default function OfferAboutMineDetailDrawer({
       className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
     >
       <DrawerTitle
-        title={ot("cap-OfferDetail")}
+        title={ot("OfferDetail")}
         onClose={() => setDrawerOpen(false)}
       />
 

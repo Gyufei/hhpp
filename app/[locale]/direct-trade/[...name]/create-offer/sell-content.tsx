@@ -112,7 +112,7 @@ export function SellContent({
           value={sellPointAmount}
           onValueChange={sellPointAmountChange}
           hasError={!!errorText}
-          topText={<>{T("txt-YouWillSell")}</>}
+          topText={<>{T("YouWillSell")}</>}
           bottomText={
             <>
               1 {currentMarket.item_name} = ${formatNum(pointPrice)}
@@ -129,11 +129,11 @@ export function SellContent({
           onValueChange={setReceiveAmount}
           topText={
             <div className="flex items-center">
-              {T("txt-YouDLikeToReceive")}
+              {T("YouDLikeToReceive")}
               <WithTip
                 content={
                   <>
-                    {T("tip-YouDLikeToReceive", {
+                    {T("YouDLikeToReceiveTip", {
                       pointName: currentMarket.item_name,
                     })}
                   </>
@@ -161,7 +161,7 @@ export function SellContent({
 
         <div className="my-5  h-[1px] bg-border-black"></div>
 
-        <OrderNoteAndFee value={note} onValueChange={setNote} type={"sell"} />
+        <OrderNoteAndFee value={note} onValueChange={setNote} />
       </div>
 
       <div className="relative px-5 py-4">

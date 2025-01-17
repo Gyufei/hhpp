@@ -18,11 +18,11 @@ export default function OverviewInfo() {
       <div className="m-[10px] pb-8 text-xs">
         <div className="flex items-center justify-between">
           <div className="leading-[18px] text-title-white">
-            {T("cap-AccountOverview")}
+            {T("AccountOverview")}
           </div>
         </div>
         <div className="mt-3 flex justify-between">
-          <LabelText>{T("lb-TradeVol")}</LabelText>
+          <LabelText>{T("TradeVol")}</LabelText>
           <div className="leading-[18px] text-title-white">
             <NoDataDisplay noData={!accountInfo}>
               ${formatNum(Number(accountInfo?.trade_vol))}
@@ -30,7 +30,7 @@ export default function OverviewInfo() {
           </div>
         </div>
         {/* <div className="mt-3 flex justify-between">
-          <LabelText>{T("lb-Profit")}</LabelText>
+          <LabelText>{T("Profit")}</LabelText>
           <div
             data-loss={accountInfo ? accountInfo?.profit < 0 : "null"}
             className="leading-[18px] data-[loss=false]:text-main data-[loss=null]:text-title-white data-[loss=true]:text-red"
@@ -45,7 +45,7 @@ export default function OverviewInfo() {
         </div> */}
 
         {/* <div className="mt-3 flex justify-between">
-          <LabelText>{T("lb-MakerOrders")}</LabelText>
+          <LabelText>{T("MakerOrders")}</LabelText>
           <div className="leading-[18px] text-title-white">
             <NoDataDisplay noData={!accountInfo}>
               {formatNum(Number(accountInfo?.maker_orders))}
@@ -53,7 +53,7 @@ export default function OverviewInfo() {
           </div>
         </div>
         <div className="mt-3 flex justify-between">
-          <LabelText>{T("lb-TakerOrders")}</LabelText>
+          <LabelText>{T("TakerOrders")}</LabelText>
           <div className="leading-[18px] text-title-white">
             <NoDataDisplay noData={!accountInfo}>
               {formatNum(Number(accountInfo?.taker_orders))}
@@ -62,7 +62,7 @@ export default function OverviewInfo() {
         </div> */}
 
         <div className="mt-3 flex justify-between">
-          <LabelText>{T("lb-SettledValue")}</LabelText>
+          <LabelText>{T("SettledValue")}</LabelText>
           <div className="leading-[18px] text-title-white">
             <NoDataDisplay noData={!accountInfo}>
               ${formatNum(Number(accountInfo?.settled_value))}
@@ -70,7 +70,7 @@ export default function OverviewInfo() {
           </div>
         </div>
         <div className="mt-3 flex justify-between">
-          <LabelText>{T("lb-TaxIncome")}</LabelText>
+          <LabelText>{T("TaxIncome")}</LabelText>
           <div
             data-loss={
               accountInfo ? Number(accountInfo?.tax_income) < 0 : "null"
@@ -89,7 +89,7 @@ export default function OverviewInfo() {
       {/* <div className="m-[10px] border-t border-border-black">
         <div className="flex items-center justify-between">
           <div className="leading-[18px] text-title-white">
-            {TR("th-HTPoints")}
+            {TR("HTPoints")}
           </div>
         </div>
         <div className="mt-3 flex justify-between">

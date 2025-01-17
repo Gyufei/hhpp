@@ -105,15 +105,15 @@ export function ReferralDrawer({
         className="flex w-[480px] flex-col items-center justify-stretch gap-0 rounded border border-border-black bg-bg-black p-0"
         aria-describedby="referral-drawer"
       >
-        <DialogTitle>{rt("th-CommissionRates")}</DialogTitle>
+        <DialogTitle>{rt("CommissionRates")}</DialogTitle>
 
         <div className="flex flex-1 flex-col justify-between">
           <div className="flex flex-1 flex-col p-5">
             <div className="text-sm leading-5 text-title-white">
-              {rt("cap-SetReferralLink")}
+              {rt("SetReferralLink")}
             </div>
             <div className="mt-[10px] text-xs leading-[18px] text-gray">
-              {rt("th-ReferralCode")}
+              {rt("ReferralCode")}
             </div>
             <Input
               disabled={true}
@@ -125,13 +125,13 @@ export function ReferralDrawer({
             <div className="mt-[30px] h-1 border-b border-[#303030]"></div>
 
             <div className="mt-5 text-sm leading-5 text-title-white">
-              {rt("cap-SetCommissionRates")}
+              {rt("SetCommissionRates")}
             </div>
 
             <div className="relative mt-[10px] flex items-center justify-between space-x-[6px]">
               <div className="flex flex-1 flex-col space-y-[10px]">
                 <div className="text-xs leading-[18px] text-gray">
-                  {rt("lb-You")}
+                  {rt("You")}
                 </div>
 
                 <NumericalInput
@@ -145,7 +145,7 @@ export function ReferralDrawer({
               <div className="mt-6 text-xs leading-[18px] text-gray">+</div>
               <div className="flex flex-1 flex-col space-y-2">
                 <div className="text-sm leading-5 text-gray">
-                  {rt("lb-YourFriend")}
+                  {rt("YourFriend")}
                 </div>
 
                 <NumericalInput
@@ -181,7 +181,7 @@ export function ReferralDrawer({
                 className="float-left mr-2"
               />
               <div>
-                {rt("tip-ReferralDrawer", {
+                {rt("ReferralDrawer", {
                   num1: Number(rate || 0) + "%",
                   num2: Number(friendRate || 0) + "%",
                 })}
@@ -192,7 +192,7 @@ export function ReferralDrawer({
           <div className="relative border-t border-[#303030] px-5 py-4">
             <WithWalletConnectBtn onClick={handleSaveRate}>
               <button className="mt-2 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive">
-                {rt("btn-Save")}
+                {rt("Save")}
               </button>
             </WithWalletConnectBtn>
           </div>

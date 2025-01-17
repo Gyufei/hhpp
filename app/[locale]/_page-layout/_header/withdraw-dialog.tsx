@@ -63,7 +63,7 @@ export function WithdrawDialog({
         }}
         aria-describedby={undefined}
       >
-        <DialogTitle>{T("btn-Withdraw")}</DialogTitle>
+        <DialogTitle>{T("Withdraw")}</DialogTitle>
 
         <div className="relative w-full border-b border-border-black p-5">
           <NumericalInput
@@ -84,7 +84,7 @@ export function WithdrawDialog({
             onClick={handleConfirmWithdraw}
             className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:bg-main-inactive"
           >
-            {CT("btn-Confirm")}
+            {CT("Confirm")}
           </button>
         </div>
       </DialogContent>

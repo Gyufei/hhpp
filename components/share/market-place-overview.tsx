@@ -61,7 +61,7 @@ export default function MarketplaceOverview({
           <>
             <div className="flex justify-between">
               <LabelText isLoading={isLoadingFlag}>
-                {t("lb-InitialListing")}
+                {t("InitialListing")}
               </LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />
@@ -81,7 +81,7 @@ export default function MarketplaceOverview({
 
             <div className="flex justify-between">
               <LabelText isLoading={isLoadingFlag}>
-                {t("lb-AllTimeHigh")}
+                {t("AllTimeHigh")}
               </LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />
@@ -103,7 +103,7 @@ export default function MarketplaceOverview({
 
             <div className="hidden justify-between sm:flex">
               <LabelText isLoading={isLoadingFlag}>
-                {t("lb-24hChange")}
+                {t("24hChange")}
               </LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />
@@ -114,7 +114,7 @@ export default function MarketplaceOverview({
 
             <div className="flex justify-between">
               <LabelText isLoading={isLoadingFlag}>
-                {t("lb-FilledOrders")}
+                {t("FilledOrders")}
               </LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />
@@ -127,7 +127,7 @@ export default function MarketplaceOverview({
 
             <div className="flex justify-between">
               <LabelText isLoading={isLoadingFlag}>
-                {t("lb-ListedSupply")}
+                {t("ListedSupply")}
               </LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />
@@ -142,7 +142,7 @@ export default function MarketplaceOverview({
 
             <div className="flex justify-between ">
               <LabelText isLoading={isLoadingFlag}>
-                {t("lb-ActiveWallets")}
+                {t("ActiveWallets")}
               </LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />

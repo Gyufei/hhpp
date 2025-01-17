@@ -126,7 +126,7 @@ export function ReferralSignInBtn({
   return (
     <>
       <div className="mb-3 text-xl leading-[30px] text-title-white">
-        {t("cap-Welcome")}
+        {t("Welcome")}
       </div>
       <div className="min-h-10 px-5 text-center text-sm leading-5 text-title-white">
         {t.rich("txt-YourFriendSentYouAnOnboardingInvitation", {
@@ -143,7 +143,7 @@ export function ReferralSignInBtn({
       <div className="mt-6 w-full">
         <WithWalletConnectBtn onClick={handleSignInReferral}>
           <button className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover">
-            {address ? rt("btn-Bind") : t("btn-SignIn")}
+            {address ? rt("Bind") : t("SignIn")}
           </button>
         </WithWalletConnectBtn>
       </div>

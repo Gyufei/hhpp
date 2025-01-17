@@ -21,7 +21,7 @@ export default function PortFolio() {
       <div className="mb-[2px] mr-0 hidden items-center justify-between rounded bg-bg-black px-5 py-[22px] sm:flex">
         <div className="flex w-full items-center justify-between space-x-5">
           <div className="text-xl leading-[30px] text-title-white">
-            {TH("btn-Dashboard")}
+            {TH("Dashboard")}
           </div>
           <PortfolioInfo />
         </div>
@@ -34,10 +34,10 @@ export default function PortFolio() {
         <TabsList className="flex items-center justify-between rounded-none border-b border-[#303030] p-0">
           <div className="flex items-center justify-start space-x-[10px]">
             <TabsTrigger className={tabClx} value="orders">
-              {TO("cap-MyOrders")}
+              {TO("MyOrders")}
             </TabsTrigger>
             <TabsTrigger className={tabClx} value="balances">
-              {TB("cap-MyBalances")}
+              {TB("MyBalances")}
             </TabsTrigger>
           </div>
         </TabsList>

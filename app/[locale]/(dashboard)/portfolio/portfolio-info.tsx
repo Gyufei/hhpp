@@ -7,7 +7,7 @@ export default function PortfolioInfo() {
       <div className="flex flex-col items-center justify-start text-xs sm:flex-row sm:space-x-4">
         {/* <div className="flex flex-col items-start justify-between object-contain">
           <WithTip className="text-gray underline" content={"View Equity"}>
-            {T("cap-Equity")}
+            {T("Equity")}
           </WithTip>
           <div className="mt-1 flex items-center justify-center text-title-white">
             <div>$1,000,000</div>
@@ -15,7 +15,7 @@ export default function PortfolioInfo() {
         </div>
         <div className="flex flex-col items-start justify-between object-contain">
           <WithTip className="text-gray underline" content={"View Volume"}>
-            {T("cap-14DayVolume")}
+            {T("14DayVolume")}
           </WithTip>
           <div className="mt-1 flex items-center justify-center text-title-white">
             <div>$1,000,000</div>
@@ -23,7 +23,7 @@ export default function PortfolioInfo() {
         </div> */}
         <div className="flex flex-col items-start justify-between">
           <WithTip className="text-gray" content={"View Fee Schedule"}>
-            {T("cap-Fees(Taker/Maker)")}
+            {T("Fees(Taker/Maker)")}
           </WithTip>
           <div className="mt-1 flex items-center justify-center  text-title-white">
             <div>0.0350% / 0.0100%</div>

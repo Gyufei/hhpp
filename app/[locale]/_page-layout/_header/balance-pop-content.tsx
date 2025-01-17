@@ -99,7 +99,7 @@ const BalancePopContent = forwardRef(
           className="mt-5 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black outline-none hover:bg-main-hover"
           onClick={() => setDepositDialogOpen(true)}
         >
-          {T("btn-Deposit")}
+          {T("Deposit")}
         </button>
 
         <DepositDialog

@@ -21,7 +21,7 @@ export function DepositDialog({
         className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded border-border-black bg-bg-black p-0"
         aria-describedby={undefined}
       >
-        <DialogTitle>{T("btn-Deposit")}</DialogTitle>
+        <DialogTitle>{T("Deposit")}</DialogTitle>
 
         <div className="flex flex-col items-center p-5">
           <div className="break-all text-center text-xs leading-[18px] text-gray">

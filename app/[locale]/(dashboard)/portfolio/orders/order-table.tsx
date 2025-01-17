@@ -158,25 +158,25 @@ export function OrderTable({
             <Header className="text-xs leading-[18px] text-gray">
               <HeaderRow className="boffer-none">
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("th-Coin")}
+                  {T("Coin")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("th-Offer")}
+                  {T("Offer")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("th-Type")}
+                  {T("Type")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("th-Price")}
+                  {T("Price")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("th-USDValue(Snapshot)")}
+                  {T("USDValue(Snapshot)")}
                 </HeaderCell>
                 {/* <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("th-Tx")}
+                  {T("Tx")}
                 </HeaderCell> */}
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("th-CreatedTime")}
+                  {T("CreatedTime")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]"></HeaderCell>
               </HeaderRow>

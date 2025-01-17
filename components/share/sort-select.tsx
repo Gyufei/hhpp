@@ -27,7 +27,7 @@ export function SortSelect({
   handleSortFieldChange: (_s: ISortField) => void;
   handleSortDirChange: (_s: ISortDir) => void;
 }) {
-  const t = useTranslations("sl-OrderSort");
+  const t = useTranslations("OrderSort");
   const [popOpen, setPopOpen] = useState(false);
 
   function handleSortDirClick(field: ISortField, dir: ISortDir) {
@@ -45,8 +45,8 @@ export function SortSelect({
         >
           <Image src="/icons/sort.svg" width={20} height={20} alt="type icon" />
           <div className="overflow-hidden text-clip whitespace-nowrap text-xs leading-[18px] text-title-white">{`${t(
-            "sl-" + sortField,
-          )}:${t("sl-" + sortDir)}`}</div>
+            "" + sortField,
+          )}:${t("" + sortDir)}`}</div>
           <Image
             data-open={popOpen}
             src="/icons/arrow-down.svg"
@@ -96,14 +96,14 @@ function SortOptions({
   onSortDirChange: (_field: ISortField, _dir: ISortDir) => void;
   alignOffset?: number;
 }) {
-  const t = useTranslations("sl-OrderSort");
+  const t = useTranslations("OrderSort");
   return (
     <DropdownMenuSub>
       <DropdownMenuSubTrigger
         data-checked={sortField === field}
         className="flex h-9 cursor-pointer items-center rounded px-4 text-xs leading-[18px] text-gray hover:text-main data-[checked=true]:text-main"
       >
-        {t("sl-" + field)}
+        {t("" + field)}
       </DropdownMenuSubTrigger>
       <DropdownMenuPortal>
         <DropdownMenuSubContent
@@ -149,7 +149,7 @@ function SortUpDown({
   active: boolean;
   isDown: boolean;
 }) {
-  const t = useTranslations("sl-OrderSort");
+  const t = useTranslations("OrderSort");
   const local = useLocale();
   const isEn = local === "en";
 
@@ -172,7 +172,7 @@ function SortUpDown({
       />
       <span className="text-xs leading-[18px]">
         {isEn ? "Sort " : ""}
-        {isDown ? t("sl-Descending") : t("sl-Ascending")}
+        {isDown ? t("Descending") : t("Ascending")}
       </span>
     </div>
   );

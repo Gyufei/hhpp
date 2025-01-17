@@ -164,7 +164,7 @@ export default function AskDetail({
           <SliderCard
             topText={
               <>
-                {T("txt-YouPay")}
+                {T("YouPay")}
                 <StableBalance className="mb-0" />
               </>
             }
@@ -196,7 +196,7 @@ export default function AskDetail({
           {isFilled ? (
             <>
               <button className="mt-4 flex h-8 w-full items-center justify-center rounded bg-[#D1D4DC] text-xs leading-[18px] text-bg-black">
-                {T("btn-Offer100%Filled")}
+                {T("Offer100%Filled")}
               </button>
             </>
           ) : (
@@ -214,7 +214,7 @@ export default function AskDetail({
                   }
                   className="mt-1 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive"
                 >
-                  {T("btn-ConfirmOrder")}
+                  {T("ConfirmOrder")}
                 </button>
               </WithWalletConnectBtn>
             </div>

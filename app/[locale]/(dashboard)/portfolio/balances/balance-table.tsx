@@ -131,19 +131,19 @@ export function BalanceTable() {
             <Header className="text-xs leading-[18px] text-gray">
               <HeaderRow className="">
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("th-Coin")}
+                  {T("Coin")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("th-TotalBalance")}
+                  {T("TotalBalance")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("th-AvailableBalance")}
+                  {T("AvailableBalance")}
                 </HeaderCell>
                 <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("th-USDValue")}
+                  {T("USDValue")}
                 </HeaderCell>
                 {/* <HeaderCell className="h-10 px-1 py-[11px]">
-                  <div className="underline">{T("th-PnL(%)")}</div>
+                  <div className="underline">{T("PnL(%)")}</div>
                 </HeaderCell> */}
                 <HeaderCell className="h-10 px-1 py-[11px]"></HeaderCell>
               </HeaderRow>
@@ -188,7 +188,7 @@ export function BalanceTable() {
                       }}
                     >
                       <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]">
-                        {TB("th-List")}
+                        {TB("List")}
                       </div>
                     </WithWalletConnectBtn>
                   </Cell>
@@ -230,7 +230,7 @@ export function BalanceTable() {
           size={500}
           className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
         >
-          <DrawerTitle title={TC("cap-List")} onClose={handleCloseDrawer} />
+          <DrawerTitle title={TC("List")} onClose={handleCloseDrawer} />
 
           <SellContent
             onSuccess={handleCloseDrawer}

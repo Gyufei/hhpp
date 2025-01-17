@@ -81,7 +81,7 @@ export function FilterSelect({
             className="flex h-9 cursor-pointer items-center rounded-xl px-4 text-xs leading-[18px] text-black data-[checked=true]:bg-[#FAFAFA]"
             onClick={() => setCheckFilterType(FilterTypes[0])}
           >
-            {T("sl-Type")}
+            {T("Type")}
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent
@@ -110,7 +110,7 @@ export function FilterSelect({
             className="flex h-9 cursor-pointer items-center rounded-xl px-4 text-xs leading-[18px] text-black data-[checked=true]:bg-[#FAFAFA]"
             onClick={() => setCheckFilterType(FilterTypes[1])}
           >
-            {T("sl-Status")}
+            {T("Status")}
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent

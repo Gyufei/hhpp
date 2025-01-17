@@ -37,7 +37,7 @@ export default function Referral() {
       <div className="hidden items-center justify-between rounded bg-bg-black p-5 sm:flex ">
         <div className="flex w-full items-center justify-between">
           <div className="text-xl leading-[30px] text-title-white">
-            {rt("cap-Referrals")}
+            {rt("Referrals")}
           </div>
           <ReferralInfo referralData={referralData || []} />
         </div>
@@ -47,7 +47,7 @@ export default function Referral() {
         <div className="mt-4 flex h-full flex-col rounded bg-bg-black p-[10px] sm:mt-0 sm:bg-transparent">
           <div className="flex h-[24px] items-center space-x-[5px]">
             <div className="pl-[10px] text-sm leading-5 text-title-white">
-              {rt("cap-ReferralLink")}
+              {rt("ReferralLink")}
             </div>
             <HoverIcon
               onClick={handleCreate}

@@ -97,7 +97,7 @@ export default function MyAskDetail({
               <div className="flex items-center">
                 {ot("txt-YouGet")}
                 <WithTip align="start">
-                  {ot("tip-YouGet", {
+                  {ot("YouGet", {
                     pointName: offer.marketplace.item_name,
                   })}
                 </WithTip>
@@ -114,11 +114,11 @@ export default function MyAskDetail({
                   disabled={true}
                   className="mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-[18px] text-title-white"
                 >
-                  {ot("btn-OfferClosed")}
+                  {ot("OfferClosed")}
                 </button>
               ) : isClosed ? (
                 <button className="pointer-events-none mt-4  flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-6 text-title-white">
-                  {ot("btn-TradingEnded")}
+                  {ot("TradingEnded")}
                 </button>
               ) : (
                 <>
@@ -131,7 +131,7 @@ export default function MyAskDetail({
                       disabled={isClosing}
                       className="mt-4 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive"
                     >
-                      {ot("btn-CloseThisOffer")}
+                      {ot("CloseThisOffer")}
                     </button>
                   </WithWalletConnectBtn>
                   <div className="mt-2 rounded bg-[#FBF2EA] px-3 py-2 text-xs leading-5 text-[#FFA95B]">

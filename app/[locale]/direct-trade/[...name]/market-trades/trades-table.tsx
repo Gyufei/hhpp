@@ -171,7 +171,7 @@ export function TradesTable({
         ),
     },
     {
-      label: t("th-ItemId"),
+      label: t("ItemId"),
       renderCell: (trade: any) =>
         isLoadingFlag ? (
           <Skeleton className="h-[16px] w-[80px]" />
@@ -180,7 +180,7 @@ export function TradesTable({
         ),
     },
     {
-      label: t("th-Value"),
+      label: t("Value"),
       renderCell: (trade: any) =>
         isLoadingFlag ? (
           <Skeleton className="h-[16px] w-[100px]" />
@@ -209,7 +209,7 @@ export function TradesTable({
         ),
     },
     {
-      label: t("th-Amount"),
+      label: t("Amount"),
       renderCell: (trade: any) =>
         isLoadingFlag ? (
           <Skeleton className="h-[16px] w-[50px]" />
@@ -223,7 +223,7 @@ export function TradesTable({
         ),
     },
     {
-      label: t("th-Buyer"),
+      label: t("Buyer"),
       renderCell: (trade: any) =>
         isLoadingFlag ? (
           <Skeleton className="h-[16px] w-[60px]" />
