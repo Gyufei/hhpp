@@ -105,10 +105,8 @@ export function OrderTable() {
       }
     `,
     HeaderCell: `
-      font-size: 12px;
-      font-weight: 400;
       color: #949e9c;
-      line-height: 18px;
+      font-weight: 400;
     `,
     Cell: `
       color: #F6FEFD;

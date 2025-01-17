@@ -29,7 +29,7 @@ import { formatNum } from "@/lib/utils/number";
 import { IReferralItem } from "@/lib/hooks/api/use-referral-data";
 import toast from "react-hot-toast";
 
-import { ReferralDrawer } from "./referral-drawer";
+import { ReferralRateDialog } from "./referral-rate-dialog";
 import {
   useReferralDelete,
   useReferralDefault,
@@ -83,10 +83,8 @@ export function ReferralTable({
       }
     `,
     HeaderCell: `
-      font-size: 12px;
-      font-weight: 400;
       color: #949e9c;
-      line-height: 18px;
+      font-weight: 400;
     `,
     Cell: `
       color: #F6FEFD;
@@ -183,7 +181,7 @@ export function ReferralTable({
         )}
       </Table>
 
-      <ReferralDrawer
+      <ReferralRateDialog
         referral={drawerData}
         drawerOpen={drawerOpen}
         setDrawerOpen={setDrawerOpen}

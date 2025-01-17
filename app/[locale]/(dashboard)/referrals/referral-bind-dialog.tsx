@@ -14,7 +14,7 @@ import { toast } from "react-hot-toast";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function ReferralDialog() {
+export default function ReferralBindDialog() {
   const query = useSearchParams();
   const referralCode = query.get("s") || "";
 

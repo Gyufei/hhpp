@@ -13,7 +13,7 @@ import { NumericalInput } from "@/components/share/numerical-input";
 import { useReferralRateChange } from "@/lib/hooks/api/use-referral";
 import { useGlobalConfig } from "@/lib/hooks/use-global-config";
 
-export function ReferralDrawer({
+export function ReferralRateDialog({
   referral,
   onSuccess,
   drawerOpen,
@@ -191,7 +191,7 @@ export function ReferralDrawer({
 
           <div className="relative border-t border-[#303030] px-5 py-4">
             <WithWalletConnectBtn onClick={handleSaveRate}>
-              <button className="mt-2 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive">
+              <button className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive">
                 {T("Save")}
               </button>
             </WithWalletConnectBtn>

@@ -58,22 +58,32 @@ export function TakerOrders({
     Header: "",
     Body: "",
     BaseRow: `
-      background-color: transparent;
+      font-size: 12px;
+      background-color: #111a1e;
+      line-height: 18px;
     `,
     HeaderRow: ``,
-    Row: ``,
-    BaseCell: `
-      font-size: 12px;
+    Row: `
+      border-radius: 4px;
+
+      &:hover {
+        background: #222428;
+      }
     `,
-    HeaderCell: `
-      font-size: 12px;
-      color: #949e9c;
-      font-weight: 400;
-      line-height: 18px;
-      
+    BaseCell: `
+      &:first-of-type {
+        padding-left: 10px;
+      }
+
       &:last-of-type {
+        padding-right: 10px;
         text-align: right;
       }
+    `,
+    HeaderCell: `
+      color: #949e9c;
+      font-weight: 400;
+      
     `,
     Cell: `
       color: #F6FEFD;
