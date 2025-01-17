@@ -23,7 +23,7 @@ const SignMessageKey = "hypes-trade-sign-message";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function ConnectBtn() {
-  const t = useTranslations("Header");
+  const T = useTranslations("Header");
 
   const { signMessage } = useSignMessage();
   const { isMobileSize } = useDeviceSize();
@@ -106,7 +106,7 @@ export default function ConnectBtn() {
           className="h-10 rounded bg-[#f0f1f5] bg-main px-4 text-xs leading-6 text-bg-black transition-all hover:bg-main-hover sm:h-9 sm:px-[10px]"
           onClick={() => handleConnect()}
         >
-          <span>{t("Connect")}</span>
+          <span>{T("Connect")}</span>
         </button>
       </>
     );

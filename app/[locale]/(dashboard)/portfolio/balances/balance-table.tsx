@@ -24,8 +24,8 @@ import DrawerTitle from "@/components/share/drawer-title";
 import Drawer from "react-modern-drawer";
 export function BalanceTable() {
   const T = useTranslations("page-MyBalances");
-  const TC = useTranslations("drawer-CreateOffer");
-  const TB = useTranslations("page-MyBalances");
+  const CT = useTranslations("drawer-CreateOffer");
+  const BT = useTranslations("page-MyBalances");
 
   const [marketCreateOffer, setOpenMarketCreateOffer] = useState(null);
 
@@ -184,7 +184,7 @@ export function BalanceTable() {
                       }}
                     >
                       <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]">
-                        {TB("List")}
+                        {BT("List")}
                       </div>
                     </WithWalletConnectBtn>
                   </Cell>
@@ -226,7 +226,7 @@ export function BalanceTable() {
           size={500}
           className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
         >
-          <DrawerTitle title={TC("List")} onClose={handleCloseDrawer} />
+          <DrawerTitle title={CT("List")} onClose={handleCloseDrawer} />
 
           <SellContent
             onSuccess={handleCloseDrawer}

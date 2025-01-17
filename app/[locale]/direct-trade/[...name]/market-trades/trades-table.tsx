@@ -26,7 +26,7 @@ export function TradesTable({
   marketplace: IMarketplace | undefined;
   isLoading: boolean;
 }) {
-  const t = useTranslations("tb-MarketTrades");
+  const T = useTranslations("tb-MarketTrades");
   const { data: historyData, isLoading: isHistoryLoading } = useMarketTrades(
     marketplace?.chain || ChainType.HYPER,
     marketplace?.market_place_account || "",
@@ -171,7 +171,7 @@ export function TradesTable({
         ),
     },
     {
-      label: t("ItemId"),
+      label: T("ItemId"),
       renderCell: (trade: any) =>
         isLoadingFlag ? (
           <Skeleton className="h-[16px] w-[80px]" />
@@ -180,7 +180,7 @@ export function TradesTable({
         ),
     },
     {
-      label: t("Value"),
+      label: T("Value"),
       renderCell: (trade: any) =>
         isLoadingFlag ? (
           <Skeleton className="h-[16px] w-[100px]" />
@@ -209,7 +209,7 @@ export function TradesTable({
         ),
     },
     {
-      label: t("Amount"),
+      label: T("Amount"),
       renderCell: (trade: any) =>
         isLoadingFlag ? (
           <Skeleton className="h-[16px] w-[50px]" />
@@ -223,7 +223,7 @@ export function TradesTable({
         ),
     },
     {
-      label: t("Buyer"),
+      label: T("Buyer"),
       renderCell: (trade: any) =>
         isLoadingFlag ? (
           <Skeleton className="h-[16px] w-[60px]" />

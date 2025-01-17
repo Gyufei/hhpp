@@ -11,7 +11,7 @@ export default function OrderNoteAndFee({
   value: string;
   onValueChange: (_v: string) => void;
 }) {
-  const cot = useTranslations("drawer-CreateOffer");
+  const T = useTranslations("drawer-CreateOffer");
   const [showInput, setShowInput] = useState(false);
 
   function handleInputNote(v: string) {
@@ -33,7 +33,7 @@ export default function OrderNoteAndFee({
     <div className="flex flex-col">
       <div className="flex items-center space-x-1">
         <div className="mr-[6px] text-xs leading-[18px] text-title-white">
-          {cot("OrderNote")}
+          {T("OrderNote")}
         </div>
         <Checkbox
           checked={showInput}
@@ -46,7 +46,7 @@ export default function OrderNoteAndFee({
             <Textarea
               value={value}
               onChange={(e) => handleInputNote(e.target.value)}
-              placeholder={cot("AnythingYouWantToInformTheBuyer")}
+              placeholder={T("AnythingYouWantToInformTheBuyer")}
               className="h-[66px] rounded border border-border-black text-xs leading-[18px] text-title-white placeholder:text-gray"
             />
             <div className="absolute bottom-2 right-4 text-xs leading-[18px] text-gray">

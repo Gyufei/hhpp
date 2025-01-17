@@ -10,9 +10,9 @@ const tabClx =
   "flex w-[105px] items-center px-[10px] font-[400] py-[10px] text-sm leading-5 border-b-2 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray rounded-none";
 
 export default function PortFolio() {
-  const TH = useTranslations("Header");
-  const TO = useTranslations("page-MyOrders");
-  const TB = useTranslations("page-MyBalances");
+  const HT = useTranslations("Header");
+  const MOT = useTranslations("page-MyOrders");
+  const MBT = useTranslations("page-MyBalances");
 
   const [currentTab, setCurrentTab] = useState("orders");
 
@@ -21,7 +21,7 @@ export default function PortFolio() {
       <div className="mb-[2px] mr-0 hidden items-center justify-between rounded bg-bg-black px-5 py-[22px] sm:flex">
         <div className="flex w-full items-center justify-between space-x-5">
           <div className="text-xl leading-[30px] text-title-white">
-            {TH("Dashboard")}
+            {HT("Dashboard")}
           </div>
           <PortfolioInfo />
         </div>
@@ -34,10 +34,10 @@ export default function PortFolio() {
         <TabsList className="flex items-center justify-between rounded-none border-b border-[#303030] p-0">
           <div className="flex items-center justify-start space-x-[10px]">
             <TabsTrigger className={tabClx} value="orders">
-              {TO("MyOrders")}
+              {MOT("MyOrders")}
             </TabsTrigger>
             <TabsTrigger className={tabClx} value="balances">
-              {TB("MyBalances")}
+              {MBT("MyBalances")}
             </TabsTrigger>
           </div>
         </TabsList>

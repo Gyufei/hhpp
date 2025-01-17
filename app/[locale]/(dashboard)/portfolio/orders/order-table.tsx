@@ -302,7 +302,7 @@ function DetailBtn({
   chain: ChainType;
   onClick: () => void;
 }) {
-  const ct = useTranslations("Common");
+  const CT = useTranslations("Common");
   return (
     <WithWalletConnectBtn
       chain={chain}
@@ -310,7 +310,7 @@ function DetailBtn({
       onClick={onClick}
     >
       <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]">
-        {ct("Detail")}
+        {CT("Detail")}
       </div>
     </WithWalletConnectBtn>
   );

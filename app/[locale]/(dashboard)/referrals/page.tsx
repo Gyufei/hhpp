@@ -8,7 +8,7 @@ import { useReferralCreate } from "@/lib/hooks/api/use-referral";
 import HoverIcon from "@/components/share/hover-icon";
 
 export default function Referral() {
-  const rt = useTranslations("page-Referral");
+  const T = useTranslations("page-Referral");
 
   const { data: referralData, mutate: refetch } = useReferralData();
 
@@ -37,7 +37,7 @@ export default function Referral() {
       <div className="hidden items-center justify-between rounded bg-bg-black p-5 sm:flex ">
         <div className="flex w-full items-center justify-between">
           <div className="text-xl leading-[30px] text-title-white">
-            {rt("Referrals")}
+            {T("Referrals")}
           </div>
           <ReferralInfo referralData={referralData || []} />
         </div>
@@ -47,7 +47,7 @@ export default function Referral() {
         <div className="mt-4 flex h-full flex-col rounded bg-bg-black p-[10px] sm:mt-0 sm:bg-transparent">
           <div className="flex h-[24px] items-center space-x-[5px]">
             <div className="pl-[10px] text-sm leading-5 text-title-white">
-              {rt("ReferralLink")}
+              {T("ReferralLink")}
             </div>
             <HoverIcon
               onClick={handleCreate}

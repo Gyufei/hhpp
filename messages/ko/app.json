@@ -28,7 +28,8 @@
     "drawer-Wallets": "지갑",
     "drawer-SocialMedia": "소셜 미디어",
     "Deposit": "입금",
-    "Withdraw": "출금"
+    "Withdraw": "출금",
+    "ChargeFeeTip": "Hyperliquid는 미국 달러 토큰을 입금할 때 일부 수수료를 부과합니다."
   },
   "card-Marketplace": {
     "InitialListing": "초기 상장",

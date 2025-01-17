@@ -68,8 +68,8 @@ export function ReferralSignInBtn({
   referralCode: string;
   onSuccess: () => void;
 }) {
-  const t = useTranslations("Header");
-  const rt = useTranslations("page-Referral");
+  const T = useTranslations("Header");
+  const RT = useTranslations("page-Referral");
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -126,10 +126,10 @@ export function ReferralSignInBtn({
   return (
     <>
       <div className="mb-3 text-xl leading-[30px] text-title-white">
-        {t("Welcome")}
+        {T("Welcome")}
       </div>
       <div className="min-h-10 px-5 text-center text-sm leading-5 text-title-white">
-        {t.rich("txt-YourFriendSentYouAnOnboardingInvitation", {
+        {T.rich("txt-YourFriendSentYouAnOnboardingInvitation", {
           name: (_chunks: any) => (
             <span className="text-green">{shortAddr}</span>
           ),
@@ -143,7 +143,7 @@ export function ReferralSignInBtn({
       <div className="mt-6 w-full">
         <WithWalletConnectBtn onClick={handleSignInReferral}>
           <button className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover">
-            {address ? rt("Bind") : t("SignIn")}
+            {address ? RT("Bind") : T("SignIn")}
           </button>
         </WithWalletConnectBtn>
       </div>

@@ -26,7 +26,7 @@ export function OfferCard({
   offer: IOffer;
   handleShowOffer: (offer: IOffer) => void;
 }) {
-  const t = useTranslations("cd-Order");
+  const T = useTranslations("cd-Order");
 
   const {
     progress,
@@ -97,7 +97,7 @@ export function OfferCard({
       <div className="mt-4 flex items-center justify-between border-b border-border-black pb-5">
         <div className="flex flex-1 grow flex-col">
           <div className="mb-[2px] text-xs leading-[18px] text-gray">
-            {t("Offer")}
+            {T("Offer")}
           </div>
           <div className="flex items-center leading-6 text-txt-white">
             {formatNum(offerValue, 2, true)}
@@ -129,7 +129,7 @@ export function OfferCard({
         </div>
         <div className="flex flex-1 grow flex-col items-end">
           <div className="mb-[2px] text-xs leading-[18px] text-gray">
-            {t("For")}
+            {T("For")}
           </div>
           <div className="flex items-center leading-6 text-txt-white">
             {formatNum(forValue, 2, true)}
@@ -190,7 +190,7 @@ export function OfferCard({
               }}
             >
               <button className="flex items-center justify-center rounded-full border border-main px-[18px] py-1 text-sm leading-5 text-main hover:border-main-hover hover:text-main-hover">
-                {orderType === "sell" ? t("Buy") : t("Sell")}
+                {orderType === "sell" ? T("Buy") : T("Sell")}
               </button>
             </WithWalletConnectBtn>
           )}
@@ -200,7 +200,7 @@ export function OfferCard({
               onClick={() => handleShow()}
             >
               <button className="flex items-center justify-center rounded-full border border-main px-[18px] py-1 text-sm leading-5 text-main hover:border-main-hover hover:text-main-hover">
-                {t("Detail")}
+                {T("Detail")}
               </button>
             </WithWalletConnectBtn>
           )}

@@ -17,7 +17,7 @@ export default function OfferDetailDrawer({
   onSuccess: () => void;
   onClose: () => void;
 }) {
-  const ot = useTranslations("drawer-OfferDetail");
+  const OT = useTranslations("drawer-OfferDetail");
 
   const { connected } = useChainWallet();
 
@@ -65,7 +65,7 @@ export default function OfferDetailDrawer({
         className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
       >
         <DrawerTitle
-          title={ot("OfferDetail")}
+          title={OT("OfferDetail")}
           onClose={() => setDrawerOpen(false)}
         />
 

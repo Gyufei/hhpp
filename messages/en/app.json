@@ -28,7 +28,8 @@
     "drawer-Wallets": "Wallets",
     "drawer-SocialMedia": "Social Media",
     "Deposit": "Deposit",
-    "Withdraw": "Withdraw"
+    "Withdraw": "Withdraw",
+    "ChargeFeeTip": "Hyperliquid Will Charge You Some Fee When Bridging Usdc Over Arbitrum Ups To Your Deposit Amount."
   },
   "card-Marketplace": {
     "InitialListing": "Initial Listing",

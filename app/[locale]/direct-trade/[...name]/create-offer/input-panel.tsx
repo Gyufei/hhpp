@@ -22,7 +22,7 @@ export function InputPanel({
   hasError?: boolean;
   className?: string;
 }) {
-  const cot = useTranslations("Common");
+  const T = useTranslations("Common");
 
   return (
     <div
@@ -37,7 +37,7 @@ export function InputPanel({
         {isCanInput ? (
           <NumericalInput
             className="mr-1 mt-2 h-9 max-w-[240px] text-left text-2xl leading-9 text-title-white placeholder:text-gray sm:max-w-full"
-            placeholder={cot("EnterAmount")}
+            placeholder={T("EnterAmount")}
             value={value}
             onUserInput={onValueChange}
           />

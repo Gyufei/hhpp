@@ -25,7 +25,7 @@ export default function MyAskDetail({
   offer: IOffer;
   onSuccess: () => void;
 }) {
-  const ot = useTranslations("drawer-OfferDetail");
+  const T = useTranslations("drawer-OfferDetail");
   const {
     tokenTotalPrice,
     progress,
@@ -76,7 +76,7 @@ export default function MyAskDetail({
 
           <SwapItemPanel
             className="mt-5"
-            topText={<>{ot("txt-YouHaveToSell")}</>}
+            topText={<>{T("txt-YouHaveToSell")}</>}
             bottomText={<>~${formatNum(tokenTotalPrice)} </>}
             value={String(NP.divide(offer.item_amount, pointDecimalNum))}
             tokenLogo={offerPointInfo.logoURI}
@@ -96,9 +96,9 @@ export default function MyAskDetail({
             }
             topText={
               <div className="flex items-center">
-                {ot("txt-YouGet")}
+                {T("txt-YouGet")}
                 <WithTip align="start">
-                  {ot("YouGet", {
+                  {T("YouGet", {
                     pointName: offer.marketplace.item_name,
                   })}
                 </WithTip>
@@ -115,11 +115,11 @@ export default function MyAskDetail({
                   disabled={true}
                   className="mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-[18px] text-title-white"
                 >
-                  {ot("OfferClosed")}
+                  {T("OfferClosed")}
                 </button>
               ) : isClosed ? (
                 <button className="pointer-events-none mt-4  flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-6 text-title-white">
-                  {ot("TradingEnded")}
+                  {T("TradingEnded")}
                 </button>
               ) : (
                 <>
@@ -135,11 +135,11 @@ export default function MyAskDetail({
                         isClosing ? "dot-loading" : "",
                       )}
                     >
-                      {ot("CloseThisOffer")}
+                      {T("CloseThisOffer")}
                     </button>
                   </WithWalletConnectBtn>
                   <div className="mt-2 rounded bg-[#FBF2EA] px-3 py-2 text-xs leading-5 text-[#FFA95B]">
-                    {ot("txt-YouHaveTheOptionToClose")}
+                    {T("txt-YouHaveTheOptionToClose")}
                   </div>
                 </>
               )}

@@ -16,7 +16,7 @@ export default function MarketplaceOverview({
   marketplace: IMarketplace | undefined;
   isLoading?: boolean;
 }) {
-  const t = useTranslations("card-Marketplace");
+  const T = useTranslations("card-Marketplace");
   const isLoadingFlag = !marketplace || isLoading;
   const { isMobileSize } = useDeviceSize();
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -61,7 +61,7 @@ export default function MarketplaceOverview({
           <>
             <div className="flex justify-between">
               <LabelText isLoading={isLoadingFlag}>
-                {t("InitialListing")}
+                {T("InitialListing")}
               </LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />
@@ -81,7 +81,7 @@ export default function MarketplaceOverview({
 
             <div className="flex justify-between">
               <LabelText isLoading={isLoadingFlag}>
-                {t("AllTimeHigh")}
+                {T("AllTimeHigh")}
               </LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />
@@ -103,7 +103,7 @@ export default function MarketplaceOverview({
 
             <div className="hidden justify-between sm:flex">
               <LabelText isLoading={isLoadingFlag}>
-                {t("24hChange")}
+                {T("24hChange")}
               </LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />
@@ -114,7 +114,7 @@ export default function MarketplaceOverview({
 
             <div className="flex justify-between">
               <LabelText isLoading={isLoadingFlag}>
-                {t("FilledOrders")}
+                {T("FilledOrders")}
               </LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />
@@ -127,7 +127,7 @@ export default function MarketplaceOverview({
 
             <div className="flex justify-between">
               <LabelText isLoading={isLoadingFlag}>
-                {t("ListedSupply")}
+                {T("ListedSupply")}
               </LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />
@@ -142,7 +142,7 @@ export default function MarketplaceOverview({
 
             <div className="flex justify-between ">
               <LabelText isLoading={isLoadingFlag}>
-                {t("ActiveWallets")}
+                {T("ActiveWallets")}
               </LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />

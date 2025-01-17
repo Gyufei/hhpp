@@ -18,7 +18,7 @@ export default function OfferAboutMineDetailDrawer({
   drawerOpen: boolean;
   setDrawerOpen: (open: boolean) => void;
 }) {
-  const ot = useTranslations("drawer-OfferDetail");
+  const T = useTranslations("drawer-OfferDetail");
 
   function handleSuccess() {
     if (!drawerOpen) return;
@@ -40,7 +40,7 @@ export default function OfferAboutMineDetailDrawer({
       className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
     >
       <DrawerTitle
-        title={ot("OfferDetail")}
+        title={T("OfferDetail")}
         onClose={() => setDrawerOpen(false)}
       />
 

@@ -43,7 +43,7 @@ export function ReferralTable({
   referralData?: IReferralItem[] | null;
   refresh: () => void;
 }) {
-  const rt = useTranslations("page-Referral");
+  const T = useTranslations("page-Referral");
 
   const data = useMemo(() => {
     return {
@@ -106,7 +106,7 @@ export function ReferralTable({
   if (!data.nodes.length) {
     return (
       <div className="flex w-screen flex-1 items-center justify-center pt-20 text-base text-gray sm:w-full">
-        {rt("txt-YourReferralLinkAppearHere")}
+        {T("txt-YourReferralLinkAppearHere")}
       </div>
     );
   }
@@ -119,28 +119,28 @@ export function ReferralTable({
             <Header className="text-xs leading-[18px] text-gray">
               <HeaderRow className="border-none">
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("ReferralCode")}
+                  {T("ReferralCode")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("SignedUp")}
+                  {T("SignedUp")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("TradingUsers")}
+                  {T("TradingUsers")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("TradingVol")}
+                  {T("TradingVol")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("Views")}
+                  {T("Views")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("CommissionRates")}
+                  {T("CommissionRates")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("Note")}
+                  {T("Note")}
                 </HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
-                  {rt("Op")}
+                  {T("Op")}
                 </HeaderCell>
               </HeaderRow>
             </Header>
@@ -273,7 +273,7 @@ function ReferralNote({
   rD: IReferralItem;
   onSuccess: () => void;
 }) {
-  const rt = useTranslations("page-Referral");
+  const T = useTranslations("page-Referral");
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState(rD.notes);
   const [isEdit, setIsEdit] = useState(false);
@@ -328,7 +328,7 @@ function ReferralNote({
         <div ref={outSideRef}>
           <Input
             ref={inputRef}
-            placeholder={rt("Note")}
+            placeholder={T("Note")}
             value={inputValue}
             onChange={(e: any) => setInputValue(e.target.value)}
             onKeyDown={handleKeyPress}

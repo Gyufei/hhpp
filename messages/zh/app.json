@@ -28,7 +28,8 @@
     "drawer-Wallets": "线包",
     "drawer-SocialMedia": "社交媒体",
     "Deposit": "存款",
-    "Withdraw": "提款"
+    "Withdraw": "提款",
+    "ChargeFeeTip": "Hyperliquid 在将 USDC 桥接到 Arbitrum 时会收取一部分费用。"
   },
   "card-Marketplace": {
     "InitialListing": "发行价",
