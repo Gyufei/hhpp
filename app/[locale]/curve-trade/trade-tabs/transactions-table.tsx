@@ -45,24 +45,24 @@ export function TransactionsTable() {
       margin-top: 10px;
       grid-template-rows: 24px repeat(auto-fit, 40px);
       grid-template-columns: repeat(6, minmax(0, 1fr)) 100px;
-      font-weight: 400;
       grid-auto-rows: 40px;
     `,
     Header: "",
     Body: "",
     BaseRow: `
-      background: transparent;
-      padding: 0 10px;
+      font-size: 12px;
+      line-height: 18px;
+      background: #111a1e;
     `,
     HeaderRow: ``,
     Row: `
       border-radius: 4px;
+
       &:hover {
-        background-color: #222428;
+        background: #222428;
       }
     `,
     BaseCell: `
-      font-size: 12px;
       text-align: left;
 
       &:first-of-type {
@@ -71,30 +71,15 @@ export function TransactionsTable() {
 
       &:last-of-type {
         padding-right: 10px;
-      }
-    `,
-    HeaderCell: `
-      font-size: 12px;
-      font-weight: 400;
-      color: #949e9c;
-      line-height: 18px;
-
-      &:last-child {
         text-align: right;
       }
     `,
+    HeaderCell: `
+      font-weight: 400;
+      color: #949e9c;
+    `,
     Cell: `
       color: #f6fefd;
-      
-      &:first-of-type {
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-      }
-
-      &:last-child {
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
-      }
     `,
   });
 

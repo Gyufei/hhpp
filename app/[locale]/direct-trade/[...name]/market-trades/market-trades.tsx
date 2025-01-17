@@ -13,7 +13,7 @@ export default function MarketTrades({
   marketplace: IMarketplace | undefined;
   isLoading?: boolean;
 }) {
-  const T = useTranslations("tb-MarketTrades");
+  const T = useTranslations("Marketplace");
   const isLoadingFlag = !marketplace || isLoading;
   // const [tradeType, setTradeType] = useState<ITradeType>("All");
 

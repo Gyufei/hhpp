@@ -17,7 +17,7 @@ export default function OfferDetailDrawer({
   onSuccess: () => void;
   onClose: () => void;
 }) {
-  const OT = useTranslations("drawer-OfferDetail");
+  const OT = useTranslations("Offer");
 
   const { connected } = useChainWallet();
 

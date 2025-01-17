@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 export default function RollInBtn() {
-  const T = useTranslations("cd-AccountOverview");
+  const T = useTranslations("Dashboard");
   const { connected } = useChainWallet();
 
   const { isLoading, isSuccess, write: rollinAction } = useRollin();

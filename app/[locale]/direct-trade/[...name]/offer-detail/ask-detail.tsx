@@ -29,7 +29,7 @@ export default function AskDetail({
   offer: IOffer;
   onSuccess: (_o: Record<string, any>) => void;
 }) {
-  const T = useTranslations("drawer-OfferDetail");
+  const T = useTranslations("Offer");
 
   const { platformFee } = useGlobalConfig();
 
@@ -60,8 +60,8 @@ export default function AskDetail({
     write: writeAction,
   } = useCreateTakerOrder();
 
-  const [payTokenAmount, setPayTokenAmount] = useState(0);
-  const [receivePointAmount, setReceivePointAmount] = useState(0);
+  const [payTokenAmount, setPayTokenAmount] = useState("0");
+  const [receivePointAmount, setReceivePointAmount] = useState("0");
 
   const [errorText, setErrorText] = useState("");
 
@@ -70,12 +70,13 @@ export default function AskDetail({
   }, [offer]);
 
   const calcPayAmountByReceive = useCallback(
-    (receiveNum: number) => {
-      if (!receiveNum) return 0;
+    (receiveNum: string) => {
+      if (!Number(receiveNum)) return "0";
+      if (!receiveNum) return "";
 
       const pay = NP.times(NP.divide(receiveNum, offer.item_amount), forValue);
       const payWithFee = NP.times(pay, 1 + platformFee + tradeFee);
-      return payWithFee;
+      return String(payWithFee);
     },
 
     [forValue, offer.item_amount, tradeFee, platformFee],
@@ -83,13 +84,14 @@ export default function AskDetail({
 
   const calcReceiveByPayAmount = useCallback(
     (payAmountNum: number) => {
-      if (!payAmountNum) return "0";
+      if (!Number(payAmountNum)) return "0";
+      if (!payAmountNum) return "";
 
       const wantPay = Number(payAmountNum);
       const realPay = NP.divide(wantPay, 1 + platformFee + tradeFee);
       const payPercent = NP.divide(realPay, forValue);
       const receive = NP.times(payPercent, offer.item_amount);
-      return receive;
+      return String(receive);
     },
     [forValue, offer.item_amount, tradeFee, platformFee],
   );
@@ -103,7 +105,7 @@ export default function AskDetail({
     let errorText = "";
     errorText = checkUSDCInsufficient(payTokenAmount);
 
-    if (!errorText && receivePointAmount > sliderCanMax) {
+    if (!errorText && Number(receivePointAmount) > sliderCanMax) {
       errorText = `Insufficient ${offer.marketplace.item_name} to Buy`;
     }
 
@@ -117,16 +119,16 @@ export default function AskDetail({
   ]);
 
   function handleSliderChange(v: number) {
-    setReceivePointAmount(v);
+    setReceivePointAmount(String(v));
 
-    const pay = calcPayAmountByReceive(v);
-    setPayTokenAmount(Number(pay));
+    const pay = calcPayAmountByReceive(String(v));
+    setPayTokenAmount(pay);
   }
 
   function handleInputPayTokenAmount(v: string) {
-    setPayTokenAmount(Number(v));
+    setPayTokenAmount(v);
     const receive = calcReceiveByPayAmount(Number(v));
-    setReceivePointAmount(Number(receive));
+    setReceivePointAmount(receive);
   }
 
   async function handleConfirmTakerOrder() {
@@ -176,7 +178,7 @@ export default function AskDetail({
             canGoMax={sliderCanMax}
             canInput={!isFilled}
             sliderMax={sliderCanMax}
-            sliderValue={receivePointAmount}
+            sliderValue={Number(receivePointAmount)}
             setSliderValue={handleSliderChange}
             hasError={!!errorText}
           />

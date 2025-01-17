@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import { useEntryById } from "@/lib/hooks/api/use-entry-by-id";
 
 export default function DetailCard({ offer }: { offer: IOffer }) {
-  const T = useTranslations("drawer-OfferDetail");
+  const T = useTranslations("Offer");
 
   const { offerPointInfo, pointDecimalNum } = useOfferFormat({
     offer,

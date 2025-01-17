@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { toast } from "react-hot-toast";
 
 export default function ReferralLink() {
-  const T = useTranslations("page-Referral");
+  const T = useTranslations("Referral");
 
   const { data: referralData } = useReferralData();
 

@@ -2,7 +2,7 @@ import { useGlobalConfig } from "@/lib/hooks/use-global-config";
 import { useTranslations } from "next-intl";
 
 export default function FeeDisplay() {
-  const T = useTranslations("drawer-CreateOffer");
+  const T = useTranslations("Offer");
   const { minAmount } = useGlobalConfig();
 
   return (

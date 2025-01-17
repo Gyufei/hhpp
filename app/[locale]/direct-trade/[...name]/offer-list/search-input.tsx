@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function SearchInput({
   handleSearch,
 }: {
   handleSearch: (searchText: string) => void;
 }) {
+  const CT = useTranslations("Common");
   const [searchText, setSearchText] = useState("");
   const [isActive, setIsActive] = useState(false);
 
@@ -41,7 +43,7 @@ export default function SearchInput({
       {isActive ? (
         <Input
           ref={inputRef}
-          placeholder="Search"
+          placeholder={CT("Search")}
           onBlur={handleBlur}
           value={searchText}
           onKeyDown={handleKeyPress}

@@ -8,7 +8,7 @@ import { useTakerOrderOfOffers } from "@/lib/hooks/api/use-taker-orders-of-offer
 import { Checkbox } from "@/components/ui/checkbox";
 
 export default function OfferTabs({ offer }: { offer: IOffer }) {
-  const T = useTranslations("drawer-OfferDetail");
+  const T = useTranslations("Offer");
   const [currentTab, setCurrentTab] = useState("orders");
 
   const { address } = useChainWallet();

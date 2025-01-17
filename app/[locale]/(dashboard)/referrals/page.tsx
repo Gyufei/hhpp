@@ -7,7 +7,7 @@ import { useReferralCreate } from "@/lib/hooks/api/use-referral";
 import HoverIcon from "@/components/share/hover-icon";
 
 export default function Referral() {
-  const T = useTranslations("page-Referral");
+  const T = useTranslations("Referral");
 
   const { data: referralData, mutate: refetch } = useReferralData();
 

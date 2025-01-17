@@ -26,7 +26,7 @@ export function TradesTable({
   marketplace: IMarketplace | undefined;
   isLoading: boolean;
 }) {
-  const T = useTranslations("tb-MarketTrades");
+  const T = useTranslations("Marketplace");
   const { data: historyData, isLoading: isHistoryLoading } = useMarketTrades(
     marketplace?.chain || ChainType.HYPER,
     marketplace?.market_place_account || "",
@@ -123,15 +123,15 @@ export function TradesTable({
     Header: "",
     Body: "",
     BaseRow: `
+      font-size: 12px;
+      line-height: 18px;
+      background: #111a1e;
     `,
     HeaderRow: `
       background: #fff;
     `,
     Row: ``,
     BaseCell: `
-      font-size: 12px;
-      font-weight: 400;
-      line-height: 18px;
 
       &:nth-of-type(3),
       &:nth-of-type(5) {
@@ -143,6 +143,8 @@ export function TradesTable({
     HeaderCell: `
       color: #949E9C;
       border-bottom: 1px solid #474747;
+      font-weight: 400;
+
 
       &:nth-of-type(4),
       &:nth-of-type(5) {

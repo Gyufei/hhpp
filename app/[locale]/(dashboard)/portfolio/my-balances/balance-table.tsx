@@ -22,10 +22,11 @@ import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { reportEvent } from "@/lib/utils/analytics";
 import DrawerTitle from "@/components/share/drawer-title";
 import Drawer from "react-modern-drawer";
+
 export function BalanceTable() {
-  const T = useTranslations("page-MyBalances");
-  const CT = useTranslations("drawer-CreateOffer");
-  const BT = useTranslations("page-MyBalances");
+  const T = useTranslations("MyBalances");
+  const CT = useTranslations("Offer");
+  const BT = useTranslations("MyBalances");
 
   const [marketCreateOffer, setOpenMarketCreateOffer] = useState(null);
 
@@ -47,25 +48,32 @@ export function BalanceTable() {
 
   const theme = useTheme({
     Table: `
-      grid-template-columns: 100px repeat(4,minmax(0,1fr));
+      grid-template-columns: 180px repeat(4,minmax(0,1fr));
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
-      gap: 2px;
     `,
     Header: "",
     Body: "",
     BaseRow: `
       font-size: 12px;
       line-height: 18px;
+      background: #111a1e;
     `,
     HeaderRow: `
-      background: transparent;
     `,
     Row: `
+      border-radius: 4px;
+
+      &:hover {
+        background: #222428;
+      }
     `,
     BaseCell: `
       &:first-of-type {
         padding-left: 10px;
+      }
+      &:last-of-type {
+        padding-right: 10px;
       }
 
       &:nth-last-of-type(2) > div,
@@ -74,17 +82,10 @@ export function BalanceTable() {
         justify-content: flex-end;
         align-items: center;
       }
-
-      &:not(:first-of-type) > div {
-        padding-left: 10px;
-      }
     `,
     HeaderCell: `
-      font-size: 12px;
-      font-weight: 400;
       color: #949e9c;
-      line-height: 18px;
-
+      font-weight: 400;
     `,
     Cell: `
       color: #F6FEFD;
@@ -110,7 +111,7 @@ export function BalanceTable() {
   if (!data.nodes.length) {
     return (
       <div className="flex w-screen flex-1 items-center justify-center text-base text-gray sm:w-full">
-        {T("txt-YourBalanceAppearHere")}
+        {T("YourBalanceAppearHere")}
       </div>
     );
   }
@@ -127,54 +128,40 @@ export function BalanceTable() {
           <>
             <Header className="text-xs leading-[18px] text-gray">
               <HeaderRow className="">
-                <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("Coin")}
-                </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("TotalBalance")}
-                </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("AvailableBalance")}
-                </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("USDValue")}
-                </HeaderCell>
-                {/* <HeaderCell className="h-10 px-1 py-[11px]">
+                <HeaderCell>{T("Coin")}</HeaderCell>
+                <HeaderCell>{T("TotalBalance")}</HeaderCell>
+                <HeaderCell>{T("AvailableBalance")}</HeaderCell>
+                <HeaderCell>{T("USDValue")}</HeaderCell>
+                {/* <HeaderCell>
                   <div className="underline">{T("PnL(%)")}</div>
                 </HeaderCell> */}
-                <HeaderCell className="h-10 px-1 py-[11px]"></HeaderCell>
+                <HeaderCell></HeaderCell>
               </HeaderRow>
             </Header>
             <Body>
               {tableList.map((holding) => (
-                <Row
-                  key={holding.offer_id}
-                  item={holding}
-                  className="h-12 border-none !bg-transparent"
-                >
-                  <Cell className="h-12 px-1 py-[11px] align-top ">
-                    {holding.marketplace.item_name}
+                <Row key={holding.offer_id} item={holding}>
+                  <Cell>
+                    <div>{holding.marketplace.item_name}</div>
                   </Cell>
 
-                  <Cell className="h-12 px-1 py-[11px] align-top">
+                  <Cell>
                     <BalanceValue
                       type="total"
                       marketAccount={holding.marketplace.market_place_account}
                     />
                   </Cell>
-                  <Cell className="h-12 px-1 py-[11px] align-top">
+                  <Cell>
                     <BalanceValue
                       type="free"
                       marketAccount={holding.marketplace.market_place_account}
                     />
                   </Cell>
-                  <Cell className="h-12 px-1 py-[11px] align-top">
-                    ${holding.marketplace.last_price * 100}
-                  </Cell>
-                  {/* <Cell className="h-12 px-1 py-[11px] align-top !text-red">
+                  <Cell>${holding.marketplace.last_price * 100}</Cell>
+                  {/* <Cell>
                     -$233.556/-12.34%
                   </Cell> */}
-                  <Cell className="h-12 px-1 py-[11px] align-top">
+                  <Cell>
                     <WithWalletConnectBtn
                       chain={holding.marketplace.chain}
                       className="flex w-fit"

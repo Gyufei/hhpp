@@ -26,7 +26,7 @@ export function OfferCard({
   offer: IOffer;
   handleShowOffer: (offer: IOffer) => void;
 }) {
-  const T = useTranslations("cd-Order");
+  const T = useTranslations("MyOrders");
 
   const {
     progress,

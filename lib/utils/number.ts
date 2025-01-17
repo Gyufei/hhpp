@@ -176,8 +176,9 @@ export function dealDecimals(num: NumberType, decimals: NumberType) {
       const firstNotZero = (match ? match[0].length : 0) + 1;
       const len = firstNotZero > Number(decimals) ? firstNotZero : decimals;
       const subDecimalsNum = len ? Number(len) + 1 : 0;
-      const maxLength = subDecimalsNum + integer.length;
-      return notExpNum.substring(0, maxLength);
+      const maxLength = integer.length + subDecimalsNum;
+      const fixNum = notExpNum.substring(0, maxLength);
+      return fixNum;
     }
   }
 

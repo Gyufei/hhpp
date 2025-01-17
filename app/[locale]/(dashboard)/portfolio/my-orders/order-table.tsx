@@ -14,27 +14,19 @@ import { useMemo, useState } from "react";
 import { useMyOffers } from "@/lib/hooks/api/use-my-offers";
 import { useMyOrders } from "@/lib/hooks/api/use-my-orders";
 import { formatTimestamp } from "@/lib/utils/time";
-import { IRole, IStatus } from "./filter-select";
 import OfferAboutMineDetailDrawer from "../offer-about-mine-detail-drawer";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useTranslations } from "next-intl";
 import { sortBy } from "lodash";
 import { ChainType } from "@/lib/types/chain";
 import { reportEvent } from "@/lib/utils/analytics";
+import { formatNum } from "@/lib/utils/number";
 // import Image from "next/image";
 // import { handleGoScan, truncateAddr } from "@/lib/utils/web3";
 // import { IOffer } from "@/lib/types/offer";
 
-export function OrderTable({
-  role,
-  status,
-  types,
-}: {
-  role: IRole;
-  status: IStatus;
-  types: Array<any>;
-}) {
-  const T = useTranslations("page-MyOrders");
+export function OrderTable() {
+  const T = useTranslations("MyOrders");
 
   const { data: offers, mutate: refreshMyOffers } = useMyOffers({
     market_symbol: null,
@@ -73,29 +65,36 @@ export function OrderTable({
     return {
       nodes: sortData,
     };
-  }, [offers, orders, role, status, types]);
+  }, [offers, orders]);
 
   const theme = useTheme({
     Table: `
       grid-template-columns: 100px repeat(6,minmax(0,1fr));
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
-      gap: 2px;
     `,
     Header: "",
     Body: "",
     BaseRow: `
       font-size: 12px;
       line-height: 18px;
-    `,
-    HeaderRow: `
       background: #111a1e;
     `,
+    HeaderRow: ``,
     Row: `
+      border-radius: 4px;
+
+      &:hover {
+        background: #222428;
+      }
     `,
     BaseCell: `
       &:first-of-type {
         padding-left: 10px;
+      }
+
+      &:last-of-type {
+        padding-right: 10px;
       }
 
       &:nth-last-of-type(2) > div,
@@ -104,16 +103,10 @@ export function OrderTable({
         justify-content: flex-end;
         align-items: center;
       }
-
-      &:not(:first-of-type) > div {
-        padding-left: 10px;
-      }
     `,
     HeaderCell: `
-      font-size: 12px;
-      font-weight: 400;
       color: #949e9c;
-      line-height: 18px;
+      font-weight: 400;
     `,
     Cell: `
       color: #F6FEFD;
@@ -157,44 +150,28 @@ export function OrderTable({
           <>
             <Header className="text-xs leading-[18px] text-gray">
               <HeaderRow className="boffer-none">
-                <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("Coin")}
-                </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("Offer")}
-                </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("Type")}
-                </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("Price")}
-                </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("USDValue(Snapshot)")}
-                </HeaderCell>
-                {/* <HeaderCell className="h-10 px-1 py-[11px]">
+                <HeaderCell>{T("Coin")}</HeaderCell>
+                <HeaderCell>{T("Offer")}</HeaderCell>
+                <HeaderCell>{T("Type")}</HeaderCell>
+                <HeaderCell>{T("Price")}</HeaderCell>
+                <HeaderCell>{T("USDValue(Snapshot)")}</HeaderCell>
+                {/* <HeaderCell>
                   {T("Tx")}
                 </HeaderCell> */}
-                <HeaderCell className="h-10 px-1 py-[11px]">
-                  {T("CreatedTime")}
-                </HeaderCell>
-                <HeaderCell className="h-10 px-1 py-[11px]"></HeaderCell>
+                <HeaderCell>{T("CreatedTime")}</HeaderCell>
+                <HeaderCell></HeaderCell>
               </HeaderRow>
             </Header>
             <Body>
               {tableList.map((off) => (
-                <Row
-                  key={off.offer_id}
-                  item={off}
-                  className="h-12 border-none !bg-transparent !text-xs"
-                >
-                  <Cell className="h-12 px-1 py-[11px] align-top ">
-                    {off.marketplace.item_name}
+                <Row key={off.offer_id} item={off} className="h-12 border-none">
+                  <Cell>
+                    <div>{off.marketplace.item_name}</div>
                   </Cell>
-                  <Cell className="h-12 px-1 py-[11px] align-top text-gray">
-                    <div className="leading-4 text-gray">#{off.entry.id}</div>
+                  <Cell>
+                    <div>#{off.entry.id}</div>
                   </Cell>
-                  <Cell className="h-12 px-1 py-[11px] align-top">
+                  <Cell>
                     <div
                       data-type={off.role}
                       className="h-[20px] w-[46px] rounded bg-[rgba(78,196,250,0.2)] text-center leading-5 text-[#4EC4FA] data-[type=taker]:bg-[rgba(255,169,91,0.2)] data-[type=taker]:text-[#FFA95B]"
@@ -202,27 +179,27 @@ export function OrderTable({
                       {off.role === "taker" ? "Taker" : "Maker"}
                     </div>
                   </Cell>
-                  <Cell className="h-12 px-1 py-[11px] align-top">
-                    ${off.price}
+                  <Cell>
+                    <div>${formatNum(off.price, 6)}</div>
                   </Cell>
-                  <Cell className="h-12 px-1 py-[11px] align-top">
-                    ${off.price * off.item_amount}
+                  <Cell>
+                    <div>${formatNum(off.price * off.item_amount, 6)}</div>
                   </Cell>
-                  {/* <Cell className="h-12 px-1 py-[11px] align-top">
+                  {/* <Cell>
                     <OfferHash offer={off} />
                   </Cell> */}
-                  <Cell className="h-12 px-1 py-[11px] align-top">
-                    <span className="leading-5">
-                      {formatTimestamp(off.create_at * 1000)}
-                    </span>
+                  <Cell>
+                    <div>{formatTimestamp(off.create_at * 1000)}</div>
                   </Cell>
-                  <Cell className="h-12 px-1 py-[11px] align-top">
-                    {off.role !== "taker" && (
-                      <DetailBtn
-                        chain={off.marketplace.chain}
-                        onClick={() => handleOpenOfferDrawer(off.offer_id)}
-                      ></DetailBtn>
-                    )}
+                  <Cell>
+                    <div>
+                      {off.role !== "taker" && (
+                        <DetailBtn
+                          chain={off.marketplace.chain}
+                          onClick={() => handleOpenOfferDrawer(off.offer_id)}
+                        ></DetailBtn>
+                      )}
+                    </div>
                   </Cell>
                 </Row>
               ))}

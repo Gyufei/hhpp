@@ -17,7 +17,7 @@ export default function MarketTable({
   marketList: IMarketplace[];
   isLoading: boolean;
 }) {
-  const T = useTranslations("page-MarketList");
+  const T = useTranslations("Marketplace");
   const router = useRouter();
 
   const data = useMemo(() => {
@@ -38,14 +38,12 @@ export default function MarketTable({
       width: 100%;
       grid-template-rows: 24px repeat(auto-fit, 40px);
       grid-template-columns: 100px repeat(3, minmax(0, 1fr)) 200px repeat(2, minmax(0, 1fr));
-      font-weight: 400;
       grid-auto-rows: 40px;
     `,
     Header: "",
     Body: "",
     BaseRow: `
-      background: transparent;
-      padding: 0 10px;
+      background: #111a1e;
     `,
     HeaderRow: ``,
     Row: `
@@ -68,10 +66,8 @@ export default function MarketTable({
       }
     `,
     HeaderCell: `
-      font-size: 12px;
       font-weight: 400;
       color: #949e9c;
-      line-height: 18px;
 
       &:last-of-type {
         text-align: right;

@@ -29,7 +29,7 @@ import { formatNum } from "@/lib/utils/number";
 import { IReferralItem } from "@/lib/hooks/api/use-referral-data";
 import toast from "react-hot-toast";
 
-import { ReferralDrawer } from "./referral-drawer";
+import { ReferralRateDialog } from "./referral-rate-dialog";
 import {
   useReferralDelete,
   useReferralDefault,
@@ -43,7 +43,7 @@ export function ReferralTable({
   referralData?: IReferralItem[] | null;
   refresh: () => void;
 }) {
-  const T = useTranslations("page-Referral");
+  const T = useTranslations("Referral");
 
   const data = useMemo(() => {
     return {
@@ -56,20 +56,19 @@ export function ReferralTable({
       grid-template-columns: 170px repeat(7,minmax(0,1fr));
       grid-template-rows: repeat(auto-fit, 40px);
       grid-auto-rows: 40px;
-      gap: 2px;
     `,
     Header: "",
     Body: "",
     BaseRow: `
       font-size: 12px;
       line-height: 18px;
+      background: #111a1e;
     `,
     HeaderRow: `
-      background: #111a1e;
     `,
     Row: `
       &:hover {
-        background: #222428 !important;
+        background: #222428;
       }
     `,
     BaseCell: `
@@ -84,10 +83,8 @@ export function ReferralTable({
       }
     `,
     HeaderCell: `
-      font-size: 12px;
-      font-weight: 400;
       color: #949e9c;
-      line-height: 18px;
+      font-weight: 400;
     `,
     Cell: `
       color: #F6FEFD;
@@ -106,7 +103,7 @@ export function ReferralTable({
   if (!data.nodes.length) {
     return (
       <div className="flex w-screen flex-1 items-center justify-center pt-20 text-base text-gray sm:w-full">
-        {T("txt-YourReferralLinkAppearHere")}
+        {T("YourReferralLinkAppearHere")}
       </div>
     );
   }
@@ -130,18 +127,12 @@ export function ReferralTable({
                 <HeaderCell className="px-1 py-[11px]">
                   {T("TradingVol")}
                 </HeaderCell>
-                <HeaderCell className="px-1 py-[11px]">
-                  {T("Views")}
-                </HeaderCell>
+                <HeaderCell className="px-1 py-[11px]">{T("Views")}</HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
                   {T("CommissionRates")}
                 </HeaderCell>
-                <HeaderCell className="px-1 py-[11px]">
-                  {T("Note")}
-                </HeaderCell>
-                <HeaderCell className="px-1 py-[11px]">
-                  {T("Op")}
-                </HeaderCell>
+                <HeaderCell className="px-1 py-[11px]">{T("Note")}</HeaderCell>
+                <HeaderCell className="px-1 py-[11px]">{T("Op")}</HeaderCell>
               </HeaderRow>
             </Header>
             <Body>
@@ -149,7 +140,7 @@ export function ReferralTable({
                 <Row
                   key={rD.id}
                   item={rD}
-                  className="border-none !bg-transparent"
+                  className="border-none"
                   onMouseEnter={() => setHoverRowId(rD.id)}
                   onMouseLeave={() => setHoverRowId(null)}
                 >
@@ -190,7 +181,7 @@ export function ReferralTable({
         )}
       </Table>
 
-      <ReferralDrawer
+      <ReferralRateDialog
         referral={drawerData}
         drawerOpen={drawerOpen}
         setDrawerOpen={setDrawerOpen}
@@ -273,7 +264,7 @@ function ReferralNote({
   rD: IReferralItem;
   onSuccess: () => void;
 }) {
-  const T = useTranslations("page-Referral");
+  const T = useTranslations("Referral");
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState(rD.notes);
   const [isEdit, setIsEdit] = useState(false);

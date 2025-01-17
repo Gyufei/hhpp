@@ -12,9 +12,8 @@ import ReferralInfo from "./referral-info";
 import { usePathname } from "next/navigation";
 
 export default function OverviewInfo() {
-  const T = useTranslations("cd-AccountOverview");
-  const RT = useTranslations("ct-Rank");
-
+  const T = useTranslations("Dashboard");
+  const RT = useTranslations("Dashboard");
   const { currentChain } = useChainWallet();
   const {
     isLoading: isClaiming,

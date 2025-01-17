@@ -86,7 +86,7 @@ export function WithdrawDialog({
           >
             {CT("Confirm")}
           </button>
-          <div className="mt-2 text-xs leading-[18px] text-gray">
+          <div className="mt-[10px] text-center text-xs leading-[18px] text-gray">
             {T("ChargeFeeTip")}
           </div>
         </div>

@@ -14,7 +14,7 @@ export default function CreateOfferBtn({
   marketplace: IMarketplace;
   onSuccess: () => void;
 }) {
-  const T = useTranslations("drawer-CreateOffer");
+  const T = useTranslations("Offer");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   function handleSuccess() {

@@ -2,8 +2,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import MyOrders from "./orders/page";
-import MyBalances from "./balances/page";
+import MyOrders from "./my-orders";
+import MyBalances from "./my-balances";
 import PortfolioInfo from "./portfolio-info";
 
 const tabClx =
@@ -11,8 +11,8 @@ const tabClx =
 
 export default function PortFolio() {
   const HT = useTranslations("Header");
-  const MOT = useTranslations("page-MyOrders");
-  const MBT = useTranslations("page-MyBalances");
+  const MOT = useTranslations("MyOrders");
+  const MBT = useTranslations("MyBalances");
 
   const [currentTab, setCurrentTab] = useState("orders");
 

@@ -1,6 +1,5 @@
 "use client";
 import { OrderTable } from "./order-table";
-import { Roles, Status } from "./filter-select";
 
 export default function MyOrders() {
   return (
@@ -8,7 +7,7 @@ export default function MyOrders() {
       <div className="flex max-w-[100vw] flex-1 flex-col overflow-x-scroll px-4 sm:max-w-none sm:overflow-x-hidden sm:px-0">
         <div className="max-h-auto relative min-h-[296px] w-[820px] flex-1 flex-col overflow-y-hidden sm:w-full sm:min-w-0">
           <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-1 flex-col">
-            <OrderTable types={[]} status={Status[0]} role={Roles[0]} />
+            <OrderTable />
           </div>
         </div>
       </div>

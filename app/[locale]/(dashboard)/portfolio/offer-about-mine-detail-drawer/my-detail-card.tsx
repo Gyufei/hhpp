@@ -12,7 +12,7 @@ import {
 } from "@/app/[locale]/direct-trade/[...name]/offer-detail/detail-card";
 
 export default function MyDetailCard({ offer }: { offer: IOffer }) {
-  const T = useTranslations("drawer-OfferDetail");
+  const T = useTranslations("Offer");
 
   const { offerPointInfo, pointDecimalNum } = useOfferFormat({
     offer: offer,
