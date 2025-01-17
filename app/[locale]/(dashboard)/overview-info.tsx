@@ -7,15 +7,15 @@ import { useUserXp } from "@/lib/hooks/api/use-user-xp";
 
 export default function OverviewInfo() {
   const T = useTranslations("cd-AccountOverview");
+  const RT = useTranslations("ct-Rank");
   const { currentChain } = useChainWallet();
   const { data: userPoints } = useUserXp();
-  console.log("🚀 ~ OverviewInfo ~ userPoints:", userPoints);
 
   const { data: accountInfo } = useAccountStats(currentChain!);
 
   return (
-    <div className="flex h-full flex-col space-y-2 pb-5 text-[12px]">
-      <div className="m-[10px] pb-8 text-xs">
+    <div className="flex h-full flex-col pb-5 text-[12px]">
+      <div className="m-[10px] pb-[10px] text-xs">
         <div className="flex items-center justify-between">
           <div className="leading-[18px] text-title-white">
             {T("AccountOverview")}
@@ -86,25 +86,27 @@ export default function OverviewInfo() {
           </div>
         </div>
       </div>
-      {/* <div className="m-[10px] border-t border-border-black">
+      <div className="mx-[10px] border-t border-border-black pt-[20px]">
         <div className="flex items-center justify-between">
           <div className="leading-[18px] text-title-white">
-            {TR("HTPoints")}
+            {RT("HTPoints")}
           </div>
         </div>
         <div className="mt-3 flex justify-between">
-          <LabelText>{TR("txt-TotalPoints")}</LabelText>
+          <LabelText>{RT("txt-TotalPoints")}</LabelText>
           <div className="leading-[18px] text-title-white">
-            <NoDataDisplay noData={!accountInfo}>10,000</NoDataDisplay>
+            <NoDataDisplay noData={!userPoints}>
+              {formatNum(Number(userPoints?.xp))}
+            </NoDataDisplay>
           </div>
         </div>
-        <div className="mt-3 flex justify-between">
-          <LabelText>{TR("txt-Rank")}</LabelText>
+        {/* <div className="mt-3 flex justify-between">
+          <LabelText>{RT("txt-Rank")}</LabelText>
           <div className="leading-[18px] text-title-white">
             <NoDataDisplay noData={!accountInfo}>N/A</NoDataDisplay>
           </div>
-        </div>
-      </div> */}
+        </div> */}
+      </div>
     </div>
   );
 }
