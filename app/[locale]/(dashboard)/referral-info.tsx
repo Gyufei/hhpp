@@ -1,50 +1,24 @@
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 
 import { formatNum } from "@/lib/utils/number";
-import { IReferralItem } from "@/lib/hooks/api/use-referral-data";
 import { useMemo } from "react";
 import NP from "number-precision";
+import { useReferralData } from "@/lib/hooks/api/use-referral-data";
 
-export default function ReferralInfo({
-  referralData,
-}: {
-  referralData: Array<IReferralItem>;
-}) {
-  const RT = useTranslations("page-Referral");
-
-  const signedUp = useMemo(() => {
-    return referralData.reduce((acc, cur) => {
-      return acc + Number(cur.referral_users);
-    }, 0);
-  }, [referralData]);
+export default function ReferralInfo() {
+  const { data: referralData } = useReferralData();
 
   const commission = useMemo(() => {
-    return referralData.reduce((acc, cur) => {
+    return (referralData || []).reduce((acc, cur) => {
       return acc + Number(cur.commission);
     }, 0);
   }, [referralData]);
 
-  const lastSignedUp = useMemo(() => {
-    return referralData.reduce((acc, cur) => {
-      return acc + Number(cur.last_referral_users);
-    }, 0);
-  }, [referralData]);
-
   const lastCommission = useMemo(() => {
-    return referralData.reduce((acc, cur) => {
+    return (referralData || []).reduce((acc, cur) => {
       return acc + Number(cur.last_commission);
     }, 0);
   }, [referralData]);
-
-  const signedUpRate = useMemo(() => {
-    if (Number(lastSignedUp) === 0 || Number(signedUp) === 0) return 0;
-
-    const yesterdaySignedUp = NP.minus(signedUp, lastSignedUp);
-    if (yesterdaySignedUp === 0) return 1;
-
-    return NP.divide(lastSignedUp, yesterdaySignedUp);
-  }, [lastSignedUp, signedUp]);
 
   const commissionRate = useMemo(() => {
     if (Number(lastCommission) === 0 || Number(commission) === 0) return 0;
@@ -58,35 +32,8 @@ export default function ReferralInfo({
   return (
     <>
       <div className="flex flex-col items-center justify-start text-[12px] sm:flex-row sm:space-x-10">
-        <div className="flex w-full items-stretch justify-between">
-          <div className="flex flex-col items-start justify-between object-contain">
-            <div className="text-gray">{RT("SignedUp")}</div>
-            <div className="mt-1 flex items-center justify-center text-title-white">
-              <div>{signedUp}</div>
-              <div className="ml-[10px] flex items-center justify-center">
-                <DisplayArrow
-                  isUp={Number(signedUpRate === 0) ? "zero" : signedUpRate > 0}
-                />
-                <div className="flex w-max items-center">
-                  <span
-                    data-up={
-                      Number(signedUpRate === 0) ? "zero" : signedUpRate > 0
-                    }
-                    className="leading-[18px] data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-gray"
-                  >
-                    {signedUpRate > 0 ? "+" : ""}
-                    {formatNum(signedUpRate * 100)}%
-                  </span>
-                  <span className="text-gray">/ 24h</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="mt-0 flex w-full items-stretch justify-between">
           <div className="flex flex-col items-start justify-between">
-            <div className="text-gray">{RT("Commission")}</div>
             <div className="mt-1 flex items-center justify-center text-title-white">
               <div>${commission}</div>
               <div className="ml-[10px] flex items-center justify-center">
@@ -105,7 +52,6 @@ export default function ReferralInfo({
                     {commissionRate > 0 ? "+" : ""}
                     {formatNum(commissionRate * 100)}%
                   </span>
-                  <span className="text-gray">/ 24h</span>
                 </div>
               </div>
             </div>

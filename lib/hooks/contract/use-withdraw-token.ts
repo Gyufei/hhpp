@@ -4,6 +4,7 @@ import { dataApiFetcher } from "@/lib/fetcher";
 import { ApiPaths } from "@/lib/PathMap";
 import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
 import { useSignData } from "./help/use-sign-data";
+import { toast } from "react-hot-toast";
 
 export type IBalanceType =
   | "taxIncome"
@@ -29,19 +30,27 @@ export function useWithdrawToken() {
       source_account: realAddress,
       dest_account: address,
     });
-
-    const res = await dataApiFetcher(
-      `${apiEndPoint}${ApiPaths.accountWithdraw}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    try {
+      const res = await dataApiFetcher(
+        `${apiEndPoint}${ApiPaths.accountWithdraw}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reqData),
         },
-        body: JSON.stringify(reqData),
-      },
-    );
+      );
 
-    return res;
+      return res;
+    } catch (error: any) {
+      toast.error(
+        error?.message || "The service is abnormal. Please try again",
+      );
+      throw new Error(
+        error?.message || "The service is abnormal. Please try again",
+      );
+    }
   };
 
   const wrapRes = useTxStatus(txAction);
