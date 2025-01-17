@@ -50,7 +50,6 @@ export default function MoreMenu() {
   const [popOpen, setPopOpen] = useState(false);
 
   function handleClick(op: (typeof urlOptions)[number]) {
-    console.log(op.url);
     if (op.url) {
       window.open(op.url, "_blank");
     }

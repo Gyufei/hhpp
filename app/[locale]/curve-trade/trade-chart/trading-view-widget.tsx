@@ -66,7 +66,6 @@ export function TradingViewWidget() {
     const subscribers: any = {};
     const datafeed = {
       onReady: (callback: any) => {
-        console.log("Loading TradingView");
         setTimeout(() =>
           callback({
             supports_search: true,
@@ -84,7 +83,6 @@ export function TradingViewWidget() {
         symbolType: any,
         onResultReadyCallback: any,
       ) => {
-        console.log(`Searching ${userInput}`);
         const results = await fetch(
           `https://prices.intear.tech/token-search?q=${encodeURIComponent(
             userInput,
@@ -111,7 +109,6 @@ export function TradingViewWidget() {
         // onResolveErrorCallback: any,
         // extension: any,
       ) => {
-        console.log(`Loading ${symbolName}`);
         const metadata = await getMetadata(symbolName);
         const price = await fetch(
           `https://prices.intear.tech/price?token_id=${symbolName}`,
@@ -146,11 +143,6 @@ export function TradingViewWidget() {
         onHistoryCallback: any,
         // onErrorCallback: any,
       ) => {
-        console.log(
-          `Getting bars for ${symbolInfo.name} ${resolution} ${
-            periodParams.countBack
-          } ${periodParams.to * 1000}`,
-        );
         const url = `https://events-v3.intear.tech/v3/price_token/ohlc?token=${
           symbolInfo.full_name
         }&resolution=${resolution}&count_back=${periodParams.countBack}&to=${
@@ -181,7 +173,6 @@ export function TradingViewWidget() {
         listenerGuid: any,
         // onResetCacheNeededCallback: any,
       ) => {
-        console.log(`Subscribing to bars of ${symbolInfo.full_name}`);
         const decimals = (await getMetadata(symbolInfo.full_name)).decimals;
         const USDT_DECIMALS = 6;
         const ws = new WebSocket(
@@ -262,7 +253,6 @@ export function TradingViewWidget() {
         };
       },
       unsubscribeBars: async (listenerGuid: any) => {
-        console.log(`Unsubscribing from bars: ${listenerGuid}`);
         subscribers[listenerGuid].ws.close();
       },
     };
@@ -277,7 +267,6 @@ export function TradingViewWidget() {
   }
 
   async function getMetadata(account_id: string) {
-    console.log(`Getting ${account_id}`);
     if (account_id === "wrap.near") {
       return {
         name: "NEAR",

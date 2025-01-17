@@ -56,20 +56,19 @@ export function ReferralTable({
       grid-template-columns: 170px repeat(7,minmax(0,1fr));
       grid-template-rows: repeat(auto-fit, 40px);
       grid-auto-rows: 40px;
-      gap: 2px;
     `,
     Header: "",
     Body: "",
     BaseRow: `
       font-size: 12px;
       line-height: 18px;
+      background: #111a1e;
     `,
     HeaderRow: `
-      background: #111a1e;
     `,
     Row: `
       &:hover {
-        background: #222428 !important;
+        background: #222428;
       }
     `,
     BaseCell: `
@@ -130,18 +129,12 @@ export function ReferralTable({
                 <HeaderCell className="px-1 py-[11px]">
                   {T("TradingVol")}
                 </HeaderCell>
-                <HeaderCell className="px-1 py-[11px]">
-                  {T("Views")}
-                </HeaderCell>
+                <HeaderCell className="px-1 py-[11px]">{T("Views")}</HeaderCell>
                 <HeaderCell className="px-1 py-[11px]">
                   {T("CommissionRates")}
                 </HeaderCell>
-                <HeaderCell className="px-1 py-[11px]">
-                  {T("Note")}
-                </HeaderCell>
-                <HeaderCell className="px-1 py-[11px]">
-                  {T("Op")}
-                </HeaderCell>
+                <HeaderCell className="px-1 py-[11px]">{T("Note")}</HeaderCell>
+                <HeaderCell className="px-1 py-[11px]">{T("Op")}</HeaderCell>
               </HeaderRow>
             </Header>
             <Body>
@@ -149,7 +142,7 @@ export function ReferralTable({
                 <Row
                   key={rD.id}
                   item={rD}
-                  className="border-none !bg-transparent"
+                  className="border-none"
                   onMouseEnter={() => setHoverRowId(rD.id)}
                   onMouseLeave={() => setHoverRowId(null)}
                 >

@@ -50,7 +50,6 @@ export function BalanceTable() {
       grid-template-columns: 100px repeat(4,minmax(0,1fr));
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
-      gap: 2px;
     `,
     Header: "",
     Body: "",

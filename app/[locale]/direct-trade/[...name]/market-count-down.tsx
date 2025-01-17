@@ -19,8 +19,6 @@ export default function MarketCountDown({
   const [minutes, setMinutes] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
 
-  console.log(marketplace);
-
   const calculateTime = useCallback(() => {
     const startsAt = Number(marketplace.trading_starts_at);
     const difference = startsAt - Date.now();
