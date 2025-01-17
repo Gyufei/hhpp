@@ -11,7 +11,8 @@
     "Minutes": "分钟",
     "Seconds": "秒",
     "Copy": "复制",
-    "Network": "网络"
+    "Network": "网络",
+    "NoData": "当前无数据"
   },
   "Header": {
     "Dashboard": "仪表盘",

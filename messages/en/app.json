@@ -11,7 +11,8 @@
     "Minutes": "Minutes",
     "Seconds": "Seconds",
     "Copy": "Copy",
-    "Network": "Network"
+    "Network": "Network",
+    "NoData": "There is currently no data available"
   },
   "Header": {
     "Dashboard": "Dashboard",

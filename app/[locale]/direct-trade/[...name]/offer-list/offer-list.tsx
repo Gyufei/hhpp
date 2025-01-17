@@ -9,6 +9,8 @@ import { IOffer } from "@/lib/types/offer";
 import { useSortOffer } from "@/lib/hooks/offer/use-sort-offer";
 import { range } from "lodash";
 import OfferDetailDrawer from "../offer-detail/offer-detail-drawer";
+import { Skeleton } from "@/components/ui/skeleton";
+import Empty from "@/components/share/empty";
 
 export default function OfferList({
   offers,
@@ -52,35 +54,48 @@ export default function OfferList({
 
   return (
     <div className="flex h-full flex-col">
-      <div className="mb-[2px] flex w-full items-center justify-between bg-bg-black pb-[10px] sm:border-b sm:border-border-black">
-        <div className="no-scroll-bar flex w-[calc(100vw-170px)] flex-1 items-center space-x-4 overflow-x-scroll sm:w-auto sm:overflow-hidden">
+      {isLoading ? (
+        <div className="flex items-center justify-between border-border-black">
+          <Skeleton className="h-[30px] w-[100px]" />
+          <Skeleton className="h-[30px] w-[30px]" />
+        </div>
+      ) : offers.length < 1 ? (
+        <></>
+      ) : (
+        <div className="mb-[2px] flex w-full items-center justify-between bg-bg-black pb-[10px] sm:border-b sm:border-border-black">
           <SortSelect
             sortField={sortField}
             sortDir={sortDir}
             handleSortFieldChange={handleSortFieldChange}
             handleSortDirChange={handleSortDirChange}
           />
+          <div className="ml-6 flex min-w-[100px] items-center justify-end sm:ml-2">
+            <SearchInput handleSearch={handleSearch} />
+          </div>
         </div>
-        <div className="ml-6 flex min-w-[100px] items-center justify-end sm:ml-2">
-          <SearchInput handleSearch={handleSearch} />
-        </div>
-      </div>
+      )}
 
       <div
-        className="no-scroll-bar mt-[10px] grid flex-1 auto-rows-min grid-cols-1 gap-[10px] overflow-y-auto pb-16 sm:pb-0 xl:grid-cols-2 2xl:grid-cols-3"
+        className="no-scroll-bar relative mt-[10px] grid flex-1 auto-rows-min grid-cols-1 gap-[10px] overflow-y-auto pb-16 sm:pb-0 xl:grid-cols-2 2xl:grid-cols-3"
         style={{
           gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
         }}
       >
-        {isLoading
-          ? range(6).map((i) => <OrderCardSkeleton key={i} />)
-          : (filterOrders || []).map((offer) => (
-              <OfferCard
-                offer={offer}
-                key={offer.offer_id}
-                handleShowOffer={handleShowOffer}
-              />
-            ))}
+        {isLoading ? (
+          range(6).map((i) => <OrderCardSkeleton key={i} />)
+        ) : offers.length < 1 ? (
+          <div className="absolute inset-0 left-1/2 top-1/2 flex h-full -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+            <Empty />
+          </div>
+        ) : (
+          (filterOrders || []).map((offer) => (
+            <OfferCard
+              offer={offer}
+              key={offer.offer_id}
+              handleShowOffer={handleShowOffer}
+            />
+          ))
+        )}
       </div>
 
       <OfferDetailDrawer

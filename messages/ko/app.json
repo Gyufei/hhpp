@@ -11,7 +11,8 @@
     "Minutes": "분",
     "Seconds": "초",
     "Copy": "복사",
-    "Network": "네트워크"
+    "Network": "네트워크",
+    "NoData": "현재 데이터가 없습니다"
   },
   "Header": {
     "Dashboard": "대시보드",

@@ -134,7 +134,7 @@ export default function MarketplaceContent({
             />
           ) : (
             <OfferList
-              offers={canBuyOffers || []}
+              offers={canBuyOffers}
               isLoading={isOffersLoading}
               refreshOffers={refreshOffers}
             />
