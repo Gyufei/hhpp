@@ -125,7 +125,12 @@
     "TaxIncome": "Tax Income",
     "HTPoints": "HT Points",
     "txt-TotalPoints": "Total Points",
-    "txt-Rank": "Rank"
+    "txt-Rank": "Rank",
+    "AccountRevenue": "Account Revenue",
+    "Total": "Total",
+    "AvailableToClaim": "Available to Claim",
+    "ReferralCommision": "Referral Commision",
+    "Change(24h)": "Change (24h)"
   },
   "MyOrders": {
     "MyOrders": "My Orders",

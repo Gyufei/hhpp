@@ -10,13 +10,11 @@ export default function HomeFooter() {
       <div className="mt-[42px] flex items-center justify-between px-[120px] text-sm leading-5 text-title-white">
         <div className="flex items-center space-x-[80px]">
           <div>2024</div>
-          <div>Genesis Event Terms & Conditions</div>
+          <div>Hypes Labs.</div>
         </div>
         <Image src="/icons/simple-logo.svg" width={39} height={32} alt="logo" />
         <div className="flex items-center space-x-[80px]">
-          <div className="cursor-pointer hover:text-main">
-            Terms of Service
-          </div>
+          <div className="cursor-pointer hover:text-main">Terms of Service</div>
           <div className="cursor-pointer hover:text-main">Privacy Policy</div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 
-export const TwitterLink = "https://twitter.com/hypestrade";
+export const TwitterLink = "https://x.com/hypestrade";
 export const DiscordLink = "https://discord.com/channels/1254632665685164092/1254724478038970409";
-export const TgLink = "https://t.me/hypestrade";
+export const TgLink = "https://t.me/+mLCHu1Z6vXJjYjY1";
 export const GithubLink = "https://github.com/hypestrade";
 export const DocLink = "https://hypestrade.gitbook.io/hypestrade"
 

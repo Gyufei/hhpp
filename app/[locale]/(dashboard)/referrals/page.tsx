@@ -1,6 +1,5 @@
 "use client";
 import { useTranslations } from "next-intl";
-import ReferralInfo from "./referral-info";
 import { ReferralTable } from "./referral-table";
 import { useReferralData } from "@/lib/hooks/api/use-referral-data";
 import { useEffect } from "react";
@@ -39,7 +38,6 @@ export default function Referral() {
           <div className="text-xl leading-[30px] text-title-white">
             {T("Referrals")}
           </div>
-          <ReferralInfo referralData={referralData || []} />
         </div>
       </div>
 
