@@ -18,7 +18,7 @@ export default function OfferAboutMineDetailDrawer({
   drawerOpen: boolean;
   setDrawerOpen: (open: boolean) => void;
 }) {
-  const T = useTranslations("drawer-OfferDetail");
+  const T = useTranslations("Offer");
 
   function handleSuccess() {
     if (!drawerOpen) return;

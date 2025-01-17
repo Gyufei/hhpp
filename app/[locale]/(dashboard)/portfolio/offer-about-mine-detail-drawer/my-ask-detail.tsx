@@ -25,7 +25,7 @@ export default function MyAskDetail({
   offer: IOffer;
   onSuccess: () => void;
 }) {
-  const T = useTranslations("drawer-OfferDetail");
+  const T = useTranslations("Offer");
   const {
     tokenTotalPrice,
     progress,

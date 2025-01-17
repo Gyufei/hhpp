@@ -60,9 +60,7 @@
     "AnythingYouWantToInformTheBuyer": "Anything you want to inform the buyer...",
     "MinimumOrderAmount": "Minimum Order Amount",
     "PlatformTradingFee": "Platform Trading Fee",
-    "BidOfferDetail": "Bid Offer Detail",
-    "MyAskOfferDetail": "My Ask Offer Detail",
-    "MyBidOfferDetail": "My Bid Offer Detail",
+    "OfferDetail": "Offer Detail",
     "YouWillSell": "You will sell",
     "YouPay": "You pay",
 

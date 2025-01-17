@@ -93,14 +93,43 @@ export function SellContent({
   const sellPointAmountChange = (v: string) => {
     setSellPointAmount(v);
 
+    if (v === "") {
+      setReceiveAmount("");
+      return;
+    }
+
     const marketPointPrice = NP.times(
       currentMarket.last_price,
       pointDecimalNum,
     );
-    setReceiveAmount(NP.times(v, marketPointPrice * 1.02).toString());
-    if (!v) {
-      setReceiveAmount("");
+
+    setReceiveAmount(
+      formatNum(
+        NP.times(v, marketPointPrice * 1.02).toString(),
+        receiveToken.decimals || 6,
+      ),
+    );
+  };
+
+  const receiveTokenAmountChange = (v: string) => {
+    setReceiveAmount(v);
+
+    if (v === "") {
+      setSellPointAmount("");
+      return;
     }
+
+    const marketPointPrice = NP.times(
+      currentMarket.last_price,
+      pointDecimalNum,
+    );
+
+    setSellPointAmount(
+      formatNum(
+        NP.divide(v, marketPointPrice * 1.02).toString(),
+        pointDecimalNum || 6,
+      ),
+    );
   };
 
   return (
@@ -126,7 +155,7 @@ export function SellContent({
         <InputPanel
           className="pb-4"
           value={receiveTokenAmount}
-          onValueChange={setReceiveAmount}
+          onValueChange={receiveTokenAmountChange}
           topText={
             <div className="flex items-center">
               {T("YouDLikeToReceive")}

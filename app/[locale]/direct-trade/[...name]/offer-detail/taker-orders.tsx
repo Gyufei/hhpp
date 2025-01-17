@@ -23,7 +23,7 @@ export function TakerOrders({
   orders: Array<ITakerOrder>;
   offer: IOffer;
 }) {
-  const T = useTranslations("drawer-OfferDetail");
+  const T = useTranslations("Offer");
 
   const {
     offerValue,
