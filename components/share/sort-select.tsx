@@ -27,7 +27,7 @@ export function SortSelect({
   handleSortFieldChange: (_s: ISortField) => void;
   handleSortDirChange: (_s: ISortDir) => void;
 }) {
-  const T = useTranslations("MyOrder");
+  const T = useTranslations("MyOrders");
   const [popOpen, setPopOpen] = useState(false);
 
   function handleSortDirClick(field: ISortField, dir: ISortDir) {
@@ -96,7 +96,7 @@ function SortOptions({
   onSortDirChange: (_field: ISortField, _dir: ISortDir) => void;
   alignOffset?: number;
 }) {
-  const T = useTranslations("MyOrder");
+  const T = useTranslations("MyOrders");
   return (
     <DropdownMenuSub>
       <DropdownMenuSubTrigger
@@ -149,7 +149,7 @@ function SortUpDown({
   active: boolean;
   isDown: boolean;
 }) {
-  const T = useTranslations("MyOrder");
+  const T = useTranslations("MyOrders");
   const local = useLocale();
   const isEn = local === "en";
 
