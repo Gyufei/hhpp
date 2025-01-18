@@ -16,16 +16,16 @@ import GlobalProvider from "@/components/provider/global-provider";
 
 export const metadata = {
   title: {
-    template: "%s | HypesTrade",
-    default: "HypesTrade",
+    template: "%s | HypeTrade",
+    default: "HypeTrade",
   },
   description: "Seed Market for Hyperliquid",
   metadataBase: new URL(`https://${process.env.VERCEL_DOMAIN}`),
   openGraph: {
-    title: "HypesTrade",
+    title: "HypeTrade",
     description: "Seed Market for Hyperliquid",
     url: `https://${process.env.VERCEL_DOMAIN}`,
-    siteName: "HypesTrade",
+    siteName: "HypeTrade",
     images: "/img/1pi2tsX13qz1uu.png",
     locale: "en_US",
     type: "website",
@@ -51,9 +51,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "HypesTrade",
+    title: "HypeTrade",
     description: "Seed Market for Hyperliquid",
-    creator: "@hypestrade",
+    creator: "@HypeTradeXYZ",
     images: ["/img/1pi2tsX13qz1uu.png"],
   },
 };
