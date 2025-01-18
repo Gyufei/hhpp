@@ -13,17 +13,19 @@ export default function HomeBanner() {
     >
       <Image src="/icons/simple-logo.svg" width={120} height={90} alt="logo" />
       <div className="mt-5 text-center text-[80px] font-light leading-[120px] text-title-white">
-        Seed market for high-quality <br /> Hyperliquid assets.
+        Seed market for premium <br /> Hyperliquid assets.
       </div>
       <div className="mt-[30px] w-[420px] text-center text-sm font-light text-title-white">
-        Rebuild dreams with see chances for every dream-making trader. Ample
-        liquidity, lightning-fast trades.
+        Where traders turn their dreams into reality, providing the tools,
+        speed, and opportunities to thrive in the world of high-performance
+        asset generating and trading. Ample liquidity, lighting-fast trades,
+        token deployment success.
       </div>
       <div className="mt-10 flex items-center justify-between space-x-[30px]">
         <StartTradingButton />
-        <div className="flex h-10 cursor-pointer items-center rounded-3xl border border-main px-6 text-base font-light text-main">
+        {/* <div className="flex h-10 cursor-pointer items-center rounded-3xl border border-main px-6 text-base font-light text-main">
           Start Building
-        </div>
+        </div> */}
       </div>
     </div>
   );
