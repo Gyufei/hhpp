@@ -3,21 +3,21 @@ export const isProduction = process.env.NODE_ENV === "production" && !isPreview;
 // export const isProduction = true;
 
 export function WithApiHost(path: string) {
-  const prodHost = `https://api.hypes.trade`;
+  const prodHost = ` api.hypetrade.xyz`;
   const devHost = `https://preview-hypes-api.aggregation.top`;
   const host = isProduction ? prodHost : devHost;
   return `${host}${path}`;
 }
 
 export function WithCDN(path: string) {
-  const prodCDN = `https://cdn.hypes.trade`;
+  const prodCDN = `cdn.hypetrade.xyz`;
   const devCDN = `https://preview-hypes-cdn.aggregation.top`;
   const cdn = isProduction ? prodCDN : devCDN;
   return `${cdn}${path}`;
 }
 
 export function WithWss(path: string) {
-  const prodWss = "wss://wss.hypes.trade" + path;
+  const prodWss = "wss://wss.hypetrade.xyz" + path;
   const devWss = "wss://preview-wss.hypes.trade" + path;
   const wss = isProduction ? prodWss : devWss;
   return wss;

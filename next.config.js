@@ -13,10 +13,6 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "hypes-cdn.aggregation.top",
-      },
-      {
-        protocol: "https",
         hostname: "explorer-api.walletconnect.com",
       },
       {
@@ -25,7 +21,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "cdn.hypes.trade",
+        hostname: "cdn.hypetrade.xyz",
       },
     ],
   },
