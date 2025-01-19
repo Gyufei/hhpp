@@ -68,7 +68,7 @@
     "txt-YouGet": "You get",
     "YouGet": "",
     "txt-YouHaveToSell": "You have to sell",
-    "txt-YouHaveTheOptionToClose": "You have the option to close the offer before it is 100% filled.",
+    "YouHaveTheOptionToClose": "You have the option to close the offer before it is 100% filled.",
 
     "Offer100%Filled": "Offer 100% Filled",
     "ConfirmOrder": "Confirm Order",

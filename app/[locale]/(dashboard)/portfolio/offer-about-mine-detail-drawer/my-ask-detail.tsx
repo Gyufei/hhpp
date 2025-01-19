@@ -122,7 +122,7 @@ export default function MyAskDetail({
                   {T("TradingEnded")}
                 </button>
               ) : (
-                <>
+                <div className="flex w-full flex-col">
                   <WithWalletConnectBtn
                     className="flex-1"
                     chain={offer?.marketplace.chain}
@@ -138,10 +138,10 @@ export default function MyAskDetail({
                       {T("CloseThisOffer")}
                     </button>
                   </WithWalletConnectBtn>
-                  <div className="mt-2 rounded bg-[#FBF2EA] px-3 py-2 text-xs leading-5 text-[#FFA95B]">
-                    {T("txt-YouHaveTheOptionToClose")}
+                  <div className="mt-2 flex h-8 items-center rounded bg-[#FBF2EA] px-3 text-xs leading-5 text-[#FFA95B]">
+                    {T("YouHaveTheOptionToClose")}
                   </div>
-                </>
+                </div>
               )}
             </>
           </div>
