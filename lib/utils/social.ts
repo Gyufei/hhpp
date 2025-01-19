@@ -1,9 +1,9 @@
 
-export const TwitterLink = "https://x.com/hypestrade";
+export const TwitterLink = "https://x.com/HypeTradeXYZ";
 export const DiscordLink = "https://discord.com/channels/1254632665685164092/1254724478038970409";
-export const TgLink = "https://t.me/+mLCHu1Z6vXJjYjY1";
-export const GithubLink = "https://github.com/hypestrade";
-export const DocLink = "https://hypestrade.gitbook.io/hypestrade"
+export const TgLink = "https://t.me/hypetradeXYZ";
+export const GithubLink = "https://github.com/HypeTradeXYZ";
+export const DocLink = "https://hypetrade.gitbook.io/hypetrade"
 
 export const handleGoTwitter = () => {
   window.open(TwitterLink);
@@ -18,7 +18,7 @@ export const handleGoToDiscordTickets = () => {
 }
 
 export const handleGoGithub = () => {
-  
+
 };
 
 export const handleGoTg = () => {

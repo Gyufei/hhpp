@@ -13,19 +13,12 @@ export default function TradeMore() {
       <div className="flex flex-col items-start space-y-2">
         <div className="flex items-center space-x-6">
           <span className="text-[70px] font-thin text-[#072722]">
-            Trade more on
+            Get in Early
           </span>
-          <Image
-            src="/icons/Trade.svg"
-            width={280}
-            height={62}
-            alt="trade"
-            className="translate-y-[8px]"
-          />
         </div>
         <div className="flex items-center space-x-6">
           <span className="text-[70px] font-thin text-[#072722]">
-            Make more on
+            Succeed with
           </span>
           <Image
             src="/icons/liquid.svg"

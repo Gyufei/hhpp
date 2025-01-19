@@ -49,7 +49,7 @@ export default function ConnectBtn() {
       }
 
       signMessage(
-        { message: "Hello, Welcome to HypesTrade!" },
+        { message: "Hello, Welcome to HypeTrade!" },
         {
           onSuccess(data) {
             localStorage.setItem(SignMessageKey, data);
