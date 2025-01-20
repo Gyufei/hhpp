@@ -1,7 +1,7 @@
 import { useReadContract } from "wagmi";
 import { erc20Abi } from "viem";
 import NP from "number-precision";
-import { useChainWallet } from "../web3/use-chain-wallet";
+import { useAccountInfo } from "./use-account-info";
 
 export function useTokenBalance({
   abiAddress,
@@ -10,7 +10,9 @@ export function useTokenBalance({
   abiAddress: string;
   decimals: number;
 }) {
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
+
   const result = useReadContract({
     abi: erc20Abi,
     address: abiAddress as any,

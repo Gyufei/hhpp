@@ -1,29 +1,15 @@
 import { useAccount, useDisconnect } from "wagmi";
-import { useAccountInfo } from "../api/use-account-info";
 
 export function useChainWallet() {
-  const {
-    address: walletAddress,
-    isConnected,
-    isConnecting,
-    connector,
-  } = useAccount();
+  const { address, isConnected, isConnecting, connector } = useAccount();
 
-  const { data: accountInfo } = useAccountInfo(walletAddress || "");
-  const { disconnect: evmDisconnect } = useDisconnect();
+  const { disconnect } = useDisconnect();
 
   return {
-    // source wallet for data fetch, sign, arb
-    walletAddress: walletAddress || "",
-    // dest wallet for HL
-    address: accountInfo?.dest_wallet || "",
-    accountInfo: accountInfo || {
-      dest_wallet: "",
-      wallet: "",
-    },
-    connected: isConnected,
-    connecting: isConnecting,
-    disconnect: evmDisconnect,
+    address,
+    isConnected,
+    isConnecting,
+    disconnect,
     connector: connector,
   };
 }

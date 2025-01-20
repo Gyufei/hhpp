@@ -5,12 +5,13 @@ import { useReferralData } from "@/lib/hooks/api/use-referral-data";
 import { useEffect } from "react";
 import { useReferralCreate } from "@/lib/hooks/api/use-referral";
 import HoverIcon from "@/components/share/hover-icon";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
+import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 export default function Referral() {
   const T = useTranslations("Referral");
 
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
   const { data: referralData, mutate: refetch } = useReferralData();
 
   const {

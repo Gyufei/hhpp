@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
 import { dataApiFetcher } from "@/lib/fetcher";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
+import { useAccountInfo } from "./use-account-info";
 
 export interface ITokenBalance {
   token_addr: string;
@@ -23,10 +23,11 @@ export interface ITokenBalance {
 
 export function useUserTokenBalance() {
   const { apiEndPoint } = useEndPoint();
-  const { address: wallet } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const res = useSWR<Array<ITokenBalance>>(
-    wallet ? `${apiEndPoint}${ApiPaths.userTokenBalance}/${wallet}` : null,
+    address ? `${apiEndPoint}${ApiPaths.userTokenBalance}/${address}` : null,
     dataApiFetcher,
   );
 

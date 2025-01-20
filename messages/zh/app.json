@@ -12,9 +12,8 @@
     "Seconds": "秒",
     "Copy": "复制",
     "Network": "网络",
-    "NoData": "当前无数据"
-  },
-  "Header": {
+    "NoData": "当前无数据",
+    "Save": "保存",
     "Dashboard": "仪表盘",
     "MarketTrades": "市场交易",
     "Connect": "连接",
@@ -26,7 +25,12 @@
     "Withdraw": "提款",
     "ChargeFeeTip": "Hyperliquid 在将 USDC 桥接到 Arbitrum 时会收取一部分费用。",
     "DepositTip": "不要从其他网络或不同类型的 USDC 发送。最低存款额为 5 USDC。Hyperliquid 将收取桥接费用，直到您的存款金额。",
-    "ContractEndWith": "合约结束于"
+    "ContractEndWith": "合约结束于",
+    "EditProfile": "编辑资料",
+    "UserProfile": "用户资料",
+    "Username": "用户名",
+    "UsernameLengthError": "用户名至少3个字符",
+    "TradingMode": "交易模式"
   },
   "Marketplace": {
     "InitialListing": "发行价",
@@ -67,7 +71,7 @@
     "YouWillSell": "你将出售",
     "txt-YouGet": "你将得到",
     "YouGet": "",
-    "txt-YouHaveToSell": " 你要卖",
+    "YouHaveToSell": " 你要卖",
     "YouHaveTheOptionToClose": "在 100% 完成前可关闭订单",
 
     "Offer100%Filled": "订单完成",
@@ -131,7 +135,7 @@
     "AccountRevenue": "账户收益",
     "Total": "总计",
     "AvailableToClaim": "可领取",
-    "ReferralCommision": "推荐佣金",
+    "ReferralCommission": "推荐佣金",
     "Change(24h)": "24小时变化"
   },
   "MyOrders": {

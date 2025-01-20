@@ -2,8 +2,9 @@ import useSWR from "swr";
 import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
 import { dataApiFetcher } from "@/lib/fetcher";
+import { useChainWallet } from "../web3/use-chain-wallet";
 
-type TradingMode = "Private" | "Public";
+export type TradingMode = "Private" | "Public";
 
 interface IAccountInfo {
   wallet: string;
@@ -12,11 +13,12 @@ interface IAccountInfo {
   trading_mode: TradingMode;
 }
 
-export function useAccountInfo(wallet: string) {
+export function useAccountInfo() {
+  const { address } = useChainWallet();
   const { apiEndPoint } = useEndPoint();
 
   const res = useSWR<IAccountInfo>(
-    wallet ? `${apiEndPoint}${ApiPaths.accountInfo}?wallet=${wallet}` : null,
+    address ? `${apiEndPoint}${ApiPaths.accountInfo}?wallet=${address}` : null,
     dataApiFetcher,
   );
 

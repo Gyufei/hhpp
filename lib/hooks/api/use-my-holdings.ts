@@ -3,12 +3,13 @@ import { dataApiFetcher } from "@/lib/fetcher";
 import { ApiPaths } from "@/lib/PathMap";
 import { useEndPoint } from "./use-endpoint";
 import { IHolding } from "@/lib/types/holding";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { useMarketplaces } from "./use-marketplaces";
 import { ChainType } from "@/lib/types/chain";
+import { useAccountInfo } from "./use-account-info";
 
 export function useMyHoldings() {
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
   const { apiEndPoint } = useEndPoint();
   const { data: marketplaceData, isLoading: isMarketLoading } =
     useMarketplaces();

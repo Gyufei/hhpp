@@ -1,14 +1,14 @@
 import { useEndPoint } from "../api/use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
 import { dataApiFetcher } from "@/lib/fetcher";
-import { useChainWallet } from "../web3/use-chain-wallet";
 import { useSignData } from "./help/use-sign-data";
 import useSWRMutation from "swr/mutation";
+import { useAccountInfo } from "../api/use-account-info";
 
 export function useUserWithdraw() {
   const { apiEndPoint } = useEndPoint();
 
-  const { accountInfo } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
   const { signDataAction } = useSignData();
 
   async function postApi(

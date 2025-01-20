@@ -187,7 +187,7 @@ export default function OverviewInfo() {
         <div className="mx-[10px] border-t border-border-black pb-[20px] pt-[20px]">
           <div className="flex items-center justify-between">
             <div className="leading-[18px] text-title-white">
-              {T("ReferralCommision")}
+              {T("ReferralCommission")}
             </div>
             {userClaim && (
               <HoverIcon

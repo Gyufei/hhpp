@@ -20,20 +20,18 @@ import {
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 import { truncateAddr } from "@/lib/utils/web3";
 
-const SignMessageKey = "hypes-trade-sign-message";
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function ConnectBtn() {
-  const T = useTranslations("Header");
+  const T = useTranslations("Common");
 
   const { signMessage } = useSignMessage();
   const { isMobileSize } = useDeviceSize();
   const { openWalletModal } = useWalletModalContext();
-  const { walletAddress, connected, connecting } = useChainWallet();
+  const { address, isConnected, isConnecting } = useChainWallet();
   const { checkAndSwitchChain } = useCheckSwitchChain();
 
-  const shortAddr = walletAddress
-    ? truncateAddr(walletAddress, { nPrefix: 6, nSuffix: 4 })
+  const shortAddr = address
+    ? truncateAddr(address, { nPrefix: 6, nSuffix: 4 })
     : "";
 
   const [popOpen, setPopOpen] = useState(false);
@@ -47,17 +45,11 @@ export default function ConnectBtn() {
 
   useAccountEffect({
     onConnect({ address, connector }) {
-      const userToken = localStorage.getItem(SignMessageKey);
-      if (userToken) {
-        checkAndSwitchChain();
-        return;
-      }
-
       signMessage(
         { message: "Hello, Welcome to HypeTrade!" },
         {
           onSuccess(data) {
-            localStorage.setItem(SignMessageKey, data);
+            console.log("data", data);
             checkAndSwitchChain();
           },
           onError(error) {
@@ -82,18 +74,20 @@ export default function ConnectBtn() {
       }
     },
     onDisconnect() {
+      // remove unused local storage
       localStorage.removeItem("hyper-trade-sign-message");
-      localStorage.removeItem(SignMessageKey);
+      localStorage.removeItem("hypes-trade-sign-message");
+      localStorage.removeItem("userToken");
     },
   });
 
   function handleOpenBalancePop(e: React.MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
-    if (!connected) return;
+    if (!isConnected) return;
     setPopOpen(true);
   }
 
-  if (!connected) {
+  if (!isConnected) {
     if (isMobileSize) {
       return (
         <button
@@ -125,7 +119,7 @@ export default function ConnectBtn() {
           className="flex cursor-pointer items-center gap-[5px]"
         >
           <div className="flex items-center text-xs leading-[18px] text-title-white hover:text-main">
-            {!shortAddr || connecting ? (
+            {!shortAddr || isConnecting ? (
               <Skeleton className="h-5 w-24" />
             ) : (
               <div>{shortAddr}</div>

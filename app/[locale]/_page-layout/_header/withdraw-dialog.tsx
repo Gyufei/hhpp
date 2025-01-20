@@ -16,7 +16,7 @@ export function WithdrawDialog({
   onOpenChange: (isOpen: boolean) => void;
   balance: string;
 }) {
-  const T = useTranslations("Header");
+  const T = useTranslations("Common");
   const CT = useTranslations("Common");
 
   const {

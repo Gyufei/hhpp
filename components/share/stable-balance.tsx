@@ -1,10 +1,11 @@
 import { formatNum } from "@/lib/utils/number";
 import { cn } from "@/lib/utils/common";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { useUsdcTokenBalance } from "@/lib/hooks/api/use-usdc-balance";
+import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 export function StableBalance({ className }: { className?: string }) {
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const { data: usdcBalanceData } = useUsdcTokenBalance(address);
   const usdcBalance = usdcBalanceData?.usdc_balance || "0";

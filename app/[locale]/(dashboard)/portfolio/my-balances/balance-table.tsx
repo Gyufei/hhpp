@@ -15,13 +15,13 @@ import { useMemo, useState } from "react";
 
 import { sortBy } from "lodash";
 import { useMyHoldings } from "@/lib/hooks/api/use-my-holdings";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { usePointAmount } from "@/lib/hooks/api/use-point-amount";
 import { SellContent } from "@/app/[locale]/direct-trade/[...name]/create-offer/sell-content";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { reportEvent } from "@/lib/utils/analytics";
 import DrawerTitle from "@/components/share/drawer-title";
 import Drawer from "react-modern-drawer";
+import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 export function BalanceTable() {
   const T = useTranslations("MyBalances");
@@ -232,7 +232,8 @@ const BalanceValue = ({
   type: string;
   marketAccount: string;
 }) => {
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
   const { data: pointAmount } = usePointAmount(address, marketAccount);
 
   if (pointAmount) {

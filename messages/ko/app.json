@@ -12,9 +12,8 @@
     "Seconds": "초",
     "Copy": "복사",
     "Network": "네트워크",
-    "NoData": "현재 데이터가 없습니다"
-  },
-  "Header": {
+    "NoData": "현재 데이터가 없습니다",
+    "Save": "저장",
     "Dashboard": "대시보드",
     "MarketTrades": "시장 거래",
     "Connect": "연결",
@@ -26,7 +25,12 @@
     "Withdraw": "출금",
     "ChargeFeeTip": "Hyperliquid는 미국 달러 토큰을 입금할 때 일부 수수료를 부과합니다.",
     "DepositTip": "다른 네트워크 또는 다른 유형의 USDC를 보내지 마세요. 최소 입금액은 5 USDC입니다. Hyperliquid는 입금액까지 브리지 수수료를 부과합니다.",
-    "ContractEndWith": "Contract ends with"
+    "ContractEndWith": "Contract ends with",
+    "EditProfile": "프로필 편집",
+    "UserProfile": "사용자 프로필",
+    "Username": "사용자 이름",
+    "UsernameLengthError": "사용자 이름은 최소 3자 이상이어야 합니다.",
+    "TradingMode": "거래 모드"
   },
   "Marketplace": {
     "InitialListing": "초기 상장",
@@ -66,7 +70,7 @@
     "YouPay": "지불할 금액",
     "txt-YouGet": "받을 금액",
     "YouGet": "",
-    "txt-YouHaveToSell": "판매해야 합니다",
+    "YouHaveToSell": "판매해야 합니다",
     "YouHaveTheOptionToClose": "100% 체결되기 전에 제안을 닫을 수 있는 옵션이 있습니다.",
     "Offer100%Filled": "제안 100% 체결",
     "ConfirmOrder": "테이커 확인",
@@ -126,7 +130,7 @@
     "AccountRevenue": "계정 수익",
     "Total": "총계",
     "AvailableToClaim": "청구 가능",
-    "ReferralCommision": "추천 수수료",
+    "ReferralCommission": "추천 수수료",
     "Change(24h)": "24시간 변동"
   },
   "MyOrders": {

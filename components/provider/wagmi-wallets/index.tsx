@@ -13,7 +13,7 @@ import { ChainConfigs } from "@/lib/const/chain-configs";
 const queryClient = new QueryClient();
 const getConfig = memoize(getWagmiConfig);
 
-export default function EthWalletsProvider({
+export default function WagmiWalletsProvider({
   children,
   initialState,
 }: {

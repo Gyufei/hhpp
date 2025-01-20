@@ -1,12 +1,12 @@
 import { useEndPoint } from "@/lib/hooks/api/use-endpoint";
 import { dataApiFetcher } from "@/lib/fetcher";
 import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { useSignData } from "./help/use-sign-data";
 import { toast } from "react-hot-toast";
+import { useAccountInfo } from "../api/use-account-info";
 
 export function useCreateTakerOrder() {
-  const { accountInfo } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
   const { apiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
 

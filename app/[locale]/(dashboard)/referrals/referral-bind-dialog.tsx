@@ -8,10 +8,10 @@ import { useSearchParams } from "next/navigation";
 import { useReferralCodeData } from "@/lib/hooks/api/use-referral-data";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useReferralBind, useReferralView } from "@/lib/hooks/api/use-referral";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { toast } from "react-hot-toast";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
+import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function ReferralBindDialog() {
@@ -20,7 +20,8 @@ export default function ReferralBindDialog() {
 
   const { trigger: viewReferral } = useReferralView();
 
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const [showReDialog, setShowReDialog] = useState(false);
 
@@ -52,7 +53,7 @@ export default function ReferralBindDialog() {
         }}
         aria-describedby={undefined}
       >
-        <ReferralSignInBtn
+        <ReferralBindBtn
           referralCode={referralCode}
           onSuccess={() => setShowReDialog(false)}
         />
@@ -61,21 +62,22 @@ export default function ReferralBindDialog() {
   );
 }
 
-export function ReferralSignInBtn({
+function ReferralBindBtn({
   referralCode,
   onSuccess,
 }: {
   referralCode: string;
   onSuccess: () => void;
 }) {
-  const T = useTranslations("Header");
+  const T = useTranslations("Common");
   const RT = useTranslations("Referral");
 
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const { data: codeData } = useReferralCodeData({
     code: referralCode,

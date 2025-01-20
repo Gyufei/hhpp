@@ -10,7 +10,7 @@ const tabClx =
   "flex w-[105px] items-center px-[10px] font-[400] py-[10px] text-sm leading-5 border-b-2 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray rounded-none";
 
 export default function PortFolio() {
-  const HT = useTranslations("Header");
+  const HT = useTranslations("Common");
   const MOT = useTranslations("MyOrders");
   const MBT = useTranslations("MyBalances");
 

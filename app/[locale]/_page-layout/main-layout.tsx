@@ -1,7 +1,9 @@
-import Header from "@/app/[locale]/_page-layout/_header";
 import GlobalToast from "@/components/share/global-toast";
 import WalletsModal from "@/components/share/wallets-modal";
-import ReferralBindDialog from "../(dashboard)/referrals/referral-bind-dialog";
+
+import Header from "@/app/[locale]/_page-layout/_header";
+import UserProfileDialog from "@/app/[locale]/_page-layout/_header/user-profile-dialog";
+import ReferralBindDialog from "@/app/[locale]/(dashboard)/referrals/referral-bind-dialog";
 
 export default function MainLayout({
   children,
@@ -20,6 +22,7 @@ export default function MainLayout({
       <GlobalToast />
       <ReferralBindDialog />
       <WalletsModal />
+      <UserProfileDialog />
     </div>
   );
 }

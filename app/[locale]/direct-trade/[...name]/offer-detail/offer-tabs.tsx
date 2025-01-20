@@ -3,15 +3,16 @@ import { useMemo, useState } from "react";
 import { TakerOrders } from "./taker-orders";
 import { IOffer } from "@/lib/types/offer";
 import { useTranslations } from "next-intl";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { useTakerOrderOfOffers } from "@/lib/hooks/api/use-taker-orders-of-offer";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 export default function OfferTabs({ offer }: { offer: IOffer }) {
   const T = useTranslations("Offer");
   const [currentTab, setCurrentTab] = useState("orders");
 
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const { data: takerOrders } = useTakerOrderOfOffers({
     offerId: offer.offer_id,

@@ -1,6 +1,6 @@
 "use client";
 
-import EthWalletsProvider from "@/components/provider/eth-wallets";
+import WagmiWalletsProvider from "@/components/provider/wagmi-wallets";
 import { ChainType } from "@/lib/types/chain";
 import { createContext, useContext, useState } from "react";
 import { State } from "wagmi";
@@ -43,9 +43,9 @@ export default function WalletModalProvider({
   initialState?: State;
 }) {
   return (
-    <EthWalletsProvider initialState={initialState}>
+    <WagmiWalletsProvider initialState={initialState}>
       <WalletModalProviderPrimitive>{children}</WalletModalProviderPrimitive>
-    </EthWalletsProvider>
+    </WagmiWalletsProvider>
   );
 }
 

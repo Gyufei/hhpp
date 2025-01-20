@@ -1,8 +1,8 @@
 import { IPoint } from "@/lib/types/token";
 import { formatNum } from "@/lib/utils/number";
 import { cn } from "@/lib/utils/common";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { usePointAmount } from "@/lib/hooks/api/use-point-amount";
+import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 export default function PointBalance({
   point,
@@ -11,7 +11,8 @@ export default function PointBalance({
   point: IPoint;
   className?: string;
 }) {
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const { data: pointAmountData } = usePointAmount(
     address,

@@ -15,10 +15,10 @@ export default function WithWalletConnectBtn({
   className?: string;
 }) {
   const { openWalletModal } = useWalletModalContext();
-  const { connected } = useChainWallet();
+  const { isConnected } = useChainWallet();
 
   function handleClick() {
-    if (!connected) {
+    if (!isConnected) {
       openWalletModal(true, chain);
     } else {
       onClick();

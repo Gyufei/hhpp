@@ -12,9 +12,8 @@
     "Seconds": "Seconds",
     "Copy": "Copy",
     "Network": "Network",
-    "NoData": "There is currently no data available"
-  },
-  "Header": {
+    "NoData": "There is currently no data available",
+    "Save": "Save",
     "Dashboard": "Dashboard",
     "MarketTrades": "Market Trades",
     "Connect": "Connect",
@@ -26,7 +25,12 @@
     "Withdraw": "Withdraw",
     "ChargeFeeTip": "Hyperliquid Will Charge You Some Fee When Bridging Usdc Over Arbitrum Ups To Your Deposit Amount.",
     "DepositTip": "Do not send USDC from other networks or other types of USDC. There is a minimum deposit of 5 USDC. Hyperliquid will charge you the bridging fee ups to your deposit amount.",
-    "ContractEndWith": "Contract ends with"
+    "ContractEndWith": "Contract ends with",
+    "EditProfile": "Edit Profile",
+    "UserProfile": "User Profile",
+    "Username": "Username",
+    "UsernameLengthError": "Username must be at least 3 characters",
+    "TradingMode": "Trading Mode"
   },
   "Marketplace": {
     "InitialListing": "Initial Listing",
@@ -67,7 +71,7 @@
 
     "txt-YouGet": "You get",
     "YouGet": "",
-    "txt-YouHaveToSell": "You have to sell",
+    "YouHaveToSell": "You have to sell",
     "YouHaveTheOptionToClose": "You have the option to close the offer before it is 100% filled.",
 
     "Offer100%Filled": "Offer 100% Filled",
@@ -129,7 +133,7 @@
     "AccountRevenue": "Account Revenue",
     "Total": "Total",
     "AvailableToClaim": "Available to Claim",
-    "ReferralCommision": "Referral Commision",
+    "ReferralCommission": "Referral Commission",
     "Change(24h)": "Change (24h)"
   },
   "MyOrders": {

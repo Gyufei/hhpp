@@ -3,8 +3,8 @@ import { apiFetcher, dataApiFetcher } from "@/lib/fetcher";
 import useSWRMutation from "swr/mutation";
 import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { ChainType } from "@/lib/types/chain";
+import { useAccountInfo } from "./use-account-info";
 
 interface IAccountInfo {
   uid: number;
@@ -18,11 +18,12 @@ interface IAccountInfo {
 
 export function useAccountStats() {
   const { apiEndPoint } = useEndPoint();
-  const { address: wallet } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const res = useSWR<IAccountInfo>(
-    wallet
-      ? `${apiEndPoint}${ApiPaths.accountStats}/${wallet}?chain=${ChainType.HYPER}`
+    address
+      ? `${apiEndPoint}${ApiPaths.accountStats}/${address}?chain=${ChainType.HYPER}`
       : null,
     dataApiFetcher,
   );

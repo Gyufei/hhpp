@@ -2,12 +2,13 @@ import { apiFetcher } from "@/lib/fetcher";
 import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
 import useSWRMutation from "swr/mutation";
-import { useChainWallet } from "../web3/use-chain-wallet";
 import toast from "react-hot-toast";
+import { useAccountInfo } from "./use-account-info";
 
 export function useReferralCreate() {
   const { apiEndPoint } = useEndPoint();
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const CreateApiPost = async () => {
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.create}`, {
@@ -27,7 +28,8 @@ export function useReferralCreate() {
 
 export function useReferralRateChange() {
   const { apiEndPoint } = useEndPoint();
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const postApi = async (
     _: string,
@@ -68,7 +70,8 @@ export function useReferralRateChange() {
 
 export function useReferralNoteChange() {
   const { apiEndPoint } = useEndPoint();
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const postApi = async (
     _: string,
@@ -104,7 +107,8 @@ export function useReferralNoteChange() {
 
 export function useReferralDefault() {
   const { apiEndPoint } = useEndPoint();
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const postApi = async (
     _: string,
@@ -136,7 +140,8 @@ export function useReferralDefault() {
 
 export function useReferralDelete() {
   const { apiEndPoint } = useEndPoint();
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const postApi = async (
     _: string,
@@ -199,7 +204,8 @@ export function useReferralView() {
 
 export function useReferralBind() {
   const { apiEndPoint } = useEndPoint();
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const CreateApiPost = async (
     _: string,

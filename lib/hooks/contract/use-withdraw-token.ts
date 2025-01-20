@@ -1,10 +1,10 @@
 import { useEndPoint } from "@/lib/hooks/api/use-endpoint";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { dataApiFetcher } from "@/lib/fetcher";
 import { ApiPaths } from "@/lib/PathMap";
 import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
 import { useSignData } from "./help/use-sign-data";
 import { toast } from "react-hot-toast";
+import { useAccountInfo } from "../api/use-account-info";
 
 export type IBalanceType =
   | "taxIncome"
@@ -16,7 +16,7 @@ export type IBalanceType =
 export function useWithdrawToken() {
   const { apiEndPoint } = useEndPoint();
 
-  const { accountInfo } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
   const { signDataAction } = useSignData();
 
   const txAction = async ({

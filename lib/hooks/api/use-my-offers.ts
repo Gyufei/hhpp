@@ -4,11 +4,12 @@ import { IOffer } from "@/lib/types/offer";
 import { ApiPaths } from "@/lib/PathMap";
 import { dataApiFetcher } from "@/lib/fetcher";
 import { useMarketplaces } from "./use-marketplaces";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
+import { useAccountInfo } from "./use-account-info";
 
 export function useMyOffers(params: any) {
   const { apiEndPoint } = useEndPoint();
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const { data: marketplaceData, isLoading: isMarketLoading } =
     useMarketplaces();

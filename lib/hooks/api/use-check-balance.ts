@@ -1,12 +1,13 @@
 import NP from "number-precision";
-import { useChainWallet } from "../web3/use-chain-wallet";
 import { useUsdcTokenBalance } from "./use-usdc-balance";
 import { usePointAmount } from "./use-point-amount";
 import { IMarketplace } from "@/lib/types/marketplace";
 import { useCallback } from "react";
+import { useAccountInfo } from "./use-account-info";
 
 export function useCheckBalance(market: IMarketplace) {
-  const { address } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_wallet || "";
 
   const { data: usdcBalanceData } = useUsdcTokenBalance(address);
   const usdcBalance = usdcBalanceData?.usdc_balance || "0";

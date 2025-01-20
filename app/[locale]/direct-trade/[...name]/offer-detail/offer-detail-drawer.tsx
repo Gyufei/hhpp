@@ -3,10 +3,10 @@ import AskDetail from "./ask-detail";
 import OfferFillDialog from "./offer-fill-dialog";
 import { IOffer } from "@/lib/types/offer";
 import { useTranslations } from "next-intl";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { reportEvent } from "@/lib/utils/analytics";
 import DrawerTitle from "@/components/share/drawer-title";
 import Drawer from "react-modern-drawer";
+import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 export default function OfferDetailDrawer({
   offer,
@@ -18,22 +18,21 @@ export default function OfferDetailDrawer({
   onClose: () => void;
 }) {
   const OT = useTranslations("Offer");
-
-  const { connected } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [orderFillDialog, setOrderFillDialog] = useState(false);
   const [resultOrder, setResultOrder] = useState<any | null>(null);
 
   useEffect(() => {
-    if (offer && connected) {
+    if (offer && accountInfo?.dest_wallet) {
       setDrawerOpen(true);
     }
 
     if (!offer) {
       setDrawerOpen(false);
     }
-  }, [offer, connected]);
+  }, [offer, accountInfo?.dest_wallet]);
 
   function handleSuccess(ord: Record<string, any>) {
     reportEvent("askOffer" + "Success", {

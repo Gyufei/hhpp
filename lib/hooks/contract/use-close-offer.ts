@@ -2,11 +2,11 @@ import { useEndPoint } from "@/lib/hooks/api/use-endpoint";
 import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
 import { dataApiFetcher } from "@/lib/fetcher";
 import { useSignData } from "./help/use-sign-data";
-import { useChainWallet } from "../web3/use-chain-wallet";
 import { toast } from "react-hot-toast";
+import { useAccountInfo } from "../api/use-account-info";
 
 export function useCloseOffer() {
-  const { accountInfo } = useChainWallet();
+  const { data: accountInfo } = useAccountInfo();
   const { apiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
 

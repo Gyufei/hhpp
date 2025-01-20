@@ -10,6 +10,7 @@ import { DepositDialog } from "./deposit-dialog";
 import { WithdrawDialog } from "./withdraw-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUsdcTokenBalance } from "@/lib/hooks/api/use-usdc-balance";
+import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 const BalancePopContent = forwardRef(
   (
@@ -18,9 +19,11 @@ const BalancePopContent = forwardRef(
       refetchBalance: () => void;
     }>,
   ) => {
-    const T = useTranslations("Header");
+    const T = useTranslations("Common");
 
-    const { address, disconnect } = useChainWallet();
+    const { disconnect } = useChainWallet();
+    const { data: accountInfo } = useAccountInfo();
+    const address = accountInfo?.dest_wallet || "";
     const [balanceHover, setBalanceHover] = useState(false);
 
     const {
@@ -57,7 +60,12 @@ const BalancePopContent = forwardRef(
 
     return (
       <>
-        <div></div>
+        <div className="flex items-center justify-between text-xs leading-[18px]">
+          <div className="text-title-white">{accountInfo?.user_name}</div>
+          <div className="cursor-pointer text-main hover:text-main-hover">
+            {T("EditProfile")}
+          </div>
+        </div>
         <div
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -107,6 +115,7 @@ const BalancePopContent = forwardRef(
           open={depositDialogOpen}
           onOpenChange={setDepositDialogOpen}
         />
+
         <WithdrawDialog
           open={withdrawDialogOpen}
           onOpenChange={setWithdrawDialogOpen}

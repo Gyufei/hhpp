@@ -14,7 +14,7 @@ export function DepositDialog({
   open: boolean;
   onOpenChange: (isOpen: boolean) => void;
 }) {
-  const T = useTranslations("Header");
+  const T = useTranslations("Common");
   const CT = useTranslations("Common");
   const chainConfig = ChainConfigs[ChainType.HYPER];
 
