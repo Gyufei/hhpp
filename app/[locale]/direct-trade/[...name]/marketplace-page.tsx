@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils/common";
 import MarketCountDown from "./market-count-down";
 import { isAfter, toDate } from "date-fns";
 
-export default function MarketplaceContent({
+export default function MarketplacePage({
   marketplace,
 }: {
   marketplace: IMarketplace;

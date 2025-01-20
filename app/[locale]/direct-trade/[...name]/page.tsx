@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
-import MarketplaceContent from "./marketplace-content";
+import MarketplacePage from "./marketplace-page";
 import { useWsMsgSub } from "@/lib/hooks/api/use-ws-msgs";
 import { useEffect } from "react";
 import { ChainType } from "@/lib/types/chain";
@@ -35,5 +35,5 @@ export default function Marketplace({ params }: { params: { name: string } }) {
     );
   }
 
-  return <MarketplaceContent marketplace={marketplace} />;
+  return <MarketplacePage marketplace={marketplace} />;
 }

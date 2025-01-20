@@ -2,14 +2,12 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import DepthChart from "./depth-chart";
 import SalesChart, { Durations, IDurationType } from "./sales-chart";
 import { IMarketplace } from "@/lib/types/marketplace";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils/common";
 import { TradingChart } from "@/app/[locale]/curve-trade/trade-chart";
 
-type IChartType = "depth" | "sales";
 const OpenKline = false as const;
 
 export default function MarketCharts({
@@ -21,12 +19,7 @@ export default function MarketCharts({
   showKChart: boolean;
   setShowKChart: (show: boolean) => void;
 }) {
-  const [chartType, setChartType] = useState<IChartType>("sales");
   const [duration, setDuration] = useState<IDurationType>(Durations[0].value);
-
-  function handleChangType(type: IChartType) {
-    setChartType(type);
-  }
 
   function handleChangeDuration(duration: IDurationType) {
     setDuration(duration);
@@ -62,18 +55,13 @@ export default function MarketCharts({
         <>
           <div className="flex items-center justify-between">
             <div className="flex w-full items-center justify-between space-x-[6px] sm:w-auto sm:justify-start">
-              <ChartSwitch
-                chartType={chartType}
-                handleChangeType={handleChangType}
-              />
+              <SaleBtn />
             </div>
             <div className="flex items-center justify-end space-x-[10px]">
-              {chartType === "sales" && (
-                <DurationSelect
-                  duration={duration}
-                  handleChangeDuration={handleChangeDuration}
-                />
-              )}
+              <DurationSelect
+                duration={duration}
+                handleChangeDuration={handleChangeDuration}
+              />
               {OpenKline && (
                 <>
                   <div className="h-5 w-[1px] bg-border-black"></div>
@@ -91,11 +79,7 @@ export default function MarketCharts({
           </div>
 
           <div className="mt-5 ">
-            {chartType === "sales" ? (
-              <SalesChart duration={duration} marketplace={marketplace} />
-            ) : (
-              <DepthChart />
-            )}
+            <SalesChart duration={duration} marketplace={marketplace} />
           </div>
         </>
       )}
@@ -103,33 +87,16 @@ export default function MarketCharts({
   );
 }
 
-function ChartSwitch({
-  chartType,
-  handleChangeType,
-}: {
-  chartType: IChartType;
-  handleChangeType: (_type: IChartType) => void;
-}) {
+function SaleBtn() {
   const T = useTranslations("Marketplace");
-  const isSales = chartType === "sales";
+
   return (
     <div className="flex space-x-1 rounded border border-border-black bg-bg-black p-1">
-      <div
-        data-checked={isSales}
-        className="flex cursor-pointer items-center rounded bg-transparent data-[checked=true]:bg-main data-[checked=false]:px-[6px] data-[checked=true]:px-3 data-[checked=true]:py-[6px]"
-        onClick={() => handleChangeType("sales")}
-      >
-        <Image
-          src={isSales ? "/icons/sales.svg" : "/icons/sales-gray.svg"}
-          width={20}
-          height={20}
-          alt="sales"
-        />
-        {isSales && (
-          <div className="ml-[6px] text-sm leading-5 text-bg-black">
-            {T("Sales")}
-          </div>
-        )}
+      <div className="flex cursor-pointer items-center rounded bg-main bg-transparent px-3 py-[6px]">
+        <Image src={"/icons/sales.svg"} width={20} height={20} alt="sales" />
+        <div className="ml-[6px] text-sm leading-5 text-bg-black">
+          {T("Sales")}
+        </div>
       </div>
     </div>
   );
