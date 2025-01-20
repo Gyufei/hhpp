@@ -5,10 +5,12 @@ import { useReferralData } from "@/lib/hooks/api/use-referral-data";
 import { useEffect } from "react";
 import { useReferralCreate } from "@/lib/hooks/api/use-referral";
 import HoverIcon from "@/components/share/hover-icon";
+import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 
 export default function Referral() {
   const T = useTranslations("Referral");
 
+  const { address } = useChainWallet();
   const { data: referralData, mutate: refetch } = useReferralData();
 
   const {
@@ -21,7 +23,7 @@ export default function Referral() {
     if (isSuccess) {
       refetch();
     }
-  }, [isSuccess]);
+  }, [isSuccess, refetch]);
 
   function handleCreate() {
     if (createLoading) {
@@ -47,15 +49,17 @@ export default function Referral() {
             <div className="pl-[10px] text-sm leading-5 text-title-white">
               {T("ReferralLink")}
             </div>
-            <HoverIcon
-              onClick={handleCreate}
-              width={20}
-              height={20}
-              src="/icons/circle-add.svg"
-              hoverSrc="/icons/green-add.svg"
-              alt="add"
-              className="cursor-pointer"
-            />
+            {address && (
+              <HoverIcon
+                onClick={handleCreate}
+                width={20}
+                height={20}
+                src="/icons/circle-add.svg"
+                hoverSrc="/icons/green-add.svg"
+                alt="add"
+                className="cursor-pointer"
+              />
+            )}
           </div>
           <div className="flex flex-1 flex-col overflow-x-scroll sm:max-w-none sm:overflow-x-hidden sm:px-0">
             <div className="max-h-auto relative min-h-[296px] w-[820px] flex-1 flex-col sm:w-full sm:min-w-0">

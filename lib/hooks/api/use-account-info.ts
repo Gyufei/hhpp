@@ -3,18 +3,20 @@ import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
 import { dataApiFetcher } from "@/lib/fetcher";
 
+type TradingMode = "Private" | "Public";
+
 interface IAccountInfo {
-  wallet: "0x48639f1e148b3734dd60d51b9e1c36c8d6ce72a6";
-  dest_wallet: "0x311555599c574992c48a1cb9560f01ab2dde607f";
+  wallet: string;
+  dest_wallet: string;
+  user_name: string;
+  trading_mode: TradingMode;
 }
 
 export function useAccountInfo(wallet: string) {
   const { apiEndPoint } = useEndPoint();
 
   const res = useSWR<IAccountInfo>(
-    wallet
-      ? `${apiEndPoint}${ApiPaths.accountInfo}?wallet=${wallet}`
-      : null,
+    wallet ? `${apiEndPoint}${ApiPaths.accountInfo}?wallet=${wallet}` : null,
     dataApiFetcher,
   );
 

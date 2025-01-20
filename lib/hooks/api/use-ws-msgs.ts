@@ -16,13 +16,15 @@ export interface IMsg {
   timestamp: number;
 }
 
-export function useWsMsgSub(chain: ChainType) {
+export function useWsMsg(chain: ChainType) {
   const { wssEndPoint } = useEndPoint();
 
   const res = useSWRSubscription<Array<IMsg>>(
     chain,
     (_key: string, { next }: { next: any }) => {
       // const socket = io(`${wssEndPoint}/${chain}`);
+
+      // temp hide socket;
       const socket = {
         on: (_event: string, _cb: any) => {},
         off: (_event: string, _cb: any) => {},
@@ -31,13 +33,9 @@ export function useWsMsgSub(chain: ChainType) {
         },
       };
 
-      function onConnect() {
-        console.log("connected");
-      }
+      function onConnect() {}
 
-      function onDisconnect() {
-        console.log("disconnected");
-      }
+      function onDisconnect() {}
 
       function onMsgEvent(value: any) {
         next(null, (prev: Array<IMsg>) =>

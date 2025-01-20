@@ -6,7 +6,7 @@ import { useChainWallet } from "../web3/use-chain-wallet";
 import { toast } from "react-hot-toast";
 
 export function useCloseOffer() {
-  const { realAddress, address } = useChainWallet();
+  const { accountInfo } = useChainWallet();
   const { apiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
 
@@ -14,8 +14,8 @@ export function useCloseOffer() {
     const { offerId } = args;
 
     const reqData = await signDataAction({
-      source_account: realAddress,
-      dest_account: address,
+      source_account: accountInfo?.wallet || "",
+      dest_account: accountInfo?.dest_wallet || "",
     });
 
     try {

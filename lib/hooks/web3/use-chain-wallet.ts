@@ -1,39 +1,29 @@
-import { truncateAddr } from "@/lib/utils/web3";
-import { useMemo } from "react";
 import { useAccount, useDisconnect } from "wagmi";
-import { ChainType } from "@/lib/types/chain";
 import { useAccountInfo } from "../api/use-account-info";
 
 export function useChainWallet() {
   const {
-    address: realAddress,
+    address: walletAddress,
     isConnected,
     isConnecting,
     connector,
   } = useAccount();
 
-  const { data: destInfo } = useAccountInfo(realAddress || "");
-
-  const destAddress = destInfo?.dest_wallet;
-
+  const { data: accountInfo } = useAccountInfo(walletAddress || "");
   const { disconnect: evmDisconnect } = useDisconnect();
-
-  const currentWalletChain = useMemo(() => {
-    return ChainType.HYPER;
-  }, []);
 
   return {
     // source wallet for data fetch, sign, arb
-    realAddress: realAddress || "",
-    shortAddr: realAddress
-      ? truncateAddr(realAddress, { nPrefix: 6, nSuffix: 4 })
-      : "",
+    walletAddress: walletAddress || "",
     // dest wallet for HL
-    address: destAddress || "",
+    address: accountInfo?.dest_wallet || "",
+    accountInfo: accountInfo || {
+      dest_wallet: "",
+      wallet: "",
+    },
     connected: isConnected,
     connecting: isConnecting,
     disconnect: evmDisconnect,
-    currentChain: currentWalletChain,
     connector: connector,
   };
 }

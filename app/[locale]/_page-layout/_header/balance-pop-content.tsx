@@ -57,12 +57,13 @@ const BalancePopContent = forwardRef(
 
     return (
       <>
+        <div></div>
         <div
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           className="flex items-start justify-between rounded border border-dashed border-border-black p-[10px]"
         >
-          <div>
+          <div className="flex flex-col">
             <div className="text-xs leading-[18px] text-gray">Balance</div>
             <div className="mt-1 flex max-w-[160px] items-center gap-x-[5px] ">
               {isBalanceLoading ? (

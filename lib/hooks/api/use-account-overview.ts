@@ -16,13 +16,13 @@ interface IAccountInfo {
   trade_vol: string;
 }
 
-export function useAccountStats(chain: ChainType) {
+export function useAccountStats() {
   const { apiEndPoint } = useEndPoint();
   const { address: wallet } = useChainWallet();
 
   const res = useSWR<IAccountInfo>(
     wallet
-      ? `${apiEndPoint}${ApiPaths.accountStats}/${wallet}?chain=${chain}`
+      ? `${apiEndPoint}${ApiPaths.accountStats}/${wallet}?chain=${ChainType.HYPER}`
       : null,
     dataApiFetcher,
   );

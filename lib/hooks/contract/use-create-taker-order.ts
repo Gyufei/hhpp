@@ -6,7 +6,7 @@ import { useSignData } from "./help/use-sign-data";
 import { toast } from "react-hot-toast";
 
 export function useCreateTakerOrder() {
-  const { realAddress, address } = useChainWallet();
+  const { accountInfo } = useChainWallet();
   const { apiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
 
@@ -15,8 +15,8 @@ export function useCreateTakerOrder() {
 
     const reqData = await signDataAction({
       item_amount: itemAmount,
-      source_account: realAddress,
-      dest_account: address,
+      source_account: accountInfo?.wallet || "",
+      dest_account: accountInfo?.dest_wallet || "",
     });
     try {
       const res = await dataApiFetcher(`${apiEndPoint}/offer/${offerId}/take`, {

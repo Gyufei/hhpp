@@ -8,7 +8,7 @@ import useSWRMutation from "swr/mutation";
 export function useUserWithdraw() {
   const { apiEndPoint } = useEndPoint();
 
-  const { realAddress, address } = useChainWallet();
+  const { accountInfo } = useChainWallet();
   const { signDataAction } = useSignData();
 
   async function postApi(
@@ -25,19 +25,16 @@ export function useUserWithdraw() {
 
     const params = {
       amount,
-      source_account: realAddress,
-      dest_account: address,
+      source_account: accountInfo?.wallet || "",
+      dest_account: accountInfo?.dest_wallet || "",
     };
 
     const reqData = await signDataAction(params);
 
-    const res = await dataApiFetcher(
-      `${apiEndPoint}${ApiPaths.userWithdraw}`,
-      {
-        method: "POST",
-        body: JSON.stringify(reqData),
-      },
-    );
+    const res = await dataApiFetcher(`${apiEndPoint}${ApiPaths.userWithdraw}`, {
+      method: "POST",
+      body: JSON.stringify(reqData),
+    });
 
     return res;
   }

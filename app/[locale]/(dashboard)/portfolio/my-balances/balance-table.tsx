@@ -232,8 +232,8 @@ const BalanceValue = ({
   type: string;
   marketAccount: string;
 }) => {
-  const { address: wallet } = useChainWallet();
-  const { data: pointAmount } = usePointAmount(wallet, marketAccount);
+  const { address } = useChainWallet();
+  const { data: pointAmount } = usePointAmount(address, marketAccount);
 
   if (pointAmount) {
     if (type === "free") {

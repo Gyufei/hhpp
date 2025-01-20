@@ -18,6 +18,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
+import { truncateAddr } from "@/lib/utils/web3";
 
 const SignMessageKey = "hypes-trade-sign-message";
 
@@ -28,8 +29,12 @@ export default function ConnectBtn() {
   const { signMessage } = useSignMessage();
   const { isMobileSize } = useDeviceSize();
   const { openWalletModal } = useWalletModalContext();
-  const { shortAddr, connected, connecting } = useChainWallet();
+  const { walletAddress, connected, connecting } = useChainWallet();
   const { checkAndSwitchChain } = useCheckSwitchChain();
+
+  const shortAddr = walletAddress
+    ? truncateAddr(walletAddress, { nPrefix: 6, nSuffix: 4 })
+    : "";
 
   const [popOpen, setPopOpen] = useState(false);
   const balancePopRef = useRef<{

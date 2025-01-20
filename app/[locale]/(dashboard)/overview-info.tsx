@@ -2,7 +2,6 @@
 import { formatNum } from "@/lib/utils/number";
 import { useAccountStats } from "@/lib/hooks/api/use-account-overview";
 import { useTranslations } from "next-intl";
-import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 import { useUserXp } from "@/lib/hooks/api/use-user-xp";
 import { useUserTokenBalance } from "@/lib/hooks/api/use-user-token-balance";
 import HoverIcon from "@/components/share/hover-icon";
@@ -13,7 +12,7 @@ import { usePathname } from "next/navigation";
 
 export default function OverviewInfo() {
   const T = useTranslations("Dashboard");
-  const { currentChain } = useChainWallet();
+
   const {
     isLoading: isClaiming,
     write: writeAction,
@@ -21,7 +20,7 @@ export default function OverviewInfo() {
   } = useWithdrawToken();
   const { data: userPoints } = useUserXp();
 
-  const { data: accountInfo } = useAccountStats(currentChain!);
+  const { data: accountInfo } = useAccountStats();
   const { data: tokenBlcData, mutate: refetchTokenBlcData } =
     useUserTokenBalance();
   const userClaim = tokenBlcData?.[0]?.ledgers;

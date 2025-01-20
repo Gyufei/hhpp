@@ -16,8 +16,7 @@ export type IBalanceType =
 export function useWithdrawToken() {
   const { apiEndPoint } = useEndPoint();
 
-  const { realAddress, address } = useChainWallet();
-
+  const { accountInfo } = useChainWallet();
   const { signDataAction } = useSignData();
 
   const txAction = async ({
@@ -27,8 +26,8 @@ export function useWithdrawToken() {
   }) => {
     const reqData = await signDataAction({
       token_balance_type,
-      source_account: realAddress,
-      dest_account: address,
+      source_account: accountInfo?.wallet || "",
+      dest_account: accountInfo?.dest_wallet || "",
     });
     try {
       const res = await dataApiFetcher(
