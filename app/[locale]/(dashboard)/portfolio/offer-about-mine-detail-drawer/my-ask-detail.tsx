@@ -79,7 +79,7 @@ export default function MyAskDetail({
             topText={<>{T("txt-YouHaveToSell")}</>}
             bottomText={<>~${formatNum(tokenTotalPrice)} </>}
             value={String(NP.divide(offer.item_amount, pointDecimalNum))}
-            tokenLogo={offerPointInfo.logoURI}
+            tokenName={offerPointInfo.symbol || ""}
             onValueChange={() => {}}
             isCanInput={false}
           />
@@ -105,7 +105,7 @@ export default function MyAskDetail({
               </div>
             }
             value={String(amount)}
-            tokenLogo={offerTokenInfo?.logoURI || "/icons/empty.png"}
+            tokenName={offerTokenInfo?.symbol || ""}
           />
 
           <div className="flex flex-wrap gap-2">

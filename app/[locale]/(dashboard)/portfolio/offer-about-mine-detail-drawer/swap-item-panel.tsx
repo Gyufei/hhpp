@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { NumericalInput } from "@/components/share/numerical-input";
 import { ReactElement } from "react";
 import { cn } from "@/lib/utils/common";
@@ -9,7 +8,7 @@ export function SwapItemPanel({
   onValueChange,
   topText,
   bottomText,
-  tokenLogo,
+  tokenName,
   isCanInput = true,
 }: {
   className?: string;
@@ -17,7 +16,7 @@ export function SwapItemPanel({
   onValueChange: (_v: string) => void;
   topText: ReactElement;
   bottomText: ReactElement;
-  tokenLogo: string;
+  tokenName: string;
   isCanInput?: boolean;
 }) {
   return (
@@ -44,13 +43,9 @@ export function SwapItemPanel({
         <div className="text-xs leading-[18px] text-gray">{bottomText}</div>
       </div>
       <div className="flex items-center">
-        <Image
-          src={tokenLogo}
-          width={24}
-          height={24}
-          alt="token"
-          className="rounded-full"
-        />
+        <div className="text-sm leading-[36px] text-title-white">
+          {tokenName}
+        </div>
       </div>
     </div>
   );

@@ -38,13 +38,13 @@ export default function MarketplaceCard({
           {isLoadingFlag ? (
             <Skeleton className="h-14 w-14 rounded-full" />
           ) : (
-            <div className="flex h-14 w-14 items-center justify-center rounded-full sm:border-[1.5px] sm:border-[#303030]">
+            <div className="flex h-14 w-14 items-center justify-center rounded sm:border-[1.5px] sm:border-[#303030]">
               <Image
                 src={marketplace?.projectLogo}
                 width={48}
                 height={48}
                 alt="token1"
-                className="rounded-full"
+                className="rounded"
               />
             </div>
           )}

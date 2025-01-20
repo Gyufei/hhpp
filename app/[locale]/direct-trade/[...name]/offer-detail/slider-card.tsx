@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Slider } from "@/components/ui/slider";
 import { ReactElement, useMemo } from "react";
 import { NumericalInput } from "@/components/share/numerical-input";
@@ -12,7 +11,7 @@ export default function SliderCard({
   sliderValue,
   sliderMax,
   canGoMax,
-  tokenLogo,
+  tokenName,
   bottomText,
   setSliderValue,
   hasError = false,
@@ -24,7 +23,7 @@ export default function SliderCard({
   sliderValue: number;
   canGoMax: number;
   sliderMax: number;
-  tokenLogo: string;
+  tokenName: string;
   bottomText: ReactElement;
   setSliderValue: (_v: number) => void;
   hasError?: boolean;
@@ -74,13 +73,9 @@ export default function SliderCard({
             {formatNum(Number(value), 6)}
           </div>
         )}
-        <Image
-          src={tokenLogo}
-          width={24}
-          height={24}
-          alt="stable token"
-          className="rounded-full"
-        />
+        <div className="text-sm leading-[36px] text-title-white">
+          {tokenName}
+        </div>
       </div>
       <div className="mt-3 flex">
         <Slider

@@ -38,11 +38,10 @@ export default function AskDetail({
   const {
     tokenPrice,
     progress,
-    offerLogo,
     forValue,
-    forLogo,
     pointPerPrice,
     isFilled,
+    offerPointInfo,
     offerTokenInfo,
     pointDecimalNum,
   } = useOfferFormat({
@@ -172,7 +171,7 @@ export default function AskDetail({
               </>
             }
             bottomText={<>~${formatNum(payTokenTotalPrice)} </>}
-            tokenLogo={forLogo}
+            tokenName={offerTokenInfo?.symbol || ""}
             value={String(payTokenAmount)}
             onUserInput={handleInputPayTokenAmount}
             canGoMax={sliderCanMax}
@@ -193,7 +192,7 @@ export default function AskDetail({
               </>
             }
             value={String(NP.divide(receivePointAmount, pointDecimalNum))}
-            tokenLogo={offerLogo}
+            tokenName={offerPointInfo?.symbol || ""}
           />
 
           {isFilled ? (

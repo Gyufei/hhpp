@@ -10,15 +10,21 @@ import { ProjectDecimalsMap } from "@/lib/const/constant";
 export function useOfferFormat({ offer }: { offer: IOffer }) {
   const { data: tokens } = useTokens(offer?.marketplace?.chain);
 
-  const offerTokenInfo = useMemo(() => {
-    return tokens?.find((t) => t.symbol === offer.payment_token);
-  }, [offer, tokens]);
-
   const offerChainInfo = useMemo(() => {
     return tokens?.find(
       (t) => t.symbol === offer?.marketplace?.chain?.toUpperCase(),
     );
   }, [offer, tokens]);
+
+  const offerTokenInfo = useMemo(() => {
+    return tokens?.find((t) => t.symbol === offer.payment_token);
+  }, [offer, tokens]);
+
+  const offerPointInfo: IPoint = {
+    symbol: offer.marketplace.item_name,
+    logoURI: offer.marketplace.pointLogo,
+    marketplace: offer.marketplace,
+  };
 
   const pointDecimalNum = useMemo(() => {
     if (
@@ -36,12 +42,6 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     offer.marketplace.chain,
     offerTokenInfo?.address || "",
   );
-
-  const offerPointInfo: IPoint = {
-    symbol: offer.marketplace.item_name,
-    logoURI: offer.marketplace.pointLogo,
-    marketplace: offer.marketplace,
-  };
 
   const tokenLogo = offerTokenInfo?.logoURI || "/icons/empty.svg";
   const pointLogo = offerPointInfo?.logoURI || "/icons/empty.svg";

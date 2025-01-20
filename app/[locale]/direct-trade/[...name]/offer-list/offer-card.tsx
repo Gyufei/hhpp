@@ -67,7 +67,7 @@ export function OfferCard({
             width={48}
             height={48}
             alt="project logo"
-            className="rounded-full"
+            className="rounded"
           />
 
           <div>

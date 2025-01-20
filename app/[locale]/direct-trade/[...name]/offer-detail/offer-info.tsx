@@ -24,7 +24,7 @@ export default function OfferInfo({
             width={48}
             height={48}
             alt="symbol"
-            className="rounded-full"
+            className="rounded"
           />
 
           <div>

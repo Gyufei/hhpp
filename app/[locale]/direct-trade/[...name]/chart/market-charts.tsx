@@ -92,7 +92,7 @@ function SaleBtn() {
 
   return (
     <div className="flex space-x-1 rounded border border-border-black bg-bg-black p-1">
-      <div className="flex cursor-pointer items-center rounded bg-main bg-transparent px-3 py-[6px]">
+      <div className="flex cursor-pointer items-center rounded bg-main px-3 py-[6px]">
         <Image src={"/icons/sales.svg"} width={20} height={20} alt="sales" />
         <div className="ml-[6px] text-sm leading-5 text-bg-black">
           {T("Sales")}
