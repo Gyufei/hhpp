@@ -67,7 +67,6 @@ async function parsedRes(res: any) {
     }
 
     const json = await res.json();
-
     if (json.code === 500) {
       reportEvent("fetch_500", { value: "" });
       return Promise.reject(new Error(json.msg || json.message || json.data));
