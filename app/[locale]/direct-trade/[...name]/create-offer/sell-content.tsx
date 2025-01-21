@@ -33,7 +33,6 @@ export function SellContent({
 
   const {
     token: receiveToken,
-    setToken: setReceiveToken,
     point: sellPoint,
     tokenAmount: receiveTokenAmount,
     setTokenAmount: setReceiveAmount,
@@ -179,13 +178,7 @@ export function SellContent({
             </div>
           }
           bottomText={<></>}
-          tokenSelect={
-            <StableTokenSelectDisplay
-              chain={currentMarket.chain}
-              token={receiveToken}
-              setToken={setReceiveToken}
-            />
-          }
+          tokenSelect={<StableTokenSelectDisplay token={receiveToken} />}
         />
 
         <div className="my-5  h-[1px] bg-border-black"></div>
