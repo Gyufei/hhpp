@@ -7,6 +7,7 @@ import { useAccountInfo } from "../api/use-account-info";
 import { ChainConfigs } from "@/lib/const/chain-configs";
 import { ChainType } from "@/lib/types/chain";
 import { isProduction } from "@/lib/PathMap";
+import { formatDecimal } from "@/lib/utils/number";
 
 export function useCreateTakerOrder() {
   const { data: accountInfo } = useAccountInfo();
@@ -66,18 +67,32 @@ export function useCreateTakerOrder() {
 }
 
 function genTakerOrderTypeData(amount: string, timestamp: number) {
-  const amountSplit = amount.split(".");
-  const integer = amountSplit[0];
-  const decimal = amountSplit[1]
-    ? amountSplit[1].length > 6
-      ? amountSplit[1].slice(0, 6)
-      : amountSplit[1].padEnd(6, "0")
-    : "";
-  const amountPad = integer + "." + decimal;
+  const amountPad = formatDecimal(amount);
   const chainConfig = ChainConfigs[ChainType.HYPER];
+  const chainId = "0x" + chainConfig.network.toString(16);
 
   const destination = chainConfig.contracts.destination;
-  const chainId = "0x" + chainConfig.network.toString(16);
+
+  const types = {
+    "HyperliquidTransaction:UsdSend": [
+      {
+        name: "hyperliquidChain",
+        type: "string",
+      },
+      {
+        name: "destination",
+        type: "string",
+      },
+      {
+        name: "amount",
+        type: "string",
+      },
+      {
+        name: "time",
+        type: "uint64",
+      },
+    ],
+  };
 
   const typeData = {
     domain: {
@@ -86,29 +101,9 @@ function genTakerOrderTypeData(amount: string, timestamp: number) {
       chainId,
       verifyingContract: "0x0000000000000000000000000000000000000000",
     },
-    types: {
-      "HyperliquidTransaction:UsdSend": [
-        {
-          name: "hyperliquidChain",
-          type: "string",
-        },
-        {
-          name: "destination",
-          type: "string",
-        },
-        {
-          name: "amount",
-          type: "string",
-        },
-        {
-          name: "time",
-          type: "uint64",
-        },
-      ],
-    },
+    types: types,
     primaryType: "HyperliquidTransaction:UsdSend",
     message: {
-      type: "usdSend",
       destination,
       amount: amountPad,
       time: timestamp,
