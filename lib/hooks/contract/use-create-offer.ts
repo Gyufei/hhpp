@@ -23,7 +23,7 @@ export function useCreateOffer({ marketSymbol }: { marketSymbol: string }) {
       trade_tax_pct: 0,
       ...args,
       source_account: accountInfo?.wallet || "",
-      dest_account: accountInfo?.dest_wallet || "",
+      dest_account: accountInfo?.dest_account || "",
     };
 
     const reqData = await signDataAction(params);

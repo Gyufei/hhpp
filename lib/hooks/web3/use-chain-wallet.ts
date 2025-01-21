@@ -16,9 +16,9 @@ export function useChainWallet() {
     // source wallet for data fetch, sign, arb
     walletAddress: walletAddress || "",
     // dest wallet for HL
-    address: accountInfo?.dest_wallet || "",
+    address: accountInfo?.dest_account || "",
     accountInfo: accountInfo || {
-      dest_wallet: "",
+      dest_account: "",
       wallet: "",
     },
     connected: isConnected,

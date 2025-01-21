@@ -16,7 +16,7 @@ export function useCreateTakerOrder() {
     const reqData = await signDataAction({
       item_amount: itemAmount,
       source_account: accountInfo?.wallet || "",
-      dest_account: accountInfo?.dest_wallet || "",
+      dest_account: accountInfo?.dest_account || "",
     });
     try {
       const res = await dataApiFetcher(`${apiEndPoint}/offer/${offerId}/take`, {

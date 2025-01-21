@@ -7,7 +7,7 @@ type TradingMode = "Private" | "Public";
 
 interface IAccountInfo {
   wallet: string;
-  dest_wallet: string;
+  dest_account: string;
   user_name: string;
   trading_mode: TradingMode;
 }
