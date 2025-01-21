@@ -45,8 +45,6 @@ export function useUserWithdraw() {
       isPublic,
     );
 
-    throw new Error("test");
-
     const reqData = isPublic
       ? {
           ...argsData,

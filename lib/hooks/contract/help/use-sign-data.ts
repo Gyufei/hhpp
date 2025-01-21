@@ -9,13 +9,11 @@ export function useSignData() {
   async function signDataAction(data: any, isTypeData = false) {
     const isStr = isString(data);
 
-    console.log(data);
     const signature = isTypeData
       ? await signer?.signTypedData(data.domain, data.types, data.message)
       : await signMessageAsync({
           message: isStr ? data : JSON.stringify(data),
         });
-    console.log(signature);
 
     if (isStr) {
       return { signature };
