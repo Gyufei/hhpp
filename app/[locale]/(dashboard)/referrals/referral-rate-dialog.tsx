@@ -6,7 +6,6 @@ import {
   IReferralItem,
   useReferralExtraRate,
 } from "@/lib/hooks/api/use-referral-data";
-import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { Input } from "@/components/ui/input";
 import { useEffect, useMemo, useState } from "react";
 import { NumericalInput } from "@/components/share/numerical-input";
@@ -24,6 +23,7 @@ export function ReferralRateDialog({
   drawerOpen: boolean;
   setDrawerOpen: (_v: boolean) => void;
 }) {
+  const CT = useTranslations("Common");
   const T = useTranslations("Referral");
   const { data: extraRateData } = useReferralExtraRate();
   const extraRate = useMemo(
@@ -190,11 +190,12 @@ export function ReferralRateDialog({
           </div>
 
           <div className="relative border-t border-[#303030] px-5 py-4">
-            <WithWalletConnectBtn onClick={handleSaveRate}>
-              <button className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive">
-                {T("Save")}
-              </button>
-            </WithWalletConnectBtn>
+            <button
+              onClick={handleSaveRate}
+              className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive"
+            >
+              {CT("Save")}
+            </button>
           </div>
         </div>
       </DialogContent>

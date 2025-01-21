@@ -36,6 +36,7 @@ export const ApiPaths = {
   userWithdraw: "/account/bridge",
   accountStats: "/account/stats",
   accountWithdraw: "/account/withdraw",
+  accountCreate: "/account/create",
   marketPointAmount: "/point",
 
   makerOrders: "/user/maker_orders",

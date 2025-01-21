@@ -17,7 +17,6 @@ import { sortBy } from "lodash";
 import { useMyHoldings } from "@/lib/hooks/api/use-my-holdings";
 import { usePointAmount } from "@/lib/hooks/api/use-point-amount";
 import { SellContent } from "@/app/[locale]/direct-trade/[...name]/create-offer/sell-content";
-import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { reportEvent } from "@/lib/utils/analytics";
 import DrawerTitle from "@/components/share/drawer-title";
 import Drawer from "react-modern-drawer";
@@ -162,18 +161,15 @@ export function BalanceTable() {
                     -$233.556/-12.34%
                   </Cell> */}
                   <Cell>
-                    <WithWalletConnectBtn
-                      chain={holding.marketplace.chain}
-                      className="flex w-fit"
+                    <div
                       onClick={() => {
                         setOpenMarketCreateOffer(holding.marketplace);
                         reportEvent("click", { value: "listOffer" });
                       }}
+                      className="flex h-7 w-fit cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]"
                     >
-                      <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]">
-                        {BT("List")}
-                      </div>
-                    </WithWalletConnectBtn>
+                      {BT("List")}
+                    </div>
                   </Cell>
                 </Row>
               ))}
@@ -233,7 +229,7 @@ const BalanceValue = ({
   marketAccount: string;
 }) => {
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
   const { data: pointAmount } = usePointAmount(address, marketAccount);
 
   if (pointAmount) {

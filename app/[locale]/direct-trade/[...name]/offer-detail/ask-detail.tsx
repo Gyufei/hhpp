@@ -54,7 +54,7 @@ export default function AskDetail({
 
   const {
     data: txHash,
-    isLoading: isDepositLoading,
+    isLoading: isTaking,
     isSuccess,
     write: writeAction,
   } = useCreateTakerOrder();
@@ -131,12 +131,13 @@ export default function AskDetail({
   }
 
   async function handleConfirmTakerOrder() {
-    if (isDepositLoading || !receivePointAmount) return;
+    if (isTaking || !receivePointAmount) return;
 
     reportEvent("click", { value: "confirmOffer-ask" });
     await writeAction({
       offerId: offer.offer_id,
       itemAmount: toNonExponential(receivePointAmount),
+      payTokenAmount: toNonExponential(payTokenAmount),
     });
   }
 
@@ -211,12 +212,10 @@ export default function AskDetail({
                 onClick={handleConfirmTakerOrder}
               >
                 <button
-                  disabled={
-                    isDepositLoading || !receivePointAmount || !!errorText
-                  }
+                  disabled={isTaking || !receivePointAmount || !!errorText}
                   className={cn(
                     "mt-1 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive",
-                    isDepositLoading ? "dot-loading" : "",
+                    isTaking ? "dot-loading" : "",
                   )}
                 >
                   {T("ConfirmOrder")}

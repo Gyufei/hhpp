@@ -1,6 +1,6 @@
 import { useEndPoint } from "@/lib/hooks/api/use-endpoint";
 import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
-import { dataApiFetcher } from "@/lib/fetcher";
+import { apiFetcher } from "@/lib/fetcher";
 import { useSignData } from "./help/use-sign-data";
 import { toast } from "react-hot-toast";
 import { useAccountInfo } from "../api/use-account-info";
@@ -14,12 +14,12 @@ export function useCloseOffer() {
     const { offerId } = args;
 
     const reqData = await signDataAction({
-      source_account: accountInfo?.wallet || "",
-      dest_account: accountInfo?.dest_wallet || "",
+      source_account: accountInfo?.source_account || "",
+      dest_account: accountInfo?.dest_account || "",
     });
 
     try {
-      const res = await dataApiFetcher(
+      const res = await apiFetcher(
         `${apiEndPoint}/offer/${offerId}/cancel`,
         {
           method: "POST",

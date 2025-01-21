@@ -1,6 +1,6 @@
 import { useEndPoint } from "../api/use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
-import { dataApiFetcher } from "@/lib/fetcher";
+import { apiFetcher } from "@/lib/fetcher";
 import { useSignData } from "./help/use-sign-data";
 import useSWRMutation from "swr/mutation";
 import { useAccountInfo } from "../api/use-account-info";
@@ -25,13 +25,13 @@ export function useUserWithdraw() {
 
     const params = {
       amount,
-      source_account: accountInfo?.wallet || "",
-      dest_account: accountInfo?.dest_wallet || "",
+      source_account: accountInfo?.source_account || "",
+      dest_account: accountInfo?.dest_account || "",
     };
 
     const reqData = await signDataAction(params);
 
-    const res = await dataApiFetcher(`${apiEndPoint}${ApiPaths.userWithdraw}`, {
+    const res = await apiFetcher(`${apiEndPoint}${ApiPaths.userWithdraw}`, {
       method: "POST",
       body: JSON.stringify(reqData),
     });

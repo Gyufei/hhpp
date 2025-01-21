@@ -11,7 +11,7 @@ export default function Referral() {
   const T = useTranslations("Referral");
 
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
   const { data: referralData, mutate: refetch } = useReferralData();
 
   const {

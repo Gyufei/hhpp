@@ -11,7 +11,7 @@ export default function ReferralPage({ params }: { params: any }) {
   const router = useRouter();
 
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const { data: codeData, isLoading } = useReferralCodeData({
     code: referral,

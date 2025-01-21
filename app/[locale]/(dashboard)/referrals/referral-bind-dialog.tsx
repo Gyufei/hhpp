@@ -21,7 +21,7 @@ export default function ReferralBindDialog() {
   const { trigger: viewReferral } = useReferralView();
 
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const [showReDialog, setShowReDialog] = useState(false);
 
@@ -77,7 +77,7 @@ function ReferralBindBtn({
   const pathname = usePathname();
 
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const { data: codeData } = useReferralCodeData({
     code: referralCode,

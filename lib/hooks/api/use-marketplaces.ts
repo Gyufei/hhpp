@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { dataApiFetcher } from "@/lib/fetcher";
+import { apiFetcher } from "@/lib/fetcher";
 import { ApiPaths } from "@/lib/PathMap";
 
 import { useEndPoint } from "./use-endpoint";
@@ -9,7 +9,7 @@ export function useMarketplaces(chain?: string) {
   const { apiEndPoint, cdnEndPoint } = useEndPoint();
 
   async function marketFetch() {
-    const res = await dataApiFetcher(`${apiEndPoint}${ApiPaths.markets}`);
+    const res = await apiFetcher(`${apiEndPoint}${ApiPaths.markets}`);
 
     const allMarket = res.flat().map((m: any) => {
       const chain = m.chain_name;

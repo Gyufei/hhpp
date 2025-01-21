@@ -1,5 +1,5 @@
 import { useEndPoint } from "@/lib/hooks/api/use-endpoint";
-import { dataApiFetcher } from "@/lib/fetcher";
+import { apiFetcher } from "@/lib/fetcher";
 import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
 import { useSignData } from "./help/use-sign-data";
 import { toast } from "react-hot-toast";
@@ -22,14 +22,14 @@ export function useCreateOffer({ marketSymbol }: { marketSymbol: string }) {
       settle_mode: "",
       trade_tax_pct: 0,
       ...args,
-      source_account: accountInfo?.wallet || "",
-      dest_account: accountInfo?.dest_wallet || "",
+      source_account: accountInfo?.source_account || "",
+      dest_account: accountInfo?.dest_account || "",
     };
 
     const reqData = await signDataAction(params);
 
     try {
-      const res = await dataApiFetcher(
+      const res = await apiFetcher(
         `${apiEndPoint}/market/${marketSymbol}/create_offer`,
         {
           method: "POST",

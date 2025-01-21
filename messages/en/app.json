@@ -28,9 +28,11 @@
     "ContractEndWith": "Contract ends with",
     "EditProfile": "Edit Profile",
     "UserProfile": "User Profile",
+    "TradingMode": "Trading Mode",
     "Username": "Username",
-    "UsernameLengthError": "Username must be at least 3 characters",
-    "TradingMode": "Trading Mode"
+    "UsernameLengthError": "Username must be at least 4 characters",
+    "UsernameStartWith": "Username must start with a letter or number",
+    "UsernameInvalid": "Username can only contain letters, numbers, _ , and -"
   },
   "Marketplace": {
     "InitialListing": "Initial Listing",
@@ -184,7 +186,6 @@
     "You": "You",
     "YourFriend": "Your friend",
     "ReferralDrawer": "When someone signs up using your referral link, the first person will receive a refund equal to {num1} of the trading fee paid by the second person. Additionally, you, as the original referrer, will receive a reward equal to {num2} of the commission fee.",
-    "Save": "Save",
     "Bind": "Bind",
     "RateError": "Your And Your friend's commission rate can't be greater than {rate}%",
     "YourFriendSentYouAnOnboardingInvitation": "Your friend <name></name> sent you an onboarding invitation with <num></num> trading fee back! "

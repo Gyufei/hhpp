@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { useEndPoint } from "./use-endpoint";
 import { IOffer } from "@/lib/types/offer";
 import { ApiPaths } from "@/lib/PathMap";
-import { dataApiFetcher } from "@/lib/fetcher";
+import { apiFetcher } from "@/lib/fetcher";
 import { useMarketplaces } from "./use-marketplaces";
 
 export function useMarketOffers({
@@ -26,7 +26,7 @@ export function useMarketOffers({
       .map(([k, v]) => `${k}=${v}`)
       .join("&");
 
-    const offerRes = await dataApiFetcher(
+    const offerRes = await apiFetcher(
       `${apiEndPoint}${ApiPaths.offers}?${fetchParams}`,
     );
 

@@ -12,7 +12,7 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
   const [currentTab, setCurrentTab] = useState("orders");
 
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const { data: takerOrders } = useTakerOrderOfOffers({
     offerId: offer.offer_id,

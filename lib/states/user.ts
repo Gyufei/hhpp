@@ -1,13 +1,3 @@
-import { createStore } from "jotai";
-import { atomWithStorage } from "jotai/utils";
+import { atom } from "jotai";
 
-export const UserStore = createStore();
-
-export const AccessTokenAtom = atomWithStorage<string>(
-  "userToken",
-  "",
-  undefined,
-  {
-    getOnInit: true,
-  },
-);
+export const UserProfileDialogOpen = atom(false);

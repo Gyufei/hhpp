@@ -1,5 +1,5 @@
 import { useEndPoint } from "@/lib/hooks/api/use-endpoint";
-import { dataApiFetcher } from "@/lib/fetcher";
+import { apiFetcher } from "@/lib/fetcher";
 import { ApiPaths } from "@/lib/PathMap";
 import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
 import { useSignData } from "./help/use-sign-data";
@@ -26,11 +26,11 @@ export function useWithdrawToken() {
   }) => {
     const reqData = await signDataAction({
       token_balance_type,
-      source_account: accountInfo?.wallet || "",
-      dest_account: accountInfo?.dest_wallet || "",
+      source_account: accountInfo?.source_account || "",
+      dest_account: accountInfo?.dest_account || "",
     });
     try {
-      const res = await dataApiFetcher(
+      const res = await apiFetcher(
         `${apiEndPoint}${ApiPaths.accountWithdraw}`,
         {
           method: "POST",

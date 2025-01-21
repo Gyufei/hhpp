@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { dataApiFetcher } from "@/lib/fetcher";
+import { apiFetcher } from "@/lib/fetcher";
 import { ApiPaths } from "@/lib/PathMap";
 import { useEndPoint } from "./use-endpoint";
 import { IHolding } from "@/lib/types/holding";
@@ -9,7 +9,7 @@ import { useAccountInfo } from "./use-account-info";
 
 export function useMyHoldings() {
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
   const { apiEndPoint } = useEndPoint();
   const { data: marketplaceData, isLoading: isMarketLoading } =
     useMarketplaces();
@@ -17,7 +17,7 @@ export function useMyHoldings() {
   const holdingFetch = async () => {
     if (!address || isMarketLoading) return [];
 
-    const holdingRes = await dataApiFetcher(
+    const holdingRes = await apiFetcher(
       `${apiEndPoint}${ApiPaths.holding}?wallet=${address}&chain=${ChainType.HYPER}`,
     );
 

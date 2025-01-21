@@ -11,7 +11,7 @@ export function useTokenBalance({
   decimals: number;
 }) {
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const result = useReadContract({
     abi: erc20Abi,

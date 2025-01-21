@@ -15,7 +15,6 @@ import { useMyOffers } from "@/lib/hooks/api/use-my-offers";
 import { useMyOrders } from "@/lib/hooks/api/use-my-orders";
 import { formatTimestamp } from "@/lib/utils/time";
 import OfferAboutMineDetailDrawer from "../offer-about-mine-detail-drawer";
-import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useTranslations } from "next-intl";
 import { sortBy } from "lodash";
 import { ChainType } from "@/lib/types/chain";
@@ -195,7 +194,6 @@ export function OrderTable() {
                     <div>
                       {off.role !== "taker" && (
                         <DetailBtn
-                          chain={off.marketplace.chain}
                           onClick={() => handleOpenOfferDrawer(off.offer_id)}
                         ></DetailBtn>
                       )}
@@ -272,23 +270,14 @@ export function OrderTable() {
 //   );
 // }
 
-function DetailBtn({
-  onClick,
-  chain,
-}: {
-  chain: ChainType;
-  onClick: () => void;
-}) {
+function DetailBtn({ onClick }: { onClick: () => void }) {
   const CT = useTranslations("Common");
   return (
-    <WithWalletConnectBtn
-      chain={chain}
-      className="flex w-fit"
+    <div
       onClick={onClick}
+      className="flex h-7 w-fit cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]"
     >
-      <div className="flex h-7 w-full cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]">
-        {CT("Detail")}
-      </div>
-    </WithWalletConnectBtn>
+      {CT("Detail")}
+    </div>
   );
 }

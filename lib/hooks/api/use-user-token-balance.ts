@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
-import { dataApiFetcher } from "@/lib/fetcher";
+import { apiFetcher } from "@/lib/fetcher";
 import { useAccountInfo } from "./use-account-info";
 
 export interface ITokenBalance {
@@ -24,11 +24,11 @@ export interface ITokenBalance {
 export function useUserTokenBalance() {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const res = useSWR<Array<ITokenBalance>>(
     address ? `${apiEndPoint}${ApiPaths.userTokenBalance}/${address}` : null,
-    dataApiFetcher,
+    apiFetcher,
   );
 
   return res;

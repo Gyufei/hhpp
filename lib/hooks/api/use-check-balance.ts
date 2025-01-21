@@ -7,7 +7,7 @@ import { useAccountInfo } from "./use-account-info";
 
 export function useCheckBalance(market: IMarketplace) {
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const { data: usdcBalanceData } = useUsdcTokenBalance(address);
   const usdcBalance = usdcBalanceData?.usdc_balance || "0";

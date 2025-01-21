@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
-import { dataApiFetcher } from "@/lib/fetcher";
+import { apiFetcher } from "@/lib/fetcher";
 
 interface IUsdcBalance {
   free_amount: number;
@@ -15,7 +15,7 @@ export function usePointAmount(wallet: string, marketAccount: string) {
     wallet && marketAccount
       ? `${apiEndPoint}${ApiPaths.marketPointAmount}?wallet=${wallet}&market_place_account=${marketAccount}`
       : null,
-    dataApiFetcher,
+    apiFetcher,
   );
 
   return res;

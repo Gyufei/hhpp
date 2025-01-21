@@ -12,7 +12,7 @@ export default function PointBalance({
   className?: string;
 }) {
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const { data: pointAmountData } = usePointAmount(
     address,

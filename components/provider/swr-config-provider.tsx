@@ -1,6 +1,7 @@
 "use client";
 
 import { isProduction } from "@/lib/PathMap";
+// import { toast } from "react-hot-toast";
 import { SWRConfig } from "swr";
 
 export default function SWRConfigProvider({
@@ -13,14 +14,9 @@ export default function SWRConfigProvider({
       value={{
         revalidateOnFocus: !!isProduction,
         shouldRetryOnError: false,
-        onError: (error, key) => {
-          console.info({
-            variant: "destructive",
-            title: `Api: ${key}`,
-            description: `${error.status || "error"}: ${
-              error.info || "Some Error Occurred"
-            }`,
-          });
+        onError: (error) => {
+          // toast.error(error.info || error.message || "Some Error Occurred");
+          return Promise.reject(error);
         },
       }}
     >

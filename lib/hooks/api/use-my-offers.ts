@@ -2,14 +2,14 @@ import useSWR from "swr";
 import { useEndPoint } from "./use-endpoint";
 import { IOffer } from "@/lib/types/offer";
 import { ApiPaths } from "@/lib/PathMap";
-import { dataApiFetcher } from "@/lib/fetcher";
+import { apiFetcher } from "@/lib/fetcher";
 import { useMarketplaces } from "./use-marketplaces";
 import { useAccountInfo } from "./use-account-info";
 
 export function useMyOffers(params: any) {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const { data: marketplaceData, isLoading: isMarketLoading } =
     useMarketplaces();
@@ -25,7 +25,7 @@ export function useMyOffers(params: any) {
       .map(([k, v]) => `${k}=${v}`)
       .join("&");
 
-    const offerRes = await dataApiFetcher(
+    const offerRes = await apiFetcher(
       `${apiEndPoint}${ApiPaths.offers}?${fetchParams}`,
     );
 

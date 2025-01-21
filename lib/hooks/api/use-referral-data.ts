@@ -23,7 +23,7 @@ export interface IReferralItem {
 export function useReferralData() {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const referralDataFetcher = async () => {
     if (!address) return null;
@@ -53,7 +53,7 @@ export function useReferralData() {
 export function useReferralReferer() {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const res = useSWR<string | any | null>(
     address
@@ -92,7 +92,7 @@ export function useReferralCodeData({ code }: { code: string }) {
 export function useReferralExtraRate() {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const res = useSWR(
     address

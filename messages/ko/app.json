@@ -29,8 +29,10 @@
     "EditProfile": "프로필 편집",
     "UserProfile": "사용자 프로필",
     "Username": "사용자 이름",
+    "TradingMode": "거래 모드",
     "UsernameLengthError": "사용자 이름은 최소 3자 이상이어야 합니다.",
-    "TradingMode": "거래 모드"
+    "UsernameStartWith": "사용자 이름은 문자 또는 숫자로 시작해야 합니다.",
+    "UsernameInvalid": "사용자 이름은 문자, 숫자, _ , 그리고 -만 포함할 수 있습니다."
   },
   "Marketplace": {
     "InitialListing": "초기 상장",
@@ -181,7 +183,6 @@
     "You": "당신",
     "YourFriend": "당신의 친구",
     "ReferralDrawer": "누군가가 당신의 추천 링크를 사용하여 가입하면, 첫 번째 사람은 두 번째 사람이 지불한 거래 수수료의 {num1}에 해당하는 환불을 받습니다. 또한, 원래 추천자인 당신은 수수료의 {num2}에 해당하는 보상을 받습니다.",
-    "Save": "저장",
     "Bind": "바인드",
     "RateError": "당신과 당신의 친구의 수수료율은 {rate}%를 초과할 수 없습니다.",
     "YourFriendSentYouAnOnboardingInvitation": "친구 <name></name>님이 <num></num> 거래 수수료 환급과 함께 초대장을 보냈습니다!"

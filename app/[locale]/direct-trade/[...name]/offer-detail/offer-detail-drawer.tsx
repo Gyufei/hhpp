@@ -25,14 +25,14 @@ export default function OfferDetailDrawer({
   const [resultOrder, setResultOrder] = useState<any | null>(null);
 
   useEffect(() => {
-    if (offer && accountInfo?.dest_wallet) {
+    if (offer && accountInfo?.dest_account) {
       setDrawerOpen(true);
     }
 
     if (!offer) {
       setDrawerOpen(false);
     }
-  }, [offer, accountInfo?.dest_wallet]);
+  }, [offer, accountInfo?.dest_account]);
 
   function handleSuccess(ord: Record<string, any>) {
     reportEvent("askOffer" + "Success", {

@@ -11,7 +11,6 @@ import MyDetailCard from "./my-detail-card";
 import { IOffer } from "@/lib/types/offer";
 import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
 import { useCloseOffer } from "@/lib/hooks/contract/use-close-offer";
-import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import NP from "number-precision";
 import { reportEvent } from "@/lib/utils/analytics";
 import { cn } from "@/lib/utils/common";
@@ -123,21 +122,16 @@ export default function MyAskDetail({
                 </button>
               ) : (
                 <div className="flex w-full flex-col">
-                  <WithWalletConnectBtn
-                    className="flex-1"
-                    chain={offer?.marketplace.chain}
+                  <button
                     onClick={handleClose}
+                    disabled={isClosing}
+                    className={cn(
+                      "mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive",
+                      isClosing ? "dot-loading" : "",
+                    )}
                   >
-                    <button
-                      disabled={isClosing}
-                      className={cn(
-                        "mt-4 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive",
-                        isClosing ? "dot-loading" : "",
-                      )}
-                    >
-                      {T("CloseThisOffer")}
-                    </button>
-                  </WithWalletConnectBtn>
+                    {T("CloseThisOffer")}
+                  </button>
                   <div className="mt-2 flex h-8 items-center rounded bg-[#FBF2EA] px-3 text-xs leading-5 text-[#FFA95B]">
                     {T("YouHaveTheOptionToClose")}
                   </div>

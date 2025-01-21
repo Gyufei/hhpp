@@ -8,7 +8,7 @@ import { useAccountInfo } from "./use-account-info";
 export function useReferralCreate() {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const CreateApiPost = async () => {
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.create}`, {
@@ -29,7 +29,7 @@ export function useReferralCreate() {
 export function useReferralRateChange() {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const postApi = async (
     _: string,
@@ -71,7 +71,7 @@ export function useReferralRateChange() {
 export function useReferralNoteChange() {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const postApi = async (
     _: string,
@@ -108,7 +108,7 @@ export function useReferralNoteChange() {
 export function useReferralDefault() {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const postApi = async (
     _: string,
@@ -141,7 +141,7 @@ export function useReferralDefault() {
 export function useReferralDelete() {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const postApi = async (
     _: string,
@@ -205,7 +205,7 @@ export function useReferralView() {
 export function useReferralBind() {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_wallet || "";
+  const address = accountInfo?.dest_account || "";
 
   const CreateApiPost = async (
     _: string,

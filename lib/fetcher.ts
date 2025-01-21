@@ -4,32 +4,12 @@
 import { withSecure } from "acclism-manifest-v2";
 import { reportEvent } from "@/lib/utils/analytics";
 
-const access_key = "aK15X6c9";
-const seedApiUrl = "https://preview-apis.tadle.com/seed/apply";
-const ga_code = "129203";
-const encryptFetch = withSecure(fetch, access_key, seedApiUrl, ga_code);
-
 export async function apiFetcher(
   input: URL | RequestInfo,
   init?: RequestInit | undefined,
 ) {
   try {
     const result = await fetch(input, init);
-    const res = await parsedRes(result);
-
-    return res;
-  } catch (e) {
-    console.log(e);
-    throw e;
-  }
-}
-
-export async function dataApiFetcher(
-  input: URL | RequestInfo,
-  init?: RequestInit | undefined,
-) {
-  try {
-    const result = await encryptFetch(input, init);
     const res = await parsedRes(result);
 
     return res;
@@ -69,7 +49,14 @@ async function parsedRes(res: any) {
     const json = await res.json();
     if (json.code === 500) {
       reportEvent("fetch_500", { value: "" });
-      return Promise.reject(new Error(json.msg || json.message || json.data));
+
+      const err = new Error(
+        `500: ${json.msg || json.message || json.data}`,
+      ) as any;
+      err.info = json.msg || json.message || json.data;
+      err.status = 500;
+
+      throw err;
     }
 
     return json?.data || json;
