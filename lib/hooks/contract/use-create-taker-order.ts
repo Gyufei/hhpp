@@ -34,7 +34,6 @@ export function useCreateTakerOrder() {
       isPublic ? genTakerOrderTypeData(payTokenAmount, timestamp) : argsData,
       isPublic,
     );
-    // throw new Error("test");
 
     const reqData = isPublic
       ? {
@@ -79,72 +78,6 @@ function genTakerOrderTypeData(amount: string, timestamp: number) {
 
   const destination = chainConfig.contracts.destination;
   const chainId = "0x" + chainConfig.network.toString(16);
-
-  const a = {
-    domain: {
-      name: "HyperliquidSignTransaction",
-      version: "1",
-      chainId: "0x66eee",
-      verifyingContract: "0x0000000000000000000000000000000000000000",
-    },
-    types: {
-      "HyperliquidTransaction:UsdSend": [
-        { name: "hyperliquidChain", type: "string" },
-        { name: "destination", type: "string" },
-        { name: "amount", type: "string" },
-        { name: "time", type: "uint64" },
-      ],
-    },
-    primaryType: "HyperliquidTransaction:UsdSend",
-    message: {
-      type: "usdSend",
-      destination: "0xa53902eda4816e7b5c63DA1C8a6f76640F4AD883",
-      amount: "0.673200",
-      time: 1737443587350,
-      signatureChainId: "0x66eee",
-      hyperliquidChain: "Testnet",
-    },
-  };
-
-  const b = {
-    domain: {
-      name: "HyperliquidSignTransaction",
-      version: "1",
-      chainId: "0x66eee",
-      verifyingContract: "0x0000000000000000000000000000000000000000",
-    },
-    types: {
-      "HyperliquidTransaction:UsdSend": [
-        {
-          name: "hyperliquidChain",
-          type: "string",
-        },
-        {
-          name: "destination",
-          type: "string",
-        },
-        {
-          name: "amount",
-          type: "string",
-        },
-        {
-          name: "time",
-          type: "uint64",
-        },
-      ],
-    },
-    primaryType: "HyperliquidTransaction:UsdSend",
-    message: {
-      type: "usdSend",
-      destination: "0xa53902eda4816e7b5c63DA1C8a6f76640F4AD883",
-      amount: "0.673200",
-      time: 1737443587350,
-      signatureChainId: "0x66eee",
-      hyperliquidChain: "Testnet",
-    },
-  };
-
-  return a;
 
   const typeData = {
     domain: {

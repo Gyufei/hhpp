@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 "use client";
 
-import { withSecure } from "acclism-manifest-v2";
 import { reportEvent } from "@/lib/utils/analytics";
 
 export async function apiFetcher(

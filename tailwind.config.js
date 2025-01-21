@@ -22,7 +22,7 @@ module.exports = {
         red: "var(--color-red)",
       },
       fontFamily: {
-        teodor: ["var(--font-teodor)"],
+        sf: ["var(--font-sf)"],
       },
       keyframes: {
         "accordion-down": {

@@ -10,20 +10,20 @@ export default function TradeMore() {
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col items-start space-y-2">
-        <div className="flex items-center space-x-6">
-          <span className="text-[70px] font-thin text-[#072722]">
+      <div className="flex flex-col items-center space-y-2">
+        <div className="flex items-center justify-center space-x-6">
+          <span className="font-sf text-[70px] font-light text-bg-black opacity-70">
             Get in Early
           </span>
         </div>
         <div className="flex items-center space-x-6">
-          <span className="text-[70px] font-thin text-[#072722]">
+          <span className="font-sf text-[70px] font-light text-bg-black opacity-70">
             Succeed with
           </span>
           <Image
-            src="/icons/liquid.svg"
-            width={318}
-            height={64}
+            src="/icons/hype-trade.svg"
+            width={252}
+            height={62}
             alt="liquidity"
             className="translate-y-[8px]"
           />

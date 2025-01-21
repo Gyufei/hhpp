@@ -12,10 +12,10 @@ export default function HomeBanner() {
       }}
     >
       <Image src="/icons/simple-logo.svg" width={120} height={90} alt="logo" />
-      <div className="mt-5 text-center text-[80px] font-light leading-[120px] text-title-white">
+      <div className="mt-5 text-center font-sf text-[80px] font-light leading-[120px] text-title-white">
         Seed market for premium <br /> Hyperliquid assets.
       </div>
-      <div className="mt-[30px] w-[420px] text-center text-sm font-light text-title-white">
+      <div className="mt-8 w-[700px] text-center text-[18px] font-light text-title-white">
         Where traders turn their dreams into reality, providing the tools,
         speed, and opportunities to thrive in the world of high-performance
         asset generating and trading. Ample liquidity, lighting-fast trades,

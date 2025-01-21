@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import { apiFetcher } from "@/lib/fetcher";
-import useSWRMutation from "swr/mutation";
 import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
 import { ChainType } from "@/lib/types/chain";

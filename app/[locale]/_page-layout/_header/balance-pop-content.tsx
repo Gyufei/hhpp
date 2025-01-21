@@ -27,7 +27,6 @@ export default function BalancePopContent() {
     data: balanceData,
     isLoading,
     isValidating,
-    mutate,
   } = useUsdcTokenBalance(address);
 
   const balance = balanceData?.usdc_balance || "0";

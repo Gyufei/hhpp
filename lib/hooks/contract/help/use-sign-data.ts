@@ -1,29 +1,19 @@
 import { isString } from "lodash";
-import { useConfig, useSignMessage, useSignTypedData } from "wagmi";
-import { verifyTypedData } from "@wagmi/core";
+import { useSignMessage } from "wagmi";
+import { useEthersSigner } from "./ethers-helper";
 
 export function useSignData() {
   const { signMessageAsync } = useSignMessage();
-  const { signTypedDataAsync } = useSignTypedData();
-  const config = useConfig();
+  const signer = useEthersSigner();
 
   async function signDataAction(data: any, isTypeData = false) {
     const isStr = isString(data);
 
     const signature = isTypeData
-      ? await signTypedDataAsync(data)
+      ? await signer?.signTypedData(data.domain, data.types, data.message)
       : await signMessageAsync({
           message: isStr ? data : JSON.stringify(data),
         });
-
-    console.log(signature);
-
-    const res = await verifyTypedData(config, {
-      ...data,
-      address: "0xf60132e5Cb6A7319dF1524dc8aC6176987a5fE34",
-      signature,
-    });
-    console.log("verify", res);
 
     if (isStr) {
       return { signature };
