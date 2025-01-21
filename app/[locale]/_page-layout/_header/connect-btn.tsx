@@ -4,40 +4,34 @@ import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 import { useWalletModalContext } from "@/components/provider/wallet-modal-provider";
 import * as Sentry from "@sentry/nextjs";
 
 import BalancePopContent from "./balance-pop-content";
-import { useAccountEffect, useSignMessage } from "wagmi";
+import { useAccountEffect } from "wagmi";
 import HoverIcon from "@/components/share/hover-icon";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 import { truncateAddr } from "@/lib/utils/web3";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function ConnectBtn() {
   const T = useTranslations("Common");
 
-  const { signMessage } = useSignMessage();
   const { isMobileSize } = useDeviceSize();
   const { openWalletModal } = useWalletModalContext();
   const { address, isConnected, isConnecting } = useChainWallet();
-  const { checkAndSwitchChain } = useCheckSwitchChain();
 
   const shortAddr = address
     ? truncateAddr(address, { nPrefix: 6, nSuffix: 4 })
     : "";
 
   const [popOpen, setPopOpen] = useState(false);
-  const balancePopRef = useRef<{
-    refetchBalance: () => void;
-  }>(null);
 
   function handleConnect() {
     openWalletModal(true);

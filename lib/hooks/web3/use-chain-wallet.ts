@@ -10,6 +10,6 @@ export function useChainWallet() {
     isConnected,
     isConnecting,
     disconnect,
-    connector: connector,
+    connector
   };
 }
