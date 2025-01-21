@@ -22,7 +22,7 @@ export function useCreateOffer({ marketSymbol }: { marketSymbol: string }) {
       settle_mode: "",
       trade_tax_pct: 0,
       ...args,
-      source_account: accountInfo?.wallet || "",
+      source_account: accountInfo?.source_account || "",
       dest_account: accountInfo?.dest_account || "",
     };
 

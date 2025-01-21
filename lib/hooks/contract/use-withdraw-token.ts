@@ -26,7 +26,7 @@ export function useWithdrawToken() {
   }) => {
     const reqData = await signDataAction({
       token_balance_type,
-      source_account: accountInfo?.wallet || "",
+      source_account: accountInfo?.source_account || "",
       dest_account: accountInfo?.dest_account || "",
     });
     try {

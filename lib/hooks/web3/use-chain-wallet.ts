@@ -19,7 +19,7 @@ export function useChainWallet() {
     address: accountInfo?.dest_account || "",
     accountInfo: accountInfo || {
       dest_account: "",
-      wallet: "",
+      source_account: "",
     },
     connected: isConnected,
     connecting: isConnecting,

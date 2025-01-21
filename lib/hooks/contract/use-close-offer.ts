@@ -14,7 +14,7 @@ export function useCloseOffer() {
     const { offerId } = args;
 
     const reqData = await signDataAction({
-      source_account: accountInfo?.wallet || "",
+      source_account: accountInfo?.source_account || "",
       dest_account: accountInfo?.dest_account || "",
     });
 

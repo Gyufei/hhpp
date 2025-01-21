@@ -6,7 +6,7 @@ import { dataApiFetcher } from "@/lib/fetcher";
 type TradingMode = "Private" | "Public";
 
 interface IAccountInfo {
-  wallet: string;
+  source_account: string;
   dest_account: string;
   user_name: string;
   trading_mode: TradingMode;

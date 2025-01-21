@@ -15,7 +15,7 @@ export function useCreateTakerOrder() {
 
     const reqData = await signDataAction({
       item_amount: itemAmount,
-      source_account: accountInfo?.wallet || "",
+      source_account: accountInfo?.source_account || "",
       dest_account: accountInfo?.dest_account || "",
     });
     try {
