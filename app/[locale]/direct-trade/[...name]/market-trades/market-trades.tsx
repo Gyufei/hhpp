@@ -22,7 +22,7 @@ export default function MarketTrades({
   // }
 
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="flex flex-1 flex-col rounded bg-bg-black sm:p-[10px]">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="text-xs leading-[18px] text-title-white">

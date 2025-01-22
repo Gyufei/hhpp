@@ -7,6 +7,7 @@ import MarketplaceCard from "./marketplace-card";
 import CreateOfferBtn from "./create-offer-btn";
 import MarketCharts from "./chart/market-charts";
 import MarketTrades from "./market-trades/market-trades";
+import MarketHolder from "./market-holder/market-holder";
 
 import { useMarketOffers } from "@/lib/hooks/api/use-market-offers";
 import { IOffer } from "@/lib/types/offer";
@@ -59,6 +60,7 @@ export default function MarketplacePage({
 
   const showItems = !isMobileSize || (isMobileSize && currentTab === "Items");
   const showTrades = !isMobileSize || (isMobileSize && currentTab === "Trades");
+  const showHolder = !isMobileSize || (isMobileSize && currentTab === "Holder");
   const showChart = isMobileSize && currentTab === "Chart";
 
   return (
@@ -142,9 +144,9 @@ export default function MarketplacePage({
         </div>
       )}
 
-      {showTrades && (
+      {(showTrades || showHolder) && (
         <div
-          className="flex w-full flex-col rounded bg-bg-black px-[10px] pb-16 pt-4 sm:w-[320px] sm:pb-0 sm:pt-[10px]"
+          className="flex w-full flex-col bg-bg-black px-[10px] pb-16 pt-4 sm:w-[320px] sm:bg-transparent sm:p-0"
           style={{
             minHeight: isMobileSize
               ? "calc(100vh - 175px)"
@@ -154,15 +156,16 @@ export default function MarketplacePage({
               : "max(calc(100vh - 60px), 691px)",
           }}
         >
-          <MarketTrades marketplace={marketplace} />
+          {showTrades && <MarketTrades marketplace={marketplace} />}
+          {showHolder && <MarketHolder marketplace={marketplace} />}
         </div>
       )}
     </div>
   );
 }
 
-type ITab = "Items" | "Chart" | "Trades";
-const MobilePageTab: ITab[] = ["Items", "Chart", "Trades"];
+type ITab = "Items" | "Chart" | "Trades" | "Holder";
+const MobilePageTab: ITab[] = ["Items", "Chart", "Trades", "Holder"];
 
 function MobileSwitchTabs({
   currentTab,
