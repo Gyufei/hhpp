@@ -57,7 +57,11 @@
     "Value": "价值",
     "Amount": "总计",
     "Buyer": "买家",
-    "Depth": "深度"
+    "Depth": "深度",
+    "HolderDistribution": "持有者分布",
+    "Rank": "排名",
+    "Address": "地址",
+    "Percentage": "百分比"
   },
   "Offer": {
     "CreateOffer": "创建订单",

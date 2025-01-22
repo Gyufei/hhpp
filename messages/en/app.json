@@ -56,7 +56,11 @@
     "ItemId": "Item Id",
     "Value": "Value",
     "Amount": "Amount",
-    "Buyer": "Buyer"
+    "Buyer": "Buyer",
+    "HolderDistribution": "Holder Distribution",
+    "Rank": "Rank",
+    "Address": "Address",
+    "Percentage": "Percentage"
   },
   "Offer": {
     "CreateOffer": "Create Offer",

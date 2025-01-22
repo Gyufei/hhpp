@@ -56,7 +56,11 @@
     "ItemId": "아이템 ID",
     "Value": "가격",
     "Amount": "금액",
-    "Buyer": "구매자"
+    "Buyer": "구매자",
+    "HolderDistribution": "보유자 분포",
+    "Rank": "순위",
+    "Address": "주소",
+    "Percentage": "백분율"
   },
   "Offer": {
     "CreateOffer": "제안 생성",
