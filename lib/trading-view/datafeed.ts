@@ -115,7 +115,7 @@ const datafeed = {
     console.log("[getBars]: Method call", symbolInfo, resolution, from, to);
 
     const urlParameters = {
-      symbol: "USDJPY" || symbolInfo.name,
+      symbol: symbolInfo.name,
       from,
       to,
       resolution,
