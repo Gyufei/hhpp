@@ -36,7 +36,7 @@ export default function Referral() {
 
   return (
     <div className="flex h-full w-screen flex-1 flex-col sm:w-full ">
-      <div className="hidden items-center justify-between rounded bg-bg-black p-5 sm:flex ">
+      <div className="hidden items-center justify-between rounded bg-bg-black p-5 sm:flex sm:py-[25px] ">
         <div className="flex w-full items-center justify-between">
           <div className="text-xl leading-[30px] text-title-white">
             {T("Referrals")}
