@@ -115,6 +115,7 @@ export default function OverviewInfo() {
           </div>
         </div>
       </div>
+
       {!isReferrals ? (
         <>
           <div className="mx-[10px] border-t border-border-black pb-[20px] pt-[20px]">
@@ -143,6 +144,7 @@ export default function OverviewInfo() {
                 />
               )}
             </div>
+
             <div className="mt-3 flex justify-between">
               <LabelText>{T("Total")}</LabelText>
               <div className="leading-[18px] text-title-white">

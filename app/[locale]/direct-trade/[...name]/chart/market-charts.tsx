@@ -39,7 +39,7 @@ export default function MarketCharts({
     >
       {showKChart ? (
         <>
-          <div className="absolute bottom-[135px] left-[84px] flex h-[33px] w-[33px] items-center justify-center rounded-full border border-border-black">
+          <div className="absolute bottom-[135px] left-[78px] flex h-[33px] w-[33px] items-center justify-center rounded-full border border-border-black">
             <Image
               src="/icons/line-chart.svg"
               width={20}
@@ -49,7 +49,7 @@ export default function MarketCharts({
               onClick={() => setShowKChart(false)}
             />
           </div>
-          <TradingChart />
+          <TradingChart symbol={marketplace.market_symbol} />
         </>
       ) : (
         <>
