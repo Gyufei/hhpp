@@ -6,9 +6,9 @@ import SalesChart, { Durations, IDurationType } from "./sales-chart";
 import { IMarketplace } from "@/lib/types/marketplace";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils/common";
-import { TradingChart } from "@/app/[locale]/curve-trade/trade-chart";
+import { KChart } from "./k-chart";
 
-const OpenKline = false as const;
+const OpenKline = true as const;
 
 export default function MarketCharts({
   marketplace,
@@ -49,7 +49,7 @@ export default function MarketCharts({
               onClick={() => setShowKChart(false)}
             />
           </div>
-          <TradingChart symbol={marketplace.market_symbol} />
+          <KChart symbol={marketplace.market_symbol} />
         </>
       ) : (
         <>

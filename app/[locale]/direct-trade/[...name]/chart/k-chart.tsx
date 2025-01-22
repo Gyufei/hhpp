@@ -8,10 +8,10 @@ const TVChartContainer = dynamic(
   { ssr: false },
 );
 
-export function TradingChart() {
+export function KChart({ symbol }: { symbol: string }) {
   return (
     <div className="mt-[2px] h-full flex-1 rounded bg-bg-black">
-      <TVChartContainer />
+      <TVChartContainer symbol={symbol} />
     </div>
   );
 }

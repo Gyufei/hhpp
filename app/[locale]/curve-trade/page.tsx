@@ -10,7 +10,7 @@ export default function Page() {
     <div className="flex items-stretch justify-between bg-border-black px-[2px] py-[2px]">
       <div className="flex flex-1 flex-col">
         <TradeAssetInfo />
-        <TradingChart />
+        <TradingChart symbol="ABC" />
         <TradeTabs />
       </div>
 
