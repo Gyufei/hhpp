@@ -27,6 +27,7 @@ export default function BalancePopContent() {
     data: balanceData,
     isLoading,
     isValidating,
+    mutate,
   } = useUsdcTokenBalance(address);
 
   const balance = balanceData?.usdc_balance || "0";
@@ -119,6 +120,9 @@ export default function BalancePopContent() {
         open={withdrawDialogOpen}
         onOpenChange={setWithdrawDialogOpen}
         balance={balance}
+        onSuccess={() => {
+          mutate();
+        }}
       />
     </>
   );

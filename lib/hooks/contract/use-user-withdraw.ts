@@ -23,10 +23,10 @@ export function useUserWithdraw() {
       };
     },
   ) {
-    const isPublic = accountInfo?.trading_mode === "Public";
     const { amount } = arg;
 
     const timestamp = Date.now();
+    const isPublic = accountInfo?.trading_mode === "Public";
 
     const argsData = {
       amount,
