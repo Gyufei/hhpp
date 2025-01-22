@@ -11,10 +11,12 @@ export function WithdrawDialog({
   open,
   onOpenChange,
   balance,
+  onSuccess,
 }: {
   open: boolean;
   onOpenChange: (isOpen: boolean) => void;
   balance: string;
+  onSuccess: () => void;
 }) {
   const T = useTranslations("Common");
   const CT = useTranslations("Common");
@@ -51,6 +53,7 @@ export function WithdrawDialog({
     if (isSuccess) {
       onOpenChange(false);
       toast.success("Withdrawal successful");
+      onSuccess();
     }
   }, [isSuccess]);
 
