@@ -1,5 +1,5 @@
 "use client";
-import AccountInfo from "./account-info/page";
+import AccountInfo from "./account-info";
 import ReferralLink from "./referral-link";
 
 export default function Dashboard({ children }: { children: React.ReactNode }) {
