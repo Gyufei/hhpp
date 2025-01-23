@@ -19,11 +19,11 @@ export const metadata = {
     template: "%s | HypeTrade",
     default: "HypeTrade",
   },
-  description: "Seed Market for Hyperliquid",
+  description: "Seed market for premium Hyperliquid assets",
   metadataBase: new URL(`https://${process.env.VERCEL_DOMAIN}`),
   openGraph: {
     title: "HypeTrade",
-    description: "Seed Market for Hyperliquid",
+    description: "Seed market for premium Hyperliquid assets",
     url: `https://${process.env.VERCEL_DOMAIN}`,
     siteName: "HypeTrade",
     images: "/img/1pi2tsX13qz1uu.png",
@@ -52,7 +52,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "HypeTrade",
-    description: "Seed Market for Hyperliquid",
+    description: "Seed market for premium Hyperliquid assets",
     creator: "@HypeTradeXYZ",
     images: ["/img/1pi2tsX13qz1uu.png"],
   },
