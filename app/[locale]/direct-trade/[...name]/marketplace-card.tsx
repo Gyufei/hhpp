@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useMarketInfo } from "@/lib/hooks/api/use-market-info";
 import { ChainType } from "@/lib/types/chain";
 import MarketSelect from "@/components/share/market-select";
+import { Link } from "@/i18n/routing";
 
 export default function MarketplaceCard({
   marketplace,
@@ -93,40 +94,32 @@ function OverviewIcons({
   discord: string | undefined;
   [key: string]: any;
 }) {
-  const handleGoTwitter = () => {
-    if (!twitter) return;
-    window.open(twitter, "_blank");
-  };
-
-  const handleGoDiscord = () => {
-    if (!discord) return;
-    window.open(discord, "_blank");
-  };
-
   if (!twitter && !discord) return null;
 
   return (
     <div className="flex h-5 items-center space-x-1">
       {twitter && (
-        <HoverIcon
-          onClick={handleGoTwitter}
-          src="/icons/twitter-gray.svg"
-          hoverSrc="/icons/twitter.svg"
-          width={20}
-          height={20}
-          alt="x"
-        />
+        <Link href={twitter} target="_blank">
+          <HoverIcon
+            src="/icons/twitter-gray.svg"
+            hoverSrc="/icons/twitter.svg"
+            width={20}
+            height={20}
+            alt="x"
+          />
+        </Link>
       )}
 
       {discord && (
-        <HoverIcon
-          onClick={handleGoDiscord}
-          src="/icons/discord-gray.svg"
-          hoverSrc="/icons/discord.svg"
-          width={20}
-          height={20}
-          alt="discord"
-        />
+        <Link href={discord} target="_blank">
+          <HoverIcon
+            src="/icons/discord-gray.svg"
+            hoverSrc="/icons/discord.svg"
+            width={20}
+            height={20}
+            alt="discord"
+          />
+        </Link>
       )}
     </div>
   );

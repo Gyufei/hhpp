@@ -5,7 +5,7 @@ import { TgLink, TwitterLink } from "@/lib/utils/social";
 export default function SocialIcon() {
   return (
     <>
-      <Link href={TwitterLink}>
+      <Link href={TwitterLink} target="_blank">
         <Image
           src="/icons/twitter-white.svg"
           width={36}
@@ -14,7 +14,7 @@ export default function SocialIcon() {
           className="cursor-pointer"
         />
       </Link>
-      <Link href={TgLink}>
+      <Link href={TgLink} target="_blank">
         <Image
           src="/icons/tg-white.svg"
           width={36}

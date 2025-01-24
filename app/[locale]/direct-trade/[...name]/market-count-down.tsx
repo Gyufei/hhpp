@@ -59,7 +59,7 @@ export default function MarketCountDown({
         {marketplace.item_name}/USDC
       </div>
       <div className="mt-[5px] w-[200px] text-center text-xs leading-[18px] text-txt-white">
-        Call auction will begin after the countdown ends.
+        Trading will begin after the countdown ends.
       </div>
       <TimeContainer
         days={days}

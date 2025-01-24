@@ -6,16 +6,14 @@ export default function BlockChain() {
           <div className="font-sf text-[120px] font-light leading-[120px] text-title-white">
             69M+
           </div>
-          <div className="text-[18px] font-semibold leading-6 text-title-white">
-            Deposit
-          </div>
+          <div className="text-[18px] leading-6 text-title-white">Deposit</div>
           <div className="mt-5 flex h-10 cursor-pointer items-center justify-center rounded-full bg-main px-[34px] text-bg-black hover:bg-main-hover">
             HypeTrade
           </div>
           <div className="absolute left-0 top-1/2 h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-main"></div>
         </div>
 
-        <div className="absolute left-0 top-0 flex -translate-x-1/2 flex-col items-center">
+        {/* <div className="absolute left-0 top-0 flex -translate-x-1/2 flex-col items-center">
           <div className="font-sf text-[80px] font-light leading-[120px] text-title-white">
             $10B+
           </div>
@@ -47,7 +45,7 @@ export default function BlockChain() {
             75
           </div>
           <div className="text-[18px] leading-6 text-title-white">Tokens</div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
