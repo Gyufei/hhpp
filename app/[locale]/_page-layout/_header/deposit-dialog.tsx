@@ -26,7 +26,7 @@ export function DepositDialog({
     : chainConfig.contracts.privateDeposit;
 
   function handleCopy() {
-    navigator.clipboard.writeText(chainConfig.contracts.deposit);
+    navigator.clipboard.writeText(depositContract);
     toast.success("Copied to clipboard");
   }
 
