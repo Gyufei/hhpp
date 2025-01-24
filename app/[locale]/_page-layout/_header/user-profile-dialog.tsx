@@ -118,10 +118,7 @@ export default function UserProfileDialog() {
   }
 
   return (
-    <Dialog
-      open={showProDialog}
-      onOpenChange={(isOpen) => setShowProDialog(isOpen)}
-    >
+    <Dialog open={showProDialog} onOpenChange={() => setShowProDialog(true)}>
       <VisuallyHidden asChild>
         <DialogTitle>{T("UserProfile")}</DialogTitle>
       </VisuallyHidden>
@@ -129,7 +126,7 @@ export default function UserProfileDialog() {
         className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded border-border-black bg-bg-black p-0"
         aria-describedby={undefined}
       >
-        <DialogTitle>{T("UserProfile")}</DialogTitle>
+        <DialogTitle showClose={false}>{T("UserProfile")}</DialogTitle>
 
         <div className="w-full p-5">
           <div className="relative mb-5">

@@ -198,7 +198,7 @@ export default function AskDetail({
 
           {isFilled ? (
             <>
-              <button className="mt-4 flex h-8 w-full items-center justify-center rounded bg-[#D1D4DC] text-xs leading-[18px] text-bg-black">
+              <button className="mt-4 flex h-8 w-full cursor-not-allowed items-center justify-center rounded bg-[#D1D4DC] text-xs leading-[18px] text-bg-black">
                 {T("Offer100%Filled")}
               </button>
             </>
@@ -212,7 +212,7 @@ export default function AskDetail({
                 onClick={handleConfirmTakerOrder}
               >
                 <button
-                  disabled={isTaking || !receivePointAmount || !!errorText}
+                  disabled={isTaking || !+receivePointAmount || !!errorText}
                   className={cn(
                     "mt-1 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive",
                     isTaking ? "dot-loading" : "",
