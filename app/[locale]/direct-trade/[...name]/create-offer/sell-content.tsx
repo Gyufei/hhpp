@@ -158,7 +158,7 @@ export function SellContent({
           topText={<>{T("YouWillSell")}</>}
           bottomText={
             <>
-              1 {currentMarket.item_name} = ${formatNum(pointPrice)}
+              1 {currentMarket.item_name} = ${formatNum(pointPrice, 10)}
             </>
           }
           tokenSelect={<PointTokenDisplay point={sellPoint} />}

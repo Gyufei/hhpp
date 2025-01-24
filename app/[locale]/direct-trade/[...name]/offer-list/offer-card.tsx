@@ -112,10 +112,10 @@ export function OfferCard({
           <div className="mt-[2px] overflow-visible whitespace-nowrap text-xs leading-[18px] text-gray">
             {orderType === "sell" ? (
               <>
-                ${formatNum(pointPerPrice, 6)} / {offer.marketplace.market_name}
+                ${formatNum(pointPerPrice, 8)} / {offer.marketplace.market_name}
               </>
             ) : (
-              <>${formatNum(tokenTotalPrice)}</>
+              <>${formatNum(tokenTotalPrice, 8)}</>
             )}
           </div>
         </div>
