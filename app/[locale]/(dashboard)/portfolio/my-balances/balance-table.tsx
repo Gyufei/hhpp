@@ -20,6 +20,8 @@ import { reportEvent } from "@/lib/utils/analytics";
 import DrawerTitle from "@/components/share/drawer-title";
 import Drawer from "react-modern-drawer";
 import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
+import NP from "number-precision";
+import { formatNum } from "@/lib/utils/number";
 
 export function BalanceTable() {
   const T = useTranslations("MyBalances");
@@ -38,7 +40,7 @@ export function BalanceTable() {
 
   const theme = useTheme({
     Table: `
-      grid-template-columns: 180px repeat(3,minmax(0,1fr));
+      grid-template-columns: 180px repeat(4,minmax(0,1fr));
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
     `,
@@ -121,7 +123,7 @@ export function BalanceTable() {
                 <HeaderCell>{T("Coin")}</HeaderCell>
                 <HeaderCell>{T("TotalBalance")}</HeaderCell>
                 <HeaderCell>{T("AvailableBalance")}</HeaderCell>
-                {/* <HeaderCell>{T("USDValue")}</HeaderCell> */}
+                <HeaderCell>{T("USDValue")}</HeaderCell>
                 {/* <HeaderCell>
                   <div className="underline">{T("PnL(%)")}</div>
                 </HeaderCell> */}
@@ -139,17 +141,23 @@ export function BalanceTable() {
                     <BalanceValue
                       type="total"
                       marketAccount={marketplace.market_place_account}
+                      lastPrice={marketplace.last_price}
                     />
                   </Cell>
                   <Cell>
                     <BalanceValue
                       type="free"
                       marketAccount={marketplace.market_place_account}
+                      lastPrice={marketplace.last_price}
                     />
                   </Cell>
-                  {/* <Cell>
-                    ${marketplace.last_price * marketplace.market_place_account}
-                  </Cell> */}
+                  <Cell>
+                    <BalanceValue
+                      type="value"
+                      marketAccount={marketplace.market_place_account}
+                      lastPrice={marketplace.last_price}
+                    />
+                  </Cell>
                   {/* <Cell>
                     -$233.556/-12.34%
                   </Cell> */}
@@ -217,9 +225,11 @@ export function BalanceTable() {
 const BalanceValue = ({
   type,
   marketAccount,
+  lastPrice,
 }: {
   type: string;
   marketAccount: string;
+  lastPrice: string;
 }) => {
   const { data: accountInfo } = useAccountInfo();
   const address = accountInfo?.dest_account || "";
@@ -228,8 +238,14 @@ const BalanceValue = ({
   if (pointAmount) {
     if (type === "free") {
       return <>{pointAmount?.free_amount || 0}</>;
-    } else {
+    }
+    if (type === "total") {
       return <>{pointAmount?.locked_amount + pointAmount?.free_amount || 0}</>;
+    }
+    if (type === "value") {
+      return (
+        <>${formatNum(NP.times(lastPrice, pointAmount?.free_amount || "0"))}</>
+      );
     }
   }
   return <>0</>;
