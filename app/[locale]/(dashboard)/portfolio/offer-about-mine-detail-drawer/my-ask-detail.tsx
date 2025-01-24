@@ -76,7 +76,7 @@ export default function MyAskDetail({
           <SwapItemPanel
             className="mt-5"
             topText={<>{T("YouHaveToSell")}</>}
-            bottomText={<>~${formatNum(tokenTotalPrice)} </>}
+            bottomText={<>~${formatNum(tokenTotalPrice, 8)} </>}
             value={String(NP.divide(offer.item_amount, pointDecimalNum))}
             tokenName={offerPointInfo.symbol || ""}
             onValueChange={() => {}}
@@ -90,7 +90,7 @@ export default function MyAskDetail({
             isCanInput={false}
             bottomText={
               <>
-                1 {offer.marketplace.item_name} = ${pointPerPrice}
+                1 {offer.marketplace.item_name} = ${formatNum(pointPerPrice, 8)}
               </>
             }
             topText={
