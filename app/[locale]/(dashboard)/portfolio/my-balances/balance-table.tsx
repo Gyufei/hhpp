@@ -38,7 +38,7 @@ export function BalanceTable() {
 
   const theme = useTheme({
     Table: `
-      grid-template-columns: 180px repeat(4,minmax(0,1fr));
+      grid-template-columns: 180px repeat(3,minmax(0,1fr));
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
     `,
@@ -121,7 +121,7 @@ export function BalanceTable() {
                 <HeaderCell>{T("Coin")}</HeaderCell>
                 <HeaderCell>{T("TotalBalance")}</HeaderCell>
                 <HeaderCell>{T("AvailableBalance")}</HeaderCell>
-                <HeaderCell>{T("USDValue")}</HeaderCell>
+                {/* <HeaderCell>{T("USDValue")}</HeaderCell> */}
                 {/* <HeaderCell>
                   <div className="underline">{T("PnL(%)")}</div>
                 </HeaderCell> */}
@@ -147,7 +147,9 @@ export function BalanceTable() {
                       marketAccount={marketplace.market_place_account}
                     />
                   </Cell>
-                  <Cell>${marketplace.last_price * 100}</Cell>
+                  {/* <Cell>
+                    ${marketplace.last_price * marketplace.market_place_account}
+                  </Cell> */}
                   {/* <Cell>
                     -$233.556/-12.34%
                   </Cell> */}
