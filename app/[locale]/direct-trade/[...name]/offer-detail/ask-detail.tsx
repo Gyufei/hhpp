@@ -171,7 +171,7 @@ export default function AskDetail({
                 <StableBalance className="mb-0" />
               </>
             }
-            bottomText={<>~${formatNum(payTokenTotalPrice)} </>}
+            bottomText={<>~${formatNum(payTokenTotalPrice, 8)} </>}
             tokenName={offerTokenInfo?.symbol || ""}
             value={String(payTokenAmount)}
             onUserInput={handleInputPayTokenAmount}
@@ -189,7 +189,7 @@ export default function AskDetail({
             topText={<>{T("txt-YouGet")}</>}
             bottomText={
               <>
-                1 {offer.marketplace.item_name} = ${formatNum(pointPerPrice)}
+                1 {offer.marketplace.item_name} = ${formatNum(pointPerPrice, 8)}
               </>
             }
             value={String(NP.divide(receivePointAmount, pointDecimalNum))}
