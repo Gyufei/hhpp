@@ -112,10 +112,10 @@ export function SellContent({
     }
 
     setReceiveAmount(
-      formatNum(
-        NP.times(v, marketPointPrice * 1.02).toString(),
+      NP.round(
+        NP.times(v, marketPointPrice * 1.02),
         receiveToken.decimals || 6,
-      ),
+      ).toString(),
     );
   };
 
@@ -139,10 +139,10 @@ export function SellContent({
     }
 
     setSellPointAmount(
-      formatNum(
-        NP.divide(v, marketPointPrice * 1.02).toString(),
+      NP.round(
+        NP.divide(v, marketPointPrice * 1.02),
         pointDecimalNum || 6,
-      ),
+      ).toString(),
     );
   };
 
