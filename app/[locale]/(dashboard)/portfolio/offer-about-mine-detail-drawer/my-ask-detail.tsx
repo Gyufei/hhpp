@@ -132,7 +132,7 @@ export default function MyAskDetail({
                   >
                     {T("CloseThisOffer")}
                   </button>
-                  <div className="mt-2 flex h-8 items-center rounded bg-[#FBF2EA] px-3 text-xs leading-5 text-[#FFA95B]">
+                  <div className="mt-2 flex items-center rounded bg-[#FBF2EA] px-3 text-xs leading-5 text-[#FFA95B]">
                     {T("YouHaveTheOptionToClose")}
                   </div>
                 </div>
