@@ -6,6 +6,7 @@ import { ChainConfigs } from "@/lib/const/chain-configs";
 import { ChainType } from "@/lib/types/chain";
 import { WithTip } from "@/components/share/with-tip";
 import { toast } from "react-hot-toast";
+import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 export function DepositDialog({
   open,
@@ -17,6 +18,12 @@ export function DepositDialog({
   const T = useTranslations("Common");
   const CT = useTranslations("Common");
   const chainConfig = ChainConfigs[ChainType.HYPER];
+
+  const { data: accountInfo } = useAccountInfo();
+  const isPublic = accountInfo?.trading_mode === "Public";
+  const depositContract = isPublic
+    ? chainConfig.contracts.publicDeposit
+    : chainConfig.contracts.privateDeposit;
 
   function handleCopy() {
     navigator.clipboard.writeText(chainConfig.contracts.deposit);
@@ -37,13 +44,13 @@ export function DepositDialog({
               onClick={handleCopy}
               className="break-all text-center text-xs leading-[18px] text-gray hover:text-main"
             >
-              {chainConfig.contracts.deposit}
+              {depositContract}
             </div>
           </WithTip>
 
           <QrCode
             src={
-              `/img/qrcode/${chainConfig.contracts.deposit}.png` +
+              `/img/qrcode/${depositContract}.png` +
               `?v=${new Date().getDate()}`
             }
           />

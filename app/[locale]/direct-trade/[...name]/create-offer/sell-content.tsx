@@ -30,6 +30,9 @@ export function SellContent({
 }) {
   const T = useTranslations("Offer");
   const { checkMinPrice, checkMaxPrice } = useCreateOfferMinPrice();
+  const [hasAutoCalc, setHasAutoCalc] = useState<
+    "sell" | "receive" | null | false
+  >(null);
 
   const {
     token: receiveToken,
@@ -92,8 +95,8 @@ export function SellContent({
   const sellPointAmountChange = (v: string) => {
     setSellPointAmount(v);
 
-    if (v === "") {
-      setReceiveAmount("");
+    if (hasAutoCalc === "receive" || hasAutoCalc === false) {
+      setHasAutoCalc(false);
       return;
     }
 
@@ -101,6 +104,12 @@ export function SellContent({
       currentMarket.last_price,
       pointDecimalNum,
     );
+
+    setHasAutoCalc("sell");
+    if (v === "") {
+      setReceiveAmount("");
+      return;
+    }
 
     setReceiveAmount(
       formatNum(
@@ -113,8 +122,8 @@ export function SellContent({
   const receiveTokenAmountChange = (v: string) => {
     setReceiveAmount(v);
 
-    if (v === "") {
-      setSellPointAmount("");
+    if (hasAutoCalc === "sell" || hasAutoCalc === false) {
+      setHasAutoCalc(false);
       return;
     }
 
@@ -122,6 +131,12 @@ export function SellContent({
       currentMarket.last_price,
       pointDecimalNum,
     );
+
+    setHasAutoCalc("receive");
+    if (v === "") {
+      setSellPointAmount("");
+      return;
+    }
 
     setSellPointAmount(
       formatNum(

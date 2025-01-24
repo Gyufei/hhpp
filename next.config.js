@@ -23,6 +23,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "cdn.hypetrade.xyz",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.hypes.trade",
+      },
     ],
   },
   webpack: (config) => {
