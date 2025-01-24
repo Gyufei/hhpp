@@ -13,8 +13,7 @@ import { Pagination } from "@/components/ui/pagination/pagination";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 
-import { sortBy } from "lodash";
-import { useMyHoldings } from "@/lib/hooks/api/use-my-holdings";
+import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
 import { usePointAmount } from "@/lib/hooks/api/use-point-amount";
 import { SellContent } from "@/app/[locale]/direct-trade/[...name]/create-offer/sell-content";
 import { reportEvent } from "@/lib/utils/analytics";
@@ -29,21 +28,13 @@ export function BalanceTable() {
 
   const [marketCreateOffer, setOpenMarketCreateOffer] = useState(null);
 
-  const { data: balanceData } = useMyHoldings();
+  const { data: marketplaceData } = useMarketplaces();
 
   const data = useMemo(() => {
-    const offerData = (balanceData || []).map((o) => {
-      return {
-        ...o,
-      };
-    });
-
-    const sortData = sortBy(offerData, "create_at").reverse();
-
     return {
-      nodes: sortData,
+      nodes: marketplaceData || [],
     };
-  }, [balanceData]);
+  }, [marketplaceData]);
 
   const theme = useTheme({
     Table: `
@@ -138,32 +129,32 @@ export function BalanceTable() {
               </HeaderRow>
             </Header>
             <Body>
-              {tableList.map((holding) => (
-                <Row key={holding.offer_id} item={holding}>
+              {tableList.map((marketplace) => (
+                <Row key={marketplace.id} item={marketplace}>
                   <Cell>
-                    <div>{holding.marketplace.item_name}</div>
+                    <div>{marketplace.item_name}</div>
                   </Cell>
 
                   <Cell>
                     <BalanceValue
                       type="total"
-                      marketAccount={holding.marketplace.market_place_account}
+                      marketAccount={marketplace.market_place_account}
                     />
                   </Cell>
                   <Cell>
                     <BalanceValue
                       type="free"
-                      marketAccount={holding.marketplace.market_place_account}
+                      marketAccount={marketplace.market_place_account}
                     />
                   </Cell>
-                  <Cell>${holding.marketplace.last_price * 100}</Cell>
+                  <Cell>${marketplace.last_price * 100}</Cell>
                   {/* <Cell>
                     -$233.556/-12.34%
                   </Cell> */}
                   <Cell>
                     <div
                       onClick={() => {
-                        setOpenMarketCreateOffer(holding.marketplace);
+                        setOpenMarketCreateOffer(marketplace);
                         reportEvent("click", { value: "listOffer" });
                       }}
                       className="flex h-7 w-fit cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]"

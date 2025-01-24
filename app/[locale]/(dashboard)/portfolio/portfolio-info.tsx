@@ -1,7 +1,7 @@
-import { useTranslations } from "next-intl";
-import { WithTip } from "@/components/share/with-tip";
+// import { useTranslations } from "next-intl";
+// import { WithTip } from "@/components/share/with-tip";
 export default function PortfolioInfo() {
-  const T = useTranslations("Dashboard");
+  // const T = useTranslations("Dashboard");
   return (
     <>
       <div className="flex flex-col items-center justify-start text-xs sm:flex-row sm:space-x-4">
@@ -21,14 +21,14 @@ export default function PortfolioInfo() {
             <div>$1,000,000</div>
           </div>
         </div> */}
-        <div className="flex flex-col items-start justify-between">
+        {/* <div className="flex flex-col items-start justify-between">
           <WithTip className="text-gray" content={"View Fee Schedule"}>
             {T("Fees(Taker/Maker)")}
           </WithTip>
           <div className="mt-1 flex items-center justify-center  text-title-white">
             <div>0.0350% / 0.0100%</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
