@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { formatNum } from "@/lib/utils/number";
 import { useWsMsg } from "@/lib/hooks/api/use-ws-msgs";
 import { IMarketplace } from "@/lib/types/marketplace";
-import { useMarketTrades } from "@/lib/hooks/api/use-market-trades";
+import { useMarketHolder } from "@/lib/hooks/api/use-market-holder";
 import { range, sortBy } from "lodash";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
@@ -22,19 +22,19 @@ export function HolderTable({
   isLoading: boolean;
 }) {
   const T = useTranslations("Marketplace");
-  const { data: historyData, isLoading: isHistoryLoading } = useMarketTrades(
+  const { data: holderData, isLoading: isHolderLoading } = useMarketHolder(
     marketplace?.chain || ChainType.HYPER,
     marketplace?.market_place_account || "",
   );
 
   const { data: tokens } = useTokens(marketplace?.chain || ChainType.HYPER);
-  const isLoadingFlag = !marketplace || isLoading || isHistoryLoading;
+  const isLoadingFlag = !marketplace || isLoading || isHolderLoading;
 
   const { data: msgEvents } = useWsMsg(marketplace?.chain || ChainType.HYPER);
 
   const tradeMsgs = useMemo<any[]>(() => {
-    const sortHistory = sortBy(historyData || [], "trade_at").reverse();
-    const history = sortHistory.map((item: any) => {
+    const sortHolder = sortBy(holderData || [], "trade_at").reverse();
+    const holder = sortHolder.map((item: any) => {
       return {
         ...item,
         timestamp: item.trade_at * 1000,
@@ -47,7 +47,7 @@ export function HolderTable({
 
     const allMsg = sortBy(msgAll || [], "trade_at")
       .reverse()
-      .concat(history || [])
+      .concat(holder || [])
       .map((item: any) => {
         const token = tokens?.find(
           (token) => token.address === item.token_mint,
@@ -60,7 +60,7 @@ export function HolderTable({
       });
 
     return allMsg;
-  }, [msgEvents, historyData, tokens, marketplace?.market_place_account]);
+  }, [msgEvents, holderData, tokens, marketplace?.market_place_account]);
 
   const data = useMemo(() => {
     if (isLoadingFlag) {
