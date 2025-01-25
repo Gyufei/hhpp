@@ -14,7 +14,7 @@ export function useTokens(chain?: ChainType) {
       };
 
     const tokens = await apiFetcher(
-      `${cdnEndPoint}/tokenlist/${chain}.json?$v=${Date.now()}`,
+      `${cdnEndPoint}/tokenlist/${chain}.json?v=${Date.now()}`,
     );
 
     const newTokens = tokens.map((t: Record<string, any>) => {

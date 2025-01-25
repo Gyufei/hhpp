@@ -11,6 +11,7 @@ interface IAccountInfo {
   dest_account: string;
   user_name: string;
   trading_mode: TradingMode;
+  is_active: boolean;
 }
 
 export function useAccountInfo() {
