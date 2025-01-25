@@ -21,6 +21,7 @@ import { useCheckBalance } from "@/lib/hooks/api/use-check-balance";
 import ArrowBetween from "../create-offer/arrow-between";
 import { StableBalance } from "@/components/share/stable-balance";
 import { cn } from "@/lib/utils/common";
+import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 export default function AskDetail({
   offer,
@@ -32,8 +33,10 @@ export default function AskDetail({
   const T = useTranslations("Offer");
 
   const { platformFee } = useGlobalConfig();
-
   const { checkUSDCInsufficient } = useCheckBalance(offer.marketplace);
+  const { data: accountInfo } = useAccountInfo();
+  const isPublic = accountInfo?.trading_mode === "Public";
+  const isFirstTake = isPublic && accountInfo?.is_active === "0";
 
   const {
     tokenPrice,
@@ -75,10 +78,15 @@ export default function AskDetail({
 
       const pay = NP.times(NP.divide(receiveNum, offer.item_amount), forValue);
       const payWithFee = NP.times(pay, 1 + platformFee + tradeFee);
+
+      if (isFirstTake) {
+        return String(NP.plus(payWithFee, 1));
+      }
+
       return String(payWithFee);
     },
 
-    [forValue, offer.item_amount, tradeFee, platformFee],
+    [forValue, offer.item_amount, tradeFee, platformFee, isFirstTake],
   );
 
   const calcReceiveByPayAmount = useCallback(
@@ -89,7 +97,8 @@ export default function AskDetail({
       const wantPay = Number(payAmountNum);
       const realPay = NP.divide(wantPay, 1 + platformFee + tradeFee);
       const payPercent = NP.divide(realPay, forValue);
-      const receive = NP.times(payPercent, offer.item_amount);
+      const receiveDecimal = NP.times(payPercent, offer.item_amount);
+      const receive = Math.floor(receiveDecimal);
       return String(receive);
     },
     [forValue, offer.item_amount, tradeFee, platformFee],
@@ -125,6 +134,7 @@ export default function AskDetail({
   }
 
   function handleInputPayTokenAmount(v: string) {
+    return;
     setPayTokenAmount(v);
     const receive = calcReceiveByPayAmount(Number(v));
     setReceivePointAmount(receive);
@@ -176,7 +186,7 @@ export default function AskDetail({
             value={String(payTokenAmount)}
             onUserInput={handleInputPayTokenAmount}
             canGoMax={sliderCanMax}
-            canInput={!isFilled}
+            canInput={false}
             sliderMax={sliderCanMax}
             sliderValue={Number(receivePointAmount)}
             setSliderValue={handleSliderChange}

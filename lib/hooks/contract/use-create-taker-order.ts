@@ -8,7 +8,6 @@ import { ChainConfigs } from "@/lib/const/chain-configs";
 import { ChainType } from "@/lib/types/chain";
 import { isProduction } from "@/lib/PathMap";
 import { formatDecimal } from "@/lib/utils/number";
-import NP from "number-precision";
 
 export function useCreateTakerOrder() {
   const { data: accountInfo } = useAccountInfo();
@@ -23,8 +22,6 @@ export function useCreateTakerOrder() {
     const { offerId, itemAmount, payTokenAmount } = args;
 
     const isPublic = accountInfo?.trading_mode === "Public";
-    const isFirstTake = accountInfo?.is_active === "0";
-    const payAmount = isFirstTake ? NP.plus(payTokenAmount, 1) : payTokenAmount;
 
     const timestamp = Date.now();
 
@@ -35,7 +32,9 @@ export function useCreateTakerOrder() {
     };
 
     const signData = await signDataAction(
-      isPublic ? genTakerOrderTypeData(String(payAmount), timestamp) : argsData,
+      isPublic
+        ? genTakerOrderTypeData(String(payTokenAmount), timestamp)
+        : argsData,
       isPublic,
     );
 

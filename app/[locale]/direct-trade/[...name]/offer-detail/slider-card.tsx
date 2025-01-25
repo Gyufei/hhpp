@@ -69,7 +69,7 @@ export default function SliderCard({
             onUserInput={(v) => onUserInput(v)}
           />
         ) : (
-          <div className="h-[36px] text-2xl leading-[36px] text-title-white">
+          <div className="h-[36px] select-none text-2xl leading-[36px] text-title-white">
             {formatNum(Number(value), 6)}
           </div>
         )}
