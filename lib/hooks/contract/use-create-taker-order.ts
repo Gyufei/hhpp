@@ -23,8 +23,8 @@ export function useCreateTakerOrder() {
     const { offerId, itemAmount, payTokenAmount } = args;
 
     const isPublic = accountInfo?.trading_mode === "Public";
-    const isActive = accountInfo?.is_active;
-    const payAmount = isActive ? NP.plus(payTokenAmount, 1) : payTokenAmount;
+    const isFirstTake = accountInfo?.is_active === "0";
+    const payAmount = isFirstTake ? NP.plus(payTokenAmount, 1) : payTokenAmount;
 
     const timestamp = Date.now();
 
