@@ -17,17 +17,13 @@ export function useSignData() {
         });
     console.log(signature);
 
-    if (isStr) {
-      return { signature };
-    }
-
     return isTypeData
       ? {
           signature,
           nonce: data.message.time,
         }
       : {
-          ...data,
+          ...(isStr ? {} : data),
           signature,
         };
   }
