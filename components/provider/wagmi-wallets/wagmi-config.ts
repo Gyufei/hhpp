@@ -24,11 +24,11 @@ export function getWagmiConfig(arbRpc?: string) {
 
   const config = createConfig({
     connectors: [
-      metaMask(),
       injected(),
       walletConnect({
         projectId: "eebc19acaf49c17d619d94fda6699100",
       }),
+      metaMask(),
     ],
     chains: supportedChains,
     ssr: true,

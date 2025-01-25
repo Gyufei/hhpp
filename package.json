@@ -61,8 +61,8 @@
     "use-debounce": "^9.0.4",
     "use-resize-observer": "^9.1.0",
     "vaul": "^0.9.9",
-    "viem": "^2.22.3",
-    "wagmi": "^2.14.6"
+    "viem": "^2.22.14",
+    "wagmi": "^2.14.9"
   },
   "devDependencies": {
     "@sentry/nextjs": "^7.119.2",
