@@ -109,6 +109,7 @@ export default function UserProfileDialog() {
     } else {
       const account = accountInfo?.dest_account || "";
       const signature = SparkMD5.hash(account);
+
       triggerUserNameChange({
         dest_account: account,
         user_name: username,

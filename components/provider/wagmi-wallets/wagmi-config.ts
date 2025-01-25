@@ -27,7 +27,7 @@ export function getWagmiConfig(arbRpc?: string) {
       metaMask(),
       injected(),
       walletConnect({
-        projectId: "8e507d09486ed2283f0d0922c0a02261",
+        projectId: "eebc19acaf49c17d619d94fda6699100",
       }),
     ],
     chains: supportedChains,
