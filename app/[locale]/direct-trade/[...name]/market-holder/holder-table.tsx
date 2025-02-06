@@ -40,7 +40,7 @@ export function HolderTable({
       };
     }
 
-    const holder = holderData.map(
+    const holder = (holderData || []).map(
       (holder: IHolderDistribution, index: number) => {
         return {
           id: Math.floor(Math.random() * 100000),
