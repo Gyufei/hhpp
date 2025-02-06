@@ -14,3 +14,8 @@ interface IHoldingEntry {
   id: number;
   item_amount: number;
 }
+
+export interface IHolderDistribution {
+  address: string;
+  percentage: string[];
+}

@@ -44,6 +44,7 @@ export const ApiPaths = {
   marketTrades: "/market_place/maker_trades_history",
   salesVolumeHistory: "/market_place/sales_volume_history",
   userTokenBalance: "/account/token_balances",
+  holderDistribution: "/holdings/distribution",
 
   referral: {
     referer: "/referral/referer",
