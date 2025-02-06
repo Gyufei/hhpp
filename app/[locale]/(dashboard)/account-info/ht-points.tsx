@@ -21,12 +21,14 @@ export default function HTPoints() {
           </NoDataDisplay>
         </div>
       </div>
-      {/* <div className="mt-3 flex justify-between">
-          <LabelText>{RT("txt-Rank")}</LabelText>
-          <div className="leading-[18px] text-title-white">
-            <NoDataDisplay noData={!accountInfo}>N/A</NoDataDisplay>
-          </div>
-        </div> */}
+      <div className="mt-3 flex justify-between">
+        <LabelText>{T("txt-Rank")}</LabelText>
+        <div className="leading-[18px] text-title-white">
+          <NoDataDisplay noData={!userPoints?.rank}>
+            {userPoints?.rank || "N/A"}
+          </NoDataDisplay>
+        </div>
+      </div>
     </div>
   );
 }
