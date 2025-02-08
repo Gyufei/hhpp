@@ -110,7 +110,8 @@ export function subscribeOnStream(
     action: "SubAdd",
     subs: [channelString],
   };
-  socket.send(JSON.stringify(subRequest));
+  console.log("[subscribeBars]: SubRequest", subRequest);
+  // socket.send(JSON.stringify(subRequest));
 }
 
 export function unsubscribeFromStream(subscriberUID: any) {

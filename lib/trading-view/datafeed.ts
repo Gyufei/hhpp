@@ -33,7 +33,7 @@ async function getAllSymbols() {
       full_name: `${market.market_name}/USDC`,
       description: `${market.market_name}/USDC`,
       exchange: "hypeTrade",
-      type: "hypeTrade",
+      type: "",
     };
   });
 
@@ -112,13 +112,37 @@ const datafeed = {
   ) => {
     console.log("periodParams", periodParams);
     const { from, to, firstDataRequest } = periodParams;
-    console.log("[getBars]: Method call", symbolInfo, resolution, from, to);
-
-    const urlParameters = {
-      symbol: symbolInfo.name,
+    console.log(
+      "[getBars]: Method call",
+      symbolInfo,
+      resolution,
       from,
       to,
-      resolution,
+      Number(to) - Number(from),
+    );
+
+    const allMarkets = await apiFetcher(WithApiHost(ApiPaths.markets));
+    const marketData = allMarkets.find(
+      ({ market_symbol }: any) => market_symbol === symbolInfo.name,
+    );
+    const marketAccount = marketData.market_place_account;
+
+    const resolutionMap = {
+      1: 60,
+      5: 300,
+      15: 900,
+      30: 1800,
+      60: 3600,
+      "1D": 86400,
+      "1W": 604800,
+      "1M": 2592000,
+    };
+
+    const urlParameters = {
+      market_place_account: marketAccount,
+      from,
+      to,
+      interval: (resolutionMap as any)[resolution] || 60,
     };
 
     const query = Object.keys(urlParameters)
@@ -129,12 +153,13 @@ const datafeed = {
           )}`,
       )
       .join("&");
-    try {
-      // const data = await makeApiRequest(`trading-view/mt4/history?${query}`);
-      console.log("query", query);
-      const data: any = [];
 
-      if ((data.s && data.s === "Error") || data.length === 0) {
+    try {
+      const data = await apiFetcher(
+        WithApiHost(ApiPaths.marketKline) + `?${query}`,
+      );
+
+      if (firstDataRequest && data.length === 0) {
         onHistoryCallback([], {
           noData: true,
         });
@@ -142,15 +167,15 @@ const datafeed = {
       }
 
       const bars: any = [];
-      data.t.map((time: any, index: any) => {
-        if (time >= from && time < to) {
+      data.map((item: any) => {
+        if (item.time >= from && item.time < to) {
           bars.push({
-            time: time * 1000,
-            low: data.l[index],
-            high: data.h[index],
-            open: data.o[index],
-            close: data.c[index],
-            volume: data.v[index],
+            time: item.time * 1000,
+            low: item.low,
+            high: item.high,
+            open: item.open,
+            close: item.close,
+            volume: item.volume,
           });
         }
       });
@@ -161,11 +186,8 @@ const datafeed = {
           ...bars[bars.length - 1],
         });
       }
-      console.log("[getBars]: Last bar cache", lastBarsCache);
 
-      onHistoryCallback(bars, {
-        noData: false,
-      });
+      onHistoryCallback(bars);
     } catch (error) {
       console.log("[getBars]: Get error", error);
       onErrorCallback(error);

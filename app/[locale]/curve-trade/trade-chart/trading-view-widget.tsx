@@ -19,7 +19,7 @@ export function TradingViewWidget({ symbol }: { symbol: string }) {
       container: chartContainerRef.current,
       datafeed,
       symbol: symbol,
-      interval: "1" as ResolutionString,
+      interval: "1D" as ResolutionString,
       library_path: "/charting_library/charting_library/",
       locale: locale as LanguageCode,
       timezone: "Asia/Shanghai",
