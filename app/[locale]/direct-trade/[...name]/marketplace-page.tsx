@@ -81,7 +81,7 @@ export default function MarketplacePage({
 
         <div
           className={cn(
-            "fixed bottom-0 z-50 mb-0 w-full rounded border-t border-border-black bg-bg-black px-[10px] py-2 sm:static sm:mb-[2px] sm:block sm:border-none sm:py-4",
+            "mb-[2px] w-full rounded border-t border-border-black bg-bg-black px-[10px] py-2 sm:border-none sm:py-4",
             showKChart ? "invisible h-0 w-0 sm:mb-0 sm:py-0" : "visible",
           )}
         >
