@@ -86,7 +86,7 @@ export default function UserProfileDialog() {
 
   function getNameErrorText(v: string) {
     if (v.length < 4) {
-      return T("UsernameLengthError");
+      return T("StrLengthError", { name: T("Username"), length: 4 });
     }
 
     if (v.startsWith("_") || v.startsWith("-")) {
@@ -143,7 +143,7 @@ export default function UserProfileDialog() {
               value={username}
               onChange={(e) => handleUsernameInput(e.target.value)}
               type="text"
-              className="z-0 mt-[10px] h-8 w-full rounded border border-border-black bg-transparent px-[10px] text-xs leading-[18px] text-txt-white placeholder:text-gray focus:text-txt-white"
+              className="z-0 mt-[10px] h-8 w-full rounded border border-border-black bg-transparent px-[10px] text-xs leading-[18px] text-title-white placeholder:text-gray focus:text-txt-white"
             />
             {nameErrorText && (
               <div className="text-error absolute -bottom-[18px] left-0 text-xs leading-[18px] text-red">

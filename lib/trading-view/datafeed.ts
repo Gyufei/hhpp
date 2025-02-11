@@ -112,14 +112,7 @@ const datafeed = {
   ) => {
     console.log("periodParams", periodParams);
     const { from, to, firstDataRequest } = periodParams;
-    console.log(
-      "[getBars]: Method call",
-      symbolInfo,
-      resolution,
-      from,
-      to,
-      Number(to) - Number(from),
-    );
+    console.log("[getBars]: Method call", symbolInfo, resolution, from, to);
 
     const allMarkets = await apiFetcher(WithApiHost(ApiPaths.markets));
     const marketData = allMarkets.find(

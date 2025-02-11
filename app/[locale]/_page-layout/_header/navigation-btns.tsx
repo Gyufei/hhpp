@@ -7,6 +7,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils/common";
 // import Setting from "./setting";
 import LanguageSetting from "./language-setting";
+// import CreateCoin from "./create-coin";
 
 const menuItemsClx =
   "flex h-10 items-center px-[10px] cursor-pointer text-xs text-title-white data-[active=true]:text-main hover:text-main";
@@ -48,6 +49,7 @@ export default function NavigationBtns() {
             {item.title}
           </Link>
         ))}
+        {/* <CreateCoin className={menuItemsClx} /> */}
         {/* <MoreMenu /> */}
       </div>
 
