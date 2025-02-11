@@ -41,6 +41,7 @@ export const ApiPaths = {
 
   makerOrders: "/user/maker_orders",
   userName: "/user/user_name",
+  userData: "/user/user_data",
   tokenPrice: "/token/info",
   marketTrades: "/market_place/maker_trades_history",
   salesVolumeHistory: "/market_place/sales_volume_history",
