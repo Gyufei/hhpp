@@ -37,22 +37,22 @@ export default function AccountOverview() {
           </div>
         </div> */}
 
-      {/* <div className="mt-3 flex justify-between">
-          <LabelText>{T("MakerOrders")}</LabelText>
-          <div className="leading-[18px] text-title-white">
-            <NoDataDisplay noData={!accountInfo}>
-              {formatNum(Number(accountInfo?.maker_orders))}
-            </NoDataDisplay>
-          </div>
+      <div className="mt-3 flex justify-between">
+        <LabelText>{T("MakerOrders")}</LabelText>
+        <div className="leading-[18px] text-title-white">
+          <NoDataDisplay noData={!accountInfo}>
+            {formatNum(Number(accountInfo?.maker_orders))}
+          </NoDataDisplay>
         </div>
-        <div className="mt-3 flex justify-between">
-          <LabelText>{T("TakerOrders")}</LabelText>
-          <div className="leading-[18px] text-title-white">
-            <NoDataDisplay noData={!accountInfo}>
-              {formatNum(Number(accountInfo?.taker_orders))}
-            </NoDataDisplay>
-          </div>
-        </div> */}
+      </div>
+      <div className="mt-3 flex justify-between">
+        <LabelText>{T("TakerOrders")}</LabelText>
+        <div className="leading-[18px] text-title-white">
+          <NoDataDisplay noData={!accountInfo}>
+            {formatNum(Number(accountInfo?.taker_orders))}
+          </NoDataDisplay>
+        </div>
+      </div>
 
       <div className="mt-3 flex justify-between">
         <LabelText>{T("SettledValue")}</LabelText>
