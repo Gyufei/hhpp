@@ -244,7 +244,15 @@ const BalanceValue = ({
     }
     if (type === "value") {
       return (
-        <>${formatNum(NP.times(lastPrice, pointAmount?.free_amount || "0"))}</>
+        <>
+          $
+          {formatNum(
+            NP.times(
+              lastPrice,
+              pointAmount?.locked_amount + pointAmount?.free_amount || "0",
+            ),
+          )}
+        </>
       );
     }
   }
