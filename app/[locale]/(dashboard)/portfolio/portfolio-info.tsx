@@ -29,14 +29,6 @@ export default function PortfolioInfo() {
             <div>${userData?.volume || 0}</div>
           </div>
         </div>
-        {/* <div className="flex flex-col items-start justify-between">
-          <WithTip className="text-gray" content={"View Fee Schedule"}>
-            {T("Fees(Taker/Maker)")}
-          </WithTip>
-          <div className="mt-1 flex items-center justify-center  text-title-white">
-            <div>0.0350% / 0.0100%</div>
-          </div>
-        </div> */}
       </div>
     </>
   );
