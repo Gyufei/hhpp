@@ -154,9 +154,9 @@ export default function AskDetail({
   useEffect(() => {
     if (isSuccess) {
       onSuccess({
-        no: "",
+        no: offer.entry.id,
         pay: payTokenAmount,
-        tx: txHash,
+        tx: offer.offer_maker,
         token: offerTokenInfo,
       });
     }

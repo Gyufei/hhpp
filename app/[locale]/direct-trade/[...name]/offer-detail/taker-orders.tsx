@@ -3,7 +3,7 @@ import Image from "next/image";
 import { CompactTable } from "@table-library/react-table-library/compact";
 import { usePagination } from "@table-library/react-table-library/pagination";
 import {
-  // handleGoScan,
+  handleGoScan,
   truncateAddr,
 } from "@/lib/utils/web3";
 import { formatTimestamp } from "@/lib/utils/time";
@@ -51,7 +51,7 @@ export function TakerOrders({
   const theme = useTheme({
     Table: `
       grid-template-rows: repeat(auto-fit, 40px);
-      grid-template-columns: 160px repeat(3, minmax(0, 1fr));
+      grid-template-columns: 160px repeat(4, minmax(0, 1fr));
       font-weight: 400;
       grid-auto-rows: 40px;
     `,
@@ -155,26 +155,26 @@ export function TakerOrders({
         );
       },
     },
-    // {
-    //   label: T("TxHash"),
-    //   renderCell: (o: ITakerOrder) => (
-    //     <div className="flex items-center justify-start">
-    //       {truncateAddr(o.tx_hash || "")}
-    //       {o.tx_hash && (
-    //         <Image
-    //           onClick={() =>
-    //             handleGoScan(offer.marketplace.chain, o.tx_hash || "", "tx")
-    //           }
-    //           src="/icons/right-45.svg"
-    //           width={16}
-    //           height={16}
-    //           alt="goScan"
-    //           className="cursor-pointer"
-    //         />
-    //       )}
-    //     </div>
-    //   ),
-    // },
+    {
+      label: T("TxHash"),
+      renderCell: (o: ITakerOrder) => (
+        <div className="flex items-center justify-start">
+          {truncateAddr(o.tx_hash || "")}
+          {o.tx_hash && (
+            <Image
+              onClick={() =>
+                handleGoScan(offer.marketplace.chain, o.tx_hash || "", "tx")
+              }
+              src="/icons/right-45.svg"
+              width={16}
+              height={16}
+              alt="goScan"
+              className="cursor-pointer pl-1"
+            />
+          )}
+        </div>
+      ),
+    },
     {
       label: T("Time"),
       renderCell: (o: ITakerOrder) => (
