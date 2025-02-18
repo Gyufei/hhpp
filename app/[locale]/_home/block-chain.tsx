@@ -1,10 +1,9 @@
 "use client"
 
 import { getFormatUnit } from "@/lib/utils/number";
-import {useTradingData} from "@/lib/hooks/api/use-trading-data";
+// import {useTradingData} from "@/lib/hooks/api/use-trading-data";
 export default function BlockChain() {
-  const { data = {} as any, isLoading } = useTradingData();
-  if (isLoading) return null;
+  // const { data = {} as any, isLoading } = useTradingData();
 
   return (
     <div className="flex h-[916px] items-center justify-center bg-bg-black">

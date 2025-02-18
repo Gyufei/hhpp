@@ -56,7 +56,7 @@ export default function AskDetail({
   }, [offer]);
 
   const {
-    data: txHash,
+    // data: txHash,
     isLoading: isTaking,
     isSuccess,
     write: writeAction,
