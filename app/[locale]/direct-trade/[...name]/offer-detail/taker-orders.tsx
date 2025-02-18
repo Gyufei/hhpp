@@ -159,7 +159,7 @@ export function TakerOrders({
       label: T("TxHash"),
       renderCell: (o: ITakerOrder) => (
         <div className="flex items-center justify-start">
-          {truncateAddr(o.tx_hash || "")}
+          {truncateAddr(o.tx_hash || "") || "N/A"}
           {o.tx_hash && (
             <Image
               onClick={() =>

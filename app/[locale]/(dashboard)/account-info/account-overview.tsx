@@ -39,7 +39,7 @@ export default function AccountOverview() {
           </div>
         </div>
 
-      <div className="mt-3 flex justify-between">
+      {/* <div className="mt-3 flex justify-between">
         <LabelText>{T("MakerOrders")}</LabelText>
         <div className="leading-[18px] text-title-white">
           <NoDataDisplay noData={!accountInfo}>
@@ -54,16 +54,16 @@ export default function AccountOverview() {
             {formatNum(Number(accountInfo?.taker_orders))}
           </NoDataDisplay>
         </div>
-      </div>
+      </div> */}
 
-      <div className="mt-3 flex justify-between">
+      {/* <div className="mt-3 flex justify-between">
         <LabelText>{T("SettledValue")}</LabelText>
         <div className="leading-[18px] text-title-white">
           <NoDataDisplay noData={!accountInfo}>
             ${formatNum(Number(accountInfo?.settled_value))}
           </NoDataDisplay>
         </div>
-      </div>
+      </div> */}
       <div className="mt-3 flex justify-between">
         <LabelText>{T("TaxIncome")}</LabelText>
         <div

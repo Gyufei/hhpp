@@ -3,6 +3,7 @@ import { WithTip } from "@/components/share/with-tip";
 import { useUserData } from "@/lib/hooks/api/use-user-data";
 import { useUserEquity } from "@/lib/hooks/api/use-user-equity";
 import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
+import { formatNum } from "@/lib/utils/number";
 
 export default function PortfolioInfo() {
   const T = useTranslations("Dashboard");
@@ -26,7 +27,7 @@ export default function PortfolioInfo() {
             {T("14DayVolume")}
           </WithTip>
           <div className="mt-1 flex items-center justify-center text-title-white">
-            <div>${userData?.volume || 0}</div>
+            <div>${formatNum(userData?.volume || 0, 6)}</div>
           </div>
         </div>
       </div>

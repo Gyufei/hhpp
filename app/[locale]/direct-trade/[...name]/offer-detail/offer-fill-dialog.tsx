@@ -12,7 +12,6 @@ export default function OfferFillDialog({
   onOpenChange: (_open: boolean) => void;
   res: Record<string, any>;
 }) {
-  console.log("🚀 ~ res:", res)
   return (
     <Dialog
       aria-describedby={undefined}

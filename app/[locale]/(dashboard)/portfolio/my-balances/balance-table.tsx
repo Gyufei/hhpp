@@ -227,7 +227,7 @@ const BalanceValue = ({
     if (Number(buyingRate) === 0 || Number(lastPrice) === 0) return 0;
     const commission = NP.minus(lastPrice, buyingRate);
     if (commission === 0) return 0;
-    return NP.divide(buyingRate, commission);
+    return NP.divide(commission, buyingRate);
   }, [lastPrice, buyingRate]);
 
   const commissionRateTag =
