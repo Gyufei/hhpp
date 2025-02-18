@@ -24,7 +24,7 @@ import Image from "next/image";
 import { handleGoScan, truncateAddr } from "@/lib/utils/web3";
 import { IOffer } from "@/lib/types/offer";
 
-export function OrderTable() {
+export function OrderTable({filters}: {filters: string[]}) {
   const T = useTranslations("MyOrders");
 
   const { data: offers, mutate: refreshMyOffers } = useMyOffers({
@@ -46,6 +46,7 @@ export function OrderTable() {
       return {
         ...o,
         id: o.offer_id,
+        type: "bids",
       };
     });
 
@@ -53,18 +54,25 @@ export function OrderTable() {
       return {
         ...o,
         id: o.order_id,
+        type: "buys",
       };
     });
+    let showData = [...offerData, ...orderData];
+    if (filters.length !== 0) {
+      showData = showData.filter((o) =>
+        filters.includes(o.type),
+      );
+    } 
 
     const sortData = sortBy(
-      [...offerData, ...orderData],
+      showData,
       "create_at",
     ).reverse();
 
     return {
       nodes: sortData,
     };
-  }, [offers, orders]);
+  }, [offers, orders, filters]);
 
   const theme = useTheme({
     Table: `
