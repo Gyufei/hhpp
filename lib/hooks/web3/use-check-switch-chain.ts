@@ -4,16 +4,11 @@ import { ChainType } from "@/lib/types/chain";
 
 export function useCheckSwitchChain() {
   const chainId = useChainId();
-  const { switchChainAsync } = useSwitchChain();
+  const { switchChain } = useSwitchChain();
 
   function checkAndSwitchChain() {
     const shouldChainId = Number(ChainConfigs[ChainType.HYPER].network);
-
-    if (chainId !== shouldChainId) {
-      return switchChainAsync({ chainId: shouldChainId });
-    }
-
-    return true;
+      return switchChain({ chainId: shouldChainId });
   }
   return { checkAndSwitchChain };
 }

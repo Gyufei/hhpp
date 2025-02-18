@@ -49,6 +49,7 @@ export default function UserProfileDialog() {
       setCanEditTradingMode(false);
       setShowProDialog(false);
       setUsername(accountInfo.user_name);
+      setTradingMode(accountInfo.trading_mode);
     }
   }, [accountInfo, error, setShowProDialog]);
 
@@ -119,7 +120,7 @@ export default function UserProfileDialog() {
   }
 
   return (
-    <Dialog open={showProDialog} onOpenChange={() => setShowProDialog(true)}>
+    <Dialog open={showProDialog} onOpenChange={() => setShowProDialog(!showProDialog)}>
       <VisuallyHidden asChild>
         <DialogTitle>{T("UserProfile")}</DialogTitle>
       </VisuallyHidden>
@@ -127,7 +128,7 @@ export default function UserProfileDialog() {
         className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded border-border-black bg-bg-black p-0"
         aria-describedby={undefined}
       >
-        <DialogTitle showClose={false}>{T("UserProfile")}</DialogTitle>
+        <DialogTitle showClose={!!accountInfo?.user_name}>{T("UserProfile")}</DialogTitle>
 
         <div className="w-full p-5">
           <div className="relative mb-5">

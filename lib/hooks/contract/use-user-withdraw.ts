@@ -7,11 +7,13 @@ import { useAccountInfo } from "../api/use-account-info";
 import { ChainConfigs } from "@/lib/const/chain-configs";
 import { ChainType } from "@/lib/types/chain";
 import { formatDecimal } from "@/lib/utils/number";
+import {useCheckSwitchChain} from "@/lib/hooks/web3/use-check-switch-chain";
 
 export function useUserWithdraw() {
   const { data: accountInfo } = useAccountInfo();
   const { apiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
+  const { checkAndSwitchChain } = useCheckSwitchChain();
 
   async function postApi(
     _: string,
@@ -33,7 +35,7 @@ export function useUserWithdraw() {
       source_account: accountInfo?.source_account || "",
       dest_account: accountInfo?.dest_account || "",
     };
-
+    checkAndSwitchChain();
     const signData = await signDataAction(
       isPublic
         ? genWithdrawTypeData(
