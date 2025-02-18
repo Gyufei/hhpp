@@ -1,13 +1,13 @@
 "use client";
 import { formatNum } from "@/lib/utils/number";
 import { useAccountStats } from "@/lib/hooks/api/use-account-overview";
-import { useUserProfit } from "@/lib/hooks/api/use-user-profit";
+// import { useUserProfit } from "@/lib/hooks/api/use-user-profit";
 import { useTranslations } from "next-intl";
 
 export default function AccountOverview() {
   const T = useTranslations("Dashboard");
   const { data: accountInfo } = useAccountStats();
-  const { data: userProfit = 0 } = useUserProfit();
+  // const { data: userProfit = 0 } = useUserProfit();
 
   return (
     <div className="m-[10px] mb-0 pb-[20px] text-xs">
@@ -24,7 +24,7 @@ export default function AccountOverview() {
           </NoDataDisplay>
         </div>
       </div>
-      <div className="mt-3 flex justify-between">
+      {/* <div className="mt-3 flex justify-between">
           <LabelText>{T("Profit")}</LabelText>
           <div
             data-loss={userProfit ? userProfit < 0 : "null"}
@@ -37,7 +37,7 @@ export default function AccountOverview() {
               </>
             </NoDataDisplay>
           </div>
-        </div>
+        </div> */}
 
       {/* <div className="mt-3 flex justify-between">
         <LabelText>{T("MakerOrders")}</LabelText>

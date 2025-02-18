@@ -22,15 +22,15 @@ export default function TableFilter({types, filterChange}: {types: string[], fil
       { types.map((t, index) => {
         return (
           <button onClick={() => handleFilterSelect(t)} key={index} className="flex items-center gap-2 text-white text-xs">
-            {t}
+            {t.replace(/^\w/, (c) => c.toUpperCase())}
             <div
               className={`w-4 h-4 rounded border  flex items-center justify-center ${
-                selecteds.includes(t)? "border-[#42E8CA]" : "border-gray-500"
+                selecteds.includes(t)? "border-[#50D2C1]" : "border-[#949E9C]"
               }`}
             >
                 <div
                 className={`w-[10px] h-[10px] rounded-sm ${
-                  selecteds.includes(t)? "bg-[#42E8CA]" : "bg-black"
+                  selecteds.includes(t)? "bg-[#50D2C1]" : ""
                 }`}
                 >
                 </div>

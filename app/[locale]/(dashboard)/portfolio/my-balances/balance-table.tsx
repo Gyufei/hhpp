@@ -22,7 +22,7 @@ import Drawer from "react-modern-drawer";
 import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 import NP from "number-precision";
 import { formatNum } from "@/lib/utils/number";
-import { useUserData } from "@/lib/hooks/api/use-user-data";
+// import { useUserData } from "@/lib/hooks/api/use-user-data";
 
 export function BalanceTable() {
   const T = useTranslations("MyBalances");
@@ -41,7 +41,7 @@ export function BalanceTable() {
 
   const theme = useTheme({
     Table: `
-      grid-template-columns: 180px repeat(5,minmax(0,1fr));
+      grid-template-columns: 180px repeat(4,minmax(0,1fr));
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
     `,
@@ -125,9 +125,9 @@ export function BalanceTable() {
                 <HeaderCell>{T("TotalBalance")}</HeaderCell>
                 <HeaderCell>{T("AvailableBalance")}</HeaderCell>
                 <HeaderCell>{T("USDValue")}</HeaderCell>
-                <HeaderCell>
+                {/* <HeaderCell>
                   <div className="underline">{T("PnL(%)")}</div>
-                </HeaderCell>
+                </HeaderCell> */}
                 <HeaderCell></HeaderCell>
               </HeaderRow>
             </Header>
@@ -214,38 +214,38 @@ const BalanceValue = ({
   const address = accountInfo?.dest_account || "";
   const { data: pointAmount = { locked_amount: 0, free_amount: 0 } } =
     usePointAmount(address, marketAccount);
-  const { data: userData } = useUserData(address);
-  const buyingRate =
-    userData?.take_point_price.find(
-      (i: any) => i.market_account === marketAccount,
-    )?.point_token_price || lastPrice;
+  // const { data: userData } = useUserData(address);
+  // const buyingRate =
+  //   userData?.take_point_price.find(
+  //     (i: any) => i.market_account === marketAccount,
+  //   )?.point_token_price || lastPrice;
 
   const total = pointAmount?.locked_amount + pointAmount?.free_amount;
   const usbValue = NP.times(lastPrice, total || "0");
 
-  const commissionRate = useMemo(() => {
-    if (Number(buyingRate) === 0 || Number(lastPrice) === 0) return 0;
-    const commission = NP.minus(lastPrice, buyingRate);
-    if (commission === 0) return 0;
-    return NP.divide(commission, buyingRate);
-  }, [lastPrice, buyingRate]);
+  // const commissionRate = useMemo(() => {
+  //   if (Number(buyingRate) === 0 || Number(lastPrice) === 0) return 0;
+  //   const commission = NP.minus(lastPrice, buyingRate);
+  //   if (commission === 0) return 0;
+  //   return NP.divide(commission, buyingRate);
+  // }, [lastPrice, buyingRate]);
 
-  const commissionRateTag =
-    commissionRate === 0 ? "" : commissionRate > 0 ? "+" : "-";
-  const pnl = Math.abs(NP.minus(usbValue, NP.times(buyingRate, total || "0")));
+  // const commissionRateTag =
+  //   commissionRate === 0 ? "" : commissionRate > 0 ? "+" : "-";
+  // const pnl = Math.abs(NP.minus(usbValue, NP.times(buyingRate, total || "0")));
 
   return (
     <>
       <Cell>{total || 0}</Cell>
       <Cell>{pointAmount?.free_amount || 0}</Cell>
       <Cell>${formatNum(usbValue)}</Cell>
-      <Cell
+      {/* <Cell
         data-up={Number(commissionRate === 0) ? "zero" : commissionRate > 0}
         className="data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-gray"
       >
         {commissionRateTag}${pnl}/{commissionRateTag}
         {formatNum(Math.abs(commissionRate) * 100)}%
-      </Cell>
+      </Cell> */}
     </>
   );
 };
