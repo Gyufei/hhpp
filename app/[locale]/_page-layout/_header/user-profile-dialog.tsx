@@ -14,12 +14,14 @@ import { useUserCreate } from "@/lib/hooks/contract/use-user-create";
 import { UserProfileDialogOpen } from "@/lib/states/user";
 import { useUserNameChange } from "@/lib/hooks/api/use-user-name-change";
 import SparkMD5 from "spark-md5";
+import {useCheckSwitchChain} from "@/lib/hooks/web3/use-check-switch-chain";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function UserProfileDialog() {
   const T = useTranslations("Common");
   const [showProDialog, setShowProDialog] = useAtom(UserProfileDialogOpen);
   const { data: accountInfo, error, mutate } = useAccountInfo();
+  const { checkAndSwitchChain } = useCheckSwitchChain();
 
   const {
     trigger: triggerCreate,
@@ -81,6 +83,7 @@ export default function UserProfileDialog() {
   }
 
   function handleBlur() {
+    canEditTradingMode && checkAndSwitchChain();
     const errTxt = getNameErrorText(username);
     setNameErrorText(errTxt);
   }
@@ -102,10 +105,11 @@ export default function UserProfileDialog() {
     return "";
   }
 
-  function handleSave() {
+  async function handleSave() {
     if (nameErrorText) return;
 
     if (canEditTradingMode) {
+      await checkAndSwitchChain();
       triggerCreate({ username, tradingMode });
     } else {
       const account = accountInfo?.dest_account || "";
@@ -120,7 +124,7 @@ export default function UserProfileDialog() {
   }
 
   return (
-    <Dialog open={showProDialog} onOpenChange={() => setShowProDialog(!showProDialog)}>
+    <Dialog open={showProDialog} onOpenChange={() => setShowProDialog(!accountInfo?.user_name ? true : !showProDialog)}>
       <VisuallyHidden asChild>
         <DialogTitle>{T("UserProfile")}</DialogTitle>
       </VisuallyHidden>

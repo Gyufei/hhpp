@@ -35,7 +35,7 @@ export function useUserWithdraw() {
       source_account: accountInfo?.source_account || "",
       dest_account: accountInfo?.dest_account || "",
     };
-    checkAndSwitchChain();
+    isPublic && await checkAndSwitchChain();
     const signData = await signDataAction(
       isPublic
         ? genWithdrawTypeData(
