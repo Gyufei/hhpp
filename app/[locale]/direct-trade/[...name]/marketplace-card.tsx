@@ -60,7 +60,7 @@ export default function MarketplaceCard({
               ) : (
                 <>
                   <div className="w-[120px] overflow-hidden text-ellipsis whitespace-nowrap text-xl leading-[30px] text-title-white">
-                    {marketplace.item_name}
+                    {marketplace.item_name}-{'到期时间'}
                   </div>
                   <OverviewIcons
                     twitter={projectInfo?.twitter}

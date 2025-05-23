@@ -52,6 +52,7 @@
     "FilledOrders": "체결된 주문",
     "ListedSupply": "상장된 공급",
     "ActiveWallets": "활성 지갑",
+    "ExpiryDate": "만료일",
     "TotalVol": "총 거래량",
     "24hVol": "24시간 거래량",
     "AvgBid": "평균 입찰",
@@ -67,11 +68,12 @@
     "ItemId": "아이템 ID",
     "Value": "가격",
     "Amount": "금액",
+    "StrikePrice": "행사가",
     "Buyer": "구매자",
-    "HolderDistribution": "보유자 분포",
+    "PnLLeaderboard": "PnL 리더보드",
     "Rank": "순위",
-    "Address": "주소",
-    "Percentage": "백분율"
+    "User": "사용자",
+    "PnL": "PnL"
   },
   "Offer": {
     "CreateOffer": "제안 생성",
@@ -113,7 +115,8 @@
     "InitialOfferMaker": "메이커",
     "InitialOfferMakerBonus": "메이커 보너스",
     "TaxForSubTrade": "하위 거래 세금",
-    "TrendingEndsAt": "트렌드 종료 시간",
+    "StrikePrice": "행사가",
+    "ExerciseStartAt": "행사 시작일",
     "YourBonus": "당신의 보너스",
     "You": "당신",
 
@@ -165,7 +168,11 @@
     "Descending": "내림차순",
     "For": "대상",
     "Buy": "구매",
-    "Detail": "세부사항"
+    "Detail": "세부사항",
+    "Direction": "방향",
+    "ALL": "전체",
+    "CALL": "콜",
+    "PUT": "풋"
   },
   "MyBalances": {
     "MyBalances": "My Balances",

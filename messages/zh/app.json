@@ -41,6 +41,7 @@
     "24hChange": "变化率/24h",
     "ListedSupply": "挂单量",
     "ActiveWallets": "活跃钱包",
+    "ExpiryDate": "到期时间",
     "TotalVol": "总量",
     "24hVol": "总量/24h",
     "AvgBid": "平均价",
@@ -56,12 +57,13 @@
     "ItemId": "项目ID",
     "Value": "价值",
     "Amount": "总计",
+    "StrikePrice": "行权价",
     "Buyer": "买家",
     "Depth": "深度",
-    "HolderDistribution": "持有者分布",
+    "PnLLeaderboard": "收益排行榜",
     "Rank": "排名",
-    "Address": "地址",
-    "Percentage": "百分比"
+    "User": "用户",
+    "PnL": "收益"
   },
   "Offer": {
     "CreateOffer": "创建订单",
@@ -107,7 +109,8 @@
     "InitialOfferMakerBonus": "初始Maker奖励",
     "BaseTaxForEachTrade": "每单基础交易税",
     "TaxForSubTrade": "子订单交易税",
-    "TrendingEndsAt": "交易结束",
+    "StrikePrice": "行权价格",
+    "ExerciseStartAt": "行权开始时间",
     "YourBonus": "你的奖励",
     "You": "你",
 
@@ -159,7 +162,11 @@
     "Descending": "降序",
     "For": "需求",
     "Buy": "买",
-    "Detail": "详情"
+    "Detail": "详情",
+    "Direction": "方向",
+    "ALL": "全部",
+    "CALL": "看涨",
+    "PUT": "看跌"
   },
   "MyBalances": {
     "MyBalances": "我的余额",

@@ -46,7 +46,7 @@ export function SortSelect({
           <Image src="/icons/sort.svg" width={20} height={20} alt="type icon" />
           <div className="overflow-hidden text-clip whitespace-nowrap text-xs leading-[18px] text-title-white">{`${T(
             "" + sortField,
-          )}:${T("" + sortDir)}`}</div>
+          )}: ${T("" + sortDir)}`}</div>
           <Image
             data-open={popOpen}
             src="/icons/arrow-down.svg"
