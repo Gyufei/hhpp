@@ -1,4 +1,4 @@
-import { ReactElement, useMemo } from "react";
+import { ReactElement } from "react";
 import { NumericalInput } from "@/components/share/numerical-input";
 import { formatNum } from "@/lib/utils/number";
 import { cn } from "@/lib/utils/common";
@@ -7,31 +7,19 @@ export default function SliderCard({
   topText,
   value,
   onUserInput,
-  canGoMax,
   tokenName,
   bottomText,
-  setSliderValue,
   hasError = false,
   canInput = true,
 }: {
   topText: ReactElement;
   value: string;
   onUserInput: (_v: string) => void;
-  sliderValue: number;
-  canGoMax: number;
-  sliderMax: number;
   tokenName: string;
   bottomText: ReactElement;
-  setSliderValue: (_v: number) => void;
   hasError?: boolean;
   canInput?: boolean;
 }) {
-  // 直接使用最大值，不允许用户修改
-  useMemo(() => {
-    setSliderValue(canGoMax);
-  }, [canGoMax, setSliderValue]);
-
-
   return (
     <div
       data-error={hasError}

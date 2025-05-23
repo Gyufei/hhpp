@@ -25,9 +25,8 @@ import { formatNum } from "@/lib/utils/number";
 // import { useUserData } from "@/lib/hooks/api/use-user-data";
 
 export function BalanceTable() {
-  const T = useTranslations("MyBalances");
-  const CT = useTranslations("Offer");
   const BT = useTranslations("MyBalances");
+  const OT = useTranslations("Offer");
 
   const [marketCreateOffer, setOpenMarketCreateOffer] = useState(null);
 
@@ -104,7 +103,7 @@ export function BalanceTable() {
   if (!data.nodes.length) {
     return (
       <div className="flex w-screen flex-1 items-center justify-center text-base text-gray sm:w-full">
-        {T("YourBalanceAppearHere")}
+        {BT("YourBalanceAppearHere")}
       </div>
     );
   }
@@ -121,10 +120,10 @@ export function BalanceTable() {
           <>
             <Header className="text-xs leading-[18px] text-gray">
               <HeaderRow className="">
-                <HeaderCell>{T("Coin")}</HeaderCell>
-                <HeaderCell>{T("TotalBalance")}</HeaderCell>
-                <HeaderCell>{T("AvailableBalance")}</HeaderCell>
-                <HeaderCell>{T("USDValue")}</HeaderCell>
+                <HeaderCell>{BT("Option")}</HeaderCell>
+                <HeaderCell>{BT("TotalBalance")}</HeaderCell>
+                <HeaderCell>{BT("AvailableBalance")}</HeaderCell>
+                <HeaderCell>{BT("USDValue")}</HeaderCell>
                 {/* <HeaderCell>
                   <div className="underline">{T("PnL(%)")}</div>
                 </HeaderCell> */}
@@ -191,7 +190,7 @@ export function BalanceTable() {
           size={500}
           className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
         >
-          <DrawerTitle title={CT("List")} onClose={handleCloseDrawer} />
+          <DrawerTitle title={OT("List")} onClose={handleCloseDrawer} />
 
           <SellContent
             onSuccess={handleCloseDrawer}

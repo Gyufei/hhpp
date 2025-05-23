@@ -2,7 +2,6 @@ import NP from "number-precision";
 import { IOffer } from "../../types/offer";
 import { useMemo } from "react";
 import { IPoint } from "../../types/token";
-import { formatTimeDuration } from "../../utils/time";
 import { useTokenPrice } from "@/lib/hooks/api/token/use-token-price";
 import { useTokens } from "../api/token/use-tokens";
 import { ProjectDecimalsMap } from "@/lib/const/constant";
@@ -63,10 +62,6 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
   const tokenTotalPrice = NP.times(amount, tokenPrice);
   const pointPerPrice = NP.divide(tokenTotalPrice, offerItemAmount);
 
-  const orderDuration = formatTimeDuration(
-    Math.floor(NP.minus(Date.now() / 1000, offer.create_at)),
-  );
-
   const isFilled = offer.taken_item_amount === offer.item_amount;
 
   const isCanceled = offer.status === "canceled";
@@ -75,9 +70,10 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     return ["filled", "canceled", "settled"].includes(offer.status);
   }, [offer.status]);
 
-  return {
-    orderDuration,
+  const expiry = (3 * 24 + 10) * 60 * 60;
+  const strike = 100;
 
+  return {
     amount,
     progress,
     offerValue,
@@ -96,5 +92,8 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     isFilled,
     isCanceled,
     isClosed,
+
+    expiry,
+    strike,
   };
 }

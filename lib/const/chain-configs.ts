@@ -22,8 +22,8 @@ export const ChainConfigs: Record<string, IChainConfig> = {
     rpcs: {
       TadleDefaultRPC: isProduction
         ? process.env.NEXT_PUBLIC_DEFAULT_RPC_ETH ||
-          "https://rpc.ankr.com/arbitrum"
-        : "https://rpc.ankr.com/arbitrum_sepolia",
+          "https://rpc.ankr.com/arbitrum/c6535b21817e457f928c2b7722b4c5e33037ca2ca6b984cfef45cf164bd4313d"
+        : "https://rpc.ankr.com/arbitrum_sepolia/c6535b21817e457f928c2b7722b4c5e33037ca2ca6b984cfef45cf164bd4313d",
     },
     contracts: isProduction
       ? {

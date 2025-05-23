@@ -4,7 +4,7 @@ export const isProduction = true;
 
 export function WithApiHost(path: string) {
   const prodHost = `https://api.hypetrade.xyz`;
-  const devHost = `https://preview-hypes-api.aggregation.top`;
+  const devHost = `https://preview-api-option.hypetrade.xyz`;
   const host = isProduction ? prodHost : devHost;
   return `${host}${path}`;
 }
@@ -40,8 +40,8 @@ export const ApiPaths = {
   marketPointAmount: "/point",
   marketKline: "/market/kline",
 
-  makerOrders: "/user/maker_orders",
   userName: "/user/user_name",
+  makerOrders: "/user/maker_orders",
   userData: "/user/user_data",
   tokenPrice: "/token/info",
   marketTrades: "/market_place/maker_trades_history",

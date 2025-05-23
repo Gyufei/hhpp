@@ -66,7 +66,7 @@ export function HolderTable({
   const theme = useTheme({
     Table: `
       grid-template-rows: 40px repeat(auto-fit, 40px);
-      grid-template-columns: 60px minmax(0, max-content) 1fr;
+      grid-template-columns: 40px minmax(0, max-content) 1fr;
       font-weight: 400;
 
       &::-webkit-scrollbar {
@@ -85,7 +85,6 @@ export function HolderTable({
     `,
     Row: ``,
     BaseCell: `
-
       &:nth-of-type(3) {
         text-align: right;
       }

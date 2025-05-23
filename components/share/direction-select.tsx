@@ -32,7 +32,7 @@ export function DirectionSelect({
           data-open={popOpen}
           className="flex cursor-pointer items-center space-x-1 rounded bg-[#222428] px-[10px] py-[5px] outline-none"
         >
-          <Image src="/icons/filter.svg" width={20} height={20} alt="direction icon" />
+          <Image src="/icons/filter-white.svg" width={18} height={18} alt="direction icon" />
           <div className="overflow-hidden text-clip whitespace-nowrap text-xs leading-[18px] text-title-white">
             {`${T("Direction")}: ${T(direction)}`}
           </div>

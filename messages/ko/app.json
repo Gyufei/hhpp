@@ -36,6 +36,7 @@
   },
   "CreateCoin": {
     "CreateCoin": "코인 생성",
+    "Mode": "모드",
     "Name": "이름",
     "Ticker": "심볼",
     "Description": "설명",
@@ -53,7 +54,6 @@
     "FilledOrders": "체결된 주문",
     "ListedSupply": "상장된 공급",
     "ActiveWallets": "활성 지갑",
-    "ExpiryDate": "만료일",
     "TotalVol": "총 거래량",
     "24hVol": "24시간 거래량",
     "AvgBid": "평균 입찰",
@@ -69,12 +69,13 @@
     "ItemId": "아이템 ID",
     "Value": "가격",
     "Amount": "금액",
-    "StrikePrice": "행사가",
     "Buyer": "구매자",
     "PnLLeaderboard": "PnL 리더보드",
     "Rank": "순위",
     "User": "사용자",
-    "PnL": "PnL"
+    "PnL": "PnL",
+    "StrikePrice": "행사가",
+    "ExpiryDate": "만료일"
   },
   "Offer": {
     "CreateOffer": "제안 생성",
@@ -88,8 +89,7 @@
     "OfferDetail": "제안 세부사항",
     "YouWillSell": "판매할 것입니다",
     "YouPay": "지불할 금액",
-    "txt-YouGet": "받을 금액",
-    "YouGet": "",
+    "YouGet": "받을 금액",
     "YouHaveToSell": "판매해야 합니다",
     "YouHaveTheOptionToClose": "100% 체결되기 전에 제안을 닫을 수 있는 옵션이 있습니다.",
     "Offer100%Filled": "제안 100% 체결",
@@ -173,17 +173,19 @@
     "Direction": "방향",
     "ALL": "전체",
     "CALL": "콜",
-    "PUT": "풋"
+    "PUT": "풋",
+    "Expiry": "만료",
+    "Strike": "행사가"
   },
   "MyBalances": {
-    "MyBalances": "My Balances",
-    "Coin": "Coin",
-    "TotalBalance": "Total Balance",
-    "AvailableBalance": "Available Balance",
-    "USDValue": "USD Value",
+    "MyBalances": "내 잔액",
+    "Option": "옵션",
+    "TotalBalance": "총 잔액",
+    "AvailableBalance": "사용 가능 잔액",
+    "USDValue": "USD 가치",
     "PnL(%)": "PnL(%)",
-    "YourBalanceAppearHere": "Your balances appear here...",
-    "List": "List"
+    "YourBalanceAppearHere": "여기에 잔액이 표시됩니다.",
+    "List": "목록"
   },
   "Referral": {
     "YourReferralLink": "당신의 추천 링크",

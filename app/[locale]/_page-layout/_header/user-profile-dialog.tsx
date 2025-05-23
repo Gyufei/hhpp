@@ -124,7 +124,8 @@ export default function UserProfileDialog() {
 
   return (
     <Dialog
-      open={showProDialog}
+      // open={showProDialog}
+      open={false}
       onOpenChange={() =>
         setShowProDialog(!accountInfo?.user_name ? true : !showProDialog)
       }

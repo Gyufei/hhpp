@@ -21,7 +21,6 @@ import { useCheckBalance } from "@/lib/hooks/api/use-check-balance";
 import ArrowBetween from "../create-offer/arrow-between";
 import { StableBalance } from "@/components/share/stable-balance";
 import { cn } from "@/lib/utils/common";
-import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 export default function AskDetail({
   offer,
@@ -34,9 +33,6 @@ export default function AskDetail({
 
   const { platformFee } = useGlobalConfig();
   const { checkUSDCInsufficient } = useCheckBalance(offer.marketplace);
-  const { data: accountInfo } = useAccountInfo();
-  const isPublic = accountInfo?.trading_mode === "Public";
-  const isFirstTake = isPublic && accountInfo?.is_active === "0";
 
   const {
     tokenPrice,
@@ -70,24 +66,6 @@ export default function AskDetail({
   const sliderCanMax = useMemo(() => {
     return +bigIntOrNpMinus(offer.item_amount, offer.taken_item_amount);
   }, [offer]);
-
-  const calcPayAmountByReceive = useCallback(
-    (receiveNum: string) => {
-      if (!Number(receiveNum)) return "0";
-      if (!receiveNum) return "";
-
-      const pay = NP.times(NP.divide(receiveNum, offer.item_amount), forValue);
-      const payWithFee = NP.times(pay, 1 + platformFee + tradeFee);
-
-      if (isFirstTake) {
-        return String(NP.plus(payWithFee, 1));
-      }
-
-      return String(payWithFee);
-    },
-
-    [forValue, offer.item_amount, tradeFee, platformFee, isFirstTake],
-  );
 
   const calcReceiveByPayAmount = useCallback(
     (payAmountNum: number) => {
@@ -125,13 +103,6 @@ export default function AskDetail({
     checkUSDCInsufficient,
     offer.marketplace.item_name,
   ]);
-
-  function handleSliderChange(v: number) {
-    setReceivePointAmount(String(v));
-
-    const pay = calcPayAmountByReceive(String(v));
-    setPayTokenAmount(pay);
-  }
 
   function handleInputPayTokenAmount(v: string) {
     return;
@@ -185,18 +156,14 @@ export default function AskDetail({
             tokenName={offerTokenInfo?.symbol || ""}
             value={String(payTokenAmount)}
             onUserInput={handleInputPayTokenAmount}
-            canGoMax={sliderCanMax}
             canInput={false}
-            sliderMax={sliderCanMax}
-            sliderValue={Number(receivePointAmount)}
-            setSliderValue={handleSliderChange}
             hasError={!!errorText}
           />
 
           <ArrowBetween className="-my-4 self-center" />
 
           <ReceiveCard
-            topText={<>{T("txt-YouGet")}</>}
+            topText={<>{T("YouGet")}</>}
             bottomText={
               <>
                 1 {offer.marketplace.item_name} = ${formatNum(pointPerPrice, 8)}

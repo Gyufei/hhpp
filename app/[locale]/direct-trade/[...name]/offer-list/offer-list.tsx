@@ -5,7 +5,6 @@ import { SortSelect } from "@/components/share/sort-select";
 import { DirectionSelect } from "@/components/share/direction-select";
 import SearchInput from "./search-input";
 import { OfferCard, OrderCardSkeleton } from "./offer-card";
-// import HoverIcon from "@/components/share/hover-icon";
 import { IOffer } from "@/lib/types/offer";
 import { useSortOffer } from "@/lib/hooks/offer/use-sort-offer";
 import { range } from "lodash";

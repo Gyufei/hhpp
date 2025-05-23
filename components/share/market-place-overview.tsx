@@ -159,19 +159,15 @@ export default function MarketplaceOverview({
               {isLoadingFlag ? (
                 <ValueSkeleton />
               ) : (
-                <div className="flex items-center leading-6 text-title-white">
-                </div>
+                <div className="flex items-center leading-6 text-title-white"></div>
               )}
             </div>
             <div className="flex justify-between ">
-              <LabelText isLoading={isLoadingFlag}>
-                {T("ExpiryDate")}
-              </LabelText>
+              <LabelText isLoading={isLoadingFlag}>{T("ExpiryDate")}</LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />
               ) : (
-                <div className="flex items-center leading-6 text-title-white">
-                </div>
+                <div className="flex items-center leading-6 text-title-white"></div>
               )}
             </div>
           </>

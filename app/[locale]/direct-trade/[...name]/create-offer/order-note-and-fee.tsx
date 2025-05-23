@@ -15,7 +15,7 @@ export default function OrderNoteAndFee({
   const [showInput, setShowInput] = useState(false);
 
   function handleInputNote(v: string) {
-    if (v.length > 50) {
+    if (v.length > 500) {
       return;
     }
 
@@ -50,7 +50,7 @@ export default function OrderNoteAndFee({
               className="h-[66px] rounded border border-border-black text-xs leading-[18px] text-title-white placeholder:text-gray"
             />
             <div className="absolute bottom-2 right-4 text-xs leading-[18px] text-gray">
-              {value.length} / 50
+              {value.length} / 500
             </div>
           </div>
           <FeeDisplay />

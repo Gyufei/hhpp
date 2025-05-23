@@ -6,11 +6,11 @@ export function formatTimestamp(timestamp: string | number) {
 
   let formattedDate = "";
   if (isCurrentDay) {
-    formattedDate = format(Number(timestamp), 'HH:mm')
+    formattedDate = format(Number(timestamp), "HH:mm");
   } else if (isCurrentYear) {
-    formattedDate = format(Number(timestamp), 'HH:mm MMM dd')
+    formattedDate = format(Number(timestamp), "HH:mm MMM dd");
   } else {
-    formattedDate = format(Number(timestamp), 'HH:mm MMM dd yyyy')
+    formattedDate = format(Number(timestamp), "HH:mm MMM dd yyyy");
   }
 
   return formattedDate;
@@ -18,7 +18,7 @@ export function formatTimestamp(timestamp: string | number) {
 
 export function formatTimeDuration(seconds: number) {
   if (!seconds || Number.isNaN(seconds)) {
-    return '';
+    return "";
   }
   const secs = Math.floor(seconds % 60);
   const minutes = Math.floor(seconds / 60);
@@ -93,5 +93,5 @@ export function convertUTCToLocalStamp(utcDateString: string) {
 
 export function convertUTCToLocalString(utcDateString: string) {
   const localDate = convertUTCToLocalStamp(utcDateString);
-  return format(new Date(localDate), 'yyyy-MM-dd HH:mm:ss');
+  return format(new Date(localDate), "yyyy-MM-dd HH:mm:ss");
 }

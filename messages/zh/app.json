@@ -36,6 +36,7 @@
   },
   "CreateCoin": {
     "CreateCoin": "创建代币",
+    "Mode": "模式",
     "Name": "名称",
     "Ticker": "符号",
     "Description": "描述",
@@ -53,7 +54,6 @@
     "24hChange": "变化率/24h",
     "ListedSupply": "挂单量",
     "ActiveWallets": "活跃钱包",
-    "ExpiryDate": "到期时间",
     "TotalVol": "总量",
     "24hVol": "总量/24h",
     "AvgBid": "平均价",
@@ -69,13 +69,14 @@
     "ItemId": "项目ID",
     "Value": "价值",
     "Amount": "总计",
-    "StrikePrice": "行权价",
     "Buyer": "买家",
     "Depth": "深度",
     "PnLLeaderboard": "收益排行榜",
     "Rank": "排名",
     "User": "用户",
-    "PnL": "收益"
+    "PnL": "收益",
+    "StrikePrice": "Strike Price",
+    "ExpiryDate": "Expiry Date"
   },
   "Offer": {
     "CreateOffer": "创建订单",
@@ -89,8 +90,7 @@
     "PlatformTradingFee": "平台交易手续费",
     "OfferDetail": "订单详情",
     "YouWillSell": "你将出售",
-    "txt-YouGet": "你将得到",
-    "YouGet": "",
+    "YouGet": "你将得到",
     "YouHaveToSell": " 你要卖",
     "YouHaveTheOptionToClose": "在 100% 完成前可关闭订单",
 
@@ -178,11 +178,13 @@
     "Direction": "方向",
     "ALL": "全部",
     "CALL": "看涨",
-    "PUT": "看跌"
+    "PUT": "看跌",
+    "Expiry": "到期",
+    "Strike": "行权价"
   },
   "MyBalances": {
     "MyBalances": "我的余额",
-    "Coin": "代币",
+    "Option": "项",
     "TotalBalance": "总余额",
     "AvailableBalance": "可用余额",
     "USDValue": "美元价值",

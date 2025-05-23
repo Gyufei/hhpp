@@ -27,12 +27,15 @@ export function useSortOffer(offers: Array<any>) {
 
     // 先按Direction筛选
     let filteredOffers = offers;
-    if (direction !== "ALL") {
+
+    if (direction !== "CALL" && direction !== "PUT") {
       const directionMap = {
-        "CALL": "buy",
-        "PUT": "sell"
+        CALL: "buy",
+        PUT: "sell",
       };
-      filteredOffers = offers.filter(offer => offer.entry.direction === directionMap[direction]);
+      filteredOffers = offers.filter(
+        (offer) => offer.entry.direction === directionMap[direction],
+      );
     }
 
     // 然后按字段排序

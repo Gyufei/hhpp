@@ -18,9 +18,9 @@ import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
 import { reportEvent } from "@/lib/utils/analytics";
-import {useCheckSwitchChain} from "@/lib/hooks/web3/use-check-switch-chain";
+import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
-
+import { formatTimeDuration } from "@/lib/utils/time";
 
 export function OfferCard({
   offer,
@@ -32,7 +32,7 @@ export function OfferCard({
   const T = useTranslations("MyOrders");
   const { checkAndSwitchChain } = useCheckSwitchChain();
   const { data: accountInfo } = useAccountInfo();
-const isPublic = accountInfo?.trading_mode === "Public";
+  const isPublic = accountInfo?.trading_mode === "Public";
 
   const {
     progress,
@@ -42,7 +42,8 @@ const isPublic = accountInfo?.trading_mode === "Public";
     forLogo,
     pointPerPrice,
     tokenTotalPrice,
-    orderDuration,
+    expiry,
+    strike,
   } = useOfferFormat({
     offer: offer,
   });
@@ -160,7 +161,7 @@ const isPublic = accountInfo?.trading_mode === "Public";
       </div>
 
       <div className="flex items-center justify-between pt-3">
-        <div className="text-xs leading-[18px] text-gray">{orderDuration}</div>
+        <ExpiryStrike expiry={expiry} strike={strike} />
         <div className="flex items-center">
           {offer.note && (
             <div
@@ -265,6 +266,33 @@ export function OrderCardSkeleton() {
       <div className="flex items-center justify-between pt-3">
         <Skeleton className="h-4 w-[120px]" />
         <Skeleton className="h-4 w-[120px]" />
+      </div>
+    </div>
+  );
+}
+
+function ExpiryStrike({ expiry, strike }: { expiry: number; strike: number }) {
+  const T = useTranslations("MyOrders");
+
+  const displayExpiry = useMemo(() => {
+    return formatTimeDuration(expiry);
+  }, [expiry]);
+
+  return (
+    <div className="flex items-center gap-9">
+      <div>
+        <div className="text-[10px] leading-[18px] text-gray">
+          {T("Expiry")}
+        </div>
+        <div className="text-xs leading-[18px] text-txt-white">
+          {displayExpiry}
+        </div>
+      </div>
+      <div>
+        <div className="text-[10px] leading-[18px] text-gray">
+          {T("Strike")}
+        </div>
+        <div className="text-xs leading-[18px] text-txt-white">${strike}</div>
       </div>
     </div>
   );

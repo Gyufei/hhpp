@@ -95,11 +95,9 @@ export default function MyAskDetail({
             }
             topText={
               <div className="flex items-center">
-                {T("txt-YouGet")}
+                {T("YouGet")}
                 <WithTip align="start">
-                  {T("YouGet", {
-                    pointName: offer.marketplace.item_name,
-                  })}
+                  {`${T("YouGet")} ${offer.marketplace.item_name}`}
                 </WithTip>
               </div>
             }
