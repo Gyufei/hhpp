@@ -13,12 +13,17 @@ export default function TradeMore() {
       <div className="flex flex-col items-center space-y-2">
         <div className="flex items-center justify-center space-x-6">
           <span className="font-sf text-[70px] font-light text-bg-black opacity-70">
-            Get in Early
+            Opt for
           </span>
+          <div className="rounded-full bg-[#7AD5C9] px-8 py-2">
+            <span className="font-sf text-[70px] font-light text-white">
+              Option
+            </span>
+          </div>
         </div>
         <div className="flex items-center space-x-6">
           <span className="font-sf text-[70px] font-light text-bg-black opacity-70">
-            Succeed with
+            Hype up with
           </span>
           <Image
             src="/icons/hype-trade.svg"

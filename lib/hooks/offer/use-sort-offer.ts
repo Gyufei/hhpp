@@ -1,4 +1,5 @@
 import { ISortDir, ISortField } from "@/components/share/sort-select";
+import { IDirection } from "@/components/share/direction-select";
 import { IOffer } from "@/lib/types/offer";
 import { sortBy } from "lodash";
 import { useMemo, useState } from "react";
@@ -7,6 +8,7 @@ import NP from "number-precision";
 export function useSortOffer(offers: Array<any>) {
   const [sortField, setSortField] = useState<ISortField>("Created");
   const [sortDir, setSortDir] = useState<ISortDir>("Descending");
+  const [direction, setDirection] = useState<IDirection>("CALL");
 
   function handleSortFieldChange(field: ISortField) {
     setSortField(field);
@@ -16,15 +18,30 @@ export function useSortOffer(offers: Array<any>) {
     setSortDir(dir);
   }
 
+  function handleDirectionChange(dir: IDirection) {
+    setDirection(dir);
+  }
+
   const sortOffers = useMemo(() => {
     if (!sortField) return offers;
 
-    let sortArr = offers;
+    // 先按Direction筛选
+    let filteredOffers = offers;
+    if (direction !== "ALL") {
+      const directionMap = {
+        "CALL": "buy",
+        "PUT": "sell"
+      };
+      filteredOffers = offers.filter(offer => offer.entry.direction === directionMap[direction]);
+    }
+
+    // 然后按字段排序
+    let sortArr = filteredOffers;
     if (sortField === "Collateral") {
       const collateralFunc = (order: IOffer) => {
         return order.item_amount;
       };
-      sortArr = sortBy(offers, [collateralFunc]);
+      sortArr = sortBy(filteredOffers, [collateralFunc]);
     }
 
     if (sortField === "Price") {
@@ -46,7 +63,7 @@ export function useSortOffer(offers: Array<any>) {
         const pointPerPrice = NP.divide(tokenTotalPrice, order.item_amount);
         return pointPerPrice;
       };
-      sortArr = sortBy(offers, [priceFunc]);
+      sortArr = sortBy(filteredOffers, [priceFunc]);
     }
 
     if (sortField === "Created") {
@@ -54,7 +71,7 @@ export function useSortOffer(offers: Array<any>) {
         return new Date(off.create_at).getTime();
       };
 
-      sortArr = sortBy(offers, [createdFunc]);
+      sortArr = sortBy(filteredOffers, [createdFunc]);
     }
 
     if (sortDir === "Descending") {
@@ -62,13 +79,15 @@ export function useSortOffer(offers: Array<any>) {
     } else {
       return sortArr;
     }
-  }, [offers, sortField, sortDir]);
+  }, [offers, sortField, sortDir, direction]);
 
   return {
     sortField,
     sortDir,
+    direction,
     handleSortFieldChange,
     handleSortDirChange,
+    handleDirectionChange,
     sortOffers,
   };
 }

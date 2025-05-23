@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { SortSelect } from "@/components/share/sort-select";
+import { DirectionSelect } from "@/components/share/direction-select";
 import SearchInput from "./search-input";
 import { OfferCard, OrderCardSkeleton } from "./offer-card";
 // import HoverIcon from "@/components/share/hover-icon";
@@ -24,8 +25,10 @@ export default function OfferList({
   const {
     sortField,
     sortDir,
+    direction,
     handleSortFieldChange,
     handleSortDirChange,
+    handleDirectionChange,
     sortOffers,
   } = useSortOffer(offers || []);
 
@@ -63,12 +66,18 @@ export default function OfferList({
         <></>
       ) : (
         <div className="mb-[2px] flex w-full items-center justify-between bg-bg-black pb-[10px] sm:border-b sm:border-border-black">
-          <SortSelect
-            sortField={sortField}
-            sortDir={sortDir}
-            handleSortFieldChange={handleSortFieldChange}
-            handleSortDirChange={handleSortDirChange}
-          />
+          <div className="flex items-center space-x-2">
+            <SortSelect
+              sortField={sortField}
+              sortDir={sortDir}
+              handleSortFieldChange={handleSortFieldChange}
+              handleSortDirChange={handleSortDirChange}
+            />
+            <DirectionSelect
+              direction={direction}
+              handleDirectionChange={handleDirectionChange}
+            />
+          </div>
           <div className="ml-6 flex min-w-[100px] items-center justify-end sm:ml-2">
             <SearchInput handleSearch={handleSearch} />
           </div>

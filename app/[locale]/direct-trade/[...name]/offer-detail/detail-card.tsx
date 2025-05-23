@@ -68,11 +68,19 @@ export default function DetailCard({ offer }: { offer: IOffer }) {
       </DetailRow>
 
       <DetailRow>
-        <DetailLabel tipText={T("TrendingEndsAt")}>
-          {T("TrendingEndsAt")}
+        <DetailLabel tipText={T("StrikePrice")}>
+          {T("StrikePrice")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="text-sm leading-5 text-title-white">--</div>
+          <div className="text-xs leading-5 text-title-white"></div>
+        </div>
+      </DetailRow>
+      <DetailRow>
+        <DetailLabel tipText={T("ExerciseStartAt")}>
+          {T("ExerciseStartAt")}
+        </DetailLabel>
+        <div className="flex items-center space-x-1">
+          <div className="text-xs leading-5 text-title-white"></div>
         </div>
       </DetailRow>
 
