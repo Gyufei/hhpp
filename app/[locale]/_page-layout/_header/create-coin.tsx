@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 import { Input } from "@/components/ui/input";
 import { NumericalInput } from "@/components/share/numerical-input";
 import { Textarea } from "@/components/ui/textarea";
+import LabelCheckbox from "@/components/share/label-checkbox";
 
 export default function CreateCoin({ className }: { className?: string }) {
   const CT = useTranslations("Common");
@@ -17,6 +18,7 @@ export default function CreateCoin({ className }: { className?: string }) {
 
   const [open, setOpen] = useState(false);
 
+  const [mode, setMode] = useState<"Direct" | "Curve">("Direct");
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
   const [ticker, setTicker] = useState("");
@@ -25,6 +27,8 @@ export default function CreateCoin({ className }: { className?: string }) {
   const [descriptionError, setDescriptionError] = useState("");
   const [initialTotalSupply, setInitialTotalSupply] = useState("");
   const [initialTotalSupplyError, setInitialTotalSupplyError] = useState("");
+  const [initialPrice, setInitialPrice] = useState("");
+  const [initialPriceError, setInitialPriceError] = useState("");
   const [image, setImage] = useState("");
   const [imageError, setImageError] = useState("");
 
@@ -59,6 +63,11 @@ export default function CreateCoin({ className }: { className?: string }) {
     checkInitTotalSupply(v);
   }
 
+  function handleInitPriceInput(v: string) {
+    setInitialPrice(v);
+    checkInitPrice(v);
+  }
+
   function handleImageInput(v: string) {
     setImage(v);
     checkImageInput(v);
@@ -66,7 +75,7 @@ export default function CreateCoin({ className }: { className?: string }) {
 
   function checkNameInput(v: string) {
     if (!v.length) {
-      setNameError(CT("StrLengthError", { name: T("Name"), length: 1 }));
+      setNameError(CT("StrLengthError", { length: 1 }));
       return false;
     }
 
@@ -76,7 +85,7 @@ export default function CreateCoin({ className }: { className?: string }) {
 
   function checkTickerInput(v: string) {
     if (!v.length) {
-      setTickerError(CT("StrLengthError", { name: T("Ticker"), length: 1 }));
+      setTickerError(CT("StrLengthError", { length: 1 }));
       return false;
     }
 
@@ -86,9 +95,7 @@ export default function CreateCoin({ className }: { className?: string }) {
 
   function checkDescriptionInput(v: string) {
     if (!v.length) {
-      setDescriptionError(
-        CT("StrLengthError", { name: T("Description"), length: 1 }),
-      );
+      setDescriptionError(CT("StrLengthError", { length: 1 }));
       return false;
     }
 
@@ -99,13 +106,21 @@ export default function CreateCoin({ className }: { className?: string }) {
   function checkInitTotalSupply(v: string) {
     const limit = 1000;
     if (Number(v) < limit) {
-      setInitialTotalSupplyError(
-        T("InitialTotalSupplyError", { total: limit }),
-      );
+      setInitialTotalSupplyError(T("TotalError", { total: limit }));
       return false;
     }
 
     setInitialTotalSupplyError("");
+    return true;
+  }
+
+  function checkInitPrice(v: string) {
+    if (!v.length) {
+      setInitialPriceError(CT("StrLengthError", { length: 1 }));
+      return false;
+    }
+
+    setInitialPriceError("");
     return true;
   }
 
@@ -135,6 +150,8 @@ export default function CreateCoin({ className }: { className?: string }) {
     const isDescriptionValid = checkDescriptionInput(description);
     const isInitTotalSupplyValid = checkInitTotalSupply(initialTotalSupply);
     const isImageValid = checkImageInput(image);
+    const isInitPriceValid =
+      mode === "Curve" ? checkInitPrice(initialPrice) : true;
 
     if (
       !(
@@ -142,13 +159,21 @@ export default function CreateCoin({ className }: { className?: string }) {
         isTickerValid &&
         isDescriptionValid &&
         isInitTotalSupplyValid &&
-        isImageValid
+        isImageValid &&
+        isInitPriceValid
       )
     ) {
       return;
     }
 
-    console.log("create");
+    console.log("create", {
+      mode,
+      name,
+      ticker,
+      description,
+      initialTotalSupply,
+      initialPrice,
+    });
   }
 
   return (
@@ -159,34 +184,60 @@ export default function CreateCoin({ className }: { className?: string }) {
         aria-describedby={undefined}
       >
         <DialogTitle>{T("CreateCoin")}</DialogTitle>
+
         <div className="flex w-full flex-col p-5">
-          <div>
-            <LabelText>{T("Name")}</LabelText>
-            <Input
-              placeholder={T("Name")}
-              value={name}
-              onChange={(e) => handleNameInput(e.target.value)}
-              type="text"
-              className="mt-[10px] h-8 w-full rounded border border-border-black bg-transparent px-[10px] text-xs leading-[18px] text-title-white placeholder:text-gray focus:border-txt-white"
-            />
-            <ErrorText>{nameError}</ErrorText>
+          <div className="mb-[15px]">
+            <LabelText>{T("Mode")}</LabelText>
+            <div className="mt-[10px] flex items-center justify-between gap-[10px]">
+              <LabelCheckbox
+                label="Direct"
+                checked={mode === "Direct"}
+                onChange={() => {
+                  if (mode === "Direct") return;
+                  setMode("Direct");
+                }}
+              />
+
+              <LabelCheckbox
+                label="Curve"
+                checked={mode === "Curve"}
+                onChange={() => {
+                  if (mode === "Curve") return;
+                  setMode("Curve");
+                }}
+              />
+            </div>
           </div>
 
-          <div>
-            <LabelText>{T("Ticker")}</LabelText>
-            <div className="relative mt-[10px]">
-              <NumericalInput
-                placeholder={T("Ticker")}
-                value={ticker}
-                onUserInput={handleTickerInput}
-                className="h-8 w-full rounded border border-border-black bg-transparent px-[10px] pl-10 text-xs leading-[18px] text-title-white placeholder:text-gray focus:border-txt-white"
+          <div className="flex justify-between gap-[10px]">
+            <div>
+              <LabelText>{T("Name")}</LabelText>
+              <Input
+                placeholder={T("Name")}
+                value={name}
+                onChange={(e) => handleNameInput(e.target.value)}
+                type="text"
+                className="mt-[10px] h-8 w-full rounded border border-border-black bg-transparent px-[10px] text-xs leading-[18px] text-title-white placeholder:text-gray focus:border-txt-white"
               />
-              <span className="absolute left-[10px] top-[8px] flex items-center gap-[10px] text-xs">
-                <span className="text-title-white">$</span>
-                <span className="text-gray">|</span>
-              </span>
+              <ErrorText>{nameError}</ErrorText>
             </div>
-            <ErrorText>{tickerError}</ErrorText>
+
+            <div>
+              <LabelText>{T("Ticker")}</LabelText>
+              <div className="relative mt-[10px]">
+                <NumericalInput
+                  placeholder={T("Ticker")}
+                  value={ticker}
+                  onUserInput={handleTickerInput}
+                  className="h-8 w-full rounded border border-border-black bg-transparent px-[10px] pl-10 text-xs leading-[18px] text-title-white placeholder:text-gray focus:border-txt-white"
+                />
+                <span className="absolute left-[10px] top-[8px] flex items-center gap-[10px] text-xs">
+                  <span className="text-title-white">$</span>
+                  <span className="text-gray">|</span>
+                </span>
+              </div>
+              <ErrorText>{tickerError}</ErrorText>
+            </div>
           </div>
 
           <div>
@@ -211,6 +262,19 @@ export default function CreateCoin({ className }: { className?: string }) {
             <ErrorText>{initialTotalSupplyError}</ErrorText>
           </div>
 
+          {mode === "Curve" && (
+            <div>
+              <LabelText>{T("InitialPrice")}</LabelText>
+              <NumericalInput
+                placeholder={T("InitialPrice")}
+                value={initialPrice}
+                onUserInput={handleInitPriceInput}
+                className="mt-[10px] h-8 w-full rounded border border-border-black bg-transparent px-[10px] text-xs leading-[18px] text-title-white placeholder:text-gray focus:border-txt-white"
+              />
+              <ErrorText>{initialPriceError}</ErrorText>
+            </div>
+          )}
+
           <div>
             <LabelText>{T("Image")}</LabelText>
             <Input
@@ -230,6 +294,7 @@ export default function CreateCoin({ className }: { className?: string }) {
               className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive"
             >
               {T("CreateCoin")}
+              {mode === "Curve" && <span>&nbsp;/ 10 USDC</span>}
             </button>
           </div>
         </div>
@@ -246,6 +311,8 @@ function LabelText({ children }: { children: React.ReactNode }) {
 
 function ErrorText({ children }: { children: React.ReactNode }) {
   return (
-    <div className="h-[15px] text-xs leading-[18px] text-red">{children}</div>
+    <div className="h-[15px] w-full whitespace-nowrap text-xs leading-[18px] text-red">
+      {children}
+    </div>
   );
 }

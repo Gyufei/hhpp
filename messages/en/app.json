@@ -30,7 +30,7 @@
     "UserProfile": "User Profile",
     "TradingMode": "Trading Mode",
     "Username": "Username",
-    "StrLengthError": "{name} must be at least {length} characters",
+    "StrLengthError": "at least {length} characters(s)",
     "UsernameStartWith": "Username must start with a letter or number",
     "UsernameInvalid": "Username can only contain letters, numbers, _ , and -"
   },
@@ -41,9 +41,10 @@
     "Description": "Description",
     "DescriptionContent": "Description content",
     "InitialTotalSupply": "Initial Total Supply",
-    "InitialTotalSupplyError": "Initial Total Supply must be at least {total}",
+    "TotalError": "at least {total}",
+    "InitialPrice": "Initial Price",
     "Image": "Image",
-    "ImageError": "Image must be a valid url"
+    "ImageError": "must be a valid url"
   },
   "Marketplace": {
     "InitialListing": "Initial Listing",

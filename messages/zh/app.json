@@ -30,9 +30,21 @@
     "UserProfile": "用户资料",
     "TradingMode": "交易模式",
     "Username": "用户名",
-    "StrLengthError": "{name} 至少 {length} 个字符",
+    "StrLengthError": "至少 {length} 个字符",
     "UsernameStartWith": "用户名必须以字母或数字开头",
     "UsernameInvalid": "用户名只能包含字母、数字、_ 和 -"
+  },
+  "CreateCoin": {
+    "CreateCoin": "创建代币",
+    "Name": "名称",
+    "Ticker": "符号",
+    "Description": "描述",
+    "DescriptionContent": "描述内容",
+    "InitialTotalSupply": "初始总供应量",
+    "TotalError": "初始总供应量至少为 {total}",
+    "InitialPrice": "初始价格",
+    "Image": "图片",
+    "ImageError": "图片必须是有效的URL"
   },
   "Marketplace": {
     "InitialListing": "发行价",

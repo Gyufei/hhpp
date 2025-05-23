@@ -30,7 +30,7 @@
     "UserProfile": "사용자 프로필",
     "Username": "사용자 이름",
     "TradingMode": "거래 모드",
-    "StrLengthError": "{name}은 최소 {length}자 이상이어야 합니다.",
+    "StrLengthError": "최소 {length}자 이상이어야 합니다.",
     "UsernameStartWith": "사용자 이름은 문자 또는 숫자로 시작해야 합니다.",
     "UsernameInvalid": "사용자 이름은 문자, 숫자, _ , 그리고 -만 포함할 수 있습니다."
   },
@@ -41,7 +41,8 @@
     "Description": "설명",
     "DescriptionContent": "설명 내용",
     "InitialTotalSupply": "초기 총 공급량",
-    "InitialTotalSupplyError": "초기 총 공급량은 최소 {total}이어야 합니다.",
+    "TotalError": "초기 총 공급량은 최소 {total}이어야 합니다.",
+    "InitialPrice": "초기 가격",
     "Image": "이미지",
     "ImageError": "이미지는 유효한 URL이어야 합니다."
   },

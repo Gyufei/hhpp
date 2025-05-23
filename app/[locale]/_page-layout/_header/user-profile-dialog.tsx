@@ -7,13 +7,12 @@ import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { TradingMode, useAccountInfo } from "@/lib/hooks/api/use-account-info";
-import { Checkbox } from "@/components/ui/checkbox";
-import { cn } from "@/lib/utils/common";
 import { toast } from "react-hot-toast";
 import { useUserCreate } from "@/lib/hooks/contract/use-user-create";
 import { UserProfileDialogOpen } from "@/lib/states/user";
 import { useUserNameChange } from "@/lib/hooks/api/use-user-name-change";
 import SparkMD5 from "spark-md5";
+import LabelCheckbox from "@/components/share/label-checkbox";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function UserProfileDialog() {
@@ -86,7 +85,7 @@ export default function UserProfileDialog() {
 
   function getNameErrorText(v: string) {
     if (v.length < 4) {
-      return T("StrLengthError", { name: T("Username"), length: 4 });
+      return T("StrLengthError", { length: 4 });
     }
 
     if (v.startsWith("_") || v.startsWith("-")) {
@@ -157,64 +156,25 @@ export default function UserProfileDialog() {
               {T("TradingMode")}
             </div>
             <div className="flex items-center justify-between space-x-[10px]">
-              <div
-                className={cn(
-                  "flex h-8 flex-1 items-center justify-between rounded border border-border-black px-[10px]",
-                  canEditTradingMode
-                    ? "cursor-pointer"
-                    : "cursor-not-allowed opacity-70",
-                )}
-                onClick={() => {
-                  if (!canEditTradingMode) return;
+              <LabelCheckbox
+                label="Private"
+                disabled={!canEditTradingMode}
+                checked={tradingMode === "Private"}
+                onChange={() => {
+                  if (tradingMode === "Private") return;
                   setTradingMode("Private");
                 }}
-              >
-                <div className="select-none text-xs leading-[18px] text-title-white">
-                  Private
-                </div>
-                <Checkbox
-                  className={cn(
-                    canEditTradingMode
-                      ? "cursor-pointer"
-                      : "pointer-events-none",
-                  )}
-                  checked={tradingMode === "Private"}
-                  onCheckedChange={() => {
-                    if (tradingMode === "Private") return;
-                    setTradingMode("Private");
-                  }}
-                />
-              </div>
+              />
 
-              <div
-                className={cn(
-                  "flex h-8 flex-1 items-center justify-between rounded border border-border-black px-[10px]",
-                  canEditTradingMode
-                    ? "cursor-pointer"
-                    : "cursor-not-allowed opacity-70",
-                )}
-                onClick={() => {
-                  if (!canEditTradingMode) return;
+              <LabelCheckbox
+                label="Public"
+                disabled={!canEditTradingMode}
+                checked={tradingMode === "Public"}
+                onChange={() => {
+                  if (tradingMode === "Public") return;
                   setTradingMode("Public");
                 }}
-              >
-                <div className="select-none text-xs leading-[18px] text-title-white">
-                  Public
-                </div>
-                <Checkbox
-                  className={cn(
-                    canEditTradingMode
-                      ? "cursor-pointer"
-                      : "pointer-events-none",
-                  )}
-                  checked={tradingMode === "Public"}
-                  onCheckedChange={() => {
-                    if (!canEditTradingMode) return;
-                    if (tradingMode === "Public") return;
-                    setTradingMode("Public");
-                  }}
-                />
-              </div>
+              />
             </div>
           </div>
         </div>
