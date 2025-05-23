@@ -13,7 +13,7 @@ export default function HomeBanner() {
     >
       <Image src="/icons/simple-logo.svg" width={120} height={90} alt="logo" />
       <div className="mt-5 text-center font-sf text-[80px] font-light leading-[120px] text-title-white">
-        Seed market for premium <br /> Hyperliquid assets.
+       Hyperliquid&apos;s Option Market.
       </div>
       <div className="mt-8 w-[700px] text-center text-[18px] font-light text-title-white">
         Where traders turn their dreams into reality, providing the tools,

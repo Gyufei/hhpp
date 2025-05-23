@@ -101,7 +101,7 @@ export default function MarketplaceOverview({
               )}
             </div>
 
-            <div className="hidden justify-between sm:flex">
+            {/* <div className="hidden justify-between sm:flex">
               <LabelText isLoading={isLoadingFlag}>
                 {T("24hChange")}
               </LabelText>
@@ -110,7 +110,7 @@ export default function MarketplaceOverview({
               ) : (
                 <Change24H rate={+marketplace.change_rate_24h} />
               )}
-            </div>
+            </div> */}
 
             <div className="flex justify-between">
               <LabelText isLoading={isLoadingFlag}>
@@ -149,6 +149,28 @@ export default function MarketplaceOverview({
               ) : (
                 <div className="flex items-center leading-6 text-title-white">
                   {formatNum(marketplace!.active_wallets)}
+                </div>
+              )}
+            </div>
+            <div className="flex justify-between ">
+              <LabelText isLoading={isLoadingFlag}>
+                {T("StrikePrice")}
+              </LabelText>
+              {isLoadingFlag ? (
+                <ValueSkeleton />
+              ) : (
+                <div className="flex items-center leading-6 text-title-white">
+                </div>
+              )}
+            </div>
+            <div className="flex justify-between ">
+              <LabelText isLoading={isLoadingFlag}>
+                {T("ExpiryDate")}
+              </LabelText>
+              {isLoadingFlag ? (
+                <ValueSkeleton />
+              ) : (
+                <div className="flex items-center leading-6 text-title-white">
                 </div>
               )}
             </div>

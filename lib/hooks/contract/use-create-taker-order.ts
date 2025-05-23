@@ -8,11 +8,13 @@ import { ChainConfigs } from "@/lib/const/chain-configs";
 import { ChainType } from "@/lib/types/chain";
 import { isProduction } from "@/lib/PathMap";
 import { formatDecimal } from "@/lib/utils/number";
+import {useCheckSwitchChain} from "@/lib/hooks/web3/use-check-switch-chain";
 
 export function useCreateTakerOrder() {
   const { data: accountInfo } = useAccountInfo();
   const { apiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
+  const { checkAndSwitchChain } = useCheckSwitchChain();
 
   const txAction = async (args: {
     offerId: string;
@@ -30,7 +32,7 @@ export function useCreateTakerOrder() {
       source_account: accountInfo?.source_account || "",
       dest_account: accountInfo?.dest_account || "",
     };
-
+    isPublic && await checkAndSwitchChain();
     const signData = await signDataAction(
       isPublic
         ? genTakerOrderTypeData(String(payTokenAmount), timestamp)

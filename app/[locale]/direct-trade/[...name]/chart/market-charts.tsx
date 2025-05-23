@@ -39,13 +39,13 @@ export default function MarketCharts({
     >
       {showKChart ? (
         <>
-          <div className="absolute bottom-[135px] left-[78px] flex h-[33px] w-[33px] items-center justify-center rounded-full border border-border-black">
+          <div className="absolute right-[220px] top-[16px] z-10 flex h-[33px] w-[33px] items-center justify-center text-[#d1d4dc]">
             <Image
-              src="/icons/line-chart.svg"
+              src={showKChart ? "/icons/zoom-in.svg" : "/icons/zoom-out.svg"}
               width={20}
               height={20}
               alt="line-chart"
-              className=" cursor-pointer"
+              className="cursor-pointer text-[#d1d4dc]"
               onClick={() => setShowKChart(false)}
             />
           </div>

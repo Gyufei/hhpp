@@ -13,12 +13,14 @@ import { UserProfileDialogOpen } from "@/lib/states/user";
 import { useUserNameChange } from "@/lib/hooks/api/use-user-name-change";
 import SparkMD5 from "spark-md5";
 import LabelCheckbox from "@/components/share/label-checkbox";
+import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function UserProfileDialog() {
   const T = useTranslations("Common");
   const [showProDialog, setShowProDialog] = useAtom(UserProfileDialogOpen);
   const { data: accountInfo, error, mutate } = useAccountInfo();
+  const { checkAndSwitchChain } = useCheckSwitchChain();
 
   const {
     trigger: triggerCreate,
@@ -48,6 +50,7 @@ export default function UserProfileDialog() {
       setCanEditTradingMode(false);
       setShowProDialog(false);
       setUsername(accountInfo.user_name);
+      setTradingMode(accountInfo.trading_mode);
     }
   }, [accountInfo, error, setShowProDialog]);
 
@@ -79,6 +82,7 @@ export default function UserProfileDialog() {
   }
 
   function handleBlur() {
+    canEditTradingMode && checkAndSwitchChain();
     const errTxt = getNameErrorText(username);
     setNameErrorText(errTxt);
   }
@@ -100,10 +104,11 @@ export default function UserProfileDialog() {
     return "";
   }
 
-  function handleSave() {
+  async function handleSave() {
     if (nameErrorText) return;
 
     if (canEditTradingMode) {
+      await checkAndSwitchChain();
       triggerCreate({ username, tradingMode });
     } else {
       const account = accountInfo?.dest_account || "";
@@ -118,7 +123,12 @@ export default function UserProfileDialog() {
   }
 
   return (
-    <Dialog open={showProDialog} onOpenChange={() => setShowProDialog(true)}>
+    <Dialog
+      open={showProDialog}
+      onOpenChange={() =>
+        setShowProDialog(!accountInfo?.user_name ? true : !showProDialog)
+      }
+    >
       <VisuallyHidden asChild>
         <DialogTitle>{T("UserProfile")}</DialogTitle>
       </VisuallyHidden>
@@ -126,7 +136,9 @@ export default function UserProfileDialog() {
         className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded border-border-black bg-bg-black p-0"
         aria-describedby={undefined}
       >
-        <DialogTitle showClose={false}>{T("UserProfile")}</DialogTitle>
+        <DialogTitle showClose={!!accountInfo?.user_name}>
+          {T("UserProfile")}
+        </DialogTitle>
 
         <div className="w-full p-5">
           <div className="relative mb-5">

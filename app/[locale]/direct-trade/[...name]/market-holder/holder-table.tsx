@@ -10,6 +10,14 @@ import { useTranslations } from "next-intl";
 import { ChainType } from "@/lib/types/chain";
 import { IHolderDistribution } from "@/lib/types/holding";
 
+// 格式化PnL显示
+const formatPnL = (percentage: number) => {
+  if (percentage === undefined || percentage === null) return "";
+  const value = Math.abs(percentage * 10); // 假设这是美元值，根据实际情况调整
+  const sign = percentage >= 0 ? "+" : "-";
+  return `$${value.toLocaleString()} (${sign}${Math.abs(percentage)}%)`;
+};
+
 export function HolderTable({
   marketplace,
   isLoading,
@@ -58,7 +66,7 @@ export function HolderTable({
   const theme = useTheme({
     Table: `
       grid-template-rows: 40px repeat(auto-fit, 40px);
-      grid-template-columns: 100px minmax(0, max-content) 1fr;
+      grid-template-columns: 60px minmax(0, max-content) 1fr;
       font-weight: 400;
 
       &::-webkit-scrollbar {
@@ -91,7 +99,7 @@ export function HolderTable({
 
 
       &:nth-of-type(3){
-        text-align: right;
+        text-align: center;
       }
     `,
     Cell: `
@@ -110,27 +118,32 @@ export function HolderTable({
       label: T("Rank"),
       renderCell: (holder: any) =>
         isLoadingFlag ? (
-          <Skeleton className="h-[16px] w-[80px]" />
+          <Skeleton className="h-[16px] w-[40px]" />
         ) : (
           <div className="px-[4px]">{holder.rank}</div>
         ),
     },
     {
-      label: T("Address"),
+      label: T("User"),
       renderCell: (holder: any) =>
         isLoadingFlag ? (
           <Skeleton className="h-[16px] w-[60px]" />
         ) : (
-          <div className="px-[4px]">{truncateAddr(holder.address)}</div>
+          <div className="px-[4px]">
+            {truncateAddr(holder.address, {
+              nPrefix: 4,
+              nSuffix: 4,
+            })}
+          </div>
         ),
     },
     {
-      label: T("Percentage"),
+      label: T("PnL"),
       renderCell: (holder: any) =>
         isLoadingFlag ? (
-          <Skeleton className="h-[16px] w-[50px]" />
+          <Skeleton className="h-[16px] w-[80px]" />
         ) : (
-          <div className="">{holder.percentage}%</div>
+          <div className="">{formatPnL(holder.percentage)}</div>
         ),
     },
   ];

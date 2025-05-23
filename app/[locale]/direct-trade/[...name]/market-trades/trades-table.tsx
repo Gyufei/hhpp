@@ -211,7 +211,7 @@ export function TradesTable({
         ),
     },
     {
-      label: T("Amount"),
+      label: T("StrikePrice"),
       renderCell: (trade: any) =>
         isLoadingFlag ? (
           <Skeleton className="h-[16px] w-[50px]" />
@@ -220,7 +220,7 @@ export function TradesTable({
             className="max-w-[80px] overflow-hidden text-ellipsis whitespace-nowrap px-[4px] text-center"
             title={formatNum(NP.divide(trade.amount, pointDecimalNum), 2, true)}
           >
-            {formatNum(NP.divide(trade.amount, pointDecimalNum), 2, true)}
+            {/* {formatNum(NP.divide(trade.amount, pointDecimalNum), 2, true)} */}
           </div>
         ),
     },

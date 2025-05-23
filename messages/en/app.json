@@ -53,6 +53,7 @@
     "FilledOrders": "Filled Orders",
     "ListedSupply": "Listed Supply",
     "ActiveWallets": "Active Wallets",
+    "ExpiryDate": "Expiry Date",
     "TotalVol": "Total Vol.",
     "24hVol": "24h Vol.",
     "AvgBid": "Avg. Bid",
@@ -68,11 +69,12 @@
     "ItemId": "Item Id",
     "Value": "Value",
     "Amount": "Amount",
+    "StrikePrice": "Strike Price",
     "Buyer": "Buyer",
-    "HolderDistribution": "Holder Distribution",
+    "PnLLeaderboard": "PnL Leaderboard",
     "Rank": "Rank",
-    "Address": "Address",
-    "Percentage": "Percentage"
+    "User": "User",
+    "PnL": "PnL"
   },
   "Offer": {
     "CreateOffer": "Create Offer",
@@ -117,7 +119,8 @@
     "InitialOfferMaker": "Maker",
     "InitialOfferMakerBonus": "Maker bonus",
     "TaxForSubTrade": "Tax for sub trade",
-    "TrendingEndsAt": "Trending ends at",
+    "StrikePrice": "Strike Price",
+    "ExerciseStartAt": "Exercise Start At",
     "YourBonus": "Your Bonus",
     "You": "You",
 
@@ -169,7 +172,11 @@
     "Price": "Price",
     "Collateral": "Collateral",
     "Ascending": "Ascending",
-    "Descending": "Descending"
+    "Descending": "Descending",
+    "Direction": "Direction",
+    "ALL": "ALL",
+    "CALL": "CALL",
+    "PUT": "PUT"
   },
   "MyBalances": {
     "MyBalances": "My Balances",

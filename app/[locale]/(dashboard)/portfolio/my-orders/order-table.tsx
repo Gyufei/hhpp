@@ -20,11 +20,11 @@ import { sortBy } from "lodash";
 import { ChainType } from "@/lib/types/chain";
 import { reportEvent } from "@/lib/utils/analytics";
 import { formatNum } from "@/lib/utils/number";
-// import Image from "next/image";
-// import { handleGoScan, truncateAddr } from "@/lib/utils/web3";
-// import { IOffer } from "@/lib/types/offer";
+import Image from "next/image";
+import { handleGoScan, truncateAddr } from "@/lib/utils/web3";
+import { IOffer } from "@/lib/types/offer";
 
-export function OrderTable() {
+export function OrderTable({filters}: {filters: string[]}) {
   const T = useTranslations("MyOrders");
 
   const { data: offers, mutate: refreshMyOffers } = useMyOffers({
@@ -46,6 +46,7 @@ export function OrderTable() {
       return {
         ...o,
         id: o.offer_id,
+        type: "bids",
       };
     });
 
@@ -53,22 +54,29 @@ export function OrderTable() {
       return {
         ...o,
         id: o.order_id,
+        type: "buys",
       };
     });
+    let showData = [...offerData, ...orderData];
+    if (filters.length !== 0) {
+      showData = showData.filter((o) =>
+        filters.includes(o.type),
+      );
+    } 
 
     const sortData = sortBy(
-      [...offerData, ...orderData],
+      showData,
       "create_at",
     ).reverse();
 
     return {
       nodes: sortData,
     };
-  }, [offers, orders]);
+  }, [offers, orders, filters]);
 
   const theme = useTheme({
     Table: `
-      grid-template-columns: 100px repeat(6,minmax(0,1fr));
+      grid-template-columns: 100px repeat(7,minmax(0,1fr));
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
     `,
@@ -154,9 +162,9 @@ export function OrderTable() {
                 <HeaderCell>{T("Type")}</HeaderCell>
                 <HeaderCell>{T("Price")}</HeaderCell>
                 <HeaderCell>{T("USDValue(Snapshot)")}</HeaderCell>
-                {/* <HeaderCell>
+                <HeaderCell>
                   {T("Tx")}
-                </HeaderCell> */}
+                </HeaderCell>
                 <HeaderCell>{T("CreatedTime")}</HeaderCell>
                 <HeaderCell></HeaderCell>
               </HeaderRow>
@@ -184,9 +192,9 @@ export function OrderTable() {
                   <Cell>
                     <div>${formatNum(off.price * off.item_amount, 6)}</div>
                   </Cell>
-                  {/* <Cell>
+                  <Cell>
                     <OfferHash offer={off} />
-                  </Cell> */}
+                  </Cell>
                   <Cell>
                     <div>{formatTimestamp(off.create_at * 1000)}</div>
                   </Cell>
@@ -248,27 +256,27 @@ export function OrderTable() {
   );
 }
 
-// function OfferHash({ offer }: { offer: IOffer }) {
-//   const hash = offer.tx_hash;
-//   if (!hash) {
-//     return <span className="leading-5">N/A</span>;
-//   }
-//   return (
-//     <div className="flex items-center">
-//       <span className="leading-5 ">
-//         {truncateAddr(hash || "", { nPrefix: 4, nSuffix: 4 })}
-//       </span>
-//       <Image
-//         onClick={() => handleGoScan(offer.marketplace.chain, hash || "", "tx")}
-//         src="/icons/right-45.svg"
-//         width={16}
-//         height={16}
-//         alt="goScan"
-//         className="cursor-pointer"
-//       />
-//     </div>
-//   );
-// }
+function OfferHash({ offer }: { offer: IOffer }) {
+  const hash = offer.tx_hash;
+  if (!hash) {
+    return <span className="leading-5">N/A</span>;
+  }
+  return (
+    <div className="flex items-center">
+      <span className="leading-5 ">
+        {truncateAddr(hash || "", { nPrefix: 4, nSuffix: 4 })}
+      </span>
+      <Image
+        onClick={() => handleGoScan(offer.marketplace.chain, hash || "", "tx")}
+        src="/icons/right-45.svg"
+        width={16}
+        height={16}
+        alt="goScan"
+        className="cursor-pointer"
+      />
+    </div>
+  );
+}
 
 function DetailBtn({ onClick }: { onClick: () => void }) {
   const CT = useTranslations("Common");

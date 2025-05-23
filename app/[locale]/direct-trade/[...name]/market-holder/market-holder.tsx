@@ -19,7 +19,7 @@ export default function MarketHolder({
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="text-xs leading-[18px] text-title-white">
-            {T("HolderDistribution")}
+            {T("PnLLeaderboard")}
           </div>
         </div>
       </div>

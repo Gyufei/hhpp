@@ -56,7 +56,7 @@ export default function AskDetail({
   }, [offer]);
 
   const {
-    data: txHash,
+    // data: txHash,
     isLoading: isTaking,
     isSuccess,
     write: writeAction,
@@ -154,9 +154,9 @@ export default function AskDetail({
   useEffect(() => {
     if (isSuccess) {
       onSuccess({
-        no: "",
+        no: offer.entry.id,
         pay: payTokenAmount,
-        tx: txHash,
+        tx: offer.offer_maker,
         token: offerTokenInfo,
       });
     }

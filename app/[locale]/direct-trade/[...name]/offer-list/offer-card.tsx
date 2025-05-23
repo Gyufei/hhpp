@@ -18,6 +18,9 @@ import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
 import { reportEvent } from "@/lib/utils/analytics";
+import {useCheckSwitchChain} from "@/lib/hooks/web3/use-check-switch-chain";
+import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
+
 
 export function OfferCard({
   offer,
@@ -27,6 +30,9 @@ export function OfferCard({
   handleShowOffer: (offer: IOffer) => void;
 }) {
   const T = useTranslations("MyOrders");
+  const { checkAndSwitchChain } = useCheckSwitchChain();
+  const { data: accountInfo } = useAccountInfo();
+const isPublic = accountInfo?.trading_mode === "Public";
 
   const {
     progress,
@@ -186,6 +192,7 @@ export function OfferCard({
             <WithWalletConnectBtn
               chain={offer.marketplace.chain}
               onClick={() => {
+                isPublic && checkAndSwitchChain();
                 handleShow();
               }}
             >

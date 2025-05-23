@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import MyOrders from "./my-orders";
 import MyBalances from "./my-balances";
 import PortfolioInfo from "./portfolio-info";
+import TableFilter from "@/components/ui/table-filter";
 
 const tabClx =
   "flex w-[105px] items-center px-[10px] font-[400] py-[10px] text-sm leading-5 border-b-2 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray rounded-none";
@@ -15,10 +16,15 @@ export default function PortFolio() {
   const MBT = useTranslations("MyBalances");
 
   const [currentTab, setCurrentTab] = useState("orders");
+  const [orderFilters, setOrderFilters] = useState([]);
+
+  const handleFilterSelect = (types: any) => {
+    setOrderFilters(types);
+  }
 
   return (
     <div className="flex flex-1 flex-col sm:p-0">
-      <div className="mb-[2px] mr-0 hidden items-center justify-between rounded bg-bg-black px-5 py-[25px] sm:flex">
+      <div className="mb-[2px] mr-0 hidden items-center justify-between rounded bg-bg-black px-5 py-[22px] sm:flex">
         <div className="flex w-full items-center justify-between space-x-5">
           <div className="text-xl leading-[30px] text-title-white">
             {HT("Dashboard")}
@@ -40,13 +46,16 @@ export default function PortFolio() {
               {MBT("MyBalances")}
             </TabsTrigger>
           </div>
+          { currentTab === 'orders' && <div className="">
+            <TableFilter types={["buys", "bids"]} filterChange={handleFilterSelect}/>
+          </div>}
         </TabsList>
         <TabsContent
           value="orders"
           className="flex flex-1 flex-col data-[state=inactive]:hidden"
           forceMount={true}
         >
-          <MyOrders />
+          <MyOrders filters={orderFilters}/>
         </TabsContent>
         <TabsContent
           value="balances"
