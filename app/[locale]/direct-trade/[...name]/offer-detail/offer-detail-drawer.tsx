@@ -25,10 +25,9 @@ export default function OfferDetailDrawer({
   const [resultOrder, setResultOrder] = useState<any | null>(null);
 
   useEffect(() => {
-    //TODO: rember to remove
-    // if (offer && accountInfo?.dest_account) {
+    if (offer && accountInfo?.dest_account) {
       setDrawerOpen(true);
-    // }
+    }
 
     if (!offer) {
       setDrawerOpen(false);

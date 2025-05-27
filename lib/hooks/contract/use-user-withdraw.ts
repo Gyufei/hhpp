@@ -7,7 +7,7 @@ import { useAccountInfo } from "../api/use-account-info";
 import { ChainConfigs } from "@/lib/const/chain-configs";
 import { ChainType } from "@/lib/types/chain";
 import { formatDecimal } from "@/lib/utils/number";
-import {useCheckSwitchChain} from "@/lib/hooks/web3/use-check-switch-chain";
+import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 
 export function useUserWithdraw() {
   const { data: accountInfo } = useAccountInfo();
@@ -21,38 +21,29 @@ export function useUserWithdraw() {
       arg,
     }: {
       arg: {
+        token_address: string;
         amount: string;
       };
     },
   ) {
-    const { amount } = arg;
+    if (!accountInfo) return;
 
-    const timestamp = Date.now();
-    const isPublic = accountInfo?.trading_mode === "Public";
+    await checkAndSwitchChain();
+
+    const { amount, token_address } = arg;
 
     const argsData = {
+      wallet: accountInfo.dest_account,
+      token_address,
       amount,
-      source_account: accountInfo?.source_account || "",
-      dest_account: accountInfo?.dest_account || "",
     };
-    isPublic && await checkAndSwitchChain();
-    const signData = await signDataAction(
-      isPublic
-        ? genWithdrawTypeData(
-            amount,
-            accountInfo?.dest_account || "",
-            timestamp,
-          )
-        : argsData,
-      isPublic,
-    );
 
-    const reqData = isPublic
-      ? {
-          ...argsData,
-          ...signData,
-        }
-      : signData;
+    const signData = await signDataAction(argsData);
+
+    const reqData = {
+      ...argsData,
+      ...signData,
+    };
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.userWithdraw}`, {
       method: "POST",
@@ -67,6 +58,7 @@ export function useUserWithdraw() {
   return res;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function genWithdrawTypeData(
   amount: string,
   destAccount: string,

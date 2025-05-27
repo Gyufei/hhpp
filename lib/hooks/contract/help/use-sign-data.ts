@@ -9,23 +9,28 @@ export function useSignData() {
   async function signDataAction(data: any, isTypeData = false) {
     const isStr = isString(data);
 
-    console.log(data);
-    const signature = isTypeData
-      ? await signer?.signTypedData(data.domain, data.types, data.message)
-      : await signMessageAsync({
-          message: JSON.stringify(data),
-        });
-    console.log(signature);
+    try {
+      const signature = isTypeData
+        ? await signer?.signTypedData(data.domain, data.types, data.message)
+        : await signMessageAsync({
+            message: JSON.stringify(data),
+          });
 
-    return isTypeData
-      ? {
-          signature,
-          nonce: data.message.time,
-        }
-      : {
-          ...(isStr ? {} : data),
-          signature,
-        };
+      return isTypeData
+        ? {
+            signature,
+            nonce: data.message.time,
+          }
+        : {
+            ...(isStr ? {} : data),
+            signature,
+          };
+    } catch (e) {
+      console.log(e, "e");
+      return {
+        signature: "",
+      };
+    }
   }
 
   return { signDataAction };

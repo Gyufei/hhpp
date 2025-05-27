@@ -2,25 +2,22 @@ import useSWRImmutable from "swr/immutable";
 import type { IToken } from "../../../types/token";
 import { apiFetcher } from "@/lib/fetcher";
 import { useEndPoint } from "../use-endpoint";
-import { ChainType } from "@/lib/types/chain";
 
-export function useTokens(chain?: ChainType) {
-  const { cdnEndPoint } = useEndPoint();
+export function useTokens() {
+  const { apiEndPoint } = useEndPoint();
 
   async function tFetcher() {
-    if (!chain)
-      return {
-        tokens: [],
-      };
-
-    const tokens = await apiFetcher(
-      `${cdnEndPoint}/tokenlist/${chain}.json?v=${Date.now()}`,
-    );
+    const tokens = await apiFetcher(`${apiEndPoint}/token/info`);
 
     const newTokens = tokens.map((t: Record<string, any>) => {
       const newT = {
         ...t,
-        logoURI: t.url,
+        address: t.token_address,
+        name: t.token_name,
+        symbol: t.token_name,
+        decimals: t.token_decimals,
+        logoURI: t.logo_url,
+        price: t.token_price,
       } as any;
 
       delete newT.url;
@@ -40,17 +37,16 @@ export function useTokens(chain?: ChainType) {
       return newT;
     });
 
-    return {
-      tokens: newTokens,
-    };
+    return newTokens;
   }
 
-  const { data, isLoading, error } = useSWRImmutable<{
-    tokens: Array<IToken>;
-  }>(chain ? chain : null, tFetcher);
+  const { data, isLoading, error } = useSWRImmutable<Array<IToken>>(
+    "getTokens",
+    tFetcher,
+  );
 
   return {
-    data: data?.tokens,
+    data,
     isLoading,
     error,
   };

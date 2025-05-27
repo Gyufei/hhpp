@@ -10,8 +10,6 @@ interface IAccountInfo {
   user_name: string;
   maker_orders: number;
   taker_orders: number;
-  settled_value: string;
-  tax_income: string;
   trade_vol: string;
 }
 

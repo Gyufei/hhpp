@@ -1,13 +1,13 @@
 import { IMarketplace } from "./marketplace";
-import { ChainType } from "./chain";
 
 export interface IToken {
+  id: number;
   address: string;
   name: string;
   symbol: string;
   decimals: number;
   logoURI: string;
-  chain: ChainType;
+  price: string;
   [key: string]: any;
 }
 

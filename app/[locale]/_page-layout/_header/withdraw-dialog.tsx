@@ -6,20 +6,26 @@ import { useEffect, useState } from "react";
 import { formatNum } from "@/lib/utils/number";
 import { useUserWithdraw } from "@/lib/hooks/contract/use-user-withdraw";
 import { toast } from "react-hot-toast";
+import { IUserBalance } from "@/lib/hooks/api/use-user-balance";
+import NP from "number-precision";
+import { cn } from "@/lib/utils";
 
 export function WithdrawDialog({
+  tokenBalance,
   open,
   onOpenChange,
-  balance,
   onSuccess,
 }: {
+  tokenBalance: IUserBalance;
   open: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  balance: string;
   onSuccess: () => void;
 }) {
   const T = useTranslations("Common");
   const CT = useTranslations("Common");
+
+  const { token } = tokenBalance || {};
+  const balanceNum = tokenBalance?.available_balance_num;
 
   const {
     trigger: triggerWithdraw,
@@ -37,17 +43,19 @@ export function WithdrawDialog({
       return;
     }
 
-    triggerWithdraw({ amount: withdrawAmount });
+    const amount = NP.times(withdrawAmount, 10 ** token.decimals);
+
+    triggerWithdraw({ token_address: token.address, amount: String(amount) });
   }
 
   useEffect(() => {
-    if (Number(withdrawAmount) > Number(balance)) {
+    if (Number(withdrawAmount) > Number(balanceNum)) {
       setWithdrawError("Withdraw amount is greater than balance");
       return;
     }
 
     setWithdrawError(null);
-  }, [withdrawAmount, balance]);
+  }, [withdrawAmount, balanceNum]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -56,6 +64,8 @@ export function WithdrawDialog({
       onSuccess();
     }
   }, [isSuccess]);
+
+  if (!token) return null;
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => onOpenChange(isOpen)}>
@@ -77,7 +87,7 @@ export function WithdrawDialog({
             className="h-12 w-full rounded border border-border-black py-3 pl-[10px] pr-[75px] text-base leading-6 text-title-white focus:border-txt-white data-[error=true]:!border-red"
           />
           <div className="absolute right-[30px] top-1/2 -translate-y-1/2 text-xs leading-[18px] text-gray">
-            Max: {formatNum(balance)}
+            Max: {formatNum(balanceNum)}
           </div>
         </div>
 
@@ -89,8 +99,13 @@ export function WithdrawDialog({
           >
             {CT("Confirm")}
           </button>
-          <div className="mt-[10px] text-center text-xs leading-[18px] text-gray">
-            {T("ChargeFeeTip")}
+          <div
+            className={cn(
+              "w-full rounded p-1 text-center text-xs leading-[18px] text-red",
+              withdrawError ? "block" : "hidden",
+            )}
+          >
+            {withdrawError}
           </div>
         </div>
       </DialogContent>

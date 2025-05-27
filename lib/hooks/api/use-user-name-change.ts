@@ -12,13 +12,12 @@ export function useUserNameChange() {
       arg,
     }: {
       arg: {
-        dest_account: string;
+        wallet: string;
         user_name: string;
-        signature: string;
       };
     },
   ) => {
-    if (!arg.dest_account || !arg.user_name || !arg.signature) return null;
+    if (!arg.wallet || !arg.user_name) return null;
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.userName}`, {
       method: "POST",

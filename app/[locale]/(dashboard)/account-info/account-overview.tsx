@@ -1,13 +1,11 @@
 "use client";
 import { formatNum } from "@/lib/utils/number";
 import { useAccountStats } from "@/lib/hooks/api/use-account-overview";
-// import { useUserProfit } from "@/lib/hooks/api/use-user-profit";
 import { useTranslations } from "next-intl";
 
 export default function AccountOverview() {
   const T = useTranslations("Dashboard");
   const { data: accountInfo } = useAccountStats();
-  // const { data: userProfit = 0 } = useUserProfit();
 
   return (
     <div className="m-[10px] mb-0 pb-[20px] text-xs">
@@ -16,6 +14,7 @@ export default function AccountOverview() {
           {T("AccountOverview")}
         </div>
       </div>
+
       <div className="mt-3 flex justify-between">
         <LabelText>{T("TradeVol")}</LabelText>
         <div className="leading-[18px] text-title-white">
@@ -24,22 +23,8 @@ export default function AccountOverview() {
           </NoDataDisplay>
         </div>
       </div>
-      {/* <div className="mt-3 flex justify-between">
-          <LabelText>{T("Profit")}</LabelText>
-          <div
-            data-loss={userProfit ? userProfit < 0 : "null"}
-            className="leading-[18px] data-[loss=false]:text-main data-[loss=null]:text-title-white data-[loss=true]:text-red"
-          >
-            <NoDataDisplay noData={!accountInfo}>
-              <>
-                {userProfit < 0 ? "-" : "+"}$
-                    {formatNum(Math.abs(userProfit || 0))}
-              </>
-            </NoDataDisplay>
-          </div>
-        </div> */}
 
-      {/* <div className="mt-3 flex justify-between">
+      <div className="mt-3 flex justify-between">
         <LabelText>{T("MakerOrders")}</LabelText>
         <div className="leading-[18px] text-title-white">
           <NoDataDisplay noData={!accountInfo}>
@@ -47,34 +32,12 @@ export default function AccountOverview() {
           </NoDataDisplay>
         </div>
       </div>
+
       <div className="mt-3 flex justify-between">
         <LabelText>{T("TakerOrders")}</LabelText>
         <div className="leading-[18px] text-title-white">
           <NoDataDisplay noData={!accountInfo}>
             {formatNum(Number(accountInfo?.taker_orders))}
-          </NoDataDisplay>
-        </div>
-      </div> */}
-
-      {/* <div className="mt-3 flex justify-between">
-        <LabelText>{T("SettledValue")}</LabelText>
-        <div className="leading-[18px] text-title-white">
-          <NoDataDisplay noData={!accountInfo}>
-            ${formatNum(Number(accountInfo?.settled_value))}
-          </NoDataDisplay>
-        </div>
-      </div> */}
-      <div className="mt-3 flex justify-between">
-        <LabelText>{T("TaxIncome")}</LabelText>
-        <div
-          data-loss={accountInfo ? Number(accountInfo?.tax_income) < 0 : "null"}
-          className="leading-[18px] data-[loss=false]:text-[#50D2C1] data-[loss=null]:text-title-white data-[loss=true]:text-red"
-        >
-          <NoDataDisplay noData={!accountInfo}>
-            <>
-              {Number(accountInfo?.tax_income) < 0 ? "-" : "+"}$
-              {formatNum(Math.abs(Number(accountInfo?.tax_income) || 0))}
-            </>
           </NoDataDisplay>
         </div>
       </div>

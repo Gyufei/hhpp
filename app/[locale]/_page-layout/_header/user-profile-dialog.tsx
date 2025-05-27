@@ -6,20 +6,21 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { TradingMode, useAccountInfo } from "@/lib/hooks/api/use-account-info";
 import { toast } from "react-hot-toast";
 import { useUserCreate } from "@/lib/hooks/contract/use-user-create";
 import { UserProfileDialogOpen } from "@/lib/states/user";
 import { useUserNameChange } from "@/lib/hooks/api/use-user-name-change";
-import SparkMD5 from "spark-md5";
-import LabelCheckbox from "@/components/share/label-checkbox";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
+import { useAccountStats } from "@/lib/hooks/api/use-account-overview";
+import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function UserProfileDialog() {
   const T = useTranslations("Common");
+
   const [showProDialog, setShowProDialog] = useAtom(UserProfileDialogOpen);
-  const { data: accountInfo, error, mutate } = useAccountInfo();
+  const { address } = useChainWallet();
+  const { data: accountStat, mutate } = useAccountStats();
   const { checkAndSwitchChain } = useCheckSwitchChain();
 
   const {
@@ -37,22 +38,18 @@ export default function UserProfileDialog() {
   const [username, setUsername] = useState("");
   const [nameErrorText, setNameErrorText] = useState("");
 
-  const [canEditTradingMode, setCanEditTradingMode] = useState(false);
-  const [tradingMode, setTradingMode] = useState<TradingMode>("Private");
+  const [isCreate, setIsCreate] = useState(false);
 
   useEffect(() => {
-    if (error && error?.status === 500) {
-      setCanEditTradingMode(true);
-      setShowProDialog(true);
-    }
-
-    if (accountInfo && accountInfo.dest_account) {
-      setCanEditTradingMode(false);
+    if (!accountStat?.user_name) {
+      setIsCreate(true);
+      // setShowProDialog(true);
+    } else {
+      setIsCreate(false);
       setShowProDialog(false);
-      setUsername(accountInfo.user_name);
-      setTradingMode(accountInfo.trading_mode);
+      setUsername(accountStat.user_name || "");
     }
-  }, [accountInfo, error, setShowProDialog]);
+  }, [accountStat, setShowProDialog]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -82,7 +79,7 @@ export default function UserProfileDialog() {
   }
 
   function handleBlur() {
-    canEditTradingMode && checkAndSwitchChain();
+    isCreate && checkAndSwitchChain();
     const errTxt = getNameErrorText(username);
     setNameErrorText(errTxt);
   }
@@ -107,27 +104,24 @@ export default function UserProfileDialog() {
   async function handleSave() {
     if (nameErrorText) return;
 
-    if (canEditTradingMode) {
-      await checkAndSwitchChain();
-      triggerCreate({ username, tradingMode });
-    } else {
-      const account = accountInfo?.dest_account || "";
-      const signature = SparkMD5.hash(account);
+    if (!address) return;
 
+    if (isCreate) {
+      await checkAndSwitchChain();
+      triggerCreate({ username });
+    } else {
       triggerUserNameChange({
-        dest_account: account,
+        wallet: address,
         user_name: username,
-        signature,
       });
     }
   }
 
   return (
     <Dialog
-      // open={showProDialog}
-      open={false}
+      open={showProDialog}
       onOpenChange={() =>
-        setShowProDialog(!accountInfo?.user_name ? true : !showProDialog)
+        setShowProDialog(!accountStat?.user_name ? true : !showProDialog)
       }
     >
       <VisuallyHidden asChild>
@@ -137,7 +131,7 @@ export default function UserProfileDialog() {
         className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded border-border-black bg-bg-black p-0"
         aria-describedby={undefined}
       >
-        <DialogTitle showClose={!!accountInfo?.user_name}>
+        <DialogTitle showClose={!!accountStat?.user_name}>
           {T("UserProfile")}
         </DialogTitle>
 
@@ -162,33 +156,6 @@ export default function UserProfileDialog() {
                 {nameErrorText}
               </div>
             )}
-          </div>
-
-          <div>
-            <div className="mb-[10px] text-xs leading-[18px] text-title-white">
-              {T("TradingMode")}
-            </div>
-            <div className="flex items-center justify-between space-x-[10px]">
-              <LabelCheckbox
-                label="Private"
-                disabled={!canEditTradingMode}
-                checked={tradingMode === "Private"}
-                onChange={() => {
-                  if (tradingMode === "Private") return;
-                  setTradingMode("Private");
-                }}
-              />
-
-              <LabelCheckbox
-                label="Public"
-                disabled={!canEditTradingMode}
-                checked={tradingMode === "Public"}
-                onChange={() => {
-                  if (tradingMode === "Public") return;
-                  setTradingMode("Public");
-                }}
-              />
-            </div>
           </div>
         </div>
 

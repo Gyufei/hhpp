@@ -1,6 +1,5 @@
 export const isPreview = process.env.NEXT_PUBLIC_IS_PREVIEW === "1";
-// export const isProduction = process.env.NODE_ENV === "production" && !isPreview;
-export const isProduction = true;
+export const isProduction = process.env.NODE_ENV === "production" && !isPreview;
 
 export function WithApiHost(path: string) {
   const prodHost = `https://api.hypetrade.xyz`;
@@ -24,26 +23,32 @@ export function WithWss(path: string) {
 }
 
 export const ApiPaths = {
+  accountCreate: "/user/create",
+  userName: "/user/user_name",
+  accountStats: "/user/stats",
+  accountBalance: "/user/token_balances",
+  userWithdraw: "/user/withdraw",
+  userDeposit: "/user/deposit",
+  userXP: "/user/xp",
+
+  tokenAllowance: "/token/allowance",
+
+  tokenPrice: "/token/info",
+  accountInfo: "/account/info",
+  usdcBalance: "/account/usdc_balance",
+
   markets: "/markets",
   offers: "/offers",
   entry: "/entry",
   offer: "/offer",
   orders: "/orders",
   holding: "/holdings",
-  userXP: "/account/xp",
-  usdcBalance: "/account/usdc_balance",
-  accountInfo: "/account/info",
-  userWithdraw: "/account/bridge",
-  accountStats: "/account/stats",
   accountWithdraw: "/account/withdraw",
-  accountCreate: "/account/create",
   marketPointAmount: "/point",
   marketKline: "/market/kline",
 
-  userName: "/user/user_name",
   makerOrders: "/user/maker_orders",
   userData: "/user/user_data",
-  tokenPrice: "/token/info",
   marketTrades: "/market_place/maker_trades_history",
   salesVolumeHistory: "/market_place/sales_volume_history",
   userTokenBalance: "/account/token_balances",

@@ -20,7 +20,6 @@ import {
 import { truncateAddr } from "@/lib/utils/web3";
 import { useRouter } from "@/i18n/routing";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function ConnectBtn() {
   const T = useTranslations("Common");
   const router = useRouter();
@@ -66,6 +65,10 @@ export default function ConnectBtn() {
 
   function handleOpenBalancePop(e: React.MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
+    if (popOpen) {
+      setPopOpen(false);
+      return;
+    }
     if (!isConnected) return;
     setPopOpen(true);
   }
@@ -111,8 +114,8 @@ export default function ConnectBtn() {
           <div>{shortAddr}</div>
         )}
       </div>
-      <Popover open={popOpen} onOpenChange={(isOpen) => setPopOpen(isOpen)}>
-        <PopoverTrigger asChild>
+      <Popover open={popOpen}>
+        <PopoverTrigger>
           <HoverIcon
             onClick={handleOpenBalancePop}
             src="/icons/arrow-down.svg"

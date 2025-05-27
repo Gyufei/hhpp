@@ -210,28 +210,14 @@ const BalanceValue = ({
   lastPrice: string;
 }) => {
   const { data: accountInfo } = useAccountInfo();
+
   const address = accountInfo?.dest_account || "";
+
   const { data: pointAmount = { locked_amount: 0, free_amount: 0 } } =
     usePointAmount(address, marketAccount);
-  // const { data: userData } = useUserData(address);
-  // const buyingRate =
-  //   userData?.take_point_price.find(
-  //     (i: any) => i.market_account === marketAccount,
-  //   )?.point_token_price || lastPrice;
 
   const total = pointAmount?.locked_amount + pointAmount?.free_amount;
-  const usbValue = NP.times(lastPrice, total || "0");
-
-  // const commissionRate = useMemo(() => {
-  //   if (Number(buyingRate) === 0 || Number(lastPrice) === 0) return 0;
-  //   const commission = NP.minus(lastPrice, buyingRate);
-  //   if (commission === 0) return 0;
-  //   return NP.divide(commission, buyingRate);
-  // }, [lastPrice, buyingRate]);
-
-  // const commissionRateTag =
-  //   commissionRate === 0 ? "" : commissionRate > 0 ? "+" : "-";
-  // const pnl = Math.abs(NP.minus(usbValue, NP.times(buyingRate, total || "0")));
+  const usbValue = NP.times(lastPrice || "0", total || "0");
 
   return (
     <>
