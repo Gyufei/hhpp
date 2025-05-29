@@ -24,9 +24,12 @@ export function PerpTable() {
 
   const theme = useTheme({
     Table: `
-      grid-template-columns: 180px repeat(9,minmax(0,1fr));
+      grid-template-columns: 100px repeat(9,minmax(80px,1fr));
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
+      min-width: 800px;
+      max-width: 100%;
+      width: 100%;
     `,
     Header: "",
     Body: "",
@@ -82,93 +85,95 @@ export function PerpTable() {
 
   if (!data.nodes.length) {
     return (
-      <div className="flex w-screen flex-1 items-center justify-center text-base text-gray sm:w-full">
+      <div className="flex w-full flex-1 items-center justify-center text-base text-gray">
         Your Options will appear here
       </div>
     );
   }
 
   return (
-    <>
-      <Table
-        data={data}
-        theme={theme}
-        pagination={pagination}
-        className="no-scroll-bar flex-1 "
-      >
-        {(tableList: Array<any>) => (
-          <>
-            <Header className="text-xs leading-[18px] text-gray">
-              <HeaderRow className="">
-                <HeaderCell>Side</HeaderCell>
-                <HeaderCell>Asset</HeaderCell>
-                <HeaderCell>Expiry Date</HeaderCell>
-                <HeaderCell>Strike Price</HeaderCell>
-                <HeaderCell>Leverage</HeaderCell>
-                <HeaderCell>Value</HeaderCell>
-                <HeaderCell>Amount</HeaderCell>
-                <HeaderCell>Entry Price</HeaderCell>
-                <HeaderCell>Mark Price</HeaderCell>
-                <HeaderCell>PnL</HeaderCell>
-              </HeaderRow>
-            </Header>
-            <Body>
-              {tableList.map((marketplace) => (
-                <Row key={marketplace.id} item={marketplace}>
-                  <Cell>
-                    <div
-                      className={cn(
-                        "font-medium",
-                        marketplace.side === "CALL"
-                          ? "text-green-500"
-                          : "text-red-500",
-                      )}
-                    >
-                      {marketplace.side}
-                    </div>
-                  </Cell>
+    <div className="flex flex-col h-full">
+      <div className="overflow-x-auto scrollbar-hide">
+        <Table
+          data={data}
+          theme={theme}
+          pagination={pagination}
+          className="no-scroll-bar flex-1"
+        >
+          {(tableList: Array<any>) => (
+            <>
+              <Header className="text-xs leading-[18px] text-gray">
+                <HeaderRow className="">
+                  <HeaderCell>Side</HeaderCell>
+                  <HeaderCell>Asset</HeaderCell>
+                  <HeaderCell>Expiry Date</HeaderCell>
+                  <HeaderCell>Strike Price</HeaderCell>
+                  <HeaderCell>Leverage</HeaderCell>
+                  <HeaderCell>Value</HeaderCell>
+                  <HeaderCell>Amount</HeaderCell>
+                  <HeaderCell>Entry Price</HeaderCell>
+                  <HeaderCell>Mark Price</HeaderCell>
+                  <HeaderCell>PnL</HeaderCell>
+                </HeaderRow>
+              </Header>
+              <Body>
+                {tableList.map((marketplace) => (
+                  <Row key={marketplace.id} item={marketplace}>
+                    <Cell>
+                      <div
+                        className={cn(
+                          "font-medium whitespace-nowrap",
+                          marketplace.side === "CALL"
+                            ? "text-green-500"
+                            : "text-red-500",
+                        )}
+                      >
+                        {marketplace.side}
+                      </div>
+                    </Cell>
 
-                  <Cell>
-                    <div>{marketplace.asset}</div>
-                  </Cell>
+                    <Cell>
+                      <div className="whitespace-nowrap">{marketplace.asset}</div>
+                    </Cell>
 
-                  <Cell>
-                    <div>{marketplace.expiryDate}</div>
-                  </Cell>
+                    <Cell>
+                      <div className="whitespace-nowrap">{marketplace.expiryDate}</div>
+                    </Cell>
 
-                  <Cell>
-                    <div>{marketplace.strikePrice}</div>
-                  </Cell>
+                    <Cell>
+                      <div className="whitespace-nowrap">{marketplace.strikePrice}</div>
+                    </Cell>
 
-                  <Cell>
-                    <div>{marketplace.leverage}</div>
-                  </Cell>
+                    <Cell>
+                      <div className="whitespace-nowrap">{marketplace.leverage}</div>
+                    </Cell>
 
-                  <Cell>
-                    <div>{marketplace.value}</div>
-                  </Cell>
+                    <Cell>
+                      <div className="whitespace-nowrap">{marketplace.value}</div>
+                    </Cell>
 
-                  <Cell>
-                    <div>{marketplace.amount}</div>
-                  </Cell>
+                    <Cell>
+                      <div className="whitespace-nowrap">{marketplace.amount}</div>
+                    </Cell>
 
-                  <Cell>
-                    <div>{marketplace.entryPrice}</div>
-                  </Cell>
+                    <Cell>
+                      <div className="whitespace-nowrap">{marketplace.entryPrice}</div>
+                    </Cell>
 
-                  <Cell>
-                    <div>{marketplace.markPrice}</div>
-                  </Cell>
+                    <Cell>
+                      <div className="whitespace-nowrap">{marketplace.markPrice}</div>
+                    </Cell>
 
-                  <Cell>
-                    <div>{marketplace.pnl}</div>
-                  </Cell>
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
+                    <Cell>
+                      <div className="whitespace-nowrap">{marketplace.pnl}</div>
+                    </Cell>
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      </div>
 
       {pagination.state.getTotalPages(data.nodes) > 1 && (
         <Pagination
@@ -193,6 +198,6 @@ export function PerpTable() {
           <Pagination.NextButton />
         </Pagination>
       )}
-    </>
+    </div>
   );
 }
