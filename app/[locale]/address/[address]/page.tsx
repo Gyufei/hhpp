@@ -1,164 +1,301 @@
 "use client";
 
-import HoverIcon from "@/components/share/hover-icon";
 import { truncateAddr } from "@/lib/utils/web3";
-import { toast } from "react-hot-toast";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useState } from "react";
-import { cn } from "@/lib/utils/common";
 import { PerpTable } from "./perp-table";
 
 export default function Page({ params }: { params: { address: string } }) {
   const address = params.address;
 
-  const handleCopy = (addr: string) => {
-    navigator.clipboard.writeText(addr);
-    toast.success("Copied to clipboard");
-  };
-
   const [currentTab, setCurrentTab] = useState("PERPS");
 
+  const [mobileInfoTab, setMobileInfoTab] = useState("Overview");
+
+  function handleMobileInfoTabChange(tab: string) {
+    setMobileInfoTab(tab);
+  }
+
   function handleTabChange(tab: string) {
-    return;
     setCurrentTab(tab);
   }
 
-  const ActiveClx =
-    "data-[state=active]:text-title-white data-[state=active]:after:absolute data-[state=active]:after:bottom-[-3px] data-[state=active]:after:left-0 data-[state=active]:after:right-0 data-[state=active]:after:h-[2px] data-[state=active]:after:bg-white data-[state=active]:after:content-['']";
+  const tabClx =
+    "flex w-[105px] items-center px-[10px] font-[400] py-[10px] text-sm leading-5 border-b-2 data-[state=active]:border-main data-[state=inactive]:border-transparent data-[state=active]:text-title-white data-[state=inactive]:text-gray rounded-none";
 
   return (
-    <div className="flex h-[calc(100vh-56px)] w-full flex-col gap-[2px] bg-border-black px-[2px] py-[2px]">
-      <div className="flex items-start justify-between gap-[2px] bg-[#222428] p-4">
-        <div className="flex items-center gap-[10px]">
-          <div className="text-gray">Address:</div>
-          <div className="text-txt-white">{address}</div>
-        </div>
-        <button onClick={() => handleCopy(address)} className="ml-2">
-          <HoverIcon
-            src="/icons/copy-gray.svg"
-            hoverSrc="/icons/white-copy.svg"
-            width={24}
-            height={24}
-            alt="copy"
-          />
-        </button>
-      </div>
+    <div className="flex h-[calc(100vh-56px)] w-full flex-col">
+      <div className="flex flex-1 items-stretch overflow-y-auto bg-border-black p-[2px]">
+        {/* Desktop Layout */}
+        <div className="hidden md:flex mr-[2px] flex-1 flex-col">
+          {/* Address Header */}
+          <div className="h-[80px] mb-[2px] flex items-center justify-between rounded bg-bg-black p-4">
+            <div className="flex items-center gap-[10px] text-[20px] text-title-white">
+              <div className="">Address:</div>
+              <div className="">{address}</div>
+            </div>
+          </div>
 
-      <div className="flex items-start justify-between gap-[2px]">
-        <div className="flex flex-1 flex-col">
-          <div className="min-w-[260px] rounded bg-[#222428] p-6">
-            <div className="flex items-center justify-between">
-              <div className="mb-2 text-2xl font-bold text-title-white">
-                Overview
-              </div>
-              <div className="mb-4 text-3xl font-bold text-title-white">
-                418,170.91$
-              </div>
-            </div>
-            <div className="mb-1 flex items-center justify-between text-sm text-gray">
-              <span>Perps (2) :</span>
-              <span className="text-title-white">418,170.91$</span>
-            </div>
-            <div className="mb-1 flex items-center justify-between text-sm text-gray">
-              <span>Spot :</span>
-              <span className="text-title-white">0.00$</span>
-            </div>
-            <div className="mb-1 flex items-center justify-between text-sm text-gray">
-              <span>Vault :</span>
-              <span className="text-title-white">0.00$</span>
-            </div>
-            <div className="flex items-center justify-between text-sm text-gray">
-              <span>Staked :</span>
-              <span className="text-title-white">0.00$</span>
-            </div>
+          {/* Main Content Area */}
+          <div className="flex-1 rounded bg-bg-black">
+            <Tabs
+              value={currentTab}
+              className="h-full flex flex-col"
+              onValueChange={handleTabChange}
+            >
+              <TabsList className="justify-start w-full rounded-none bg-transparent border-b border-border-black text-gray">
+                <TabsTrigger value="TRANSACTIONS" className={tabClx}>
+                  Transactions
+                </TabsTrigger>
+                <TabsTrigger value="OPTIONS" className={tabClx}>
+                  Options
+                </TabsTrigger>
+                <TabsTrigger value="PERPS" className={tabClx}>
+                  Perps
+                </TabsTrigger>
+                <TabsTrigger value="ORDERS" className={tabClx}>
+                  Orders
+                </TabsTrigger>
+                <TabsTrigger value="VAULTS" className={tabClx}>
+                  Vaults
+                </TabsTrigger>
+                <TabsTrigger value="STAKING" className={tabClx}>
+                  Staking
+                </TabsTrigger>
+                <TabsTrigger value="MORE" className={tabClx}>
+                  More
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="PERPS" className="flex-1 p-0 m-0">
+                <PerpTable />
+              </TabsContent>
+              <TabsContent value="TRANSACTIONS" className="flex-1 p-4">
+                <div className="text-gray">Transactions content</div>
+              </TabsContent>
+              <TabsContent value="OPTIONS" className="flex-1 p-4">
+                <div className="text-gray">Options content</div>
+              </TabsContent>
+              <TabsContent value="ORDERS" className="flex-1 p-4">
+                <div className="text-gray">Orders content</div>
+              </TabsContent>
+              <TabsContent value="VAULTS" className="flex-1 p-4">
+                <div className="text-gray">Vaults content</div>
+              </TabsContent>
+              <TabsContent value="STAKING" className="flex-1 p-4">
+                <div className="text-gray">Staking content</div>
+              </TabsContent>
+              <TabsContent value="MORE" className="flex-1 p-4">
+                <div className="text-gray">More content</div>
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
 
-        <div className="flex min-w-[260px] max-w-[400px] flex-1 flex-col">
-          <div className="flex h-full flex-col justify-between rounded bg-[#222428] p-6">
-            <div className="text-2xl font-bold text-title-white">Infos</div>
-            <div className="flex items-center justify-between">
-              <div className="break-all text-sm text-title-white">
+        {/* Mobile Layout */}
+        <div className="flex md:hidden flex-1 flex-col text-[14px]">
+          {/* Address Header */}
+          <div className="h-[80px] mb-[2px] flex items-center justify-between rounded bg-bg-black p-4">
+            <div className="flex items-center gap-[10px] text-[16px] text-title-white">
+              <div className="">Address:</div>
+              <div className="">{truncateAddr(address, { nPrefix: 10, nSuffix: 8 })}</div>
+            </div>
+          </div>
+
+          {/* Mobile Tabs */}
+          <div className="mb-[2px] rounded bg-bg-black">
+            <Tabs
+              value={mobileInfoTab}
+              className="w-full"
+              onValueChange={handleMobileInfoTabChange}
+            >
+              <TabsList className="h-auto p-0 w-full rounded-none bg-transparent border-b border-border-black text-gray p-0">
+                <TabsTrigger value="Overview" className="flex-1 py-3 data-[state=active]:text-title-white data-[state=active]:border-b-2 data-[state=active]:border-main">
+                  Overview
+                </TabsTrigger>
+                <TabsTrigger value="Infos" className="flex-1 py-3 data-[state=active]:text-title-white data-[state=active]:border-b-2 data-[state=active]:border-main">
+                  Infos
+                </TabsTrigger>
+                <TabsTrigger value="Positions" className="flex-1 py-3 data-[state=active]:text-title-white data-[state=active]:border-b-2 data-[state=active]:border-main">
+                  Positions
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="Overview" className="p-4">
+                <div className="space-y-[10px] text-[12px]">
+                  <div className="flex items-center justify-between">
+                    <span className="text-title-white">Overview</span>
+                    <span className="text-main">$820,650.66</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray">Perps (2)</span>
+                    <span className="text-title-white">$820,650.66</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray">Spot</span>
+                    <span className="text-title-white">$0.00</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray">Vault</span>
+                    <span className="text-title-white">$0.00</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray">Staked</span>
+                    <span className="text-title-white">$0.00</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray">Settled Value</span>
+                    <span className="text-title-white">$0.00</span>
+                  </div>
+                </div>
+              </TabsContent>
+              <TabsContent value="Infos" className="p-4">
+                <div className="text-[12px]">
+                  <div className="flex items-center justify-between mb-[10px]">
+                    <div className="break-all text-gray">
+                      {truncateAddr(address, { nPrefix: 10, nSuffix: 8 })}
+                    </div>
+                    <button className="w-[84px] h-[24px] rounded-full flex items-center justify-center border border-main text-main">
+                      Add alias
+                    </button>
+                  </div>
+                </div>
+              </TabsContent>
+              <TabsContent value="Positions" className="p-4">
+                <div className="text-[12px]">
+                  <div className="rounded bg-[#00D4AA] px-4 py-2 text-center">
+                    <div className="text-[#111A1E]">BTC-USD</div>
+                  </div>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
+
+          {/* Mobile Main Content */}
+          <div className="flex-1 rounded bg-bg-black">
+            <Tabs
+              value={currentTab}
+              className="h-full flex flex-col"
+              onValueChange={handleTabChange}
+            >
+              <TabsList className="h-auto p-0 w-[100vw] overflow-hidden rounded-none bg-transparent border-b border-border-black text-gray">
+                <div className="flex overflow-x-auto scrollbar-hide">
+                  <TabsTrigger 
+                    value="TRANSACTIONS" 
+                    className="relative flex-shrink-0 px-4 py-3 border-b-2 border-transparent data-[state=active]:text-title-white data-[state=active]:border-main whitespace-nowrap"
+                  >
+                    Transactions
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="OPTIONS" 
+                    className="relative flex-shrink-0 px-4 py-3 border-b-2 border-transparent data-[state=active]:text-title-white data-[state=active]:border-main whitespace-nowrap"
+                  >
+                    Options
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="PERPS" 
+                    className="relative flex-shrink-0 px-4 py-3 border-b-2 border-transparent data-[state=active]:text-title-white data-[state=active]:border-main whitespace-nowrap"
+                  >
+                    Perps
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="ORDERS" 
+                    className="relative flex-shrink-0 px-4 py-3 border-b-2 border-transparent data-[state=active]:text-title-white data-[state=active]:border-main whitespace-nowrap"
+                  >
+                    Orders
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="VAULTS"
+                    className="relative flex-shrink-0 px-4 py-3 border-b-2 border-transparent data-[state=active]:text-title-white data-[state=active]:border-main whitespace-nowrap"
+                  >
+                    Vaults
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="STAKING"
+                    className="relative flex-shrink-0 px-4 py-3 border-b-2 border-transparent data-[state=active]:text-title-white data-[state=active]:border-main whitespace-nowrap"
+                  >
+                    Staking
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="MORE"  
+                    className="relative flex-shrink-0 px-4 py-3 border-b-2 border-transparent data-[state=active]:text-title-white data-[state=active]:border-main whitespace-nowrap" 
+                  >
+                    More
+                  </TabsTrigger>
+                </div>
+              </TabsList>
+              <TabsContent value="PERPS" className="flex-1 p-0 m-0 w-[100vw] lg:w-full overflow-hidden">
+                <PerpTable />
+              </TabsContent>
+              <TabsContent value="TRANSACTIONS" className="flex-1 p-4">
+                <div className="text-gray">Transactions content</div>
+              </TabsContent>
+              <TabsContent value="OPTIONS" className="flex-1 p-4">
+                <div className="text-gray">Options content</div>
+              </TabsContent>
+              <TabsContent value="ORDERS" className="flex-1 p-4">
+                <div className="text-gray">Orders content</div>
+              </TabsContent>
+            </Tabs>
+          </div>
+        </div>
+
+        {/* Desktop Right Sidebar */}
+        <div className="hidden md:flex h-full flex-col text-[12px] sm:w-[368px]">
+          {/* Overview Section */}
+          <div className="rounded bg-bg-black p-[10px]">
+            <div className="space-y-[10px]">
+              <div className="flex items-center justify-between">
+                <span className="text-title-white">Overview</span>
+                <span className="text-main">$820,650.66</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray">Perps (2)</span>
+                <span className="text-title-white">$820,650.66</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray">Spot</span>
+                <span className="text-title-white">$0.00</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray">Vault</span>
+                <span className="text-title-white">$0.00</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray">Staked</span>
+                <span className="text-title-white">$0.00</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray">Settled Value</span>
+                <span className="text-title-white">$0.00</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Info Section */}
+          <div className="mt-[2px] rounded bg-bg-black p-[10px]">
+            <div className="mb-[10px] font-semibold text-title-white">
+              Infos
+            </div>
+            <div className="flex items-center justify-between mb-[10px]">
+              <div className="break-all text-gray mb-2">
                 {truncateAddr(address, { nPrefix: 6, nSuffix: 4 })}
               </div>
-              <button className="mt-4 w-fit cursor-not-allowed rounded bg-[#303030] px-4 py-1 text-xs text-gray opacity-60">
-                ADD ALIAS
+              <button className="w-[84px] h-[24px] rounded-full flex items-center justify-center border border-main text-main">
+                Add alias
               </button>
             </div>
           </div>
-        </div>
 
-        <div className="flex min-w-[260px] flex-1 flex-col">
-          <div className="h-full rounded bg-[#222428] p-6">
-            <div className="mb-4 text-2xl font-bold text-title-white">
+          {/* Positions Section */}
+          <div className="flex-1 mt-[2px] rounded bg-bg-black p-[10px]">
+            <div className="mb-4 text-title-white">
               Positions
             </div>
-            <div className="flex w-full">
-              <div className="flex-1 cursor-pointer rounded bg-red px-6 py-3 text-lg font-bold text-white">
-                BTC-USD
-              </div>
-              <div className="flex-1 cursor-pointer rounded bg-red px-6 py-3 text-lg font-bold text-white">
-                PEPE-USD
-              </div>
+            <div className="rounded bg-[#00D4AA] px-4 py-2 text-center">
+              <div className="text-[#111A1E]">BTC-USD</div>
             </div>
           </div>
         </div>
       </div>
-
-      <Tabs
-        value={currentTab}
-        className="w-full"
-        onValueChange={handleTabChange}
-      >
-        <TabsList className="w-full rounded-none bg-[#222428] text-gray">
-          <TabsTrigger
-            value="TRANSACTIONS"
-            className={cn("relative flex-1", ActiveClx)}
-          >
-            TRANSACTIONS
-          </TabsTrigger>
-          <TabsTrigger
-            value="HOLDINGS"
-            className={cn("relative flex-1", ActiveClx)}
-          >
-            HOLDINGS
-          </TabsTrigger>
-          <TabsTrigger
-            value="PERPS"
-            className={cn("relative flex-1", ActiveClx)}
-          >
-            PERPS
-          </TabsTrigger>
-          <TabsTrigger
-            value="ORDERS"
-            className={cn("relative flex-1", ActiveClx)}
-          >
-            ORDERS
-          </TabsTrigger>
-          <TabsTrigger
-            value="VAULTS"
-            className={cn("relative flex-1", ActiveClx)}
-          >
-            VAULTS
-          </TabsTrigger>
-          <TabsTrigger
-            value="STAKING"
-            className={cn("relative flex-1", ActiveClx)}
-          >
-            STAKING
-          </TabsTrigger>
-          <TabsTrigger
-            value="MORE"
-            className={cn("relative flex-1", ActiveClx)}
-          >
-            MORE
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="PERPS" className="mt-[2px]">
-          {/* Table */}
-          <PerpTable />
-        </TabsContent>
-      </Tabs>
     </div>
   );
 }
