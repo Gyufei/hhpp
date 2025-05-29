@@ -6,10 +6,10 @@ export default function BlockChain() {
   // const { data = {} as any, isLoading } = useTradingData();
 
   return (
-    <div className="flex h-[916px] items-center justify-center bg-bg-black">
-      <div className=" relative flex h-[748px] w-[748px] items-center justify-center rounded-full border-[2px] border-border-black">
-        <div className="relative flex h-[480px] w-[480px] flex-col items-center justify-center rounded-full border-[2px] border-border-black">
-          <div className="font-sf text-[120px] font-light leading-[120px] text-title-white">
+    <div className="flex h-[916px] items-start mt-[40px] lg:mt-0 lg:items-center justify-center bg-bg-black">
+      <div className="absolute flex h-[120vw] overflow-visible lg:h-[748px] w-[120vw] lg:w-[748px] items-center justify-center rounded-full border-[2px] border-border-black">
+        <div className="relative flex h-[80vw] lg:h-[480px] w-[80vw] lg:w-[480px] flex-col items-center justify-center rounded-full border-[2px] border-border-black">
+          <div className="font-sf text-[80px] lg:text-[120px] font-light leading-[80px] lg:leading-[120px] text-title-white">
             {formatValue(69000000)}
             {/* {formatValue(data?.deposit)} */}
           </div>

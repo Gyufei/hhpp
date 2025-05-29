@@ -4,7 +4,7 @@ import StartTradingButton from "./start-trading-button";
 export default function HomeBanner() {
   return (
     <div
-      className="mt-14 flex flex-col items-center pb-[118px] pt-[132px]"
+      className="mt-14 flex flex-col items-center pb-[118px] pt-[132px] px-[20px] lg:px-0"
       style={{
         backgroundImage: "url('/img/home/banner-bg.png')",
         backgroundSize: "cover",
@@ -12,10 +12,10 @@ export default function HomeBanner() {
       }}
     >
       <Image src="/icons/simple-logo.svg" width={120} height={90} alt="logo" />
-      <div className="mt-5 text-center font-sf text-[80px] font-light leading-[120px] text-title-white">
+      <div className="mt-5 text-center font-sf text-[36px] lg:text-[80px] font-light leading-[60px] lg:leading-[120px] text-title-white">
         Hyperliquid&apos;s Option Market.
       </div>
-      <div className="mt-8 w-[700px] text-center text-[18px] font-light text-title-white">
+      <div className="mt-8 w-full lg:w-[700px] text-center text-[12px] lg:text-[18px] leading-[20px] lg:leading-[28px]  font-light text-title-white">
         Where traders turn their dreams into reality, providing the tools,
         speed, and opportunities to thrive in the world of high-performance
         asset generating and trading. Ample liquidity, lighting-fast trades,
