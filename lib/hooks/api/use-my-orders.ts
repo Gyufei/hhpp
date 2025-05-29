@@ -31,7 +31,7 @@ export function useMyOrders(params: any) {
 
     const parsedRes = orderRes.map((o: Record<string, any>) => {
       const marketplace = marketplaceData?.find(
-        (m) => m.market_symbol === o.entry.market_symbol,
+        (m) => m.market_place_id === o.market_place_id,
       );
 
       return {

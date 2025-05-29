@@ -1,6 +1,5 @@
 import { io } from "socket.io-client";
 import { isProduction } from "@/lib/PathMap";
-import { ChainType } from "@/lib/types/chain";
 import { useEndPoint } from "./use-endpoint";
 import useSWRSubscription from "swr/subscription";
 
@@ -16,11 +15,11 @@ export interface IMsg {
   timestamp: number;
 }
 
-export function useWsMsg(chain: ChainType) {
+export function useWsMsg() {
   const { wssEndPoint } = useEndPoint();
 
   const res = useSWRSubscription<Array<IMsg>>(
-    chain,
+    "ws-msg",
     (_key: string, { next }: { next: any }) => {
       // const socket = io(`${wssEndPoint}/${chain}`);
 

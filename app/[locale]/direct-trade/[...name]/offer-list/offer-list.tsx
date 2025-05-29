@@ -40,7 +40,7 @@ export default function OfferList({
     }
 
     return sortOffers?.filter((o: IOffer) => {
-      const isIdMatch = String(o.entry.id) === String(searchText);
+      const isIdMatch = String(o.id) === String(searchText);
 
       return isIdMatch;
     });

@@ -2,80 +2,56 @@ import NP from "number-precision";
 import { IOffer } from "../../types/offer";
 import { useMemo } from "react";
 import { IPoint } from "../../types/token";
-import { useTokenPrice } from "@/lib/hooks/api/token/use-token-price";
-import { useTokens } from "../api/token/use-tokens";
-import { ProjectDecimalsMap } from "@/lib/const/constant";
+import { useStableToken } from "../api/token/use-tokens";
 
 export function useOfferFormat({ offer }: { offer: IOffer }) {
-  const { data: tokens } = useTokens(offer?.marketplace?.chain);
+  const { data: usdtToken } = useStableToken();
 
-  const offerChainInfo = useMemo(() => {
-    return tokens?.find(
-      (t) => t.symbol === offer?.marketplace?.chain?.toUpperCase(),
-    );
-  }, [offer, tokens]);
+  const offerTokenInfo = usdtToken;
 
-  const offerTokenInfo = useMemo(() => {
-    return tokens?.find((t) => t.symbol === offer.payment_token);
-  }, [offer, tokens]);
-
-  const offerPointInfo: IPoint = {
-    symbol: offer.marketplace.item_name,
-    logoURI: offer.marketplace.pointLogo,
-    marketplace: offer.marketplace,
-  };
-
-  const pointDecimalNum = useMemo(() => {
-    if (
-      offer?.marketplace &&
-      ProjectDecimalsMap[offer.marketplace.market_symbol]
-    ) {
-      const decimal = ProjectDecimalsMap[offer.marketplace.market_symbol];
-      return 10 ** decimal;
-    }
-
-    return 1;
+  const offerPointInfo: IPoint = useMemo(() => {
+    return {
+      ...offer.marketplace.token,
+      marketplace: offer.marketplace,
+    };
   }, [offer]);
 
-  const { data: tokenPrice } = useTokenPrice(
-    offer.marketplace.chain,
-    offerTokenInfo?.address || "",
-  );
+  const pointDecimalNum = useMemo(() => {
+    const decimals = offer.marketplace.token.decimals;
+
+    return 10 ** decimals;
+  }, [offer]);
 
   const tokenLogo = offerTokenInfo?.logoURI || "/icons/empty.svg";
   const pointLogo = offerPointInfo?.logoURI || "/icons/empty.svg";
+  const pointPerPrice = offer.marketplace.token.price;
 
-  const offerItemAmount = NP.divide(offer.item_amount, pointDecimalNum);
+  const pointPrice = offer.marketplace.strike_price;
+  const pointAmount = NP.divide(offer.shares, pointDecimalNum);
+  const amount = NP.times(pointAmount, pointPrice);
 
-  const amount = NP.times(offer.item_amount, offer.price);
+  const tokenPrice = offerTokenInfo?.price;
+  const tokenTotalPrice = amount;
 
-  const progress = Number(
-    (Number(offer.taken_item_amount) / Number(offer.item_amount)).toFixed(2),
-  );
-
-  const offerType = offer.entry.direction;
-  const offerValue = offerType === "sell" ? offerItemAmount : amount;
-  const forValue = offerType === "sell" ? amount : offerItemAmount;
+  const offerType = "sell";
+  const offerValue = offerType === "sell" ? pointAmount : amount;
+  const forValue = offerType === "sell" ? amount : pointAmount;
   const offerLogo = offerType === "sell" ? pointLogo : tokenLogo;
   const forLogo = offerType === "sell" ? tokenLogo : pointLogo;
 
-  const tokenTotalPrice = NP.times(amount, tokenPrice);
-  const pointPerPrice = NP.divide(tokenTotalPrice, offerItemAmount);
+  const isFilled = false;
 
-  const isFilled = offer.taken_item_amount === offer.item_amount;
-
-  const isCanceled = offer.status === "canceled";
+  const isCanceled = offer.order_status === "cancelled";
 
   const isClosed = useMemo(() => {
-    return ["filled", "canceled", "settled"].includes(offer.status);
-  }, [offer.status]);
+    return ["filled", "canceled", "settled"].includes(offer.order_status);
+  }, [offer.order_status]);
 
-  const expiry = (3 * 24 + 10) * 60 * 60;
-  const strike = 100;
+  const expiry = offer.marketplace.expiry_date;
+  const strike = offer.marketplace.strike_price;
 
   return {
     amount,
-    progress,
     offerValue,
     forValue,
     offerLogo,
@@ -86,7 +62,6 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     pointPerPrice,
     offerPointInfo,
     offerTokenInfo,
-    offerChainInfo,
     pointDecimalNum,
 
     isFilled,

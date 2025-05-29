@@ -1,15 +1,12 @@
 import { cn } from "@/lib/utils/common";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
-import { ChainType } from "@/lib/types/chain";
 import { useWalletModalContext } from "../provider/wallet-modal-provider";
 
 export default function WithWalletConnectBtn({
-  chain,
   onClick,
   children,
   className = "",
 }: {
-  chain?: ChainType;
   onClick: () => void;
   children: React.ReactNode;
   className?: string;
@@ -19,7 +16,7 @@ export default function WithWalletConnectBtn({
 
   function handleClick() {
     if (!isConnected) {
-      openWalletModal(true, chain);
+      openWalletModal(true);
     } else {
       onClick();
     }

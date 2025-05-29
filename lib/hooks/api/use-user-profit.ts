@@ -13,8 +13,8 @@ export function useUserProfit() {
     useMarketplaces();
   const { data: accountInfo } = useAccountInfo();
   const address = accountInfo?.dest_account || "";
-    const { data: userData } = useUserData(address);
-  
+  const { data: userData } = useUserData(address);
+
   async function userProfitFetch() {
     async function pointAmountFetch(wallet: string, marketAccount: string) {
       const offers = await apiFetcher(
@@ -28,14 +28,20 @@ export function useUserProfit() {
       marketplaces.map(async (marketplace) => {
         const pointAmount = await pointAmountFetch(
           address,
-          marketplace.market_place_account,
+          marketplace.market_place_id,
         );
         const total = NP.plus(
           pointAmount?.locked_amount || "0",
           pointAmount?.free_amount || "0",
         );
-        const buyingRate = userData?.take_point_price.find((i: any) => i.market_account === marketplace.market_place_account,)?.point_token_price || marketplace.last_price;
-        return NP.minus(NP.times(marketplace.last_price, total || "0"), NP.times(buyingRate, total || "0"));
+        const buyingRate =
+          userData?.take_point_price.find(
+            (i: any) => i.market_place_id === marketplace.market_place_id,
+          )?.point_token_price || marketplace.token.price;
+        return NP.minus(
+          NP.times(marketplace.token.price, total || "0"),
+          NP.times(buyingRate, total || "0"),
+        );
       }),
     );
 

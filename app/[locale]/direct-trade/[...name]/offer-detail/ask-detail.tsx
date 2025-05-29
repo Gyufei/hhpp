@@ -184,10 +184,7 @@ export default function AskDetail({
               <div className="absolute -top-1 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-[10px] leading-[16px] text-red">
                 {errorText}
               </div>
-              <WithWalletConnectBtn
-                chain={offer.marketplace.chain}
-                onClick={handleConfirmTakerOrder}
-              >
+              <WithWalletConnectBtn onClick={handleConfirmTakerOrder}>
                 <button
                   disabled={isTaking || !+receivePointAmount || !!errorText}
                   className={cn(

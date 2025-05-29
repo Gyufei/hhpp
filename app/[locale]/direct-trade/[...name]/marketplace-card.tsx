@@ -1,14 +1,11 @@
 "use client";
 import Image from "next/image";
-import { useMemo } from "react";
 import HoverIcon from "@/components/share/hover-icon";
 
 import { IMarketplace } from "@/lib/types/marketplace";
 import MarketplaceOverview from "@/components/share/market-place-overview";
 import { cn } from "@/lib/utils/common";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useMarketInfo } from "@/lib/hooks/api/use-market-info";
-import { ChainType } from "@/lib/types/chain";
 import MarketSelect from "@/components/share/market-select";
 import { Link } from "@/i18n/routing";
 
@@ -20,17 +17,6 @@ export default function MarketplaceCard({
   className?: string;
 }) {
   const isLoadingFlag = !marketplace;
-
-  const { data: marketInfos } = useMarketInfo(
-    marketplace?.chain || ChainType.HYPER,
-  );
-
-  const projectInfo = useMemo(() => {
-    if (!marketplace || !marketInfos) return;
-    const projectInfo = marketInfos[marketplace.market_symbol];
-
-    return projectInfo;
-  }, [marketplace, marketInfos]);
 
   return (
     <div className={cn(className, "relative")}>
@@ -60,12 +46,9 @@ export default function MarketplaceCard({
               ) : (
                 <>
                   <div className="max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap text-xl leading-[30px] text-title-white">
-                    {marketplace.item_name}-{'250517'}
+                    {marketplace.token_name}-{marketplace.expiry_date}
                   </div>
-                  <OverviewIcons
-                    twitter={projectInfo?.twitter}
-                    discord={projectInfo?.discord}
-                  />
+                  <OverviewIcons twitter={""} discord={""} />
                 </>
               )}
             </div>

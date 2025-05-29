@@ -56,7 +56,6 @@ export function useUserBalance(address: string) {
       } as IUserBalance;
     });
 
-    console.log("tokenBalances", tokenBalances);
     return tokenBalances as IUserBalance[];
   }
 

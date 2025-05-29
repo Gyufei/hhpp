@@ -20,7 +20,7 @@ export default function MarketCountDown({
   const [seconds, setSeconds] = useState<number>(0);
 
   const calculateTime = useCallback(() => {
-    const startsAt = Number(marketplace.trading_starts_at) * 1000;
+    const startsAt = Number(marketplace.trading_start_at) * 1000;
     const difference = startsAt - Date.now();
     setDays(Math.floor(difference / (millisecondsInHour * 24)));
     setHours(Math.floor((difference / millisecondsInHour) % 24));
@@ -34,7 +34,7 @@ export default function MarketCountDown({
       setSeconds(0);
       onCountEnd();
     }
-  }, [onCountEnd, marketplace.trading_starts_at]);
+  }, [onCountEnd, marketplace.trading_start_at]);
 
   useEffect(() => {
     calculateTime();
@@ -56,7 +56,7 @@ export default function MarketCountDown({
         className="rounded-full"
       />
       <div className="mt-[10px] text-sm leading-5 text-title-white">
-        {marketplace.item_name}/USDC
+        {marketplace.token_name}-{marketplace.expiry_date}
       </div>
       <div className="mt-[5px] w-[200px] text-center text-xs leading-[18px] text-txt-white">
         Trading will begin after the countdown ends.

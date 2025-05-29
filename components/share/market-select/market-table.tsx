@@ -5,8 +5,6 @@ import { formatNum } from "@/lib/utils/number";
 import { Skeleton } from "@/components/ui/skeleton";
 import Sparkline from "@/components/share/snapshot";
 import { IMarketplace } from "@/lib/types/marketplace";
-import { ProjectDecimalsMap } from "@/lib/const/constant";
-import NP from "number-precision";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
 
@@ -21,15 +19,8 @@ export default function MarketTable({
   const router = useRouter();
 
   const data = useMemo(() => {
-    const orderData = marketList.map((o, index) => {
-      return {
-        ...o,
-        id: index,
-      };
-    });
-
     return {
-      nodes: orderData,
+      nodes: marketList,
     };
   }, [marketList]);
 
@@ -37,7 +28,7 @@ export default function MarketTable({
     Table: `
       width: 100%;
       grid-template-rows: 24px repeat(auto-fit, 40px);
-      grid-template-columns: 100px repeat(3, minmax(0, 1fr)) 200px repeat(2, minmax(0, 1fr));
+      grid-template-columns: 180px minmax(0, 1fr) 200px repeat(2, minmax(0, 1fr));
       grid-auto-rows: 40px;
     `,
     Header: "",
@@ -89,45 +80,23 @@ export default function MarketTable({
   const COLUMNS = [
     {
       label: T("Asset"),
-      renderCell: (o: any) => {
+      renderCell: (o: IMarketplace) => {
         return isLoading ? (
           <Skeleton className="h-[16px] w-[60px]" />
         ) : (
-          <div className="w-fit">{o.market_name}</div>
+          <div className="w-fit">
+            {o.token_name}-{o.expiry_date}
+          </div>
         );
       },
     },
     {
       label: T("InitialListing"),
       renderCell: (item: IMarketplace) => {
-        const pointDecimalNum = ProjectDecimalsMap[item.market_symbol]
-          ? 10 ** ProjectDecimalsMap[item.market_symbol]
-          : 1;
-
         return isLoading ? (
           <Skeleton className="mr-2 h-[16px] w-[40px]" />
         ) : (
-          <PriceText
-            num={Number(NP.times(item.initial_listing_price, pointDecimalNum))}
-          />
-        );
-      },
-    },
-    {
-      label: T("AllTimeHigh"),
-      renderCell: (item: IMarketplace) => {
-        const pointDecimalNum = ProjectDecimalsMap[item.market_symbol]
-          ? 10 ** ProjectDecimalsMap[item.market_symbol]
-          : 1;
-
-        return isLoading ? (
-          <div className="flex">
-            <Skeleton className="h-[16px] w-[60px]" />
-          </div>
-        ) : (
-          <PriceText
-            num={Number(NP.times(item.all_time_high_price, pointDecimalNum))}
-          />
+          <PriceText num={Number(item.initial_premium_price)} />
         );
       },
     },
@@ -140,24 +109,6 @@ export default function MarketTable({
           </div>
         ) : (
           <PriceText num={Number(item.vol_24h)} />
-        );
-      },
-    },
-    {
-      label: T("24hChange"),
-      renderCell: (item: IMarketplace) => {
-        const pointDecimalNum = ProjectDecimalsMap[item.market_symbol]
-          ? 10 ** ProjectDecimalsMap[item.market_symbol]
-          : 1;
-        return isLoading ? (
-          <div className="flex">
-            <Skeleton className="h-[16px] w-[60px]" />
-          </div>
-        ) : (
-          <ChangeText
-            vol={NP.times(item.last_price, pointDecimalNum)}
-            percent={+item.change_rate_24h}
-          />
         );
       },
     },
@@ -176,7 +127,7 @@ export default function MarketTable({
     {
       label: "Snapshot",
       renderCell: (o: any) => (
-        <Snapshot salesData={o.salesData} isLoading={o.isLoading} />
+        <Snapshot salesData={o?.salesData} isLoading={o.isLoading} />
       ),
     },
   ];
@@ -192,26 +143,10 @@ export default function MarketTable({
       data={data}
       rowProps={{
         onClick: (node: any) => {
-          handleGo(node.market_symbol);
+          handleGo(node.id);
         },
       }}
     />
-  );
-}
-
-function ChangeText({ vol, percent }: { vol: number; percent: number }) {
-  const isGreater = percent > 0;
-  const prev = isGreater ? "+" : "-";
-  return (
-    <div
-      data-greater={percent === 0 ? "zero" : isGreater}
-      className="text-xs leading-[18px] data-[greater=false]:text-red data-[greater=true]:text-green data-[greater=zero]:text-title-white"
-    >
-      {Number(vol) === 0
-        ? "$0"
-        : `${percent === 0 ? "" : prev}$${formatNum(vol, 3)}`}
-      /{Number(percent) === 0 ? "0" : `${prev}${Math.abs(percent).toFixed(2)}`}%
-    </div>
   );
 }
 

@@ -33,21 +33,20 @@ export default function MarketplacePage({
     mutate: refreshOffers,
     isLoading: isOffersLoading,
   } = useMarketOffers({
-    marketSymbol: marketplace?.market_symbol || "",
-    marketChain: marketplace.chain,
+    marketId: String(marketplace?.id) || "",
   });
 
   const canBuyOffers = useMemo(() => {
-    const showOffer = (offers || [])?.filter((ord: IOffer) =>
-      ["virgin", "ongoing", "filled"].includes(ord.status),
+    const showOffer = (offers || [])?.filter(
+      (ord: IOffer) => !["cancelled"].includes(ord.order_status),
     );
-    const sortO = sortBy(showOffer, "status");
+    const sortO = sortBy(showOffer, "create_at");
 
     return sortO;
   }, [offers]);
 
   const calcIsCountdown = useCallback(() => {
-    const tradingStartsAt = Number(marketplace.trading_starts_at) * 1000;
+    const tradingStartsAt = Number(marketplace.trading_start_at) * 1000;
     if (!tradingStartsAt) return false;
 
     const isCount = isAfter(toDate(tradingStartsAt), Date.now());

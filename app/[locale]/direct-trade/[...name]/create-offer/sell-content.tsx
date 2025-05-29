@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import { InputPanel } from "./input-panel";
@@ -6,18 +5,15 @@ import { StableTokenSelectDisplay } from "./stable-token-display";
 import NP from "number-precision";
 
 import ArrowBetween from "./arrow-between";
-import { WithTip } from "../../../../../components/share/with-tip";
 import OrderNoteAndFee from "./order-note-and-fee";
 import { IMarketplace } from "@/lib/types/marketplace";
 import { useTranslations } from "next-intl";
 import { formatNum } from "@/lib/utils/number";
 import { useCreateAction } from "./use-create-action";
-import { useOptionOfCreate } from "./use-option-of-create";
 import { PointTokenDisplay } from "./point-token-display";
 import { cn } from "@/lib/utils/common";
 import { reportEvent } from "@/lib/utils/analytics";
 import { useCheckBalance } from "@/lib/hooks/api/use-check-balance";
-import { useCreateOfferMinPrice } from "@/lib/hooks/offer/use-create-offer-min-price";
 
 export function SellContent({
   marketplace,
@@ -29,7 +25,6 @@ export function SellContent({
   className?: string;
 }) {
   const T = useTranslations("Offer");
-  const { checkMinPrice, checkMaxPrice } = useCreateOfferMinPrice();
   const [hasAutoCalc, setHasAutoCalc] = useState<
     "sell" | "receive" | null | false
   >(null);
@@ -37,6 +32,8 @@ export function SellContent({
   const {
     token: receiveToken,
     point: sellPoint,
+    note,
+    setNote,
     tokenAmount: receiveTokenAmount,
     setTokenAmount: setReceiveAmount,
     pointAmount: sellPointAmount,
@@ -56,8 +53,6 @@ export function SellContent({
     }
   }, [isCreateSuccess, onSuccess]);
 
-  const { note, setNote } = useOptionOfCreate();
-
   const { checkPointInsufficient } = useCheckBalance(marketplace);
 
   const [errorText, setErrorText] = useState("");
@@ -65,25 +60,13 @@ export function SellContent({
   useEffect(() => {
     let curErrorText = "";
     curErrorText = checkPointInsufficient(sellPointAmount);
-    const marketPointPrice = NP.times(
-      currentMarket.last_price,
-      pointDecimalNum,
-    );
-    if (!curErrorText && +pointPrice) {
-      curErrorText = checkMinPrice(pointPrice, marketPointPrice);
-
-      curErrorText = checkMaxPrice(pointPrice, marketPointPrice);
-    }
 
     setErrorText(curErrorText);
   }, [
     sellPointAmount,
     pointPrice,
-    currentMarket.item_name,
-    currentMarket.last_price,
-    pointDecimalNum,
-    checkMinPrice,
-    checkMaxPrice,
+    marketplace.token_name,
+    marketplace.strike_price,
     checkPointInsufficient,
   ]);
 
@@ -100,12 +83,10 @@ export function SellContent({
       return;
     }
 
-    const marketPointPrice = NP.times(
-      currentMarket.last_price,
-      pointDecimalNum,
-    );
+    const marketPointPrice = Number(marketplace.strike_price);
 
     setHasAutoCalc("sell");
+
     if (v === "") {
       setReceiveAmount("");
       return;
@@ -113,7 +94,7 @@ export function SellContent({
 
     setReceiveAmount(
       NP.round(
-        NP.times(v, marketPointPrice * 1.02),
+        NP.times(v, marketPointPrice),
         receiveToken.decimals || 6,
       ).toString(),
     );
@@ -127,12 +108,10 @@ export function SellContent({
       return;
     }
 
-    const marketPointPrice = NP.times(
-      currentMarket.last_price,
-      pointDecimalNum,
-    );
+    const marketPointPrice = Number(marketplace.strike_price);
 
     setHasAutoCalc("receive");
+
     if (v === "") {
       setSellPointAmount("");
       return;
@@ -158,7 +137,7 @@ export function SellContent({
           topText={<>{T("YouWillSell")}</>}
           bottomText={
             <>
-              1 {currentMarket.item_name} = ${formatNum(pointPrice, 8)}
+              1 {currentMarket.token_name} = ${formatNum(pointPrice, 4)}
             </>
           }
           tokenSelect={<PointTokenDisplay point={sellPoint} />}
@@ -170,27 +149,9 @@ export function SellContent({
           className="pb-4"
           value={receiveTokenAmount}
           onValueChange={receiveTokenAmountChange}
+          isCanInput={false}
           topText={
-            <div className="flex items-center">
-              {T("YouDLikeToReceive")}
-              <WithTip
-                content={
-                  <>
-                    {T("YouDLikeToReceiveTip", {
-                      pointName: currentMarket.item_name,
-                    })}
-                  </>
-                }
-              >
-                <Image
-                  src="/icons/info-tip.svg"
-                  height={16}
-                  width={16}
-                  alt="info"
-                  className="ml-2"
-                />
-              </WithTip>
-            </div>
+            <div className="flex items-center">{T("YouDLikeToReceive")}</div>
           }
           bottomText={<></>}
           tokenSelect={<StableTokenSelectDisplay token={receiveToken} />}

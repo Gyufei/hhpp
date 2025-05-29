@@ -12,7 +12,7 @@ export default function Marketplace() {
 
   if (firstMarket) {
     router.replace(
-      `/direct-trade/${firstMarket.market_symbol}?${searchParams.toString()}`,
+      `/direct-trade/${firstMarket.id}?${searchParams.toString()}`,
     );
   }
 

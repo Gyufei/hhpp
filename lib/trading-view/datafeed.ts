@@ -29,9 +29,9 @@ async function getAllSymbols() {
 
   const allSymbols: any = data.map((market: IMarketplace) => {
     return {
-      symbol: market.market_symbol,
-      full_name: `${market.market_name}/USDC`,
-      description: `${market.market_name}/USDC`,
+      symbol: market.token_name,
+      full_name: `${market.token_name}-${market.expiry_date}`,
+      description: `${market.token_name}-${market.expiry_date}`,
       exchange: "hypeTrade",
       type: "",
     };
@@ -118,7 +118,7 @@ const datafeed = {
     const marketData = allMarkets.find(
       ({ market_symbol }: any) => market_symbol === symbolInfo.name,
     );
-    const marketAccount = marketData.market_place_account;
+    const marketId = marketData.market_place_id;
 
     const resolutionMap = {
       1: 60,
@@ -132,7 +132,7 @@ const datafeed = {
     };
 
     const urlParameters = {
-      market_place_account: marketAccount,
+      market_place_id: marketId,
       from,
       to,
       interval: (resolutionMap as any)[resolution] || 60,

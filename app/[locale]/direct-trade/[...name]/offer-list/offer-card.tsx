@@ -1,4 +1,3 @@
-import NP from "number-precision";
 import Image from "next/image";
 import { CircleProgress } from "@/components/share/circle-progress";
 import { formatNum } from "@/lib/utils/number";
@@ -17,10 +16,8 @@ import { CTooltipArrow } from "@/components/share/c-tooltip-arrow";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
-import { reportEvent } from "@/lib/utils/analytics";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
-import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
-import { formatTimeDuration } from "@/lib/utils/time";
+import { coverExpiryDate, formatTimeDuration } from "@/lib/utils/time";
 
 export function OfferCard({
   offer,
@@ -31,11 +28,8 @@ export function OfferCard({
 }) {
   const T = useTranslations("MyOrders");
   const { checkAndSwitchChain } = useCheckSwitchChain();
-  const { data: accountInfo } = useAccountInfo();
-  const isPublic = accountInfo?.trading_mode === "Public";
 
   const {
-    progress,
     offerValue,
     forValue,
     offerLogo,
@@ -48,21 +42,18 @@ export function OfferCard({
     offer: offer,
   });
 
-  const orderType = offer.entry.direction;
+  const offerType = "sell";
 
   const showBuy = useMemo(() => {
-    return ["virgin", "ongoing"].includes(offer.status);
+    return ["virgin", "ongoing"].includes(offer.order_status);
   }, [offer]);
 
   const done = useMemo(() => {
-    return ["filled", "settled"].includes(offer.status);
+    return ["filled", "settled"].includes(offer.order_status);
   }, [offer]);
 
   function handleShow() {
     handleShowOffer(offer);
-    reportEvent("click_" + orderType === "sell" ? "buy-offer" : "sell-offer", {
-      value: offer.entry.id,
-    });
   }
 
   return (
@@ -79,24 +70,11 @@ export function OfferCard({
 
           <div>
             <div className="mb-[2px] leading-6 text-txt-white">
-              {offer.marketplace.item_name}
+              {offer.marketplace.token_name}
             </div>
             <div className="w-fit rounded border border-border-black bg-border-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
-              #{offer.entry.id}
+              #{offer.id}
             </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <CircleProgress
-            percentage={Number(formatNum(progress * 100))}
-            className="scale-[1.1429]"
-          />
-          <div
-            data-zero={Number(progress) === 0 ? true : false}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs leading-[18px] data-[zero=false]:text-txt-white data-[zero=true]:text-gray"
-          >
-            {formatNum(NP.times(progress, 100))}%
           </div>
         </div>
       </div>
@@ -117,12 +95,12 @@ export function OfferCard({
             />
           </div>
           <div className="mt-[2px] overflow-visible whitespace-nowrap text-xs leading-[18px] text-gray">
-            {orderType === "sell" ? (
+            {offerType === "sell" ? (
               <>
-                ${formatNum(pointPerPrice, 8)} / {offer.marketplace.market_name}
+                ${formatNum(pointPerPrice, 2)} / {offer.marketplace.token_name}
               </>
             ) : (
-              <>${formatNum(tokenTotalPrice, 8)}</>
+              <>${formatNum(tokenTotalPrice, 2)}</>
             )}
           </div>
         </div>
@@ -149,11 +127,11 @@ export function OfferCard({
             />
           </div>
           <div className="mt-[2px] overflow-visible whitespace-nowrap text-xs leading-[18px] text-gray">
-            {orderType === "sell" ? (
+            {offerType === "sell" ? (
               <>${formatNum(tokenTotalPrice)}</>
             ) : (
               <>
-                ${formatNum(pointPerPrice, 6)} / {offer.marketplace.item_name}
+                ${formatNum(pointPerPrice, 2)} / {offer.marketplace.token_name}
               </>
             )}
           </div>
@@ -163,7 +141,7 @@ export function OfferCard({
       <div className="flex items-center justify-between pt-3">
         <ExpiryStrike expiry={expiry} strike={strike} />
         <div className="flex items-center">
-          {offer.note && (
+          {offer.order_note && (
             <div
               data-right={showBuy}
               className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full data-[right=true]:mr-3"
@@ -180,7 +158,7 @@ export function OfferCard({
                     />
                   </TooltipTrigger>
                   <TooltipContent className="w-[200px]">
-                    <p className="text-xs leading-[18px]">{offer.note}</p>
+                    <p className="text-xs leading-[18px]">{offer.order_note}</p>
                     <TooltipArrow asChild>
                       <CTooltipArrow />
                     </TooltipArrow>
@@ -191,22 +169,18 @@ export function OfferCard({
           )}
           {showBuy && (
             <WithWalletConnectBtn
-              chain={offer.marketplace.chain}
               onClick={() => {
-                isPublic && checkAndSwitchChain();
+                checkAndSwitchChain();
                 handleShow();
               }}
             >
               <button className="flex items-center justify-center rounded-full border border-main px-[18px] py-1 text-sm leading-5 text-main hover:border-main-hover hover:text-main-hover">
-                {orderType === "sell" ? T("Buy") : T("Sell")}
+                {offerType === "sell" ? T("Buy") : T("Sell")}
               </button>
             </WithWalletConnectBtn>
           )}
           {done && (
-            <WithWalletConnectBtn
-              chain={offer.marketplace.chain}
-              onClick={() => handleShow()}
-            >
+            <WithWalletConnectBtn onClick={() => handleShow()}>
               <button className="flex items-center justify-center rounded-full border border-main px-[18px] py-1 text-sm leading-5 text-main hover:border-main-hover hover:text-main-hover">
                 {T("Detail")}
               </button>
@@ -271,12 +245,26 @@ export function OrderCardSkeleton() {
   );
 }
 
-function ExpiryStrike({ expiry, strike }: { expiry: number; strike: number }) {
+function ExpiryStrike({ expiry, strike }: { expiry: string; strike: string }) {
   const T = useTranslations("MyOrders");
 
-  const displayExpiry = useMemo(() => {
-    return formatTimeDuration(expiry);
+  console.log(expiry);
+  const expiryDuration = useMemo(() => {
+    const expiryTime = coverExpiryDate(expiry.toString()).timestamp;
+    const now = Date.now();
+    const duration = expiryTime - now;
+    if (duration < 0) {
+      return 0;
+    }
+    return duration;
   }, [expiry]);
+
+  const displayExpiry = useMemo(() => {
+    if (expiryDuration === 0) {
+      return "-";
+    }
+    return formatTimeDuration(expiryDuration / 1000);
+  }, [expiryDuration]);
 
   return (
     <div className="flex items-center gap-9">

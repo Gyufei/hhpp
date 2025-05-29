@@ -29,7 +29,7 @@ export function useReferralData() {
     if (!address) return null;
 
     const res = await apiFetcher(
-      `${apiEndPoint}${ApiPaths.referral.data}?dest_account=${address}`,
+      `${apiEndPoint}${ApiPaths.referral.data}?referrer=${address}`,
     );
 
     const parsedRes = res.map((item: any) => {

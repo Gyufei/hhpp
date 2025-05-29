@@ -2,7 +2,6 @@ import useSWR from "swr";
 import { apiFetcher } from "@/lib/fetcher";
 import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
-import { ChainType } from "@/lib/types/chain";
 import { useAccountInfo } from "./use-account-info";
 
 interface IAccountInfo {
@@ -19,9 +18,7 @@ export function useAccountStats() {
   const address = accountInfo?.dest_account || "";
 
   const res = useSWR<IAccountInfo>(
-    address
-      ? `${apiEndPoint}${ApiPaths.accountStats}/${address}?chain=${ChainType.HYPER}`
-      : null,
+    address ? `${apiEndPoint}${ApiPaths.accountStats}/${address}` : null,
     apiFetcher,
   );
 

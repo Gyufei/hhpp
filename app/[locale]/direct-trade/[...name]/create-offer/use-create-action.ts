@@ -1,31 +1,40 @@
 import { useEffect, useMemo, useState } from "react";
 import NP from "number-precision";
-import { useStableToken } from "@/lib/hooks/api/token/use-stable-token";
 import { IMarketplace } from "@/lib/types/marketplace";
 import { IPoint, IToken } from "@/lib/types/token";
-import { useTokenPrice } from "@/lib/hooks/api/token/use-token-price";
 import { useCreateOffer } from "@/lib/hooks/contract/use-create-offer";
-import { ProjectDecimalsMap } from "@/lib/const/constant";
-import { toNonExponential } from "@/lib/utils/number";
+import { useStableToken, useTokens } from "@/lib/hooks/api/token/use-tokens";
 
 export function useCreateAction(marketplace: IMarketplace) {
-  const { data: stableTokens } = useStableToken(marketplace.chain);
+  const { data: tokens } = useTokens();
+  const { data: stableToken } = useStableToken();
 
   const [token, setToken] = useState<IToken>({
     symbol: "",
     logoURI: "/icons/empty.svg",
     decimals: 9,
   } as IToken);
+
   const [tokenAmount, setTokenAmount] = useState("");
-  const point = useMemo<IPoint | null>(
-    () => ({
-      logoURI: marketplace.pointLogo,
-      symbol: marketplace.item_name,
+
+  const point = useMemo<IPoint | null>(() => {
+    const token = tokens?.find((t) => t.symbol === marketplace.token_name);
+    if (!token)
+      return {
+        symbol: "",
+        logoURI: "/icons/empty.svg",
+        decimals: 9,
+      } as IPoint;
+
+    return {
+      ...token,
       marketplace,
-    }),
-    [marketplace],
-  );
+    };
+  }, [tokens, marketplace]);
+
   const [pointAmount, setPointAmount] = useState("");
+
+  const [note, setNote] = useState("");
 
   const currentMarket = useMemo(() => {
     if (point?.marketplace) {
@@ -36,24 +45,18 @@ export function useCreateAction(marketplace: IMarketplace) {
   }, [marketplace, point]);
 
   const pointDecimalNum = useMemo(() => {
-    if (ProjectDecimalsMap[currentMarket.market_symbol]) {
-      const decimal = ProjectDecimalsMap[currentMarket.market_symbol];
-      return 10 ** decimal;
-    }
-
-    return 1;
+    const decimal = currentMarket.token.decimals;
+    return 10 ** decimal;
   }, [currentMarket]);
 
   useEffect(() => {
-    if (stableTokens && stableTokens.length > 0) {
-      setToken(stableTokens[0]);
+    if (stableToken) {
+      setToken(stableToken);
     }
-  }, [stableTokens]);
+  }, [stableToken]);
 
-  const { data: tokenPrice } = useTokenPrice(
-    marketplace.chain,
-    token?.address || "",
-  );
+  const tokenPrice = marketplace.strike_price;
+  const pointPrice = marketplace.strike_price;
 
   const tokenAmountValue = useMemo(() => {
     if (!tokenAmount) return 0;
@@ -61,20 +64,12 @@ export function useCreateAction(marketplace: IMarketplace) {
     return NP.times(tokenAmount, tokenPrice);
   }, [tokenAmount, tokenPrice]);
 
-  const pointPrice = useMemo(() => {
-    if (!pointAmount) {
-      return 0;
-    }
-
-    return NP.divide(tokenAmountValue, pointAmount);
-  }, [tokenAmountValue, pointAmount]);
-
   const {
     isLoading: isCreating,
     write: writeAction,
     isSuccess: isCreateSuccess,
   } = useCreateOffer({
-    marketSymbol: currentMarket.market_symbol,
+    marketId: currentMarket.market_place_id,
   });
 
   async function handleCreate() {
@@ -84,10 +79,8 @@ export function useCreateAction(marketplace: IMarketplace) {
       }
 
       writeAction({
-        total_item_amount: toNonExponential(
-          NP.times(pointAmount, pointDecimalNum),
-        ),
-        usdc_amount: tokenAmount,
+        shares: Math.floor(NP.times(pointAmount, pointDecimalNum)),
+        note,
       });
     } catch (error) {
       console.error(error);
@@ -98,6 +91,8 @@ export function useCreateAction(marketplace: IMarketplace) {
     token,
     setToken,
     point,
+    note,
+    setNote,
 
     currentMarket,
     tokenAmount,

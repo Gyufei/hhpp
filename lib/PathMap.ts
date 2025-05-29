@@ -30,14 +30,18 @@ export const ApiPaths = {
   userWithdraw: "/user/withdraw",
   userDeposit: "/user/deposit",
   userXP: "/user/xp",
+  marketKline: "/market/kline",
+  userNonce: "/user/nonce",
+
+  markets: "/markets",
+  salesVolumeHistory: "/market/sales_volume_history",
+  createOffer: "/market/create_offer",
 
   tokenAllowance: "/token/allowance",
 
   tokenPrice: "/token/info",
-  accountInfo: "/account/info",
   usdcBalance: "/account/usdc_balance",
 
-  markets: "/markets",
   offers: "/offers",
   entry: "/entry",
   offer: "/offer",
@@ -45,12 +49,10 @@ export const ApiPaths = {
   holding: "/holdings",
   accountWithdraw: "/account/withdraw",
   marketPointAmount: "/point",
-  marketKline: "/market/kline",
 
   makerOrders: "/user/maker_orders",
   userData: "/user/user_data",
-  marketTrades: "/market_place/maker_trades_history",
-  salesVolumeHistory: "/market_place/sales_volume_history",
+  marketTrades: "/market/maker_trades_history",
   userTokenBalance: "/account/token_balances",
   holderDistribution: "/holdings/distribution",
 

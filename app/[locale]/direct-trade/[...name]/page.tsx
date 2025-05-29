@@ -4,28 +4,27 @@ import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
 import MarketplacePage from "./marketplace-page";
 import { useWsMsg } from "@/lib/hooks/api/use-ws-msgs";
 import { useEffect } from "react";
-import { ChainType } from "@/lib/types/chain";
 
 export default function Marketplace({ params }: { params: { name: string } }) {
-  const marketplaceName = decodeURIComponent(params.name[0]);
+  const mId = decodeURIComponent(params.name[0]);
   const { data: markets, mutate } = useMarketplaces();
 
   const marketplace = markets?.find(
-    (marketplace) => marketplace.market_symbol === marketplaceName,
+    (marketplace) => String(marketplace.id) === mId,
   );
 
-  const { data: wsData } = useWsMsg(marketplace?.chain || ChainType.HYPER);
+  const { data: wsData } = useWsMsg();
 
   useEffect(() => {
     if (wsData && wsData?.length > 0) {
       const currentMsg = wsData[wsData.length - 1];
-      if (currentMsg.market_id === marketplace?.market_place_account) {
+      if (currentMsg.market_id === String(marketplace?.market_place_id)) {
         mutate();
       }
     }
-  }, [wsData, marketplace?.market_place_account, mutate]);
+  }, [wsData, marketplace?.market_place_id, mutate]);
 
-  if (!markets || !marketplaceName) return null;
+  if (!markets || !mId) return null;
 
   if (!marketplace) {
     return (

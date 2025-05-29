@@ -1,7 +1,6 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import FeeDisplay from "./fee-display";
 import { useTranslations } from "next-intl";
 
 export default function OrderNoteAndFee({
@@ -53,7 +52,6 @@ export default function OrderNoteAndFee({
               {value.length} / 500
             </div>
           </div>
-          <FeeDisplay />
         </>
       )}
     </div>

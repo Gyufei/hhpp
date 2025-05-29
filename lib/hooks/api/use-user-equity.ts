@@ -27,11 +27,11 @@ export function useUserEquity() {
       marketplaces.map(async (marketplace) => {
         const pointAmount = await pointAmountFetch(
           address,
-          marketplace.market_place_account,
+          marketplace.market_place_id,
         );
         const pointAmountsValue = formatNum(
           NP.times(
-            marketplace.last_price,
+            marketplace.token.price,
             pointAmount?.locked_amount + pointAmount?.free_amount || "0",
           ),
         );

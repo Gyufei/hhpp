@@ -3,7 +3,6 @@ import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
 import { apiFetcher } from "@/lib/fetcher";
 import { useMemo } from "react";
-import { ChainType } from "@/lib/types/chain";
 
 interface ISalesVolume {
   create_at: number;
@@ -11,12 +10,12 @@ interface ISalesVolume {
   sales_volume: string;
 }
 
-export function useSalesVolume(chain: ChainType, marketplaceId: string) {
+export function useSalesVolume(marketplaceId: string) {
   const { apiEndPoint } = useEndPoint();
 
   const res = useSWR(
     marketplaceId
-      ? `${apiEndPoint}${ApiPaths.salesVolumeHistory}?market_place_account=${marketplaceId}`
+      ? `${apiEndPoint}${ApiPaths.salesVolumeHistory}?market_place_id=${marketplaceId}`
       : null,
     apiFetcher,
   );

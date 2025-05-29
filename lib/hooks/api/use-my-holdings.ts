@@ -25,7 +25,7 @@ export function useMyHoldings() {
 
     const holdings = holdingRes.map((h: any) => {
       const curMarketplace = marketplaceData?.find(
-        (m: any) => h.market_symbol === m.market_symbol,
+        (m: any) => h.market_place_id === m.market_place_id,
       );
 
       return {
@@ -38,7 +38,7 @@ export function useMyHoldings() {
       ...Array.from(
         new Map(
           holdings.map((item: IHolding) => [
-            item.marketplace?.market_catagory,
+            item.marketplace?.expiry_date,
             item,
           ]),
         ).values(),

@@ -42,7 +42,7 @@ export function InputPanel({
             onUserInput={onValueChange}
           />
         ) : (
-          <div className="mt-2 h-9 text-2xl">{value}</div>
+          <div className="mt-2 h-9 text-2xl text-title-white">{value}</div>
         )}
         <div className="text-xs leading-[18px] text-gray">{bottomText}</div>
       </div>

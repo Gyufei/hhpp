@@ -16,23 +16,9 @@ export function useTokens() {
         name: t.token_name,
         symbol: t.token_name,
         decimals: t.token_decimals,
-        logoURI: t.logo_url,
+        logoURI: t.logo_url || `/icons/${t.token_name}.svg`,
         price: t.token_price,
       } as any;
-
-      delete newT.url;
-
-      if (newT.symbol === "WSOL") {
-        newT.symbol = "SOL";
-      }
-
-      if (newT.symbol === "WETH") {
-        newT.symbol = "ETH";
-      }
-
-      if (newT.symbol === "WBNB") {
-        newT.symbol = "BNB";
-      }
 
       return newT;
     });
@@ -47,6 +33,16 @@ export function useTokens() {
 
   return {
     data,
+    isLoading,
+    error,
+  };
+}
+
+export function useStableToken() {
+  const { data, isLoading, error } = useTokens();
+
+  return {
+    data: data?.find((t) => t.symbol === "USDT"),
     isLoading,
     error,
   };

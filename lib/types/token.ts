@@ -11,8 +11,6 @@ export interface IToken {
   [key: string]: any;
 }
 
-export interface IPoint {
-  symbol: string;
-  logoURI: string;
+export type IPoint = IToken & {
   marketplace: IMarketplace;
-}
+};

@@ -95,3 +95,15 @@ export function convertUTCToLocalString(utcDateString: string) {
   const localDate = convertUTCToLocalStamp(utcDateString);
   return format(new Date(localDate), "yyyy-MM-dd HH:mm:ss");
 }
+
+export function coverExpiryDate(expiryDate: string) {
+  const year = expiryDate.slice(0, 4);
+  const month = expiryDate.slice(4, 6);
+  const day = expiryDate.slice(6, 8);
+
+  return {
+    str: `${year}-${month}-${day}`,
+    date: new Date(`${year}-${month}-${day}`),
+    timestamp: new Date(`${year}-${month}-${day}`).getTime(),
+  };
+}

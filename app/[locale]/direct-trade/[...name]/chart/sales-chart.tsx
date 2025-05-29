@@ -1,13 +1,12 @@
 import NP from "number-precision";
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import Highcharts, { Options } from "highcharts";
 import HighchartsExporting from "highcharts/modules/exporting";
 import HighchartsReact from "highcharts-react-official";
 import { IMarketplace } from "@/lib/types/marketplace";
 import { useSalesVolume } from "@/lib/hooks/api/use-sales-volume";
-import { useWsMsg } from "@/lib/hooks/api/use-ws-msgs";
-import { useEffect } from "react";
 import { sortBy } from "lodash";
+import { useWsMsg } from "@/lib/hooks/api/use-ws-msgs";
 
 if (typeof Highcharts === "object") {
   HighchartsExporting(Highcharts);
@@ -39,22 +38,20 @@ export default function SalesChart({
 }) {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
-  const marketplaceId = marketplace?.market_place_account;
+  const marketplaceId = String(marketplace?.id);
 
-  const { data: salesData, mutate } = useSalesVolume(
-    marketplace.chain,
-    marketplaceId,
-  );
-  const { data } = useWsMsg(marketplace.chain);
+  const { data: salesData, mutate } = useSalesVolume(marketplaceId);
+
+  const { data } = useWsMsg();
 
   useEffect(() => {
     if (data && data.length > 0) {
       const currentMsg = data[data.length - 1];
-      if (currentMsg.market_id === marketplace?.market_place_account) {
+      if (currentMsg.market_id === marketplaceId) {
         mutate();
       }
     }
-  }, [data, marketplace?.market_place_account, mutate]);
+  }, [data, marketplaceId, mutate]);
 
   const now = new Date().getTime();
   const oneHourDuration = 3600 * 1000;

@@ -1,6 +1,6 @@
 "use client";
 import { formatNum } from "@/lib/utils/number";
-import { useAccountStats } from "@/lib/hooks/api/use-account-overview";
+import { useAccountStats } from "@/lib/hooks/api/use-account-stats";
 import { useTranslations } from "next-intl";
 
 export default function AccountOverview() {

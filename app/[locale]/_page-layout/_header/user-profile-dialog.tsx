@@ -11,7 +11,7 @@ import { useUserCreate } from "@/lib/hooks/contract/use-user-create";
 import { UserProfileDialogOpen } from "@/lib/states/user";
 import { useUserNameChange } from "@/lib/hooks/api/use-user-name-change";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
-import { useAccountStats } from "@/lib/hooks/api/use-account-overview";
+import { useAccountStats } from "@/lib/hooks/api/use-account-stats";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

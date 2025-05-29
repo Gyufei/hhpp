@@ -13,8 +13,6 @@ import { range, sortBy } from "lodash";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
 import { useTokens } from "@/lib/hooks/api/token/use-tokens";
-import { ChainType } from "@/lib/types/chain";
-import { ProjectDecimalsMap } from "@/lib/const/constant";
 import NP from "number-precision";
 
 export function TradesTable({
@@ -28,16 +26,13 @@ export function TradesTable({
 }) {
   const T = useTranslations("Marketplace");
   const { data: historyData, isLoading: isHistoryLoading } = useMarketTrades(
-    marketplace?.chain || ChainType.HYPER,
-    marketplace?.market_place_account || "",
+    String(marketplace?.id) || "",
   );
 
-  const { data: tokens } = useTokens(marketplace?.chain || ChainType.HYPER);
+  const { data: tokens } = useTokens();
   const isLoadingFlag = !marketplace || isLoading || isHistoryLoading;
 
-  const { data: msgEvents } = useWsMsg(
-    marketplace?.chain || ChainType.HYPER,
-  );
+  const { data: msgEvents } = useWsMsg();
 
   const tradeMsgs = useMemo<any[]>(() => {
     const sortHistory = sortBy(historyData || [], "trade_at").reverse();
@@ -49,7 +44,7 @@ export function TradesTable({
     });
 
     const msgAll = (msgEvents || []).filter(
-      (msg) => !!msg && msg.market_id === marketplace?.market_place_account,
+      (msg) => !!msg && msg.market_id === String(marketplace?.id),
     );
 
     const allMsg = sortBy(msgAll || [], "trade_at")
@@ -67,7 +62,7 @@ export function TradesTable({
       });
 
     return allMsg;
-  }, [msgEvents, historyData, tokens, marketplace?.market_place_account]);
+  }, [msgEvents, historyData, tokens, marketplace?.id]);
 
   const data = useMemo(() => {
     if (isLoadingFlag) {
@@ -102,20 +97,14 @@ export function TradesTable({
   }, [tradeMsgs, type, isLoadingFlag]);
 
   const pointDecimalNum = useMemo(() => {
-    if (marketplace && ProjectDecimalsMap[marketplace.market_symbol]) {
-      const decimal = ProjectDecimalsMap[marketplace.market_symbol];
-      return 10 ** decimal;
-    }
-
-    return 1;
+    return 10 ** (marketplace?.token?.decimals || 0);
   }, [marketplace]);
 
   const theme = useTheme({
     Table: `
       grid-template-rows: 40px repeat(auto-fit, 40px);
-      grid-template-columns: 30px 60px minmax(0, max-content) minmax(0, max-content) 1fr;
+      grid-template-columns: 30px 60px minmax(0, max-content) 1fr 1fr;
       font-weight: 400;
-
       &::-webkit-scrollbar {
         display: none;
       }
@@ -211,7 +200,7 @@ export function TradesTable({
         ),
     },
     {
-      label: T("StrikePrice"),
+      label: T("StrikePrice").replace(" ", ""),
       renderCell: (trade: any) =>
         isLoadingFlag ? (
           <Skeleton className="h-[16px] w-[50px]" />

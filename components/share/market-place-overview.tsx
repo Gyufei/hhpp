@@ -1,13 +1,13 @@
 import { IMarketplace } from "@/lib/types/marketplace";
-import { formatNum, toPercent } from "@/lib/utils/number";
+import { formatNum } from "@/lib/utils/number";
 import { Skeleton } from "../ui/skeleton";
 import { useTranslations } from "next-intl";
-import { ProjectDecimalsMap } from "@/lib/const/constant";
 import { useMemo, useState } from "react";
 import NP from "number-precision";
 import { cn } from "@/lib/utils/common";
 import Image from "next/image";
 import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
+import { coverExpiryDate } from "@/lib/utils/time";
 
 export default function MarketplaceOverview({
   marketplace,
@@ -23,12 +23,8 @@ export default function MarketplaceOverview({
   const isColl = isMobileSize && isCollapsed;
 
   const pointDecimalNum = useMemo(() => {
-    if (marketplace && ProjectDecimalsMap[marketplace.market_symbol]) {
-      const decimal = ProjectDecimalsMap[marketplace.market_symbol];
-      return 10 ** decimal;
-    }
-
-    return 1;
+    const decimal = marketplace?.token?.decimals || 0;
+    return 10 ** decimal;
   }, [marketplace]);
 
   return (
@@ -38,7 +34,6 @@ export default function MarketplaceOverview({
           <ValueSkeleton />
         ) : (
           <div className="flex items-center gap-x-1">
-            <Change24H rate={+marketplace.change_rate_24h} />
             <Image
               onClick={() => setIsCollapsed(!isCollapsed)}
               src="/icons/down.svg"
@@ -67,50 +62,10 @@ export default function MarketplaceOverview({
                 <ValueSkeleton />
               ) : (
                 <div className="flex items-center leading-5 text-title-white">
-                  $
-                  {formatNum(
-                    NP.times(
-                      marketplace.initial_listing_price,
-                      pointDecimalNum,
-                    ),
-                    3,
-                  )}
+                  ${formatNum(marketplace!.initial_premium_price, 3)}
                 </div>
               )}
             </div>
-
-            <div className="flex justify-between">
-              <LabelText isLoading={isLoadingFlag}>
-                {T("AllTimeHigh")}
-              </LabelText>
-              {isLoadingFlag ? (
-                <ValueSkeleton />
-              ) : (
-                <div className="flex items-center leading-5 text-title-white">
-                  $
-                  {formatNum(
-                    Number(
-                      NP.times(
-                        marketplace.all_time_high_price,
-                        pointDecimalNum,
-                      ),
-                    ),
-                    3,
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* <div className="hidden justify-between sm:flex">
-              <LabelText isLoading={isLoadingFlag}>
-                {T("24hChange")}
-              </LabelText>
-              {isLoadingFlag ? (
-                <ValueSkeleton />
-              ) : (
-                <Change24H rate={+marketplace.change_rate_24h} />
-              )}
-            </div> */}
 
             <div className="flex justify-between">
               <LabelText isLoading={isLoadingFlag}>
@@ -152,6 +107,7 @@ export default function MarketplaceOverview({
                 </div>
               )}
             </div>
+
             <div className="flex justify-between ">
               <LabelText isLoading={isLoadingFlag}>
                 {T("StrikePrice")}
@@ -159,41 +115,26 @@ export default function MarketplaceOverview({
               {isLoadingFlag ? (
                 <ValueSkeleton />
               ) : (
-                <div className="flex items-center leading-6 text-title-white"></div>
+                <div className="flex items-center leading-6 text-title-white">
+                  ${formatNum(marketplace!.strike_price)}
+                </div>
               )}
             </div>
+
             <div className="flex justify-between ">
               <LabelText isLoading={isLoadingFlag}>{T("ExpiryDate")}</LabelText>
               {isLoadingFlag ? (
                 <ValueSkeleton />
               ) : (
-                <div className="flex items-center leading-6 text-title-white"></div>
+                <div className="flex items-center leading-6 text-title-white">
+                  {coverExpiryDate(marketplace!.expiry_date).str}
+                </div>
               )}
             </div>
           </>
         )}
       </div>
     </>
-  );
-}
-
-function Change24H({ rate }: { rate: number }) {
-  const isUp = rate > 0;
-  const isZero = rate === 0;
-  const isDown = rate < 0;
-
-  return (
-    <div
-      className={cn(
-        "text-xl leading-[30px] sm:text-xs sm:leading-[18px]",
-        isUp && "text-green",
-        isDown && "text-red",
-        isZero && "text-title-white",
-      )}
-    >
-      {isZero ? null : isUp ? "+ " : "- "}
-      {isZero ? 0 : toPercent(rate)}%
-    </div>
   );
 }
 

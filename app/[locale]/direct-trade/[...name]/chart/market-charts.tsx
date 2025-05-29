@@ -49,7 +49,7 @@ export default function MarketCharts({
               onClick={() => setShowKChart(false)}
             />
           </div>
-          <KChart symbol={marketplace.market_symbol} />
+          <KChart symbol={marketplace.token.symbol} />
         </>
       ) : (
         <>

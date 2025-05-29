@@ -11,10 +11,10 @@ export function useMarketPoints() {
     }
 
     const pts: Array<IPoint> = marketRes.data
-      .filter((m) => m.status !== "offline")
+      .filter((m) => m.market_place_status !== "offline")
       .map((market) => ({
         logoURI: market.pointLogo,
-        symbol: market.item_name,
+        symbol: market.token_name,
         marketplace: market,
       }));
 

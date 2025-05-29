@@ -15,11 +15,6 @@ export default function MarketTrades({
 }) {
   const T = useTranslations("Marketplace");
   const isLoadingFlag = !marketplace || isLoading;
-  // const [tradeType, setTradeType] = useState<ITradeType>("All");
-
-  // function handleTradeTypeChange(t: ITradeType) {
-  //   setTradeType(t);
-  // }
 
   return (
     <div className="flex flex-1 flex-col rounded bg-bg-black sm:p-[10px]">
@@ -29,10 +24,6 @@ export default function MarketTrades({
             {T("MarketTrades")}
           </div>
         </div>
-        {/* <TradeTypeSelect
-          type={tradeType}
-          handleTypeChange={handleTradeTypeChange}
-        /> */}
       </div>
 
       <TradesTable

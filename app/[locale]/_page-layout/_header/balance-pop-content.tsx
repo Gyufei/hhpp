@@ -12,7 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 import { UserProfileDialogOpen } from "@/lib/states/user";
 import { useSetAtom } from "jotai";
-import { useAccountStats } from "@/lib/hooks/api/use-account-overview";
+import { useAccountStats } from "@/lib/hooks/api/use-account-stats";
 import { IUserBalance, useUserBalance } from "@/lib/hooks/api/use-user-balance";
 
 export default function BalancePopContent() {
