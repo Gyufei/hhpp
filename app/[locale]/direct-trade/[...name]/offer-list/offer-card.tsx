@@ -38,6 +38,7 @@ export function OfferCard({
     tokenTotalPrice,
     expiry,
     strike,
+    progress,
   } = useOfferFormat({
     offer: offer,
   });
@@ -45,11 +46,11 @@ export function OfferCard({
   const offerType = "sell";
 
   const showBuy = useMemo(() => {
-    return ["virgin", "ongoing"].includes(offer.order_status);
+    return ["created"].includes(offer.order_status);
   }, [offer]);
 
   const done = useMemo(() => {
-    return ["filled", "settled"].includes(offer.order_status);
+    return ["purchased", "settled", "cancelled"].includes(offer.order_status);
   }, [offer]);
 
   function handleShow() {
@@ -75,6 +76,19 @@ export function OfferCard({
             <div className="w-fit rounded border border-border-black bg-border-black px-[5px] py-[2px] text-[10px] leading-4 text-gray">
               #{offer.id}
             </div>
+          </div>
+        </div>
+
+        <div className="relative">
+          <CircleProgress
+            percentage={Number(formatNum(progress * 100))}
+            className="scale-[1.1429]"
+          />
+          <div
+            data-zero={Number(progress) === 0 ? true : false}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs leading-[18px] data-[zero=false]:text-txt-white data-[zero=true]:text-gray"
+          >
+            {formatNum(progress)}%
           </div>
         </div>
       </div>

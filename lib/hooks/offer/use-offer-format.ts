@@ -24,9 +24,10 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
 
   const tokenLogo = offerTokenInfo?.logoURI || "/icons/empty.svg";
   const pointLogo = offerPointInfo?.logoURI || "/icons/empty.svg";
-  const pointPerPrice = offer.marketplace.token.price;
 
+  const pointPerPrice = offer.marketplace.token.price;
   const pointPrice = offer.marketplace.strike_price;
+
   const pointAmount = NP.divide(offer.shares, pointDecimalNum);
   const amount = NP.times(pointAmount, pointPrice);
 
@@ -39,12 +40,14 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
   const offerLogo = offerType === "sell" ? pointLogo : tokenLogo;
   const forLogo = offerType === "sell" ? tokenLogo : pointLogo;
 
-  const isFilled = false;
-
+  const isFilled = offer.order_status === "purchased";
   const isCanceled = offer.order_status === "cancelled";
+  const isSettled = offer.order_status === "settled";
 
-  const isClosed = useMemo(() => {
-    return ["filled", "canceled", "settled"].includes(offer.order_status);
+  const progress = isFilled || isSettled ? 100 : 0;
+
+  const isNotCanBuy = useMemo(() => {
+    return ["purchased", "cancelled", "settled"].includes(offer.order_status);
   }, [offer.order_status]);
 
   const expiry = offer.marketplace.expiry_date;
@@ -56,6 +59,8 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     forValue,
     offerLogo,
     forLogo,
+    progress,
+    pointPrice,
 
     tokenPrice,
     tokenTotalPrice,
@@ -66,7 +71,8 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
 
     isFilled,
     isCanceled,
-    isClosed,
+    isSettled,
+    isNotCanBuy,
 
     expiry,
     strike,

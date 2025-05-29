@@ -91,7 +91,7 @@ export default function OfferList({
       >
         {isLoading ? (
           range(6).map((i) => <OrderCardSkeleton key={i} />)
-        ) : offers.length < 1 ? (
+        ) : filterOrders.length < 1 ? (
           <div className="absolute inset-0 left-1/2 top-1/2 flex h-full -translate-x-1/2 -translate-y-1/2 items-center justify-center">
             <Empty />
           </div>
@@ -99,7 +99,7 @@ export default function OfferList({
           (filterOrders || []).map((offer) => (
             <OfferCard
               offer={offer}
-              key={offer.offer_id}
+              key={offer.order_id}
               handleShowOffer={handleShowOffer}
             />
           ))

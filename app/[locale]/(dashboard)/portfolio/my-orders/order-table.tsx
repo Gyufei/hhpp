@@ -12,71 +12,40 @@ import { useTheme } from "@table-library/react-table-library/theme";
 import { Pagination } from "@/components/ui/pagination/pagination";
 import { useMemo, useState } from "react";
 import { useMyOffers } from "@/lib/hooks/api/use-my-offers";
-import { useMyOrders } from "@/lib/hooks/api/use-my-orders";
-import { formatTimestamp } from "@/lib/utils/time";
 import OfferAboutMineDetailDrawer from "../offer-about-mine-detail-drawer";
 import { useTranslations } from "next-intl";
 import { sortBy } from "lodash";
-import { ChainType } from "@/lib/types/chain";
-import { reportEvent } from "@/lib/utils/analytics";
 import { formatNum } from "@/lib/utils/number";
-import Image from "next/image";
-import { handleGoScan, truncateAddr } from "@/lib/utils/web3";
 import { IOffer } from "@/lib/types/offer";
+import NP from "number-precision";
+import { format } from "date-fns";
 
-export function OrderTable({filters}: {filters: string[]}) {
+export function OrderTable({ filters }: { filters: string[] }) {
   const T = useTranslations("MyOrders");
 
-  const { data: offers, mutate: refreshMyOffers } = useMyOffers({
-    market_symbol: null,
-    chain: ChainType.HYPER,
-  });
-  const { data: orders = [] } = useMyOrders({
-    market_symbol: null,
-    chain: ChainType.HYPER,
-  });
+  const { data: offers, mutate: refreshMyOffers } = useMyOffers();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const [selectOfferId, setSelectOfferId] = useState("");
-  const selectedOffer = offers?.find((o) => o.offer_id === selectOfferId);
+  const selectedOffer = offers?.find((o) => o.order_id === selectOfferId);
 
   const data = useMemo(() => {
-    const offerData = (offers || []).map((o) => {
-      return {
-        ...o,
-        id: o.offer_id,
-        type: "bids",
-      };
-    });
-
-    const orderData = (orders || []).map((o) => {
-      return {
-        ...o,
-        id: o.order_id,
-        type: "buys",
-      };
-    });
-    let showData = [...offerData, ...orderData];
+    let showData = [...offers];
     if (filters.length !== 0) {
-      showData = showData.filter((o) =>
-        filters.includes(o.type),
-      );
-    } 
+      showData = showData.filter((o) => filters.includes(o.role));
+    }
 
-    const sortData = sortBy(
-      showData,
-      "create_at",
-    ).reverse();
+    const sortData = sortBy(showData, "create_at").reverse();
 
     return {
       nodes: sortData,
     };
-  }, [offers, orders, filters]);
+  }, [offers, filters]);
 
   const theme = useTheme({
     Table: `
-      grid-template-columns: 100px repeat(7,minmax(0,1fr));
+      grid-template-columns: 160px repeat(6,minmax(0,1fr));
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
     `,
@@ -153,30 +122,29 @@ export function OrderTable({filters}: {filters: string[]}) {
         pagination={pagination}
         className="no-scroll-bar flex-1"
       >
-        {(tableList: Array<any>) => (
+        {(tableList: Array<IOffer>) => (
           <>
             <Header className="text-xs leading-[18px] text-gray">
-              <HeaderRow className="boffer-none">
-                <HeaderCell>{T("Coin")}</HeaderCell>
+              <HeaderRow className="border-none">
+                <HeaderCell>{T("Option")}</HeaderCell>
                 <HeaderCell>{T("Offer")}</HeaderCell>
                 <HeaderCell>{T("Type")}</HeaderCell>
                 <HeaderCell>{T("Price")}</HeaderCell>
                 <HeaderCell>{T("USDValue(Snapshot)")}</HeaderCell>
-                <HeaderCell>
-                  {T("Tx")}
-                </HeaderCell>
                 <HeaderCell>{T("CreatedTime")}</HeaderCell>
                 <HeaderCell></HeaderCell>
               </HeaderRow>
             </Header>
             <Body>
               {tableList.map((off) => (
-                <Row key={off.offer_id} item={off} className="h-12 border-none">
+                <Row key={off.order_id} item={off} className="h-12 border-none">
                   <Cell>
-                    <div>{off.marketplace.item_name}</div>
+                    <div>
+                      {off.marketplace.token_name}-{off.marketplace.expiry_date}
+                    </div>
                   </Cell>
                   <Cell>
-                    <div>#{off.entry.id}</div>
+                    <div>#{off.id}</div>
                   </Cell>
                   <Cell>
                     <div
@@ -187,22 +155,33 @@ export function OrderTable({filters}: {filters: string[]}) {
                     </div>
                   </Cell>
                   <Cell>
-                    <div>${formatNum(off.price, 6)}</div>
+                    <div>${formatNum(off.marketplace.strike_price, 6)}</div>
                   </Cell>
                   <Cell>
-                    <div>${formatNum(off.price * off.item_amount, 6)}</div>
+                    <div>
+                      $
+                      {formatNum(
+                        NP.times(
+                          NP.divide(
+                            off.shares,
+                            10 ** off.marketplace.token.decimals,
+                          ),
+                          off.marketplace.strike_price,
+                        ),
+                        6,
+                      )}
+                    </div>
                   </Cell>
                   <Cell>
-                    <OfferHash offer={off} />
-                  </Cell>
-                  <Cell>
-                    <div>{formatTimestamp(off.create_at * 1000)}</div>
+                    <div>
+                      {format(new Date(off.create_at), "yyyy-MM-dd HH:mm:ss")}
+                    </div>
                   </Cell>
                   <Cell>
                     <div>
                       {off.role !== "taker" && (
                         <DetailBtn
-                          onClick={() => handleOpenOfferDrawer(off.offer_id)}
+                          onClick={() => handleOpenOfferDrawer(off.order_id)}
                         ></DetailBtn>
                       )}
                     </div>
@@ -239,42 +218,14 @@ export function OrderTable({filters}: {filters: string[]}) {
       )}
 
       <OfferAboutMineDetailDrawer
-        holdingId={selectOfferId}
         drawerOpen={drawerOpen}
         setDrawerOpen={setDrawerOpen}
-        offer={selectedOffer}
+        offer={selectedOffer as IOffer}
         onSuccess={() => {
-          if (selectOfferId) {
-            reportEvent("offerDetailActionSuccess", {
-              value: selectOfferId.slice(-8),
-            });
-          }
           refreshMyOffers();
         }}
       />
     </>
-  );
-}
-
-function OfferHash({ offer }: { offer: IOffer }) {
-  const hash = offer.tx_hash;
-  if (!hash) {
-    return <span className="leading-5">N/A</span>;
-  }
-  return (
-    <div className="flex items-center">
-      <span className="leading-5 ">
-        {truncateAddr(hash || "", { nPrefix: 4, nSuffix: 4 })}
-      </span>
-      <Image
-        onClick={() => handleGoScan(offer.marketplace.chain, hash || "", "tx")}
-        src="/icons/right-45.svg"
-        width={16}
-        height={16}
-        alt="goScan"
-        className="cursor-pointer"
-      />
-    </div>
   );
 }
 

@@ -2,14 +2,13 @@ import useSWR from "swr";
 import { useEndPoint } from "./use-endpoint";
 import { ApiPaths } from "@/lib/PathMap";
 import { apiFetcher } from "@/lib/fetcher";
-import { ChainType } from "@/lib/types/chain";
 
-export function useMarketHolder(chain: ChainType, marketplaceId: string) {
+export function useMarketHolder(marketplaceId: string) {
   const { apiEndPoint } = useEndPoint();
 
   const res = useSWR(
-    marketplaceId && chain
-      ? `${apiEndPoint}${ApiPaths.holderDistribution}?market_place_account=${marketplaceId}`
+    marketplaceId
+      ? `${apiEndPoint}${ApiPaths.offerDistribution}?market_place_id=${marketplaceId}`
       : "",
     apiFetcher,
   );

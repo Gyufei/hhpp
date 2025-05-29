@@ -7,40 +7,41 @@ import {
   HeaderCell,
   Cell,
 } from "@table-library/react-table-library/table";
+import Image from "next/image";
 import { usePagination } from "@table-library/react-table-library/pagination";
 import { useTheme } from "@table-library/react-table-library/theme";
 import { Pagination } from "@/components/ui/pagination/pagination";
 import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
-import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
-import { usePointAmount } from "@/lib/hooks/api/use-point-amount";
-import { SellContent } from "@/app/[locale]/direct-trade/[...name]/create-offer/sell-content";
-import { reportEvent } from "@/lib/utils/analytics";
-import DrawerTitle from "@/components/share/drawer-title";
-import Drawer from "react-modern-drawer";
 import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 import NP from "number-precision";
-import { formatNum } from "@/lib/utils/number";
+import { useOffers } from "@/lib/hooks/api/use-offers";
 // import { useUserData } from "@/lib/hooks/api/use-user-data";
 
 export function BalanceTable() {
   const BT = useTranslations("MyBalances");
-  const OT = useTranslations("Offer");
 
-  const [marketCreateOffer, setOpenMarketCreateOffer] = useState(null);
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_account || "";
+  console.log(accountInfo);
 
-  const { data: marketplaceData } = useMarketplaces();
+  const { data: myTakeOffers } = useOffers(
+    {
+      taker: address,
+    },
+    address ? `my-take-offer-${address}` : "",
+  );
 
   const data = useMemo(() => {
     return {
-      nodes: marketplaceData || [],
+      nodes: myTakeOffers || [],
     };
-  }, [marketplaceData]);
+  }, [myTakeOffers]);
 
   const theme = useTheme({
     Table: `
-      grid-template-columns: 180px repeat(4,minmax(0,1fr));
+      grid-template-columns: 180px repeat(3,minmax(0,1fr));
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
     `,
@@ -96,10 +97,6 @@ export function BalanceTable() {
     pagination.fns.onSetPage(page);
   };
 
-  function handleCloseDrawer() {
-    setOpenMarketCreateOffer(null);
-  }
-
   if (!data.nodes.length) {
     return (
       <div className="flex w-screen flex-1 items-center justify-center text-base text-gray sm:w-full">
@@ -122,31 +119,50 @@ export function BalanceTable() {
               <HeaderRow className="">
                 <HeaderCell>{BT("Option")}</HeaderCell>
                 <HeaderCell>{BT("TotalBalance")}</HeaderCell>
-                <HeaderCell>{BT("AvailableBalance")}</HeaderCell>
                 <HeaderCell>{BT("USDValue")}</HeaderCell>
-                {/* <HeaderCell>
-                  <div className="underline">{T("PnL(%)")}</div>
-                </HeaderCell> */}
                 <HeaderCell></HeaderCell>
               </HeaderRow>
             </Header>
             <Body>
-              {tableList.map((marketplace) => (
-                <Row key={marketplace.id} item={marketplace}>
+              {tableList.map((offer) => (
+                <Row key={offer.id} item={offer}>
                   <Cell>
-                    <div>{marketplace.item_name}</div>
+                    <div>
+                      {offer.marketplace.token_name}-
+                      {offer.marketplace.expiry_date}
+                    </div>
                   </Cell>
 
-                  <BalanceValue
-                    marketAccount={marketplace.market_place_account}
-                    lastPrice={marketplace.last_price}
-                  />
+                  <Cell>
+                    <div className="flex items-center gap-2">
+                      <span>
+                        {NP.divide(
+                          offer.shares,
+                          10 ** offer.marketplace.token.decimals,
+                        )}
+                      </span>
+                      <Image
+                        src={offer.marketplace.token.logoURI}
+                        alt={offer.marketplace.token_name}
+                        width={20}
+                        height={20}
+                      />
+                    </div>
+                  </Cell>
+
+                  <Cell>
+                    {NP.times(
+                      NP.divide(
+                        offer.shares,
+                        10 ** offer.marketplace.token.decimals,
+                      ),
+                      offer.marketplace.strike_price,
+                    )}
+                  </Cell>
+
                   <Cell>
                     <div
-                      onClick={() => {
-                        setOpenMarketCreateOffer(marketplace);
-                        reportEvent("click", { value: "listOffer" });
-                      }}
+                      onClick={() => {}}
                       className="flex h-7 w-fit cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]"
                     >
                       {BT("List")}
@@ -182,55 +198,6 @@ export function BalanceTable() {
           <Pagination.NextButton />
         </Pagination>
       )}
-      {marketCreateOffer && (
-        <Drawer
-          open={true}
-          onClose={handleCloseDrawer}
-          direction="right"
-          size={500}
-          className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
-        >
-          <DrawerTitle title={OT("List")} onClose={handleCloseDrawer} />
-
-          <SellContent
-            onSuccess={handleCloseDrawer}
-            marketplace={marketCreateOffer}
-          />
-        </Drawer>
-      )}
     </>
   );
 }
-
-const BalanceValue = ({
-  marketAccount,
-  lastPrice,
-}: {
-  marketAccount: string;
-  lastPrice: string;
-}) => {
-  const { data: accountInfo } = useAccountInfo();
-
-  const address = accountInfo?.dest_account || "";
-
-  const { data: pointAmount = { locked_amount: 0, free_amount: 0 } } =
-    usePointAmount(address, marketAccount);
-
-  const total = pointAmount?.locked_amount + pointAmount?.free_amount;
-  const usbValue = NP.times(lastPrice || "0", total || "0");
-
-  return (
-    <>
-      <Cell>{total || 0}</Cell>
-      <Cell>{pointAmount?.free_amount || 0}</Cell>
-      <Cell>${formatNum(usbValue)}</Cell>
-      {/* <Cell
-        data-up={Number(commissionRate === 0) ? "zero" : commissionRate > 0}
-        className="data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-gray"
-      >
-        {commissionRateTag}${pnl}/{commissionRateTag}
-        {formatNum(Math.abs(commissionRate) * 100)}%
-      </Cell> */}
-    </>
-  );
-};

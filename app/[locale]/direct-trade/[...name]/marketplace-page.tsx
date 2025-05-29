@@ -9,7 +9,7 @@ import MarketCharts from "./chart/market-charts";
 import MarketTrades from "./market-trades/market-trades";
 import MarketHolder from "./market-holder/market-holder";
 
-import { useMarketOffers } from "@/lib/hooks/api/use-market-offers";
+import { useOffers } from "@/lib/hooks/api/use-offers";
 import { IOffer } from "@/lib/types/offer";
 
 import { IMarketplace } from "@/lib/types/marketplace";
@@ -32,9 +32,12 @@ export default function MarketplacePage({
     data: offers,
     mutate: refreshOffers,
     isLoading: isOffersLoading,
-  } = useMarketOffers({
-    marketId: String(marketplace?.id) || "",
-  });
+  } = useOffers(
+    {
+      marketId: String(marketplace?.id) || "",
+    },
+    "market-all-offers",
+  );
 
   const canBuyOffers = useMemo(() => {
     const showOffer = (offers || [])?.filter(

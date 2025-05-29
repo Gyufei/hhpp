@@ -84,6 +84,7 @@
     "YouDLikeToReceive": "你将收到",
     "YouDLikeToReceiveTip": "当购买 {pointName} 时, 您需要等到 {pointName} 转换成协议的代币之后才能接收代币",
     "YouPay": "你支付",
+    "YouPayPremium": "你支付权利金",
     "OrderNote": "订单备注",
     "AnythingYouWantToInformTheBuyer": "任何你想告诉买家的内容",
     "MinimumOrderAmount": "最低订单数量",
@@ -94,7 +95,7 @@
     "YouHaveToSell": " 你要卖",
     "YouHaveTheOptionToClose": "在 100% 完成前可关闭订单",
 
-    "Offer100%Filled": "订单完成",
+    "OfferBePurchased": "订单完成",
     "ConfirmOrder": "确认订单",
     "RelistThisOffer": "重新上架",
     "OfferClosed": "已关闭",
@@ -102,6 +103,7 @@
     "CloseThisOffer": "关闭",
     "AbortThisOffer": "中止",
     "CloseBidOffer": "关闭竞价订单",
+    "DelistThisOffer": "下架",
 
     "Filled/SellingAmount": "已售 / 总销售",
     "Filled/BuyingAmount": "已购 / 总需求",
@@ -162,7 +164,7 @@
     "Type": "类型",
     "Status": "状态",
     "Offer": "订单",
-    "Coin": "代币",
+    "Option": "项",
     "Tx": "交易",
     "USDValue(Snapshot)": "美元价值",
     "Price": "价格",

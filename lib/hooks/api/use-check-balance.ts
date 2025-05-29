@@ -14,7 +14,7 @@ export function useCheckBalance(market: IMarketplace) {
 
   const usdtBalance = usdcBalanceObj?.available_balance_num || "0";
 
-  const checkUSDCInsufficient = useCallback(
+  const checkUSDTInsufficient = useCallback(
     (value: string | number) => {
       if (usdtBalance === undefined) return "";
 
@@ -32,21 +32,26 @@ export function useCheckBalance(market: IMarketplace) {
     (b) => b.token.symbol === market.token_name,
   );
 
-  const pointAmount = pointAmountObj?.available_balance_num || "0";
+  const pointBalance = pointAmountObj?.available_balance_num || "0";
 
   const checkPointInsufficient = useCallback(
     (value: string | number) => {
-      if (pointAmount === undefined) return "";
+      if (pointBalance === undefined) return "";
 
-      const valueResult = NP.minus(pointAmount, value) >= 0;
+      const valueResult = NP.minus(pointBalance, value) >= 0;
 
       if (!valueResult) {
         return `Insufficient ${market.token_name} to sell`;
       }
       return "";
     },
-    [pointAmount, market.token_name],
+    [pointBalance, market.token_name],
   );
 
-  return { checkUSDCInsufficient, checkPointInsufficient };
+  return {
+    usdtBalance,
+    pointAmount: pointBalance,
+    checkUSDTInsufficient,
+    checkPointInsufficient,
+  };
 }

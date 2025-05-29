@@ -5,11 +5,12 @@ import { handleGoScan, truncateAddr } from "@/lib/utils/web3";
 import { IOffer } from "@/lib/types/offer";
 import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
 import { useTranslations } from "next-intl";
-import { useEntryById } from "@/lib/hooks/api/use-entry-by-id";
 import {
   DetailLabel,
   DetailRow,
 } from "@/app/[locale]/direct-trade/[...name]/offer-detail/detail-card";
+import { format } from "date-fns";
+import { coverExpiryDate } from "@/lib/utils/time";
 
 export default function MyDetailCard({ offer }: { offer: IOffer }) {
   const T = useTranslations("Offer");
@@ -17,10 +18,9 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
   const { offerPointInfo, pointDecimalNum } = useOfferFormat({
     offer: offer,
   });
-  const { data: entryInfo } = useEntryById(offer.entry.id);
 
-  const originId = entryInfo?.root_entry_id || offer.entry.id;
-  const originMaker = entryInfo?.original_creator || offer.offer_maker;
+  const originId = offer.id;
+  const originMaker = offer.creator;
 
   return (
     <div className="flex-1 p-5">
@@ -35,7 +35,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
         </DetailLabel>
         <div className="flex items-center space-x-1">
           <div className="text-xs leading-5 text-title-white">
-            {formatNum(NP.divide(offer.item_amount, pointDecimalNum))}
+            {formatNum(NP.divide(offer.shares, pointDecimalNum))}
           </div>
           <Image
             src={offerPointInfo.logoURI}
@@ -51,15 +51,13 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
         <DetailLabel tipText={T("Seller")}>{T("Seller")}</DetailLabel>
         <div className="flex items-center space-x-1">
           <div className="text-xs leading-5 text-title-white">
-            {truncateAddr(offer?.offer_maker || "", {
+            {truncateAddr(offer?.creator || "", {
               nPrefix: 4,
               nSuffix: 4,
             })}
           </div>
           <Image
-            onClick={() =>
-              handleGoScan(offer.marketplace.chain, offer?.offer_maker || "")
-            }
+            onClick={() => handleGoScan(offer?.creator || "")}
             src="/icons/right-45.svg"
             width={16}
             height={16}
@@ -70,11 +68,11 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
       </DetailRow>
 
       <DetailRow>
-        <DetailLabel tipText={T("StrikePrice")}>
-          {T("StrikePrice")}
-        </DetailLabel>
+        <DetailLabel tipText={T("StrikePrice")}>{T("StrikePrice")}</DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="text-xs leading-5 text-title-white"></div>
+          <div className="text-xs leading-5 text-title-white">
+            ${formatNum(offer.marketplace.strike_price)}
+          </div>
         </div>
       </DetailRow>
       <DetailRow>
@@ -82,7 +80,14 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
           {T("ExerciseStartAt")}
         </DetailLabel>
         <div className="flex items-center space-x-1">
-          <div className="text-xs leading-5 text-title-white"></div>
+          <div className="text-xs leading-5 text-title-white">
+            {format(
+              new Date(
+                coverExpiryDate(offer.marketplace.expiry_date).timestamp,
+              ).setHours(0, 0, 0, 0),
+              "yyyy-MM-dd HH:mm:ss",
+            )}
+          </div>
         </div>
       </DetailRow>
 
@@ -101,9 +106,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
             })}
           </div>
           <Image
-            onClick={() =>
-              handleGoScan(offer.marketplace.chain, String(originMaker))
-            }
+            onClick={() => handleGoScan(String(originMaker))}
             src="/icons/right-45.svg"
             width={16}
             height={16}

@@ -15,8 +15,7 @@ export default function OfferTabs({ offer }: { offer: IOffer }) {
   const address = accountInfo?.dest_account || "";
 
   const { data: takerOrders } = useTakerOrderOfOffers({
-    offerId: offer.offer_id,
-    chain: offer.marketplace.chain,
+    offerId: offer.order_id,
   });
 
   const [onlyMe, setOnlyMe] = useState(false);

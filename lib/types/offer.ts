@@ -11,10 +11,11 @@ export interface IOffer {
   creator: string;
   taker: string;
   order_note: string;
-  order_status: string;
+  order_status: "created" | "purchased" | "cancelled" | "settled";
   update_at: string;
   create_at: string;
 
+  role?: "maker" | "taker";
   marketplace: IMarketplace;
 }
 

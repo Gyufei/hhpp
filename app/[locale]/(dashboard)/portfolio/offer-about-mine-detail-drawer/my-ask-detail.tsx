@@ -5,22 +5,19 @@ import { formatNum } from "@/lib/utils/number";
 import OfferInfo from "@/app/[locale]/direct-trade/[...name]/offer-detail/offer-info";
 import OfferTabs from "@/app/[locale]/direct-trade/[...name]/offer-detail/offer-tabs";
 import ArrowBetween from "@/app/[locale]/direct-trade/[...name]/create-offer/arrow-between";
-import { WithTip } from "@/components/share/with-tip";
 import { SwapItemPanel } from "./swap-item-panel";
 import MyDetailCard from "./my-detail-card";
 import { IOffer } from "@/lib/types/offer";
 import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
 import { useCloseOffer } from "@/lib/hooks/contract/use-close-offer";
 import NP from "number-precision";
-import { reportEvent } from "@/lib/utils/analytics";
 import { cn } from "@/lib/utils/common";
+import { useDelistOffer } from "@/lib/hooks/contract/use-delist-offer";
 
 export default function MyAskDetail({
-  holdingId,
   offer,
   onSuccess,
 }: {
-  holdingId: string;
   offer: IOffer;
   onSuccess: () => void;
 }) {
@@ -28,11 +25,11 @@ export default function MyAskDetail({
   const {
     tokenTotalPrice,
     progress,
-    pointPerPrice,
+    pointPrice,
     amount,
     offerTokenInfo,
     offerPointInfo,
-    isClosed,
+    isNotCanBuy,
     isCanceled,
     pointDecimalNum,
   } = useOfferFormat({
@@ -45,18 +42,31 @@ export default function MyAskDetail({
     isSuccess: isCloseSuccess,
   } = useCloseOffer();
 
+  const {
+    isLoading: isDelisting,
+    write: delistAction,
+    isSuccess: isDelistSuccess,
+  } = useDelistOffer();
+
   function handleClose() {
     if (isClosing) return;
 
-    reportEvent("click", { value: `closeOffer-${holdingId}` });
-
     closeAction?.({
-      offerId: offer.offer_id,
+      offerId: offer.order_id,
+    });
+  }
+
+  function handleDelist() {
+    if (isDelisting) return;
+
+    delistAction?.({
+      offerId: offer.order_id,
+      marketId: offer.market_place_id,
     });
   }
 
   useEffect(() => {
-    if (isCloseSuccess) {
+    if (isCloseSuccess || isDelistSuccess) {
       onSuccess();
     }
   }, [isCloseSuccess, onSuccess]);
@@ -68,16 +78,20 @@ export default function MyAskDetail({
         <div className="flex flex-1 flex-col border-r border-border-black bg-bg-black p-5">
           <OfferInfo
             img1={offer.marketplace.projectLogo}
-            name={offer.marketplace.market_name}
-            no={String(offer.entry.id)}
-            progress={progress}
+            name={`${offer.marketplace.token_name}-${offer.marketplace.expiry_date}`}
+            no={String(offer.id)}
+            progress={progress / 100}
           />
 
           <SwapItemPanel
             className="mt-5"
             topText={<>{T("YouHaveToSell")}</>}
-            bottomText={<>~${formatNum(tokenTotalPrice, 8)} </>}
-            value={String(NP.divide(offer.item_amount, pointDecimalNum))}
+            bottomText={
+              <>
+                1 {offer.marketplace.token_name} = ${formatNum(pointPrice, 2)}
+              </>
+            }
+            value={String(NP.divide(offer.shares, pointDecimalNum))}
             tokenName={offerPointInfo.symbol || ""}
             onValueChange={() => {}}
             isCanInput={false}
@@ -88,38 +102,31 @@ export default function MyAskDetail({
           <SwapItemPanel
             onValueChange={() => {}}
             isCanInput={false}
-            bottomText={
-              <>
-                1 {offer.marketplace.item_name} = ${formatNum(pointPerPrice, 8)}
-              </>
-            }
-            topText={
-              <div className="flex items-center">
-                {T("YouGet")}
-                <WithTip align="start">
-                  {`${T("YouGet")} ${offer.marketplace.item_name}`}
-                </WithTip>
-              </div>
-            }
+            bottomText={<>~${formatNum(tokenTotalPrice, 8)} </>}
+            topText={<div className="flex items-center">{T("YouGet")}</div>}
             value={String(amount)}
             tokenName={offerTokenInfo?.symbol || ""}
           />
 
           <div className="flex flex-wrap gap-2">
             <>
-              {isCanceled ? (
+              {isCanceled && (
                 <button
                   disabled={true}
                   className="mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-[18px] text-title-white"
                 >
                   {T("OfferClosed")}
                 </button>
-              ) : isClosed ? (
+              )}
+
+              {!isCanceled && isNotCanBuy && (
                 <button className="pointer-events-none mt-4  flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-6 text-title-white">
                   {T("TradingEnded")}
                 </button>
-              ) : (
-                <div className="flex w-full flex-col">
+              )}
+
+              {offer.order_status === "created" && offer.role === "maker" && (
+                <div className="flex w-full justify-between gap-2">
                   <button
                     onClick={handleClose}
                     disabled={isClosing}
@@ -130,9 +137,17 @@ export default function MyAskDetail({
                   >
                     {T("CloseThisOffer")}
                   </button>
-                  <div className="mt-2 flex items-center rounded bg-[#FBF2EA] px-3 text-xs leading-5 text-[#FFA95B]">
-                    {T("YouHaveTheOptionToClose")}
-                  </div>
+
+                  <button
+                    onClick={handleDelist}
+                    disabled={isDelisting}
+                    className={cn(
+                      "mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive",
+                      isClosing ? "dot-loading" : "",
+                    )}
+                  >
+                    {T("DelistThisOffer")}
+                  </button>
                 </div>
               )}
             </>

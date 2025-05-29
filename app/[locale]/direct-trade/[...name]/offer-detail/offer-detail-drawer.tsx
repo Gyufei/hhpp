@@ -3,7 +3,6 @@ import AskDetail from "./ask-detail";
 import OfferFillDialog from "./offer-fill-dialog";
 import { IOffer } from "@/lib/types/offer";
 import { useTranslations } from "next-intl";
-import { reportEvent } from "@/lib/utils/analytics";
 import DrawerTitle from "@/components/share/drawer-title";
 import Drawer from "react-modern-drawer";
 import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
@@ -35,9 +34,6 @@ export default function OfferDetailDrawer({
   }, [offer, accountInfo?.dest_account]);
 
   function handleSuccess(ord: Record<string, any>) {
-    reportEvent("askOffer" + "Success", {
-      value: offer?.entry?.id,
-    });
     setResultOrder(ord);
     setOrderFillDialog(true);
     onSuccess();

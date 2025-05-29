@@ -7,7 +7,6 @@ import { useMarketHolder } from "@/lib/hooks/api/use-market-holder";
 import { range } from "lodash";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
-import { ChainType } from "@/lib/types/chain";
 import { IHolderDistribution } from "@/lib/types/holding";
 
 // 格式化PnL显示
@@ -27,8 +26,7 @@ export function HolderTable({
 }) {
   const T = useTranslations("Marketplace");
   const { data: holderData, isLoading: isHolderLoading } = useMarketHolder(
-    marketplace?.chain || ChainType.HYPER,
-    marketplace?.market_place_account || "",
+    marketplace?.market_place_id || "",
   );
 
   const isLoadingFlag = !marketplace || isLoading || isHolderLoading;

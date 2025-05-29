@@ -1,51 +1,44 @@
-import useSWR from "swr";
-import { useEndPoint } from "./use-endpoint";
-import { IOffer } from "@/lib/types/offer";
-import { ApiPaths } from "@/lib/PathMap";
-import { apiFetcher } from "@/lib/fetcher";
-import { useMarketplaces } from "./use-marketplaces";
 import { useAccountInfo } from "./use-account-info";
+import { useOffers } from "./use-offers";
 
-export function useMyOffers(params: any) {
-  const { apiEndPoint } = useEndPoint();
+export function useMyOffers() {
   const { data: accountInfo } = useAccountInfo();
   const address = accountInfo?.dest_account || "";
+  console.log(accountInfo);
 
-  const { data: marketplaceData, isLoading: isMarketLoading } =
-    useMarketplaces();
+  const res1 = useOffers(
+    {
+      creator: address,
+    },
+    address,
+  );
 
-  const myOffersFetcher = async () => {
-    if (isMarketLoading) return [];
+  const res2 = useOffers(
+    {
+      taker: address,
+    },
+    address,
+  );
 
-    const fetchParams = Object.entries({
-      ...params,
-      wallet: address,
-    })
-      .filter(([_, v]) => v !== null)
-      .map(([k, v]) => `${k}=${v}`)
-      .join("&");
+  const asMaker = res1.data?.map((o) => ({
+    ...o,
+    role: "maker",
+    order_status: "created",
+  }));
 
-    const offerRes = await apiFetcher(
-      `${apiEndPoint}${ApiPaths.offers}?${fetchParams}`,
-    );
-
-    const parsedRes = offerRes.map((o: Record<string, any>) => {
-      const marketplace = marketplaceData?.find(
-        (m) => m.market_place_id === o.market_place_id,
-      );
-
-      return {
-        ...o,
-        marketplace,
-      };
-    });
-
-    return parsedRes as Array<IOffer>;
-  };
-
-  const res = useSWR(`my_offers:${address}${isMarketLoading}`, myOffersFetcher);
+  const asTaker = res2.data?.map((o) => ({
+    ...o,
+    role: "taker",
+    order_status: "created",
+  }));
 
   return {
-    ...res,
+    data: [...(asMaker || []), ...(asTaker || [])],
+    isLoading: res1.isLoading || res2.isLoading,
+    mutate: () => {
+      res1.mutate();
+      res2.mutate();
+    },
+    error: res1.error || res2.error,
   };
 }

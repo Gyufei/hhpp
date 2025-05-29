@@ -1,4 +1,3 @@
-import { ChainType } from "@/lib/types/chain";
 import { isProduction } from "../PathMap";
 
 export function truncateAddr(
@@ -18,15 +17,7 @@ export function truncateAddr(
   return shorter;
 }
 
-export function isEvmChain(chain: ChainType) {
-  return [ChainType.HYPER].includes(chain);
-}
-
-export function handleGoScan(
-  chain: ChainType,
-  addr: string,
-  type: "account" | "tx" = "account",
-) {
+export function handleGoScan(addr: string, type: "account" | "tx" = "account") {
   if (!addr) return;
 
   let goType: any = type;
@@ -34,17 +25,15 @@ export function handleGoScan(
     goType = "address";
   }
 
-  if (chain === ChainType.HYPER) {
-    if (isProduction) {
-      window.open(
-        `https://app.hyperliquid.xyz/explorer/${goType}/${addr}`,
-        "_blank",
-      );
-    } else {
-      window.open(
-        `https://app.hyperliquid-testnet.xyz/explorer/${goType}/${addr}`,
-        "_blank",
-      );
-    }
+  if (isProduction) {
+    window.open(
+      `https://app.hyperliquid.xyz/explorer/${goType}/${addr}`,
+      "_blank",
+    );
+  } else {
+    window.open(
+      `https://app.hyperliquid-testnet.xyz/explorer/${goType}/${addr}`,
+      "_blank",
+    );
   }
 }

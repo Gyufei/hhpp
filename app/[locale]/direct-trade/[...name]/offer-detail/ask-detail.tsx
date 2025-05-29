@@ -1,11 +1,7 @@
 import NP from "number-precision";
-import {
-  formatNum,
-  toNonExponential,
-  bigIntOrNpMinus,
-} from "@/lib/utils/number";
+import { formatNum } from "@/lib/utils/number";
 import OfferInfo from "./offer-info";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SliderCard from "./slider-card";
 import ReceiveCard from "./receive-card";
 import DetailCard from "./detail-card";
@@ -13,14 +9,13 @@ import OfferTabs from "./offer-tabs";
 import { useCreateTakerOrder } from "@/lib/hooks/contract/use-create-taker-order";
 import { IOffer } from "@/lib/types/offer";
 import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
-import { useGlobalConfig } from "@/lib/hooks/use-global-config";
 import WithWalletConnectBtn from "@/components/share/with-wallet-connect-btn";
 import { useTranslations } from "next-intl";
-import { reportEvent } from "@/lib/utils/analytics";
 import { useCheckBalance } from "@/lib/hooks/api/use-check-balance";
 import ArrowBetween from "../create-offer/arrow-between";
 import { StableBalance } from "@/components/share/stable-balance";
 import { cn } from "@/lib/utils/common";
+import { usePremiumPrice } from "@/lib/hooks/api/use-premium-price";
 
 export default function AskDetail({
   offer,
@@ -31,25 +26,29 @@ export default function AskDetail({
 }) {
   const T = useTranslations("Offer");
 
-  const { platformFee } = useGlobalConfig();
-  const { checkUSDCInsufficient } = useCheckBalance(offer.marketplace);
+  const { data: premiumPriceData } = usePremiumPrice(
+    offer.marketplace.token_name,
+    offer.marketplace.strike_price,
+    offer.marketplace.expiry_date,
+  );
+
+  const premiumPrice = premiumPriceData?.current_premium_price || 0;
+
+  const { checkUSDTInsufficient } = useCheckBalance(offer.marketplace);
 
   const {
-    tokenPrice,
     progress,
-    forValue,
-    pointPerPrice,
+    pointPrice,
+    isNotCanBuy,
     isFilled,
+    isCanceled,
+    isSettled,
     offerPointInfo,
     offerTokenInfo,
     pointDecimalNum,
   } = useOfferFormat({
     offer,
   });
-
-  const tradeFee = useMemo(() => {
-    return NP.divide(offer?.trade_tax_pct || 0, 10000);
-  }, [offer]);
 
   const {
     // data: txHash,
@@ -58,76 +57,46 @@ export default function AskDetail({
     write: writeAction,
   } = useCreateTakerOrder();
 
-  const [payTokenAmount, setPayTokenAmount] = useState("0");
-  const [receivePointAmount, setReceivePointAmount] = useState("0");
+  const payTokenAmount = useMemo(() => {
+    return NP.times(premiumPrice, NP.divide(offer.shares, pointDecimalNum));
+  }, [premiumPrice, offer.shares, pointDecimalNum]);
+
+  const receivePointAmount = useMemo(
+    () => NP.divide(offer.shares, pointDecimalNum),
+    [offer.shares, pointDecimalNum],
+  );
 
   const [errorText, setErrorText] = useState("");
 
-  const sliderCanMax = useMemo(() => {
-    return +bigIntOrNpMinus(offer.item_amount, offer.taken_item_amount);
-  }, [offer]);
-
-  const calcReceiveByPayAmount = useCallback(
-    (payAmountNum: number) => {
-      if (!Number(payAmountNum)) return "0";
-      if (!payAmountNum) return "";
-
-      const wantPay = Number(payAmountNum);
-      const realPay = NP.divide(wantPay, 1 + platformFee + tradeFee);
-      const payPercent = NP.divide(realPay, forValue);
-      const receiveDecimal = NP.times(payPercent, offer.item_amount);
-      const receive = Math.floor(receiveDecimal);
-      return String(receive);
-    },
-    [forValue, offer.item_amount, tradeFee, platformFee],
-  );
-
   const payTokenTotalPrice = useMemo(() => {
     if (!payTokenAmount) return "0";
-    return NP.times(payTokenAmount || 0, tokenPrice);
-  }, [payTokenAmount, tokenPrice]);
+    return NP.times(payTokenAmount || 0, offerTokenInfo?.price || 0);
+  }, [payTokenAmount, offerTokenInfo]);
 
   useEffect(() => {
+    if (isNotCanBuy) return;
     let errorText = "";
-    errorText = checkUSDCInsufficient(payTokenAmount);
-
-    if (!errorText && Number(receivePointAmount) > sliderCanMax) {
-      errorText = `Insufficient ${offer.marketplace.item_name} to Buy`;
-    }
+    errorText = checkUSDTInsufficient(payTokenAmount);
 
     setErrorText(errorText);
-  }, [
-    payTokenAmount,
-    receivePointAmount,
-    sliderCanMax,
-    checkUSDCInsufficient,
-    offer.marketplace.item_name,
-  ]);
-
-  function handleInputPayTokenAmount(v: string) {
-    return;
-    setPayTokenAmount(v);
-    const receive = calcReceiveByPayAmount(Number(v));
-    setReceivePointAmount(receive);
-  }
+  }, [payTokenAmount, receivePointAmount, checkUSDTInsufficient, isNotCanBuy]);
 
   async function handleConfirmTakerOrder() {
     if (isTaking || !receivePointAmount) return;
 
-    reportEvent("click", { value: "confirmOffer-ask" });
     await writeAction({
-      offerId: offer.offer_id,
-      itemAmount: toNonExponential(receivePointAmount),
-      payTokenAmount: toNonExponential(payTokenAmount),
+      offerId: offer.order_id,
+      premiumAmount: String(NP.times(payTokenAmount, pointDecimalNum)),
+      premiumPrice: premiumPrice,
     });
   }
 
   useEffect(() => {
     if (isSuccess) {
       onSuccess({
-        no: offer.entry.id,
+        no: offer.id,
         pay: payTokenAmount,
-        tx: offer.offer_maker,
+        tx: offer.creator,
         token: offerTokenInfo,
       });
     }
@@ -140,22 +109,22 @@ export default function AskDetail({
         <div className="flex flex-1 flex-col border-r border-border-black bg-bg-black p-5">
           <OfferInfo
             img1={offer.marketplace.projectLogo}
-            name={offer.marketplace.market_name}
-            no={String(offer.entry.id)}
-            progress={progress}
+            name={`${offer.marketplace.token_name}-${offer.marketplace.expiry_date}`}
+            no={String(offer.id)}
+            progress={progress / 100}
           />
 
           <SliderCard
             topText={
               <>
-                {T("YouPay")}
+                {T("YouPayPremium")}
                 <StableBalance className="mb-0" />
               </>
             }
             bottomText={<>~${formatNum(payTokenTotalPrice, 8)} </>}
             tokenName={offerTokenInfo?.symbol || ""}
             value={String(payTokenAmount)}
-            onUserInput={handleInputPayTokenAmount}
+            onUserInput={() => {}}
             canInput={false}
             hasError={!!errorText}
           />
@@ -166,17 +135,19 @@ export default function AskDetail({
             topText={<>{T("YouGet")}</>}
             bottomText={
               <>
-                1 {offer.marketplace.item_name} = ${formatNum(pointPerPrice, 8)}
+                1 {offer.marketplace.token_name} = ${formatNum(pointPrice, 8)}
               </>
             }
-            value={String(NP.divide(receivePointAmount, pointDecimalNum))}
+            value={String(receivePointAmount)}
             tokenName={offerPointInfo?.symbol || ""}
           />
 
-          {isFilled ? (
+          {isFilled || isSettled || isCanceled ? (
             <>
               <button className="mt-4 flex h-8 w-full cursor-not-allowed items-center justify-center rounded bg-[#D1D4DC] text-xs leading-[18px] text-bg-black">
-                {T("Offer100%Filled")}
+                {isFilled && T("OfferBePurchased")}
+                {isSettled && T("TradingEnded")}
+                {isCanceled && T("OfferClosed")}
               </button>
             </>
           ) : (

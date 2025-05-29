@@ -2,11 +2,7 @@ import NP from "number-precision";
 import Image from "next/image";
 import { CompactTable } from "@table-library/react-table-library/compact";
 import { usePagination } from "@table-library/react-table-library/pagination";
-import {
-  handleGoScan,
-  truncateAddr,
-} from "@/lib/utils/web3";
-import { formatTimestamp } from "@/lib/utils/time";
+import { truncateAddr } from "@/lib/utils/web3";
 import { useMemo } from "react";
 import { Pagination } from "@/components/ui/pagination/pagination";
 import { useTheme } from "@table-library/react-table-library/theme";
@@ -15,6 +11,7 @@ import { useTranslations } from "next-intl";
 import { ITakerOrder } from "@/lib/hooks/api/use-taker-orders-of-offer";
 import { IOffer } from "@/lib/types/offer";
 import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
+import { format } from "date-fns";
 
 export function TakerOrders({
   orders,
@@ -25,15 +22,10 @@ export function TakerOrders({
 }) {
   const T = useTranslations("Offer");
 
-  const {
-    offerValue,
-    pointDecimalNum,
-    offerTokenInfo,
-    offerPointInfo,
-    forValue,
-  } = useOfferFormat({
-    offer: offer,
-  });
+  const { pointDecimalNum, offerTokenInfo, offerPointInfo, forValue } =
+    useOfferFormat({
+      offer: offer,
+    });
 
   const data = useMemo(() => {
     const orderData = orders.map((o, index) => {
@@ -51,7 +43,7 @@ export function TakerOrders({
   const theme = useTheme({
     Table: `
       grid-template-rows: repeat(auto-fit, 40px);
-      grid-template-columns: 160px repeat(4, minmax(0, 1fr));
+      grid-template-columns: 160px repeat(3, minmax(0, 1fr));
       font-weight: 400;
       grid-auto-rows: 40px;
     `,
@@ -112,8 +104,8 @@ export function TakerOrders({
     {
       label: T("FillAmount"),
       renderCell: (o: any) => {
-        const points = o.item_amount;
-        const totalPoints = offer.item_amount;
+        const points = o.shares;
+        const totalPoints = offer.shares;
         const percent = formatNum(NP.divide(points, totalPoints) * 100);
 
         return (
@@ -134,14 +126,10 @@ export function TakerOrders({
     },
     {
       label: T("Deposits"),
-      renderCell: (o: ITakerOrder) => {
-        const points = o.item_amount;
-        const totalPoints = offer.item_amount;
-        const percent = formatNum(NP.divide(points, totalPoints));
-        const amount = NP.times(
-          offer.entry.direction === "sell" ? forValue : offerValue,
-          percent,
-        );
+      renderCell: () => {
+        const percent = 100;
+        const amount = NP.times(forValue, percent);
+
         return (
           <div className="flex items-center justify-start space-x-1">
             <span>{formatNum(amount)}</span>
@@ -156,31 +144,11 @@ export function TakerOrders({
       },
     },
     {
-      label: T("TxHash"),
-      renderCell: (o: ITakerOrder) => (
-        <div className="flex items-center justify-start">
-          {truncateAddr(o.tx_hash || "") || "N/A"}
-          {o.tx_hash && (
-            <Image
-              onClick={() =>
-                handleGoScan(offer.marketplace.chain, o.tx_hash || "", "tx")
-              }
-              src="/icons/right-45.svg"
-              width={16}
-              height={16}
-              alt="goScan"
-              className="cursor-pointer pl-1"
-            />
-          )}
-        </div>
-      ),
-    },
-    {
       label: T("Time"),
       renderCell: (o: ITakerOrder) => (
-        <div className="flex items-center justify-end">{`${formatTimestamp(
-          Number(o.create_at) * 1000,
-        )}`}</div>
+        <div className="flex items-center justify-end">
+          {format(new Date(o.create_at), "yyyy-MM-dd HH:mm:ss")}
+        </div>
       ),
     },
   ];

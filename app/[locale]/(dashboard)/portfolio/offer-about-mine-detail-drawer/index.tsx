@@ -6,13 +6,11 @@ import DrawerTitle from "@/components/share/drawer-title";
 import MyAskDetail from "./my-ask-detail";
 
 export default function OfferAboutMineDetailDrawer({
-  holdingId,
   offer,
   onSuccess,
   drawerOpen,
   setDrawerOpen,
 }: {
-  holdingId: string;
   offer: IOffer | undefined;
   onSuccess: () => void;
   drawerOpen: boolean;
@@ -44,11 +42,7 @@ export default function OfferAboutMineDetailDrawer({
         onClose={() => setDrawerOpen(false)}
       />
 
-      <MyAskDetail
-        holdingId={holdingId}
-        offer={offer}
-        onSuccess={handleSuccess}
-      />
+      <MyAskDetail offer={offer} onSuccess={handleSuccess} />
     </Drawer>
   );
 }

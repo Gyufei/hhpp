@@ -1,42 +1,35 @@
 import { useEndPoint } from "@/lib/hooks/api/use-endpoint";
-import { apiFetcher } from "@/lib/fetcher";
 import useTxStatus from "@/lib/hooks/contract/help/use-tx-status";
+import { apiFetcher } from "@/lib/fetcher";
 import { useSignData } from "./help/use-sign-data";
 import { toast } from "react-hot-toast";
 import { useAccountInfo } from "../api/use-account-info";
-import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 import { getUserNonce } from "./help/user-nonce";
+import { ApiPaths } from "@/lib/PathMap";
 import { useSendTx } from "./help/use-send-tx";
 
-export function useCreateTakerOrder() {
+export function useDelistOffer() {
   const { data: accountInfo } = useAccountInfo();
   const { apiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
-  const { checkAndSwitchChain } = useCheckSwitchChain();
   const { send } = useSendTx();
 
-  const txAction = async (args: {
-    offerId: string;
-    premiumAmount: string;
-    premiumPrice: string;
-  }) => {
-    const { offerId, premiumAmount, premiumPrice } = args;
-
+  const txAction = async (args: { offerId: string; marketId: string }) => {
     const nonce = await getUserNonce(accountInfo?.dest_account || "");
 
-    const argsData = {
-      taker: accountInfo?.dest_account,
-      nonce: nonce,
+    const { offerId, marketId } = args;
+
+    const params = {
       offer_id: offerId,
-      premium_amount: premiumAmount,
-      premium_price: premiumPrice,
+      market_place_id: marketId,
+      taker: accountInfo?.dest_account || "",
+      nonce: nonce,
     };
 
-    await checkAndSwitchChain();
-    const reqData = await signDataAction(argsData);
+    const reqData = await signDataAction(params);
 
     try {
-      const res = await apiFetcher(`${apiEndPoint}/offer/${offerId}/take`, {
+      const res = await apiFetcher(`${apiEndPoint}${ApiPaths.offerDelist}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,10 +40,12 @@ export function useCreateTakerOrder() {
       const hash = await send(res);
 
       return hash;
-    } catch (e: any) {
-      toast.error(e?.message || "The service is abnormal. Please try again");
+    } catch (error: any) {
+      toast.error(
+        error?.message || "The service is abnormal. Please try again",
+      );
       throw new Error(
-        e?.message || "The service is abnormal. Please try again",
+        error?.message || "The service is abnormal. Please try again",
       );
     }
   };

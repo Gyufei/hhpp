@@ -22,7 +22,7 @@ export default function OfferFillDialog({
         overlayClassName="z-[110]"
         className="z-[110] w-[360px] gap-0 overflow-y-auto rounded border border-border-black !bg-bg-black p-4 sm:p-0"
       >
-        <DialogTitle>Taker Order filled</DialogTitle>
+        <DialogTitle>Taker Order Purchased</DialogTitle>
 
         <div className="flex flex-col items-center">
           <Image

@@ -25,6 +25,7 @@ export function SellContent({
   className?: string;
 }) {
   const T = useTranslations("Offer");
+
   const [hasAutoCalc, setHasAutoCalc] = useState<
     "sell" | "receive" | null | false
   >(null);
@@ -53,7 +54,7 @@ export function SellContent({
     }
   }, [isCreateSuccess, onSuccess]);
 
-  const { checkPointInsufficient } = useCheckBalance(marketplace);
+  const { checkPointInsufficient, pointAmount } = useCheckBalance(marketplace);
 
   const [errorText, setErrorText] = useState("");
 
@@ -62,13 +63,7 @@ export function SellContent({
     curErrorText = checkPointInsufficient(sellPointAmount);
 
     setErrorText(curErrorText);
-  }, [
-    sellPointAmount,
-    pointPrice,
-    marketplace.token_name,
-    marketplace.strike_price,
-    checkPointInsufficient,
-  ]);
+  }, [sellPointAmount, checkPointInsufficient]);
 
   async function handleConfirmBtnClick() {
     handleCreate();
@@ -140,7 +135,14 @@ export function SellContent({
               1 {currentMarket.token_name} = ${formatNum(pointPrice, 4)}
             </>
           }
-          tokenSelect={<PointTokenDisplay point={sellPoint} />}
+          tokenSelect={
+            <>
+              <div className={cn("text-[12px] text-gray", className)}>
+                Balance: {formatNum(pointAmount, 4)}
+              </div>
+              <PointTokenDisplay point={sellPoint} />
+            </>
+          }
         />
 
         <ArrowBetween className="-my-4 self-center" />
