@@ -65,10 +65,18 @@ export function WithdrawDialog({
     }
   }, [isSuccess]);
 
+  function handleToggleOpen(isOpen: boolean) {
+    if (isOpen) {
+      setWithdrawAmount("");
+      setWithdrawError(null);
+    }
+    onOpenChange(isOpen);
+  }
+
   if (!token) return null;
 
   return (
-    <Dialog open={open} onOpenChange={(isOpen) => onOpenChange(isOpen)}>
+    <Dialog open={open} onOpenChange={handleToggleOpen}>
       <DialogContent
         className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded border-border-black bg-bg-black p-0"
         style={{

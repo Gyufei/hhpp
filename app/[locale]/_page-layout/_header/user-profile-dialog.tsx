@@ -20,7 +20,11 @@ export default function UserProfileDialog() {
 
   const [showProDialog, setShowProDialog] = useAtom(UserProfileDialogOpen);
   const { address } = useChainWallet();
-  const { data: accountStat, mutate } = useUserStats();
+  const {
+    data: accountStat,
+    isLoading: isLoadingAccountStat,
+    mutate,
+  } = useUserStats();
   const { checkAndSwitchChain } = useCheckSwitchChain();
 
   const {
@@ -41,15 +45,17 @@ export default function UserProfileDialog() {
   const [isCreate, setIsCreate] = useState(false);
 
   useEffect(() => {
+    if (isLoadingAccountStat || !accountStat) return;
+
     if (!accountStat?.user_name) {
       setIsCreate(true);
-      // setShowProDialog(true);
+      setShowProDialog(true);
     } else {
       setIsCreate(false);
       setShowProDialog(false);
       setUsername(accountStat.user_name || "");
     }
-  }, [accountStat, setShowProDialog]);
+  }, [isLoadingAccountStat, accountStat, setShowProDialog]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -118,12 +124,7 @@ export default function UserProfileDialog() {
   }
 
   return (
-    <Dialog
-      open={showProDialog}
-      onOpenChange={() =>
-        setShowProDialog(!accountStat?.user_name ? true : !showProDialog)
-      }
-    >
+    <Dialog open={showProDialog} onOpenChange={(val) => setShowProDialog(val)}>
       <VisuallyHidden asChild>
         <DialogTitle>{T("UserProfile")}</DialogTitle>
       </VisuallyHidden>
@@ -132,7 +133,7 @@ export default function UserProfileDialog() {
         aria-describedby={undefined}
       >
         <DialogTitle showClose={!!accountStat?.user_name}>
-          <div className="flex items-center justify-between w-full">
+          <div className="flex w-full items-center justify-between">
             <div className="text-title-white">{T("UserProfile")}</div>
             <button
               onClick={() => setShowProDialog(false)}

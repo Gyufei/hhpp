@@ -29,6 +29,7 @@ export function BalanceTable() {
   const { data: myTakeOffers, mutate: mutateMyTakeOffers } = useOffers(
     {
       taker: address,
+      // taker: "0x8C3A4f7D55fcbff9be9d53529D0f9184B3718c28",
     },
     address ? `my-take-offer-${address}` : "",
   );
@@ -151,7 +152,8 @@ export function BalanceTable() {
                   <Cell>
                     <div>
                       {offer.marketplace.token_name}-
-                      {offer.marketplace.expiry_date}
+                      {offer.marketplace.expiry_date}-
+                      {offer.marketplace.strike_price}
                     </div>
                   </Cell>
 

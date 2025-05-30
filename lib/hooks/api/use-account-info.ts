@@ -4,8 +4,10 @@ export function useAccountInfo() {
   const { address } = useChainWallet();
 
   return {
-    data: {
-      dest_account: address,
-    },
+    data: address
+      ? {
+          dest_account: address,
+        }
+      : undefined,
   };
 }

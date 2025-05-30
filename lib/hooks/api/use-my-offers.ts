@@ -4,7 +4,6 @@ import { useOffers } from "./use-offers";
 export function useMyOffers() {
   const { data: accountInfo } = useAccountInfo();
   const address = accountInfo?.dest_account || "";
-  console.log(accountInfo);
 
   const res1 = useOffers(
     {
