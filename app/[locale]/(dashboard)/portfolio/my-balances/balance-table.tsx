@@ -12,11 +12,13 @@ import { usePagination } from "@table-library/react-table-library/pagination";
 import { useTheme } from "@table-library/react-table-library/theme";
 import { Pagination } from "@/components/ui/pagination/pagination";
 import { useTranslations } from "next-intl";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 import NP from "number-precision";
 import { useOffers } from "@/lib/hooks/api/use-offers";
+import { useRelist } from "@/lib/hooks/contract/use-relist";
+import { IOffer } from "@/lib/types/offer";
 
 export function BalanceTable() {
   const BT = useTranslations("MyBalances");
@@ -24,12 +26,18 @@ export function BalanceTable() {
   const { data: accountInfo } = useAccountInfo();
   const address = accountInfo?.dest_account || "";
 
-  const { data: myTakeOffers } = useOffers(
+  const { data: myTakeOffers, mutate: mutateMyTakeOffers } = useOffers(
     {
       taker: address,
     },
     address ? `my-take-offer-${address}` : "",
   );
+
+  const {
+    write: relistAction,
+    isLoading: isRelisting,
+    isSuccess: isRelistSuccess,
+  } = useRelist();
 
   const data = useMemo(() => {
     return {
@@ -94,6 +102,22 @@ export function BalanceTable() {
   const handlePageChange = (page: number) => {
     pagination.fns.onSetPage(page);
   };
+
+  function handleRelist(o: IOffer) {
+    console.log("relist");
+    if (isRelisting) return;
+
+    relistAction?.({
+      offerIds: [o.order_id],
+      marketId: o.market_place_id,
+    });
+  }
+
+  useEffect(() => {
+    if (isRelistSuccess) {
+      mutateMyTakeOffers();
+    }
+  }, [isRelistSuccess, mutateMyTakeOffers]);
 
   if (!data.nodes.length) {
     return (
@@ -160,7 +184,7 @@ export function BalanceTable() {
 
                   <Cell>
                     <div
-                      onClick={() => {}}
+                      onClick={() => handleRelist(offer)}
                       className="flex h-7 w-fit cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]"
                     >
                       {BT("List")}

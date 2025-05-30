@@ -30,6 +30,7 @@ export const ApiPaths = {
 
   markets: "/markets",
   marketKline: "/market/kline",
+  marketTrades: "/market/maker_trades_history",
   salesVolumeHistory: "/market/sales_volume_history",
 
   createOffer: "/market/create_offer",
@@ -38,16 +39,10 @@ export const ApiPaths = {
   offerPremiumPrice: "/offer/current_premium_price",
   offerDistribution: "/offer/distribution",
   offerCancel: "/offer/cancel",
+  offerRelist: "/offer/relist",
   offerDelist: "/offer/delist",
-
-  entry: "/entry",
-  orders: "/orders",
-  holding: "/holdings",
-  accountWithdraw: "/account/withdraw",
-  marketPointAmount: "/point",
-
-  makerOrders: "/user/maker_orders",
-  marketTrades: "/market/maker_trades_history",
+  offerMakerSettle: "/offer/liquidate_by_creator",
+  offerTakerSettle: "/offer/liquidate_by_taker",
 
   referral: {
     referer: "/referral/referer",

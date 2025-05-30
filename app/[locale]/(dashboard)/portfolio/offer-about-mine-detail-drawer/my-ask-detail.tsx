@@ -13,6 +13,8 @@ import { useCloseOffer } from "@/lib/hooks/contract/use-close-offer";
 import NP from "number-precision";
 import { cn } from "@/lib/utils/common";
 import { useDelistOffer } from "@/lib/hooks/contract/use-delist-offer";
+import { useMakerSettleOffer } from "@/lib/hooks/contract/use-maker-settle-offer";
+import { useTakerSettleOffer } from "@/lib/hooks/contract/use-taker-settle-offer";
 
 export default function MyAskDetail({
   offer,
@@ -29,12 +31,18 @@ export default function MyAskDetail({
     amount,
     offerTokenInfo,
     offerPointInfo,
-    isNotCanBuy,
     isCanceled,
     pointDecimalNum,
+    isFilled,
+    isAfterExpiry,
   } = useOfferFormat({
     offer,
   });
+
+  const isMaker = offer.role === "maker";
+  const isTaker = offer.role === "taker";
+  const canCancel = !isFilled && !isAfterExpiry && isMaker;
+  const canSettle = isFilled && isAfterExpiry && (isMaker || isTaker);
 
   const {
     isLoading: isClosing,
@@ -47,6 +55,44 @@ export default function MyAskDetail({
     write: delistAction,
     isSuccess: isDelistSuccess,
   } = useDelistOffer();
+
+  const {
+    isLoading: isMakerSettling,
+    write: makerSettleAction,
+    isSuccess: isMakerSettleSuccess,
+  } = useMakerSettleOffer();
+
+  const {
+    isLoading: isTakerSettling,
+    write: takerSettleAction,
+    isSuccess: isTakerSettleSuccess,
+  } = useTakerSettleOffer();
+
+  const isSettling = isMaker ? isMakerSettling : isTakerSettling;
+
+  function handleSettle() {
+    if (isMaker) {
+      handleMakerSettle();
+    } else if (isTaker) {
+      handleTakerSettle();
+    }
+  }
+
+  function handleMakerSettle() {
+    if (isMakerSettling) return;
+
+    makerSettleAction?.({
+      offerId: offer.order_id,
+    });
+  }
+
+  function handleTakerSettle() {
+    if (isTakerSettling) return;
+
+    takerSettleAction?.({
+      offerId: offer.order_id,
+    });
+  }
 
   function handleClose() {
     if (isClosing) return;
@@ -66,10 +112,21 @@ export default function MyAskDetail({
   }
 
   useEffect(() => {
-    if (isCloseSuccess || isDelistSuccess) {
+    if (
+      isCloseSuccess ||
+      isDelistSuccess ||
+      isMakerSettleSuccess ||
+      isTakerSettleSuccess
+    ) {
       onSuccess();
     }
-  }, [isCloseSuccess, onSuccess]);
+  }, [
+    isCloseSuccess,
+    isDelistSuccess,
+    isMakerSettleSuccess,
+    isTakerSettleSuccess,
+    onSuccess,
+  ]);
 
   return (
     <>
@@ -110,22 +167,14 @@ export default function MyAskDetail({
 
           <div className="flex flex-wrap gap-2">
             <>
-              {isCanceled && (
+              {isCanceled ? (
                 <button
                   disabled={true}
                   className="mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-[18px] text-title-white"
                 >
                   {T("OfferClosed")}
                 </button>
-              )}
-
-              {!isCanceled && isNotCanBuy && (
-                <button className="pointer-events-none mt-4  flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-6 text-title-white">
-                  {T("TradingEnded")}
-                </button>
-              )}
-
-              {offer.order_status === "created" && offer.role === "maker" && (
+              ) : canCancel ? (
                 <div className="flex w-full justify-between gap-2">
                   <button
                     onClick={handleClose}
@@ -143,12 +192,27 @@ export default function MyAskDetail({
                     disabled={isDelisting}
                     className={cn(
                       "mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive",
-                      isClosing ? "dot-loading" : "",
+                      isDelisting ? "dot-loading" : "",
                     )}
                   >
                     {T("DelistThisOffer")}
                   </button>
                 </div>
+              ) : canSettle ? (
+                <button
+                  onClick={handleSettle}
+                  disabled={isSettling}
+                  className={cn(
+                    "mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive",
+                    isSettling ? "dot-loading" : "",
+                  )}
+                >
+                  {T("SettleThisOffer")}
+                </button>
+              ) : (
+                <button className="pointer-events-none mt-4  flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-6 text-title-white">
+                  {T("TradingEnded")}
+                </button>
               )}
             </>
           </div>

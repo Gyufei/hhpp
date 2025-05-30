@@ -104,6 +104,7 @@
     "AbortThisOffer": "Abort this offer",
     "CloseBidOffer": "Close Bid Offer",
     "DelistThisOffer": "Delist this offer",
+    "SettleThisOffer": "Settle this offer",
 
     "Filled/SellingAmount": "Filled / Selling amount",
     "Filled/BuyingAmount": "Filled / Buying amount",

@@ -3,6 +3,7 @@ import { IOffer } from "../../types/offer";
 import { useMemo } from "react";
 import { IPoint } from "../../types/token";
 import { useStableToken } from "../api/token/use-tokens";
+import { coverExpiryDate } from "@/lib/utils/time";
 
 export function useOfferFormat({ offer }: { offer: IOffer }) {
   const { data: usdtToken } = useStableToken();
@@ -51,6 +52,10 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
   }, [offer.order_status]);
 
   const expiry = offer.marketplace.expiry_date;
+
+  const isAfterExpiry =
+    coverExpiryDate(expiry).timestamp < new Date().getTime();
+
   const strike = offer.marketplace.strike_price;
 
   return {
@@ -75,6 +80,7 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     isNotCanBuy,
 
     expiry,
+    isAfterExpiry,
     strike,
   };
 }

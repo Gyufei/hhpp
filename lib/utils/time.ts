@@ -101,9 +101,11 @@ export function coverExpiryDate(expiryDate: string) {
   const month = expiryDate.slice(4, 6);
   const day = expiryDate.slice(6, 8);
 
+  const dateStr = `${year}-${month}-${day}T00:00:00`;
+
   return {
     str: `${year}-${month}-${day}`,
-    date: new Date(`${year}-${month}-${day}`),
-    timestamp: new Date(`${year}-${month}-${day}`).getTime(),
+    date: new Date(dateStr),
+    timestamp: new Date(dateStr).getTime(),
   };
 }
