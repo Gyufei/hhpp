@@ -2,7 +2,7 @@ export const isPreview = process.env.NEXT_PUBLIC_IS_PREVIEW === "1";
 export const isProduction = process.env.NODE_ENV === "production" && !isPreview;
 
 export function WithApiHost(path: string) {
-  const prodHost = `https://api.hypetrade.xyz`;
+  const prodHost = `https://preview-api-option.hypetrade.xyz`;
   const devHost = `https://preview-api-option.hypetrade.xyz`;
   const host = isProduction ? prodHost : devHost;
   return `${host}${path}`;

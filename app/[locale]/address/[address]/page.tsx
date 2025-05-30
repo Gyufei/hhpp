@@ -6,9 +6,11 @@ import { useState } from "react";
 import { PerpTable } from "./perp-table";
 import { UserProfileDialogOpen } from "@/lib/states/user";
 import { useSetAtom } from "jotai";
+import { useUserStats } from "@/lib/hooks/api/use-user-stats";
 
 export default function Page({ params }: { params: { address: string } }) {
   const address = params.address;
+  const { data: accountStat } = useUserStats();
 
   const [currentTab, setCurrentTab] = useState("PERPS");
 
@@ -170,7 +172,12 @@ export default function Page({ params }: { params: { address: string } }) {
                 <div className="text-[12px]">
                   <div className="mb-[10px] flex items-center justify-between">
                     <div className="break-all text-gray">
-                      {truncateAddr(address, { nPrefix: 10, nSuffix: 8 })}
+                      {accountStat?.uid
+                        ? `${accountStat?.user_name}(${truncateAddr(address, {
+                            nPrefix: 10,
+                            nSuffix: 8,
+                          })})`
+                        : truncateAddr(address, { nPrefix: 10, nSuffix: 8 })}
                     </div>
                     <button className="flex h-[24px] w-[84px] items-center justify-center rounded-full border border-main text-main">
                       Add alias
@@ -267,27 +274,27 @@ export default function Page({ params }: { params: { address: string } }) {
             <div className="space-y-[10px]">
               <div className="flex items-center justify-between">
                 <span className="text-title-white">Overview</span>
-                <span className="text-main">$820,650.66</span>
+                <span className="text-main">-</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray">Perps (2)</span>
-                <span className="text-title-white">$820,650.66</span>
+                <span className="text-title-white">-</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray">Spot</span>
-                <span className="text-title-white">$0.00</span>
+                <span className="text-title-white">-</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray">Vault</span>
-                <span className="text-title-white">$0.00</span>
+                <span className="text-title-white">-</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray">Staked</span>
-                <span className="text-title-white">$0.00</span>
+                <span className="text-title-white">-</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray">Settled Value</span>
-                <span className="text-title-white">$0.00</span>
+                <span className="text-title-white">-</span>
               </div>
             </div>
           </div>

@@ -12,15 +12,74 @@ import { useTheme } from "@table-library/react-table-library/theme";
 import { Pagination } from "@/components/ui/pagination/pagination";
 import { useMemo } from "react";
 import { cn } from "@/lib/utils";
+import { useMyOffers } from "@/lib/hooks/api/use-my-offers";
+import { coverExpiryDate } from "@/lib/utils/time";
+import { format } from "date-fns";
+import NP from "number-precision";
+import { formatNum } from "@/lib/utils/number";
+
+interface ITableData {
+  id: string;
+  side: "CALL" | "PUT";
+  asset: string;
+  expiryDate: string;
+  strikePrice: string;
+  leverage: number;
+  value: number;
+  amount: number;
+  entryPrice: string;
+  markPrice: string;
+  pnl: number;
+  pnlPercent: number;
+}
 
 export function PerpTable() {
-  const marketplaceData: any[] = [{}];
+  const { data: offers, isLoading: isLoadingOffers } = useMyOffers();
+
+  const tableData: ITableData[] = useMemo(() => {
+    if (isLoadingOffers || !offers?.length) return [];
+
+    return offers?.map((offer) => {
+      const shares = NP.divide(
+        offer.shares,
+        10 ** offer.marketplace.token.decimals,
+      );
+
+      const strikeAmount = NP.times(shares, offer.marketplace.strike_price);
+      const tokenAmount = NP.times(shares, offer.marketplace.token.price);
+
+      const pnl = NP.minus(strikeAmount, tokenAmount);
+      const pnlPercent =
+        NP.divide(NP.minus(strikeAmount, tokenAmount), strikeAmount) * 100;
+
+      return {
+        id: offer.order_id,
+        asset: `${offer.marketplace.token.symbol}-${offer.marketplace.expiry_date}`,
+        expiryDate: format(
+          coverExpiryDate(offer.marketplace.expiry_date).date,
+          "MM/dd/yyyy",
+        ),
+        strikePrice: offer.marketplace.strike_price,
+        leverage: 1,
+        value: tokenAmount,
+        amount: strikeAmount,
+        entryPrice: offer.marketplace.strike_price,
+        markPrice: offer.marketplace.token.price,
+        pnl: pnl,
+        pnlPercent: pnlPercent,
+        side:
+          offer.marketplace.strike_price > offer.marketplace.token.price
+            ? "CALL"
+            : "PUT",
+      };
+    });
+  }, [isLoadingOffers, offers]);
 
   const data = useMemo(() => {
     return {
-      nodes: marketplaceData || [],
+      nodes: tableData || [],
     };
-  }, [marketplaceData]);
+  }, [tableData]);
 
   const theme = useTheme({
     Table: `
@@ -85,22 +144,22 @@ export function PerpTable() {
 
   if (!data.nodes.length) {
     return (
-      <div className="flex w-full flex-1 items-center justify-center text-base text-gray">
+      <div className="mt-10 flex w-full flex-1 items-center justify-center text-base text-gray">
         Your Options will appear here
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="overflow-x-auto scrollbar-hide">
+    <div className="flex h-full flex-col">
+      <div className="scrollbar-hide overflow-x-auto">
         <Table
           data={data}
           theme={theme}
           pagination={pagination}
           className="no-scroll-bar flex-1"
         >
-          {(tableList: Array<any>) => (
+          {(tableList: Array<ITableData>) => (
             <>
               <Header className="text-xs leading-[18px] text-gray">
                 <HeaderRow className="">
@@ -117,55 +176,65 @@ export function PerpTable() {
                 </HeaderRow>
               </Header>
               <Body>
-                {tableList.map((marketplace) => (
-                  <Row key={marketplace.id} item={marketplace}>
+                {tableList.map((row) => (
+                  <Row key={row.id} item={row}>
                     <Cell>
                       <div
                         className={cn(
-                          "font-medium whitespace-nowrap",
-                          marketplace.side === "CALL"
-                            ? "text-green-500"
-                            : "text-red-500",
+                          "whitespace-nowrap font-medium",
+                          row.side === "CALL"
+                            ? "text-green"
+                            : "text-red",
                         )}
                       >
-                        {marketplace.side}
+                        {row.side}
                       </div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{marketplace.asset}</div>
+                      <div className="whitespace-nowrap">{row.asset}</div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{marketplace.expiryDate}</div>
+                      <div className="whitespace-nowrap">{row.expiryDate}</div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{marketplace.strikePrice}</div>
+                      <div className="whitespace-nowrap">{row.strikePrice}</div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{marketplace.leverage}</div>
+                      <div className="whitespace-nowrap">{row.leverage}</div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{marketplace.value}</div>
+                      <div className="whitespace-nowrap">
+                        {formatNum(row.value, 2)}
+                      </div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{marketplace.amount}</div>
+                      <div className="whitespace-nowrap">
+                        {formatNum(row.amount)}
+                      </div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{marketplace.entryPrice}</div>
+                      <div className="whitespace-nowrap">
+                        {formatNum(row.entryPrice)}
+                      </div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{marketplace.markPrice}</div>
+                      <div className="whitespace-nowrap">
+                        {formatNum(row.markPrice)}
+                      </div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{marketplace.pnl}</div>
+                      <div className="whitespace-nowrap">
+                        {formatNum(row.pnl)}({formatNum(row.pnlPercent)}%)
+                      </div>
                     </Cell>
                   </Row>
                 ))}
