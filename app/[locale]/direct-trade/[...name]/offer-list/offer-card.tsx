@@ -18,6 +18,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 import { coverExpiryDate, formatTimeDuration } from "@/lib/utils/time";
+import { format } from "date-fns";
 
 export function OfferCard({
   offer,
@@ -267,16 +268,16 @@ function ExpiryStrike({ expiry, strike }: { expiry: string; strike: string }) {
     const expiryTime = coverExpiryDate(expiry.toString()).timestamp;
     const now = Date.now();
     const duration = expiryTime - now;
-    if (duration < 0) {
-      return 0;
-    }
+
     return duration;
   }, [expiry]);
 
   const displayExpiry = useMemo(() => {
-    if (expiryDuration === 0) {
-      return "-";
+    if (expiryDuration < 0) {
+      const date = coverExpiryDate(expiry.toString());
+      return format(date.date, "MM/dd/yyyy");
     }
+
     return formatTimeDuration(expiryDuration / 1000);
   }, [expiryDuration]);
 

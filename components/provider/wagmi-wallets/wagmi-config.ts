@@ -1,14 +1,17 @@
 import { cookieStorage, createConfig, createStorage } from "wagmi";
 import { injected, metaMask, walletConnect } from "wagmi/connectors";
 import { http } from "wagmi";
-import { arbitrum, arbitrumSepolia } from "wagmi/chains";
+// import { arbitrum, arbitrumSepolia } from "wagmi/chains";
+import { hypeEVM, hypeEVMTestnet } from "./hype-chain";
 import { isProduction } from "@/lib/PathMap";
 import { ChainConfigs } from "@/lib/const/chain-configs";
 import { ChainType } from "@/lib/types/chain";
 
 export const supportedChains = isProduction
-  ? ([arbitrum] as const)
-  : ([arbitrumSepolia] as const);
+  ? ([hypeEVM] as const)
+  : ([hypeEVMTestnet] as const);
+// ? ([arbitrum, hypeEVM] as const)
+// : ([arbitrumSepolia, hypeEVMTestnet] as const);
 
 export function getWagmiConfig(arbRpc?: string) {
   const defaultRpc =
@@ -16,10 +19,12 @@ export function getWagmiConfig(arbRpc?: string) {
 
   const trans = isProduction
     ? {
-        [arbitrum.id]: http(defaultRpc),
+        // [arbitrum.id]: http(defaultRpc),
+        [hypeEVM.id]: http(defaultRpc),
       }
     : {
-        [arbitrumSepolia.id]: http(defaultRpc),
+        // [arbitrumSepolia.id]: http(defaultRpc),
+        [hypeEVMTestnet.id]: http(defaultRpc),
       };
 
   const config = createConfig({

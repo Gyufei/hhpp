@@ -132,7 +132,15 @@ export default function UserProfileDialog() {
         aria-describedby={undefined}
       >
         <DialogTitle showClose={!!accountStat?.user_name}>
-          {T("UserProfile")}
+          <div className="flex items-center justify-between w-full">
+            <div className="text-title-white">{T("UserProfile")}</div>
+            <button
+              onClick={() => setShowProDialog(false)}
+              className="text-title-white hover:text-main"
+            >
+              &times;
+            </button>
+          </div>
         </DialogTitle>
 
         <div className="w-full p-5">

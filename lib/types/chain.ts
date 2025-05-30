@@ -1,3 +1,3 @@
 export enum ChainType {
-  HYPER = "hyperliquid",
+  HYPER = "hype",
 }
