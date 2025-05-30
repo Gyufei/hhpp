@@ -11,7 +11,7 @@ import { useUserCreate } from "@/lib/hooks/contract/use-user-create";
 import { UserProfileDialogOpen } from "@/lib/states/user";
 import { useUserNameChange } from "@/lib/hooks/api/use-user-name-change";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
-import { useAccountStats } from "@/lib/hooks/api/use-account-stats";
+import { useUserStats } from "@/lib/hooks/api/use-user-stats";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -20,7 +20,7 @@ export default function UserProfileDialog() {
 
   const [showProDialog, setShowProDialog] = useAtom(UserProfileDialogOpen);
   const { address } = useChainWallet();
-  const { data: accountStat, mutate } = useAccountStats();
+  const { data: accountStat, mutate } = useUserStats();
   const { checkAndSwitchChain } = useCheckSwitchChain();
 
   const {

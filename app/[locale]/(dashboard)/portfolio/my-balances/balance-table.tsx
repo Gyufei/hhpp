@@ -17,14 +17,12 @@ import { useMemo } from "react";
 import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 import NP from "number-precision";
 import { useOffers } from "@/lib/hooks/api/use-offers";
-// import { useUserData } from "@/lib/hooks/api/use-user-data";
 
 export function BalanceTable() {
   const BT = useTranslations("MyBalances");
 
   const { data: accountInfo } = useAccountInfo();
   const address = accountInfo?.dest_account || "";
-  console.log(accountInfo);
 
   const { data: myTakeOffers } = useOffers(
     {

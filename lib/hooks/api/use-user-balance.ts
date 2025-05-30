@@ -22,7 +22,7 @@ export function useUserBalance(address: string) {
 
   async function getTokenBalance() {
     const bas = await apiFetcher(
-      `${apiEndPoint}${ApiPaths.accountBalance}/${address}`,
+      `${apiEndPoint}${ApiPaths.userBalance}/${address}`,
     );
 
     const tokenBalances = tokens?.map((t: IToken) => {

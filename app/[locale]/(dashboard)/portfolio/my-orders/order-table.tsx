@@ -20,7 +20,7 @@ import { IOffer } from "@/lib/types/offer";
 import NP from "number-precision";
 import { format } from "date-fns";
 
-export function OrderTable({ filters }: { filters: string[] }) {
+export function OrderTable() {
   const T = useTranslations("MyOrders");
 
   const { data: offers, mutate: refreshMyOffers } = useMyOffers();
@@ -31,17 +31,12 @@ export function OrderTable({ filters }: { filters: string[] }) {
   const selectedOffer = offers?.find((o) => o.order_id === selectOfferId);
 
   const data = useMemo(() => {
-    let showData = [...offers];
-    if (filters.length !== 0) {
-      showData = showData.filter((o) => filters.includes(o.role));
-    }
-
-    const sortData = sortBy(showData, "create_at").reverse();
+    const sortData = sortBy(offers, "create_at").reverse();
 
     return {
       nodes: sortData,
     };
-  }, [offers, filters]);
+  }, [offers]);
 
   const theme = useTheme({
     Table: `

@@ -12,13 +12,13 @@ interface IAccountInfo {
   trade_vol: string;
 }
 
-export function useAccountStats() {
+export function useUserStats() {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
   const address = accountInfo?.dest_account || "";
 
   const res = useSWR<IAccountInfo>(
-    address ? `${apiEndPoint}${ApiPaths.accountStats}/${address}` : null,
+    address ? `${apiEndPoint}${ApiPaths.userStats}/${address}` : null,
     apiFetcher,
   );
 

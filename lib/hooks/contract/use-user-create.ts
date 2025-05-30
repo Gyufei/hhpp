@@ -29,7 +29,7 @@ export function useUserCreate() {
       signature,
     };
 
-    const res = await apiFetcher(`${apiEndPoint}${ApiPaths.accountCreate}`, {
+    const res = await apiFetcher(`${apiEndPoint}${ApiPaths.userCreate}`, {
       method: "POST",
       body: JSON.stringify(params),
     });

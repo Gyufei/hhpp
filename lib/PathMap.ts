@@ -8,13 +8,6 @@ export function WithApiHost(path: string) {
   return `${host}${path}`;
 }
 
-export function WithCDN(path: string) {
-  const prodCDN = `https://cdn.hypetrade.xyz`;
-  const devCDN = `https://preview-hypes-cdn.aggregation.top`;
-  const cdn = isProduction ? prodCDN : devCDN;
-  return `${cdn}${path}`;
-}
-
 export function WithWss(path: string) {
   const prodWss = "wss://wss.hypetrade.xyz" + path;
   const devWss = "wss://preview-wss.hypes.trade" + path;
@@ -23,10 +16,10 @@ export function WithWss(path: string) {
 }
 
 export const ApiPaths = {
-  accountCreate: "/user/create",
+  userCreate: "/user/create",
   userName: "/user/user_name",
-  accountStats: "/user/stats",
-  accountBalance: "/user/token_balances",
+  userStats: "/user/stats",
+  userBalance: "/user/token_balances",
   userWithdraw: "/user/withdraw",
   userDeposit: "/user/deposit",
   userXP: "/user/xp",
@@ -54,9 +47,7 @@ export const ApiPaths = {
   marketPointAmount: "/point",
 
   makerOrders: "/user/maker_orders",
-  userData: "/user/user_data",
   marketTrades: "/market/maker_trades_history",
-  userTokenBalance: "/account/token_balances",
 
   referral: {
     referer: "/referral/referer",

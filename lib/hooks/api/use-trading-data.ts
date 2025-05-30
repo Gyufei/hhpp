@@ -11,9 +11,10 @@ interface IData {
 }
 
 export function useTradingData() {
-  const { cdnEndPoint } = useEndPoint();
+  const { apiEndPoint } = useEndPoint();
 
-  const res = useSWRImmutable<Record<string, IData>>(`${cdnEndPoint}/trading_data.json`,
+  const res = useSWRImmutable<Record<string, IData>>(
+    `${apiEndPoint}/trading_data.json`,
     apiFetcher,
   );
 

@@ -1,11 +1,11 @@
 "use client";
 import { formatNum } from "@/lib/utils/number";
-import { useAccountStats } from "@/lib/hooks/api/use-account-stats";
+import { useUserStats } from "@/lib/hooks/api/use-user-stats";
 import { useTranslations } from "next-intl";
 
 export default function AccountOverview() {
   const T = useTranslations("Dashboard");
-  const { data: accountInfo } = useAccountStats();
+  const { data: userStat } = useUserStats();
 
   return (
     <div className="m-[10px] mb-0 pb-[20px] text-xs">
@@ -18,8 +18,8 @@ export default function AccountOverview() {
       <div className="mt-3 flex justify-between">
         <LabelText>{T("TradeVol")}</LabelText>
         <div className="leading-[18px] text-title-white">
-          <NoDataDisplay noData={!accountInfo}>
-            ${formatNum(Number(accountInfo?.trade_vol))}
+          <NoDataDisplay noData={!userStat?.trade_vol}>
+            ${formatNum(Number(userStat?.trade_vol || 0))}
           </NoDataDisplay>
         </div>
       </div>
@@ -27,8 +27,8 @@ export default function AccountOverview() {
       <div className="mt-3 flex justify-between">
         <LabelText>{T("MakerOrders")}</LabelText>
         <div className="leading-[18px] text-title-white">
-          <NoDataDisplay noData={!accountInfo}>
-            {formatNum(Number(accountInfo?.maker_orders))}
+          <NoDataDisplay noData={!userStat?.maker_orders}>
+            {formatNum(Number(userStat?.maker_orders || 0))}
           </NoDataDisplay>
         </div>
       </div>
@@ -36,8 +36,8 @@ export default function AccountOverview() {
       <div className="mt-3 flex justify-between">
         <LabelText>{T("TakerOrders")}</LabelText>
         <div className="leading-[18px] text-title-white">
-          <NoDataDisplay noData={!accountInfo}>
-            {formatNum(Number(accountInfo?.taker_orders))}
+          <NoDataDisplay noData={!userStat?.taker_orders}>
+            {formatNum(Number(userStat?.taker_orders || 0))}
           </NoDataDisplay>
         </div>
       </div>

@@ -1,39 +1,15 @@
 import Image from "next/image";
 
 import { formatNum } from "@/lib/utils/number";
-import { useMemo, useEffect } from "react";
+import { useMemo } from "react";
 import NP from "number-precision";
 import { useReferralData } from "@/lib/hooks/api/use-referral-data";
 import { useTranslations } from "next-intl";
-import { useUserTokenBalance } from "@/lib/hooks/api/use-user-token-balance";
-import HoverIcon from "@/components/share/hover-icon";
-import { useWithdrawToken } from "@/lib/hooks/contract/use-withdraw-token";
 
 export default function ReferralCommision() {
   const T = useTranslations("Dashboard");
-  const { data: tokenBlcData, mutate: refetchTokenBlcData } =
-    useUserTokenBalance();
-  const userClaim = tokenBlcData?.[0]?.ledgers;
 
-  const {
-    isLoading: isClaiming,
-    write: writeAction,
-    isSuccess: isClaimSuccess,
-  } = useWithdrawToken();
-
-  useEffect(() => {
-    if (isClaimSuccess) {
-      refetchTokenBlcData();
-    }
-  }, [isClaimSuccess, refetchTokenBlcData]);
-
-  const handleWithdraw = (type: string, value: any) => {
-    if (value <= 0) return;
-    writeAction({
-      token_balance_type: type,
-      dest_account: value,
-    });
-  };
+  const userClaim = null;
 
   return (
     <div className="mx-[10px] border-t border-border-black pb-[20px] pt-[20px]">
@@ -41,33 +17,11 @@ export default function ReferralCommision() {
         <div className="leading-[18px] text-title-white">
           {T("ReferralCommission")}
         </div>
-        {userClaim && (
-          <HoverIcon
-            onClick={() =>
-              handleWithdraw("referral_bonus", userClaim?.referral_bonus)
-            }
-            src="/icons/claim-gray.svg"
-            hoverSrc={
-              isClaiming || +(userClaim?.referral_bonus as string) <= 0
-                ? "/icons/claim-gray.svg"
-                : "/icons/claim.svg"
-            }
-            width={20}
-            height={20}
-            alt="copy"
-            data-disabled={
-              isClaiming || +(userClaim?.referral_bonus as string) <= 0
-            }
-            className="data-[disabled=true]:cursor-not-allowed"
-          />
-        )}
       </div>
       <div className="mt-3 flex justify-between">
         <LabelText>{T("Total")}</LabelText>
         <div className="leading-[18px] text-title-white">
-          <NoDataDisplay noData={!userClaim}>
-            ${formatNum(Number(userClaim?.total_referral_bonus))}
-          </NoDataDisplay>
+          <NoDataDisplay noData={true}>-</NoDataDisplay>
         </div>
       </div>
       <div className="mt-3 flex justify-between">
@@ -79,9 +33,7 @@ export default function ReferralCommision() {
       <div className="mt-3 flex justify-between">
         <LabelText>{T("AvailableToClaim")}</LabelText>
         <div className="leading-[18px] text-title-white">
-          <NoDataDisplay noData={!userClaim}>
-            ${formatNum(Number(userClaim?.referral_bonus))}
-          </NoDataDisplay>
+          <NoDataDisplay noData={true}>-</NoDataDisplay>
         </div>
       </div>
     </div>

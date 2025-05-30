@@ -12,7 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 import { UserProfileDialogOpen } from "@/lib/states/user";
 import { useSetAtom } from "jotai";
-import { useAccountStats } from "@/lib/hooks/api/use-account-stats";
+import { useUserStats } from "@/lib/hooks/api/use-user-stats";
 import { IUserBalance, useUserBalance } from "@/lib/hooks/api/use-user-balance";
 
 export default function BalancePopContent() {
@@ -22,7 +22,7 @@ export default function BalancePopContent() {
   const { data: accountInfo } = useAccountInfo();
   const address = accountInfo?.dest_account || "";
 
-  const { data: accountStat } = useAccountStats();
+  const { data: accountStat } = useUserStats();
 
   const { disconnect } = useChainWallet();
 
