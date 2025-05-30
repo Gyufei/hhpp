@@ -21,6 +21,9 @@ export function useUserNameChange() {
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.userName}`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         ...arg,
       }),
