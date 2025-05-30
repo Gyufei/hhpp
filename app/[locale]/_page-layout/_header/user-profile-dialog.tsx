@@ -47,7 +47,7 @@ export default function UserProfileDialog() {
   useEffect(() => {
     if (isLoadingAccountStat || !accountStat) return;
 
-    if (!accountStat?.user_name) {
+    if (!accountStat?.uid) {
       setIsCreate(true);
       setShowProDialog(true);
     } else {
@@ -124,7 +124,12 @@ export default function UserProfileDialog() {
   }
 
   return (
-    <Dialog open={showProDialog} onOpenChange={(val) => setShowProDialog(val)}>
+    <Dialog
+      open={showProDialog}
+      onOpenChange={(val) =>
+        !accountStat?.uid ? setShowProDialog(true) : setShowProDialog(val)
+      }
+    >
       <VisuallyHidden asChild>
         <DialogTitle>{T("UserProfile")}</DialogTitle>
       </VisuallyHidden>
@@ -132,15 +137,9 @@ export default function UserProfileDialog() {
         className="z-[199] flex w-[360px] flex-col items-center gap-0 rounded border-border-black bg-bg-black p-0"
         aria-describedby={undefined}
       >
-        <DialogTitle showClose={!!accountStat?.user_name}>
+        <DialogTitle showClose={!!accountStat?.uid}>
           <div className="flex w-full items-center justify-between">
             <div className="text-title-white">{T("UserProfile")}</div>
-            <button
-              onClick={() => setShowProDialog(false)}
-              className="text-title-white hover:text-main"
-            >
-              &times;
-            </button>
           </div>
         </DialogTitle>
 
