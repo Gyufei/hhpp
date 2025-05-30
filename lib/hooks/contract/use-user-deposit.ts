@@ -52,6 +52,9 @@ export function useUserDeposit() {
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.userDeposit}`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(reqData),
     });
 

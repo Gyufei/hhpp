@@ -30,16 +30,13 @@ export function useWithdrawToken() {
       dest_account: accountInfo?.dest_account || "",
     });
     try {
-      const res = await apiFetcher(
-        `${apiEndPoint}${ApiPaths.accountWithdraw}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(reqData),
+      const res = await apiFetcher(`${apiEndPoint}${ApiPaths.userWithdraw}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify(reqData),
+      });
 
       return res;
     } catch (error: any) {

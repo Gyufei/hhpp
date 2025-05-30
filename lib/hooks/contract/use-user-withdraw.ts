@@ -44,6 +44,9 @@ export function useUserWithdraw() {
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.userWithdraw}`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(reqData),
     });
 

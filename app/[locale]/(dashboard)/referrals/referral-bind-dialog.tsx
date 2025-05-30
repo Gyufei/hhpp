@@ -27,7 +27,7 @@ export default function ReferralBindDialog() {
 
   useEffect(() => {
     if (referralCode && address) {
-      viewReferral({ referral_code: referralCode, authority: address });
+      viewReferral({ referral_code: referralCode, referrer: address });
     }
   }, [referralCode, viewReferral, address]);
 

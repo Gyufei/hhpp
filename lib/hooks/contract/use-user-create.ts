@@ -31,6 +31,9 @@ export function useUserCreate() {
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.userCreate}`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(params),
     });
 

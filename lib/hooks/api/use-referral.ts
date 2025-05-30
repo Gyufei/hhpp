@@ -13,8 +13,11 @@ export function useReferralCreate() {
   const CreateApiPost = async () => {
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.create}`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
-        dest_account: address,
+        referrer: address,
       }),
     });
 
@@ -50,8 +53,11 @@ export function useReferralRateChange() {
         `${apiEndPoint}${ApiPaths.referral.updateCommission}`,
         {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
-            dest_account: address,
+            referrer: address,
             ...arg,
           }),
         },
@@ -90,8 +96,11 @@ export function useReferralNoteChange() {
       `${apiEndPoint}${ApiPaths.referral.updateNote}`,
       {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          dest_account: address,
+          referrer: address,
           ...arg,
         }),
       },
@@ -124,8 +133,11 @@ export function useReferralDefault() {
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.default}`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
-        dest_account: address,
+        referrer: address,
         ...arg,
       }),
     });
@@ -157,8 +169,11 @@ export function useReferralDelete() {
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.delete}`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
-        dest_account: address,
+        referrer: address,
         ...arg,
       }),
     });
@@ -180,12 +195,12 @@ export function useReferralView() {
       arg,
     }: {
       arg: {
-        authority: string;
+        referrer: string;
         referral_code: string;
       };
     },
   ) => {
-    if (!arg.authority || !arg.referral_code) return null;
+    if (!arg.referrer || !arg.referral_code) return null;
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.views}`, {
       method: "POST",
@@ -221,8 +236,11 @@ export function useReferralBind() {
 
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.referral.bind}`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
-        dest_account: address,
+        referrer: address,
         ...arg,
       }),
     });
