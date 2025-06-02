@@ -1,14 +1,10 @@
 import NP from "number-precision";
 import { IMarketplace } from "@/lib/types/marketplace";
 import { useCallback } from "react";
-import { useAccountInfo } from "./use-account-info";
 import { useUserBalance } from "./use-user-balance";
 
 export function useCheckBalance(market: IMarketplace) {
-  const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_account || "";
-
-  const { data: userBalance } = useUserBalance(address);
+  const { data: userBalance } = useUserBalance();
 
   const usdcBalanceObj = userBalance?.find((b) => b.token.symbol === "USDT");
 

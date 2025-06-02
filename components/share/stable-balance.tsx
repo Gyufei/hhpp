@@ -1,13 +1,9 @@
 import { formatNum } from "@/lib/utils/number";
 import { cn } from "@/lib/utils/common";
 import { useUserBalance } from "@/lib/hooks/api/use-user-balance";
-import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 export function StableBalance({ className }: { className?: string }) {
-  const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_account || "";
-
-  const { data: userBalance } = useUserBalance(address);
+  const { data: userBalance } = useUserBalance();
 
   const usdcBalanceObj = userBalance?.find((b) => b.token.symbol === "USDT");
 

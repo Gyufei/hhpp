@@ -31,7 +31,7 @@ export default function BalancePopContent() {
     isLoading,
     isValidating,
     mutate,
-  } = useUserBalance(address);
+  } = useUserBalance();
 
   const [targetBalance, setTargetBalance] = useState<IUserBalance | null>(null);
 

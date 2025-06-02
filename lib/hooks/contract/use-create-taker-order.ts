@@ -7,6 +7,7 @@ import { useAccountInfo } from "../api/use-account-info";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 import { getUserNonce } from "./help/user-nonce";
 import { useSendTx } from "./help/use-send-tx";
+import { ApiPaths } from "@/lib/PathMap";
 
 export function useCreateTakerOrder() {
   const { data: accountInfo } = useAccountInfo();
@@ -36,7 +37,7 @@ export function useCreateTakerOrder() {
     const reqData = await signDataAction(argsData);
 
     try {
-      const res = await apiFetcher(`${apiEndPoint}/offer/${offerId}/take`, {
+      const res = await apiFetcher(`${apiEndPoint}/${ApiPaths.offerTake}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

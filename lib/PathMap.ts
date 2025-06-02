@@ -36,6 +36,7 @@ export const ApiPaths = {
   createOffer: "/market/create_offer",
   offers: "/offers",
   offer: "/offer",
+  offerTake: "/offer/take",
   offerPremiumPrice: "/offer/current_premium_price",
   offerDistribution: "/offer/distribution",
   offerCancel: "/offer/cancel",

@@ -5,12 +5,18 @@ import { useSignData } from "./help/use-sign-data";
 import useSWRMutation from "swr/mutation";
 import { useAccountInfo } from "../api/use-account-info";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
+import { useUserBalance } from "../api/use-user-balance";
+import { useSendTx } from "./help/use-send-tx";
 
 export function useUserWithdraw() {
   const { data: accountInfo } = useAccountInfo();
   const { apiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
   const { checkAndSwitchChain } = useCheckSwitchChain();
+
+  const { mutate } = useUserBalance();
+
+  const { send } = useSendTx();
 
   async function postApi(
     _: string,
@@ -50,7 +56,11 @@ export function useUserWithdraw() {
       body: JSON.stringify(reqData),
     });
 
-    return res;
+    const hash = await send(res);
+
+    mutate();
+
+    return hash;
   }
 
   const res = useSWRMutation("user withdraw", postApi);

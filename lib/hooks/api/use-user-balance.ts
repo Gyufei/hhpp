@@ -5,6 +5,7 @@ import { apiFetcher } from "@/lib/fetcher";
 import { useTokens } from "./token/use-tokens";
 import { IToken } from "@/lib/types/token";
 import NP from "number-precision";
+import { useAccountInfo } from "./use-account-info";
 
 export interface IUserBalance {
   wallet: string;
@@ -16,13 +17,17 @@ export interface IUserBalance {
   token: IToken;
 }
 
-export function useUserBalance(address: string) {
+export function useUserBalance(address?: string) {
   const { apiEndPoint } = useEndPoint();
   const { data: tokens } = useTokens();
 
+  const { data: accountInfo } = useAccountInfo();
+  const dest_account = accountInfo?.dest_account;
+  const wallet = address ?? dest_account;
+
   async function getTokenBalance() {
     const bas = await apiFetcher(
-      `${apiEndPoint}${ApiPaths.userBalance}/${address}`,
+      `${apiEndPoint}${ApiPaths.userBalance}/${wallet}`,
     );
 
     const tokenBalances = tokens?.map((t: IToken) => {
@@ -33,7 +38,7 @@ export function useUserBalance(address: string) {
       if (!baData)
         return {
           token: t,
-          wallet: address,
+          wallet: wallet,
           token_address: t.address,
           token_available_balance: "0",
           token_locked_balance: "0",
@@ -60,7 +65,7 @@ export function useUserBalance(address: string) {
   }
 
   const res = useSWR<IUserBalance[]>(
-    address && tokens ? `getTokenBalance ${address} ${tokens.length}` : null,
+    wallet && tokens ? `getTokenBalance ${wallet} ${tokens.length}` : null,
     getTokenBalance,
   );
 

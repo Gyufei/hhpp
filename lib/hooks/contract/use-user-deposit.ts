@@ -5,11 +5,14 @@ import useSWRMutation from "swr/mutation";
 import { useAccountInfo } from "../api/use-account-info";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 import { useSendTx } from "./help/use-send-tx";
+import { useUserBalance } from "../api/use-user-balance";
 
 export function useUserDeposit() {
   const { data: accountInfo } = useAccountInfo();
   const { apiEndPoint } = useEndPoint();
   const { checkAndSwitchChain } = useCheckSwitchChain();
+
+  const { mutate } = useUserBalance();
 
   const { send } = useSendTx();
 
@@ -59,6 +62,8 @@ export function useUserDeposit() {
     });
 
     const hash = await send(res);
+
+    mutate();
 
     return hash;
   }
