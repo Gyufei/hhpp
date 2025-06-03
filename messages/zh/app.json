@@ -193,7 +193,8 @@
     "USDValue": "美元价值",
     "PnL(%)": "收益率",
     "YourBalanceAppearHere": "你的余额出现在这里...",
-    "List": "上架"
+    "List": "上架",
+    "CombineList": "合并上架"
   },
   "Referral": {
     "YourReferralLink": "你的推荐链接",

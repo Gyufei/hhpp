@@ -53,8 +53,7 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
 
   const expiry = offer.marketplace.expiry_date;
 
-  const isAfterExpiry =
-    coverExpiryDate(expiry).timestamp < new Date().getTime();
+  const isAfterExpiry = checkIsAfterExpiry(expiry);
 
   const strike = offer.marketplace.strike_price;
 
@@ -83,4 +82,8 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     isAfterExpiry,
     strike,
   };
+}
+
+export function checkIsAfterExpiry(expiry: string) {
+  return coverExpiryDate(expiry).timestamp < new Date().getTime();
 }
