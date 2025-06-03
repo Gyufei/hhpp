@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SalesChart, { Durations, IDurationType } from "./sales-chart";
 import { IMarketplace } from "@/lib/types/marketplace";
 import { useTranslations } from "next-intl";
@@ -20,6 +20,22 @@ export default function MarketCharts({
   setShowKChart: (show: boolean) => void;
 }) {
   const [duration, setDuration] = useState<IDurationType>(Durations[0].value);
+  const [showZoomButton, setShowZoomButton] = useState(false);
+
+  useEffect(() => {
+    if (showKChart) {
+      const timer = setTimeout(() => {
+        setShowZoomButton(true);
+      }, 1000);
+
+      return () => {
+        clearTimeout(timer);
+        setShowZoomButton(false);
+      };
+    } else {
+      setShowZoomButton(false);
+    }
+  }, [showKChart]);
 
   function handleChangeDuration(duration: IDurationType) {
     setDuration(duration);
@@ -34,21 +50,23 @@ export default function MarketCharts({
     <div
       className={cn(
         "flex flex-col p-[10px] transition-all duration-300",
-        showKChart ? "relative h-full" : "",
+        showKChart ? "relative h-[600px] mt-8 lg:mt-0 lg:h-full" : "",
       )}
     >
       {showKChart ? (
         <>
-          <div className="absolute right-[220px] top-[16px] z-10 flex h-[33px] w-[33px] items-center justify-center text-[#d1d4dc]">
-            <Image
-              src={showKChart ? "/icons/zoom-in.svg" : "/icons/zoom-out.svg"}
-              width={20}
-              height={20}
-              alt="line-chart"
-              className="cursor-pointer text-[#d1d4dc]"
-              onClick={() => setShowKChart(false)}
-            />
-          </div>
+          {showZoomButton && (
+            <div className="absolute lg:right-[220px] right-0 -top-[24px] lg:top-[14px] z-10 flex h-[33px] w-[33px] items-center justify-center text-[#d1d4dc]">
+              <Image
+                src={showKChart ? "/icons/zoom-in.svg" : "/icons/zoom-out.svg"}
+                width={18}
+                height={18}
+                alt="line-chart"
+                className="cursor-pointer text-[#d1d4dc]"
+                onClick={() => setShowKChart(false)}
+              />
+            </div>
+          )}
           <KChart symbol={marketplace.token.symbol} />
         </>
       ) : (
@@ -67,9 +85,9 @@ export default function MarketCharts({
                   <div className="h-5 w-[1px] bg-border-black"></div>
                   <Image
                     onClick={handleShowKChart}
-                    src="/icons/k-chart.svg"
-                    width={20}
-                    height={20}
+                    src="/icons/zoom-out.svg"
+                    width={18}
+                    height={18}
                     alt="k-chart"
                     className="cursor-pointer"
                   />

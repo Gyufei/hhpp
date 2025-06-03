@@ -70,7 +70,7 @@ export default function MarketplacePage({
       <div
         className={cn(
           "mr-[2px] flex w-full flex-col",
-          showKChart ? "sm:w-[100vw-320px]" : "sm:w-[320px]",
+          showKChart ? "hidden sm:flex sm:w-[100vw-320px]" : "sm:w-[320px]",
         )}
       >
         <MarketplaceCard
@@ -104,7 +104,11 @@ export default function MarketplacePage({
         </div>
       </div>
 
-      <MobileSwitchTabs currentTab={currentTab} setCurrentTab={setCurrentTab} />
+      <MobileSwitchTabs 
+        currentTab={currentTab} 
+        setCurrentTab={setCurrentTab}
+        showKChart={showKChart}
+      />
 
       {showChart && (
         <div className="flex w-full flex-1 flex-col rounded bg-bg-black px-[10px]">
@@ -172,16 +176,21 @@ const MobilePageTab: ITab[] = ["Items", "Chart", "Trades", "Holder"];
 function MobileSwitchTabs({
   currentTab,
   setCurrentTab,
+  showKChart,
 }: {
   currentTab: ITab;
   setCurrentTab: (tab: ITab) => void;
+  showKChart: boolean;
 }) {
   const handleTabClick = (tab: ITab) => {
     setCurrentTab(tab);
   };
 
   return (
-    <div className="w-full bg-bg-black sm:hidden">
+    <div className={cn(
+      "w-full bg-bg-black sm:hidden",
+      showKChart && "hidden"
+    )}>
       <div className="relative mx-[10px] mt-[10px] flex items-center justify-start">
         {MobilePageTab.map((tab) => (
           <div
