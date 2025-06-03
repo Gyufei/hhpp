@@ -24,7 +24,6 @@ export function useMyOffers() {
   const asMaker = res1.data?.map((o) => ({
     ...o,
     role: "maker",
-    order_status: "created",
   }));
 
   const asTaker = res2.data
@@ -32,7 +31,6 @@ export function useMyOffers() {
     .map((o) => ({
       ...o,
       role: "taker",
-      order_status: "created",
     }));
 
   const allData = uniqBy([...(asMaker || []), ...(asTaker || [])], "order_id");
