@@ -13,10 +13,13 @@ import { useUserNameChange } from "@/lib/hooks/api/use-user-name-change";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 import { useUserStats } from "@/lib/hooks/api/use-user-stats";
 import { useChainWallet } from "@/lib/hooks/web3/use-chain-wallet";
+import { usePathname } from "@/i18n/routing";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function UserProfileDialog() {
   const T = useTranslations("Common");
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   const [showProDialog, setShowProDialog] = useAtom(UserProfileDialogOpen);
   const { address } = useChainWallet();
@@ -49,13 +52,16 @@ export default function UserProfileDialog() {
 
     if (!accountStat?.uid) {
       setIsCreate(true);
-      setShowProDialog(true);
+      // 排除首页自动弹出对话框
+      if (!isHome) {
+        setShowProDialog(true);
+      }
     } else {
       setIsCreate(false);
       setShowProDialog(false);
       setUsername(accountStat.user_name || "");
     }
-  }, [isLoadingAccountStat, accountStat, setShowProDialog]);
+  }, [isLoadingAccountStat, accountStat, setShowProDialog, isHome]);
 
   useEffect(() => {
     if (isSuccess) {
