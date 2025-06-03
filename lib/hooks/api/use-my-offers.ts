@@ -1,3 +1,4 @@
+import { uniqBy } from "lodash";
 import { useAccountInfo } from "./use-account-info";
 import { useOffers } from "./use-offers";
 
@@ -26,14 +27,18 @@ export function useMyOffers() {
     order_status: "created",
   }));
 
-  const asTaker = res2.data?.map((o) => ({
-    ...o,
-    role: "taker",
-    order_status: "created",
-  }));
+  const asTaker = res2.data
+    ?.filter((o) => o.creator !== o.taker)
+    .map((o) => ({
+      ...o,
+      role: "taker",
+      order_status: "created",
+    }));
+
+  const allData = uniqBy([...(asMaker || []), ...(asTaker || [])], "order_id");
 
   return {
-    data: [...(asMaker || []), ...(asTaker || [])],
+    data: allData,
     isLoading: res1.isLoading || res2.isLoading,
     mutate: () => {
       res1.mutate();

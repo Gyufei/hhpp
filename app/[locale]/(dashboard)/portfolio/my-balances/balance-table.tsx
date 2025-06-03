@@ -30,13 +30,17 @@ export function BalanceTable() {
   const { data: accountInfo } = useAccountInfo();
   const address = accountInfo?.dest_account || "";
 
-  const { data: myTakeOffers, mutate: mutateMyTakeOffers } = useOffers(
+  const { data: myTakeOffersData, mutate: mutateMyTakeOffers } = useOffers(
     {
       taker: address,
       // taker: "0x8C3A4f7D55fcbff9be9d53529D0f9184B3718c28",
     },
     address ? `my-take-offer-${address}` : "",
   );
+
+  const myTakeOffers = useMemo(() => {
+    return myTakeOffersData?.filter((o) => o.creator !== o.taker);
+  }, [myTakeOffersData]);
 
   const {
     write: relistAction,
