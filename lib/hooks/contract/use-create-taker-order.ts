@@ -37,7 +37,7 @@ export function useCreateTakerOrder() {
     const reqData = await signDataAction(argsData);
 
     try {
-      const res = await apiFetcher(`${apiEndPoint}/${ApiPaths.offerTake}`, {
+      const res = await apiFetcher(`${apiEndPoint}${ApiPaths.offerTake}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
