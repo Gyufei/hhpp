@@ -12,9 +12,8 @@ import { useMarketTrades } from "@/lib/hooks/api/use-market-trades";
 import { range, sortBy } from "lodash";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
-import { useStableToken, useTokens } from "@/lib/hooks/api/token/use-tokens";
+import { useTokens } from "@/lib/hooks/api/token/use-tokens";
 import NP from "number-precision";
-import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
 
 export function TradesTable({
   type,
@@ -31,7 +30,6 @@ export function TradesTable({
   );
 
   const { data: tokens } = useTokens();
-  const { data: USDT } = useStableToken();
 
   const isLoadingFlag = !marketplace || isLoading || isHistoryLoading;
 
