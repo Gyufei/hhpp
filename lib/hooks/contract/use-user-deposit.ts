@@ -43,16 +43,6 @@ export function useUserDeposit() {
       ...argsData,
     };
 
-    const checkAllowanceRes = await apiFetcher(
-      `${apiEndPoint}${ApiPaths.tokenAllowance}?token_address=${token_address}&wallet=${accountInfo.dest_account}`,
-    );
-
-    const allowance = checkAllowanceRes.allowance;
-
-    if (Number(allowance) === 0 || Number(allowance) < Number(amount)) {
-      await send(checkAllowanceRes.txParams);
-    }
-
     const res = await apiFetcher(`${apiEndPoint}${ApiPaths.userDeposit}`, {
       method: "POST",
       headers: {

@@ -84,10 +84,18 @@ export default function AskDetail({
   async function handleConfirmTakerOrder() {
     if (isTaking || !receivePointAmount) return;
 
+    const withSlippage = String(
+      Math.floor(
+        NP.times(
+          NP.times(payTokenAmount, 1.01),
+          10 ** (offerTokenInfo?.decimals || 0),
+        ),
+      ),
+    );
+
     await writeAction({
       offerId: offer.order_id,
-      premiumAmount: String(NP.times(payTokenAmount, pointDecimalNum)),
-      premiumPrice: premiumPrice,
+      maxPremiumAmount: withSlippage,
     });
   }
 

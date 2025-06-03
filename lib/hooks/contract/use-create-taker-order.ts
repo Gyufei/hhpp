@@ -18,19 +18,17 @@ export function useCreateTakerOrder() {
 
   const txAction = async (args: {
     offerId: string;
-    premiumAmount: string;
-    premiumPrice: string;
+    maxPremiumAmount: string;
   }) => {
-    const { offerId, premiumAmount, premiumPrice } = args;
+    const { offerId, maxPremiumAmount } = args;
 
     const nonce = await getUserNonce(accountInfo?.dest_account || "");
 
     const argsData = {
       taker: accountInfo?.dest_account,
       nonce: nonce,
-      offer_id: offerId,
-      premium_amount: premiumAmount,
-      premium_price: premiumPrice,
+      order_id: offerId,
+      maximum_premium_amount: maxPremiumAmount,
     };
 
     await checkAndSwitchChain();

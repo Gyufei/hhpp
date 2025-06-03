@@ -10,6 +10,7 @@ import { useUserDeposit } from "@/lib/hooks/contract/use-user-deposit";
 import { toast } from "react-hot-toast";
 import NP from "number-precision";
 import { cn } from "@/lib/utils";
+import { useCheckAllowance } from "@/lib/hooks/contract/use-check-allowance";
 
 export function DepositDialog({
   tokenBalance,
@@ -35,10 +36,27 @@ export function DepositDialog({
   const [depositError, setDepositError] = useState<string | null>(null);
 
   const {
+    allowance,
+    isLoading: isAllowanceLoading,
+    isApproving,
+    approveError,
+    handleApprove,
+  } = useCheckAllowance(token?.address);
+
+  const isShouldApprove = Number(allowance) < Number(depositAmount);
+
+  const {
     trigger: triggerDeposit,
     isMutating,
     data: isSuccess,
   } = useUserDeposit();
+
+  async function handleDepositApprove() {
+    if (isShouldApprove) {
+      await handleApprove();
+      return;
+    }
+  }
 
   function handleConfirmDeposit() {
     if (depositError) return;
@@ -50,6 +68,11 @@ export function DepositDialog({
 
     if (Number(depositAmount) > Number(tokenBalanceNum)) {
       setDepositError("Deposit amount is greater than balance");
+      return;
+    }
+
+    if (isShouldApprove) {
+      handleApprove();
       return;
     }
 
@@ -102,11 +125,15 @@ export function DepositDialog({
 
         <div className="w-full px-5 py-[15px]">
           <button
-            disabled={!!depositError || isMutating}
-            onClick={handleConfirmDeposit}
+            disabled={
+              !!depositError || isAllowanceLoading || isApproving || isMutating
+            }
+            onClick={
+              isShouldApprove ? handleDepositApprove : handleConfirmDeposit
+            }
             className="flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:bg-main-inactive"
           >
-            {CT("Confirm")}
+            {isShouldApprove ? "Approve" : CT("Confirm")}
           </button>
           <div
             className={cn(
@@ -114,7 +141,7 @@ export function DepositDialog({
               depositError ? "block" : "hidden",
             )}
           >
-            {depositError}
+            {depositError || approveError}
           </div>
         </div>
       </DialogContent>
