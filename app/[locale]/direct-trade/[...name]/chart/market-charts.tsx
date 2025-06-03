@@ -50,13 +50,13 @@ export default function MarketCharts({
     <div
       className={cn(
         "flex flex-col p-[10px] transition-all duration-300",
-        showKChart ? "relative h-full" : "",
+        showKChart ? "relative h-[600px] mt-8 lg:mt-0 lg:h-full" : "",
       )}
     >
       {showKChart ? (
         <>
           {showZoomButton && (
-            <div className="absolute right-[220px] top-[14px] z-10 flex h-[33px] w-[33px] items-center justify-center text-[#d1d4dc]">
+            <div className="absolute lg:right-[220px] right-0 -top-[24px] lg:top-[14px] z-10 flex h-[33px] w-[33px] items-center justify-center text-[#d1d4dc]">
               <Image
                 src={showKChart ? "/icons/zoom-in.svg" : "/icons/zoom-out.svg"}
                 width={18}
