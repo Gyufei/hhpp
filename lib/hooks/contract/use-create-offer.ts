@@ -31,7 +31,7 @@ export function useCreateOffer({ marketId }: { marketId: string }) {
     await checkAndSwitchChain();
 
     const reqData = await signDataAction(params);
-
+    
     try {
       const res = await apiFetcher(`${apiEndPoint}${ApiPaths.createOffer}`, {
         method: "POST",
