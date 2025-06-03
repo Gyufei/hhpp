@@ -191,7 +191,8 @@
     "USDValue": "USD Value",
     "PnL(%)": "PnL(%)",
     "YourBalanceAppearHere": "Your balances appear here...",
-    "List": "List"
+    "List": "List",
+    "CombineList": "Combine List"
   },
   "Referral": {
     "YourReferralLink": "Your referral link",

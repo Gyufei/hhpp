@@ -189,7 +189,8 @@
     "USDValue": "USD 가치",
     "PnL(%)": "PnL(%)",
     "YourBalanceAppearHere": "여기에 잔액이 표시됩니다.",
-    "List": "목록"
+    "List": "목록",
+    "CombineList": "목록 합치기"
   },
   "Referral": {
     "YourReferralLink": "당신의 추천 링크",

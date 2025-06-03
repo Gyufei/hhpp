@@ -34,7 +34,7 @@ export default function MarketplacePage({
     isLoading: isOffersLoading,
   } = useOffers(
     {
-      marketId: String(marketplace?.id) || "",
+      market_place_id: String(marketplace?.market_place_id) || "",
     },
     "market-all-offers",
   );

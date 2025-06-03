@@ -7,7 +7,7 @@ import { useMarketplaces } from "./use-marketplaces";
 
 export function useOffers(
   queryArgs: {
-    marketId?: string | null;
+    market_place_id?: string | null;
     creator?: string | null;
     taker?: string | null;
   },

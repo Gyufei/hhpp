@@ -22,10 +22,9 @@ export function TakerOrders({
 }) {
   const T = useTranslations("Offer");
 
-  const { pointDecimalNum, offerTokenInfo, offerPointInfo, forValue } =
-    useOfferFormat({
-      offer: offer,
-    });
+  const { pointDecimalNum, offerTokenInfo, offerPointInfo } = useOfferFormat({
+    offer: offer,
+  });
 
   const data = useMemo(() => {
     const orderData = orders.map((o, index) => {
@@ -126,9 +125,11 @@ export function TakerOrders({
     },
     {
       label: T("Deposits"),
-      renderCell: () => {
-        const percent = 100;
-        const amount = NP.times(forValue, percent);
+      renderCell: (o: ITakerOrder) => {
+        const amount = NP.divide(
+          o.premium_amount,
+          10 ** (offerTokenInfo?.decimals || 0),
+        );
 
         return (
           <div className="flex items-center justify-start space-x-1">

@@ -41,7 +41,6 @@ export default function useTxStatus(
         reportEvent("walletReject", { value: e?.name });
         eMsg = "User rejected.";
       }
-      console.error(e);
       if (e?.message.includes("An internal error was received")) {
         reportEvent("walletError", { value: e?.name });
       } else {

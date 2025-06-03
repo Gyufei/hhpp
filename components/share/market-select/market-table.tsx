@@ -28,7 +28,7 @@ export default function MarketTable({
     Table: `
       width: 100%;
       grid-template-rows: 24px repeat(auto-fit, 40px);
-      grid-template-columns: 180px minmax(0, 1fr) 200px repeat(2, minmax(0, 1fr));
+      grid-template-columns: 180px repeat(5, minmax(0, 1fr));
       grid-auto-rows: 40px;
     `,
     Header: "",
@@ -87,6 +87,16 @@ export default function MarketTable({
           <div className="w-fit">
             {o.token_name}-{o.expiry_date}
           </div>
+        );
+      },
+    },
+    {
+      label: T("StrikePrice"),
+      renderCell: (o: IMarketplace) => {
+        return isLoading ? (
+          <Skeleton className="h-[16px] w-[60px]" />
+        ) : (
+          <div className="w-fit">${formatNum(Number(o.strike_price), 3)}</div>
         );
       },
     },

@@ -26,10 +26,11 @@ export function TradesTable({
 }) {
   const T = useTranslations("Marketplace");
   const { data: historyData, isLoading: isHistoryLoading } = useMarketTrades(
-    String(marketplace?.id) || "",
+    String(marketplace?.market_place_id) || "",
   );
 
   const { data: tokens } = useTokens();
+
   const isLoadingFlag = !marketplace || isLoading || isHistoryLoading;
 
   const { data: msgEvents } = useWsMsg();
@@ -44,7 +45,7 @@ export function TradesTable({
     });
 
     const msgAll = (msgEvents || []).filter(
-      (msg) => !!msg && msg.market_id === String(marketplace?.id),
+      (msg) => !!msg && msg.market_id === String(marketplace?.market_place_id),
     );
 
     const allMsg = sortBy(msgAll || [], "trade_at")
@@ -62,7 +63,7 @@ export function TradesTable({
       });
 
     return allMsg;
-  }, [msgEvents, historyData, tokens, marketplace?.id]);
+  }, [msgEvents, historyData, tokens, marketplace?.market_place_id]);
 
   const data = useMemo(() => {
     if (isLoadingFlag) {
@@ -177,16 +178,7 @@ export function TradesTable({
           <Skeleton className="h-[16px] w-[100px]" />
         ) : (
           <div className="flex w-full items-center justify-end px-[4px] pr-4">
-            <span>
-              {formatNum(
-                NP.divide(
-                  trade.token_amount,
-                  NP.divide(trade.amount, pointDecimalNum),
-                ),
-                2,
-                true,
-              )}
-            </span>
+            <span>{formatNum(trade.value)}</span>
             {trade.token && (
               <Image
                 className="ml-1 rounded-full"
@@ -209,7 +201,7 @@ export function TradesTable({
             className="max-w-[80px] overflow-hidden text-ellipsis whitespace-nowrap px-[4px] text-center"
             title={formatNum(NP.divide(trade.amount, pointDecimalNum), 2, true)}
           >
-            {/* {formatNum(NP.divide(trade.amount, pointDecimalNum), 2, true)} */}
+            ${formatNum(marketplace?.strike_price, 2)}
           </div>
         ),
     },

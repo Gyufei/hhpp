@@ -9,11 +9,21 @@ export function useSignData() {
   async function signDataAction(data: any, isTypeData = false) {
     const isStr = isString(data);
 
+    let msgData = data;
+    if (typeof msgData === "object" && !isTypeData) {
+      msgData = Object.keys(msgData)
+        .sort()
+        .reduce((acc, key) => {
+          acc[key] = data[key];
+          return acc;
+        }, {} as Record<string, any>);
+    }
+
     try {
       const signature = isTypeData
         ? await signer?.signTypedData(data.domain, data.types, data.message)
         : await signMessageAsync({
-            message: JSON.stringify(data),
+            message: JSON.stringify(msgData),
           });
 
       return isTypeData

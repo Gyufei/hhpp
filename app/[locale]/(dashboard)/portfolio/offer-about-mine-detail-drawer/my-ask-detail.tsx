@@ -41,7 +41,11 @@ export default function MyAskDetail({
 
   const isMaker = offer.role === "maker";
   const isTaker = offer.role === "taker";
-  const canCancel = !isFilled && !isAfterExpiry && isMaker;
+
+  const isOriginOffer = offer.creator === offer.taker;
+
+  const canCancel = !isFilled && !isAfterExpiry && isOriginOffer;
+  const canDelist = !isFilled && !isAfterExpiry && !isOriginOffer;
   const canSettle = isFilled && isAfterExpiry && (isMaker || isTaker);
 
   const {
@@ -175,29 +179,27 @@ export default function MyAskDetail({
                   {T("OfferClosed")}
                 </button>
               ) : canCancel ? (
-                <div className="flex w-full justify-between gap-2">
-                  <button
-                    onClick={handleClose}
-                    disabled={isClosing}
-                    className={cn(
-                      "mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive",
-                      isClosing ? "dot-loading" : "",
-                    )}
-                  >
-                    {T("CloseThisOffer")}
-                  </button>
-
-                  <button
-                    onClick={handleDelist}
-                    disabled={isDelisting}
-                    className={cn(
-                      "mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive",
-                      isDelisting ? "dot-loading" : "",
-                    )}
-                  >
-                    {T("DelistThisOffer")}
-                  </button>
-                </div>
+                <button
+                  onClick={handleClose}
+                  disabled={isClosing}
+                  className={cn(
+                    "mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive",
+                    isClosing ? "dot-loading" : "",
+                  )}
+                >
+                  {T("CloseThisOffer")}
+                </button>
+              ) : canDelist ? (
+                <button
+                  onClick={handleDelist}
+                  disabled={isDelisting}
+                  className={cn(
+                    "mt-4 flex h-8 w-full flex-1 items-center justify-center rounded bg-main text-xs leading-6 text-bg-black hover:bg-main-hover disabled:bg-main-inactive",
+                    isDelisting ? "dot-loading" : "",
+                  )}
+                >
+                  {T("DelistThisOffer")}
+                </button>
               ) : canSettle ? (
                 <button
                   onClick={handleSettle}

@@ -79,7 +79,7 @@ export function useCreateAction(marketplace: IMarketplace) {
       }
 
       writeAction({
-        shares: Math.floor(NP.times(pointAmount, pointDecimalNum)),
+        shares: String(Math.floor(NP.times(pointAmount, pointDecimalNum))),
         note,
       });
     } catch (error) {

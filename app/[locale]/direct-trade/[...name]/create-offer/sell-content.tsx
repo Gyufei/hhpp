@@ -171,7 +171,6 @@ export function SellContent({
         <button
           onClick={handleConfirmBtnClick}
           disabled={isCreating || !!errorText || !receiveTokenAmount}
-          data-isCreating={isCreating}
           className={cn(
             "mt-2 flex h-8 w-full items-center justify-center rounded bg-main text-xs leading-[18px] text-bg-black hover:bg-main-hover disabled:cursor-not-allowed disabled:bg-main-inactive",
             isCreating ? "dot-loading" : "",

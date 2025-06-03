@@ -25,7 +25,7 @@ export function useSendTx() {
         from: from as `0x${string}`,
         to: to as `0x${string}`,
         data: data as `0x${string}`,
-        gas: BigInt(gas),
+        gas: gas ? BigInt(gas) : undefined,
         ...(value ? { value: BigInt(value) } : {}),
       };
 

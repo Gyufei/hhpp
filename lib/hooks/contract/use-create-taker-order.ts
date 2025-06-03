@@ -25,13 +25,14 @@ export function useCreateTakerOrder() {
     const nonce = await getUserNonce(accountInfo?.dest_account || "");
 
     const argsData = {
+      order_id: offerId,
       taker: accountInfo?.dest_account,
       nonce: nonce,
-      order_id: offerId,
       maximum_premium_amount: maxPremiumAmount,
     };
 
     await checkAndSwitchChain();
+
     const reqData = await signDataAction(argsData);
 
     try {

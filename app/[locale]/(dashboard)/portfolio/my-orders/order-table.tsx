@@ -174,11 +174,11 @@ export function OrderTable() {
                   </Cell>
                   <Cell>
                     <div>
-                      {off.role !== "taker" && (
+                      {
                         <DetailBtn
                           onClick={() => handleOpenOfferDrawer(off.order_id)}
                         ></DetailBtn>
-                      )}
+                      }
                     </div>
                   </Cell>
                 </Row>

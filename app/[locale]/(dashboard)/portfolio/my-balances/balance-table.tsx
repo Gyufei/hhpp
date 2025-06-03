@@ -12,21 +12,25 @@ import { usePagination } from "@table-library/react-table-library/pagination";
 import { useTheme } from "@table-library/react-table-library/theme";
 import { Pagination } from "@/components/ui/pagination/pagination";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 import NP from "number-precision";
 import { useOffers } from "@/lib/hooks/api/use-offers";
 import { useRelist } from "@/lib/hooks/contract/use-relist";
 import { IOffer } from "@/lib/types/offer";
+import { cn } from "@/lib/utils";
+import { checkIsAfterExpiry } from "@/lib/hooks/offer/use-offer-format";
 
 export function BalanceTable() {
   const BT = useTranslations("MyBalances");
+  const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
 
   const { data: accountInfo } = useAccountInfo();
   const address = accountInfo?.dest_account || "";
 
-  const { data: myTakeOffers, mutate: mutateMyTakeOffers } = useOffers(
+  const { data: myTakeOffersData, mutate: mutateMyTakeOffers } = useOffers(
     {
       taker: address,
       // taker: "0x8C3A4f7D55fcbff9be9d53529D0f9184B3718c28",
@@ -34,11 +38,25 @@ export function BalanceTable() {
     address ? `my-take-offer-${address}` : "",
   );
 
+  const myTakeOffers = useMemo(() => {
+    return myTakeOffersData?.filter((o) => o.creator !== o.taker);
+  }, [myTakeOffersData]);
+
   const {
     write: relistAction,
     isLoading: isRelisting,
     isSuccess: isRelistSuccess,
   } = useRelist();
+
+  const selectedOffers = useMemo(() => {
+    return myTakeOffers?.filter((offer) => selectedRows.has(offer.order_id));
+  }, [myTakeOffers, selectedRows]);
+
+  const isCanCombineList = useMemo(() => {
+    return selectedOffers?.every(
+      (offer) => offer.market_place_id === selectedOffers?.[0]?.market_place_id,
+    );
+  }, [selectedOffers]);
 
   const data = useMemo(() => {
     return {
@@ -114,6 +132,31 @@ export function BalanceTable() {
     });
   }
 
+  function handleRelistCheckRow() {
+    console.log("relist check row", selectedRows);
+    if (selectedRows.size === 0) return;
+    if (isRelisting) return;
+
+    const offerIds = Array.from(selectedRows);
+
+    relistAction?.({
+      offerIds,
+      marketId: selectedOffers?.[0]?.market_place_id,
+    });
+  }
+
+  const handleSelectRow = (orderId: string) => {
+    setSelectedRows((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(orderId)) {
+        newSet.delete(orderId);
+      } else {
+        newSet.add(orderId);
+      }
+      return newSet;
+    });
+  };
+
   useEffect(() => {
     if (isRelistSuccess) {
       mutateMyTakeOffers();
@@ -143,14 +186,30 @@ export function BalanceTable() {
                 <HeaderCell>{BT("Option")}</HeaderCell>
                 <HeaderCell>{BT("TotalBalance")}</HeaderCell>
                 <HeaderCell>{BT("USDValue")}</HeaderCell>
-                <HeaderCell></HeaderCell>
+                <HeaderCell>
+                  {selectedRows.size > 1 && (
+                    <div
+                      onClick={() => handleRelistCheckRow()}
+                      className={cn(
+                        "flex h-6 w-fit cursor-pointer items-center rounded-full border border-[#eee] px-[14px] transition-opacity hover:border-[#50D2C1] hover:text-[#50D2C1]",
+                        !isCanCombineList && "opacity-50",
+                      )}
+                    >
+                      {BT("CombineList")}
+                    </div>
+                  )}
+                </HeaderCell>
               </HeaderRow>
             </Header>
             <Body>
               {tableList.map((offer) => (
                 <Row key={offer.id} item={offer}>
                   <Cell>
-                    <div>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        checked={selectedRows.has(offer.order_id)}
+                        onCheckedChange={() => handleSelectRow(offer.order_id)}
+                      />
                       {offer.marketplace.token_name}-
                       {offer.marketplace.expiry_date}-
                       {offer.marketplace.strike_price}
@@ -185,12 +244,14 @@ export function BalanceTable() {
                   </Cell>
 
                   <Cell>
-                    <div
-                      onClick={() => handleRelist(offer)}
-                      className="flex h-7 w-fit cursor-pointer items-center rounded-full border border-[#eee] px-[14px] hover:border-[#50D2C1] hover:text-[#50D2C1]"
-                    >
-                      {BT("List")}
-                    </div>
+                    {!checkIsAfterExpiry(offer.marketplace.expiry_date) && (
+                      <div
+                        onClick={() => handleRelist(offer)}
+                        className="flex h-7 w-fit cursor-pointer items-center rounded-full border border-[#eee] px-[14px] transition-opacity hover:border-[#50D2C1] hover:text-[#50D2C1]"
+                      >
+                        {BT("List")}
+                      </div>
+                    )}
                   </Cell>
                 </Row>
               ))}
