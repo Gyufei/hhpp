@@ -6,13 +6,11 @@ import { toast } from "react-hot-toast";
 import { useAccountInfo } from "../api/use-account-info";
 import { getUserNonce } from "./help/user-nonce";
 import { ApiPaths } from "@/lib/PathMap";
-import { useSendTx } from "./help/use-send-tx";
 
 export function useTakerSettleOffer() {
   const { data: accountInfo } = useAccountInfo();
   const { apiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
-  const { send } = useSendTx();
 
   const txAction = async (args: { offerId: string }) => {
     const nonce = await getUserNonce(accountInfo?.dest_account || "");
@@ -39,9 +37,7 @@ export function useTakerSettleOffer() {
         },
       );
 
-      const hash = await send(res);
-
-      return hash;
+      return res;
     } catch (error: any) {
       toast.error(
         error?.message || "The service is abnormal. Please try again",

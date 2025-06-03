@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 import { useAccountInfo } from "../api/use-account-info";
 import { useCheckSwitchChain } from "@/lib/hooks/web3/use-check-switch-chain";
 import { getUserNonce } from "./help/user-nonce";
-import { useSendTx } from "./help/use-send-tx";
 import { ApiPaths } from "@/lib/PathMap";
 
 export function useCreateTakerOrder() {
@@ -14,7 +13,6 @@ export function useCreateTakerOrder() {
   const { apiEndPoint } = useEndPoint();
   const { signDataAction } = useSignData();
   const { checkAndSwitchChain } = useCheckSwitchChain();
-  const { send } = useSendTx();
 
   const txAction = async (args: {
     offerId: string;
@@ -44,9 +42,7 @@ export function useCreateTakerOrder() {
         body: JSON.stringify(reqData),
       });
 
-      const hash = await send(res);
-
-      return hash;
+      return res;
     } catch (e: any) {
       toast.error(e?.message || "The service is abnormal. Please try again");
       throw new Error(

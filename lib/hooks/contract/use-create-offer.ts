@@ -6,14 +6,12 @@ import { toast } from "react-hot-toast";
 import { useAccountInfo } from "../api/use-account-info";
 import { getUserNonce } from "./help/user-nonce";
 import { ApiPaths } from "@/lib/PathMap";
-import { useSendTx } from "./help/use-send-tx";
 import { useCheckSwitchChain } from "../web3/use-check-switch-chain";
 
 export function useCreateOffer({ marketId }: { marketId: string }) {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
   const { signDataAction } = useSignData();
-  const { send } = useSendTx();
 
   const { checkAndSwitchChain } = useCheckSwitchChain();
 
@@ -31,7 +29,7 @@ export function useCreateOffer({ marketId }: { marketId: string }) {
     await checkAndSwitchChain();
 
     const reqData = await signDataAction(params);
-    
+
     try {
       const res = await apiFetcher(`${apiEndPoint}${ApiPaths.createOffer}`, {
         method: "POST",
@@ -41,9 +39,7 @@ export function useCreateOffer({ marketId }: { marketId: string }) {
         body: JSON.stringify(reqData),
       });
 
-      const hash = await send(res);
-
-      return hash;
+      return res;
     } catch (error: any) {
       toast.error(error?.message || "Invalid transaction data");
       throw new Error(error?.message || "Invalid transaction data");
