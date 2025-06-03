@@ -20,9 +20,9 @@ export function useCreateOffer({ marketId }: { marketId: string }) {
     const params = {
       market_place_id: marketId,
       shares: args.shares,
-      order_note: args.note,
       creator: accountInfo?.dest_account || "",
       nonce: nonce,
+      order_note: args.note,
     };
 
     const reqData = await signDataAction(params);

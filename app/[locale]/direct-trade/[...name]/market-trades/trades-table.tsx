@@ -26,7 +26,7 @@ export function TradesTable({
 }) {
   const T = useTranslations("Marketplace");
   const { data: historyData, isLoading: isHistoryLoading } = useMarketTrades(
-    String(marketplace?.id) || "",
+    String(marketplace?.market_place_id) || "",
   );
 
   const { data: tokens } = useTokens();
@@ -44,7 +44,7 @@ export function TradesTable({
     });
 
     const msgAll = (msgEvents || []).filter(
-      (msg) => !!msg && msg.market_id === String(marketplace?.id),
+      (msg) => !!msg && msg.market_id === String(marketplace?.market_place_id),
     );
 
     const allMsg = sortBy(msgAll || [], "trade_at")
@@ -62,7 +62,7 @@ export function TradesTable({
       });
 
     return allMsg;
-  }, [msgEvents, historyData, tokens, marketplace?.id]);
+  }, [msgEvents, historyData, tokens, marketplace?.market_place_id]);
 
   const data = useMemo(() => {
     if (isLoadingFlag) {
