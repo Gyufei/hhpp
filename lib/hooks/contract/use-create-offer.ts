@@ -7,12 +7,15 @@ import { useAccountInfo } from "../api/use-account-info";
 import { getUserNonce } from "./help/user-nonce";
 import { ApiPaths } from "@/lib/PathMap";
 import { useSendTx } from "./help/use-send-tx";
+import { useCheckSwitchChain } from "../web3/use-check-switch-chain";
 
 export function useCreateOffer({ marketId }: { marketId: string }) {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
   const { signDataAction } = useSignData();
   const { send } = useSendTx();
+
+  const { checkAndSwitchChain } = useCheckSwitchChain();
 
   const txAction = async (args: { shares: number; note: string }) => {
     const nonce = await getUserNonce(accountInfo?.dest_account || "");
@@ -24,6 +27,8 @@ export function useCreateOffer({ marketId }: { marketId: string }) {
       nonce: nonce,
       order_note: args.note,
     };
+
+    await checkAndSwitchChain();
 
     const reqData = await signDataAction(params);
 
