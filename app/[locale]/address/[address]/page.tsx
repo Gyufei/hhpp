@@ -321,7 +321,7 @@ export default function Page({ params }: { params: { address: string } }) {
           <div className="mt-[2px] flex-1 rounded bg-bg-black p-[10px]">
             <div className="mb-4 text-title-white">Positions</div>
             <div className="rounded bg-[#00D4AA] px-4 py-2 text-center">
-              <div className="text-[#111A1E]">BTC-USD</div>
+              <div className="text-[#111A1E]">BTC-USDT</div>
             </div>
           </div>
         </div>

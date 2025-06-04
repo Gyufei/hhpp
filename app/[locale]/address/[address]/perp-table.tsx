@@ -24,7 +24,7 @@ interface ITableData {
   asset: string;
   expiryDate: string;
   strikePrice: string;
-  leverage: number;
+  quantity: number;
   value: number;
   amount: number;
   entryPrice: string;
@@ -60,9 +60,9 @@ export function PerpTable() {
           "MM/dd/yyyy",
         ),
         strikePrice: offer.marketplace.strike_price,
-        leverage: 1,
-        value: tokenAmount,
+        quantity: shares,
         amount: strikeAmount,
+        value: tokenAmount,
         entryPrice: offer.marketplace.strike_price,
         markPrice: offer.marketplace.token.price,
         pnl: pnl,
@@ -83,7 +83,7 @@ export function PerpTable() {
 
   const theme = useTheme({
     Table: `
-      grid-template-columns: 100px repeat(9,minmax(80px,1fr));
+      grid-template-columns: 100px repeat(7,minmax(80px,1fr)) 100px 150px;
       grid-template-rows: 40px repeat(auto-fit, 56px);
       grid-auto-rows: 56px;
       min-width: 800px;
@@ -167,7 +167,7 @@ export function PerpTable() {
                   <HeaderCell>Asset</HeaderCell>
                   <HeaderCell>Expiry Date</HeaderCell>
                   <HeaderCell>Strike Price</HeaderCell>
-                  <HeaderCell>Leverage</HeaderCell>
+                  <HeaderCell>Quantity</HeaderCell>
                   <HeaderCell>Value</HeaderCell>
                   <HeaderCell>Amount</HeaderCell>
                   <HeaderCell>Entry Price</HeaderCell>
@@ -182,9 +182,7 @@ export function PerpTable() {
                       <div
                         className={cn(
                           "whitespace-nowrap font-medium",
-                          row.side === "CALL"
-                            ? "text-green"
-                            : "text-red",
+                          row.side === "CALL" ? "text-green" : "text-red",
                         )}
                       >
                         {row.side}
@@ -196,43 +194,48 @@ export function PerpTable() {
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{row.expiryDate}</div>
+                      <div className="whitespace-nowrap">${row.expiryDate}</div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{row.strikePrice}</div>
+                      <div className="whitespace-nowrap">${row.strikePrice}</div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{row.leverage}</div>
+                      <div className="whitespace-nowrap">{row.quantity}</div>
                     </Cell>
 
                     <Cell>
                       <div className="whitespace-nowrap">
-                        {formatNum(row.value, 2)}
+                        ${formatNum(row.value, 2)}
                       </div>
                     </Cell>
 
                     <Cell>
                       <div className="whitespace-nowrap">
-                        {formatNum(row.amount)}
+                        ${formatNum(row.amount)}
                       </div>
                     </Cell>
 
                     <Cell>
                       <div className="whitespace-nowrap">
-                        {formatNum(row.entryPrice)}
+                        ${formatNum(row.entryPrice)}
                       </div>
                     </Cell>
 
                     <Cell>
                       <div className="whitespace-nowrap">
-                        {formatNum(row.markPrice)}
+                        ${formatNum(row.markPrice)}
                       </div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">
+                      <div
+                        className={cn(
+                          "whitespace-nowrap",
+                          row.pnl > 0 ? "text-green" : "text-red",
+                        )}
+                      >
                         {formatNum(row.pnl)}({formatNum(row.pnlPercent)}%)
                       </div>
                     </Cell>
