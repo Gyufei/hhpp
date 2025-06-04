@@ -101,11 +101,12 @@ export function coverExpiryDate(expiryDate: string) {
   const month = expiryDate.slice(4, 6);
   const day = expiryDate.slice(6, 8);
 
-  const dateStr = `${year}-${month}-${day}T00:00:00`;
+  const dateStr = `${year}-${month}-${day}T00:00:00Z`; // 确保是 UTC 时间
+  const utcDate = new Date(dateStr);
 
   return {
-    str: `${year}-${month}-${day}`,
-    date: new Date(dateStr),
-    timestamp: new Date(dateStr).getTime(),
+    str: expiryDate,
+    date: utcDate,
+    timestamp: utcDate.getTime(),
   };
 }

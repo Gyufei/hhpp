@@ -41,6 +41,7 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
   const offerLogo = offerType === "sell" ? pointLogo : tokenLogo;
   const forLogo = offerType === "sell" ? tokenLogo : pointLogo;
 
+  const isCreated = offer.order_status === "created";
   const isFilled = offer.order_status === "purchased";
   const isCanceled = offer.order_status === "cancelled";
   const isSettled = offer.order_status === "settled";
@@ -73,6 +74,7 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     offerTokenInfo,
     pointDecimalNum,
 
+    isCreated,
     isFilled,
     isCanceled,
     isSettled,

@@ -45,7 +45,7 @@ export function useCreateAction(marketplace: IMarketplace) {
   }, [marketplace, point]);
 
   const pointDecimalNum = useMemo(() => {
-    const decimal = currentMarket.token.decimals;
+    const decimal = currentMarket?.token?.decimals || 0;
     return 10 ** decimal;
   }, [currentMarket]);
 

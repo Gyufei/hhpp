@@ -9,7 +9,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { IOffer } from "@/lib/types/offer";
-import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
+import {
+  checkIsAfterExpiry,
+  useOfferFormat,
+} from "@/lib/hooks/offer/use-offer-format";
 import { useMemo } from "react";
 import { TooltipArrow } from "@radix-ui/react-tooltip";
 import { CTooltipArrow } from "@/components/share/c-tooltip-arrow";
@@ -47,7 +50,10 @@ export function OfferCard({
   const offerType = "sell";
 
   const showBuy = useMemo(() => {
-    return ["created"].includes(offer.order_status);
+    const isCreated = ["created"].includes(offer.order_status);
+    const isNotAfterExpiry = !checkIsAfterExpiry(offer.marketplace.expiry_date);
+
+    return isCreated && isNotAfterExpiry;
   }, [offer]);
 
   const done = useMemo(() => {
@@ -194,7 +200,7 @@ export function OfferCard({
               </button>
             </WithWalletConnectBtn>
           )}
-          {done && (
+          {(done || !showBuy) && (
             <WithWalletConnectBtn onClick={() => handleShow()}>
               <button className="flex items-center justify-center rounded-full border border-main px-[18px] py-1 text-sm leading-5 text-main hover:border-main-hover hover:text-main-hover">
                 {T("Detail")}

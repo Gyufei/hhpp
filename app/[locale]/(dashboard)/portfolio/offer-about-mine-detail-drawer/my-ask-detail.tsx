@@ -31,9 +31,10 @@ export default function MyAskDetail({
     amount,
     offerTokenInfo,
     offerPointInfo,
+    isCreated,
+    isFilled,
     isCanceled,
     pointDecimalNum,
-    isFilled,
     isAfterExpiry,
   } = useOfferFormat({
     offer,
@@ -46,7 +47,8 @@ export default function MyAskDetail({
 
   const canCancel = !isFilled && !isAfterExpiry && isOriginOffer;
   const canDelist = !isFilled && !isAfterExpiry && !isOriginOffer;
-  const canSettle = isFilled && isAfterExpiry && (isMaker || isTaker);
+  const canSettle =
+    isAfterExpiry && ((isMaker && isCreated) || (isFilled && isTaker));
 
   const {
     isLoading: isClosing,
