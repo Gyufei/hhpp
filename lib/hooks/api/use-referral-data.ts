@@ -57,7 +57,7 @@ export function useReferralReferer() {
 
   const res = useSWR<string | any | null>(
     address
-      ? `${apiEndPoint}${ApiPaths.referral.referer}?dest_account=${address}`
+      ? `${apiEndPoint}${ApiPaths.referral.referer}?referee=${address}`
       : null,
     apiFetcher,
   );
@@ -96,7 +96,7 @@ export function useReferralExtraRate() {
 
   const res = useSWR(
     address
-      ? `${apiEndPoint}${ApiPaths.referral.extraRate}?dest_account=${address}`
+      ? `${apiEndPoint}${ApiPaths.referral.extraRate}?referrer=${address}`
       : null,
     apiFetcher,
   );

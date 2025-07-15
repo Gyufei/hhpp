@@ -61,7 +61,10 @@ export function ReferralRateDialog({
   }
 
   useEffect(() => {
-    if (Number(rate) + Number(friendRate) > referralBaseRate + extraRate) {
+    if (
+      Number(rate) + Number(friendRate) >
+      Number(referralBaseRate) + Number(extraRate)
+    ) {
       setRateError(true);
     } else {
       setRateError(false);
