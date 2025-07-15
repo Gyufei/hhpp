@@ -240,7 +240,7 @@ export function useReferralBind() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        referrer: address,
+        referee: address,
         ...arg,
       }),
     });
