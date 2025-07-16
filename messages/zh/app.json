@@ -105,6 +105,7 @@
     "CloseBidOffer": "关闭竞价订单",
     "DelistThisOffer": "下架",
     "SettleThisOffer": "清算",
+    "WaitingForSettle": "等待清算",
 
     "Filled/SellingAmount": "已售 / 总销售",
     "Filled/BuyingAmount": "已购 / 总需求",

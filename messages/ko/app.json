@@ -103,6 +103,7 @@
     "CloseBidOffer": "입찰 제안 닫기",
     "DelistThisOffer": "이 제안 삭제",
     "SettleThisOffer": "이 제안 정산",
+    "WaitingForSettle": "정산 대기중",
 
     "Filled/SellingAmount": "체결 / 판매 금액",
     "Filled/BuyingAmount": "체결 / 구매 금액",

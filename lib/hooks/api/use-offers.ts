@@ -36,8 +36,6 @@ export function useOffers(
         (m) => m.market_place_id === o.market_place_id,
       );
 
-      console.log(o.market_place_id, marketplace);
-
       return {
         ...o,
         marketplace,

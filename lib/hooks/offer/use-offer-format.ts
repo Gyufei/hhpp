@@ -54,6 +54,7 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
   }, [offer.order_status]);
 
   const expiry = offer.marketplace.expiry_date;
+  // const expiry = "20250716";
 
   const isDuringExpiry = checkDuringExpiry(expiry);
 

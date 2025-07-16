@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 
 import { formatNum } from "@/lib/utils/number";
@@ -49,18 +49,14 @@ export default function MyAskDetail({
   const canCancel = !isFilled && !isAfterExpiry && isOriginOffer;
 
   const canDelist = !isFilled && !isAfterExpiry && !isOriginOffer;
-  
-  const canSettle = useMemo(() => {
-    if (isDuringExpiry && isTaker && isFilled) {
-      return true;
-    }
 
-    if (isAfterExpiry && isMaker && (isCreated || isFilled)) {
-      return true;
-    }
+  const canTakerSettle = isDuringExpiry && isFilled;
+  const isTakerCanSettle = canTakerSettle && isTaker;
+  const canMakerSettle =
+    !isDuringExpiry && isAfterExpiry && (isCreated || isFilled);
+  const isMakerCanSettle = canMakerSettle && isMaker;
 
-    return false;
-  }, [isAfterExpiry, isDuringExpiry, isMaker, isCreated, isFilled, isTaker]);
+  const canSettle = isTakerCanSettle || isMakerCanSettle;
 
   const {
     isLoading: isClosing,
@@ -227,7 +223,9 @@ export default function MyAskDetail({
                 </button>
               ) : (
                 <button className="pointer-events-none mt-4  flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-6 text-title-white">
-                  {T("TradingEnded")}
+                  {isMaker && canTakerSettle
+                    ? T("WaitingForSettle")
+                    : T("TradingEnded")}
                 </button>
               )}
             </>
