@@ -9,38 +9,6 @@ import { useTranslations } from "next-intl";
 export default function ReferralCommision() {
   const T = useTranslations("Dashboard");
 
-  const userClaim = null;
-
-  return (
-    <div className="mx-[10px] border-t border-border-black pb-[20px] pt-[20px]">
-      <div className="flex items-center justify-between">
-        <div className="leading-[18px] text-title-white">
-          {T("ReferralCommission")}
-        </div>
-      </div>
-      <div className="mt-3 flex justify-between">
-        <LabelText>{T("Total")}</LabelText>
-        <div className="leading-[18px] text-title-white">
-          <NoDataDisplay noData={true}>-</NoDataDisplay>
-        </div>
-      </div>
-      <div className="mt-3 flex justify-between">
-        <LabelText>{T("Change(24h)")}</LabelText>
-        <div className="leading-[18px] text-title-white">
-          {userClaim ? <ReferralChange /> : "-"}
-        </div>
-      </div>
-      <div className="mt-3 flex justify-between">
-        <LabelText>{T("AvailableToClaim")}</LabelText>
-        <div className="leading-[18px] text-title-white">
-          <NoDataDisplay noData={true}>-</NoDataDisplay>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ReferralChange() {
   const { data: referralData } = useReferralData();
 
   const commission = useMemo(() => {
@@ -55,6 +23,43 @@ function ReferralChange() {
     }, 0);
   }, [referralData]);
 
+  const total = useMemo(() => {
+    return commission + lastCommission;
+  }, [commission, lastCommission]);
+
+  return (
+    <div className="mx-[10px] border-t border-border-black pb-[20px] pt-[20px]">
+      <div className="flex items-center justify-between">
+        <div className="leading-[18px] text-title-white">
+          {T("ReferralCommission")}
+        </div>
+      </div>
+      <div className="mt-3 flex justify-between">
+        <LabelText>{T("Total")}</LabelText>
+        <div className="leading-[18px] text-title-white">
+          <NoDataDisplay noData={!total}>{formatNum(total)}</NoDataDisplay>
+        </div>
+      </div>
+      <div className="mt-3 flex justify-between">
+        <LabelText>{T("Change(24h)")}</LabelText>
+        <div className="leading-[18px] text-title-white">
+          <ReferralChange
+            commission={commission}
+            lastCommission={lastCommission}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReferralChange({
+  commission,
+  lastCommission,
+}: {
+  commission: number;
+  lastCommission: number;
+}) {
   const commissionRate = useMemo(() => {
     if (Number(lastCommission) === 0 || Number(commission) === 0) return 0;
 
