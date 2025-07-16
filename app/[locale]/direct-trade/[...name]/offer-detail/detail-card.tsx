@@ -8,6 +8,9 @@ import { useOfferFormat } from "@/lib/hooks/offer/use-offer-format";
 import { useTranslations } from "next-intl";
 import { format } from "date-fns";
 import { coverExpiryDate } from "@/lib/utils/time";
+import { useTakerOrderOfOffers } from "@/lib/hooks/api/use-taker-orders-of-offer";
+import { useMemo } from "react";
+import { sortBy } from "lodash";
 
 export default function DetailCard({ offer }: { offer: IOffer }) {
   const T = useTranslations("Offer");
@@ -15,6 +18,21 @@ export default function DetailCard({ offer }: { offer: IOffer }) {
   const { offerPointInfo, pointDecimalNum } = useOfferFormat({
     offer,
   });
+
+  const { data: takerOrders } = useTakerOrderOfOffers({
+    offerId: String(offer.order_id),
+  });
+
+  const seller = useMemo(() => {
+    console.log("takerOrders", offer.order_id, takerOrders);
+    if (!takerOrders?.length || takerOrders.length === 1) return offer.creator;
+
+    if (takerOrders.length > 1) {
+      const lastTakerOrder = sortBy(takerOrders, "id")?.reverse()[1];
+      console.log("lastTakerOrder", lastTakerOrder);
+      return lastTakerOrder.wallet;
+    }
+  }, [takerOrders, offer.creator]);
 
   const originId = offer.id;
   const originMaker = offer.creator;
@@ -48,7 +66,7 @@ export default function DetailCard({ offer }: { offer: IOffer }) {
         <DetailLabel tipText={T("Seller")}>{T("Seller")}</DetailLabel>
         <div className="flex items-center space-x-1">
           <div className="text-sm leading-5 text-title-white">
-            {truncateAddr(offer?.creator || "", {
+            {truncateAddr(seller || "", {
               nPrefix: 4,
               nSuffix: 4,
             })}
