@@ -69,31 +69,38 @@ function ReferralChange({
     return NP.divide(lastCommission, yesterdayCommission);
   }, [lastCommission, commission]);
 
+  const allZero = commission === 0 && lastCommission === 0;
+
   return (
     <>
       <div className="flex flex-col items-center justify-start text-[12px] sm:flex-row sm:space-x-10">
         <div className="mt-0 flex w-full items-stretch justify-between">
           <div className="flex flex-col items-start justify-between">
             <div className="mt-1 flex items-center justify-center text-title-white">
-              <div>${commission}</div>
-              <div className="ml-[10px] flex items-center justify-center">
-                <DisplayArrow
-                  isUp={
-                    Number(commissionRate === 0) ? "zero" : commissionRate > 0
-                  }
-                />
-                <div className="flex w-max items-center">
-                  <span
-                    data-up={
+              {allZero ? (
+                "-"
+              ) : (
+                <div className="ml-[10px] flex items-center justify-center">
+                  <DisplayArrow
+                    isUp={
                       Number(commissionRate === 0) ? "zero" : commissionRate > 0
                     }
-                    className="data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-gray"
-                  >
-                    {commissionRate > 0 ? "+" : ""}
-                    {formatNum(commissionRate * 100)}%
-                  </span>
+                  />
+                  <div className="flex w-max items-center">
+                    <span
+                      data-up={
+                        Number(commissionRate === 0)
+                          ? "zero"
+                          : commissionRate > 0
+                      }
+                      className="data-[up=false]:text-red data-[up=true]:text-green data-[up=zero]:text-gray"
+                    >
+                      {commissionRate > 0 ? "+" : ""}
+                      {formatNum(commissionRate * 100)}%
+                    </span>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
