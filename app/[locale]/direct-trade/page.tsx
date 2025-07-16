@@ -2,6 +2,7 @@
 import { useRouter } from "@/i18n/routing";
 import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
 import { checkIsAfterExpiry } from "@/lib/hooks/offer/use-offer-format";
+import { getMarketUrlField } from "@/lib/utils/other";
 import { useSearchParams } from "next/navigation";
 
 export default function Marketplace() {
@@ -15,7 +16,9 @@ export default function Marketplace() {
 
   if (firstMarket) {
     router.replace(
-      `/direct-trade/${firstMarket.id}?${searchParams.toString()}`,
+      `/direct-trade/${getMarketUrlField(
+        firstMarket,
+      )}?${searchParams.toString()}`,
     );
   }
 

@@ -7,6 +7,7 @@ import Sparkline from "@/components/share/snapshot";
 import { IMarketplace } from "@/lib/types/marketplace";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
+import { getMarketUrlField } from "@/lib/utils/other";
 
 export default function MarketTable({
   marketList,
@@ -142,8 +143,8 @@ export default function MarketTable({
     },
   ];
 
-  function handleGo(id: string) {
-    router.push(`/direct-trade/${id}`);
+  function handleGo(market: IMarketplace) {
+    router.push(`/direct-trade/${getMarketUrlField(market)}`);
   }
 
   return (
@@ -153,7 +154,7 @@ export default function MarketTable({
       data={data}
       rowProps={{
         onClick: (node: any) => {
-          handleGo(node.id);
+          handleGo(node);
         },
       }}
     />

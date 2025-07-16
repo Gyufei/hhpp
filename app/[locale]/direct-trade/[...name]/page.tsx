@@ -4,13 +4,19 @@ import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
 import MarketplacePage from "./marketplace-page";
 import { useWsMsg } from "@/lib/hooks/api/use-ws-msgs";
 import { useEffect } from "react";
+import { parseMarketUrlField } from "@/lib/utils/other";
 
 export default function Marketplace({ params }: { params: { name: string } }) {
-  const mId = decodeURIComponent(params.name[0]);
+  const marketParamsStr = decodeURIComponent(params.name[0]);
   const { data: markets, mutate } = useMarketplaces();
 
+  const marketParams = parseMarketUrlField(marketParamsStr);
+
   const marketplace = markets?.find(
-    (marketplace) => String(marketplace.id) === mId,
+    (marketplace) =>
+      marketplace.expiry_date === marketParams.expiryDate &&
+      marketplace.token_name === marketParams.token &&
+      marketplace.strike_price === marketParams.strikePrice,
   );
 
   const { data: wsData } = useWsMsg();
@@ -24,7 +30,7 @@ export default function Marketplace({ params }: { params: { name: string } }) {
     }
   }, [wsData, marketplace?.market_place_id, mutate]);
 
-  if (!markets || !mId) return null;
+  if (!markets || !marketParamsStr) return null;
 
   if (!marketplace) {
     return (
