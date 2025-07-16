@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
 
 import { formatNum } from "@/lib/utils/number";
@@ -36,6 +36,7 @@ export default function MyAskDetail({
     isCanceled,
     pointDecimalNum,
     isAfterExpiry,
+    isDuringExpiry,
   } = useOfferFormat({
     offer,
   });
@@ -46,11 +47,20 @@ export default function MyAskDetail({
   const isOriginOffer = offer.creator === offer.taker;
 
   const canCancel = !isFilled && !isAfterExpiry && isOriginOffer;
-  const canDelist = !isFilled && !isAfterExpiry && !isOriginOffer;
-  const canSettle =
-    isAfterExpiry && ((isMaker && isCreated) || (isFilled && isTaker));
 
-  console.log("canSettle", canSettle, isAfterExpiry, isMaker, isCreated);
+  const canDelist = !isFilled && !isAfterExpiry && !isOriginOffer;
+  
+  const canSettle = useMemo(() => {
+    if (isDuringExpiry && isTaker && isFilled) {
+      return true;
+    }
+
+    if (isAfterExpiry && isMaker && (isCreated || isFilled)) {
+      return true;
+    }
+
+    return false;
+  }, [isAfterExpiry, isDuringExpiry, isMaker, isCreated, isFilled, isTaker]);
 
   const {
     isLoading: isClosing,

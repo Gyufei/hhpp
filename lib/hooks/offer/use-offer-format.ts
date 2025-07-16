@@ -55,6 +55,8 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
 
   const expiry = offer.marketplace.expiry_date;
 
+  const isDuringExpiry = checkDuringExpiry(expiry);
+
   const isAfterExpiry = checkIsAfterExpiry(expiry);
 
   const strike = offer.marketplace.strike_price;
@@ -83,11 +85,12 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
 
     expiry,
     isAfterExpiry,
+    isDuringExpiry,
     strike,
   };
 }
 
-export function duringExpiry(expiry: string) {
+export function checkDuringExpiry(expiry: string) {
   return isSameDay(new Date(), coverExpiryDate(expiry).date);
 }
 
