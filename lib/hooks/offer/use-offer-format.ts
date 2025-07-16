@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { IPoint } from "../../types/token";
 import { useStableToken } from "../api/token/use-tokens";
 import { coverExpiryDate } from "@/lib/utils/time";
+import { isSameDay } from "date-fns";
 
 export function useOfferFormat({ offer }: { offer: IOffer }) {
   const { data: usdtToken } = useStableToken();
@@ -84,6 +85,10 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     isAfterExpiry,
     strike,
   };
+}
+
+export function duringExpiry(expiry: string) {
+  return isSameDay(new Date(), coverExpiryDate(expiry).date);
 }
 
 export function checkIsAfterExpiry(expiry: string) {

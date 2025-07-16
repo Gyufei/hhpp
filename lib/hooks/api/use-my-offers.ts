@@ -4,8 +4,13 @@ import { useOffers } from "./use-offers";
 
 export function useMyOffers() {
   const { data: accountInfo } = useAccountInfo();
-  const address = accountInfo?.dest_account || "";
-  // const address = "0x8C3A4f7D55fcbff9be9d53529D0f9184B3718c28";
+  // #A
+  // const address = "0xb6FA7f135038600E7071378Ac57cdb1e35e4936b";
+  // #B
+  const address = '0xaE71F62Bfd81058a7c9024d729D79B9C20524Ec4'
+  // accountInfo?.dest_account || "";
+  // TODO: remove this
+  console.log("address", accountInfo);
 
   const res1 = useOffers(
     {

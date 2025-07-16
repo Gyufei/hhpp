@@ -50,6 +50,8 @@ export default function MyAskDetail({
   const canSettle =
     isAfterExpiry && ((isMaker && isCreated) || (isFilled && isTaker));
 
+  console.log("canSettle", canSettle, isAfterExpiry, isMaker, isCreated);
+
   const {
     isLoading: isClosing,
     write: closeAction,
