@@ -7,6 +7,7 @@ import { PerpTable } from "./perp-table";
 import { UserProfileDialogOpen } from "@/lib/states/user";
 import { useSetAtom } from "jotai";
 import { useUserStats } from "@/lib/hooks/api/use-user-stats";
+import { cn } from "@/lib/utils";
 
 export default function Page({ params }: { params: { address: string } }) {
   const address = params.address;
@@ -54,25 +55,43 @@ export default function Page({ params }: { params: { address: string } }) {
               onValueChange={handleTabChange}
             >
               <TabsList className="w-full justify-start rounded-none border-b border-border-black bg-transparent text-gray">
-                <TabsTrigger value="TRANSACTIONS" className={tabClx}>
+                <TabsTrigger
+                  value="TRANSACTIONS"
+                  className={cn(tabClx, "pointer-events-none")}
+                >
                   Transactions
                 </TabsTrigger>
-                <TabsTrigger value="OPTIONS" className={tabClx}>
+                <TabsTrigger
+                  value="OPTIONS"
+                  className={cn(tabClx, "pointer-events-none")}
+                >
                   Options
                 </TabsTrigger>
                 <TabsTrigger value="PERPS" className={tabClx}>
                   Perps
                 </TabsTrigger>
-                <TabsTrigger value="ORDERS" className={tabClx}>
+                <TabsTrigger
+                  value="ORDERS"
+                  className={cn(tabClx, "pointer-events-none")}
+                >
                   Orders
                 </TabsTrigger>
-                <TabsTrigger value="VAULTS" className={tabClx}>
+                <TabsTrigger
+                  value="VAULTS"
+                  className={cn(tabClx, "pointer-events-none")}
+                >
                   Vaults
                 </TabsTrigger>
-                <TabsTrigger value="STAKING" className={tabClx}>
+                <TabsTrigger
+                  value="STAKING"
+                  className={cn(tabClx, "pointer-events-none")}
+                >
                   Staking
                 </TabsTrigger>
-                <TabsTrigger value="MORE" className={tabClx}>
+                <TabsTrigger
+                  value="MORE"
+                  className={cn(tabClx, "pointer-events-none")}
+                >
                   More
                 </TabsTrigger>
               </TabsList>
