@@ -15,6 +15,9 @@ import { cn } from "@/lib/utils/common";
 import { useDelistOffer } from "@/lib/hooks/contract/use-delist-offer";
 import { useMakerSettleOffer } from "@/lib/hooks/contract/use-maker-settle-offer";
 import { useTakerSettleOffer } from "@/lib/hooks/contract/use-taker-settle-offer";
+import { useTakerOrderOfOffers } from "@/lib/hooks/api/use-taker-orders-of-offer";
+import { sortBy } from "lodash";
+import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
 
 export default function MyAskDetail({
   offer,
@@ -23,6 +26,9 @@ export default function MyAskDetail({
   offer: IOffer;
   onSuccess: () => void;
 }) {
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_account;
+
   const T = useTranslations("Offer");
   const {
     tokenTotalPrice,
@@ -46,17 +52,27 @@ export default function MyAskDetail({
 
   const isOriginOffer = offer.creator === offer.taker;
 
-  const canCancel = !isFilled && !isAfterExpiry && isOriginOffer;
+  const { data: takerOrders } = useTakerOrderOfOffers({
+    offerId: String(offer.order_id),
+  });
 
-  const canDelist = !isFilled && !isAfterExpiry && !isOriginOffer;
+  const isHasTakerOrder = (takerOrders || [])?.length > 0;
+  const lastBuyOrder = sortBy(takerOrders, "id")?.reverse()[0];
+  const canCancel =
+    !isFilled && !isAfterExpiry && isOriginOffer && !isHasTakerOrder;
+
+  const canDelist =
+    !isFilled &&
+    !isAfterExpiry &&
+    !isOriginOffer &&
+    isCreated &&
+    lastBuyOrder?.wallet === address;
 
   const canTakerSettle = isDuringExpiry && isFilled;
   const isTakerCanSettle = canTakerSettle && isTaker;
   const canMakerSettle =
     !isDuringExpiry && isAfterExpiry && (isCreated || isFilled);
   const isMakerCanSettle = canMakerSettle && isMaker;
-
-  console.log(isDuringExpiry);
 
   const canSettle = isTakerCanSettle || isMakerCanSettle;
 
@@ -233,7 +249,9 @@ export default function MyAskDetail({
                 </button>
               ) : (
                 <button className="pointer-events-none mt-4  flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-6 text-title-white">
-                  {isMaker && canTakerSettle
+                  {!isAfterExpiry
+                    ? T("WaitingForSettle")
+                    : isMaker && canTakerSettle
                     ? T("WaitingForSettle")
                     : T("TradingEnded")}
                 </button>
