@@ -17,6 +17,7 @@ export interface IReferralItem {
   referrer_rate: string;
   trading_fee: string;
   trading_users: string;
+  trading_vol: string;
   unique_views: string;
 }
 

@@ -56,6 +56,8 @@ export default function MyAskDetail({
     !isDuringExpiry && isAfterExpiry && (isCreated || isFilled);
   const isMakerCanSettle = canMakerSettle && isMaker;
 
+  console.log(isDuringExpiry);
+
   const canSettle = isTakerCanSettle || isMakerCanSettle;
 
   const {
@@ -156,7 +158,9 @@ export default function MyAskDetail({
 
           <SwapItemPanel
             className="mt-5"
-            topText={<>{T("YouHaveToSell")}</>}
+            topText={
+              <>{isTaker ? T("YouDLikeToReceive") : T("YouHaveToSell")}</>
+            }
             bottomText={
               <>
                 1 {offer.marketplace.token_name} = ${formatNum(pointPrice, 2)}
@@ -174,7 +178,11 @@ export default function MyAskDetail({
             onValueChange={() => {}}
             isCanInput={false}
             bottomText={<>~${formatNum(tokenTotalPrice, 8)} </>}
-            topText={<div className="flex items-center">{T("YouGet")}</div>}
+            topText={
+              <div className="flex items-center">
+                {isTaker ? T("YouPay") : T("YouGet")}
+              </div>
+            }
             value={String(amount)}
             tokenName={offerTokenInfo?.symbol || ""}
           />
@@ -219,7 +227,9 @@ export default function MyAskDetail({
                     isSettling ? "dot-loading" : "",
                   )}
                 >
-                  {T("SettleThisOffer")}
+                  {isTakerCanSettle
+                    ? T("ExerciseThisOption")
+                    : T("SettleThisOffer")}
                 </button>
               ) : (
                 <button className="pointer-events-none mt-4  flex h-8 w-full flex-1 items-center justify-center rounded bg-[#999999] text-xs leading-6 text-title-white">

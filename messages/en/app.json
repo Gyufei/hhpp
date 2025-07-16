@@ -106,6 +106,7 @@
     "DelistThisOffer": "Delist this offer",
     "SettleThisOffer": "Settle this offer",
     "WaitingForSettle": "Waiting for settle",
+    "ExerciseThisOption": "Exercise option",
 
     "Filled/SellingAmount": "Filled / Selling amount",
     "Filled/BuyingAmount": "Filled / Buying amount",
@@ -193,7 +194,8 @@
     "PnL(%)": "PnL(%)",
     "YourBalanceAppearHere": "Your balances appear here...",
     "List": "List",
-    "CombineList": "Combine List"
+    "CombineList": "Combine List",
+    "Relisted": "Relisted"
   },
   "Referral": {
     "YourReferralLink": "Your referral link",

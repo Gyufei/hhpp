@@ -22,6 +22,8 @@ import { useRelist } from "@/lib/hooks/contract/use-relist";
 import { IOffer } from "@/lib/types/offer";
 import { cn } from "@/lib/utils";
 import { checkIsAfterExpiry } from "@/lib/hooks/offer/use-offer-format";
+import { sortBy } from "lodash";
+import { useTakerOffersWithTakerOrder } from "./use-taker-offers-with-taker-order";
 
 export function BalanceTable() {
   const BT = useTranslations("MyBalances");
@@ -33,14 +35,28 @@ export function BalanceTable() {
   const { data: myTakeOffersData, mutate: mutateMyTakeOffers } = useOffers(
     {
       taker: address,
-      // taker: "0x8C3A4f7D55fcbff9be9d53529D0f9184B3718c28",
     },
     address ? `my-take-offer-${address}` : "",
   );
 
+  const { data: offersWithTakerOrder } = useTakerOffersWithTakerOrder(
+    myTakeOffersData || [],
+  );
+
+  console.log("offersWithTakerOrder", offersWithTakerOrder);
+
   const myTakeOffers = useMemo(() => {
-    return myTakeOffersData?.filter((o) => o.creator !== o.taker);
-  }, [myTakeOffersData]);
+    if (!myTakeOffersData?.length || !offersWithTakerOrder) return [];
+
+    const myBuy = myTakeOffersData?.filter((o) => o.creator !== o.taker);
+    const belongMe = myBuy?.filter((o) => {
+      const takerOrder = offersWithTakerOrder?.[o.order_id];
+      const isLastBuy = sortBy(takerOrder, "id")?.reverse()[0];
+      return isLastBuy?.wallet === address;
+    });
+
+    return belongMe;
+  }, [myTakeOffersData, offersWithTakerOrder, address]);
 
   const {
     write: relistAction,
@@ -205,15 +221,12 @@ export function BalanceTable() {
               {tableList.map((offer) => (
                 <Row key={offer.id} item={offer}>
                   <Cell>
-                    <div className="flex items-center gap-2">
-                      <Checkbox
-                        checked={selectedRows.has(offer.order_id)}
-                        onCheckedChange={() => handleSelectRow(offer.order_id)}
-                      />
-                      {offer.marketplace.token_name}-
-                      {offer.marketplace.expiry_date}-
-                      {offer.marketplace.strike_price}
-                    </div>
+                    <RowCheck
+                      offer={offer}
+                      takerOrders={offersWithTakerOrder?.[offer.order_id]}
+                      selectedRows={selectedRows}
+                      handleSelectRow={handleSelectRow}
+                    />
                   </Cell>
 
                   <Cell>
@@ -244,14 +257,11 @@ export function BalanceTable() {
                   </Cell>
 
                   <Cell>
-                    {!checkIsAfterExpiry(offer.marketplace.expiry_date) && (
-                      <div
-                        onClick={() => handleRelist(offer)}
-                        className="flex h-7 w-fit cursor-pointer items-center rounded-full border border-[#eee] px-[14px] transition-opacity hover:border-[#50D2C1] hover:text-[#50D2C1]"
-                      >
-                        {BT("List")}
-                      </div>
-                    )}
+                    <RowOpBtn
+                      offer={offer}
+                      takerOrders={offersWithTakerOrder?.[offer.order_id]}
+                      handleRelist={handleRelist}
+                    />
                   </Cell>
                 </Row>
               ))}
@@ -284,5 +294,79 @@ export function BalanceTable() {
         </Pagination>
       )}
     </>
+  );
+}
+
+function RowCheck({
+  offer,
+  takerOrders,
+  selectedRows,
+  handleSelectRow,
+}: {
+  offer: IOffer;
+  takerOrders: any[];
+  selectedRows: Set<string>;
+  handleSelectRow: (orderId: string) => void;
+}) {
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_account || "";
+
+  const lastBuyOrder = sortBy(takerOrders, "id")?.reverse()[0];
+
+  const lastBuyWallet = lastBuyOrder?.wallet;
+
+  const isCanRelist = lastBuyWallet === address;
+  const isHasRelist = offer.order_status === "created";
+  const isAfterExpiry = checkIsAfterExpiry(offer.marketplace.expiry_date);
+
+  return (
+    <div className="flex items-center gap-2">
+      {isCanRelist && !isHasRelist && !isAfterExpiry ? (
+        <Checkbox
+          checked={selectedRows.has(offer.order_id)}
+          onCheckedChange={() => handleSelectRow(offer.order_id)}
+        />
+      ) : (
+        <div className="h-4 w-4"></div>
+      )}
+      {offer.marketplace.token_name}-{offer.marketplace.expiry_date}-
+      {offer.marketplace.strike_price}
+    </div>
+  );
+}
+
+function RowOpBtn({
+  offer,
+  takerOrders,
+  handleRelist,
+}: {
+  offer: IOffer;
+  takerOrders: any[];
+  handleRelist: (o: IOffer) => void;
+}) {
+  const BT = useTranslations("MyBalances");
+
+  const { data: accountInfo } = useAccountInfo();
+  const address = accountInfo?.dest_account || "";
+
+  const lastBuyOrder = sortBy(takerOrders, "id")?.reverse()[0];
+
+  const lastBuyWallet = lastBuyOrder?.wallet;
+
+  const isCanRelist = lastBuyWallet === address;
+  const isHasRelist = offer.order_status === "created";
+  const isAfterExpiry = checkIsAfterExpiry(offer.marketplace.expiry_date);
+
+  if (!isCanRelist || isAfterExpiry) return null;
+
+  return isHasRelist ? (
+    <div className="px-[10px] text-xs">{BT("Relisted")}</div>
+  ) : (
+    <div
+      onClick={() => handleRelist(offer)}
+      className="flex h-7 w-fit cursor-pointer items-center rounded-full border border-[#eee] px-[14px] transition-opacity hover:border-[#50D2C1] hover:text-[#50D2C1]"
+    >
+      {BT("List")}
+    </div>
   );
 }

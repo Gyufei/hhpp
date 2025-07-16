@@ -106,6 +106,7 @@
     "DelistThisOffer": "下架",
     "SettleThisOffer": "清算",
     "WaitingForSettle": "等待清算",
+    "ExerciseThisOption": "行权",
 
     "Filled/SellingAmount": "已售 / 总销售",
     "Filled/BuyingAmount": "已购 / 总需求",
@@ -195,7 +196,8 @@
     "PnL(%)": "收益率",
     "YourBalanceAppearHere": "你的余额出现在这里...",
     "List": "上架",
-    "CombineList": "合并上架"
+    "CombineList": "合并上架",
+    "Relisted": "已上架"
   },
   "Referral": {
     "YourReferralLink": "你的推荐链接",

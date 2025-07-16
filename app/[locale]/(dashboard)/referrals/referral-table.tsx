@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import NP from "number-precision";
 
 import {
   Table,
@@ -154,9 +153,7 @@ export function ReferralTable({
                     <div className="">{rD.trading_users}</div>
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
-                    <div className="">
-                      ${formatNum(NP.times(rD.trading_fee, 50), 6)}
-                    </div>
+                    <div className="">{rD.trading_vol}</div>
                   </Cell>
                   <Cell className="px-1 py-[11px] align-top">
                     <div className="">{rD.unique_views}</div>
