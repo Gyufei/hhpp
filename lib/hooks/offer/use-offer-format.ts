@@ -53,9 +53,9 @@ export function useOfferFormat({ offer }: { offer: IOffer }) {
     return ["purchased", "cancelled", "settled"].includes(offer.order_status);
   }, [offer.order_status]);
 
-  // const expiry = offer.marketplace.expiry_date;
+  const expiry = offer.marketplace.expiry_date;
   // TODO: remove this
-  const expiry = "20250716";
+  // const expiry = "20250716";
 
   const isDuringExpiry = checkDuringExpiry(expiry);
 
