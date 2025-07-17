@@ -9,6 +9,7 @@ export function useAccountInfo() {
           dest_account: address,
           // TODO: remove
           // #a
+          // dest_account: "0xB2A6C0e08C834fEeF42B4f0aBAE6178BE49145a3",
           // dest_account: "0xb6FA7f135038600E7071378Ac57cdb1e35e4936b",
           // #b
           // dest_account: "0xaE71F62Bfd81058a7c9024d729D79B9C20524Ec4",

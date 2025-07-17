@@ -238,7 +238,7 @@ export function PerpTable() {
 
                     <Cell>
                       <div className="whitespace-nowrap">
-                        ${row.strikePrice}
+                        ${formatNum(row.strikePrice, 4)}
                       </div>
                     </Cell>
 
@@ -268,7 +268,7 @@ export function PerpTable() {
 
                     <Cell>
                       <div className="whitespace-nowrap">
-                        ${formatNum(row.markPrice)}
+                        ${formatNum(row.markPrice, 4)}
                       </div>
                     </Cell>
 
