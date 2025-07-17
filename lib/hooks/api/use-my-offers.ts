@@ -1,6 +1,7 @@
 import { uniqBy } from "lodash";
 import { useAccountInfo } from "./use-account-info";
 import { useOffers } from "./use-offers";
+import { IOffer } from "@/lib/types/offer";
 
 export function useMyOffers() {
   const { data: accountInfo } = useAccountInfo();
@@ -32,7 +33,10 @@ export function useMyOffers() {
       role: "taker",
     }));
 
-  const allData = uniqBy([...(asMaker || []), ...(asTaker || [])], "order_id");
+  const allData = uniqBy(
+    [...(asMaker || []), ...(asTaker || [])],
+    "order_id",
+  ) as IOffer[];
 
   return {
     data: allData,

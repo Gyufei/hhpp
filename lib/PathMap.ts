@@ -30,6 +30,7 @@ export const ApiPaths = {
 
   marketsDisplay: "/markets",
   markets: "/markets/stats",
+  marketDetail: "/markets/info",
 
   marketKline: "/market/kline",
   marketTrades: "/market/maker_trades_history",

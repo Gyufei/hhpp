@@ -32,7 +32,6 @@ export function useOffers(
     );
 
     const parsedRes = offerRes.map((o: Record<string, any>) => {
-      console.log("o", o);
       const marketplace = marketplaceData?.find(
         (m) => m.market_place_id === o.market_place_id,
       );

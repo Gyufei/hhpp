@@ -23,10 +23,6 @@ export default function ReferralCommision() {
     }, 0);
   }, [referralData]);
 
-  const total = useMemo(() => {
-    return commission + lastCommission;
-  }, [commission, lastCommission]);
-
   return (
     <div className="mx-[10px] border-t border-border-black pb-[20px] pt-[20px]">
       <div className="flex items-center justify-between">
@@ -37,7 +33,9 @@ export default function ReferralCommision() {
       <div className="mt-3 flex justify-between">
         <LabelText>{T("Total")}</LabelText>
         <div className="leading-[18px] text-title-white">
-          <NoDataDisplay noData={!total}>{formatNum(total)}</NoDataDisplay>
+          <NoDataDisplay noData={!commission}>
+            {formatNum(commission)}
+          </NoDataDisplay>
         </div>
       </div>
       <div className="mt-3 flex justify-between">
