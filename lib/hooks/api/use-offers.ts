@@ -14,10 +14,14 @@ export function useOffers(
   key: string,
 ) {
   const { apiEndPoint } = useEndPoint();
-  const { data: marketplaceData, isLoading: isMarketLoading } =
-    useMarketplaces();
+  const {
+    data: marketplaceData,
+    isLoading: isMarketLoading,
+    mutate: mutateMarketplaces,
+  } = useMarketplaces();
 
   const marketOffersFetcher = async () => {
+    mutateMarketplaces();
     if (isMarketLoading) return [];
 
     if (Object.values(queryArgs).some((v) => v == null)) return [];

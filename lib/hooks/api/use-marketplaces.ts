@@ -31,7 +31,7 @@ export function useMarketplaces() {
   }
 
   const res = useSWR(
-    tokens?.length ? `marketplaces-${"all"}-${Date.now()}` : null,
+    tokens?.length ? `marketplaces-${"all"}` : null,
     marketFetch,
   );
 

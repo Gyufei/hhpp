@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useTokenBalance } from "@/lib/hooks/api/use-token-balance";
 import { NumericalInput } from "@/components/share/numerical-input";
 import { useEffect, useState } from "react";
-import { formatNum } from "@/lib/utils/number";
+import { formatNum, toNonExponential } from "@/lib/utils/number";
 import { IUserBalance } from "@/lib/hooks/api/use-user-balance";
 import { useUserDeposit } from "@/lib/hooks/contract/use-user-deposit";
 import { toast } from "react-hot-toast";
@@ -77,8 +77,13 @@ export function DepositDialog({
     }
 
     const amount = NP.times(depositAmount, 10 ** token.decimals);
+    console.log("amount", amount);
+    const amountStr = String(amount).includes("e")
+      ? toNonExponential(String(amount))
+      : String(amount);
+    console.log("amountStr", amountStr);
 
-    triggerDeposit({ token_address: token?.address, amount: String(amount) });
+    triggerDeposit({ token_address: token?.address, amount: amountStr });
   }
 
   useEffect(() => {
