@@ -116,7 +116,7 @@ export default function MarketplaceOverview({
                 <ValueSkeleton />
               ) : (
                 <div className="flex items-center leading-6 text-title-white">
-                  ${formatNum(marketplace!.strike_price)}
+                  ${formatNum(marketplace!.strike_price, 4)}
                 </div>
               )}
             </div>

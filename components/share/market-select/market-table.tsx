@@ -97,7 +97,7 @@ export default function MarketTable({
         return isLoading ? (
           <Skeleton className="h-[16px] w-[60px]" />
         ) : (
-          <div className="w-fit">${formatNum(Number(o.strike_price), 3)}</div>
+          <div className="w-fit">${formatNum(Number(o.strike_price), 4)}</div>
         );
       },
     },
