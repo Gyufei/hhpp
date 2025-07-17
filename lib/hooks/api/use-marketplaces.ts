@@ -20,7 +20,6 @@ export function useMarketplaces() {
       return {
         ...m,
         token,
-        id: `${m.id}-${m.token_name}`,
         projectLogo: token?.logoURI,
         pointLogo: token?.logoURI,
       };

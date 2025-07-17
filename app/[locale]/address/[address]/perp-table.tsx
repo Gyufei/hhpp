@@ -40,6 +40,24 @@ export function PerpTable() {
     if (isLoadingOffers || !offers?.length) return [];
 
     return offers?.map((offer) => {
+      if (!offer.marketplace)
+        return {
+          id: offer.order_id,
+          asset: "",
+          expiryDate: "-",
+          strikePrice: "-",
+          leverage: 0,
+          amount: 0,
+          value: 0,
+          entryPrice: "-",
+          markPrice: "-",
+          pnl: 0,
+          pnlPercent: 0,
+          side: "CALL",
+        };
+
+      const isMaker = offer.role === "maker";
+
       const shares = NP.divide(
         offer.shares,
         10 ** (offer.marketplace?.token?.decimals || 18),
@@ -56,19 +74,25 @@ export function PerpTable() {
 
       const leverage = NP.divide(strikeAmount, tokenAmount);
 
-      const pnl = NP.minus(strikeAmount, tokenAmount);
-      const pnlPercent =
-        NP.divide(NP.minus(strikeAmount, tokenAmount), strikeAmount) * 100;
+      const pnl = isMaker
+        ? NP.minus(strikeAmount, tokenAmount)
+        : NP.minus(tokenAmount, strikeAmount);
+
+      const pnlPercent = isMaker
+        ? NP.divide(NP.minus(strikeAmount, tokenAmount), strikeAmount) * 100
+        : NP.divide(NP.minus(tokenAmount, strikeAmount), strikeAmount) * 100;
 
       return {
         id: offer.order_id,
         asset: `${offer.marketplace?.token?.symbol}-${
           offer.marketplace?.expiry_date || ""
         }`,
-        expiryDate: format(
-          coverExpiryDate(offer.marketplace?.expiry_date || "").date,
-          "MM/dd/yyyy",
-        ),
+        expiryDate: offer.marketplace
+          ? format(
+              coverExpiryDate(offer.marketplace?.expiry_date || "").date,
+              "MM/dd/yyyy",
+            )
+          : "",
         strikePrice: offer.marketplace?.strike_price || "0",
         leverage: leverage,
         amount: shares,
