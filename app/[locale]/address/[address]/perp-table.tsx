@@ -102,7 +102,8 @@ export function PerpTable() {
         pnl: pnl,
         pnlPercent: pnlPercent,
         side:
-          offer.marketplace?.strike_price > offer.marketplace?.token?.price
+          Number(offer.marketplace?.strike_price) >
+          Number(offer.marketplace?.token?.price)
             ? "CALL"
             : "PUT",
       };

@@ -28,7 +28,9 @@ export const ApiPaths = {
   tokenAllowance: "/token/allowance",
   tokenPrice: "/token/info",
 
-  markets: "/markets",
+  marketsDisplay: "/markets",
+  markets: "/markets/stats",
+
   marketKline: "/market/kline",
   marketTrades: "/market/maker_trades_history",
   salesVolumeHistory: "/market/sales_volume_history",

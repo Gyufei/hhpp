@@ -7,9 +7,9 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import MarketTable from "./market-table";
-import { useMarketplaces } from "@/lib/hooks/api/use-marketplaces";
 import { cn } from "@/lib/utils/common";
 import { coverExpiryDate } from "@/lib/utils/time";
+import { useMarketplacesDisplay } from "@/lib/hooks/api/use-marketplaces-display";
 
 // 格式化日期为"DD MMM YY"格式
 const formatDateTab = (timestamp: number) => {
@@ -35,7 +35,7 @@ const formatDateTab = (timestamp: number) => {
 };
 
 export default function MarketSelect() {
-  const { data: marketplaceData, isLoading } = useMarketplaces();
+  const { data: marketplaceData, isLoading } = useMarketplacesDisplay();
 
   const [popOpen, setPopOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
