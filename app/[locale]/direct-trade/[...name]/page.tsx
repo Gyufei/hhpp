@@ -32,9 +32,9 @@ export default function Marketplace({ params }: { params: { name: string } }) {
     }
   }, [wsData, marketplace?.market_place_id, mutate]);
 
-  if (isLoading || !marketParamsStr) return null;
+  if (marketplace === undefined || !marketParamsStr) return null;
 
-  if (!marketplace) {
+  if (marketplace === null) {
     return (
       <div className="flex h-[calc(100vh-56px)] w-full items-center justify-center">
         <Image src="/img/404.png" width={480} height={360} alt="404" />
