@@ -68,7 +68,8 @@ export default function MyAskDetail({
     isCreated &&
     lastBuyOrder?.wallet === address;
 
-  const canTakerSettle = isDuringExpiry && isFilled;
+  const canTakerSettle =
+    isDuringExpiry && (isFilled || (isHasTakerOrder && isCreated));
   const isTakerCanSettle = canTakerSettle && isTaker;
   const canMakerSettle =
     !isDuringExpiry && isAfterExpiry && (isCreated || isFilled);
