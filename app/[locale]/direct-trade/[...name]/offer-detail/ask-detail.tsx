@@ -26,11 +26,12 @@ export default function AskDetail({
 }) {
   const T = useTranslations("Offer");
 
-  const { data: premiumPriceData } = usePremiumPrice(
-    offer.marketplace.token_name,
-    offer.marketplace.strike_price,
-    offer.marketplace.expiry_date,
-  );
+  const { data: premiumPriceData, mutate: mutatePremiumPrice } =
+    usePremiumPrice(
+      offer.marketplace.token_name,
+      offer.marketplace.strike_price,
+      offer.marketplace.expiry_date,
+    );
 
   const premiumPrice = premiumPriceData?.current_premium_price || 0;
 
@@ -110,6 +111,14 @@ export default function AskDetail({
       });
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      mutatePremiumPrice();
+    }, 20000);
+
+    return () => clearInterval(interval);
+  }, [mutatePremiumPrice]);
 
   return (
     <>
