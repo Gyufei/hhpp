@@ -17,6 +17,8 @@ export function useOffers(
   const { data: marketplaceData, isLoading: isMarketLoading } =
     useMarketplaces();
 
+  console.log(marketplaceData);
+
   const marketOffersFetcher = async () => {
     if (isMarketLoading) return [];
 
@@ -35,6 +37,7 @@ export function useOffers(
       const marketplace = marketplaceData?.find(
         (m) => m.market_place_id === o.market_place_id,
       );
+      console.log("o", o);
       console.log("marketplace", marketplace);
 
       return {

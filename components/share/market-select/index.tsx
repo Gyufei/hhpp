@@ -118,8 +118,8 @@ function SwitchTabs({
 
   // 创建一个可滚动的日期标签容器
   return (
-    <div className="mb-[10px] min-h-10 w-full flex-1 overflow-x-auto bg-bg-black">
-      <div className="relative flex items-center justify-start overflow-y-hidden">
+    <div className="scrollbar-hover relative mb-[10px] min-h-10 w-full flex-1 overflow-x-auto overflow-y-hidden bg-bg-black">
+      <div className="flex items-center justify-start overflow-y-hidden">
         {tabs.map((tab) => (
           <div
             key={tab}
@@ -136,8 +136,8 @@ function SwitchTabs({
               : formatDateTab(coverExpiryDate(tab).timestamp)}
           </div>
         ))}
-        <div className="absolute bottom-0 h-1 w-full border-b border-border-black transition-all"></div>
       </div>
+      <div className="absolute bottom-0 h-1 w-full border-b border-border-black transition-all"></div>
     </div>
   );
 }
