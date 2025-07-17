@@ -46,6 +46,7 @@ export default function AskDetail({
     offerPointInfo,
     offerTokenInfo,
     pointDecimalNum,
+    isAfterExpiry,
   } = useOfferFormat({
     offer,
   });
@@ -150,11 +151,11 @@ export default function AskDetail({
             tokenName={offerPointInfo?.symbol || ""}
           />
 
-          {isFilled || isSettled || isCanceled ? (
+          {isFilled || isSettled || isCanceled || isAfterExpiry ? (
             <>
               <button className="mt-4 flex h-8 w-full cursor-not-allowed items-center justify-center rounded bg-[#D1D4DC] text-xs leading-[18px] text-bg-black">
                 {isFilled && T("OfferBePurchased")}
-                {isSettled && T("TradingEnded")}
+                {(isSettled || isAfterExpiry) && T("TradingEnded")}
                 {isCanceled && T("OfferClosed")}
               </button>
             </>
