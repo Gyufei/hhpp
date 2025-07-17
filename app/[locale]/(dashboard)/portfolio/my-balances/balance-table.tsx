@@ -43,8 +43,6 @@ export function BalanceTable() {
     myTakeOffersData || [],
   );
 
-  console.log("offersWithTakerOrder", offersWithTakerOrder);
-
   const myTakeOffers = useMemo(() => {
     if (!myTakeOffersData?.length || !offersWithTakerOrder) return [];
 
@@ -139,7 +137,6 @@ export function BalanceTable() {
   };
 
   function handleRelist(o: IOffer) {
-    console.log("relist");
     if (isRelisting) return;
 
     relistAction?.({
@@ -149,7 +146,6 @@ export function BalanceTable() {
   }
 
   function handleRelistCheckRow() {
-    console.log("relist check row", selectedRows);
     if (selectedRows.size === 0) return;
     if (isRelisting) return;
 

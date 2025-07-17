@@ -24,12 +24,10 @@ export default function DetailCard({ offer }: { offer: IOffer }) {
   });
 
   const seller = useMemo(() => {
-    console.log("takerOrders", offer.order_id, takerOrders);
     if (!takerOrders?.length || takerOrders.length === 1) return offer.creator;
 
     if (takerOrders.length > 1) {
       const lastTakerOrder = sortBy(takerOrders, "id")?.reverse()[1];
-      console.log("lastTakerOrder", lastTakerOrder);
       return lastTakerOrder.wallet;
     }
   }, [takerOrders, offer.creator]);

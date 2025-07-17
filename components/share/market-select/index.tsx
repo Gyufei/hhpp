@@ -64,7 +64,6 @@ export default function MarketSelect() {
     // 如果选择了日期标签，按创建时间筛选
     if (currentTab !== "All") {
       return textFiltered.filter((market) => {
-        console.log(market.expiry_date, currentTab);
         return market.expiry_date === currentTab;
       });
     }
@@ -120,7 +119,7 @@ function SwitchTabs({
   // 创建一个可滚动的日期标签容器
   return (
     <div className="mb-[10px] min-h-10 w-full flex-1 overflow-x-auto bg-bg-black">
-      <div className="relative flex items-center justify-start">
+      <div className="relative flex items-center justify-start overflow-y-hidden">
         {tabs.map((tab) => (
           <div
             key={tab}

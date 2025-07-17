@@ -8,7 +8,19 @@ import { getUserNonce } from "./help/user-nonce";
 import { ApiPaths } from "@/lib/PathMap";
 import { useCheckSwitchChain } from "../web3/use-check-switch-chain";
 
-export function useCreateOffer({ marketId }: { marketId: string }) {
+export function useCreateOffer({
+  marketId,
+  tokenName,
+  tokenAddress,
+  expiryDate,
+  strikePrice,
+}: {
+  marketId: string;
+  tokenName: string;
+  tokenAddress: string;
+  expiryDate: string;
+  strikePrice: string;
+}) {
   const { apiEndPoint } = useEndPoint();
   const { data: accountInfo } = useAccountInfo();
   const { signDataAction } = useSignData();
@@ -19,6 +31,10 @@ export function useCreateOffer({ marketId }: { marketId: string }) {
     const nonce = await getUserNonce(accountInfo?.dest_account || "");
 
     const params = {
+      token_name: tokenName,
+      token_address: tokenAddress,
+      expiry_date: expiryDate,
+      strike_price: strikePrice,
       market_place_id: marketId,
       shares: args.shares,
       creator: accountInfo?.dest_account || "",

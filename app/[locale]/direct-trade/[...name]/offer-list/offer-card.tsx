@@ -269,7 +269,6 @@ export function OrderCardSkeleton() {
 function ExpiryStrike({ expiry, strike }: { expiry: string; strike: string }) {
   const T = useTranslations("MyOrders");
 
-  console.log(expiry);
   const expiryDuration = useMemo(() => {
     const expiryTime = coverExpiryDate(expiry.toString()).timestamp;
     const now = Date.now();

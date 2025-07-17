@@ -20,7 +20,7 @@ import { formatNum } from "@/lib/utils/number";
 
 interface ITableData {
   id: string;
-  side: "CALL" | "PUT";
+  side: "CALL" | "PUT" | "-";
   asset: string;
   expiryDate: string;
   strikePrice: string;
@@ -53,7 +53,7 @@ export function PerpTable() {
           markPrice: "-",
           pnl: 0,
           pnlPercent: 0,
-          side: "CALL",
+          side: "-",
         };
 
       const isMaker = offer.role === "maker";
@@ -216,7 +216,11 @@ export function PerpTable() {
                       <div
                         className={cn(
                           "whitespace-nowrap font-medium",
-                          row.side === "CALL" ? "text-green" : "text-red",
+                          row.side === "CALL"
+                            ? "text-green"
+                            : row.side === "PUT"
+                            ? "text-red"
+                            : "text-gray",
                         )}
                       >
                         {row.side}
@@ -228,7 +232,7 @@ export function PerpTable() {
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">${row.expiryDate}</div>
+                      <div className="whitespace-nowrap">{row.expiryDate}</div>
                     </Cell>
 
                     <Cell>

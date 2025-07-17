@@ -70,6 +70,10 @@ export function useCreateAction(marketplace: IMarketplace) {
     isSuccess: isCreateSuccess,
   } = useCreateOffer({
     marketId: currentMarket.market_place_id,
+    tokenName: currentMarket.token_name,
+    tokenAddress: currentMarket.token_address,
+    expiryDate: currentMarket.expiry_date,
+    strikePrice: currentMarket.strike_price,
   });
 
   async function handleCreate() {
