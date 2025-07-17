@@ -13,7 +13,6 @@ export default function Marketplace({ params }: { params: { name: string } }) {
 
   const {
     data: marketplace,
-    isLoading,
     mutate,
   } = useMarketInfo({
     token_name: marketParams.token,
