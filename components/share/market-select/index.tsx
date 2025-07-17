@@ -64,6 +64,7 @@ export default function MarketSelect() {
     // 如果选择了日期标签，按创建时间筛选
     if (currentTab !== "All") {
       return textFiltered.filter((market) => {
+        console.log(market.expiry_date, currentTab);
         return market.expiry_date === currentTab;
       });
     }

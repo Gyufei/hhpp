@@ -24,7 +24,7 @@ interface ITableData {
   asset: string;
   expiryDate: string;
   strikePrice: string;
-  quantity: number;
+  leverage: number;
   value: number;
   amount: number;
   entryPrice: string;
@@ -42,11 +42,19 @@ export function PerpTable() {
     return offers?.map((offer) => {
       const shares = NP.divide(
         offer.shares,
-        10 ** offer.marketplace.token.decimals,
+        10 ** (offer.marketplace?.token?.decimals || 18),
       );
 
-      const strikeAmount = NP.times(shares, offer.marketplace.strike_price);
-      const tokenAmount = NP.times(shares, offer.marketplace.token.price);
+      const strikeAmount = NP.times(
+        shares,
+        offer?.marketplace?.strike_price || 0,
+      );
+      const tokenAmount = NP.times(
+        shares,
+        offer?.marketplace?.token?.price || 0,
+      );
+
+      const leverage = NP.divide(strikeAmount, tokenAmount);
 
       const pnl = NP.minus(strikeAmount, tokenAmount);
       const pnlPercent =
@@ -54,21 +62,23 @@ export function PerpTable() {
 
       return {
         id: offer.order_id,
-        asset: `${offer.marketplace.token.symbol}-${offer.marketplace.expiry_date}`,
+        asset: `${offer.marketplace?.token?.symbol}-${
+          offer.marketplace?.expiry_date || ""
+        }`,
         expiryDate: format(
-          coverExpiryDate(offer.marketplace.expiry_date).date,
+          coverExpiryDate(offer.marketplace?.expiry_date || "").date,
           "MM/dd/yyyy",
         ),
-        strikePrice: offer.marketplace.strike_price,
-        quantity: shares,
-        amount: strikeAmount,
+        strikePrice: offer.marketplace?.strike_price || "0",
+        leverage: leverage,
+        amount: shares,
         value: tokenAmount,
-        entryPrice: offer.marketplace.strike_price,
-        markPrice: offer.marketplace.token.price,
+        entryPrice: offer.marketplace?.strike_price || "0",
+        markPrice: offer.marketplace?.token?.price || "0",
         pnl: pnl,
         pnlPercent: pnlPercent,
         side:
-          offer.marketplace.strike_price > offer.marketplace.token.price
+          offer.marketplace?.strike_price > offer.marketplace?.token?.price
             ? "CALL"
             : "PUT",
       };
@@ -167,7 +177,7 @@ export function PerpTable() {
                   <HeaderCell>Asset</HeaderCell>
                   <HeaderCell>Expiry Date</HeaderCell>
                   <HeaderCell>Strike Price</HeaderCell>
-                  <HeaderCell>Quantity</HeaderCell>
+                  <HeaderCell>Leverage</HeaderCell>
                   <HeaderCell>Value</HeaderCell>
                   <HeaderCell>Amount</HeaderCell>
                   <HeaderCell>Entry Price</HeaderCell>
@@ -198,11 +208,15 @@ export function PerpTable() {
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">${row.strikePrice}</div>
+                      <div className="whitespace-nowrap">
+                        ${row.strikePrice}
+                      </div>
                     </Cell>
 
                     <Cell>
-                      <div className="whitespace-nowrap">{row.quantity}</div>
+                      <div className="whitespace-nowrap">
+                        {formatNum(row.leverage, 2)}
+                      </div>
                     </Cell>
 
                     <Cell>
@@ -213,7 +227,7 @@ export function PerpTable() {
 
                     <Cell>
                       <div className="whitespace-nowrap">
-                        ${formatNum(row.amount)}
+                        {formatNum(row.amount)}
                       </div>
                     </Cell>
 
