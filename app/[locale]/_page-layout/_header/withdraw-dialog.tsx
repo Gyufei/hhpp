@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { NumericalInput } from "@/components/share/numerical-input";
 import { useEffect, useState } from "react";
-import { formatNum } from "@/lib/utils/number";
+import { formatNum, toNonExponential } from "@/lib/utils/number";
 import { useUserWithdraw } from "@/lib/hooks/contract/use-user-withdraw";
 import { toast } from "react-hot-toast";
 import { IUserBalance } from "@/lib/hooks/api/use-user-balance";
@@ -44,8 +44,11 @@ export function WithdrawDialog({
     }
 
     const amount = NP.times(withdrawAmount, 10 ** token.decimals);
+    const amountStr = String(amount).includes("e")
+      ? toNonExponential(String(amount))
+      : String(amount);
 
-    triggerWithdraw({ token_address: token.address, amount: String(amount) });
+    triggerWithdraw({ token_address: token.address, amount: amountStr });
   }
 
   useEffect(() => {
