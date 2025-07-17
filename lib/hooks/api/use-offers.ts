@@ -17,8 +17,6 @@ export function useOffers(
   const { data: marketplaceData, isLoading: isMarketLoading } =
     useMarketplaces();
 
-  console.log(marketplaceData);
-
   const marketOffersFetcher = async () => {
     if (isMarketLoading) return [];
 
