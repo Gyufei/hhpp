@@ -89,7 +89,7 @@ export function DepositDialog({
   useEffect(() => {
     if (isSuccess) {
       onOpenChange(false);
-      toast.success("Withdrawal successful");
+      toast.success("Deposit successful");
       onSuccess();
     }
   }, [isSuccess]);
