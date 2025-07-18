@@ -8,14 +8,21 @@ import {
 import { Input } from "@/components/ui/input";
 import MarketTable from "./market-table";
 import { cn } from "@/lib/utils/common";
-import { coverExpiryDate } from "@/lib/utils/time";
 import { useMarketplacesDisplay } from "@/lib/hooks/api/use-marketplaces-display";
 
 // 格式化日期为"DD MMM YY"格式
-const formatDateTab = (timestamp: number) => {
-  const date = new Date(timestamp);
-  const day = date.getDate();
-  const month = [
+const formatDateTab = (expiryDate: string) => {
+  const year = expiryDate.slice(0, 4);
+  const monthStr = expiryDate.slice(4, 6);
+  const dayStr = expiryDate.slice(6, 8);
+
+  const monthNumber = parseInt(monthStr);
+
+  // 日去除前导零
+  const day = parseInt(dayStr).toString(); // 如 "01" → "1"
+
+  // 月转换为三位字母
+  const monthNames = [
     "JAN",
     "FEB",
     "MAR",
@@ -28,10 +35,10 @@ const formatDateTab = (timestamp: number) => {
     "OCT",
     "NOV",
     "DEC",
-  ][date.getMonth()];
-  const year = date.getFullYear().toString().slice(-2);
+  ];
+  const monthAbbr = monthNames[monthNumber - 1];
 
-  return `${day} ${month} ${year}`;
+  return `${day} ${monthAbbr} ${year.slice(2)}`;
 };
 
 export default function MarketSelect() {
@@ -131,9 +138,7 @@ function SwitchTabs({
                 : "cursor-pointer text-gray",
             )}
           >
-            {tab === "All"
-              ? "All Coins"
-              : formatDateTab(coverExpiryDate(tab).timestamp)}
+            {tab === "All" ? "All Coins" : formatDateTab(tab)}
           </div>
         ))}
       </div>
