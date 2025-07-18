@@ -75,7 +75,8 @@
     "User": "사용자",
     "PnL": "PnL",
     "StrikePrice": "행사가",
-    "ExpiryDate": "만료일"
+    "ExpiryDate": "만료일",
+    "MarketEnded": "시장 종료"
   },
   "Offer": {
     "CreateOffer": "제안 생성",

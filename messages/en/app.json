@@ -75,7 +75,8 @@
     "User": "User",
     "PnL": "PnL",
     "StrikePrice": "Strike Price",
-    "ExpiryDate": "Expiry Date"
+    "ExpiryDate": "Expiry Date",
+    "MarketEnded": "Market Ended"
   },
   "Offer": {
     "CreateOffer": "Create Offer",

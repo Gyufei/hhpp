@@ -76,7 +76,8 @@
     "User": "用户",
     "PnL": "收益",
     "StrikePrice": "Strike Price",
-    "ExpiryDate": "Expiry Date"
+    "ExpiryDate": "Expiry Date",
+    "MarketEnded": "市场已结束"
   },
   "Offer": {
     "CreateOffer": "创建订单",

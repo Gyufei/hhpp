@@ -100,7 +100,7 @@ export default function MyDetailCard({ offer }: { offer: IOffer }) {
             {format(
               new Date(
                 coverExpiryDate(offer.marketplace.expiry_date).timestamp,
-              ).setHours(0, 0, 0, 0),
+              ),
               "yyyy-MM-dd HH:mm:ss",
             )}
           </div>

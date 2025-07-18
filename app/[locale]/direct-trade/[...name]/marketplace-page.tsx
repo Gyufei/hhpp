@@ -9,7 +9,6 @@ import MarketCharts from "./chart/market-charts";
 import MarketTrades from "./market-trades/market-trades";
 import MarketHolder from "./market-holder/market-holder";
 
-import { useOffers } from "@/lib/hooks/api/use-offers";
 import { IOffer } from "@/lib/types/offer";
 
 import { IMarketplace } from "@/lib/types/marketplace";
@@ -17,12 +16,16 @@ import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 import { cn } from "@/lib/utils/common";
 import MarketCountDown from "./market-count-down";
 import { isAfter, toDate } from "date-fns";
+import { useMarketOffers } from "@/lib/hooks/api/use-market-offer";
+import { coverExpiryDate } from "@/lib/utils/time";
+import { useTranslations } from "next-intl";
 
 export default function MarketplacePage({
   marketplace,
 }: {
   marketplace: IMarketplace;
 }) {
+  const T = useTranslations("Marketplace");
   const { isMobileSize } = useDeviceSize();
   const [currentTab, setCurrentTab] = useState<ITab>("Items");
   const [showKChart, setShowKChart] = useState(false);
@@ -32,12 +35,11 @@ export default function MarketplacePage({
     data: offers,
     mutate: refreshOffers,
     isLoading: isOffersLoading,
-  } = useOffers(
-    {
-      market_place_id: String(marketplace?.market_place_id) || "",
-    },
-    "market-all-offers",
-  );
+  } = useMarketOffers(marketplace);
+
+  const isAfterExpiry = useMemo(() => {
+    return isAfter(new Date(), coverExpiryDate(marketplace.expiry_date).date);
+  }, [marketplace]);
 
   const canBuyOffers = useMemo(() => {
     const showOffer = (offers || [])?.filter(
@@ -87,12 +89,17 @@ export default function MarketplacePage({
             showKChart ? "invisible h-0 w-0 sm:mb-0 sm:py-0" : "visible",
           )}
         >
-          {marketplace && (
-            <CreateOfferBtn
-              marketplace={marketplace}
-              onSuccess={refreshOffers}
-            />
-          )}
+          {marketplace &&
+            (!isAfterExpiry ? (
+              <CreateOfferBtn
+                marketplace={marketplace}
+                onSuccess={refreshOffers}
+              />
+            ) : (
+              <button className="h-10 w-full cursor-default items-center justify-center rounded bg-[#D1D4DC] text-[14px] leading-5 text-bg-black sm:flex sm:h-8 sm:text-[12px] sm:leading-4">
+                {T("MarketEnded")}
+              </button>
+            ))}
         </div>
 
         <div className="box-border hidden flex-1 rounded bg-bg-black sm:block">
@@ -104,8 +111,8 @@ export default function MarketplacePage({
         </div>
       </div>
 
-      <MobileSwitchTabs 
-        currentTab={currentTab} 
+      <MobileSwitchTabs
+        currentTab={currentTab}
         setCurrentTab={setCurrentTab}
         showKChart={showKChart}
       />
@@ -187,10 +194,7 @@ function MobileSwitchTabs({
   };
 
   return (
-    <div className={cn(
-      "w-full bg-bg-black sm:hidden",
-      showKChart && "hidden"
-    )}>
+    <div className={cn("w-full bg-bg-black sm:hidden", showKChart && "hidden")}>
       <div className="relative mx-[10px] mt-[10px] flex items-center justify-start">
         {MobilePageTab.map((tab) => (
           <div
