@@ -218,7 +218,7 @@
     "SetCommissionRates": "设置佣金率",
     "You": "你",
     "YourFriend": "你的朋友",
-    "ReferralDrawer": "当有人使用你的推荐链接注册时，第一个人将收到第二个人支付的交易费用的{ num1 }的退款。此外，作为原始推荐人，您将获得相当于佣金{ num2 }的奖励。",
+    "ReferralDrawer": "当有人使用你的推荐链接注册、并成功交易时，他将收到交易手续费 {num2} 的退款，作为推荐人，您将获得交易手续费 {num1} 的佣金奖励。",
     "Bind": "绑定",
     "RateError": "总和不得超过 { rate }%",
     "YourFriendSentYouAnOnboardingInvitation": "您的朋友 <name></name> 向您发送了一个交易费返还 <num></num> 的引导邀请"

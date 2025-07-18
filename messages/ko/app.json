@@ -214,7 +214,7 @@
     "SetCommissionRates": "수수료율 설정",
     "You": "당신",
     "YourFriend": "당신의 친구",
-    "ReferralDrawer": "누군가가 당신의 추천 링크를 사용하여 가입하면, 첫 번째 사람은 두 번째 사람이 지불한 거래 수수료의 {num1}에 해당하는 환불을 받습니다. 또한, 원래 추천자인 당신은 수수료의 {num2}에 해당하는 보상을 받습니다.",
+    "ReferralDrawer": "누군가가 당신의 추천 링크를 사용하여 가입하면, 첫 번째 사람은 두 번째 사람이 지불한 거래 수수료의 {num2}에 해당하는 환불을 받습니다. 또한, 원래 추천자인 당신은 수수료의 {num1}에 해당하는 보상을 받습니다.",
     "Bind": "바인드",
     "RateError": "당신과 당신의 친구의 수수료율은 {rate}%를 초과할 수 없습니다.",
     "YourFriendSentYouAnOnboardingInvitation": "친구 <name></name>님이 <num></num> 거래 수수료 환급과 함께 초대장을 보냈습니다!"
