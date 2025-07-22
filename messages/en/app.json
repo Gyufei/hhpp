@@ -216,7 +216,7 @@
     "SetCommissionRates": "Set Commission Rates",
     "You": "You",
     "YourFriend": "Your friend",
-    "ReferralDrawer": "When someone signs up using your referral link, the first person will receive a refund equal to {num2} of the trading fee paid by the second person. Additionally, you, as the original referrer, will receive a reward equal to {num1} of the commission fee.",
+    "ReferralDrawer": "When someone signs up using your referral link and completes a trade, they will receive a {num2} refund on their trading fee. As the referrer, you will receive a commission equal to {num1} of their trading fee.",
     "Bind": "Bind",
     "RateError": "Your And Your friend's commission rate can't be greater than {rate}%",
     "YourFriendSentYouAnOnboardingInvitation": "Your friend <name></name> sent you an onboarding invitation with <num></num> trading fee back! "
