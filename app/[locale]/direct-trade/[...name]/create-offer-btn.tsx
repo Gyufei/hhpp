@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { reportEvent } from "@/lib/utils/analytics";
 import DrawerTitle from "@/components/share/drawer-title";
 import Drawer from "react-modern-drawer";
+import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 
 export default function CreateOfferBtn({
   marketplace,
@@ -16,6 +17,8 @@ export default function CreateOfferBtn({
 }) {
   const T = useTranslations("Offer");
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const { isMobileSize } = useDeviceSize();
 
   function handleSuccess() {
     setDrawerOpen(false);
@@ -40,8 +43,8 @@ export default function CreateOfferBtn({
           open={drawerOpen}
           onClose={() => setDrawerOpen(false)}
           direction="right"
-          size={500}
-          className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
+          size={isMobileSize ? "100%" : 500}
+          className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-0"
         >
           <DrawerTitle
             title={T("CreateOffer")}

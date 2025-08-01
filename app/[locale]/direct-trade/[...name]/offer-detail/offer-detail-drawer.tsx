@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import DrawerTitle from "@/components/share/drawer-title";
 import Drawer from "react-modern-drawer";
 import { useAccountInfo } from "@/lib/hooks/api/use-account-info";
+import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 
 export default function OfferDetailDrawer({
   offer,
@@ -18,6 +19,8 @@ export default function OfferDetailDrawer({
 }) {
   const OT = useTranslations("Offer");
   const { data: accountInfo } = useAccountInfo();
+
+  const { isMobileSize } = useDeviceSize();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [orderFillDialog, setOrderFillDialog] = useState(false);
@@ -56,8 +59,8 @@ export default function OfferDetailDrawer({
         open={drawerOpen}
         onClose={() => handleDrawerToggle(false)}
         direction="right"
-        size={740}
-        className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
+        size={isMobileSize ? "100%" : 740}
+        className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-0"
       >
         <DrawerTitle
           title={OT("OfferDetail")}

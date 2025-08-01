@@ -36,7 +36,7 @@ export default function DetailCard({ offer }: { offer: IOffer }) {
   const originMaker = offer.creator;
 
   return (
-    <div className="mt-5 flex-1 px-0 sm:px-5">
+    <div className="mt-5 flex-1 border-t border-border-black px-5 py-5 sm:border-none sm:py-0">
       <div className="flex items-center justify-between">
         <div className="text-xs leading-[18px] text-title-white">
           {T("OfferDetail")}

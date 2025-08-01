@@ -38,7 +38,7 @@ export default function Page({ params }: { params: { address: string } }) {
     <div className="flex h-[calc(100vh-56px)] w-full flex-col">
       <div className="flex flex-1 items-stretch overflow-y-auto bg-border-black p-[2px]">
         {/* Desktop Layout */}
-        <div className="mr-[2px] hidden flex-1 flex-col md:flex">
+        <div className="mr-[2px] hidden flex-1 flex-col sm:flex">
           {/* Address Header */}
           <div className="mb-[2px] flex h-[80px] items-center justify-between rounded bg-bg-black p-4">
             <div className="flex items-center gap-[10px] text-[20px] text-title-white">
@@ -121,7 +121,7 @@ export default function Page({ params }: { params: { address: string } }) {
         </div>
 
         {/* Mobile Layout */}
-        <div className="flex flex-1 flex-col text-[14px] md:hidden">
+        <div className="flex flex-1 flex-col text-[14px] sm:hidden">
           {/* Address Header */}
           <div className="mb-[2px] flex h-[80px] items-center justify-between rounded bg-bg-black p-4">
             <div className="flex items-center gap-[10px] text-[16px] text-title-white">
@@ -287,7 +287,7 @@ export default function Page({ params }: { params: { address: string } }) {
         </div>
 
         {/* Desktop Right Sidebar */}
-        <div className="hidden h-full flex-col text-[12px] sm:w-[368px] md:flex">
+        <div className="hidden h-full flex-col text-[12px] sm:flex sm:w-[368px]">
           {/* Overview Section */}
           <div className="rounded bg-bg-black p-[10px]">
             <div className="space-y-[10px]">

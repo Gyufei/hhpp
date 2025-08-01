@@ -4,6 +4,7 @@ import { IOffer } from "@/lib/types/offer";
 import DrawerTitle from "@/components/share/drawer-title";
 
 import MyAskDetail from "./my-ask-detail";
+import { useDeviceSize } from "@/lib/hooks/common/use-device-size";
 
 export default function OfferAboutMineDetailDrawer({
   offer,
@@ -18,11 +19,14 @@ export default function OfferAboutMineDetailDrawer({
 }) {
   const T = useTranslations("Offer");
 
+  const { isMobileSize } = useDeviceSize();
+
   function handleSuccess() {
     if (!drawerOpen) return;
     setDrawerOpen(false);
     onSuccess();
   }
+
   function handleDrawerToggle(v: boolean) {
     setDrawerOpen(v);
   }
@@ -34,8 +38,8 @@ export default function OfferAboutMineDetailDrawer({
       open={drawerOpen}
       onClose={() => handleDrawerToggle(false)}
       direction="right"
-      size={740}
-      className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-4 sm:p-0"
+      size={isMobileSize ? "100%" : 740}
+      className="flex flex-col overflow-y-auto rounded-none border border-border-black !bg-bg-black p-0"
     >
       <DrawerTitle
         title={T("OfferDetail")}
